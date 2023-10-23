@@ -265,6 +265,19 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             return selectModels;
         }
 
+        public async Task<List<SelectModel>> GetOfficeByShipTypeSelectModel(int type)
+        {
+
+            ICollection<Office> offices = await officeRepository.FilterAsync(x => x.IsActive && x.ShipType==type);
+            List<Office> query = offices.OrderBy(x => x.ShortName).ToList();
+            List<SelectModel> selectModels = query.Select(x => new SelectModel
+            {
+                Text = x.ShortName,
+                Value = x.OfficeId
+            }).ToList();
+            return selectModels;
+        }
+
         public List<SelectModel> GetObjectiveSelectModels()
         {
             List<SelectModel> selectModels =

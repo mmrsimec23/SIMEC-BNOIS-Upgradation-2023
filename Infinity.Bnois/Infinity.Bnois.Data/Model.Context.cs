@@ -217,6 +217,7 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<EmployeeChildren> EmployeeChildren { get; set; }
         public virtual DbSet<CareerForecast> CareerForecast { get; set; }
         public virtual DbSet<EmployeeGeneral> EmployeeGeneral { get; set; }
+        public virtual DbSet<CoXoService> CoXoService { get; set; }
     
         public virtual ObjectResult<GetLeaveInfo_Result> GetLeaveInfo(string employeeID, Nullable<int> idFrom, Nullable<int> idTo)
         {

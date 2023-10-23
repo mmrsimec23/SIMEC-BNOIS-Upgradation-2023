@@ -490,6 +490,9 @@
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeGeneral_SubBranch" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeGeneral_SubCategory" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeGeneral_Subject" />
+        <EntityTypeShape EntityType="BnoisdbModel.CoXoService" Width="1.5" PointX="31.25" PointY="100.5" />
+        <AssociationConnector Association="BnoisdbModel.FK_CoXoService_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_CoXoService_Office" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -332,4 +332,14 @@ namespace Infinity.Bnois
         Report = 2,
         CurrentStatus = 3,
     }
+    public enum CoXoType
+    {
+        Proposed = 1,
+        Waiting = 2,
+    }
+    public enum CoXoAppointment
+    {
+        CO = 1,
+        XO = 2,
+    }
 }

@@ -132,6 +132,7 @@ namespace Infinity.Bnois.Api
 	    public const string LeavePurpose = BnoisRoutePrefixBase + "leave-purpose";
         public const string EmployeeChildrens = BnoisRoutePrefixBase + "employee-childrens";
         public const string CurrentStatus = BnoisRoutePrefixBase + "current-status";
+        public const string RoasterList = BnoisRoutePrefixBase + "roaster-list";
         public const string PromotionPolicies = BnoisRoutePrefixBase + "promotion-policies";
         public const string TraceSettings = BnoisRoutePrefixBase + "trace-settings";
         public const string OPREntries = BnoisRoutePrefixBase + "opr-entries";
@@ -178,5 +179,6 @@ namespace Infinity.Bnois.Api
         public const string EmployeeCarLoan = BnoisRoutePrefixBase + "employee-car-loan";
         public const string CareerForecastSetting = BnoisRoutePrefixBase + "career-forecast-setting";
         public const string BnoisLogInfo = BnoisRoutePrefixBase + "bnois-log-info";
+        public const string EmployeeCoXoService = BnoisRoutePrefixBase + "employee-coxo-service";
     }
 }

@@ -101,7 +101,9 @@
     <Compile Include="Implementation\CareerForecastSettingService.cs" />
     <Compile Include="Implementation\CareerForecastService.cs" />
     <Compile Include="Implementation\BnoisLogInfoService.cs" />
+    <Compile Include="Implementation\RoasterListService.cs" />
     <Compile Include="Implementation\EmployeeMscEducationService.cs" />
+    <Compile Include="Implementation\EmployeeCoxoService.cs" />
     <Compile Include="Implementation\MscEducationTypeService.cs" />
     <Compile Include="Implementation\MscInstituteService.cs" />
     <Compile Include="Implementation\MscPermissionTypeService.cs" />
@@ -267,7 +269,9 @@
     <Compile Include="Interface\ICareerForecastSettingService.cs" />
     <Compile Include="Interface\ICareerForecastService.cs" />
     <Compile Include="Interface\IBnoisLogInfoService.cs" />
+    <Compile Include="Interface\IRoasterListService.cs" />
     <Compile Include="Interface\IEmployeeMscEducationService.cs" />
+    <Compile Include="Interface\IEmployeeCoxoService.cs" />
     <Compile Include="Interface\IMscEducationTypeService.cs" />
     <Compile Include="Interface\IMscPermissionTypeService.cs" />
     <Compile Include="Interface\IMscInstituteService.cs" />
@@ -454,6 +458,7 @@
     <Compile Include="Models\CareerForecastSettingModel.cs" />
     <Compile Include="Models\BatchModel.cs" />
     <Compile Include="Models\EmployeeMscEducationModel.cs" />
+    <Compile Include="Models\EmployeeCoxoServiceModel.cs" />
     <Compile Include="Models\MscEducationTypeModel.cs" />
     <Compile Include="Models\MscPermissionTypeModel.cs" />
     <Compile Include="Models\MscInstituteModel.cs" />

@@ -189,5 +189,7 @@
         CAREER_FORECAST_SETTING_URL: baseAPIUrl + 'api/bnois/career-forecast-setting/',
         CAREER_FORECAST_URL: baseAPIUrl + 'api/bnois/career-forecast/',
         BNOIS_LOG_INFO_URL: baseAPIUrl + 'api/bnois/bnois-log-info/',
+        BNOIS_COXO_SERVICE_URL: baseAPIUrl + 'api/bnois/employee-coxo-service/',
+        ROASTER_LIST_URL: baseAPIUrl + 'api/bnois/roaster-list/',
     });
 })();

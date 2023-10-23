@@ -4110,6 +4110,35 @@
                 }
             },
 
+            //-------------Employee PFT-------
+            {
+                state: 'employee-proposed-coxos',
+                config: {
+                    url: '/employee-proposed-coxos?ps&pn&q',
+                    templateUrl: 'app/views/employee-proposed-coxo/employeeProposedCoxos.html',
+                    controller: 'employeeProposedCoxosController as vm',
+                    title: 'Employee PFT'
+                }
+            },
+            {
+                state: 'employee-proposed-coxo-create',
+                config: {
+                    url: '/employee-proposed-coxo-create',
+                    templateUrl: 'app/views/employee-proposed-coxo/employeeProposedCoxoAdd.html',
+                    controller: 'employeeProposedCoxoAddController as vm',
+                    title: 'Employee PFT'
+                }
+            },
+            {
+                state: "employee-proposed-coxo-modify",
+                config: {
+                    url: "employee-proposed-coxo-modify/:id",
+                    templateUrl: 'app/views/employee-proposed-coxo/employeeProposedCoxoAdd.html',
+                    controller: 'employeeProposedCoxoAddController as vm',
+                    title: 'Employee PFT'
+                }
+            },
+
 
             //-------------Current Status Tab-------
             {
@@ -5748,6 +5777,15 @@
                     templateUrl: 'app/views/bnois-log-info/bnoisLogInfo.html',
                     controller: 'bnoisLogInfoController as vm',
                     title: 'Bnois Log Info'
+                }
+            },
+            {
+                state: "coxo-large-ships",
+                config: {
+                    url: "/coxo-large-ships",
+                    templateUrl: 'app/views/large-ship-coxo/largeShipCoXo.html',
+                    controller: 'largeShipCoXoController as vm',
+                    title: 'CO/XO Large Ships'
                 }
             }
 

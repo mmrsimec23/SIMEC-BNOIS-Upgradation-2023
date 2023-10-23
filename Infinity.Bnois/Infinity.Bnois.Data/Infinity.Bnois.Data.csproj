@@ -155,6 +155,9 @@
     <Compile Include="CourseSubCategory.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="CoXoService.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="District.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

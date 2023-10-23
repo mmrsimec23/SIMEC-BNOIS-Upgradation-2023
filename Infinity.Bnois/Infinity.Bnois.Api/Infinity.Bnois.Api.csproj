@@ -78,7 +78,9 @@
     <Compile Include="Controllers\CareerForecastSettingController.cs" />
     <Compile Include="Controllers\CareerForecastController.cs" />
     <Compile Include="Controllers\BnoisLogInfoController.cs" />
+    <Compile Include="Controllers\RoasterListController.cs" />
     <Compile Include="Controllers\EmployeeMscEducationController.cs" />
+    <Compile Include="Controllers\EmployeeCoXoServiceController.cs" />
     <Compile Include="Controllers\MscEducationTypeController.cs" />
     <Compile Include="Controllers\MscPermissionTypeController.cs" />
     <Compile Include="Controllers\MscInstituteController.cs" />
@@ -250,6 +252,7 @@
     <Compile Include="Models\EmployeeMscEducationViewModel.cs" />
     <Compile Include="Models\EmployeeHajjDetailViewModel.cs" />
     <Compile Include="Models\EmployeeFamilyPermissionViewModel.cs" />
+    <Compile Include="Models\EmployeeCoxoServiceViewModel.cs" />
     <Compile Include="Models\OfficeViewModel.cs" />
     <Compile Include="Models\PreviousTransferViewModel.cs" />
     <Compile Include="Models\PreviousMissionViewModel.cs" />

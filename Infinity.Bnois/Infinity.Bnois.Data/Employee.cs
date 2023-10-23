@@ -73,6 +73,7 @@ namespace Infinity.Bnois.Data
             this.EmployeeChildren = new HashSet<EmployeeChildren>();
             this.CareerForecast = new HashSet<CareerForecast>();
             this.EmployeeGeneral = new HashSet<EmployeeGeneral>();
+            this.CoXoService = new HashSet<CoXoService>();
         }
     
         public int EmployeeId { get; set; }
@@ -226,5 +227,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<CareerForecast> CareerForecast { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeGeneral> EmployeeGeneral { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoXoService> CoXoService { get; set; }
     }
 }

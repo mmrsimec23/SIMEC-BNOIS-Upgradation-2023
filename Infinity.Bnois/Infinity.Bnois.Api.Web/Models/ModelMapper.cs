@@ -407,6 +407,11 @@ namespace Infinity.Bnois.Api.Web.Models
                     .ForMember(d => d.PftResult, opt => opt.MapFrom(s => s.PftResult));
 
 
+                cfg.CreateMap<CoXoService, EmployeeCoxoServiceModel>()
+                    .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
+                    .ForMember(d => d.Office, opt => opt.MapFrom(s => s.Office));
+
+
                 cfg.CreateMap<EmployeeChildren, EmployeeChildrenModel>()
                .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
                .ForMember(d => d.Occupation, opt => opt.MapFrom(s => s.Occupation));
@@ -926,6 +931,10 @@ namespace Infinity.Bnois.Api.Web.Models
                     .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
                     .ForMember(d => d.PftType, opt => opt.MapFrom(s => s.PftType))
                     .ForMember(d => d.PftResult, opt => opt.MapFrom(s => s.PftResult));
+                
+                cfg.CreateMap<EmployeeCoxoServiceModel, CoXoService>()
+                    .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
+                    .ForMember(d => d.Office, opt => opt.MapFrom(s => s.Office));
 
 
                 cfg.CreateMap<EmployeeChildrenModel, EmployeeChildren>()

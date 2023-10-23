@@ -24,6 +24,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
      
         Task<List<SelectModel>> GetMinistryOfficeSelectModel();
         Task<List<SelectModel>> GetOfficeSelectModel(int type);
+        Task<List<SelectModel>> GetOfficeByShipTypeSelectModel(int type);
         Task<List<SelectModel>> GetChildOfficeSelectModel(int parentId);
          List<SelectModel> GetShipTypeSelectModels();
          Task<List<SelectModel>> GetOfficeWithoutShipSelectModels();

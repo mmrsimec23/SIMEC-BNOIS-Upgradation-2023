@@ -144,6 +144,8 @@ namespace Infinity.Bnois.Api.Right
         public const int CAREER_FORECAST_SETTING = 1132;
         public const int CAREER_FORECAST = 1133;
         public const int BNOIS_LOG_INFO = 1134;
+        public const int EMPLOYEE_COXO_SERVICE = 1135;
+        public const int ROASTER_LIST = 1136;
 
     }
 }

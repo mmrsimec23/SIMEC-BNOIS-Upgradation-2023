@@ -526,6 +526,25 @@
     <Property Name="ModifiedDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="CoXoService">
+    <Key>
+      <PropertyRef Name="CoXoServiceId" />
+    </Key>
+    <Property Name="CoXoServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="OfficeId" Type="int" />
+    <Property Name="Type" Type="int" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="1500" />
+    <Property Name="Appointment" Type="int" />
+    <Property Name="ShipType" Type="int" />
+    <Property Name="ProposedDate" Type="date" />
+    <Property Name="CompleteStatus" Type="int" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="District">
     <Key>
       <PropertyRef Name="DistrictId" />
@@ -3766,6 +3785,30 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CoXoService_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="CoXoService" Type="Self.CoXoService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="CoXoService">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CoXoService_Office">
+    <End Role="Office" Type="Self.Office" Multiplicity="0..1" />
+    <End Role="CoXoService" Type="Self.CoXoService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Office">
+        <PropertyRef Name="OfficeId" />
+      </Principal>
+      <Dependent Role="CoXoService">
+        <PropertyRef Name="OfficeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_District_dbo_Divission_DivissionId">
     <End Role="Division" Type="Self.Division" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -6877,6 +6920,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
     <EntitySet Name="CourseCategory" EntityType="Self.CourseCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CoursePoint" EntityType="Self.CoursePoint" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CourseSubCategory" EntityType="Self.CourseSubCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CoXoService" EntityType="Self.CoXoService" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
@@ -7248,6 +7292,14 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
     <AssociationSet Name="FK_CourseSubCategory_CourseCategory" Association="Self.FK_CourseSubCategory_CourseCategory">
       <End Role="CourseCategory" EntitySet="CourseCategory" />
       <End Role="CourseSubCategory" EntitySet="CourseSubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CoXoService_Employee" Association="Self.FK_CoXoService_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="CoXoService" EntitySet="CoXoService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CoXoService_Office" Association="Self.FK_CoXoService_Office">
+      <End Role="Office" EntitySet="Office" />
+      <End Role="CoXoService" EntitySet="CoXoService" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_District_dbo_Divission_DivissionId" Association="Self.FK_dbo_District_dbo_Divission_DivissionId">
       <End Role="Division" EntitySet="Division" />

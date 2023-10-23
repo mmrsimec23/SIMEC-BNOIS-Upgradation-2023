@@ -96,7 +96,9 @@
     <Content Include="app\services\advanceSearchService.js" />
     <Content Include="app\services\careerForecastSettingService.js" />
     <Content Include="app\services\bnoisLogInfoService.js" />
+    <Content Include="app\services\roasterListService.js" />
     <Content Include="app\services\employeeMscEducationService.js" />
+    <Content Include="app\services\employeeProposedCoxoService.js" />
     <Content Include="app\services\mscEducationTypeService.js" />
     <Content Include="app\services\mscPermissionTypeService.js" />
     <Content Include="app\services\mscInstituteService.js" />
@@ -335,10 +337,16 @@
     <Content Include="app\views\emp-career-forecast\careerForecastAddController.js" />
     <Content Include="app\views\emp-career-forecast\careerForecasts.html" />
     <Content Include="app\views\emp-career-forecast\careerForecastsController.js" />
+    <Content Include="app\views\employee-proposed-coxo\employeeProposedCoxoAdd.html" />
+    <Content Include="app\views\employee-proposed-coxo\employeeProposedCoxoAddController.js" />
+    <Content Include="app\views\employee-proposed-coxo\employeeProposedCoxos.html" />
+    <Content Include="app\views\employee-proposed-coxo\employeeProposedCoxosController.js" />
     <Content Include="app\views\family-permissions\familyPermissions.html" />
     <Content Include="app\views\family-permissions\familyPermissionsController.js" />
     <Content Include="app\views\car-loan\carLoan.html" />
     <Content Include="app\views\car-loan\carLoanController.js" />
+    <Content Include="app\views\large-ship-coxo\largeShipCoXo.html" />
+    <Content Include="app\views\large-ship-coxo\largeShipCoXoController.js" />
     <Content Include="app\views\miscellaneous-services\miscellaneousServices.html" />
     <Content Include="app\views\miscellaneous-services\miscellaneousServicesController.js" />
     <Content Include="app\views\family-permission-list-by-type\familyPermissionListByType.html" />

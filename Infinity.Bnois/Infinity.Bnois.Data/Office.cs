@@ -25,6 +25,7 @@ namespace Infinity.Bnois.Data
             this.OfficeAppointment = new HashSet<OfficeAppointment>();
             this.ProposalDetail = new HashSet<ProposalDetail>();
             this.Transfer = new HashSet<Transfer>();
+            this.CoXoService = new HashSet<CoXoService>();
         }
     
         public int OfficeId { get; set; }
@@ -98,5 +99,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<ProposalDetail> ProposalDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transfer> Transfer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoXoService> CoXoService { get; set; }
     }
 }

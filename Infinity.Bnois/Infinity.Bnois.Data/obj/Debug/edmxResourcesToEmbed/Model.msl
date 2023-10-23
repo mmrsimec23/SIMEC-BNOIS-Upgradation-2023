@@ -3471,5 +3471,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CoXoService">
+      <EntityTypeMapping TypeName="BnoisdbModel.CoXoService">
+        <MappingFragment StoreEntitySet="CoXoService">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CompleteStatus" ColumnName="CompleteStatus" />
+          <ScalarProperty Name="ProposedDate" ColumnName="ProposedDate" />
+          <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+          <ScalarProperty Name="Appointment" ColumnName="Appointment" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="CoXoServiceId" ColumnName="CoXoServiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

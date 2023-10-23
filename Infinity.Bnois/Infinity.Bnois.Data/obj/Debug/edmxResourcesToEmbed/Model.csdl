@@ -1376,6 +1376,15 @@
       <End Role="Subject" EntitySet="Subjects" />
       <End Role="EmployeeGeneral" EntitySet="EmployeeGeneral" />
     </AssociationSet>
+    <EntitySet Name="CoXoService" EntityType="BnoisdbModel.CoXoService" />
+    <AssociationSet Name="FK_CoXoService_Employee" Association="BnoisdbModel.FK_CoXoService_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="CoXoService" EntitySet="CoXoService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CoXoService_Office" Association="BnoisdbModel.FK_CoXoService_Office">
+      <End Role="Office" EntitySet="Office" />
+      <End Role="CoXoService" EntitySet="CoXoService" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="GetLeaveInfo_Result">
     <Property Type="Int32" Name="Value" Nullable="false" />
@@ -7018,6 +7027,7 @@
     <NavigationProperty Name="EmployeeChildren" Relationship="BnoisdbModel.FK_EmployeeChildren_Employee" FromRole="Employee" ToRole="EmployeeChildren" />
     <NavigationProperty Name="CareerForecast" Relationship="BnoisdbModel.FK_CareerForecast_Employee" FromRole="Employee" ToRole="CareerForecast" />
     <NavigationProperty Name="EmployeeGeneral" Relationship="BnoisdbModel.FK_EmployeeGeneral_Employee" FromRole="Employee" ToRole="EmployeeGeneral" />
+    <NavigationProperty Name="CoXoService" Relationship="BnoisdbModel.FK_CoXoService_Employee" FromRole="Employee" ToRole="CoXoService" />
   </EntityType>
   <EntityType Name="ExecutionRemark">
     <Key>
@@ -8351,6 +8361,7 @@
     <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_OfficeAppointment_Office" FromRole="Office" ToRole="OfficeAppointment" />
     <NavigationProperty Name="ProposalDetail" Relationship="BnoisdbModel.FK_ProposalDetail_Office" FromRole="Office" ToRole="ProposalDetail" />
     <NavigationProperty Name="Transfer" Relationship="BnoisdbModel.FK_Transfer_PreBorn" FromRole="Office" ToRole="Transfer" />
+    <NavigationProperty Name="CoXoService" Relationship="BnoisdbModel.FK_CoXoService_Office" FromRole="Office" ToRole="CoXoService" />
   </EntityType>
   <Association Name="FK_Achievement_Office">
     <End Type="BnoisdbModel.Office" Role="Office" Multiplicity="0..1" />
@@ -8808,6 +8819,51 @@
       </Principal>
       <Dependent Role="EmployeeGeneral">
         <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CoXoService">
+    <Key>
+      <PropertyRef Name="CoXoServiceId" />
+    </Key>
+    <Property Name="CoXoServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" />
+    <Property Name="OfficeId" Type="Int32" />
+    <Property Name="Type" Type="Int32" />
+    <Property Name="Remarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+    <Property Name="Appointment" Type="Int32" />
+    <Property Name="ShipType" Type="Int32" />
+    <Property Name="ProposedDate" Type="DateTime" Precision="0" />
+    <Property Name="CompleteStatus" Type="Int32" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_CoXoService_Employee" FromRole="CoXoService" ToRole="Employee" />
+    <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_CoXoService_Office" FromRole="CoXoService" ToRole="Office" />
+  </EntityType>
+  <Association Name="FK_CoXoService_Employee">
+    <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="BnoisdbModel.CoXoService" Role="CoXoService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="CoXoService">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CoXoService_Office">
+    <End Type="BnoisdbModel.Office" Role="Office" Multiplicity="0..1" />
+    <End Type="BnoisdbModel.CoXoService" Role="CoXoService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Office">
+        <PropertyRef Name="OfficeId" />
+      </Principal>
+      <Dependent Role="CoXoService">
+        <PropertyRef Name="OfficeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
