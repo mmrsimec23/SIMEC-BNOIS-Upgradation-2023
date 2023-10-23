@@ -1,0 +1,110 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <form name="vm.employeeCarLoanForm">
+                    <div class="col-sm-12 page-header">
+                        <h2 class="warning page-header-item">Officer Car Loan<span class="pull-right text-success">{{vm.title}}</span></h2>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="pNo" class="custom-label"> PNo</label>
+                                <input type="text" id="pNo" ng-keypress="$event.keyCode ==13 && vm.getEmployeeInfo()" class="form-control custom-form-control" ng-model="vm.employeeCarLoan.employee.pNo" name="pNo" required />
+                                <p ng-show="vm.employeeCarLoanForm.pNo.$error.required" class="help-block errormsg">PNo is required</p>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="fullNameEng" class="custom-label">Name</label>
+                                <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameEng" class="form-control custom-form-control" ng-model="vm.employeeCarLoan.employee.fullNameEng" name="fullNameEng" maxlength="250" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="fullNameBan" class="custom-label">Rank</label>
+                                <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employeeCarLoan.employee.rank.fullName" name="fullNameBan" maxlength="250" required />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="fullNameBan" class="custom-label">Batch</label>
+                                <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employeeCarLoan.employee.batch.name" name="fullNameBan" maxlength="250" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="col-sm-6" ng-if="vm.employeeCarLoan.employee.employeeId>0">
+                            <div class="form-group">
+                                <input type="checkbox" id="isBackLog" class="form-check-input" ng-model="vm.employeeCarLoan.isBackLog" name="isBackLog" ng-change="vm.isBackLogChecked(vm.employeeFamilyPermission.isBackLog)" />
+                                <label for="isBackLog" class="custom-label"> Back Log </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" ng-show="vm.employeeCarLoan.isBackLog">
+                            <div class="form-group">
+                                <label for="rankId" class="custom-label">Avail Rank</label>
+                                <select name="rankId" id="rankId" class="form-control" ng-model="vm.employeeCarLoan.rankId"
+                                        ng-options="option.value as option.text for option in vm.ranks">
+                                    <option value="">--Select an Option--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="fromDate" class="custom-label"> Avail Date</label>
+                                <input kendo-date-picker id="fromDate" class="form-control custom-form-control" k-ng-model="vm.employeeCarLoan.availDate" k-format="'dd-MM-yyyy'" name="fromDate" required />
+                                <p ng-show="vm.employeeCarLoanForm.fromDate.$error.required" class="help-block errormsg">From Date is required</p>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="carLoanFiscalYearId" class="custom-label">Fiscal Year</label>
+                                <select name="carLoanFiscalYearId" id="carLoanFiscalYearId" class="form-control" ng-model="vm.employeeCarLoan.carLoanFiscalYearId" ng-options="option.value as option.text for option in vm.carLoanFiscalYears" required>
+                                    <option value="">--Select an Option--</option>
+                                </select>
+                                <p ng-show="vm.employeeCarLoanForm.carLoanFiscalYearId.$error.required" class="help-block errormsg">Please select an Option</p>
+                            </div>
+                        </div>
+                        <!--<div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="tempTransferType" class="custom-label">Status</label>
+                                <label>
+                                    <input type="radio" id="tempTransferType" ng-model="vm.employeeCarLoan.status" ng-value="1"> Avail
+                                    <input type="radio" id="tempTransferType" ng-model="vm.employeeCarLoan.status" ng-value="2"> Not-Avail
+                                </label>
+                            </div>
+                        </div>-->
+                    </div>
+                    <div class="col-sm-12">
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="amount" class="custom-label"> Amount</label>
+                                <input type="text" id="amount" class="form-control custom-form-control" ng-model="vm.employeeCarLoan.amount" name="amount" />
+                                <!--<p ng-show="vm.employeeCarLoanForm.aCompanyBy.$error.maxlength" class="help-block errormsg">Maximum character 500</p>-->
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="remarks" class="custom-label"> Remarks</label>
+                                <textarea type="text" id="remarks" class="form-control custom-form-control" ng-model="vm.employeeCarLoan.remarks" name="remarks" />
+                                <p ng-show="vm.employeeCarLoanForm.remarks.$error.maxlength" class="help-block errormsg">Maximum character 1500</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.employeeCarLoanForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

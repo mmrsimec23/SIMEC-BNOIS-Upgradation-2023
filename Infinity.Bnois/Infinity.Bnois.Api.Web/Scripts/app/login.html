@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html ng-app="app" ng-controller="LayoutCtrl">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{siteName}</title>
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="../../Content/site-login.css" rel="stylesheet" />
+</head>
+
+<!-- style="background-image: url(../../Content/images/navy.jpg); background-size:100% 100%" -->
+<body lang="en" style="background-color: #F2F2F2;">
+
+    <div class="login-section">
+        <div class="login-wrapper" style="margin-top: 100px; margin-bottom: 10px;">
+            <div class="login-form">
+               
+                    <img src="../../Content/images/BNLogo.png" class="logo img-responsive" style="width:100px;height:110px" alt="">
+                
+                <h2 style="color: navy; font-family:arial;font-weight: bold; text-align: center; text-transform: uppercase; margin-left: 15px; margin-right: 15px; margin-top: -5px;">Bangladesh Navy Officers' Information System (BNOIS)</h2>
+                <h4 style="font-style: italic; color: #5a99ba; text-align: center; font-family:Georgia;margin-top: -5px; ">  Naval Secretariat, Naval Headquarters</h4>
+                <hr  style="border: 1px solid navy; margin-top: -5px; margin-bottom: 2px; "/>
+                <img src="../../images/BNOIS_FONT_IMG.png" class="img-responsive" style="height: 290px; width: 100%; border-radius: 10px;" alt="">
+
+                <div style="margin-top: 5px;background-color: white">
+                    <div class="row" ng-show="model.errorMessage" style="margin-left: 37%;">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>Error:</strong>
+                                {{model.errorMessage}}
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                    <form style="margin-left: 37%;" method="post" name="loginForm" role="login" action="{{model.loginUrl}}" >
+                        <anti-forgery-token token="model.antiForgery"></anti-forgery-token>
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" class="form-control input-md" ng-model="model.username" placeholder="Username" maxlength="100" required />
+                            <span class="help-block" ng-show="loginForm.username.$touched && loginForm.username.$invalid && loginForm.username.$error.required">You can't leave this empty.</span>
+                        </div>
+
+                        <div class="form-group" style="margin-top: -10px;">
+                            <input type="password" id="password" name="password" ng-model="model.password" class="form-control input-md" placeholder="Password" minlength="6" autocomplete="off" required />
+                            <span class="help-block" ng-show="loginForm.password.$touched && loginForm.password.$error.required && loginForm.password.$invalid">Use at least 8 characters.</span>
+                        </div>
+                        <!-- <div class="form-group"> -->
+                        <!--     <div class="checkbox-group"> -->
+                        <!--         <input type="checkbox" value="None" id="checkbox" name="checkbox" ng-model="model.allowRememberMe" /> -->
+                        <!--         <label for="checkbox" class="checkbox-label-checkbox"></label> -->
+                        <!--         <label class="custom-label checkbox-label" for="checkbox"><strong>Remember me</strong></label> -->
+                        <!--     </div> -->
+                        <!-- </div> -->
+
+                        <div class="form-group" style="margin-top: -5px;">
+                            <button style="border-radius: 5px;" type="submit" ng-disabled="loginForm.$invalid" class="btn btn-md custom-btn-primary btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</button>
+                        </div>
+
+                        <!-- <div class="log-create" ng-repeat="link in model.additionalLinks"> -->
+                        <!--     <a style="color:#9370DB" ng-href="{{link.href}}">{{link.text}}</a> -->
+                        <!-- </div> -->
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="footer-section">
+            <div class="row">
+                <div class="col-xs-12" >
+
+                    <p>
+                        <span class="footer-right-powered">Powered by </span>
+                        <span class="footer-right-text">
+                            <img src="../../Images/InfinityLogo.png" width="17" alt="">
+                            Infinity Technology International Ltd
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script id='modelJson' type='application/json'>
+        {model}
+    </script>
+    <script src="../../Scripts/jquery-3.2.1.min.js"></script>
+    <script src="../../Scripts/bootstrap.min.js"></script>
+    <script src="../../Scripts/angular.min.js"></script>
+    <script src="../../Scripts/encoder.min.js"></script>
+    <script src="./../Scripts/app/app.js"></script>
+</body>
+</html>
+

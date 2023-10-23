@@ -1,0 +1,84 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <header class="page-header">
+                    <h2 class="warning page-header-item">User<span class="pull-right text-success">{{vm.title}}</span></h2>
+                </header>
+                <form name="vm.userForm">
+                    <div class="col-sm-6 col-md-6 custom-col-height">
+                        <div class="form-group">
+                            <label for="userName" class="custom-label">User</label>
+                            <input type="text" id="userName" class="form-control custom-form-control" ng-model="vm.user.userName" name="userName" ng-maxlength="256" required />
+                            <span ng-show="vm.userForm.userName.$error.required" class="help-block errormsg">User is required</span>
+                            <span ng-show="vm.userForm.userName.$error.maxlength" class="help-block errormsg">Maximum character 256</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 custom-col-height" ng-hide="vm.userId != ''">
+                        <div class="form-group">
+                            <label for="password" class="custom-label">Password</label>
+                            <input type="password" id="password" class="form-control custom-form-control" ng-model="vm.user.password" name="password" ng-maxlength="25" ng-minlength="8" required />
+                            <span ng-show="vm.userForm.password.$error.required" class="help-block errormsg">Password is required</span>
+                            <span ng-show="vm.userForm.password.$error.maxlength" class="help-block errormsg">Maximum character 25</span>
+                            <span ng-show="vm.userForm.password.$error.minlength" class="help-block errormsg">Minimum character 8</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 custom-col-height" ng-hide="vm.userId != ''">
+                        <div class="form-group">
+                            <label for="confirmPassword" class="custom-label">Confirm Password</label>
+                            <input type="password" id="confirmPassword" class="form-control custom-form-control" ng-model="vm.user.confirmPassword" name="confirmPassword" ng-maxlength="25" ng-minlength="8" required />
+                            <span ng-show="vm.userForm.confirmPassword.$error.required" class="help-block errormsg">Password is required</span>
+                            <span ng-show="vm.userForm.confirmPassword.$error.maxlength" class="help-block errormsg">Maximum character 25</span>
+                            <span ng-show="vm.userForm.confirmPassword.$error.minlength" class="help-block errormsg">Minimum character 8</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 custom-col-height">
+                        <div class="form-group">
+                            <label for="firstName" class="custom-label">First Name</label>
+                            <input type="text" id="firstName" class="form-control custom-form-control" ng-model="vm.user.firstName" name="firstName" ng-maxlength="100" required />
+                            <span ng-show="vm.userForm.firstName.$error.required" class="help-block errormsg">First Name is required</span>
+                            <span ng-show="vm.userForm.firstName.$error.maxlength" class="help-block errormsg">Maximum character 100</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 custom-col-height">
+                        <div class="form-group">
+                            <label for="lastName" class="custom-label">Last Name</label>
+                            <input type="text" id="lastName" class="form-control custom-form-control" ng-model="vm.user.lastName" name="lastName" ng-maxlength="100" required />
+                            <span ng-show="vm.userForm.lastName.$error.required" class="help-block errormsg">Last Name is required</span>
+                            <span ng-show="vm.userForm.lastName.$error.maxlength" class="help-block errormsg">Maximum character 100</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 custom-col-height">
+                        <div class="form-group">
+                            <label for="phoneNumber" class="custom-label">Phone Number</label>
+                            <input type="text" id="phoneNumber" class="form-control custom-form-control" ng-model="vm.user.phoneNumber" name="phoneNumber" ng-maxlength="100" required />
+                            <span ng-show="vm.userForm.phoneNumber.$error.required" class="help-block errormsg">Phone number is required</span>
+                            <span ng-show="vm.userForm.phoneNumber.$error.maxlength" class="help-block errormsg">Maximum character 100</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 custom-col-height">
+                        <div class="form-group">
+                            <label for="fax" class="custom-label">Email</label>
+                            <input type="email" id="fax" class="form-control custom-form-control" ng-model="vm.user.email" name="email" ng-maxlength="100" required ng-pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' />
+                            <span ng-show="vm.userForm.email.$error.required" class="help-block errormsg">Email is required</span>
+                            <span ng-show="vm.userForm.email.$error.maxlength" class="help-block errormsg">Maximum character 100</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 custom-col-height">
+                        <div class="form-group">
+                            <label for="cultureCode" class="custom-label">Language</label>
+                            <select id="cultureCode" ng-model="vm.user.cultureCode" ng-options="option.value as option.text for option in vm.languages" name="cultureCode" class="form-control custom-form-control selectpicker">
+                                <option value="">--Select Langualge--</option>
+                            </select>
+                            <span ng-show="vm.userForm.cultureCode.$error.required" class="help-block errormsg">Laguage is required</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ><i class="fa fa-floppy-o" aria-hidden="true"></i> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><i class="fa fa-times" aria-hidden="true"></i> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

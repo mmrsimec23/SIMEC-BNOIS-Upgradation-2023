@@ -1,0 +1,103 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <button  class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
+
+            <div class="panel-body">
+                <div id="print">
+                    
+                    <h3 class="reportHeader">Transfer History</h3>
+                    <hr/>
+                    
+                    <h4 class="noScreen"  style="border-bottom: 3px solid blue">{{vm.officerName}} ({{vm.pNo}})</h4>
+                    <div class="table-wrapper table-responsive reportCover">
+                        <table class="table table-bordered pdfReportTable" border="1">
+                            <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                                <th  rowspan="2" style="vertical-align: middle; text-align: center;">SL</th>
+                                <th  rowspan="2" style="vertical-align: middle; text-align: center;">Appointment</th>
+                                <th  rowspan="2" style="vertical-align: middle; text-align: center;">Rank</th>
+                                <th  rowspan="2" style="vertical-align: middle; text-align: center;">Unit</th>
+                                <th  colspan="2" style="text-align: center">Duration</th>
+                                <th  rowspan="2" style="vertical-align: middle; text-align: center;">Total Duration</th>
+                                <th class="no-print" rowspan="2" style="vertical-align: middle; text-align: center;">TY</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+                                <th classs="reportTD">From Date</th>
+                                <th classs="reportTD">To Date</th>
+                            </tr>
+                            </thead>
+                            <tbody class="reportBody">
+                            <tr class="reportTR" ng-repeat="permanentTransferHistory in vm.permanentTransferHistories">
+                                <td class="reportTD" style="text-align: center; width: 50px;">{{$index+1}}</td>
+                                <td class="reportTD" style="width: 150px;">{{permanentTransferHistory.appointment}}</td>
+                                <td class="reportTD" style="width: 90px;">{{permanentTransferHistory.rank}}</td>
+                                <td class="reportTD" style="width: 200px;" >{{permanentTransferHistory.unit}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;">{{permanentTransferHistory.fromDate|date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;"><span ng-if="permanentTransferHistory.toDate !=null">{{permanentTransferHistory.toDate |date:"dd-MMM-yyyy"}}</span><span ng-if="permanentTransferHistory.toDate ==null">Till Now</span></td>
+                                <td class="reportTD" style="text-align: center; text-transform: lowercase; width: 110px;">{{permanentTransferHistory.duration}}</td>
+                                <td class="reportTD no-print" style="text-align: center;width: 50px;" ng-if="permanentTransferHistory.ty>0"><a href="" data-toggle="modal" data-target="#myModal" ng-click="vm.getTemporaryTransfer(permanentTransferHistory.transferId)"><strong>{{permanentTransferHistory.ty}}</strong></a></td>
+                                <td class="reportTD no-print" style="text-align: center;width: 50px;" ng-if="permanentTransferHistory.ty==0"> </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" style="color: red">&times;</button>
+                                <h4 class="modal-title">Temporary Transfer History</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="table-wrapper table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr class="tableHeading">
+                                            <th rowspan="2" style="vertical-align: middle; text-align: center;">SL</th>
+                                            <th rowspan="2" style="vertical-align: middle; text-align: center;">Appointment</th>
+                                            <th rowspan="2" style="vertical-align: middle; text-align: center;">TY Reason</th>
+                                            <th rowspan="2" style="vertical-align: middle; text-align: center;">Unit</th>
+                                            <th colspan="2" style="text-align: center">Duration</th>
+                                            <th rowspan="2" style="vertical-align: middle; text-align: center;">Total Duration</th>
+
+                                        </tr>
+                                        <tr class="tableHeading">
+                                            <th>From Date</th>
+                                            <th>To Date</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="temporaryTransferHistory in vm.temporaryTransferHistories">
+                                            <td style="text-align: center">{{$index+1}}</td>
+                                            <td>{{temporaryTransferHistory.appointment}}</td>
+                                            <td style="width: 100px;">{{temporaryTransferHistory.reason}}</td>
+                                            <td>{{temporaryTransferHistory.unit}}</td>
+                                            <td style="text-align: center; width: 100px;">{{temporaryTransferHistory.fromDate|date:"dd-MMM-yyyy"}}</td>
+                                            <td style="text-align: center; width: 100px;">{{temporaryTransferHistory.toDate |date:"dd-MMM-yyyy"}}</td>
+                                            <td style="text-align: center; text-transform: lowercase; width: 120px;">{{temporaryTransferHistory.duration}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,403 @@
+﻿<style>
+    fieldset.scheduler-border {
+        border: 1px groove #ddd !important;
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 0 !important;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width: auto;
+        padding: 0 10px;
+        border-bottom: none;
+    }
+</style>
+<div class="container-fluid">
+	<div class="row">
+		<div class="panel">
+			<div class="panel-body">
+				<div class="page-header">
+					<h2 class="warning page-header-item">Officer Leave<span class="pull-right text-success">{{vm.title}}</span></h2>
+				</div>
+                <form name="vm.employeeLeaveForm">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="pNo" class="custom-label"> PNo</label>
+                            <input type="text" id="pNo" ng-keypress="$event.keyCode ==13 && vm.searchEmployee()" class="form-control custom-form-control" ng-model="vm.employeeLeave.employee.pNo" name="pNo" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="fullNameEng" class="custom-label"> Name</label>
+                            <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameEng" class="form-control custom-form-control" ng-model="vm.employeeLeave.employee.fullNameEng" name="fullNameEng" maxlength="250" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="fullNameBan" class="custom-label">Rank</label>
+                            <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employeeLeave.employee.rank.fullName" name="fullNameBan" maxlength="250" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="fullNameBan" class="custom-label">Batch</label>
+                            <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employeeLeave.employee.batch.name" name="fullNameBan" maxlength="250" required />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="born" class="custom-label">Born</label>
+                            <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employeeLeave.preBornOffice" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="Attach" class="custom-label">Attach</label>
+                            <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employeeLeave.preAttachOffice" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="Appointment" class="custom-label">Appointment</label>
+                            <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employeeLeave.preAppointment" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                      
+                    </div>
+                    <div class="col-sm-6" ng-if="vm.employeeLeave.employee.employeeId>0">
+                        <div class="form-group">
+                            <input type="checkbox" id="isBackLog" class="form-check-input" ng-model="vm.employeeLeave.isBackLog" name="isBackLog" ng-change="vm.isBackLogChecked(vm.employeeLeave.isBackLog)" />
+                            <label for="isBackLog" class="custom-label"> Back Log </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" ng-show="vm.employeeLeave.isBackLog">
+                        <div class="form-group">
+                            <label for="rankId" class="custom-label">Rank</label>
+                            <select name="rankId" id="rankId" class="form-control" ng-model="vm.employeeLeave.rankId"
+                                    ng-options="option.value as option.text for option in vm.ranks">
+                                <option value="">--Select an Option--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" ng-show="vm.employeeLeave.isBackLog">
+                        <div class="form-group">
+                            <label for="transferId" class="custom-label">Born/Attach/Appointment</label>
+                            <select name="transferId" id="transferId" class="form-control" ng-model="vm.employeeLeave.transferId"
+                                    ng-options="option.value as option.text for option in vm.transfers">
+                                <option value="">--Select an Option--</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="col-sm-12">
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Leave Entry</legend>
+                            <div class="col-sm-9">
+                                <fieldset class="scheduler-border">
+                                    <div class="row" style="padding-top:10px">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="leaveTypeId" class="custom-label"> Leave Type</label>
+                                                <select name="leaveTypeId" id="leaveTypeId" class="form-control" ng-model="vm.employeeLeave.leaveTypeId" ng-change="vm.getLeaveDurationInfo(vm.employeeLeave.leaveTypeId)" ng-options="option.value as option.text for option in vm.leaveTypes" required>
+                                                    <option value="">--Select an Option--</option>
+                                                </select>
+                                                <p ng-show="vm.employeeLeaveForm.leaveTypeId.$error.required" class="help-block errormsg">Please select an Option</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="leaveDueCount" class="custom-label"> Total Leave Due</label>
+                                                <input type="text" id="duration" ng-if="vm.employeeLeave.leaveDueCount >= 0" class="form-control custom-form-control" ng-model="vm.employeeLeave.leaveDueCount" name="duration" disabled />
+                                                <input type="text" id="duration" ng-if="vm.employeeLeave.leaveDueCount < 0" class="form-control custom-form-control" ng-init="defaultvalue='0 Days'" ng-model="defaultvalue" name="duration" disabled />
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="fromDate" class="custom-label"> Date From</label>
+                                            <input kendo-date-picker id="fromDate" class="form-control custom-form-control" k-on-change="vm.getDays()" k-ng-model="vm.employeeLeave.fromDate" k-format="'dd-MM-yyyy'" name="fromDate" required />
+                                            <p ng-show="vm.employeeLeaveForm.fromDate.$error.required" class="help-block errormsg"> Date is required</p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="toDate" class="custom-label"> Date To</label>
+                                            <input kendo-date-picker id="toDate" class="form-control custom-form-control" k-ng-model="vm.employeeLeave.toDate" k-on-change="vm.getDays()" k-format="'dd-MM-yyyy'" name="toDate" required />
+                                            <p ng-show="vm.employeeLeaveForm.toDate.$error.toDate" class="help-block errormsg"> Date is required</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="duration" class="custom-label"> Total Leave Days</label>
+                                            <input type="text" id="duration" class="form-control custom-form-control" ng-model="vm.employeeLeave.duration" name="duration" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="remarks" class="custom-label"> Remarks</label>
+                                            <textarea id="remarks" class="form-control custom-form-control" ng-model="vm.employeeLeave.remarks" name="remarks"></textarea>
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-sm-3">
+                                <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Privilege Leave Slot</legend>
+                                    <div class="table-wrapper table-responsive">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Year</th>
+                                                    <th>Total</th>
+                                                    <th>Balance</th>
+                                                    <th>Availed</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="leaveBalance in  vm.employeeLeave.leaveBalances">
+                                                    <td>
+                                                        <input type="checkbox" ng-model="leaveBalance.isAssigned">
+                                                    </td>
+                                                    <td>{{leaveBalance.leaveYear}}</td>
+                                                    <td>{{leaveBalance.totalLeave}}</td>
+                                                    <td>{{leaveBalance.balance}}</td>
+                                                    <td>{{leaveBalance.totalConsume}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-sm-12">
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border"><input type="checkbox" ng-model="vm.employeeLeave.exBdLeave" />   Ex Bangladesh Leave</legend>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="countryIds" class="custom-label">Country</label>
+                                    <select kendo-multi-select k-options="vm.countryOptions" k-ng-model="vm.employeeLeave.countryIds" k-ng-disabled="!(vm.employeeLeave.exBdLeave)"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="purpose" class="custom-label">Purpose</label>
+                                    <select name="purpose" id="purpose" class="form-control" ng-disabled="!(vm.employeeLeave.exBdLeave)" ng-model="vm.employeeLeave.purpose" ng-options="option.value as option.text for option in vm.leavePurposeList">
+                                        <option value="">--Select an Option--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="accompanyBy" class="custom-label"> Accompany By</label>
+                                        <textarea id="accompanyBy" ng-readonly="!(vm.employeeLeave.exBdLeave)" class="form-control custom-form-control" ng-model="vm.employeeLeave.accompanyBy" name="accompanyBy"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+
+                    <div class="col-sm-12 page-header">
+                        <h2 class="warning page-header-item">Officer's Leave Application File Upload</h2>
+                    </div>
+                    <div class="row">
+                        <div class="panel" nv-file-drop="" uploader="uploader">
+                            <div class="panel-body" style="padding-top: 0;">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="table-wrapper table-responsive">
+                                            <div class="col-sm-12">
+                                                <h4>Upload only PDF File</h4>
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th ng-show="uploader.isHTML5">Size</th>
+                                                        <th ng-show="uploader.isHTML5">Progress</th>
+                                                        <th>Status</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="item in uploader.queue">
+                                                        <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                                        <td ng-show="uploader.isHTML5">
+                                                            <div class="progress" style="margin-bottom: 0;">
+                                                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                                            <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                            <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="col-sm-12">
+                                                Upload progress:
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group" style="min-height: 50px;">
+                                                    <div class="panel-default">
+                                                        <div ng-show="uploader.isHTML5">
+                                                            <div class="btn custom-btn-primary fileinput-button" style="display:block;">
+                                                                <input type="file" nv-file-select="" uploader="uploader" style="opacity: 1;" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="pull-right">
+                                                    <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                                        <span class="glyphicon glyphicon-upload"></span> Upload
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-xs-12">
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.employeeLeaveForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.searchEmployee()"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                    </div>
+                </form>
+			</div>
+		</div>
+	</div>
+	<div class="table-wrapper table-responsive">
+		<div ng-repeat="parent in vm.employeeLeave.leaveDetails">
+            <strong>{{parent.leaveTypeName}}&nbsp;&nbsp;({{parent.shartName}})</strong>
+				<div ng-if="parent.leaveTypeId == vm.plCode">
+					<table class="table table-hover table-striped">
+						<thead>
+                            <tr>
+                                <th>Entry Date</th>
+                                <th>From Date</th>
+                                <th>To Date</th>
+                                <th>Days</th>
+                                <th>Leave Slot</th>
+                                <th>Ex. BD Leave</th>
+                                <th>Remarks</th>
+
+                                <th class="text-center"></th>
+                            </tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="child in parent.spGetEmployeeLeaveInfoes | orderBy:'fromDate'">
+                            <td>{{child.createdDate | date: "dd-MM-yyyy"}}</td>
+							<td>{{child.fromDate | date: "dd-MM-yyyy"}}</td>
+							<td>{{child.toDate | date: "dd-MM-yyyy"}}</td>
+							<td ng-init="$parent.total = $parent.total + child.duration">{{child.duration}}</td>
+							<td>{{child.slot}}</td>
+						    <td>{{child.country}}</td>
+                            <td>{{child.remarks}}</td>
+                            <td class="text-right">
+                                <a href="{{vm.url+child.fileName}}" ng-hide="child.fileName ==null" class="btn custom-btn btn-edit custom-btn-primary btn-xs" target="_blank"><span class="fa fa-download" aria-hidden="true" title="Download Leave Application"></span></a>
+                                <a disabled ng-hide="child.fileName !=null" class="btn custom-btn btn-edit custom-btn-primary btn-xs"><span class="fa fa-download" aria-hidden="true" title="Download Leave Application"></span></a>
+
+                                <a ng-show="vm.permission.update" class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.editEmployeeLeave(child.empLeaveId)"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span></a>
+                                <a ng-show="vm.permission.delete" class="btn custom-btn btn-delete btn-danger btn-xs" style="cursor:pointer" ng-confirmation-click="vm.deleteEmployeeLeave(child.empLeaveId)"
+                                   ng-confirmation-message="Do you want to delete Employee Leave?"
+                                   ng-confirmation-title="Delete Employee Leave?"
+                                   ng-confirmation-yes-text="Yes"
+                                   ng-confirmation-cancel-text="No"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Employee"></span></a>
+                            </td>
+						</tr>
+                        <tr>
+                            <td><b>Total</b></td>
+                            <td></td>
+                            <td></td>
+                            <td><b>{{ total }}</b></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+						</tbody>
+					</table>
+				</div>
+		    <div ng-if="parent.leaveTypeId !=  vm.plCode">
+		        <table class="table table-hover table-striped">
+		            <thead>
+		            <tr>
+		                <th>Entry Date</th>
+		                <th>From Date</th>
+		                <th>To Date</th>
+		                <th>Days</th>		
+		                <th>Remarks</th>
+		                <th class="text-center"></th>
+		            </tr>
+		            </thead>
+		            <tbody>
+                        <tr ng-repeat="child in parent.spGetEmployeeLeaveInfoes | orderBy:'fromDate'">
+                            <td>{{child.createdDate | date: "dd-MM-yyyy"}}</td>
+                            <td>{{child.fromDate | date: "dd-MM-yyyy"}}</td>
+                            <td>{{child.toDate | date: "dd-MM-yyyy"}}</td>
+                            <td ng-init="$parent.total = $parent.total + child.duration">{{child.duration}}</td>
+                            <td>{{child.remarks}}</td>
+
+                            <td class="text-right">
+                                <a href="{{vm.url+child.fileName}}" ng-hide="child.fileName ==null" class="btn custom-btn btn-edit custom-btn-primary btn-xs" target="_blank"><span class="fa fa-download" aria-hidden="true" title="Download Leave Application"></span></a>
+                                <a disabled ng-hide="child.fileName !=null" class="btn custom-btn btn-edit custom-btn-primary btn-xs"><span class="fa fa-download" aria-hidden="true" title="Download Leave Application"></span></a>
+
+
+                                <a ng-show="vm.permission.update" class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.editEmployeeLeave(child.empLeaveId)"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span></a>
+                                <a ng-show="vm.permission.delete" class="btn custom-btn btn-delete btn-danger btn-xs" style="cursor:pointer" ng-confirmation-click="vm.deleteEmployeeLeave(child.empLeaveId)"
+                                   ng-confirmation-message="Do you want to delete Employee Leave?"
+                                   ng-confirmation-title="Delete Employee Leave?"
+                                   ng-confirmation-yes-text="Yes"
+                                   ng-confirmation-cancel-text="No"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Employee"></span></a>
+                            </td>
+                        </tr>
+		            <tr>
+		                <td><b>Total</b></td>
+		                <td></td>
+		                <td></td>
+		                <td><b>{{ total }}</b></td>
+		                <td></td>
+		                <td></td>
+		               
+		            </tr>
+		            </tbody>
+		        </table>
+		    </div>
+            
+            <div style="margin-top: 100px;"></div>
+
+		</div>
+	</div>
+</div>

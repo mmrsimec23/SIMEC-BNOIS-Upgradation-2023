@@ -1,0 +1,55 @@
+<div class="container-fluid">
+	<div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <button  class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.addUser()"><span class="glyphicon glyphicon-user"></span> Add</button>
+                    <div ng-include="'app/templates/search.html'"></div>
+                    <h2 class="warning page-header-item">User Information </h2>
+                </div>
+                <div class="table-wrapper table-responsive">
+
+                    <label>
+                        <input type="radio" ng-model="vm.userStatus" value="true"   ng-checked="true" />Active
+                    </label>
+                    <label>
+                        <input type="radio" ng-model="vm.userStatus" value="false" ng-checked="false" />Inactive
+                    </label>
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Status</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="user in vm.users| filter:{firstName:vm.searchText,isActive:vm.userStatus }">
+                                <td>{{user.userName}}</td>
+                                <td>{{user.firstName}}{{" "}}{{user.lastName}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.phoneNumber}}</td>
+                                <td><active-inactive is-active="{{user.isActive}}"></active-inactive></td>
+                                <td class="text-center">
+                                    <a class="btn custom-btn btn-edit btn-info btn-xs" ng-disabled="vm.loginUserId==user.id" ng-click="vm.loginUserId!=user.id&&vm.addUserRoles(user)"><span class="glyphicon glyphicon-wrench" ng-disabled="vm.loginUserId==user.id" aria-hidden="true" title="User In Role"></span></a>
+                                    <a class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.updateUser(user)"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span></a>
+                                    <a class="btn custom-btn btn-delete btn-danger btn-xs" style="cursor: pointer" ng-confirmation-click="vm.deleteUser(user)"
+                                       ng-confirmation-message="Do you want to Inactive User"
+                                       ng-confirmation-title="Inactive User"
+                                       ng-confirmation-yes-text="Yes"
+                                       ng-confirmation-cancel-text="No"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete role"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-if="vm.user.length > 0">
+                        <ul uib-pagination items-per-page="vm.pageSize" total-items="vm.total" ng-change="vm.pageChanged()" ng-model="vm.pageNumber" max-size="5" class="pagination" boundary-link-numbers="true"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>

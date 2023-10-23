@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Infinity.Bnois.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Infinity.Bnois.Api.Controllers.GendersController.#ctor(Infinity.Bnois.ApplicationService.Interface.IGenderService,Infinity.Bnois.Configuration.IRoleFeatureService)">
+            <summary>
+            GendersController constructor with IGenderService
+            </summary>
+            <param name="genderService">Instance of IGenderService</param>
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.GendersController.GetGenders(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all Gender
+            </summary>
+            <remarks>
+            response data:
+            {
+             isError:true/false,
+             message:"error message",
+             result: [{gender}],
+             total: total number of Gender
+            }
+            </remarks>
+            <param name="ps">Represents number of page size</param>
+            <param name="pn">Represents number of page number</param>
+            <param name="qs">Represents searching key</param>
+            <returns>Return list of Gender object</returns>
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.GendersController.GetGender(System.Int32)">
+            <summary>
+            Get Gender by Id 
+            </summary>
+            <param name="genderId">genderId</param>
+            <returns>Return a single instance of Gender</returns>
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.GendersController.SaveGender(Infinity.Bnois.ApplicationService.Models.GenderModel)">
+            <summary>
+            Save Gender
+            </summary>
+            <remarks>
+            response data:
+            {
+             isError:true/false,
+             message:"error message",
+             result: {gender} 
+            }
+            </remarks>
+            <param name="model">Gender</param>
+            <returns>
+            a single of Gender object
+            </returns>
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.GendersController.UpdateGender(System.Int32,Infinity.Bnois.ApplicationService.Models.GenderModel)">
+            <summary>
+            Update Gender
+            </summary>
+            <remarks>
+            response data:
+            {
+             isError:true/false,
+             message:"error message",
+             result: {gender} 
+            }
+            </remarks>
+            <param name="genderId">genderId</param>
+            <param name="model">Gender</param>
+            <returns>A newly created Gender</returns>
+            <response code="201">Returns the updated Gender</response>
+            <response code="400">If the Gender is null</response> 
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.GendersController.DeleteGender(System.Int32)">
+            <summary>
+            Delete a Gender
+            </summary>
+            <param name="genderId">genderId</param>
+            <returns>
+            {
+             isError:true/false,
+             message:"error message",
+             result: true/false
+            }
+            </returns>
+        </member>
+        <member name="T:Infinity.Bnois.Api.Controllers.RankCategoriesController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.RankCategoriesController.#ctor(Infinity.Bnois.ApplicationService.Interface.IRankCategoryService,Infinity.Bnois.Configuration.IRoleFeatureService)">
+            <summary>
+            
+            </summary>
+            <param name="rankCategoryService"></param>
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.RankCategoriesController.GetRankCategories(System.Int32,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="ps"></param>
+            <param name="pn"></param>
+            <param name="qs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.RankCategoriesController.GetRankCategory(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.RankCategoriesController.SaveRankCategory(Infinity.Bnois.ApplicationService.Models.RankCategoryModel)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.RankCategoriesController.UpdateRankCategory(System.Int32,Infinity.Bnois.ApplicationService.Models.RankCategoryModel)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Infinity.Bnois.Api.Controllers.RankCategoriesController.DeleteRankCategory(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Infinity.Bnois.Api.Right.MASTER_SETUP">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>
