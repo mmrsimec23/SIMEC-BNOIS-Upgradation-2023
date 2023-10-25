@@ -24,5 +24,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
 
         bool ExecuteNamingConvention();
         List<object> GetEmployeeByName(string qs);
+
+        Object GetDynamicTableInfoById(string tableName, string columnName, int id);
     }
 }

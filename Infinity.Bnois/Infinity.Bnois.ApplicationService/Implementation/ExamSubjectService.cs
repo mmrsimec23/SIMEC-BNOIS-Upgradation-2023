@@ -6,6 +6,7 @@ using Infinity.Bnois.ExceptionHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace Infinity.Bnois.ApplicationService.Implementation
@@ -14,10 +15,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
         private readonly IBnoisRepository<ExamSubject> examSubjectRepository;
         private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
-        public ExamSubjectService(IBnoisRepository<ExamSubject> examSubjectRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
+        private readonly IEmployeeService employeeService;
+        public ExamSubjectService(IEmployeeService employeeService,IBnoisRepository<ExamSubject> examSubjectRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.examSubjectRepository = examSubjectRepository;
             this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
 
@@ -79,14 +82,15 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.UpdatedValue = "Id: " + model.ExamSubjectId;
                 if (examSubject.ExaminationId != model.ExaminationId)
                 {
-                    //Examination exam = 
+                    var exam = employeeService.GetDynamicTableInfoById("Examination", "ExaminationId", model.ExaminationId);
                     bnLog.PreviousValue += ", Examination: " + examSubject.Examination.Name;
-                    bnLog.UpdatedValue += ", Examination: " + model.Examination.Name;
+                    bnLog.UpdatedValue += ", Examination: " + ((dynamic)exam).Name;
                 }
                 if (examSubject.SubjectId != model.SubjectId)
                 {
+                    var sub = employeeService.GetDynamicTableInfoById("Subject", "SubjectId", model.SubjectId);
                     bnLog.PreviousValue += ", Subject: " + examSubject.Subject.Name;
-                    bnLog.UpdatedValue += ", Subject: " + model.Subject.Name;
+                    bnLog.UpdatedValue += ", Subject: " + ((dynamic)sub).Name;
                 }
                 if (examSubject.Remarks != model.Remarks)
                 {

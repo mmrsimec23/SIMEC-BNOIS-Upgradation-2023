@@ -249,6 +249,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             employeeRepository.ExecWithSqlQuery(String.Format("exec spUpdateSeniorityPosition"));
             return true;
         }
+
+        public object GetDynamicTableInfoById(string tableName, string columnName, int id)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDynamicRowInfoById] '{0}','{1}',{2} ", tableName, columnName, id));
+            return dataTable.ToJson().FirstOrDefault();
+        }
         private void GetAgeLimitServiceLimitLprDate(int EmployeeId, int category, int subCategory, int rank, DateTime commissionDate, DateTime dateOfBirth, out DateTime ageLimit, out DateTime serviceLimit, out DateTime LprDate)
         {
             AgeServicePolicy ageServicePolicy = ageServicePolicyRepository.FindOne(x => x.CategoryId == category && x.SubCategoryId == subCategory && x.RankId == rank);

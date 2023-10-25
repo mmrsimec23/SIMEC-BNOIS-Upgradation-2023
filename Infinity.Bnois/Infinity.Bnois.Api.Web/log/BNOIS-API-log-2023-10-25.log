@@ -1019,3 +1019,3289 @@
   }
 }
 2023-10-25 10:35:38,041 [INFO] - End access token validation request
+2023-10-25 11:32:52,660 [WARN] - AuthorizationCodeStore not configured - falling back to InMemory
+2023-10-25 11:32:52,676 [WARN] - TokenHandleStore not configured - falling back to InMemory
+2023-10-25 11:32:52,676 [WARN] - ConsentStore not configured - falling back to InMemory
+2023-10-25 11:32:52,676 [WARN] - RefreshTokenStore not configured - falling back to InMemory
+2023-10-25 11:32:52,801 [WARN] - The signing certificate will expire in the next 30 days: 1/21/2020 4:00:00 AM
+2023-10-25 11:32:57,905 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:57,913 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:57,913 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,207 [INFO] - Start access token validation request
+2023-10-25 11:32:58,222 [INFO] - Start access token validation request
+2023-10-25 11:32:58,222 [INFO] - Start access token validation request
+2023-10-25 11:32:58,222 [INFO] - Start access token validation request
+2023-10-25 11:32:58,222 [INFO] - Start access token validation request
+2023-10-25 11:32:58,233 [INFO] - Start discovery request
+2023-10-25 11:32:58,239 [INFO] - Start access token validation
+2023-10-25 11:32:58,239 [INFO] - Start access token validation
+2023-10-25 11:32:58,239 [INFO] - Start access token validation
+2023-10-25 11:32:58,239 [INFO] - Start access token validation
+2023-10-25 11:32:58,239 [INFO] - Start access token validation
+2023-10-25 11:32:58,351 [ERROR] - Token handle not found
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Reference",
+  "TokenHandle": "undefined"
+}
+2023-10-25 11:32:58,351 [ERROR] - Token handle not found
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Reference",
+  "TokenHandle": "undefined"
+}
+2023-10-25 11:32:58,351 [ERROR] - Token handle not found
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Reference",
+  "TokenHandle": "undefined"
+}
+2023-10-25 11:32:58,351 [ERROR] - Token handle not found
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Reference",
+  "TokenHandle": "undefined"
+}
+2023-10-25 11:32:58,351 [INFO] - Returning error: invalid_token
+2023-10-25 11:32:58,351 [INFO] - Returning error: invalid_token
+2023-10-25 11:32:58,351 [ERROR] - Token handle not found
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Reference",
+  "TokenHandle": "undefined"
+}
+2023-10-25 11:32:58,351 [INFO] - Returning error: invalid_token
+2023-10-25 11:32:58,351 [INFO] - Returning error: invalid_token
+2023-10-25 11:32:58,351 [INFO] - Returning error: invalid_token
+2023-10-25 11:32:58,488 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,488 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,488 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,490 [INFO] - Start discovery request
+2023-10-25 11:32:58,542 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,542 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,542 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,543 [INFO] - Start discovery request
+2023-10-25 11:32:58,587 [INFO] - Start authorize request
+2023-10-25 11:32:58,600 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,600 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,600 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,601 [INFO] - Start discovery request
+2023-10-25 11:32:58,605 [INFO] - Start authorize request protocol validation
+2023-10-25 11:32:58,605 [INFO] - Start authorize request
+2023-10-25 11:32:58,605 [INFO] - Start authorize request protocol validation
+2023-10-25 11:32:58,608 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,608 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,608 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,609 [INFO] - Start discovery request
+2023-10-25 11:32:58,623 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,623 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,623 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,623 [INFO] - Start discovery request
+2023-10-25 11:32:58,664 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "unknown",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "34399003015064",
+  "Nonce": "1448581771593489",
+  "Raw": {
+    "state": "34399003015064",
+    "nonce": "1448581771593489",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 11:32:58,664 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "unknown",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "11449620877507983",
+  "Nonce": "5952496038761196",
+  "Raw": {
+    "state": "11449620877507983",
+    "nonce": "5952496038761196",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 11:32:58,690 [INFO] - User is not authenticated. Redirecting to login.
+2023-10-25 11:32:58,690 [INFO] - User is not authenticated. Redirecting to login.
+2023-10-25 11:32:58,710 [INFO] - End authorize request
+2023-10-25 11:32:58,710 [INFO] - End authorize request
+2023-10-25 11:32:58,713 [INFO] - Redirecting to login page
+2023-10-25 11:32:58,714 [INFO] - Redirecting to login page
+2023-10-25 11:32:58,752 [DEBUG] - Protecting message: {"ReturnUrl":"http://localhost:24116/core/connect/authorize?state=11449620877507983&nonce=5952496038761196&client_id=infinity-bnois-api-client&redirect_uri=http%3A%2F%2Flocalhost%3A24123%2Fcallback.html&response_type=id_token%20token&scope=openid%20profile%20infinity-bnois-api-scope%20infinity-bnois-identity-api-scope%20roles%20all_claims","ClientId":"infinity-bnois-api-client","AcrValues":[],"Created":638338087785359308}
+2023-10-25 11:32:58,766 [INFO] - Start authorize request
+2023-10-25 11:32:58,766 [INFO] - Start authorize request protocol validation
+2023-10-25 11:32:58,766 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "unknown",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "13183021872249822",
+  "Nonce": "7789212651664369",
+  "Raw": {
+    "state": "13183021872249822",
+    "nonce": "7789212651664369",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 11:32:58,766 [INFO] - User is not authenticated. Redirecting to login.
+2023-10-25 11:32:58,766 [DEBUG] - Protecting message: {"ReturnUrl":"http://localhost:24116/core/connect/authorize?state=34399003015064&nonce=1448581771593489&client_id=infinity-bnois-api-client&redirect_uri=http%3A%2F%2Flocalhost%3A24123%2Fcallback.html&response_type=id_token%20token&scope=openid%20profile%20infinity-bnois-api-scope%20infinity-bnois-identity-api-scope%20roles%20all_claims","ClientId":"infinity-bnois-api-client","AcrValues":[],"Created":638338087786058578}
+2023-10-25 11:32:58,766 [INFO] - End authorize request
+2023-10-25 11:32:58,766 [INFO] - Redirecting to login page
+2023-10-25 11:32:58,767 [DEBUG] - Protecting message: {"ReturnUrl":"http://localhost:24116/core/connect/authorize?state=13183021872249822&nonce=7789212651664369&client_id=infinity-bnois-api-client&redirect_uri=http%3A%2F%2Flocalhost%3A24123%2Fcallback.html&response_type=id_token%20token&scope=openid%20profile%20infinity-bnois-api-scope%20infinity-bnois-identity-api-scope%20roles%20all_claims","ClientId":"infinity-bnois-api-client","AcrValues":[],"Created":638338087787664959}
+2023-10-25 11:32:58,785 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,785 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,785 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,785 [INFO] - Start discovery request
+2023-10-25 11:32:58,791 [INFO] - Start authorize request
+2023-10-25 11:32:58,791 [INFO] - Start authorize request protocol validation
+2023-10-25 11:32:58,791 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "unknown",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "8063161022234989",
+  "Nonce": "5605103696024003",
+  "Raw": {
+    "state": "8063161022234989",
+    "nonce": "5605103696024003",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 11:32:58,791 [INFO] - User is not authenticated. Redirecting to login.
+2023-10-25 11:32:58,791 [INFO] - End authorize request
+2023-10-25 11:32:58,791 [INFO] - Redirecting to login page
+2023-10-25 11:32:58,791 [DEBUG] - Protecting message: {"ReturnUrl":"http://localhost:24116/core/connect/authorize?state=8063161022234989&nonce=5605103696024003&client_id=infinity-bnois-api-client&redirect_uri=http%3A%2F%2Flocalhost%3A24123%2Fcallback.html&response_type=id_token%20token&scope=openid%20profile%20infinity-bnois-api-scope%20infinity-bnois-identity-api-scope%20roles%20all_claims","ClientId":"infinity-bnois-api-client","AcrValues":[],"Created":638338087787907695}
+2023-10-25 11:32:58,809 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,809 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,809 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,809 [INFO] - Start discovery request
+2023-10-25 11:32:58,851 [INFO] - Start authorize request
+2023-10-25 11:32:58,851 [INFO] - Start authorize request protocol validation
+2023-10-25 11:32:58,851 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "unknown",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "14099072028710664",
+  "Nonce": "13507922260783523",
+  "Raw": {
+    "state": "14099072028710664",
+    "nonce": "13507922260783523",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 11:32:58,851 [INFO] - User is not authenticated. Redirecting to login.
+2023-10-25 11:32:58,851 [INFO] - End authorize request
+2023-10-25 11:32:58,851 [INFO] - Redirecting to login page
+2023-10-25 11:32:58,851 [DEBUG] - Protecting message: {"ReturnUrl":"http://localhost:24116/core/connect/authorize?state=14099072028710664&nonce=13507922260783523&client_id=infinity-bnois-api-client&redirect_uri=http%3A%2F%2Flocalhost%3A24123%2Fcallback.html&response_type=id_token%20token&scope=openid%20profile%20infinity-bnois-api-scope%20infinity-bnois-identity-api-scope%20roles%20all_claims","ClientId":"infinity-bnois-api-client","AcrValues":[],"Created":638338087788519870}
+2023-10-25 11:32:58,857 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,861 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,861 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,865 [INFO] - Start discovery request
+2023-10-25 11:32:58,897 [INFO] - Start authorize request
+2023-10-25 11:32:58,897 [INFO] - Start authorize request protocol validation
+2023-10-25 11:32:58,897 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "unknown",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "677965324505053",
+  "Nonce": "1571439901013043",
+  "Raw": {
+    "state": "677965324505053",
+    "nonce": "1571439901013043",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 11:32:58,897 [INFO] - User is not authenticated. Redirecting to login.
+2023-10-25 11:32:58,897 [INFO] - End authorize request
+2023-10-25 11:32:58,897 [INFO] - Redirecting to login page
+2023-10-25 11:32:58,897 [DEBUG] - Protecting message: {"ReturnUrl":"http://localhost:24116/core/connect/authorize?state=677965324505053&nonce=1571439901013043&client_id=infinity-bnois-api-client&redirect_uri=http%3A%2F%2Flocalhost%3A24123%2Fcallback.html&response_type=id_token%20token&scope=openid%20profile%20infinity-bnois-api-scope%20infinity-bnois-identity-api-scope%20roles%20all_claims","ClientId":"infinity-bnois-api-client","AcrValues":[],"Created":638338087788976973}
+2023-10-25 11:32:58,928 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,928 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,928 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,929 [INFO] - Start discovery request
+2023-10-25 11:32:58,932 [INFO] - Start authorize request
+2023-10-25 11:32:58,932 [INFO] - Start authorize request protocol validation
+2023-10-25 11:32:58,932 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "unknown",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "16759449344773113",
+  "Nonce": "11218361833865767",
+  "Raw": {
+    "state": "16759449344773113",
+    "nonce": "11218361833865767",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 11:32:58,932 [INFO] - User is not authenticated. Redirecting to login.
+2023-10-25 11:32:58,932 [INFO] - End authorize request
+2023-10-25 11:32:58,932 [INFO] - Redirecting to login page
+2023-10-25 11:32:58,932 [DEBUG] - Protecting message: {"ReturnUrl":"http://localhost:24116/core/connect/authorize?state=16759449344773113&nonce=11218361833865767&client_id=infinity-bnois-api-client&redirect_uri=http%3A%2F%2Flocalhost%3A24123%2Fcallback.html&response_type=id_token%20token&scope=openid%20profile%20infinity-bnois-api-scope%20infinity-bnois-identity-api-scope%20roles%20all_claims","ClientId":"infinity-bnois-api-client","AcrValues":[],"Created":638338087789316633}
+2023-10-25 11:32:58,936 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,936 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,936 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,936 [INFO] - Start discovery request
+2023-10-25 11:32:58,946 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:32:58,946 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:32:58,946 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:32:58,947 [INFO] - Start discovery request
+2023-10-25 11:32:58,958 [INFO] - Start authorize request
+2023-10-25 11:32:58,958 [INFO] - Start authorize request protocol validation
+2023-10-25 11:32:58,958 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "unknown",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "8003318398538374",
+  "Nonce": "222415803781388",
+  "Raw": {
+    "state": "8003318398538374",
+    "nonce": "222415803781388",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 11:32:58,958 [INFO] - User is not authenticated. Redirecting to login.
+2023-10-25 11:32:58,958 [INFO] - End authorize request
+2023-10-25 11:32:58,958 [INFO] - Redirecting to login page
+2023-10-25 11:32:58,958 [DEBUG] - Protecting message: {"ReturnUrl":"http://localhost:24116/core/connect/authorize?state=8003318398538374&nonce=222415803781388&client_id=infinity-bnois-api-client&redirect_uri=http%3A%2F%2Flocalhost%3A24123%2Fcallback.html&response_type=id_token%20token&scope=openid%20profile%20infinity-bnois-api-scope%20infinity-bnois-identity-api-scope%20roles%20all_claims","ClientId":"infinity-bnois-api-client","AcrValues":[],"Created":638338087789583233}
+2023-10-25 11:32:58,979 [INFO] - Start authorize request
+2023-10-25 11:32:58,979 [INFO] - Start authorize request protocol validation
+2023-10-25 11:32:58,979 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "unknown",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "1540583199074594",
+  "Nonce": "16536439556615742",
+  "Raw": {
+    "state": "1540583199074594",
+    "nonce": "16536439556615742",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 11:32:58,979 [INFO] - User is not authenticated. Redirecting to login.
+2023-10-25 11:32:58,979 [INFO] - End authorize request
+2023-10-25 11:32:58,979 [INFO] - Redirecting to login page
+2023-10-25 11:32:58,979 [DEBUG] - Protecting message: {"ReturnUrl":"http://localhost:24116/core/connect/authorize?state=1540583199074594&nonce=16536439556615742&client_id=infinity-bnois-api-client&redirect_uri=http%3A%2F%2Flocalhost%3A24123%2Fcallback.html&response_type=id_token%20token&scope=openid%20profile%20infinity-bnois-api-scope%20infinity-bnois-identity-api-scope%20roles%20all_claims","ClientId":"infinity-bnois-api-client","AcrValues":[],"Created":638338087789785594}
+2023-10-25 11:32:59,055 [INFO] - Login page requested
+2023-10-25 11:32:59,131 [DEBUG] - signin message passed to login: {
+  "ReturnUrl": "http://localhost:24116/core/connect/authorize?state=1540583199074594&nonce=16536439556615742&client_id=infinity-bnois-api-client&redirect_uri=http%3A%2F%2Flocalhost%3A24123%2Fcallback.html&response_type=id_token%20token&scope=openid%20profile%20infinity-bnois-api-scope%20infinity-bnois-identity-api-scope%20roles%20all_claims",
+  "ClientId": "infinity-bnois-api-client",
+  "IdP": null,
+  "Tenant": null,
+  "LoginHint": null,
+  "DisplayMode": null,
+  "UiLocales": null,
+  "AcrValues": [],
+  "Created": 638338087789785594
+}
+2023-10-25 11:32:59,144 [INFO] - rendering login page
+2023-10-25 11:33:07,488 [ERROR] - Unhandled exception thrown in GET for request http://localhost:24116/api/Configuration/modules/get-module-features: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Infinity.Bnois.Configuration.ModuleService.GetModuleFeatures(FeatureType featureTypeId) in E:\SIMEC-BNOIS-Upgradation-2023\Infinity.Bnois\Infinity.Bnois.Configuration\ModuleService.cs:line 100
+   at Infinity.Bnois.Api.Web.Controllers.ModulesController.GetModuleFeatures() in E:\SIMEC-BNOIS-Upgradation-2023\Infinity.Bnois\Infinity.Bnois.Api.Web\Controllers\ModulesController.cs:line 108
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass6_1.<GetExecutor>b__3(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.ActionFilterAttribute.<CallOnActionExecutedAsync>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Web.Http.Filters.ActionFilterAttribute.<CallOnActionExecutedAsync>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.ActionFilterAttribute.<ExecuteActionFilterAsyncCore>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.AuthorizationFilterAttribute.<ExecuteAuthorizationFilterAsyncCore>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.AuthorizationFilterAttribute.<ExecuteAuthorizationFilterAsyncCore>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.AuthenticationFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__15.MoveNext()
+2023-10-25 11:33:15,330 [INFO] - Login page submitted
+2023-10-25 11:33:15,728 [INFO] - Login credentials successfully validated by user service
+2023-10-25 11:33:15,730 [INFO] - Calling PostAuthenticateAsync on the user service
+2023-10-25 11:33:15,745 [INFO] - issuing primary signin cookie
+2023-10-25 11:33:15,748 [INFO] - redirecting to: http://localhost:24116/core/connect/authorize?state=1540583199074594&nonce=16536439556615742&client_id=infinity-bnois-api-client&redirect_uri=http:%2F%2Flocalhost:24123%2Fcallback.html&response_type=id_token token&scope=openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims
+2023-10-25 11:33:15,780 [INFO] - Start authorize request
+2023-10-25 11:33:15,780 [INFO] - Start authorize request protocol validation
+2023-10-25 11:33:15,780 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "1540583199074594",
+  "Nonce": "16536439556615742",
+  "SessionId": "1ea1c8fbe81788d6e71c406f1a18e82b",
+  "Raw": {
+    "state": "1540583199074594",
+    "nonce": "16536439556615742",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 11:33:15,822 [INFO] - Creating Implicit Flow response.
+2023-10-25 11:33:15,826 [DEBUG] - Creating access token
+2023-10-25 11:33:15,862 [DEBUG] - Creating JWT access token
+2023-10-25 11:33:15,930 [DEBUG] - Creating identity token
+2023-10-25 11:33:15,930 [INFO] - Getting claims for identity token for subject: 78ea3d76-95fe-48df-8a3a-16d428e4c329
+2023-10-25 11:33:15,930 [INFO] - All claims rule found - emitting all claims for user.
+2023-10-25 11:33:15,959 [DEBUG] - Creating JWT identity token
+2023-10-25 11:33:15,965 [DEBUG] - Adding client infinity-bnois-api-client to client list cookie for subject 78ea3d76-95fe-48df-8a3a-16d428e4c329
+2023-10-25 11:33:15,969 [INFO] - End authorize request
+2023-10-25 11:33:15,971 [INFO] - Redirecting to: http://localhost:24123/callback.html
+2023-10-25 11:33:15,997 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 11:33:15,997 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:33:15,997 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:33:15,997 [INFO] - Start discovery request
+2023-10-25 11:33:16,014 [INFO] - CORS request made for path: /.well-known/jwks from origin: http://localhost:24123
+2023-10-25 11:33:16,015 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 11:33:16,015 [INFO] - CorsPolicyService allowed origin
+2023-10-25 11:33:16,020 [INFO] - Start key discovery request
+2023-10-25 11:33:16,433 [INFO] - Start access token validation request
+2023-10-25 11:33:16,433 [INFO] - Start access token validation
+2023-10-25 11:33:16,438 [INFO] - Start access token validation request
+2023-10-25 11:33:16,438 [INFO] - Start access token validation
+2023-10-25 11:33:16,487 [INFO] - Start access token validation request
+2023-10-25 11:33:16,487 [INFO] - Start access token validation
+2023-10-25 11:33:16,538 [INFO] - Start access token validation request
+2023-10-25 11:33:16,538 [INFO] - Start access token validation
+2023-10-25 11:33:16,538 [INFO] - Start access token validation request
+2023-10-25 11:33:16,538 [INFO] - Start access token validation
+2023-10-25 11:33:16,622 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:33:16,623 [INFO] - End access token validation request
+2023-10-25 11:33:16,625 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:33:16,625 [INFO] - End access token validation request
+2023-10-25 11:33:16,629 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:33:16,629 [INFO] - End access token validation request
+2023-10-25 11:33:16,644 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:33:16,644 [INFO] - End access token validation request
+2023-10-25 11:33:16,644 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:33:16,644 [INFO] - End access token validation request
+2023-10-25 11:33:26,282 [INFO] - Start access token validation request
+2023-10-25 11:33:26,282 [INFO] - Start access token validation request
+2023-10-25 11:33:26,282 [INFO] - Start access token validation
+2023-10-25 11:33:26,282 [INFO] - Start access token validation
+2023-10-25 11:33:26,311 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:33:26,311 [INFO] - End access token validation request
+2023-10-25 11:33:26,311 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:33:26,311 [INFO] - End access token validation request
+2023-10-25 11:33:37,970 [INFO] - Start access token validation request
+2023-10-25 11:33:37,970 [INFO] - Start access token validation
+2023-10-25 11:33:37,988 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:33:37,988 [INFO] - End access token validation request
+2023-10-25 11:42:36,585 [INFO] - Start access token validation request
+2023-10-25 11:42:36,585 [INFO] - Start access token validation
+2023-10-25 11:42:36,606 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:42:36,606 [INFO] - End access token validation request
+2023-10-25 11:43:44,108 [INFO] - Start access token validation request
+2023-10-25 11:43:44,108 [INFO] - Start access token validation
+2023-10-25 11:43:44,108 [INFO] - Start access token validation request
+2023-10-25 11:43:44,108 [INFO] - Start access token validation
+2023-10-25 11:43:44,148 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:43:44,148 [INFO] - End access token validation request
+2023-10-25 11:43:44,152 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:43:44,152 [INFO] - End access token validation request
+2023-10-25 11:43:44,176 [INFO] - Start access token validation request
+2023-10-25 11:43:44,176 [INFO] - Start access token validation
+2023-10-25 11:43:44,217 [INFO] - Start access token validation request
+2023-10-25 11:43:44,217 [INFO] - Start access token validation
+2023-10-25 11:43:44,235 [INFO] - Start access token validation request
+2023-10-25 11:43:44,235 [INFO] - Start access token validation
+2023-10-25 11:43:44,275 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:43:44,275 [INFO] - End access token validation request
+2023-10-25 11:43:44,275 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:43:44,275 [INFO] - End access token validation request
+2023-10-25 11:43:44,293 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:43:44,293 [INFO] - End access token validation request
+2023-10-25 11:44:09,624 [INFO] - Start access token validation request
+2023-10-25 11:44:09,624 [INFO] - Start access token validation
+2023-10-25 11:44:09,646 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:44:09,646 [INFO] - End access token validation request
+2023-10-25 11:44:09,658 [INFO] - Start access token validation request
+2023-10-25 11:44:09,658 [INFO] - Start access token validation
+2023-10-25 11:44:09,677 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:44:09,677 [INFO] - End access token validation request
+2023-10-25 11:45:23,469 [INFO] - Start access token validation request
+2023-10-25 11:45:23,469 [INFO] - Start access token validation
+2023-10-25 11:45:23,480 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:45:23,480 [INFO] - End access token validation request
+2023-10-25 11:45:23,876 [ERROR] - Unhandled exception thrown in GET for request http://localhost:24116/api/bnois/employees/get-employee-by-pno?pno=1395: Infinity.Bnois.ExceptionHelper.InfinityNotFoundException: Officer not found!
+   at Infinity.Bnois.ApplicationService.Implementation.EmployeeService.<GetEmployeeByPO>d__11.MoveNext() in E:\SIMEC-BNOIS-Upgradation-2023\Infinity.Bnois\Infinity.Bnois.ApplicationService\Implementation\EmployeeService.cs:line 157
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Infinity.Bnois.Api.Controllers.EmployeesController.<GetEmployeeByPno>d__11.MoveNext() in E:\SIMEC-BNOIS-Upgradation-2023\Infinity.Bnois\Infinity.Bnois.Api\Controllers\EmployeesController.cs:line 100
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Threading.Tasks.TaskHelpersExtensions.<CastToObject>d__1`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.ActionFilterAttribute.<CallOnActionExecutedAsync>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Web.Http.Filters.ActionFilterAttribute.<CallOnActionExecutedAsync>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.ActionFilterAttribute.<ExecuteActionFilterAsyncCore>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.AuthorizationFilterAttribute.<ExecuteAuthorizationFilterAsyncCore>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.AuthenticationFilterResult.<ExecuteAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__15.MoveNext()
+2023-10-25 11:45:51,902 [INFO] - Start access token validation request
+2023-10-25 11:45:51,902 [INFO] - Start access token validation
+2023-10-25 11:45:51,913 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:45:51,913 [INFO] - End access token validation request
+2023-10-25 11:45:52,609 [INFO] - Start access token validation request
+2023-10-25 11:45:52,609 [INFO] - Start access token validation
+2023-10-25 11:45:52,639 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:45:52,639 [INFO] - End access token validation request
+2023-10-25 11:45:52,643 [INFO] - Start access token validation request
+2023-10-25 11:45:52,643 [INFO] - Start access token validation
+2023-10-25 11:45:52,663 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:45:52,663 [INFO] - End access token validation request
+2023-10-25 11:45:52,690 [INFO] - Start access token validation request
+2023-10-25 11:45:52,692 [INFO] - Start access token validation
+2023-10-25 11:45:52,692 [INFO] - Start access token validation request
+2023-10-25 11:45:52,692 [INFO] - Start access token validation
+2023-10-25 11:45:52,893 [INFO] - Start access token validation request
+2023-10-25 11:45:52,893 [INFO] - Start access token validation
+2023-10-25 11:45:53,069 [INFO] - Start access token validation request
+2023-10-25 11:45:53,069 [INFO] - Start access token validation
+2023-10-25 11:45:53,176 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:45:53,176 [INFO] - End access token validation request
+2023-10-25 11:45:53,176 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:45:53,177 [INFO] - End access token validation request
+2023-10-25 11:45:53,178 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:45:53,178 [INFO] - End access token validation request
+2023-10-25 11:45:53,178 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:45:53,179 [INFO] - End access token validation request
+2023-10-25 11:46:05,275 [INFO] - Start access token validation request
+2023-10-25 11:46:05,275 [INFO] - Start access token validation
+2023-10-25 11:46:05,275 [INFO] - Start access token validation request
+2023-10-25 11:46:05,275 [INFO] - Start access token validation
+2023-10-25 11:46:05,302 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:46:05,302 [INFO] - End access token validation request
+2023-10-25 11:46:05,304 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:46:05,305 [INFO] - End access token validation request
+2023-10-25 11:54:45,997 [INFO] - Start access token validation request
+2023-10-25 11:54:45,997 [INFO] - Start access token validation
+2023-10-25 11:54:46,019 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:54:46,019 [INFO] - End access token validation request
+2023-10-25 11:54:47,759 [INFO] - Start access token validation request
+2023-10-25 11:54:47,759 [INFO] - Start access token validation
+2023-10-25 11:54:47,791 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:54:47,791 [INFO] - End access token validation request
+2023-10-25 11:54:55,784 [INFO] - Start access token validation request
+2023-10-25 11:54:55,784 [INFO] - Start access token validation
+2023-10-25 11:54:55,792 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:54:55,792 [INFO] - End access token validation request
+2023-10-25 11:54:55,930 [INFO] - Start access token validation request
+2023-10-25 11:54:55,930 [INFO] - Start access token validation
+2023-10-25 11:54:55,945 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:54:55,945 [INFO] - End access token validation request
+2023-10-25 11:54:57,724 [INFO] - Start access token validation request
+2023-10-25 11:54:57,724 [INFO] - Start access token validation
+2023-10-25 11:54:57,853 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:54:57,853 [INFO] - End access token validation request
+2023-10-25 11:55:01,533 [INFO] - Start access token validation request
+2023-10-25 11:55:01,533 [INFO] - Start access token validation
+2023-10-25 11:55:01,544 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:55:01,544 [INFO] - End access token validation request
+2023-10-25 11:55:01,595 [INFO] - Start access token validation request
+2023-10-25 11:55:01,595 [INFO] - Start access token validation
+2023-10-25 11:55:01,611 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:55:01,611 [INFO] - End access token validation request
+2023-10-25 11:55:06,230 [INFO] - Start access token validation request
+2023-10-25 11:55:06,230 [INFO] - Start access token validation
+2023-10-25 11:55:06,250 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:55:06,250 [INFO] - End access token validation request
+2023-10-25 11:55:10,062 [INFO] - Start access token validation request
+2023-10-25 11:55:10,062 [INFO] - Start access token validation
+2023-10-25 11:55:10,071 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:55:10,071 [INFO] - End access token validation request
+2023-10-25 11:55:13,852 [INFO] - Start access token validation request
+2023-10-25 11:55:13,852 [INFO] - Start access token validation
+2023-10-25 11:55:13,875 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:55:13,875 [INFO] - End access token validation request
+2023-10-25 11:55:29,372 [INFO] - Start access token validation request
+2023-10-25 11:55:29,372 [INFO] - Start access token validation
+2023-10-25 11:55:29,387 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:55:29,387 [INFO] - End access token validation request
+2023-10-25 11:56:25,633 [INFO] - Start access token validation request
+2023-10-25 11:56:25,633 [INFO] - Start access token validation
+2023-10-25 11:56:25,640 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 11:56:25,640 [INFO] - End access token validation request
+2023-10-25 12:02:16,358 [INFO] - Start access token validation request
+2023-10-25 12:02:16,359 [INFO] - Start access token validation
+2023-10-25 12:02:16,377 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:02:16,378 [INFO] - End access token validation request
+2023-10-25 12:02:30,102 [INFO] - Start access token validation request
+2023-10-25 12:02:30,102 [INFO] - Start access token validation
+2023-10-25 12:02:30,110 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:02:30,110 [INFO] - End access token validation request
+2023-10-25 12:02:39,148 [INFO] - Start access token validation request
+2023-10-25 12:02:39,148 [INFO] - Start access token validation
+2023-10-25 12:02:39,162 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:02:39,162 [INFO] - End access token validation request
+2023-10-25 12:02:42,092 [INFO] - Start access token validation request
+2023-10-25 12:02:42,092 [INFO] - Start access token validation
+2023-10-25 12:02:42,099 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:02:42,099 [INFO] - End access token validation request
+2023-10-25 12:02:46,338 [INFO] - Start access token validation request
+2023-10-25 12:02:46,338 [INFO] - Start access token validation
+2023-10-25 12:02:46,346 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:02:46,346 [INFO] - End access token validation request
+2023-10-25 12:02:50,943 [INFO] - Start access token validation request
+2023-10-25 12:02:50,943 [INFO] - Start access token validation
+2023-10-25 12:02:50,948 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:02:50,948 [INFO] - End access token validation request
+2023-10-25 12:02:55,893 [INFO] - Start access token validation request
+2023-10-25 12:02:55,894 [INFO] - Start access token validation
+2023-10-25 12:02:55,899 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:02:55,899 [INFO] - End access token validation request
+2023-10-25 12:18:07,439 [INFO] - Start access token validation request
+2023-10-25 12:18:07,439 [INFO] - Start access token validation
+2023-10-25 12:18:07,461 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:18:07,461 [INFO] - End access token validation request
+2023-10-25 12:18:13,353 [INFO] - Start access token validation request
+2023-10-25 12:18:13,353 [INFO] - Start access token validation
+2023-10-25 12:18:13,373 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:18:13,374 [INFO] - End access token validation request
+2023-10-25 12:18:18,252 [INFO] - Start access token validation request
+2023-10-25 12:18:18,252 [INFO] - Start access token validation
+2023-10-25 12:18:18,271 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:18:18,271 [INFO] - End access token validation request
+2023-10-25 12:18:20,868 [INFO] - Start access token validation request
+2023-10-25 12:18:20,868 [INFO] - Start access token validation
+2023-10-25 12:18:20,886 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:18:20,886 [INFO] - End access token validation request
+2023-10-25 12:21:23,204 [INFO] - Start access token validation request
+2023-10-25 12:21:23,204 [INFO] - Start access token validation
+2023-10-25 12:21:23,214 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:21:23,214 [INFO] - End access token validation request
+2023-10-25 12:32:46,605 [WARN] - AuthorizationCodeStore not configured - falling back to InMemory
+2023-10-25 12:32:46,619 [WARN] - TokenHandleStore not configured - falling back to InMemory
+2023-10-25 12:32:46,619 [WARN] - ConsentStore not configured - falling back to InMemory
+2023-10-25 12:32:46,619 [WARN] - RefreshTokenStore not configured - falling back to InMemory
+2023-10-25 12:32:46,855 [WARN] - The signing certificate will expire in the next 30 days: 1/21/2020 4:00:00 AM
+2023-10-25 12:33:02,000 [INFO] - Start access token validation request
+2023-10-25 12:33:02,026 [INFO] - Start access token validation
+2023-10-25 12:33:02,503 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:02,503 [INFO] - End access token validation request
+2023-10-25 12:33:07,706 [INFO] - Start access token validation request
+2023-10-25 12:33:07,706 [INFO] - Start access token validation
+2023-10-25 12:33:07,723 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:07,723 [INFO] - End access token validation request
+2023-10-25 12:33:15,586 [INFO] - Start access token validation request
+2023-10-25 12:33:15,586 [INFO] - Start access token validation
+2023-10-25 12:33:15,591 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698215595",
+    "nbf": "1698211995",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:15,591 [INFO] - End access token validation request
+2023-10-25 12:33:24,940 [INFO] - Start access token validation request
+2023-10-25 12:33:24,940 [INFO] - Start access token validation
+2023-10-25 12:33:24,940 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 12:33:24,940 [ERROR] - Token handle not found
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Reference",
+  "TokenHandle": "undefined"
+}
+2023-10-25 12:33:24,940 [INFO] - Returning error: invalid_token
+2023-10-25 12:33:24,940 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 12:33:24,940 [INFO] - CorsPolicyService allowed origin
+2023-10-25 12:33:24,975 [INFO] - Start discovery request
+2023-10-25 12:33:25,066 [INFO] - Start authorize request
+2023-10-25 12:33:25,073 [INFO] - Start authorize request protocol validation
+2023-10-25 12:33:25,123 [INFO] - Authorize request validation success
+ {
+  "ClientId": "infinity-bnois-api-client",
+  "ClientName": "Bangladesh Naval Officers Information System",
+  "RedirectUri": "http://localhost:24123/callback.html",
+  "AllowedRedirectUris": [
+    "http://localhost:24123/callback.html",
+    "http://localhost:24123/silent-renew.html"
+  ],
+  "SubjectId": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+  "ResponseType": "id_token token",
+  "ResponseMode": "fragment",
+  "Flow": "Implicit",
+  "RequestedScopes": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims",
+  "State": "3642637431129176",
+  "Nonce": "7680568996176848",
+  "SessionId": "1ea1c8fbe81788d6e71c406f1a18e82b",
+  "Raw": {
+    "state": "3642637431129176",
+    "nonce": "7680568996176848",
+    "client_id": "infinity-bnois-api-client",
+    "redirect_uri": "http://localhost:24123/callback.html",
+    "response_type": "id_token token",
+    "scope": "openid profile infinity-bnois-api-scope infinity-bnois-identity-api-scope roles all_claims"
+  }
+}
+2023-10-25 12:33:25,172 [INFO] - Creating Implicit Flow response.
+2023-10-25 12:33:25,172 [DEBUG] - Creating access token
+2023-10-25 12:33:25,244 [DEBUG] - Creating JWT access token
+2023-10-25 12:33:25,290 [DEBUG] - Creating identity token
+2023-10-25 12:33:25,290 [INFO] - Getting claims for identity token for subject: 78ea3d76-95fe-48df-8a3a-16d428e4c329
+2023-10-25 12:33:25,290 [INFO] - All claims rule found - emitting all claims for user.
+2023-10-25 12:33:25,316 [DEBUG] - Creating JWT identity token
+2023-10-25 12:33:25,322 [DEBUG] - Adding client infinity-bnois-api-client to client list cookie for subject 78ea3d76-95fe-48df-8a3a-16d428e4c329
+2023-10-25 12:33:25,350 [INFO] - End authorize request
+2023-10-25 12:33:25,355 [INFO] - Redirecting to: http://localhost:24123/callback.html
+2023-10-25 12:33:25,394 [INFO] - CORS request made for path: /.well-known/openid-configuration from origin: http://localhost:24123
+2023-10-25 12:33:25,394 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 12:33:25,394 [INFO] - CorsPolicyService allowed origin
+2023-10-25 12:33:25,394 [INFO] - Start discovery request
+2023-10-25 12:33:25,403 [INFO] - CORS request made for path: /.well-known/jwks from origin: http://localhost:24123
+2023-10-25 12:33:25,403 [INFO] - AllowAll true, so origin: http://localhost:24123 is allowed
+2023-10-25 12:33:25,403 [INFO] - CorsPolicyService allowed origin
+2023-10-25 12:33:25,409 [INFO] - Start key discovery request
+2023-10-25 12:33:25,862 [INFO] - Start access token validation request
+2023-10-25 12:33:25,862 [INFO] - Start access token validation
+2023-10-25 12:33:25,862 [INFO] - Start access token validation request
+2023-10-25 12:33:25,863 [INFO] - Start access token validation
+2023-10-25 12:33:25,888 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:25,888 [INFO] - End access token validation request
+2023-10-25 12:33:25,929 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:25,929 [INFO] - End access token validation request
+2023-10-25 12:33:25,936 [INFO] - Start access token validation request
+2023-10-25 12:33:25,936 [INFO] - Start access token validation
+2023-10-25 12:33:25,980 [INFO] - Start access token validation request
+2023-10-25 12:33:25,980 [INFO] - Start access token validation
+2023-10-25 12:33:25,992 [INFO] - Start access token validation request
+2023-10-25 12:33:25,992 [INFO] - Start access token validation
+2023-10-25 12:33:26,007 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:26,007 [INFO] - End access token validation request
+2023-10-25 12:33:26,055 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:26,055 [INFO] - End access token validation request
+2023-10-25 12:33:26,055 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:26,055 [INFO] - End access token validation request
+2023-10-25 12:33:32,446 [INFO] - Start access token validation request
+2023-10-25 12:33:32,446 [INFO] - Start access token validation
+2023-10-25 12:33:32,465 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:32,465 [INFO] - End access token validation request
+2023-10-25 12:33:34,057 [INFO] - Start access token validation request
+2023-10-25 12:33:34,057 [INFO] - Start access token validation
+2023-10-25 12:33:34,075 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:34,075 [INFO] - End access token validation request
+2023-10-25 12:33:36,821 [INFO] - Start access token validation request
+2023-10-25 12:33:36,821 [INFO] - Start access token validation
+2023-10-25 12:33:36,838 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:36,838 [INFO] - End access token validation request
+2023-10-25 12:33:42,372 [INFO] - Start access token validation request
+2023-10-25 12:33:42,372 [INFO] - Start access token validation
+2023-10-25 12:33:42,390 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:42,390 [INFO] - End access token validation request
+2023-10-25 12:33:45,198 [INFO] - Start access token validation request
+2023-10-25 12:33:45,198 [INFO] - Start access token validation
+2023-10-25 12:33:45,209 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:45,209 [INFO] - End access token validation request
+2023-10-25 12:33:45,343 [INFO] - Start access token validation request
+2023-10-25 12:33:45,343 [INFO] - Start access token validation
+2023-10-25 12:33:45,360 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:45,360 [INFO] - End access token validation request
+2023-10-25 12:33:47,473 [INFO] - Start access token validation request
+2023-10-25 12:33:47,473 [INFO] - Start access token validation
+2023-10-25 12:33:47,504 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:33:47,504 [INFO] - End access token validation request
+2023-10-25 12:34:01,127 [INFO] - Start access token validation request
+2023-10-25 12:34:01,127 [INFO] - Start access token validation
+2023-10-25 12:34:01,143 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:34:01,143 [INFO] - End access token validation request
+2023-10-25 12:34:04,808 [INFO] - Start access token validation request
+2023-10-25 12:34:04,808 [INFO] - Start access token validation
+2023-10-25 12:34:04,828 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:34:04,828 [INFO] - End access token validation request
+2023-10-25 12:45:24,006 [INFO] - Start access token validation request
+2023-10-25 12:45:24,006 [INFO] - Start access token validation
+2023-10-25 12:45:24,021 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:45:24,021 [INFO] - End access token validation request
+2023-10-25 12:45:32,363 [INFO] - Start access token validation request
+2023-10-25 12:45:32,363 [INFO] - Start access token validation
+2023-10-25 12:45:32,384 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:45:32,384 [INFO] - End access token validation request
+2023-10-25 12:45:36,438 [INFO] - Start access token validation request
+2023-10-25 12:45:36,438 [INFO] - Start access token validation
+2023-10-25 12:45:36,454 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:45:36,454 [INFO] - End access token validation request
+2023-10-25 12:46:48,554 [INFO] - Start access token validation request
+2023-10-25 12:46:48,554 [INFO] - Start access token validation
+2023-10-25 12:46:48,575 [INFO] - Token validation success
+{
+  "ValidateLifetime": true,
+  "AccessTokenType": "Jwt",
+  "Claims": {
+    "iss": "http://localhost:24116",
+    "aud": "http://localhost:24116/resources",
+    "exp": "1698219205",
+    "nbf": "1698215605",
+    "client_id": "infinity-bnois-api-client",
+    "scope": [
+      "openid",
+      "profile",
+      "infinity-bnois-api-scope",
+      "infinity-bnois-identity-api-scope",
+      "roles",
+      "all_claims"
+    ],
+    "sub": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "auth_time": "1698211995",
+    "idp": "idsrv",
+    "preferred_username": "SOIT",
+    "email": "soit1234@gmail.com",
+    "email_verified": "false",
+    "phone_number": "01769702030",
+    "phone_number_verified": "false",
+    "role": "System Administrator : SO(IT), In-Charge Data Room",
+    "given_name": "SO (IT)",
+    "family_name": "(System Administrator)",
+    "culture_code": "en-US",
+    "user_id": "78ea3d76-95fe-48df-8a3a-16d428e4c329",
+    "role_id": "15abe3a1-2df6-4a3d-9cda-a606a0602b34",
+    "amr": "password"
+  }
+}
+2023-10-25 12:46:48,575 [INFO] - End access token validation request
