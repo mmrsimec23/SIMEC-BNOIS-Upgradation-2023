@@ -1,0 +1,106 @@
+﻿<style>
+    .navCenter {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    @media (min-width: 768px) {
+        .navbar-nav {
+            float: none;
+        }
+    }
+</style>
+
+<div class="">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="col-md-9">
+                    <ul class="nav nav-tabs">
+                        <li><a ui-sref="dashboard.outside-navy()" ui-sref-active="active"><strong>Outside Navy</strong></a></li>
+                        <li><a ui-sref="dashboard.branch()"><strong>Branch</strong></a></li>
+                        <li><a ui-sref="dashboard.leave()"><strong>Leave</strong></a></li>
+                        <li><a ui-sref="dashboard.admin-authority()"><strong>Admin Authority</strong></a></li>
+                        <li><a ui-sref="dashboard.stream()"><strong>Stream</strong></a></li>
+                        <li><a ui-sref="dashboard.office-appointment()"><strong>Office Appt</strong></a></li>
+                        <li><a ui-sref="dashboard.category()"><strong>Category</strong></a></li>
+                        <li><a ui-sref="dashboard.gender()"><strong>Gender</strong></a></li>
+                       
+                    </ul>
+                    <div ui-view></div>
+                </div>
+                <div class="col-sm-3">
+                    <h4 style="border-bottom: 2px solid lightblue; text-align: center;">Current Status</h4>
+                    <div class="input-group" style="margin-bottom: 3px;margin-right:15%;margin-left:15%">
+                        <input type="text" class="form-control" style="text-align: center" placeholder="PNO" ng-model="vm.searchPno" ng-keypress="$event.keyCode == 13 && vm.searchByPno(vm.searchPno)">
+                        <span class="input-group-btn">
+                            <a class="btn btn-success" ng-click="vm.searchByPno(vm.searchPno)"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        </span>
+                    </div>
+
+
+
+                    <!-- <img class="logo img-responsive" style="display: block; margin-left: auto; margin-right: auto; margin-top: 15px; width: 50%; height: 120px;" src="/images/BNLogo.png" alt="BN Logo"> -->
+
+
+                    <h4 style="border-bottom: 2px solid lightblue; margin-top: 25px; text-align: center;">Quick Search</h4>
+                    <div class="input-group" style="margin-bottom: 3px;margin-right:15%;margin-left:15%">
+                        <input type="text" class="form-control" style="text-align: center" placeholder="Officer Name" ng-model="vm.searchName" ng-keypress="$event.keyCode == 13 && vm.searchByName(vm.searchName)">
+                        <span class="input-group-btn">
+                            <a class="btn btn-success"  ng-click="vm.searchByName(vm.searchName)"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        </span>
+                    </div>
+
+                    <h4 style="border-bottom: 2px solid lightblue; margin-top: 25px; text-align: center;">Office Search</h4>
+                    <div class="input-group" style="margin-bottom: 3px;margin-right:15%;margin-left:15%">
+                        <!--<input type="text" class="form-control" style="text-align: center" placeholder="Office Name" ng-model="vm.searchOffice" ng-keypress="$event.keyCode == 13 && vm.searchByName(vm.searchName)">-->
+                        <angucomplete-alt id="searchedOfficeId"
+                                          placeholder="Search Office"
+                                          pause="400"
+                                          maxlength="250"
+                                          minlength="2"
+                                          selected-object="vm.selected"
+                                          local-data="vm.officeList"
+                                          local-search="vm.localOfficeSearch"
+                                          title-field="text"
+                                          match-class="highlight"
+                                          field-required="false"
+                                          input-name="searchedOfficeId"
+                                          override-suggestions="true"
+                                          auto-match="true"
+                                          text-no-results="Office Not Found"
+                                          input-class="form-control form-control-small text-center" />
+                        <span class="input-group-btn">
+                            <a class="btn btn-success"  ng-click="vm.searchByOfficeId()"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        </span>
+                    </div>
+
+                    <h4 style="border-bottom: 2px solid lightblue; margin-top: 25px; text-align: center;">TO&E Structure </h4>
+                    <a href="" ng-click="vm.officeStructure()">
+                        <img class="logo img-responsive" style="display: block; margin-left: auto; margin-right: auto; margin-top: 15px; width: 100%;" src="/images/to&e.png" alt="BN Logo">
+                    </a>
+
+                    <h4 style="border-bottom: 2px solid lightblue; margin-top: 25px; text-align: center;">Quick Links</h4>
+
+                    <div class="table-wrapper table-responsive" style="overflow-y:scroll; height:190px;">
+                        <table class="table table-hover table-striped">
+
+                            <tbody>
+
+                                <tr ng-repeat="item in  vm.quickLinks">
+                                    <td style="border: none;">
+                                       {{$index+1}}.   <a target="_blank" href="{{vm.URL+item.fileName}}" download style="text-decoration: none;"><strong>{{item.name}}{{item.extention}}</strong></a>
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

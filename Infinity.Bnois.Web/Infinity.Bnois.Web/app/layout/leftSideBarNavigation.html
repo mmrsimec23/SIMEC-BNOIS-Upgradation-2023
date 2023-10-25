@@ -1,0 +1,43 @@
+﻿<section class="sidebar-section" ng-controller="LeftSideBarNavigationController as vm">
+    <div id="sidebar-wrapper">
+        <script type="text/ng-template" id="panelTemplate.html">
+            <div id="{{parentId}}" class="sidebar-wrapper">
+                <div ng-repeat="item in model">
+                    <div data-toggle="collapse" data-parent="#{{parentId}}" data-target="#child{{$index}}" ng-click="model.selected = item">
+                        <ul class="sidebar-nav">
+                            <li>
+                                <a href="" class="sidebar-nav-item" ng-click="vm.toggole()">
+                                    {{item.name}}  
+                                    <i class="fa fa-angle-down"  aria-hidden="true" style="float:right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="child{{$index}}" ng-class="{'collapse':true}">
+                        <ul class="sub-menu">
+                            <li ng-repeat="subitem in item.features">
+                                <a ui-sref="{{subitem.actionNgHref}}">
+                                    <strong> {{subitem.featureName}}</strong>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </script>
+        <side-Nav-Bar class="sidenavbar-wrapper" model="vm.model" id="test"></side-Nav-Bar>
+
+    </div>
+</section>
+
+
+
+
+
+<!--ScrollBar Script Leftside Bar-->
+<!--<script src="../../Scripts/scroll-bar.js"></script>-->
+<script>
+	new PerfectScrollbar('#sidebar-wrapper');
+
+</script>

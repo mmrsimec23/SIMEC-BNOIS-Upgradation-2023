@@ -1,0 +1,49 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <button  class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
+
+            <div class="panel-body" id="print">
+
+                <h3> Family Permissions</h3>
+                <hr />
+                <h4 class="noScreen" style="border-bottom: 3px solid blue;font-family: Arial">{{vm.officerName}} ({{vm.pNo}})</h4>
+
+
+                <div ng-if="vm.familyPermissions.length>0" class="table-wrapper table-responsive reportCover">
+                    <table class="table table-bordered pdfReportTable" border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                                <th>Relative Name</th>
+                                <th>Relation Type</th>
+                                <th>Country</th>
+                                <th>From Date</th>
+                                <th>To Date </th>
+                                <th>Visit Purpose</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody class="reportBody">
+                            <tr class="reportTR" ng-repeat="familyPermission in vm.familyPermissions">
+
+                                <td class="reportTD" style="text-align: center;">{{familyPermission.relativeName}}</td>
+                                <td class="reportTD">{{familyPermission.relationType}}</td>
+                                <td class="reportTD">{{familyPermission.country}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;">{{familyPermission.fromDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;">{{familyPermission.toDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD">{{familyPermission.visitPurpose}}</td>
+                                <td class="reportTD">{{familyPermission.remarks}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+                <!--<h5 ng-if="vm.familyPermissions.length<=0" class="text-center" style="margin-top: 15px;">No data found. </h5>-->
+
+            </div>
+        </div>
+    </div>
+</div>
