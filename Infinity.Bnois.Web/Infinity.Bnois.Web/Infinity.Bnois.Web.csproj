@@ -337,10 +337,16 @@
     <Content Include="app\views\emp-career-forecast\careerForecastAddController.js" />
     <Content Include="app\views\emp-career-forecast\careerForecasts.html" />
     <Content Include="app\views\emp-career-forecast\careerForecastsController.js" />
+    <Content Include="app\views\employee-proposed-coxo\employeeProposedCoxosController.js" />
+    <Content Include="app\views\employee-proposed-coxo\employeeProposedCoxos.html" />
+    <Content Include="app\views\employee-proposed-coxo\employeeProposedCoxoAddController.js" />
+    <Content Include="app\views\employee-proposed-coxo\employeeProposedCoxoAdd.html" />
     <Content Include="app\views\family-permissions\familyPermissions.html" />
     <Content Include="app\views\family-permissions\familyPermissionsController.js" />
     <Content Include="app\views\car-loan\carLoan.html" />
     <Content Include="app\views\car-loan\carLoanController.js" />
+    <Content Include="app\views\large-ship-coxo\largeShipCoXo.html" />
+    <Content Include="app\views\large-ship-coxo\largeShipCoXoController.js" />
     <Content Include="app\views\miscellaneous-services\miscellaneousServices.html" />
     <Content Include="app\views\miscellaneous-services\miscellaneousServicesController.js" />
     <Content Include="app\views\family-permission-list-by-type\familyPermissionListByType.html" />
@@ -2161,7 +2167,6 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\views\employee-proposed-coxo\" />
     <Folder Include="app\views\report\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>

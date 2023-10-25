@@ -7,7 +7,7 @@
     var controllerId = 'largeShipCoXoController';
 
     angular.module('app').controller(controllerId, largeShipCoXoController);
-    largeShipCoXoController.$inject = ['$stateParams','roasterListService', 'notificationService', '$state'];
+    largeShipCoXoController.$inject = ['$stateParams', 'roasterListService', 'notificationService', '$state'];
 
     function largeShipCoXoController($stateParams, roasterListService, notificationService, $state) {
         var vm = this;
@@ -15,7 +15,7 @@
         vm.largeShipCoXos = [];
         vm.courseAttendeds = [];
         vm.printSection = printSection;
-        
+
 
         if ($stateParams.shipType !== undefined && $stateParams.shipType !== null) {
             vm.shipType = $stateParams.shipType;
@@ -28,7 +28,7 @@
             roasterListService.getRoasterListByShipType(vm.shipType).then(function (data) {
                 vm.largeShipCoXos = data.result;
                 console.log(vm.largeShipCoXos);
-                },
+            },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
@@ -49,6 +49,6 @@
             popupWindow.document.close();
             popupWindow.focus();
         }
-       
+
     }
 })();

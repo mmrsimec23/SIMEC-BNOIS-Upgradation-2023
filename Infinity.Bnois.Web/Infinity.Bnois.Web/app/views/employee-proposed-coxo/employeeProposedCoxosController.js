@@ -59,7 +59,7 @@
         }
 
         function pageChanged() {
-            $state.go('employee-pfts', { pn: vm.pageNumber, ps: vm.pageSize, q: vm.searchText }, { reload: true, inherit: false });
+            $state.go('employee-proposed-coxos', { pn: vm.pageNumber, ps: vm.pageSize, q: vm.searchText }, { reload: true, inherit: false });
         }
 
         function onSearch() {
