@@ -92,11 +92,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (employeeSecurityClearance.SecurityClearanceReasonId != model.SecurityClearanceReasonId)
                 {
-                    var emp = employeeService.GetDynamicTableInfoById("SecurityClearanceReason", "SecurityClearanceReasonId", model.SecurityClearanceReasonId);
+                    var reason = employeeService.GetDynamicTableInfoById("SecurityClearanceReason", "SecurityClearanceReasonId", model.SecurityClearanceReasonId);
                     bnLog.PreviousValue += ", Reason: " + employeeSecurityClearance.SecurityClearanceReason.Reason;
-                    bnLog.UpdatedValue += ", Reason: " + ((dynamic)emp).Reason;
-                    //bnLog.PreviousValue += ", Reason: " + employeeSecurityClearance.SecurityClearanceReasonId;
-                    //bnLog.UpdatedValue += ", Reason: " + model.SecurityClearanceReasonId;
+                    bnLog.UpdatedValue += ", Reason: " + ((dynamic)reason).Reason;
                 }
                 if (employeeSecurityClearance.TransferId != model.TransferId)
                 {
@@ -202,8 +200,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "EmployeeSecurityClearance";
                 bnLog.TableEntryForm = "Officer Security Clearance";
-                bnLog.PreviousValue = "Id: " + employeeSecurityClearance.EmployeeSecurityClearanceId + ", Name: " + employeeSecurityClearance.EmployeeId + ", Rank: " + employeeSecurityClearance.RankId
-                    + ", Remarks: " + employeeSecurityClearance.Remarks + ", Reason: " + employeeSecurityClearance.SecurityClearanceReasonId + ", TransferId: " + employeeSecurityClearance.TransferId
+                var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeSecurityClearance.EmployeeId);
+                var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeSecurityClearance.RankId ?? 0);
+                var reason = employeeService.GetDynamicTableInfoById("SecurityClearanceReason", "SecurityClearanceReasonId", employeeSecurityClearance.SecurityClearanceReasonId);
+                var transfer = employeeService.GetDynamicTableInfoById("Transfer", "TransferId", employeeSecurityClearance.TransferId ?? 0);
+                bnLog.PreviousValue = "Id: " + employeeSecurityClearance.EmployeeSecurityClearanceId + ", Name: " + ((dynamic)emp).Name + ", Rank: " + ((dynamic)rank).ShortName
+                    + ", Remarks: " + employeeSecurityClearance.Remarks + ", Reason: " + ((dynamic)reason).Reason + ", Transfer: " + ((dynamic)emp).FromDate
                     + ", IsCleared: " + employeeSecurityClearance.IsCleared + ", NotClearReason: " + employeeSecurityClearance.NotClearReason + ", ClearanceDate: " + employeeSecurityClearance.ClearanceDate + ", Expirydate: " + employeeSecurityClearance.Expirydate;
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
