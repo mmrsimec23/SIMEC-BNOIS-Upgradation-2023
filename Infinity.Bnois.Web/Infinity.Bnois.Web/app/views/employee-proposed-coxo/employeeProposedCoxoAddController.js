@@ -5,9 +5,9 @@
     var controllerId = 'employeeProposedCoxoAddController';
 
     angular.module('app').controller(controllerId, employeeProposedCoxoAddController);
-    employeeProposedCoxoAddController.$inject = ['$stateParams', 'employeeProposedCoxoService','serviceExamService', 'notificationService', '$state'];
+    employeeProposedCoxoAddController.$inject = ['$stateParams', 'employeeProposedCoxoService', 'serviceExamService', 'notificationService', '$state'];
 
-    function employeeProposedCoxoAddController($stateParams, employeeProposedCoxoService, serviceExamService ,notificationService, $state) {
+    function employeeProposedCoxoAddController($stateParams, employeeProposedCoxoService, serviceExamService, notificationService, $state) {
         var vm = this;
         vm.employeeProposedCoxoId = 0;
         vm.title = 'ADD MODE';
@@ -43,15 +43,15 @@
                 vm.coxoAppoinments = data.result.coxoAppoinments;
                 vm.offices = data.result.offices;
                 console.log(data.result);
-                    if (vm.employeeProposedCoxoId !== 0 && vm.employeeProposedCoxoId !== '') {
-                       
-                        if (vm.employeeProposedCoxo.proposedDate != null) {
-                            vm.employeeProposedCoxo.proposedDate = new Date(data.result.employeeCoxoService.proposedDate);
-                        }
-                        getOfficeByShiptype(data.result.employeeCoxoService.shipType);
-                    }
+                if (vm.employeeProposedCoxoId !== 0 && vm.employeeProposedCoxoId !== '') {
 
-               },
+                    if (vm.employeeProposedCoxo.proposedDate != null) {
+                        vm.employeeProposedCoxo.proposedDate = new Date(data.result.employeeCoxoService.proposedDate);
+                    }
+                    getOfficeByShiptype(data.result.employeeCoxoService.shipType);
+                }
+
+            },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
@@ -114,9 +114,9 @@
 
         //}
 
-      
+
     }
 
-  
+
 
 })();

@@ -1,53 +1,54 @@
 ﻿<div class="container-fluid">
-    <div class="row">
-        <div class="panel">
-            <button  class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
+	<div class="row">
+		<div class="panel">
+			<button class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
 
-            <div class="panel-body pdfReportFormCover" id="print">
-                <h3 class="reportHeader">Large Ship CO/XO</h3>
-                <hr />
-                
-                <div ng-if="vm.largeShipCoXos.length>0" class="table-wrapper table-responsive reportCover">
-                    <table class="table table-bordered pdfReportTable" border="1">
-                        <thead class="reportThead">
-                            <tr class="tableHeading reportTR">
+			<div class="panel-body pdfReportFormCover" id="print">
+				<h3 class="reportHeader">PRESENT CO/XO LIST (LARGE SHIP)</h3>
+				<hr />
 
-                                <th style="vertical-align : middle;">SL</th>
-                                <th style="vertical-align : middle;"> Ships</th>
-                                <th style="vertical-align : middle;"> P No</th>
-                                <th style="vertical-align : middle;">Rank & Name</th>
-                                <th style="vertical-align : middle;">Batch</th>
-                                <th style="vertical-align : middle;">Since</th>
-                                <th style="text-align: center">Duration</th>
-                                <!--<th style="text-align: center">Med Ship Comd Svc</th>
-                                <th style="vertical-align : middle;">Total Comd Svc</th>
-                                <th style="vertical-align : middle;">Sea Svc</th>-->
-                                <th style="vertical-align : middle;">Rotation Due</th>
-                                <th style="vertical-align : middle;">SASB</th>
+				<div ng-if="vm.largeShipCoXos.length>0" class="table-wrapper table-responsive reportCover">
+					<table class="table table-bordered pdfReportTable" border="1">
+						<thead class="reportThead">
+							<tr class="tableHeading reportTR">
 
-                            </tr>
-                        </thead>
-                        <tbody class="reportBody">
-                            <tr ng-repeat="largeShipCoXo in vm.largeShipCoXos" class="reportTR">
-                                <td class="reportTD" style="text-align: center; width: 20px;">{{$index+1}}</td>
-                                <td class="reportTD">{{largeShipCoXo.shortName}}</td>
-                                <td class="reportTD">{{largeShipCoXo.pNo}}</td>
-                                <td class="reportTD">{{largeShipCoXo.fullNameEng}}</td>
-                                <td class="reportTD">{{largeShipCoXo.batch}}</td>
-                                <td class="reportTD">{{largeShipCoXo.since | date:"dd-MMM-yyyy"}}</td>
-                                <td class="reportTD">{{largeShipCoXo.duration}}</td>
-                                <!--<td class="reportTD">{{largeShipCoXo.medShipComdSvc}}</td>
-                                <td class="reportTD">{{largeShipCoXo.comdTotalDuration}}</td>
-                                <td class="reportTD">{{largeShipCoXo.seaTotalDuration}}</td>-->
-                                <td class="reportTD">{{largeShipCoXo.rotationDue}}</td>
-                                <td class="reportTD">{{largeShipCoXo.sasbStatus}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
 
-                </div>
-                
-            </div>
-        </div>
-    </div>
+								<th style="vertical-align : middle;"> Ships</th>
+								<th style="vertical-align : middle;">Appt</th>
+								<th style="vertical-align: middle; width: 50px; "> P No</th>
+								<th style="vertical-align : middle;">Rank & Name</th>
+								<th style="vertical-align: middle; width: 60px;">Batch</th>
+								<th style="vertical-align: middle; width: 95px;">Since</th>
+								<th style="text-align: center">Duration</th>
+								<!--<th style="text-align: center">Med Ship Comd Svc</th>
+	<th style="vertical-align : middle;">Total Comd Svc</th>
+	<th style="vertical-align : middle;">Sea Svc</th>-->
+								<th style="vertical-align : middle;">Rotation Due</th>
+								<th style="vertical-align: middle; width: 95px;">SASB</th>
+								<th style="vertical-align : middle;"></th>
+
+							</tr>
+						</thead>
+						<tbody class="reportBody" style="border-bottom: 1px solid;">
+							<tr ng-repeat="largeShipCoXo in vm.largeShipCoXos" class="reportTR">
+								<!--<td class="reportTD">{{largeShipCoXo.shortName}}</td>-->
+							<td class="reportTD" style="{{ largeShipCoXo.shipName !== vm.largeShipCoXos[$index -1].shipName ? 'border-bottom:none !important;' : 'border-top:none !important;border-bottom:none !important;' }}"> {{ largeShipCoXo.shipName !== vm.largeShipCoXos[$index -1].shipName ? largeShipCoXo.shipName : '' }} </td>
+								<td class="reportTD">{{largeShipCoXo.appt}}</td>
+								<td class="reportTD">{{largeShipCoXo.pNo}}</td>
+								<td class="reportTD"><a href="" ng-click="vm.officeCurrentStatus(largeShipCoXo.pNo)"> <strong>{{largeShipCoXo.fullNameEng}}</strong></a></td>
+								<td class="reportTD">{{largeShipCoXo.batch}}</td>
+								<td class="reportTD">{{largeShipCoXo.since | date:"dd-MMM-yyyy"}}</td>
+								<td class="reportTD">{{largeShipCoXo.duration}}</td>
+								<td class="reportTD">{{largeShipCoXo.rotationDue}}</td>
+								<td class="reportTD">{{largeShipCoXo.sasbStatus}}</td>
+								<td class="reportTD" style="text-align: center;"><a target="_blank" href="http://localhost:24123/large-ship-cos-list/{{largeShipCoXo.officeId}}" style="text-decoration: none;"><strong>CO</strong></a></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
 </div>

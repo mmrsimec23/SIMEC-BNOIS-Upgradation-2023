@@ -5787,6 +5787,15 @@
                     controller: 'largeShipCoXoController as vm',
                     title: 'CO/XO Large Ships'
                 }
+            },
+            {
+                state: "large-ship-cos-list",
+                config: {
+                    url: "/large-ship-cos-list/:officeId",
+                    templateUrl: 'app/views/large-ship-co-list/largeShipCoList.html',
+                    controller: 'largeShipCoListController as vm',
+                    title: 'Large Ship CO List'
+                }
             }
 
 

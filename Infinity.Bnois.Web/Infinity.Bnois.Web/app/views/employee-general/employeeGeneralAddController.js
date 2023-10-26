@@ -31,7 +31,7 @@
         vm.title = 'ADD MODE';
 
         vm.sasbStatusList = [
-            { 'value': 1, 'text': 'Recom' }, { 'value': 2, 'text': 'Not-Recom' }, { 'value': 2, 'text': 'Yet to Appear' }
+            { 'value': 1, 'text': 'Recom' }, { 'value': 2, 'text': 'Not-Recom' }, { 'value': 3, 'text': 'Yet to Appear' }
         ];
         
 
