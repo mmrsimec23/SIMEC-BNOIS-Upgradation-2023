@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
 
         private readonly IBnoisRepository<EmployeeFamilyPermission> employeeFamilyPermissionRepository;
-        public EmployeeFamilyPermissionService(IBnoisRepository<EmployeeFamilyPermission> employeeFamilyPermissionRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public EmployeeFamilyPermissionService(IBnoisRepository<EmployeeFamilyPermission> employeeFamilyPermissionRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.employeeFamilyPermissionRepository = employeeFamilyPermissionRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
   
@@ -59,7 +63,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             if (id > 0)
             {
-                employeeFamilyPermission = await employeeFamilyPermissionRepository.FindOneAsync(x => x.EmployeeFamilyPermissionId == id);
+                employeeFamilyPermission = employeeFamilyPermissionRepository.FindOne(x => x.EmployeeFamilyPermissionId == id, new List<string> { "Employee", "Employee.Rank", "Relation", "Country" });
                 if (employeeFamilyPermission == null)
                 {
                     throw new InfinityNotFoundException("Employee Family Permission not found !");
@@ -68,6 +72,78 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 employeeFamilyPermission.ModifiedDate = DateTime.Now;
                 employeeFamilyPermission.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeeFamilyPermission";
+                bnLog.TableEntryForm = "Officer Family Permission";
+                bnLog.PreviousValue = "Id: " + model.EmployeeFamilyPermissionId;
+                bnLog.UpdatedValue = "Id: " + model.EmployeeFamilyPermissionId;
+                if (employeeFamilyPermission.EmployeeId != model.EmployeeId)
+                {
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + employeeFamilyPermission.Employee.Name + " _ " + employeeFamilyPermission.Employee.PNo;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
+                }
+                if (employeeFamilyPermission.RelationId != model.RelationId)
+                {
+                    var relation = employeeService.GetDynamicTableInfoById("Relation", "RelationId", model.RelationId??0);
+                    bnLog.PreviousValue += ", Relation: " + employeeFamilyPermission.Relation.Name;
+                    bnLog.UpdatedValue += ", Relation: " + ((dynamic)relation).Name;
+                }
+                if (employeeFamilyPermission.CountryId != model.CountryId)
+                {
+                    var coun = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId??0);
+                    bnLog.PreviousValue += ", Country: " + employeeFamilyPermission.Country.FullName;
+                    bnLog.UpdatedValue += ", Country: " + ((dynamic)coun).FullName;
+                }
+                if (employeeFamilyPermission.RankId != model.RankId)
+                {
+                    var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId??0);
+                    bnLog.PreviousValue += ", Rank: " + employeeFamilyPermission.Rank.ShortName;
+                    bnLog.UpdatedValue += ", Rank: " + ((dynamic)rank).ShortName;
+                }
+                if (employeeFamilyPermission.RelativeName != model.RelativeName)
+                {
+                    bnLog.PreviousValue += ", RelativeName: " + employeeFamilyPermission.RelativeName;
+                    bnLog.UpdatedValue += ", RelativeName: " + model.RelativeName;
+                }
+                if (employeeFamilyPermission.VisitPurpose != model.VisitPurpose)
+                {
+                    bnLog.PreviousValue += ", VisitPurpose: " + employeeFamilyPermission.VisitPurpose;
+                    bnLog.UpdatedValue += ", VisitPurpose: " + model.VisitPurpose;
+                }
+                if (employeeFamilyPermission.FromDate != model.FromDate)
+                {
+                    bnLog.PreviousValue += ", FromDate: " + employeeFamilyPermission.FromDate;
+                    bnLog.UpdatedValue += ", FromDate: " + model.FromDate;
+                }
+                if (employeeFamilyPermission.ToDate != model.ToDate)
+                {
+                    bnLog.PreviousValue += ", ToDate: " + employeeFamilyPermission.ToDate;
+                    bnLog.UpdatedValue += ", ToDate: " + model.ToDate;
+                }
+                if (employeeFamilyPermission.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + employeeFamilyPermission.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (employeeFamilyPermission.EmployeeId != model.EmployeeId || employeeFamilyPermission.RelationId != model.RelationId || employeeFamilyPermission.Remarks != model.Remarks 
+                    || employeeFamilyPermission.CountryId != model.CountryId || employeeFamilyPermission.RankId != model.RankId || employeeFamilyPermission.RelativeName != model.RelativeName
+                    || employeeFamilyPermission.VisitPurpose != model.VisitPurpose || employeeFamilyPermission.FromDate != model.FromDate || employeeFamilyPermission.ToDate != model.ToDate)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -91,7 +167,10 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             //    employeeFamilyPermission.TransferId = model.TransferId;
             //}
 
-            employeeFamilyPermission.Employee = null;
+            //employeeFamilyPermission.Employee = null;
+            //employeeFamilyPermission.Country = null;
+            //employeeFamilyPermission.Relation = null;
+            //employeeFamilyPermission.Rank = null;
             await employeeFamilyPermissionRepository.SaveAsync(employeeFamilyPermission);
             model.EmployeeFamilyPermissionId = employeeFamilyPermission.EmployeeFamilyPermissionId;
             return model;
@@ -110,6 +189,24 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeeFamilyPermission";
+                bnLog.TableEntryForm = "Officer Family Permission";
+                bnLog.PreviousValue = "Id: " + employeeFamilyPermission.EmployeeFamilyPermissionId + ", Name: " + employeeFamilyPermission.EmployeeId
+                    + ", Relation: " + employeeFamilyPermission.RelationId + ", Remarks: " + employeeFamilyPermission.Remarks 
+                    + ", Country: " + employeeFamilyPermission.CountryId + ", Rank: " + employeeFamilyPermission.RankId
+                    + ", RelativeName: " + employeeFamilyPermission.RelativeName + ", VisitPurpose: " + employeeFamilyPermission.VisitPurpose
+                    + ", FromDate: " + employeeFamilyPermission.FromDate + ", ToDate: " + employeeFamilyPermission.ToDate;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await employeeFamilyPermissionRepository.DeleteAsync(employeeFamilyPermission);
             }
         }
