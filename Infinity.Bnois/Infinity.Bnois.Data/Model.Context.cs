@@ -56,7 +56,6 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<EyeVision> EyeVisions { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<HeirType> HeirTypes { get; set; }
-        public virtual DbSet<Institute> Institutes { get; set; }
         public virtual DbSet<InstituteType> InstituteTypes { get; set; }
         public virtual DbSet<LeavePolicy> LeavePolicies { get; set; }
         public virtual DbSet<LeavePurpose> LeavePurposes { get; set; }
@@ -164,7 +163,6 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<BraCtryCoursePoint> BraCtryCoursePoints { get; set; }
         public virtual DbSet<PreviousExperience> PreviousExperiences { get; set; }
         public virtual DbSet<ForeignProject> ForeignProjects { get; set; }
-        public virtual DbSet<Remark> Remarks { get; set; }
         public virtual DbSet<EmployeeOther> EmployeeOthers { get; set; }
         public virtual DbSet<Spouse> Spouses { get; set; }
         public virtual DbSet<PreviousMission> PreviousMissions { get; set; }
@@ -218,6 +216,8 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<CareerForecast> CareerForecast { get; set; }
         public virtual DbSet<EmployeeGeneral> EmployeeGeneral { get; set; }
         public virtual DbSet<CoXoService> CoXoService { get; set; }
+        public virtual DbSet<Institute> Institute { get; set; }
+        public virtual DbSet<Remark> Remark { get; set; }
     
         public virtual ObjectResult<GetLeaveInfo_Result> GetLeaveInfo(string employeeID, Nullable<int> idFrom, Nullable<int> idTo)
         {

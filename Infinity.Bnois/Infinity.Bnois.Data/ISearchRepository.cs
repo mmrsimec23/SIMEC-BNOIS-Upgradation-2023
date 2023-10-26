@@ -108,6 +108,7 @@ namespace Infinity.Bnois.Data
         int SaveDoingCourseCountrySelected(object value, string userId);
         int SaveMissionAppointmentsSelected(object value, string userId);
         int SaveCourseMissionAbroadSelected(object value, string userId);
+        int SaveRemarksPersuationNsNoteSelected(object value, string userId);
         int SaveClearanceSelected(object value, string userId);
         int SaveMedalsSelected(object value, string userId);
         int SavePublicationsSelected(object value, string userId);

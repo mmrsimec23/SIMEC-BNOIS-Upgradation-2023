@@ -34,7 +34,6 @@
         <EntityTypeShape EntityType="BnoisdbModel.EyeVision" Width="1.5" PointX="6" PointY="142.75" />
         <EntityTypeShape EntityType="BnoisdbModel.Gender" Width="1.5" PointX="3.75" PointY="135.25" />
         <EntityTypeShape EntityType="BnoisdbModel.HeirType" Width="1.5" PointX="18" PointY="152.375" />
-        <EntityTypeShape EntityType="BnoisdbModel.Institute" Width="1.5" PointX="12" PointY="167.375" />
         <EntityTypeShape EntityType="BnoisdbModel.InstituteType" Width="1.5" PointX="4.75" PointY="3.75" />
         <EntityTypeShape EntityType="BnoisdbModel.LeavePolicy" Width="1.5" PointX="31.25" PointY="131.875" />
         <EntityTypeShape EntityType="BnoisdbModel.LeavePurpose" Width="1.5" PointX="12" PointY="147.5" />
@@ -96,7 +95,6 @@
         <AssociationConnector Association="BnoisdbModel.FK_Address_Division" />
         <AssociationConnector Association="BnoisdbModel.FK_Address_Upazila" />
         <AssociationConnector Association="BnoisdbModel.FK_MissionAppointment_AptCat" />
-        <AssociationConnector Association="BnoisdbModel.FK_Institute_Board" />
         <AssociationConnector Association="BnoisdbModel.FK_BoardMember_MemberRole" />
         <AssociationConnector Association="BnoisdbModel.FK_LeavePolicy_CommissionType" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeLeaveCountry_Country" />
@@ -251,7 +249,6 @@
         <AssociationConnector Association="BnoisdbModel.FK_PreviousExperience_PreviousExperience" />
         <EntityTypeShape EntityType="BnoisdbModel.ForeignProject" Width="1.5" PointX="23" PointY="89" />
         <AssociationConnector Association="BnoisdbModel.FK_ForeignProject_Country" />
-        <EntityTypeShape EntityType="BnoisdbModel.Remark" Width="1.5" PointX="13" PointY="59.375" />
         <EntityTypeShape EntityType="BnoisdbModel.EmployeeOther" Width="1.5" PointX="13" PointY="77.875" />
         <EntityTypeShape EntityType="BnoisdbModel.Spouse" Width="1.5" PointX="20.25" PointY="79.5" />
         <AssociationConnector Association="BnoisdbModel.FK_Spouse_Occupation" />
@@ -307,7 +304,6 @@
         <AssociationConnector Association="BnoisdbModel.FK_Education_Board" />
         <AssociationConnector Association="BnoisdbModel.FK_Education_ExamCategory" />
         <AssociationConnector Association="BnoisdbModel.FK_Education_Examination" />
-        <AssociationConnector Association="BnoisdbModel.FK_Education_Institute" />
         <AssociationConnector Association="BnoisdbModel.FK_Education_Result" />
         <AssociationConnector Association="BnoisdbModel.FK_Education_ResultGrade" />
         <AssociationConnector Association="BnoisdbModel.FK_Education_Subject" />
@@ -407,7 +403,6 @@
         <AssociationConnector Association="BnoisdbModel.FK_PromotionNomination_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_ProposalCadidate_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_Employee" />
-        <AssociationConnector Association="BnoisdbModel.FK_Remark_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_RetiredEmployee_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_SeaService_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_Sibling_Employee" />
@@ -493,6 +488,11 @@
         <EntityTypeShape EntityType="BnoisdbModel.CoXoService" Width="1.5" PointX="31.25" PointY="100.5" />
         <AssociationConnector Association="BnoisdbModel.FK_CoXoService_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_CoXoService_Office" />
+        <EntityTypeShape EntityType="BnoisdbModel.Institute" Width="1.5" PointX="14.25" PointY="159.375" />
+        <AssociationConnector Association="BnoisdbModel.FK_Institute_Board" />
+        <AssociationConnector Association="BnoisdbModel.FK_Education_Institute" />
+        <EntityTypeShape EntityType="BnoisdbModel.Remark" Width="1.5" PointX="13" PointY="85.5" />
+        <AssociationConnector Association="BnoisdbModel.FK_Remark_Employee" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

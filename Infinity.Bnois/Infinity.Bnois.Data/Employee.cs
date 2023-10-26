@@ -55,7 +55,6 @@ namespace Infinity.Bnois.Data
             this.PromotionNomination = new HashSet<PromotionNomination>();
             this.ProposalCandidate = new HashSet<ProposalCandidate>();
             this.PunishmentAccident = new HashSet<PunishmentAccident>();
-            this.Remark = new HashSet<Remark>();
             this.RetiredEmployee = new HashSet<RetiredEmployee>();
             this.SeaService = new HashSet<SeaService>();
             this.Sibling = new HashSet<Sibling>();
@@ -74,6 +73,7 @@ namespace Infinity.Bnois.Data
             this.CareerForecast = new HashSet<CareerForecast>();
             this.EmployeeGeneral = new HashSet<EmployeeGeneral>();
             this.CoXoService = new HashSet<CoXoService>();
+            this.Remark = new HashSet<Remark>();
         }
     
         public int EmployeeId { get; set; }
@@ -192,8 +192,6 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PunishmentAccident> PunishmentAccident { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Remark> Remark { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RetiredEmployee> RetiredEmployee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SeaService> SeaService { get; set; }
@@ -229,5 +227,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<EmployeeGeneral> EmployeeGeneral { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoXoService> CoXoService { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Remark> Remark { get; set; }
     }
 }

@@ -342,15 +342,15 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     .ToList();
             return selectModels;
         }
-        public List<SelectModel> GetCourseMissionAbroadSelectModels()
-        {
-            List<SelectModel> selectModels =
-                Enum.GetValues(typeof(TransferFor)).Cast<TransferFor>()
-                    .Select(v => new SelectModel { Text = v.ToString(), Value = Convert.ToInt32(v) })
-                    .ToList();
-            selectModels.RemoveAt(0);
-            return selectModels;
-        }
+        //public List<SelectModel> GetCourseMissionAbroadSelectModels()
+        //{
+        //    List<SelectModel> selectModels =
+        //        Enum.GetValues(typeof(TransferFor)).Cast<TransferFor>()
+        //            .Select(v => new SelectModel { Text = v.ToString(), Value = Convert.ToInt32(v) })
+        //            .ToList();
+        //    selectModels.RemoveAt(0);
+        //    return selectModels;
+        //}
 
         public vwTransfer GetLastTransfer(int employeeId)
         {

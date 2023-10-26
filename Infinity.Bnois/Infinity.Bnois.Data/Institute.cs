@@ -17,7 +17,7 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Institute()
         {
-            this.Educations = new HashSet<Education>();
+            this.Education = new HashSet<Education>();
         }
     
         public long InstituteId { get; set; }
@@ -33,6 +33,6 @@ namespace Infinity.Bnois.Data
     
         public virtual Board Board { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Education> Educations { get; set; }
+        public virtual ICollection<Education> Education { get; set; }
     }
 }

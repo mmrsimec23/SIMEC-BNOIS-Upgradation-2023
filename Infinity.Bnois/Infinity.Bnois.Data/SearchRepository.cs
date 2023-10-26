@@ -404,6 +404,12 @@ namespace Infinity.Bnois.Data
             return ExecNoneQuery(saveQuery);
 
         }
+        public int SaveRemarksPersuationNsNoteSelected(object value, string userId)
+        {
+            string saveQuery = String.Format(@"insert into SearchRemarksPersuationNsNoteParams values ('{0}','{1}')", value, userId);
+            return ExecNoneQuery(saveQuery);
+
+        }
         public int SaveNotDoneCourseCountrySelected(object value, string userId)
         {
             string saveQuery = String.Format(@"insert into SearchNotDoneCourseCountryParams values ('{0}','{1}')", value, userId);

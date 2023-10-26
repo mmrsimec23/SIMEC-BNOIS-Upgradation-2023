@@ -27,16 +27,16 @@ namespace Infinity.Bnois.Api.Controllers
 
         [HttpGet]
         [Route("get-roaster-list-by-ship-type")]
-        public IHttpActionResult GetRoasterListByShipType(int shipType, int aptNetId, int aptCatId)
+        public IHttpActionResult GetRoasterListByShipType(int shipType)
         {
             return Ok(new ResponseMessage<List<object>>()
             {
-                Result = roasterListService.GetRoasterListByShipType(shipType, aptNetId, aptCatId)
+                Result = roasterListService.GetRoasterListByShipType(shipType)
             });
         }
 
         [HttpGet]
-        [Route("get-large-ship-proposed-waiting-coxo-list")]
+        [Route("get-proposed-waiting-coxo-list")]
         public IHttpActionResult GetLargeShipProposedWaitingCoXoList(int officeId, int appointment)
         {
             return Ok(new ResponseMessage<List<object>>()

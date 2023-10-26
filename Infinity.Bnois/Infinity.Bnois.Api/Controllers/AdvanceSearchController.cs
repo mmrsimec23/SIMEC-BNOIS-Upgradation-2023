@@ -150,7 +150,7 @@ namespace Infinity.Bnois.Api.Controllers
 	        vm.Areas = await zoneService.GetZoneSelectModels();
 	        vm.AreaTypes =  transferService.GetTransferTypeSelectModels();
 	        vm.OfficerTransferFor =  transferService.GetTransferForSelectModels();
-	        vm.CourseMissionAbroad =  transferService.GetCourseMissionAbroadSelectModels();
+	        //vm.CourseMissionAbroad =  transferService.GetCourseMissionAbroadSelectModels();
 	        vm.AdminAuthorities = await officeService.GetAdminAuthoritySelectModel();
 	        vm.Batches = await batchService.GetBatchSelectModels();
 	        vm.Branches = await branchService.GetBranchSelectModels();

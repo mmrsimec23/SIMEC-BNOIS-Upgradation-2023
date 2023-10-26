@@ -4,7 +4,7 @@
 			<button class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
 
 			<div class="panel-body pdfReportFormCover" id="print">
-				<h3 class="reportHeader">CO PROPOSED/WAITING LIST ({{vm.shipName}})</h3>
+				<h3 class="reportHeader">{{vm.appointment==1 ? 'CO' : vm.appointment==2 ? 'XO' : 'CO/XO'}} PROPOSED/WAITING LIST ({{vm.shipName}})</h3>
 				<hr />
 
 				<div ng-if="vm.largeShipCoXos.length>0" class="table-wrapper table-responsive reportCover">
@@ -14,11 +14,11 @@
 
 								<th style="vertical-align : middle;">SL</th>
 								<th style="vertical-align : middle;"> P No</th>
-								<th style="vertical-align : middle;">Rank & Name</th>
-								<th style="vertical-align : middle;">Batch</th>
+								<th style="vertical-align : middle;width:250px;">Rank & Name</th>
+								<th style="vertical-align: middle; width: 90px;">Batch</th>
 								<th style="vertical-align : middle;">Present Billet</th>
-								<th style="vertical-align : middle;">Since</th>
-								<th style="vertical-align : middle;">Propose Appt</th>
+								<th style="vertical-align: middle; width: 100px;">Since</th>
+								<th style="vertical-align: middle; width: 70px;">Propose Appt</th>
 								<th style="vertical-align : middle;">Propose Type</th>
 								<th style="vertical-align : middle;">Proposed Date</th>
 								<th style="text-align: center">Remarks</th>

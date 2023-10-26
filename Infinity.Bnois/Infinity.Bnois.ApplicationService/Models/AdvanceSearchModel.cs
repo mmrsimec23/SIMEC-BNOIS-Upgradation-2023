@@ -15,7 +15,8 @@ namespace Infinity.Bnois.ApplicationService.Models
         public SelectModel[] MscEduInstitutesSelected { get; set; }
         public SelectModel[] OfficerLeaveTypesSelected { get; set; }
         public SelectModel[] MscEducationTypesSelected { get; set; }
-        public SelectModel[] OfficerCourseMissionAbroadSelected { get; set; }
+        //public SelectModel[] OfficerCourseMissionAbroadSelected { get; set; }
+        public SelectModel[] RemarksPersuationNsNoteSelected { get; set; }
         public SelectModel[] PromotionFromRankSelected { get; set; }
         public SelectModel[] PromotionToRankSelected { get; set; }
         public SelectModel[] employeeCarLoanFiscalYearSelected { get; set; }

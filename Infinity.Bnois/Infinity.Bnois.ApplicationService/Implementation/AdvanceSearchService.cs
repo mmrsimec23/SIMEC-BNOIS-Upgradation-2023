@@ -89,7 +89,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 new SelectModel {Value = 58, Text = "Seniority"},
                 new SelectModel {Value = 59, Text = "Leave"},
                 new SelectModel {Value = 60, Text = "Spouse Info"},
-                new SelectModel {Value = 61, Text = "Course/Mission Abroad"}
+                new SelectModel {Value = 61, Text = "Remarks, Persuation & NS Note"}
 
             };
 
@@ -199,11 +199,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	            }
 	        }
 			
-	        if (model.OfficerCourseMissionAbroadSelected.Length > 0)
+	        if (model.RemarksPersuationNsNoteSelected.Length > 0)
 	        {
-	            foreach (var item in model.OfficerCourseMissionAbroadSelected)
+	            foreach (var item in model.RemarksPersuationNsNoteSelected)
 	            {
-	                searchRepository.SaveCourseMissionAbroadSelected(item.Value, userId);
+	                searchRepository.SaveRemarksPersuationNsNoteSelected(item.Value, userId);
 	            }
 	        }
 

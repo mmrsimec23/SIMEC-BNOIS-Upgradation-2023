@@ -44,10 +44,10 @@ namespace Infinity.Bnois.Data
         public virtual Board Board { get; set; }
         public virtual ExamCategory ExamCategory { get; set; }
         public virtual Examination Examination { get; set; }
-        public virtual Institute Institute { get; set; }
         public virtual Result Result { get; set; }
         public virtual ResultGrade ResultGrade { get; set; }
         public virtual Subject Subject { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual Institute Institute { get; set; }
     }
 }

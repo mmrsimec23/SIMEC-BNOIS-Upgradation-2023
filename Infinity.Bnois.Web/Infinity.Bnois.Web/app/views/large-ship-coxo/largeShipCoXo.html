@@ -41,7 +41,7 @@
 								<td class="reportTD">{{largeShipCoXo.duration}}</td>
 								<td class="reportTD">{{largeShipCoXo.rotationDue}}</td>
 								<td class="reportTD">{{largeShipCoXo.sasbStatus}}</td>
-								<td class="reportTD" style="text-align: center;"><a target="_blank" href="http://localhost:24123/large-ship-cos-list/{{largeShipCoXo.officeId}}" style="text-decoration: none;"><strong>CO</strong></a></td>
+								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{largeShipCoXo.officeId}}/{{largeShipCoXo.appt === 'CO' ? 1 : largeShipCoXo.appt === 'XO' ? 2 : 0}}" style="text-decoration: none;"><strong>{{largeShipCoXo.appt}}</strong></a></td>
 							</tr>
 						</tbody>
 					</table>

@@ -5789,12 +5789,21 @@
                 }
             },
             {
-                state: "large-ship-cos-list",
+                state: "coxo-medium-ships",
                 config: {
-                    url: "/large-ship-cos-list/:officeId",
-                    templateUrl: 'app/views/large-ship-co-list/largeShipCoList.html',
-                    controller: 'largeShipCoListController as vm',
-                    title: 'Large Ship CO List'
+                    url: "/coxo-medium-ships",
+                    templateUrl: 'app/views/medium-ship-coxo/mediumShipCoXo.html',
+                    controller: 'mediumShipCoXoController as vm',
+                    title: 'CO/XO Medium Ships'
+                }
+            },
+            {
+                state: "coxo-waiting-list",
+                config: {
+                    url: "/coxo-waiting-list/:officeId/:appointment",
+                    templateUrl: 'app/views/shipwise-proposed-waiting-coxo-list/shipwiseProposedWaitingCoXoList.html',
+                    controller: 'shipwiseProposedWaitingCoXoListController as vm',
+                    title: 'Ship Wise CO/XO List'
                 }
             }
 

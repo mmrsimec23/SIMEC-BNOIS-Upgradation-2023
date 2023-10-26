@@ -225,7 +225,8 @@
         vm.advanceSearch.visitNotCountriesSelected = [];
         vm.advanceSearch.countriesSelected = [];
         vm.advanceSearch.officerTransferForSelected = [];
-        vm.advanceSearch.officerCourseMissionAbroadSelected = [];
+        //vm.advanceSearch.officerCourseMissionAbroadSelected = [];
+        vm.advanceSearch.remarksPersuationNsNoteSelected = [];
         vm.advanceSearch.subjectsSelected = [];
         vm.advanceSearch.ranksSelected = [];
         vm.advanceSearch.medicalCategoriesSelected = [];
@@ -275,6 +276,8 @@
             { 'value': 3, 'text': 'Commission Type' }, { 'value': 4, 'text': 'Branch' }, { 'value': 5, 'text': 'Religion' }
         ];
 
+        vm.remarksPersuationNsList = [ { 'value': 1, 'text': 'Remarks' }, { 'value': 2, 'text': 'Persuation' }, { 'value': 3, 'text': 'NS Note' } ];
+
         Init();
         function Init() {
 
@@ -292,7 +295,7 @@
                 vm.adminAuthorities = data.result.adminAuthorities;
                 vm.batches = data.result.batches;
                 vm.officerTransferFor = data.result.officerTransferFor;
-                vm.courseMissionAbroad = data.result.courseMissionAbroad;
+                //vm.courseMissionAbroad = data.result.courseMissionAbroad;
                 vm.branches = data.result.branches;
                 vm.subBranches = data.result.subBranches;
                 vm.bloodGroups = data.result.bloodGroups;
@@ -797,10 +800,10 @@
             }
             
             else if (value == 61 && checked) {
-                vm.courseMissionAbroadShow = true;
+                vm.remarksPersuationNsNoteShow = true;
             }
             else if (value == 61 && !checked) {
-                vm.courseMissionAbroadShow = false;
+                vm.remarksPersuationNsNoteShow = false;
             }
 
 
@@ -852,7 +855,8 @@
             vm.advanceSearch.visitNotCountriesSelected = [];
             vm.advanceSearch.countriesSelected = [];
             vm.advanceSearch.officerTransferForSelected = [];
-            vm.advanceSearch.officerCourseMissionAbroadSelected = [];
+            //vm.advanceSearch.officerCourseMissionAbroadSelected = [];
+            vm.advanceSearch.remarksPersuationNsNoteSelected = [];
             vm.advanceSearch.subjectsSelected = [];
             vm.advanceSearch.officerLeaveTypesSelected = [];
             vm.advanceSearch.ranksSelected = [];
@@ -937,7 +941,7 @@
             vm.promotionRankShow = false;
             vm.officerLeaveShow = false;
             vm.spDivorceInfoShow = false;
-            vm.courseMissionAbroadShow = false;
+            vm.remarksPersuationNsNoteShow = false;
             vm.seniorityShow = false;
             vm.mscEduShow = false;
             vm.mscEduShow = false;

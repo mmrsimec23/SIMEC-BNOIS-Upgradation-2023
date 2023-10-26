@@ -2583,7 +2583,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.EmployeeTraining' does not have a pri
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="TransferId" Type="int" />
           <Property Name="NoteType" Type="int" />
-          <Property Name="Remarks" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Date" Type="date" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
@@ -8372,7 +8372,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <EntitySet Name="EyeVisions" EntityType="BnoisdbModel.EyeVision" />
           <EntitySet Name="Genders" EntityType="BnoisdbModel.Gender" />
           <EntitySet Name="HeirTypes" EntityType="BnoisdbModel.HeirType" />
-          <EntitySet Name="Institutes" EntityType="BnoisdbModel.Institute" />
           <EntitySet Name="InstituteTypes" EntityType="BnoisdbModel.InstituteType" />
           <EntitySet Name="LeavePolicies" EntityType="BnoisdbModel.LeavePolicy" />
           <EntitySet Name="LeavePurposes" EntityType="BnoisdbModel.LeavePurpose" />
@@ -8445,10 +8444,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <AssociationSet Name="FK_MissionAppointment_AptCat" Association="BnoisdbModel.FK_MissionAppointment_AptCat">
             <End Role="AptCat" EntitySet="AptCats" />
             <End Role="MissionAppointment" EntitySet="MissionAppointments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Institute_Board" Association="BnoisdbModel.FK_Institute_Board">
-            <End Role="Board" EntitySet="Boards" />
-            <End Role="Institute" EntitySet="Institutes" />
           </AssociationSet>
           <AssociationSet Name="FK_BoardMember_MemberRole" Association="BnoisdbModel.FK_BoardMember_MemberRole">
             <End Role="MemberRole" EntitySet="MemberRoles" />
@@ -8916,7 +8911,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             <End Role="Country" EntitySet="Countries" />
             <End Role="ForeignProject" EntitySet="ForeignProjects" />
           </AssociationSet>
-          <EntitySet Name="Remarks" EntityType="BnoisdbModel.Remark" />
           <EntitySet Name="EmployeeOthers" EntityType="BnoisdbModel.EmployeeOther" />
           <EntitySet Name="Spouses" EntityType="BnoisdbModel.Spouse" />
           <AssociationSet Name="FK_Spouse_Occupation" Association="BnoisdbModel.FK_Spouse_Occupation">
@@ -9075,10 +9069,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           </AssociationSet>
           <AssociationSet Name="FK_Education_Examination" Association="BnoisdbModel.FK_Education_Examination">
             <End Role="Examination" EntitySet="Examinations" />
-            <End Role="Education" EntitySet="Educations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Education_Institute" Association="BnoisdbModel.FK_Education_Institute">
-            <End Role="Institute" EntitySet="Institutes" />
             <End Role="Education" EntitySet="Educations" />
           </AssociationSet>
           <AssociationSet Name="FK_Education_Result" Association="BnoisdbModel.FK_Education_Result">
@@ -9432,10 +9422,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             <End Role="Employee" EntitySet="Employee" />
             <End Role="PunishmentAccident" EntitySet="PunishmentAccidents" />
           </AssociationSet>
-          <AssociationSet Name="FK_Remark_Employee" Association="BnoisdbModel.FK_Remark_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Remark" EntitySet="Remarks" />
-          </AssociationSet>
           <AssociationSet Name="FK_RetiredEmployee_Employee" Association="BnoisdbModel.FK_RetiredEmployee_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="RetiredEmployee" EntitySet="RetiredEmployee" />
@@ -9722,6 +9708,20 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             <End Role="Office" EntitySet="Office" />
             <End Role="CoXoService" EntitySet="CoXoService" />
           </AssociationSet>
+          <EntitySet Name="Institute" EntityType="BnoisdbModel.Institute" />
+          <AssociationSet Name="FK_Institute_Board" Association="BnoisdbModel.FK_Institute_Board">
+            <End Role="Board" EntitySet="Boards" />
+            <End Role="Institute" EntitySet="Institute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Education_Institute" Association="BnoisdbModel.FK_Education_Institute">
+            <End Role="Institute" EntitySet="Institute" />
+            <End Role="Education" EntitySet="Educations" />
+          </AssociationSet>
+          <EntitySet Name="Remark" EntityType="BnoisdbModel.Remark" />
+          <AssociationSet Name="FK_Remark_Employee" Association="BnoisdbModel.FK_Remark_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Remark" EntitySet="Remark" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
           <Property Type="Int32" Name="Value" Nullable="false" />
@@ -9818,8 +9818,8 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Institutes" Relationship="BnoisdbModel.FK_Institute_Board" FromRole="Board" ToRole="Institute" />
           <NavigationProperty Name="Educations" Relationship="BnoisdbModel.FK_Education_Board" FromRole="Board" ToRole="Education" />
+          <NavigationProperty Name="Institute" Relationship="BnoisdbModel.FK_Institute_Board" FromRole="Board" ToRole="Institute" />
         </EntityType>
         <EntityType Name="BoardMember">
           <Key>
@@ -10209,23 +10209,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="HeirNextOfKinInfo" Relationship="BnoisdbModel.FK_HireNextOfKinInfo_HeirType" FromRole="HeirType" ToRole="HeirNextOfKinInfo" />
-        </EntityType>
-        <EntityType Name="Institute">
-          <Key>
-            <PropertyRef Name="InstituteId" />
-          </Key>
-          <Property Name="InstituteId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BoardType" Type="Int32" Nullable="false" />
-          <Property Name="BoardId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Board" Relationship="BnoisdbModel.FK_Institute_Board" FromRole="Institute" ToRole="Board" />
-          <NavigationProperty Name="Educations" Relationship="BnoisdbModel.FK_Education_Institute" FromRole="Institute" ToRole="Education" />
         </EntityType>
         <EntityType Name="InstituteType">
           <Key>
@@ -11162,18 +11145,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Principal>
             <Dependent Role="MissionAppointment">
               <PropertyRef Name="AppointmentCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Institute_Board">
-          <End Type="BnoisdbModel.Board" Role="Board" Multiplicity="1" />
-          <End Type="BnoisdbModel.Institute" Role="Institute" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Board">
-              <PropertyRef Name="BoardId" />
-            </Principal>
-            <Dependent Role="Institute">
-              <PropertyRef Name="BoardId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -13449,24 +13420,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Remark">
-          <Key>
-            <PropertyRef Name="RemarkId" />
-          </Key>
-          <Property Name="RemarkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="TransferId" Type="Int32" />
-          <Property Name="NoteType" Type="Int32" />
-          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Remark" ToRole="Employee" />
-        </EntityType>
         <EntityType Name="EmployeeOther">
           <Key>
             <PropertyRef Name="EmployeeOtherId" />
@@ -14370,11 +14323,11 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <NavigationProperty Name="Board" Relationship="BnoisdbModel.FK_Education_Board" FromRole="Education" ToRole="Board" />
           <NavigationProperty Name="ExamCategory" Relationship="BnoisdbModel.FK_Education_ExamCategory" FromRole="Education" ToRole="ExamCategory" />
           <NavigationProperty Name="Examination" Relationship="BnoisdbModel.FK_Education_Examination" FromRole="Education" ToRole="Examination" />
-          <NavigationProperty Name="Institute" Relationship="BnoisdbModel.FK_Education_Institute" FromRole="Education" ToRole="Institute" />
           <NavigationProperty Name="Result" Relationship="BnoisdbModel.FK_Education_Result" FromRole="Education" ToRole="Result" />
           <NavigationProperty Name="ResultGrade" Relationship="BnoisdbModel.FK_Education_ResultGrade" FromRole="Education" ToRole="ResultGrade" />
           <NavigationProperty Name="Subject" Relationship="BnoisdbModel.FK_Education_Subject" FromRole="Education" ToRole="Subject" />
           <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_Education_Employee" FromRole="Education" ToRole="Employee" />
+          <NavigationProperty Name="Institute" Relationship="BnoisdbModel.FK_Education_Institute" FromRole="Education" ToRole="Institute" />
         </EntityType>
         <Association Name="FK_Education_Board">
           <End Type="BnoisdbModel.Board" Role="Board" Multiplicity="0..1" />
@@ -14409,18 +14362,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Principal>
             <Dependent Role="Education">
               <PropertyRef Name="ExaminationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Education_Institute">
-          <End Type="BnoisdbModel.Institute" Role="Institute" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.Education" Role="Education" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Institute">
-              <PropertyRef Name="InstituteId" />
-            </Principal>
-            <Dependent Role="Education">
-              <PropertyRef Name="InstituteId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -15346,7 +15287,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <NavigationProperty Name="PromotionNomination" Relationship="BnoisdbModel.FK_PromotionNomination_Employee" FromRole="Employee" ToRole="PromotionNomination" />
           <NavigationProperty Name="ProposalCandidate" Relationship="BnoisdbModel.FK_ProposalCadidate_Employee" FromRole="Employee" ToRole="ProposalCandidate" />
           <NavigationProperty Name="PunishmentAccident" Relationship="BnoisdbModel.FK_PunishmentAccident_Employee" FromRole="Employee" ToRole="PunishmentAccident" />
-          <NavigationProperty Name="Remark" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Employee" ToRole="Remark" />
           <NavigationProperty Name="RetiredEmployee" Relationship="BnoisdbModel.FK_RetiredEmployee_Employee" FromRole="Employee" ToRole="RetiredEmployee" />
           <NavigationProperty Name="SeaService" Relationship="BnoisdbModel.FK_SeaService_Employee" FromRole="Employee" ToRole="SeaService" />
           <NavigationProperty Name="Sibling" Relationship="BnoisdbModel.FK_Sibling_Employee" FromRole="Employee" ToRole="Sibling" />
@@ -15365,6 +15305,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <NavigationProperty Name="CareerForecast" Relationship="BnoisdbModel.FK_CareerForecast_Employee" FromRole="Employee" ToRole="CareerForecast" />
           <NavigationProperty Name="EmployeeGeneral" Relationship="BnoisdbModel.FK_EmployeeGeneral_Employee" FromRole="Employee" ToRole="EmployeeGeneral" />
           <NavigationProperty Name="CoXoService" Relationship="BnoisdbModel.FK_CoXoService_Employee" FromRole="Employee" ToRole="CoXoService" />
+          <NavigationProperty Name="Remark" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Employee" ToRole="Remark" />
         </EntityType>
         <EntityType Name="ExecutionRemark">
           <Key>
@@ -15919,18 +15860,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
               <PropertyRef Name="EmployeeId" />
             </Principal>
             <Dependent Role="PunishmentAccident">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Remark_Employee">
-          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="BnoisdbModel.Remark" Role="Remark" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="Remark">
               <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -17204,6 +17133,77 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Institute">
+          <Key>
+            <PropertyRef Name="InstituteId" />
+          </Key>
+          <Property Name="InstituteId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoardType" Type="Int32" Nullable="false" />
+          <Property Name="BoardId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Board" Relationship="BnoisdbModel.FK_Institute_Board" FromRole="Institute" ToRole="Board" />
+          <NavigationProperty Name="Education" Relationship="BnoisdbModel.FK_Education_Institute" FromRole="Institute" ToRole="Education" />
+        </EntityType>
+        <Association Name="FK_Institute_Board">
+          <End Type="BnoisdbModel.Board" Role="Board" Multiplicity="1" />
+          <End Type="BnoisdbModel.Institute" Role="Institute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Board">
+              <PropertyRef Name="BoardId" />
+            </Principal>
+            <Dependent Role="Institute">
+              <PropertyRef Name="BoardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Education_Institute">
+          <End Type="BnoisdbModel.Institute" Role="Institute" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.Education" Role="Education" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Institute">
+              <PropertyRef Name="InstituteId" />
+            </Principal>
+            <Dependent Role="Education">
+              <PropertyRef Name="InstituteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Remark">
+          <Key>
+            <PropertyRef Name="RemarkId" />
+          </Key>
+          <Property Name="RemarkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="TransferId" Type="Int32" />
+          <Property Name="NoteType" Type="Int32" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Remark" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Remark_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.Remark" Role="Remark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Remark">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -17650,22 +17650,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="HeirTypeId" ColumnName="HeirTypeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Institutes">
-            <EntityTypeMapping TypeName="BnoisdbModel.Institute">
-              <MappingFragment StoreEntitySet="Institute">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="BoardId" ColumnName="BoardId" />
-                <ScalarProperty Name="BoardType" ColumnName="BoardType" />
-                <ScalarProperty Name="InstituteId" ColumnName="InstituteId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -19412,24 +19396,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Remarks">
-            <EntityTypeMapping TypeName="BnoisdbModel.Remark">
-              <MappingFragment StoreEntitySet="Remark">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="NoteType" ColumnName="NoteType" />
-                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="RemarkId" ColumnName="RemarkId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EmployeeOthers">
             <EntityTypeMapping TypeName="BnoisdbModel.EmployeeOther">
               <MappingFragment StoreEntitySet="EmployeeOther">
@@ -20697,6 +20663,40 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
                 <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="CoXoServiceId" ColumnName="CoXoServiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Institute">
+            <EntityTypeMapping TypeName="BnoisdbModel.Institute">
+              <MappingFragment StoreEntitySet="Institute">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BoardId" ColumnName="BoardId" />
+                <ScalarProperty Name="BoardType" ColumnName="BoardType" />
+                <ScalarProperty Name="InstituteId" ColumnName="InstituteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Remark">
+            <EntityTypeMapping TypeName="BnoisdbModel.Remark">
+              <MappingFragment StoreEntitySet="Remark">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="NoteType" ColumnName="NoteType" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="RemarkId" ColumnName="RemarkId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

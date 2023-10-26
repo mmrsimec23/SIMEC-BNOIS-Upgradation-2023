@@ -17,7 +17,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<SelectModel> GetTransferModeSelectModels();  
         List<SelectModel> GetTransferTypeSelectModels();
         List<SelectModel> GetTransferForSelectModels();
-        List<SelectModel> GetCourseMissionAbroadSelectModels();
+        //List<SelectModel> GetCourseMissionAbroadSelectModels();
         List<SelectModel> GetTemporaryTransferTypeSelectModels();
 
         vwTransfer GetLastTransfer(int employeeId);

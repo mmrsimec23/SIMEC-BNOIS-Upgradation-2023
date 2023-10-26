@@ -47,6 +47,8 @@
                     vm.users = data.result.users;
                     vm.total = data.total; 
                     vm.loginUserId = data.result.loginUserId;
+
+                console.log(vm.users)
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage);

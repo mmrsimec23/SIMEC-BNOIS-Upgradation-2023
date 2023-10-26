@@ -63,8 +63,8 @@ namespace Infinity.Bnois.Api.Web.Services
         {
             IQueryable<User> userQuery = userStore.Users.AsQueryable();
             total = userQuery.Count();
-            List<User> users = userQuery.OrderBy(x => x.UserName).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
-            List<UserModel> userModels = users.Select(x => new UserModel
+            //List<User> users = userQuery.OrderBy(x => x.UserName).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            List<UserModel> userModels = userQuery.Select(x => new UserModel
             {
                 Id = x.Id,
                 UserName = x.UserName,

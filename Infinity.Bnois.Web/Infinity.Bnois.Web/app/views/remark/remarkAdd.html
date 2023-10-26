@@ -26,9 +26,9 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="remarks" class="custom-label">{{vm.typeName}}</label>
-                            <textarea type="text" id="remarks" class="form-control custom-form-control" ng-model="vm.remark.remarks" name="remarks" maxlength="1000" required></textarea>
+                            <textarea type="text" id="remarks" class="form-control custom-form-control" ng-model="vm.remark.remarks" name="remarks"  required></textarea>
                             <p ng-show="vm.remarkForm.remarks.$error.required" class="help-block errormsg">{{vm.typeName}} is required. </p>
-                            <p ng-show="vm.remarkForm.remarks.$error.maxlength" class="help-block errormsg">Maximum character 1000</p>
+                            <!--<p ng-show="vm.remarkForm.remarks.$error.maxlength" class="help-block errormsg">Maximum character 5000</p>-->
                         </div>
                     </div>
 

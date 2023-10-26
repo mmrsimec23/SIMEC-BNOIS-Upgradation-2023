@@ -345,8 +345,10 @@
     <Content Include="app\views\family-permissions\familyPermissionsController.js" />
     <Content Include="app\views\car-loan\carLoan.html" />
     <Content Include="app\views\car-loan\carLoanController.js" />
-    <Content Include="app\views\large-ship-co-list\largeShipCoList.html" />
-    <Content Include="app\views\large-ship-co-list\largeShipCoListController.js" />
+    <Content Include="app\views\shipwise-proposed-waiting-coxo-list\shipwiseProposedWaitingCoXoList.html" />
+    <Content Include="app\views\shipwise-proposed-waiting-coxo-list\shipwiseProposedWaitingCoXoListController.js" />
+    <Content Include="app\views\medium-ship-coxo\mediumShipCoXo.html" />
+    <Content Include="app\views\medium-ship-coxo\mediumShipCoXoController.js" />
     <Content Include="app\views\large-ship-coxo\largeShipCoXo.html" />
     <Content Include="app\views\large-ship-coxo\largeShipCoXoController.js" />
     <Content Include="app\views\miscellaneous-services\miscellaneousServices.html" />

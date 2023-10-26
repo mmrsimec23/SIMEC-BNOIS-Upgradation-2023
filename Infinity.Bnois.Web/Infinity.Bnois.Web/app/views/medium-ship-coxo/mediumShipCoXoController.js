@@ -4,36 +4,30 @@
 
     'use strict';
 
-    var controllerId = 'largeShipCoListController';
+    var controllerId = 'mediumShipCoXoController';
 
-    angular.module('app').controller(controllerId, largeShipCoListController);
-    largeShipCoListController.$inject = ['$stateParams', 'roasterListService', 'notificationService', '$state'];
+    angular.module('app').controller(controllerId, mediumShipCoXoController);
+    mediumShipCoXoController.$inject = ['$stateParams', 'roasterListService', 'notificationService', '$state'];
 
-    function largeShipCoListController($stateParams, roasterListService, notificationService, $state) {
+    function mediumShipCoXoController($stateParams, roasterListService, notificationService, $state) {
         var vm = this;
-        vm.officeId = 0;
-        vm.appointment = 1;
-        vm.largeShipCoXos = [];
+        vm.shipType = 2;
+        vm.mediumShipCoXos = [];
         vm.courseAttendeds = [];
         vm.printSection = printSection;
-        vm.shipName = '';
         vm.officeCurrentStatus = officeCurrentStatus;
 
-        if ($stateParams.officeId !== undefined && $stateParams.officeId !== null) {
-            vm.officeId = $stateParams.officeId;
-        }
-        if ($stateParams.appointment !== undefined && $stateParams.appointment !== null) {
-            vm.appointment = $stateParams.appointment;
+        if ($stateParams.shipType !== undefined && $stateParams.shipType !== null) {
+            vm.shipType = $stateParams.shipType;
         }
 
         Init();
         function Init() {
 
 
-            roasterListService.getLargeShipProposedWaitingCoXoList(vm.officeId,vm.appointment).then(function (data) {
-                vm.largeShipCoXos = data.result;
-                vm.shipName = vm.largeShipCoXos[0].shortName;
-                console.log(vm.shipName);
+            roasterListService.getRoasterListByShipType(vm.shipType).then(function (data) {
+                vm.mediumShipCoXos = data.result;
+                console.log(vm.mediumShipCoXos);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

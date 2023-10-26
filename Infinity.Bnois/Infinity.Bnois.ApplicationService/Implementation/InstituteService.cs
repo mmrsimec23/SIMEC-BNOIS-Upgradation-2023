@@ -5,7 +5,9 @@ using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +18,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<Institute> instituteRepository;
         private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
         private readonly IEmployeeService employeeService;
+        
         public InstituteService(IBnoisRepository<Institute> instituteRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.instituteRepository = instituteRepository;
@@ -68,7 +71,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             Institute institute = ObjectConverter<InstituteModel, Institute>.Convert(model);
             if (id > 0)
             {
-                institute = await instituteRepository.FindOneAsync(x => x.InstituteId == id, new List<string>() { "Board" });
+                institute =  instituteRepository.FindOne(x => x.InstituteId == id, new List<string>() { "Board" });
                 if (institute == null)
                 {
                     throw new InfinityNotFoundException("Institute not found !");
@@ -88,14 +91,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (institute.BoardType != model.BoardType)
                 {
-                    bnLog.PreviousValue += ", BoardType: " + institute.BoardType;
-                    bnLog.UpdatedValue += ", BoardType: " + model.BoardType;
+                    bnLog.PreviousValue += ", BoardType: " + Enum.GetName(typeof(BoardType), institute.BoardType);
+                    bnLog.UpdatedValue += ", BoardType: " + Enum.GetName(typeof(BoardType), model.BoardType);
                 }
                 if (institute.BoardId != model.BoardId)
                 {
-                    var sub = employeeService.GetDynamicTableInfoById("Board", "BoardId", model.BoardId);
+                    var board = employeeService.GetDynamicTableInfoById("Board", "BoardId", model.BoardId);
                     bnLog.PreviousValue += ", Board: " + institute.Board.Name;
-                    bnLog.UpdatedValue += ", Board: " + ((dynamic)sub).Name;
+                    bnLog.UpdatedValue += ", Board: " + ((dynamic)board).Name;
                 }
                 if (institute.Remarks != model.Remarks)
                 {
@@ -125,6 +128,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 institute.CreatedBy = userId;
             }
             institute.Name = model.Name;
+            institute.BoardId = model.BoardId;
             institute.BoardType = model.BoardType;
             institute.Remarks = model.Remarks;
             //institute.Board = null;
@@ -149,7 +153,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "Institute";
                 bnLog.TableEntryForm = "Institute";
-                bnLog.PreviousValue = "Id: " + institute.InstituteId + ", Name: " + institute.Name + ", BoardType: " + institute.BoardType + ", Board: " + institute.BoardId + ", Remarks: " + institute.Remarks;
+                var board = employeeService.GetDynamicTableInfoById("Board", "BoardId", institute.BoardId);
+                bnLog.PreviousValue = "Id: " + institute.InstituteId + ", Name: " + institute.Name + ", BoardType: " + Enum.GetName(typeof(BoardType), institute.BoardType) + ", Board: " + ((dynamic)board).Name + ", Remarks: " + institute.Remarks;
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete

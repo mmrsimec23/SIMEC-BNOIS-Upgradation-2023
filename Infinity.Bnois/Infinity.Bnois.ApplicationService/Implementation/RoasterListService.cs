@@ -16,9 +16,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             this.employeeRepository = employeeRepository;
         }
 
-        public List<object> GetRoasterListByShipType(int shipType, int aptNetId, int aptCatId)
+        public List<object> GetRoasterListByShipType(int shipType)
         {
-            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetCoOpvFfWaitingList] {0},{1},{2} ", shipType, aptNetId,aptCatId));
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetCoOpvFfWaitingList] {0} ", shipType));
             return dataTable.ToJson().ToList();
         }
 
