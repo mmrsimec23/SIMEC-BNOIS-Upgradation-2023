@@ -14,10 +14,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	public class ReligionService : IReligionService
 	{
 		private readonly IBnoisRepository<Religion> religionRepository;
-		public ReligionService(IBnoisRepository<Religion> relegionRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public ReligionService(IBnoisRepository<Religion> relegionRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
 		{
 			this.religionRepository = relegionRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+        }
 
 		public async Task<bool> DeleteReligion(int id)
 		{
@@ -32,7 +34,21 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 			}
 			else
 			{
-				return await religionRepository.DeleteAsync(relegion);
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Religion";
+                bnLog.TableEntryForm = "Religion";
+                bnLog.PreviousValue = "Id: " + relegion.ReligionId + ", Name: " + relegion.Name + ", Remarks: " + relegion.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+                return await religionRepository.DeleteAsync(relegion);
 			}
 		}
 
@@ -82,8 +98,39 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 			    religion.Modified = DateTime.Now;
 			    religion.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Religion";
+                bnLog.TableEntryForm = "Religion";
+                bnLog.PreviousValue = "Id: " + model.ReligionId;
+                bnLog.UpdatedValue = "Id: " + model.ReligionId;
+                if (religion.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + religion.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (religion.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + religion.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (religion.Name != model.Name || religion.Remarks != model.Remarks)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
-			else
+            else
 			{
 				religion.Created = DateTime.Now;
 				religion.CreatedBy = userId;

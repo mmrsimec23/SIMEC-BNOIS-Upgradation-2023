@@ -14,9 +14,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class RankCategoryService : IRankCategoryService
     {
         private readonly IBnoisRepository<RankCategory> rankCategoryRepository;
-        public RankCategoryService(IBnoisRepository<RankCategory> rankCategoryRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public RankCategoryService(IBnoisRepository<RankCategory> rankCategoryRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.rankCategoryRepository = rankCategoryRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
         public List<RankCategoryModel> GetRankCategories(int ps, int pn, string qs, out int total)
@@ -68,6 +70,37 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 rankCategory.ModifiedDate = DateTime.Now;
                 rankCategory.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "RankCategory";
+                bnLog.TableEntryForm = "Rank Category";
+                bnLog.PreviousValue = "Id: " + model.RankCategoryId;
+                bnLog.UpdatedValue = "Id: " + model.RankCategoryId;
+                if (rankCategory.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + rankCategory.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (rankCategory.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + rankCategory.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (rankCategory.Name != model.Name || rankCategory.Remarks != model.Remarks)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -96,6 +129,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "RankCategory";
+                bnLog.TableEntryForm = "Rank Category";
+                bnLog.PreviousValue = "Id: " + rankCategory.RankCategoryId + ", Name: " + rankCategory.Name + ", Remarks: " + rankCategory.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await rankCategoryRepository.DeleteAsync(rankCategory);
             }
         }

@@ -14,9 +14,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class RelationService : IRelationService
     {
         private readonly IBnoisRepository<Relation> relationRepository;
-        public RelationService(IBnoisRepository<Relation> relationRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public RelationService(IBnoisRepository<Relation> relationRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.relationRepository = relationRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
     
@@ -67,6 +69,37 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 relation.ModifiedDate = DateTime.Now;
                 relation.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Relation";
+                bnLog.TableEntryForm = "Relation";
+                bnLog.PreviousValue = "Id: " + model.RelationId;
+                bnLog.UpdatedValue = "Id: " + model.RelationId;
+                if (relation.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + relation.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (relation.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + relation.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (relation.Name != model.Name || relation.Remarks != model.Remarks)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -95,6 +128,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Relation";
+                bnLog.TableEntryForm = "Relation";
+                bnLog.PreviousValue = "Id: " + Relation.RelationId + ", Name: " + Relation.Name + ", Remarks: " + Relation.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await relationRepository.DeleteAsync(Relation);
             }
         }

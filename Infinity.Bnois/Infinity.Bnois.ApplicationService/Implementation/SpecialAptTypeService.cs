@@ -15,10 +15,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	{	
 
 		private readonly IBnoisRepository<SpecialAptType> specialAptTypeRepository;
-		public SpecialAptTypeService(IBnoisRepository<SpecialAptType> specialAptTypeRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public SpecialAptTypeService(IBnoisRepository<SpecialAptType> specialAptTypeRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
 		{
 			this.specialAptTypeRepository = specialAptTypeRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+        }
 
 
         public List<SpecialAptTypeModel> GetSpecialAptTypes(int ps, int pn, string qs, out int total)
@@ -66,8 +68,38 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 {
                     throw new InfinityNotFoundException("SpecialAptType not found !");
                 }
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "SpecialAptType";
+                bnLog.TableEntryForm = "Special Appointment";
+                bnLog.PreviousValue = "Id: " + model.Id;
+                bnLog.UpdatedValue = "Id: " + model.Id;
+                if (specialAptType.SpAptType != model.SpAptType)
+                {
+                    bnLog.PreviousValue += ", SpecialAppointment: " + specialAptType.SpAptType;
+                    bnLog.UpdatedValue += ", SpecialAppointment: " + model.SpAptType;
+                }
+                if (specialAptType.Position != model.Position)
+                {
+                    bnLog.PreviousValue += ", Position: " + specialAptType.Position;
+                    bnLog.UpdatedValue += ", Position: " + model.Position;
+                }
 
-               
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (specialAptType.SpAptType != model.SpAptType || specialAptType.Position != model.Position)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
+
             }
             else
             {
@@ -95,6 +127,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "SpecialAptType";
+                bnLog.TableEntryForm = "Special Appointment";
+                bnLog.PreviousValue = "Id: " + specialAptType.Id + ", SpecialAppointment: " + specialAptType.SpAptType + ", Position: " + specialAptType.Position;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await specialAptTypeRepository.DeleteAsync(specialAptType);
             }
         }

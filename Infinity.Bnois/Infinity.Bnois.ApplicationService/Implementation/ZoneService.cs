@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
 using Infinity.Bnois.Configuration;
+using Infinity.Bnois.Configuration.Models;
 using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 
@@ -14,10 +15,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	public class ZoneService : IZoneService
 	{
 		private readonly IBnoisRepository<Zone> zoneRepository;
-		public ZoneService(IBnoisRepository<Zone> zoneRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public ZoneService(IBnoisRepository<Zone> zoneRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
 		{
 			this.zoneRepository = zoneRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+        }
         public async Task<ZoneModel> GetZone(int id)
         {
             if (id <= 0)
@@ -70,6 +73,37 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 	            zone.ModifiedDate = DateTime.Now;
 	            zone.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Zone";
+                bnLog.TableEntryForm = "Zone";
+                bnLog.PreviousValue = "Id: " + model.ZoneId;
+                bnLog.UpdatedValue = "Id: " + model.ZoneId;
+                if (zone.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + zone.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (zone.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + zone.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (zone.Name != model.Name || zone.Remarks != model.Remarks)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -97,6 +131,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Zone";
+                bnLog.TableEntryForm = "Zone";
+                bnLog.PreviousValue = "Id: " + Zone.ZoneId + ", Name: " + Zone.Name + ", Remarks: " + Zone.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await zoneRepository.DeleteAsync(Zone);
             }
         }

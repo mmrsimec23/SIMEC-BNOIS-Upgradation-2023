@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
 using Infinity.Bnois.Configuration;
+using Infinity.Bnois.Configuration.Models;
 using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 
@@ -14,9 +15,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
 
         private readonly IBnoisRepository<Upazila> upazilaRepository;
-        public UpazilaService(IBnoisRepository<Upazila> upazilaRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public UpazilaService(IBnoisRepository<Upazila> upazilaRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.upazilaRepository = upazilaRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<UpazilaModel> GetUpazilas(int ps, int pn, string qs, out int total)
@@ -62,13 +67,56 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             Upazila upazila = ObjectConverter<UpazilaModel, Upazila>.Convert(model);
             if (id > 0)
             {
-                upazila = await upazilaRepository.FindOneAsync(x => x.UpazilaId == id);
+                upazila = await upazilaRepository.FindOneAsync(x => x.UpazilaId == id, new List<string>() { "District", "Division" });
                 if (upazila == null)
                 {
                     throw new InfinityNotFoundException("Upazila not found !");
                 }
                 upazila.ModifiedDate = DateTime.Now;
                 upazila.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Upazila";
+                bnLog.TableEntryForm = "Upazila";
+                bnLog.PreviousValue = "Id: " + model.UpazilaId;
+                bnLog.UpdatedValue = "Id: " + model.UpazilaId;
+                if (upazila.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + upazila.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (upazila.DistrictId != model.DistrictId)
+                {
+                    var dis = employeeService.GetDynamicTableInfoById("District", "DistrictId", model.DistrictId);
+                    bnLog.PreviousValue += ", District: " + upazila.District.Name;
+                    bnLog.UpdatedValue += ", District: " + ((dynamic)dis).Name;
+                }
+                if (upazila.DivisionId != model.DivisionId)
+                {
+                    var div = employeeService.GetDynamicTableInfoById("Division", "DivisionId", model.DivisionId??0);
+                    bnLog.PreviousValue += ", Division: " + upazila.Division.Name;
+                    bnLog.UpdatedValue += ", Division: " + ((dynamic)div).Name;
+                }
+                if (upazila.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + upazila.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (upazila.Name != model.Name || upazila.DistrictId != model.DistrictId || upazila.DivisionId != model.DivisionId || upazila.Remarks != model.Remarks)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -99,6 +147,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Upazila";
+                bnLog.TableEntryForm = "Upazila";
+                bnLog.PreviousValue = "Id: " + upazila.UpazilaId + ", Name: " + upazila.Name + ", District: " + upazila.DistrictId + ", Division: " + upazila.DivisionId + ", Remarks: " + upazila.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await upazilaRepository.DeleteAsync(upazila);
             }
         }

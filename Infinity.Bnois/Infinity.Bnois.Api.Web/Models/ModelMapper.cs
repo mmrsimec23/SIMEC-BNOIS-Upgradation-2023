@@ -40,7 +40,8 @@ namespace Infinity.Bnois.Api.Web.Models
                 cfg.CreateMap<PhysicalStructure, PhysicalStructureModel>();
 
                 cfg.CreateMap<ExamCategory, ExamCategoryModel>();
-                cfg.CreateMap<Examination, ExaminationModel>();
+                cfg.CreateMap<Examination, ExaminationModel>()
+                .ForMember(d => d.ExamCategory, opt => opt.MapFrom(s => s.ExamCategory)); 
 
                 cfg.CreateMap<InstituteType, InstituteTypeModel>();
                 cfg.CreateMap<Institute, InstituteModel>()
@@ -167,7 +168,7 @@ namespace Infinity.Bnois.Api.Web.Models
                     .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
 
 
-
+                
 
                 cfg.CreateMap<EmployeeServiceExt, EmployeeServiceExtensionModel>()
                     .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee));
@@ -649,7 +650,8 @@ namespace Infinity.Bnois.Api.Web.Models
                .ForMember(d => d.Occupation, opt => opt.MapFrom(s => s.Occupation));
 
                 cfg.CreateMap<ExamCategoryModel, ExamCategory>();
-                cfg.CreateMap<ExaminationModel, Examination>();
+                cfg.CreateMap<ExaminationModel, Examination>()
+               .ForMember(d => d.ExamCategory, opt => opt.MapFrom(s => s.ExamCategory));
 
                 cfg.CreateMap<InstituteTypeModel, InstituteType>();
 

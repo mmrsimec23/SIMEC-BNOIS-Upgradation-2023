@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
 using Infinity.Bnois.Configuration;
+using Infinity.Bnois.Configuration.Models;
 using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 
@@ -15,12 +16,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	{
 		private readonly IBnoisRepository<Subject> subjectRepository;
         private readonly IBnoisRepository<ExamSubject> examSubjectRepository;
-        
-        public SubjectService(IBnoisRepository<Subject> subjectRepository, IBnoisRepository<ExamSubject> examSubjectRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+
+        public SubjectService(IBnoisRepository<Subject> subjectRepository, IBnoisRepository<ExamSubject> examSubjectRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
 		{
             this.subjectRepository = subjectRepository;
-            this.examSubjectRepository = examSubjectRepository; ;
-		}
+            this.examSubjectRepository = examSubjectRepository; 
+            this.bnoisLogRepository = bnoisLogRepository;
+        }
 
 		public async Task<bool> DeleteSubject(int id)
 		{
@@ -35,7 +38,21 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 			}
 			else
 			{
-				return await subjectRepository.DeleteAsync(subject);
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Subject";
+                bnLog.TableEntryForm = "Subject";
+                bnLog.PreviousValue = "Id: " + subject.SubjectId + ", Name: " + subject.Name + ", Remarks: " + subject.Remarks + ", BnList: " + subject.GoToBnList;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+                return await subjectRepository.DeleteAsync(subject);
 			}
 		}
 
@@ -93,8 +110,44 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 				}
                 subject.ModifiedDate = DateTime.Now;
                 subject.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Subject";
+                bnLog.TableEntryForm = "Subject";
+                bnLog.PreviousValue = "Id: " + model.SubjectId;
+                bnLog.UpdatedValue = "Id: " + model.SubjectId;
+                if (subject.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + subject.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (subject.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + subject.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+                if (subject.GoToBnList != model.GoToBnList)
+                {
+                    bnLog.PreviousValue += ", BnList: " + subject.GoToBnList;
+                    bnLog.UpdatedValue += ", BnList: " + model.GoToBnList;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (subject.Name != model.Name || subject.Remarks != model.Remarks || subject.GoToBnList != model.GoToBnList)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
-			else
+            else
             {
                 subject.IsActive = true;
                 subject.CreatedDate = DateTime.Now;

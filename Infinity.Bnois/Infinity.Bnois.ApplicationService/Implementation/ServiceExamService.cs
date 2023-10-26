@@ -15,9 +15,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
 
         private readonly IBnoisRepository<ServiceExam> serviceExamRepository;
-        public ServiceExamService(IBnoisRepository<ServiceExam> serviceExamRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public ServiceExamService(IBnoisRepository<ServiceExam> serviceExamRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.serviceExamRepository = serviceExamRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<ServiceExamModel> GetServiceExams(int ps, int pn, string qs, out int total)
@@ -63,7 +67,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             ServiceExam serviceExam = ObjectConverter<ServiceExamModel, ServiceExam>.Convert(model);
             if (id > 0)
             {
-                serviceExam = await serviceExamRepository.FindOneAsync(x => x.ServiceExamId == id);
+                serviceExam = await serviceExamRepository.FindOneAsync(x => x.ServiceExamId == id, new List<string>() { "ServiceExamCategory", "Branch" });
                 if (serviceExam == null)
                 {
                     throw new InfinityNotFoundException("Service Exam not found !");
@@ -71,6 +75,60 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 serviceExam.ModifiedDate = DateTime.Now;
                 serviceExam.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "ServiceExam";
+                bnLog.TableEntryForm = "Service Exam";
+                bnLog.PreviousValue = "Id: " + model.ServiceExamId;
+                bnLog.UpdatedValue = "Id: " + model.ServiceExamId;
+                if (serviceExam.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + serviceExam.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (serviceExam.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ", ShortName: " + serviceExam.ShortName;
+                    bnLog.UpdatedValue += ", ShortName: " + model.ShortName;
+                }
+                if (serviceExam.ServiceExamCategoryId != model.ServiceExamCategoryId)
+                {
+                    var sec = employeeService.GetDynamicTableInfoById("ServiceExamCategory", "ServiceExamCategoryId", model.ServiceExamCategoryId);
+                    bnLog.PreviousValue += ", ServiceExamCategory: " + serviceExam.ServiceExamCategory.ExamName;
+                    bnLog.UpdatedValue += ", ServiceExamCategory: " + ((dynamic)sec).ExamName;
+                }
+                if (serviceExam.BranchId != model.BranchId)
+                {
+                    var branch = employeeService.GetDynamicTableInfoById("Branch", "BranchId", model.BranchId);
+                    bnLog.PreviousValue += ", Branch: " + serviceExam.Branch.Name;
+                    bnLog.UpdatedValue += ", Branch: " + ((dynamic)branch).Name;
+                }
+                if (serviceExam.NOS != model.NOS)
+                {
+                    bnLog.PreviousValue += ", NOS: " + serviceExam.NOS;
+                    bnLog.UpdatedValue += ", NOS: " + model.NOS;
+                }
+                if (serviceExam.AttTime != model.AttTime)
+                {
+                    bnLog.PreviousValue += ", AttTime: " + serviceExam.AttTime;
+                    bnLog.UpdatedValue += ", AttTime: " + model.AttTime;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (serviceExam.Name != model.Name || serviceExam.ShortName != model.ShortName || serviceExam.ServiceExamCategoryId != model.ServiceExamCategoryId
+                    || serviceExam.BranchId != model.BranchId || serviceExam.NOS != model.NOS || serviceExam.AttTime != model.AttTime)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -81,7 +139,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             serviceExam.Name = model.Name;
             serviceExam.ShortName = model.ShortName;
             serviceExam.ServiceExamCategoryId = model.ServiceExamCategoryId;
+            serviceExam.ServiceExamCategory = null;
             serviceExam.BranchId = model.BranchId;
+            serviceExam.Branch = null;
             serviceExam.NOS = model.NOS;
             serviceExam.AttTime = model.AttTime;
             await serviceExamRepository.SaveAsync(serviceExam);
@@ -103,6 +163,21 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "ServiceExam";
+                bnLog.TableEntryForm = "Service Exam";
+                bnLog.PreviousValue = "Id: " + serviceExam.ServiceExamId + ", Name: " + serviceExam.Name + ", ShortName: " + serviceExam.ShortName
+                    + ", ServiceExamCategory: " + serviceExam.ServiceExamCategoryId + ", Branch: " + serviceExam.BranchId + ", NOS: " + serviceExam.NOS + ", AttTime: " + serviceExam.AttTime;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await serviceExamRepository.DeleteAsync(serviceExam);
             }
         }

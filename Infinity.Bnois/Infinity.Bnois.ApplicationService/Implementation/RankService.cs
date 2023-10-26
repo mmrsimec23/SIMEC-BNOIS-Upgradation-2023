@@ -15,9 +15,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class RankService : IRankService
     {
         private readonly IRankRepository rankRepository;
-        public RankService(IRankRepository rankRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public RankService(IRankRepository rankRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.rankRepository = rankRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
         public List<RankModel> 
 	        GetRanks(int pageSize, int pageNumber, string searchText, out int total)
@@ -76,6 +78,74 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 rank.Modified = DateTime.Now;
                 rank.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Rank";
+                bnLog.TableEntryForm = "Rank";
+                bnLog.PreviousValue = "Id: " + model.RankId;
+                bnLog.UpdatedValue = "Id: " + model.RankId;
+                if (rank.FullName != model.FullName)
+                {
+                    bnLog.PreviousValue += ", FullName: " + rank.FullName;
+                    bnLog.UpdatedValue += ", FullName: " + model.FullName;
+                }
+                if (rank.FullNameBan != model.FullNameBan)
+                {
+                    bnLog.PreviousValue += ", FullNameBan: " + rank.FullNameBan;
+                    bnLog.UpdatedValue += ", FullNameBan: " + model.FullNameBan;
+                }
+                if (rank.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + rank.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+                if (rank.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ", ShortName: " + rank.ShortName;
+                    bnLog.UpdatedValue += ", ShortName: " + model.ShortName;
+                }
+                if (rank.ShortNameBan != model.ShortNameBan)
+                {
+                    bnLog.PreviousValue += ", ShortNameBan: " + rank.ShortNameBan;
+                    bnLog.UpdatedValue += ", ShortNameBan: " + model.ShortNameBan;
+                }
+                if (rank.RankOrder != model.RankOrder)
+                {
+                    bnLog.PreviousValue += ", RankOrder: " + rank.RankOrder;
+                    bnLog.UpdatedValue += ", RankOrder: " + model.RankOrder;
+                }
+                if (rank.RankLevel != model.RankLevel)
+                {
+                    bnLog.PreviousValue += ", RankLevel: " + rank.RankLevel;
+                    bnLog.UpdatedValue += ", RankLevel: " + model.RankLevel;
+                }
+                if (rank.IsConfirm != model.IsConfirm)
+                {
+                    bnLog.PreviousValue += ", IsConfirm: " + rank.IsConfirm;
+                    bnLog.UpdatedValue += ", IsConfirm: " + model.IsConfirm;
+                }
+                if (rank.ServiceYear != model.ServiceYear)
+                {
+                    bnLog.PreviousValue += ", ServiceYear: " + rank.ServiceYear;
+                    bnLog.UpdatedValue += ", ServiceYear: " + model.ServiceYear;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (rank.FullName != model.FullName || rank.FullNameBan != model.FullNameBan || rank.Remarks != model.Remarks 
+                    || rank.ShortName != model.ShortName || rank.ShortNameBan != model.ShortNameBan || rank.RankOrder != model.RankOrder
+                    || rank.RankLevel != model.RankLevel || rank.IsConfirm != model.IsConfirm || rank.ServiceYear != model.ServiceYear)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
 
             }
             else
@@ -109,6 +179,22 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Rank";
+                bnLog.TableEntryForm = "Rank";
+                bnLog.PreviousValue = "Id: " + rank.RankId + ", FullName: " + rank.FullName + ", FullNameBan: " + rank.FullNameBan + ", Remarks: " 
+                    + rank.Remarks + ", ShortName: " + rank.ShortName + ", ShortNameBan: " + rank.ShortNameBan + ", RankOrder: " + rank.RankOrder
+                    + ", RankLevel: " + rank.RankLevel + ", IsConfirm: " + rank.IsConfirm + ", ServiceYear: " + rank.ServiceYear;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await rankRepository.DeleteAsync(rank);
             }
         }

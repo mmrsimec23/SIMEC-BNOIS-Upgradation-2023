@@ -15,10 +15,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
         private readonly IBnoisRepository<Institute> instituteRepository;
         private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
-        public InstituteService(IBnoisRepository<Institute> instituteRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
+        private readonly IEmployeeService employeeService;
+        public InstituteService(IBnoisRepository<Institute> instituteRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.instituteRepository = instituteRepository;
             this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
         
         public async Task<InstituteModel> GetInstitute(int id)
@@ -66,7 +68,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             Institute institute = ObjectConverter<InstituteModel, Institute>.Convert(model);
             if (id > 0)
             {
-                institute = await instituteRepository.FindOneAsync(x => x.InstituteId == id);
+                institute = await instituteRepository.FindOneAsync(x => x.InstituteId == id, new List<string>() { "Board" });
                 if (institute == null)
                 {
                     throw new InfinityNotFoundException("Institute not found !");
@@ -91,8 +93,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (institute.BoardId != model.BoardId)
                 {
-                    bnLog.PreviousValue += ", Board: " + institute.BoardId;
-                    bnLog.UpdatedValue += ", Board: " + model.BoardId;
+                    var sub = employeeService.GetDynamicTableInfoById("Board", "BoardId", model.BoardId);
+                    bnLog.PreviousValue += ", Board: " + institute.Board.Name;
+                    bnLog.UpdatedValue += ", Board: " + ((dynamic)sub).Name;
                 }
                 if (institute.Remarks != model.Remarks)
                 {
@@ -124,6 +127,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             institute.Name = model.Name;
             institute.BoardType = model.BoardType;
             institute.Remarks = model.Remarks;
+            //institute.Board = null;
             await instituteRepository.SaveAsync(institute);
             model.InstituteId = institute.InstituteId;
             return model;

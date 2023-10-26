@@ -16,11 +16,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<SubCategory> subCategoryRepository;
 	    private readonly IProcessRepository processRepository;
         private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
-        public SubCategoryService(IBnoisRepository<SubCategory> subCategoryRepository, IProcessRepository processRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
+        private readonly IEmployeeService employeeService;
+        public SubCategoryService(IBnoisRepository<SubCategory> subCategoryRepository, IProcessRepository processRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.subCategoryRepository = subCategoryRepository;
             this.processRepository = processRepository;
             this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<SubCategoryModel> GetSubCategories(int ps, int pn, string qs, out int total)
@@ -76,7 +78,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 // data log section start
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "SubCategory";
-                bnLog.TableEntryForm = "Sub Category";
+                bnLog.TableEntryForm = "Officer Naming Convention/Sub Category";
                 bnLog.PreviousValue = "Id: " + model.SubCategoryId;
                 bnLog.UpdatedValue = "Id: " + model.SubCategoryId;
                 if (subCategory.Name != model.Name)
@@ -86,8 +88,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (subCategory.CategoryId != model.CategoryId)
                 {
+                    var cat = employeeService.GetDynamicTableInfoById("Category", "CategoryId", model.CategoryId);
                     bnLog.PreviousValue += ", Category: " + subCategory.Category.Name;
-                    bnLog.UpdatedValue += ", Category: " + model.Category.Name;
+                    bnLog.UpdatedValue += ", Category: " + ((dynamic)cat).Name;
                 }
                 if (subCategory.ShortName != model.ShortName)
                 {
@@ -228,7 +231,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 // data log section start
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "SubCategory";
-                bnLog.TableEntryForm = "Sub Category";
+                bnLog.TableEntryForm = "Officer Naming Convention/Sub Category";
                 bnLog.PreviousValue = "Id: " + subCategory.SubCategoryId + ", Name: " + subCategory.Name + ", Category: " + subCategory.CategoryId 
                     + ", ShortName: " + subCategory.ShortName + ", Description: " + subCategory.Description + ", Prefix: " + subCategory.Prefix
                     + ", Rank: " + subCategory.Rank + ", Branch: " + subCategory.Branch + ", SubBranch: " + subCategory.SubBranch

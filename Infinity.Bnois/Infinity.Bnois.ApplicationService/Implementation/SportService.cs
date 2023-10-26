@@ -14,9 +14,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class SportService : ISportService
     {
         private readonly IBnoisRepository<Sport> sportRepository;
-        public SportService(IBnoisRepository<Sport> sportRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public SportService(IBnoisRepository<Sport> sportRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.sportRepository = sportRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
         
         public async Task<SportModel> GetSport(int id)
@@ -67,6 +69,37 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 sport.ModifiedDate = DateTime.Now;
                 sport.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Sport";
+                bnLog.TableEntryForm = "Sport";
+                bnLog.PreviousValue = "Id: " + model.SportId;
+                bnLog.UpdatedValue = "Id: " + model.SportId;
+                if (sport.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + sport.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (sport.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + sport.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (sport.Name != model.Name || sport.Remarks != model.Remarks)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -95,6 +128,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Sport";
+                bnLog.TableEntryForm = "Sport";
+                bnLog.PreviousValue = "Id: " + sport.SportId + ", Name: " + sport.Name + ", Remarks: " + sport.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await sportRepository.DeleteAsync(sport);
             }
         }

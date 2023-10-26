@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
+using Infinity.Bnois.Configuration;
 using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 
@@ -12,9 +13,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class ResultService : IResultService
     {
         private readonly IBnoisRepository<Result> resultRepository;
-        public ResultService(IBnoisRepository<Result> resultRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public ResultService(IBnoisRepository<Result> resultRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.resultRepository = resultRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
         public List<ResultModel> GetResults(int pageSize, int pageNumber, string searchText, out int total)
@@ -61,6 +64,52 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 result.ModifiedBy = model.ModifiedBy;
                 result.ModifiedDate = DateTime.Now;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Result";
+                bnLog.TableEntryForm = "Result";
+                bnLog.PreviousValue = "Id: " + model.ResultId;
+                bnLog.UpdatedValue = "Id: " + model.ResultId;
+                if (result.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + result.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (result.ResultCode != model.ResultCode)
+                {
+                    bnLog.PreviousValue += ", ResultCode: " + result.ResultCode;
+                    bnLog.UpdatedValue += ", ResultCode: " + model.ResultCode;
+                }
+                if (result.Description != model.Description)
+                {
+                    bnLog.PreviousValue += ", Description: " + result.Description;
+                    bnLog.UpdatedValue += ", Description: " + model.Description;
+                }
+                if (result.MinGPA != model.MinGPA)
+                {
+                    bnLog.PreviousValue += ", MinGPA: " + result.MinGPA;
+                    bnLog.UpdatedValue += ", MinGPA: " + model.MinGPA;
+                }
+                if (result.MaxGPA != model.MaxGPA)
+                {
+                    bnLog.PreviousValue += ", MaxGPA: " + result.MaxGPA;
+                    bnLog.UpdatedValue += ", MaxGPA: " + model.MaxGPA;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = model.CreatedBy;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (result.Name != model.Name || result.ResultCode != model.ResultCode || result.Description != model.Description || result.MinGPA != model.MinGPA || result.MaxGPA != model.MaxGPA)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -92,7 +141,21 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
-             
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Result";
+                bnLog.TableEntryForm = "Result";
+                bnLog.PreviousValue = "Id: " + result.ResultId + ", Name: " + result.Name + ", ResultCode: " + result.ResultCode + ", Description: " + result.Description + ", MinGPA: " + result.MinGPA + ", MaxGPA: " + result.MaxGPA;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await resultRepository.DeleteAsync(result);
             }
         }

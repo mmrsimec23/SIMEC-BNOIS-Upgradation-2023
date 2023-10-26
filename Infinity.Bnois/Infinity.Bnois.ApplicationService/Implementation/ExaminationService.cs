@@ -16,10 +16,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
         private readonly IBnoisRepository<Examination> _examinationRepository;
         private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
-        public ExaminationService(IBnoisRepository<Examination> examinationRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
+        private readonly IEmployeeService employeeService;
+        public ExaminationService(IBnoisRepository<Examination> examinationRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             _examinationRepository = examinationRepository;
             this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<ExaminationModel> GetExaminations(int pageSize, int pageNumber, string searchText, out int total)
@@ -58,7 +60,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             Examination examination = ObjectConverter<ExaminationModel, Examination>.Convert(model);
             if (examinationId > 0)
             {
-                examination = await _examinationRepository.FindOneAsync(x => x.ExaminationId == examinationId);
+                examination = await _examinationRepository.FindOneAsync(x => x.ExaminationId == examinationId, new List<string>() { "ExamCategory" });
                 if (examination == null)
                 {
                     throw new InfinityNotFoundException("Examination not found!");
@@ -83,8 +85,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (examination.ExamCategoryId != model.ExamCategoryId)
                 {
-                    bnLog.PreviousValue += ", Remarks: " + examination.ExamCategoryId;
-                    bnLog.UpdatedValue += ", Remarks: " + model.ExamCategoryId;
+                    var exam = employeeService.GetDynamicTableInfoById("ExamCategory", "ExamCategoryId", model.ExamCategoryId);
+                    bnLog.PreviousValue += ", ExamCategory: " + examination.ExamCategory.Name;
+                    bnLog.UpdatedValue += ", ExamCategory: " + ((dynamic)exam).Name;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
@@ -111,6 +114,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             examination.ExaminationCode = model.ExaminationCode;
             examination.Name = model.Name;
             examination.ExamCategoryId = model.ExamCategoryId;
+            examination.ExamCategory = null;
             await _examinationRepository.SaveAsync(examination);
             model.ExaminationId = examination.ExaminationId;
             return model;

@@ -1,6 +1,7 @@
 ﻿using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
 using Infinity.Bnois.Configuration;
+using Infinity.Bnois.Configuration.Models;
 using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 using System;
@@ -14,9 +15,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class OfficerStreamService : IOfficerStreamService
     {
         private readonly IBnoisRepository<OfficerStream> officerStreamRepository;
-        public OfficerStreamService(IBnoisRepository<OfficerStream> officerStreamRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public OfficerStreamService(IBnoisRepository<OfficerStream> officerStreamRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.officerStreamRepository = officerStreamRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
         
         public List<OfficerStreamModel> GetOfficerStreams(int ps, int pn, string qs, out int total)
@@ -65,6 +68,37 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 officerStream.ModifiedDate = DateTime.Now;
                 officerStream.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "OfficerStream";
+                bnLog.TableEntryForm = "Stream";
+                bnLog.PreviousValue = "Id: " + model.OfficerStreamId;
+                bnLog.UpdatedValue = "Id: " + model.OfficerStreamId;
+                if (officerStream.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + officerStream.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (officerStream.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + officerStream.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (officerStream.Name != model.Name || officerStream.Remarks != model.Remarks)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -93,6 +127,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "OfficerStream";
+                bnLog.TableEntryForm = "Stream";
+                bnLog.PreviousValue = "Id: " + officerStream.OfficerStreamId + ", Name: " + officerStream.Name + ", Remarks: " + officerStream.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await officerStreamRepository.DeleteAsync(officerStream);
             }
         }

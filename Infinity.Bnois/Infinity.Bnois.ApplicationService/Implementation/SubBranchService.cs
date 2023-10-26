@@ -1,6 +1,7 @@
 ﻿using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
 using Infinity.Bnois.Configuration;
+using Infinity.Bnois.Configuration.Models;
 using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 using System;
@@ -14,9 +15,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class SubBranchService : ISubBranchService
     {
         private readonly IBnoisRepository<SubBranch> subBranchRepository;
-        public SubBranchService(IBnoisRepository<SubBranch> subBranchRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public SubBranchService(IBnoisRepository<SubBranch> subBranchRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.subBranchRepository = subBranchRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
         
         public List<SubBranchModel> GetSubBranches(int ps, int pn, string qs, out int total)
@@ -67,6 +70,52 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 subBranch.ModifiedDate = DateTime.Now;
                 subBranch.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "SubBranch";
+                bnLog.TableEntryForm = "Sub Branch";
+                bnLog.PreviousValue = "Id: " + model.SubBranchId;
+                bnLog.UpdatedValue = "Id: " + model.SubBranchId;
+                if (subBranch.FullName != model.FullName)
+                {
+                    bnLog.PreviousValue += ", FullName: " + subBranch.FullName;
+                    bnLog.UpdatedValue += ", FullName: " + model.FullName;
+                }
+                if (subBranch.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ", ShortName: " + subBranch.ShortName;
+                    bnLog.UpdatedValue += ", ShortName: " + model.ShortName;
+                }
+                if (subBranch.FullNameBan != model.FullNameBan)
+                {
+                    bnLog.PreviousValue += ", FullNameBan: " + subBranch.FullNameBan;
+                    bnLog.UpdatedValue += ", FullNameBan: " + model.FullNameBan;
+                }
+                if (subBranch.ShortNameBan != model.ShortNameBan)
+                {
+                    bnLog.PreviousValue += ", ShortNameBan: " + subBranch.ShortNameBan;
+                    bnLog.UpdatedValue += ", ShortNameBan: " + model.ShortNameBan;
+                }
+                if (subBranch.Description != model.Description)
+                {
+                    bnLog.PreviousValue += ", Description: " + subBranch.Description;
+                    bnLog.UpdatedValue += ", Description: " + model.Description;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (subBranch.FullName != model.FullName || subBranch.ShortName != model.ShortName || subBranch.FullNameBan != model.FullNameBan || subBranch.ShortNameBan != model.ShortNameBan || subBranch.Description != model.Description)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -98,6 +147,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "SubBranch";
+                bnLog.TableEntryForm = "Sub Branch";
+                bnLog.PreviousValue = "Id: " + subBranch.SubBranchId + ", FullName: " + subBranch.FullName + ", ShortName: " + subBranch.ShortName + ", FullNameBan: " + subBranch.FullNameBan + ", ShortNameBan: " + subBranch.ShortNameBan + ", Description: " + subBranch.Description;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await subBranchRepository.DeleteAsync(subBranch);
             }
         }

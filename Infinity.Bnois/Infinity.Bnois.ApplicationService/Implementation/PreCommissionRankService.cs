@@ -14,9 +14,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class PreCommissionRankService : IPreCommissionRankService
     {
         private readonly IBnoisRepository<PreCommissionRank> preCommissionRankRepository;
-        public PreCommissionRankService(IBnoisRepository<PreCommissionRank> preCommissionRankRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public PreCommissionRankService(IBnoisRepository<PreCommissionRank> preCommissionRankRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.preCommissionRankRepository = preCommissionRankRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
     
@@ -67,6 +69,37 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 preCommissionRank.ModifiedDate = DateTime.Now;
                 preCommissionRank.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PreCommissionRank";
+                bnLog.TableEntryForm = "Pre Commission Rank";
+                bnLog.PreviousValue = "Id: " + model.PreCommissionRankId;
+                bnLog.UpdatedValue = "Id: " + model.PreCommissionRankId;
+                if (preCommissionRank.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + preCommissionRank.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (preCommissionRank.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + preCommissionRank.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (preCommissionRank.Name != model.Name || preCommissionRank.Remarks != model.Remarks)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -95,6 +128,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PreCommissionRank";
+                bnLog.TableEntryForm = "Pre Commission Rank";
+                bnLog.PreviousValue = "Id: " + PreCommissionRank.PreCommissionRankId + ", Name: " + PreCommissionRank.Name + ", Remarks: " + PreCommissionRank.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await preCommissionRankRepository.DeleteAsync(PreCommissionRank);
             }
         }

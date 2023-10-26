@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
+using Infinity.Bnois.Configuration;
 using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 
@@ -14,9 +15,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class ServiceExamCategoryService : IServiceExamCategoryService
     {
         private readonly IBnoisRepository<ServiceExamCategory> serviceExamCategoryRepository;
-        public ServiceExamCategoryService(IBnoisRepository<ServiceExamCategory> serviceExamCategoryRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public ServiceExamCategoryService(IBnoisRepository<ServiceExamCategory> serviceExamCategoryRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.serviceExamCategoryRepository = serviceExamCategoryRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
         public List<ServiceExamCategoryModel> GetServiceExamCategories(int pageSize, int pageNumber, string searchText, out int total)
@@ -69,6 +72,37 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 serviceExamCategory.ModifiedDate = DateTime.Now;
                 serviceExamCategory.ModifiedBy = model.ModifiedBy;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "ServiceExamCategory";
+                bnLog.TableEntryForm = "Service Exam Category";
+                bnLog.PreviousValue = "Id: " + model.ServiceExamCategoryId;
+                bnLog.UpdatedValue = "Id: " + model.ServiceExamCategoryId;
+                if (serviceExamCategory.ExamName != model.ExamName)
+                {
+                    bnLog.PreviousValue += ", ExamName: " + serviceExamCategory.ExamName;
+                    bnLog.UpdatedValue += ", ExamName: " + model.ExamName;
+                }
+                if (serviceExamCategory.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ", ShortName: " + serviceExamCategory.ShortName;
+                    bnLog.UpdatedValue += ", ShortName: " + model.ShortName;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = model.CreatedBy;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (serviceExamCategory.ExamName != model.ExamName || serviceExamCategory.ShortName != model.ShortName)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -97,6 +131,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "ServiceExamCategory";
+                bnLog.TableEntryForm = "Service Exam Category";
+                bnLog.PreviousValue = "Id: " + serviceExamCategory.ServiceExamCategoryId + ", ExamName: " + serviceExamCategory.ExamName + ", ShortName: " + serviceExamCategory.ShortName;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await serviceExamCategoryRepository.DeleteAsync(serviceExamCategory);
             }
         }
