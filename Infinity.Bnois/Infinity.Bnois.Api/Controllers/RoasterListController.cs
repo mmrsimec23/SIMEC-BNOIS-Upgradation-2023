@@ -8,6 +8,7 @@ using Infinity.Bnois.Api.Right;
 using Infinity.Bnois.ApplicationService.Implementation;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
+using Infinity.Bnois.Data;
 
 namespace Infinity.Bnois.Api.Controllers
 {
@@ -26,11 +27,21 @@ namespace Infinity.Bnois.Api.Controllers
 
         [HttpGet]
         [Route("get-roaster-list-by-ship-type")]
-        public IHttpActionResult GetRoasterListByShipType(int shipType)
+        public IHttpActionResult GetRoasterListByShipType(int shipType, int aptNetId, int aptCatId)
         {
             return Ok(new ResponseMessage<List<object>>()
             {
-                Result = roasterListService.GetRoasterListByShipType(shipType)
+                Result = roasterListService.GetRoasterListByShipType(shipType, aptNetId, aptCatId)
+            });
+        }
+
+        [HttpGet]
+        [Route("get-large-ship-proposed-waiting-coxo-list")]
+        public IHttpActionResult GetLargeShipProposedWaitingCoXoList(int officeId, int appointment)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = roasterListService.GetLargeShipProposedWaitingCoXoList(officeId, appointment)
             });
         }
 

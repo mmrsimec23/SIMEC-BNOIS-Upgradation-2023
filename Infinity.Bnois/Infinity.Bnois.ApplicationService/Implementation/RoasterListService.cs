@@ -16,9 +16,49 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             this.employeeRepository = employeeRepository;
         }
 
-        public List<object> GetRoasterListByShipType(int shipType)
+        public List<object> GetRoasterListByShipType(int shipType, int aptNetId, int aptCatId)
         {
-            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetCoOpvFfWaitingList] {0} ", shipType));
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetCoOpvFfWaitingList] {0},{1},{2} ", shipType, aptNetId,aptCatId));
+            return dataTable.ToJson().ToList();
+        }
+
+        //public dynamic GetSeaServices(string pno)
+        //{
+
+        //    Dictionary<string, dynamic> keyValues = new Dictionary<string, dynamic>();
+
+        //    foreach (var type in Enum.GetValues((typeof(ShipType))))
+        //    {
+        //        var results = GetSeaServicesByType(pno, (int)type);
+
+        //        var shipType = String.Empty;
+        //        if (results.Count > 0)
+        //        {
+        //            if ((int)type == (int)ShipType.Small)
+        //            {
+        //                shipType = "Small";
+
+        //            }
+        //            else if ((int)type == (int)ShipType.Medium)
+        //            {
+        //                shipType = "Medium";
+        //            }
+        //            else
+        //            {
+        //                shipType = "Large";
+        //            }
+
+
+        //            keyValues.Add(shipType, results);
+        //        }
+
+        //    }
+        //    return keyValues;
+        //}
+
+        public List<object> GetLargeShipProposedWaitingCoXoList(int officeId, int appointment)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetCoXoProposedWaitingOfficerList] {0},{1}", officeId, appointment));
             return dataTable.ToJson().ToList();
         }
 

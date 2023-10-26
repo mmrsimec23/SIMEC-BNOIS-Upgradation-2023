@@ -4,34 +4,36 @@
 
     'use strict';
 
-    var controllerId = 'largeShipCoXoController';
+    var controllerId = 'largeShipCoListController';
 
-    angular.module('app').controller(controllerId, largeShipCoXoController);
-    largeShipCoXoController.$inject = ['$stateParams', 'roasterListService', 'notificationService', '$state'];
+    angular.module('app').controller(controllerId, largeShipCoListController);
+    largeShipCoListController.$inject = ['$stateParams', 'roasterListService', 'notificationService', '$state'];
 
-    function largeShipCoXoController($stateParams, roasterListService, notificationService, $state) {
+    function largeShipCoListController($stateParams, roasterListService, notificationService, $state) {
         var vm = this;
-        vm.shipType = 3;
-        vm.coAptNetId = 13;
-        vm.coAptCatId = 48;
-        vm.xoAptNetId = 15;
-        vm.xoAptCatId = 50;
+        vm.officeId = 0;
+        vm.appointment = 1;
         vm.largeShipCoXos = [];
         vm.courseAttendeds = [];
         vm.printSection = printSection;
+        vm.shipName = '';
         vm.officeCurrentStatus = officeCurrentStatus;
 
-        if ($stateParams.shipType !== undefined && $stateParams.shipType !== null) {
-            vm.shipType = $stateParams.shipType;
+        if ($stateParams.officeId !== undefined && $stateParams.officeId !== null) {
+            vm.officeId = $stateParams.officeId;
+        }
+        if ($stateParams.appointment !== undefined && $stateParams.appointment !== null) {
+            vm.appointment = $stateParams.appointment;
         }
 
         Init();
         function Init() {
 
 
-            roasterListService.getRoasterListByShipType(vm.shipType, vm.coAptNetId, vm.coAptCatId).then(function (data) {
+            roasterListService.getLargeShipProposedWaitingCoXoList(vm.officeId,vm.appointment).then(function (data) {
                 vm.largeShipCoXos = data.result;
-                console.log(vm.largeShipCoXos);
+                vm.shipName = vm.largeShipCoXos[0].shortName;
+                console.log(vm.shipName);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

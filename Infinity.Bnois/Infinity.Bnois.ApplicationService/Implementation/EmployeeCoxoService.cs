@@ -83,7 +83,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             EmployeeCoxoService.Remarks = model.Remarks;
             EmployeeCoxoService.Appointment = model.Appointment;
             EmployeeCoxoService.ShipType = model.ShipType;
-            EmployeeCoxoService.ProposedDate = (DateTime)model.ProposedDate;
+            EmployeeCoxoService.ProposedDate = model.ProposedDate;
             EmployeeCoxoService.CompleteStatus = model.CompleteStatus;
 
 
