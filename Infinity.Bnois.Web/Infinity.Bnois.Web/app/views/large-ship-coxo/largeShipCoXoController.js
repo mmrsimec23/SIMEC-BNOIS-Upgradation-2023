@@ -12,10 +12,7 @@
     function largeShipCoXoController($stateParams, roasterListService, notificationService, $state) {
         var vm = this;
         vm.shipType = 3;
-        vm.coAptNetId = 13;
-        vm.coAptCatId = 48;
-        vm.xoAptNetId = 15;
-        vm.xoAptCatId = 50;
+        vm.coxoStatus = 0;
         vm.largeShipCoXos = [];
         vm.courseAttendeds = [];
         vm.printSection = printSection;
@@ -29,7 +26,7 @@
         function Init() {
 
 
-            roasterListService.getRoasterListByShipType(vm.shipType, vm.coAptNetId, vm.coAptCatId).then(function (data) {
+            roasterListService.getRoasterListByShipType(vm.shipType, vm.coxoStatus).then(function (data) {
                 vm.largeShipCoXos = data.result;
                 console.log(vm.largeShipCoXos);
             },

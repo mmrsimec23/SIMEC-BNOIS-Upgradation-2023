@@ -14,22 +14,18 @@
                             <tr class="tableHeading reportTR">
                                 <th>SL</th>
                                 <th>Clearance For</th>
-                                <th>Remarks</th>
-                                <th>Is Cleared</th>
-                                <th>Not Clear Reason</th>
                                 <th>Date</th>
-                                <th>Expiry Date</th>
+                                <th>Is Cleared</th>
+                                <th>Remarks</th>
                             </tr>
                         </thead>
                         <tbody class="reportBody">
                             <tr class="reportTR" ng-repeat="securityClearanceReason in vm.securityClearanceReasons">
                                 <td class="reportTD" style="text-align: center; width: 50px;">{{$index+1}}</td>
                                 <td class="reportTD">{{securityClearanceReason.clearanceFor}}</td>
-                                <td class="reportTD">{{securityClearanceReason.remarks}}</td>
-                                <td class="reportTD">{{securityClearanceReason.isCleared}}</td>
-                                <td class="reportTD">{{securityClearanceReason.notClearReason}}</td>
                                 <td class="reportTD" style="text-align: center;width: 100px;">{{securityClearanceReason.clearanceDate | date: "dd-MMM-yyyy"}}</td>
-                                <td class="reportTD" style="text-align: center;width: 100px;">{{securityClearanceReason.expirydate | date: "dd-MMM-yyyy"}}</td>
+                                <td class="reportTD">{{securityClearanceReason.isCleared}}</td>
+                                <td class="reportTD">{{securityClearanceReason.remarks}}</td>
                             </tr>
                         </tbody>
                     </table>

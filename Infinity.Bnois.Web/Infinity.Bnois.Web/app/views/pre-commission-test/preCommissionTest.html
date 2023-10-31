@@ -12,10 +12,10 @@
                 <div class="table-wrapper table-responsive reportCover">
                     <table class="table table-bordered pdfReportTable">
                         <tr class="reportTR">
-                            <td class="reportTD" style="font-weight:bold">ISSB</td>
+                            <td class="reportTD" style="font-weight: bold; width: 140px;">ISSB</td>
 
-                            <td class="reportTD" style="color:green;font-weight:bold;" ng-if="vm.preCommissionTest.issbText =='Attained'">{{vm.preCommissionTest.issbText}}</td>
-                            <td class="reportTD" style="color:red;font-weight:bold;" ng-if="vm.preCommissionTest.issbText =='Not Attained'">{{vm.preCommissionTest.issbText}}</td>
+                            <td class="reportTD" style="{{vm.preCommissionTest.issb===1 ? 'color:green;' :vm.preCommissionTest.issb===2 ? 'color:red;' : ''}}font-weight:bold;">{{vm.preCommissionTest.issbText}}</td>
+                            <!--<td class="reportTD" style="color:red;font-weight:bold;" ng-if="vm.preCommissionTest.issbText =='Not Attained'">{{vm.preCommissionTest.issbText}}</td>-->
                             <td class="reportTD" ng-if="vm.preCommissionTest.issb ==1" style="font-weight:bold">Result</td>
                             <td class="reportTD" style="color:green;font-weight:bold;" ng-if="vm.preCommissionTest.issbResult =='Not Qualified'">{{vm.preCommissionTest.issbResult}}</td>
                             <td class="reportTD" style="color:green;font-weight:bold;" ng-if="vm.preCommissionTest.issbResult =='Qualified'">{{vm.preCommissionTest.issbResult}}</td>
@@ -29,7 +29,7 @@
                 <div class="table-wrapper table-responsive reportCover">
                     <table class="table table-bordered pdfReportTable">
                         <tr class="reportTR">
-                            <td class="reportTD" style="font-weight:bold;">Batch Position</td>
+                            <td class="reportTD" style="font-weight: bold; width: 140px;">Batch Position</td>
                             <td class="reportTD" style="font-weight:bold">{{vm.batchPosition.batchPosition}}</td>
                             <td class="reportTD" style="font-weight:bold;">Total</td>
                             <td class="reportTD" style="font-weight:bold">{{vm.batchPosition.batchTotal}}</td>

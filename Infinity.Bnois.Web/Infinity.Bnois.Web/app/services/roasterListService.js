@@ -11,8 +11,8 @@
 
         return service;
 
-        function getRoasterListByShipType(shipType) {
-            var url = dataConstants.ROASTER_LIST_URL + 'get-roaster-list-by-ship-type?shipType=' + shipType;
+        function getRoasterListByShipType(shipType, coxoStatus) {
+            var url = dataConstants.ROASTER_LIST_URL + 'get-roaster-list-by-ship-type?shipType=' + shipType + '&coxoStatus=' + coxoStatus;
             return apiHttpService.GET(url);
         }
 

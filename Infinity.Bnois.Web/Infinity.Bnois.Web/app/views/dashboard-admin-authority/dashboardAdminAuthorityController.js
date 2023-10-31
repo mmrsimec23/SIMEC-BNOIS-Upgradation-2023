@@ -45,13 +45,13 @@
                     notificationService.displayError(errorMessage.message);
                 });
 
-            dashboardService.getDashboardBCGOrganization().then(function (data) {
-                vm.dashboardBCGOrganizations = data.result;
+            //dashboardService.getDashboardBCGOrganization().then(function (data) {
+            //    vm.dashboardBCGOrganizations = data.result;
 
-            },
-                function (errorMessage) {
-                    notificationService.displayError(errorMessage.message);
-                });
+            //},
+            //    function (errorMessage) {
+            //        notificationService.displayError(errorMessage.message);
+            //    });
            
         }
 

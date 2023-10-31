@@ -32,9 +32,9 @@ namespace Infinity.Bnois.Data
             this.EmployeeTransferFuturePlan = new HashSet<EmployeeTransferFuturePlan>();
             this.PreCommissionCourse = new HashSet<PreCommissionCourse>();
             this.EmployeeFamilyPermission = new HashSet<EmployeeFamilyPermission>();
-            this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
             this.Office = new HashSet<Office>();
             this.Office1 = new HashSet<Office>();
+            this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
         }
     
         public int CountryId { get; set; }
@@ -82,10 +82,10 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeFamilyPermission> EmployeeFamilyPermission { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Office> Office { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Office> Office1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
     }
 }

@@ -24,6 +24,7 @@
             getHeir: getHeir,
             getOprGrading: getOprGrading,
             getForeignVisit: getForeignVisit,
+            getForeignCourseVisitGrandTotal: getForeignCourseVisitGrandTotal,
             getParentInfo: getParentInfo,
             getSpouseInfo: getSpouseInfo,
             getTransferHistory: getTransferHistory,
@@ -162,6 +163,10 @@
         }
         function getForeignVisit(pNo) {
             var url = dataConstants.CURRENT_STATUS_URL + 'get-foreign-visit?pNo=' + pNo;
+            return apiHttpService.GET(url);
+        }
+        function getForeignCourseVisitGrandTotal(pNo) {
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-foreign-course-visit-grand-total?pNo=' + pNo;
             return apiHttpService.GET(url);
         }
 

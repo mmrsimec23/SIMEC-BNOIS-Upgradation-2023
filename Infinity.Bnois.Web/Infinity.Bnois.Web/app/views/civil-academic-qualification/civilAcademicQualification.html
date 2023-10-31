@@ -34,7 +34,7 @@
                     </table>
 
                 </div>
-                <h3 class="reportHeader"> MSc Education</h3>
+                <h3 class="reportHeader"> Higher Education</h3>
                 <hr />
                 <h4 class="noScreen" style="border-bottom: 3px solid blue;font-family: Arial">{{vm.officerName}} ({{vm.pNo}})</h4>
                 <div ng-if="vm.mscEducationQualifications.length>0" class="table-wrapper table-responsive reportCover">
@@ -42,12 +42,13 @@
                         <thead class="reportThead">
                             <tr class="tableHeading reportTR">
                                 <th style="text-align: center;">SL</th>
-                                <th style="text-align: center;">Education Type</th>
+                                <th style="text-align: center;">Program Type</th>
                                 <th style="text-align: center;">Institute</th>
-                                <th style="text-align: center;">Country</th>
-                                <th style="text-align: center;">Permission Type</th>
-                                <th style="text-align: center;">Result</th>
+                                <th style="text-align: center;">Arrangement</th>
+                                <th style="text-align: center;">Permission Year</th>
                                 <th style="text-align: center;">Passing Year</th>
+                                <th style="text-align: center;">Result</th>
+                                <th style="text-align: center;">Remarks</th>
                             </tr>
                         </thead>
                         <tbody class="reportBody">
@@ -55,10 +56,11 @@
                                 <td class="reportTD" style="text-align: center;">{{$index+1}}</td>
                                 <td class="reportTD">{{mscEdu.educationType}}</td>
                                 <td class="reportTD" style="text-align: center;">{{mscEdu.institute}}</td>
-                                <td class="reportTD" style="text-transform: capitalize">{{mscEdu.country}}</td>
                                 <td class="reportTD" style="text-align: center;">{{mscEdu.permissionType}}</td>
-                                <td class="reportTD" style="text-align: center;">{{mscEdu.results}}</td>
+                                <td class="reportTD" style="text-align: center;">{{mscEdu.permissionYear}}</td>
                                 <td class="reportTD" style="text-align: center;">{{mscEdu.passingYear}}</td>
+                                <td class="reportTD" style="text-align: center;">{{mscEdu.results}}</td>
+                                <td class="reportTD" style="text-align: center;">{{mscEdu.remarks}}</td>
                             </tr>
                         </tbody>
                     </table>

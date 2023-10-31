@@ -27,11 +27,11 @@ namespace Infinity.Bnois.Api.Controllers
 
         [HttpGet]
         [Route("get-roaster-list-by-ship-type")]
-        public IHttpActionResult GetRoasterListByShipType(int shipType)
+        public IHttpActionResult GetRoasterListByShipType(int shipType,int coxoStatus)
         {
             return Ok(new ResponseMessage<List<object>>()
             {
-                Result = roasterListService.GetRoasterListByShipType(shipType)
+                Result = roasterListService.GetRoasterListByShipType(shipType, coxoStatus)
             });
         }
 

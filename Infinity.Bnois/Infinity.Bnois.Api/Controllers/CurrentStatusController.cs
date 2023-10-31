@@ -78,7 +78,15 @@ namespace Infinity.Bnois.Api.Controllers
                 Result = currentStatusService.GetForeignCourseAttended(pNo)
             });
         }
-        
+        [HttpGet]
+        [Route("get-foreign-course-visit-grand-total")]
+        public IHttpActionResult GetForeignCourseVisitGrandTotal(string pNo)
+        {
+            return Ok(new ResponseMessage<object>()
+            {
+                Result = currentStatusService.GetForeignCourseVisitGrandTotal(pNo)
+            });
+        }
 
 
         [HttpGet]

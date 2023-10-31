@@ -12,6 +12,7 @@
     function foreignVisitController($stateParams, employeeService,currentStatusService, notificationService, $state) {
         var vm = this;
         vm.pNo = 0;
+        vm.grandTotal = {};
         vm.foreignVisits = [];
         vm.courseAttendeds = [];
         vm.printSection = printSection;
@@ -44,6 +45,14 @@
 
             currentStatusService.getForeignCourseAttended(vm.pNo).then(function (data) {
                 vm.courseAttendeds = data.result;
+
+            },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+
+            currentStatusService.getForeignCourseVisitGrandTotal(vm.pNo).then(function (data) {
+                vm.grandTotal = data.result;
 
             },
                 function (errorMessage) {

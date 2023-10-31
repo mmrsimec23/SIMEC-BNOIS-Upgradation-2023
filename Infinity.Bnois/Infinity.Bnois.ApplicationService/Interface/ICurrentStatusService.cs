@@ -11,6 +11,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<Object> GetSecurityClearance(string pNo);
         List<Object> GetCourseAttended(string pNo);
         List<Object> GetForeignCourseAttended(string pNo);
+        Object GetForeignCourseVisitGrandTotal(string pNo);
         List<Object> GetExamTestResult(string pNo);
         List<Object> GetCareerForecast(string pNo);
         List<Object> GetCarLoanInfo(string pNo);

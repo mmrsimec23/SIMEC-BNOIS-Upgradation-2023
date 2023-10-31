@@ -13,7 +13,7 @@
 							<tr class="tableHeading reportTR">
 
 
-								<th style="vertical-align : middle;"> Ships</th>
+								<th style="vertical-align: middle; width: 150px;"> Ships</th>
 								<th style="vertical-align : middle;">Appt</th>
 								<th style="vertical-align: middle; width: 50px; "> P No</th>
 								<th style="vertical-align: middle; width: 300px; ">Rank & Name</th>
@@ -25,7 +25,7 @@
 								<th style="vertical-align: middle; width: 90px; ">Sea Svc</th>
 								<th style="vertical-align: middle; width: 70px;">Rotation Due</th>
 								<th style="vertical-align: middle; width: 95px;">SASB</th>
-								<th style="vertical-align : middle;"></th>
+								<th style="vertical-align: middle; width: 90px;">Proposed</th>
 
 							</tr>
 						</thead>
@@ -42,9 +42,9 @@
 								<td class="reportTD">{{mediumShipCoXo.medShipComdSvc}}</td>
 								<td class="reportTD">{{mediumShipCoXo.comdTotalDuration}}</td>
 								<td class="reportTD">{{mediumShipCoXo.seaTotalDuration}}</td>
-								<td class="reportTD">{{mediumShipCoXo.rotationDue}}</td>
+								<td class="reportTD">{{mediumShipCoXo.officeHead == true ? mediumShipCoXo.coRotationDue : mediumShipCoXo.headofDpt == true ? mediumShipCoXo.xoRotationDue : ''}}</td>
 								<td class="reportTD">{{mediumShipCoXo.sasbStatus}}</td>
-								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{mediumShipCoXo.officeId}}/{{mediumShipCoXo.appt === 'CO' ? 1 : mediumShipCoXo.appt === 'XO' ? 2 : 0}}" style="text-decoration: none;"><strong>{{mediumShipCoXo.appt}}</strong></a></td>
+								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{mediumShipCoXo.officeId}}/{{mediumShipCoXo.officeHead == true ? 1 : mediumShipCoXo.headofDpt == true ? 2 : 0}}" style="text-decoration: none;"><strong>{{mediumShipCoXo.appt}}</strong></a></td>
 							</tr>
 						</tbody>
 					</table>

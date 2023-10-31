@@ -57,7 +57,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 		}
 
 
-		public List<object> GetExamTestResult(string pNo)
+        public object GetForeignCourseVisitGrandTotal(string pNo)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetForeignCourseVisitGrandTotal] '{0}' ", pNo));
+            return dataTable.ToJson().FirstOrDefault();
+        }
+        public List<object> GetExamTestResult(string pNo)
 		{
 			DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetExamTestResult] '{0}' ", pNo));
 

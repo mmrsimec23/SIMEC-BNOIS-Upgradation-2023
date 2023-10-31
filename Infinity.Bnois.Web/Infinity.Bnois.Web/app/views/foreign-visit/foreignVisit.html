@@ -31,15 +31,16 @@
                         </thead>
                         <tbody class="reportBody">
                             <tr ng-repeat="foreignVisit in vm.foreignVisits" class="reportTR">
-                                <td class="reportTD" style="text-align: center; width: 20px;">{{$index+1}}</td>
-                                <td class="reportTD">{{foreignVisit.category}}</td>
-                                <td class="reportTD">{{foreignVisit.subCategory}}</td>
-                                <td class="reportTD">{{foreignVisit.country}}</td>
-                                <td class="reportTD" style="text-align: center;width: 100px;">{{foreignVisit.fromDate | date:"dd-MMM-yyyy"}}</td>
-                                <td class="reportTD" style="text-align: center;width: 100px;">{{foreignVisit.toDate| date:"dd-MMM-yyyy"}}</td>
-                                <td class="reportTD" style="text-align: center;text-transform: lowercase; width: 120px;">{{foreignVisit.duration}}</td>
-
-                                <td class="reportTD">{{foreignVisit.purpose}}</td>
+                                <td class="reportTD" style="text-align: center; width: 20px;" ng-if="$index+1 !== vm.foreignVisits.length">{{$index+1}}</td>
+                                <td class="reportTD" style="text-align: center; width: 20px; font-weight: bold;" ng-if="$index+1 === vm.foreignVisits.length" colspan="6">Total</td>
+                                <td class="reportTD" ng-if="$index+1 !== vm.foreignVisits.length">{{foreignVisit.category}}</td>
+                                <td class="reportTD" ng-if="$index+1 !== vm.foreignVisits.length">{{foreignVisit.subCategory}}</td>
+                                <td class="reportTD" ng-if="$index+1 !== vm.foreignVisits.length">{{foreignVisit.country}}</td>
+                                <td class="reportTD" style="text-align: center;width: 100px;" ng-if="$index+1 !== vm.foreignVisits.length">{{foreignVisit.fromDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center;width: 100px;" ng-if="$index+1 !== vm.foreignVisits.length">{{foreignVisit.toDate| date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center;text-transform: lowercase; width: 120px;" ng-if="$index+1 !== vm.foreignVisits.length">{{foreignVisit.duration}}</td>
+                                <td class="reportTD" style="text-align: center;text-transform: lowercase; width: 120px;font-weight:bold;" ng-if="$index+1 === vm.foreignVisits.length" colspan="2">{{foreignVisit.duration}}</td>
+                                <td class="reportTD" ng-if="$index+1 !== vm.foreignVisits.length">{{foreignVisit.purpose}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -72,14 +73,16 @@
                         </thead>
                         <tbody class="reportBody">
                             <tr ng-repeat="courseAttended in vm.courseAttendeds" class="reportTR">
-                                <td class="reportTD" style="text-align: center; width: 20px;">{{$index+1}}</td>
-                                <td class="reportTD">{{courseAttended.course}}</td>
-                                <td class="reportTD">{{courseAttended.institute}}</td>
-                                <td class="reportTD" style="text-align: center;width:95px;">{{courseAttended.fromDate | date:"dd-MMM-yyyy"}}</td>
-                                <td class="reportTD" style="text-align: center;width: 95px;">{{courseAttended.toDate | date:"dd-MMM-yyyy"}}</td>
-                                <td class="reportTD" style="text-align: center;text-transform: lowercase; width: 100px;">{{courseAttended.duration}}</td>
-                                <td class="reportTD" style="text-align: center">{{courseAttended.result}}</td>
-                                <td class="reportTD" style="text-align: center">{{courseAttended.position}}</td>
+                                <td class="reportTD" style="text-align: center; width: 20px;" ng-if="$index+1 !== vm.courseAttendeds.length">{{$index+1}}</td>
+                                <td class="reportTD" style="text-align: center; width: 20px; font-weight: bold;" ng-if="$index+1 === vm.courseAttendeds.length" colspan="5">Total</td>
+                                <td class="reportTD" ng-if="$index+1 !== vm.courseAttendeds.length">{{courseAttended.course}}</td>
+                                <td class="reportTD" ng-if="$index+1 !== vm.courseAttendeds.length">{{courseAttended.institute}}</td>
+                                <td class="reportTD" style="text-align: center;width:95px;" ng-if="$index+1 !== vm.courseAttendeds.length">{{courseAttended.fromDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center;width: 95px;" ng-if="$index+1 !== vm.courseAttendeds.length">{{courseAttended.toDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center;text-transform: lowercase; width: 100px;" ng-if="$index+1 !== vm.courseAttendeds.length">{{courseAttended.duration}}</td>
+                                <td class="reportTD" style="text-align: center; text-transform: lowercase; width: 100px; font-weight: bold;" ng-if="$index+1 === vm.courseAttendeds.length" colspan="3">{{courseAttended.duration}}</td>
+                                <td class="reportTD" style="text-align: center" ng-if="$index+1 !== vm.courseAttendeds.length">{{courseAttended.result}}</td>
+                                <td class="reportTD" style="text-align: center" ng-if="$index+1 !== vm.courseAttendeds.length">{{courseAttended.position}}</td>
 
                             </tr>
                         </tbody>
@@ -87,6 +90,24 @@
 
                 </div>
                 <!--<h5 ng-if="vm.courseAttendeds.length==null" class="text-center" style="margin-top: 15px;">No data found. </h5>-->
+
+                <h3 class="reportHeader">Grand Total </h3>
+                <hr />
+                <!--<h4 class="noScreen" style="border-bottom: 3px solid blue;font-family: Arial">{{vm.officerName}} ({{vm.pNo}})</h4>-->
+
+                <div ng-if="vm.courseAttendeds.length>0" class="table-wrapper table-responsive reportCover">
+                    <table class="table table-bordered pdfReportTable" border="1">
+                        
+                        <tbody class="reportBody">
+                            <tr class="reportTR">
+                                <td style="font-weight:bold;text-align:center;">Total</td>
+                                <td style="font-weight:bold;text-align:center;">{{vm.grandTotal.duration}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
     </div>

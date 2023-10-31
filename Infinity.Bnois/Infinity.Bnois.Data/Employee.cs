@@ -68,12 +68,12 @@ namespace Infinity.Bnois.Data
             this.EmployeeFamilyPermission = new HashSet<EmployeeFamilyPermission>();
             this.EmployeeCarLoan = new HashSet<EmployeeCarLoan>();
             this.EmployeeSecurityClearance = new HashSet<EmployeeSecurityClearance>();
-            this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
             this.EmployeeChildren = new HashSet<EmployeeChildren>();
             this.CareerForecast = new HashSet<CareerForecast>();
             this.EmployeeGeneral = new HashSet<EmployeeGeneral>();
             this.CoXoService = new HashSet<CoXoService>();
             this.Remark = new HashSet<Remark>();
+            this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
         }
     
         public int EmployeeId { get; set; }
@@ -218,8 +218,6 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeSecurityClearance> EmployeeSecurityClearance { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeChildren> EmployeeChildren { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CareerForecast> CareerForecast { get; set; }
@@ -229,5 +227,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<CoXoService> CoXoService { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Remark> Remark { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
     }
 }

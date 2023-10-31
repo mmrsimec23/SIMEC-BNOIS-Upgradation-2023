@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c156cc6eb9dd4bb29c430ebf9fbb2b1c" Name="Diagram1" ZoomLevel="63">
+      <Diagram DiagramId="c156cc6eb9dd4bb29c430ebf9fbb2b1c" Name="Diagram1" ZoomLevel="56">
         <EntityTypeShape EntityType="BnoisdbModel.Address" Width="1.5" PointX="8.25" PointY="134.375" />
         <EntityTypeShape EntityType="BnoisdbModel.AptCat" Width="1.5" PointX="24" PointY="151" />
         <EntityTypeShape EntityType="BnoisdbModel.AttributeType" Width="1.5" PointX="0.75" PointY="0.75" />
@@ -444,13 +444,6 @@
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeSecurityClearance_Transfer" />
         <EntityTypeShape EntityType="BnoisdbModel.CareerForecastSetting" Width="1.5" PointX="3" PointY="155.625" />
         <AssociationConnector Association="BnoisdbModel.FK_CareerForecastSetting_Branch" />
-        <EntityTypeShape EntityType="BnoisdbModel.EmployeeMscEducation" Width="1.5" PointX="20" PointY="63.625" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Country" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Employee" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Rank" />
         <EntityTypeShape EntityType="BnoisdbModel.BnoisLog" Width="1.5" PointX="7.375" PointY="17.75" />
         <EntityTypeShape EntityType="BnoisdbModel.Office" Width="1.5" PointX="20" PointY="118.25" />
         <AssociationConnector Association="BnoisdbModel.FK_Achievement_Office" />
@@ -493,6 +486,13 @@
         <AssociationConnector Association="BnoisdbModel.FK_Education_Institute" />
         <EntityTypeShape EntityType="BnoisdbModel.Remark" Width="1.5" PointX="13" PointY="85.5" />
         <AssociationConnector Association="BnoisdbModel.FK_Remark_Employee" />
+        <EntityTypeShape EntityType="BnoisdbModel.EmployeeMscEducation" Width="1.5" PointX="20" PointY="63.625" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Country" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Rank" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

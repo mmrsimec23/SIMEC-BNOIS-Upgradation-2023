@@ -12,6 +12,7 @@
     function mediumShipCoXoController($stateParams, roasterListService, notificationService, $state) {
         var vm = this;
         vm.shipType = 2;
+        vm.coxoStatus = 1;
         vm.mediumShipCoXos = [];
         vm.courseAttendeds = [];
         vm.printSection = printSection;
@@ -25,7 +26,7 @@
         function Init() {
 
 
-            roasterListService.getRoasterListByShipType(vm.shipType).then(function (data) {
+            roasterListService.getRoasterListByShipType(vm.shipType,vm.coxoStatus).then(function (data) {
                 vm.mediumShipCoXos = data.result;
                 console.log(vm.mediumShipCoXos);
             },

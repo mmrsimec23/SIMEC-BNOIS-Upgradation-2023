@@ -13,6 +13,7 @@
         var vm = this;
         vm.pNo = 0;
         vm.generalInformation = {};
+        vm.carLoanInfos = [];
         vm.printSection = printSection;
 
         if ($stateParams.pno !== undefined && $stateParams.pno !== null) {
@@ -35,6 +36,14 @@
                 vm.generalInformation = data.result;
                     
                 },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+            currentStatusService.getCarLoanInfo(vm.pNo).then(function (data) {
+
+                vm.carLoanInfos = data.result;
+
+            },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });

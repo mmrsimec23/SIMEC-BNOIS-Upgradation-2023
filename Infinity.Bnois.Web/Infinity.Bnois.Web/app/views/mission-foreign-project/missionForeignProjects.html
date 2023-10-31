@@ -94,8 +94,7 @@
                         <tbody class="reportBody">
                             <tr class="reportTR" ng-repeat="employeeHajjDetail in vm.hajjDetails">
                                 <td>{{$index + 1}}</td>                        
-                                <td ng-if="employeeHajjDetail.hajjOrOmra==true">Hajj</td>
-                                <td ng-if="employeeHajjDetail.hajjOrOmra==false">Omrah</td>
+                                <td>Hajj</td>
                                 <td>{{employeeHajjDetail.fromDate | date: "dd-MMM-yyyy"}}</td>
                                 <td>{{employeeHajjDetail.toDate | date: "dd-MMM-yyyy"}}</td>
                                 <td ng-if="employeeHajjDetail.balotyNonBaloty==true">Baloty</td>
@@ -104,7 +103,6 @@
                                 <td ng-if="employeeHajjDetail.arrangedBy==true">Own Arrangement</td>
                                 <td ng-if="employeeHajjDetail.arrangedBy==false">Govt. Arrangement</td>
                                 <td ng-if="employeeHajjDetail.arrangedBy==null"></td>
-                                <td ng-if="employeeHajjDetail.balotyNonBaloty==null"></td>
                                 <td ng-if="employeeHajjDetail.royelGuest==true">Yes</td>
                                 <td ng-if="employeeHajjDetail.royelGuest==false">No</td>
                                 <td ng-if="employeeHajjDetail.royelGuest==null"></td>

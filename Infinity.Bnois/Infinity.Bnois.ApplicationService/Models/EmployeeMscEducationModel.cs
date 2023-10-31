@@ -18,6 +18,7 @@ namespace Infinity.Bnois.ApplicationService.Models
         public Nullable<int> MscPermissionTypeId { get; set; }
         public Nullable<int> CountryId { get; set; }
         public string PassingYear { get; set; }
+        public string PermissionYear { get; set; }
         public string Results { get; set; }
         public string Remarks { get; set; }
 

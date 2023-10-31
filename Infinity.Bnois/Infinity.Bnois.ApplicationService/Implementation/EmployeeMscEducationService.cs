@@ -119,6 +119,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     bnLog.PreviousValue += ", PassingYear: " + employeeMscEducation.PassingYear;
                     bnLog.UpdatedValue += ", PassingYear: " + model.PassingYear;
                 }
+                if (employeeMscEducation.PermissionYear != model.PermissionYear)
+                {
+                    bnLog.PreviousValue += ", Permission Year: " + employeeMscEducation.PermissionYear;
+                    bnLog.UpdatedValue += ", Permission Year: " + model.PermissionYear;
+                }
                 if (employeeMscEducation.Results != model.Results)
                 {
                     bnLog.PreviousValue += ", Results: " + employeeMscEducation.Results;
@@ -151,7 +156,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 if (employeeMscEducation.EmployeeId != model.EmployeeId || employeeMscEducation.MscEducationTypeId != model.MscEducationTypeId || employeeMscEducation.Remarks != model.Remarks 
                     || employeeMscEducation.MscInstituteId != model.MscInstituteId || employeeMscEducation.MscPermissionTypeId != model.MscPermissionTypeId || employeeMscEducation.CountryId != model.CountryId
-                    || employeeMscEducation.RankId != model.RankId || employeeMscEducation.PassingYear != model.PassingYear || employeeMscEducation.Results != model.Results
+                    || employeeMscEducation.RankId != model.RankId || employeeMscEducation.PassingYear != model.PassingYear || employeeMscEducation.PermissionYear != model.PermissionYear || employeeMscEducation.Results != model.Results
                     || employeeMscEducation.IsComplete != model.IsComplete || employeeMscEducation.FromDate != model.FromDate || employeeMscEducation.ToDate != model.ToDate)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
@@ -176,6 +181,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             employeeMscEducation.MscPermissionTypeId = model.MscPermissionTypeId;
             employeeMscEducation.CountryId = model.CountryId;
             employeeMscEducation.PassingYear = model.PassingYear;
+            employeeMscEducation.PermissionYear = model.PermissionYear;
             employeeMscEducation.Results = model.Results;
             employeeMscEducation.Remarks = model.Remarks;
             employeeMscEducation.IsComplete = model.IsComplete;

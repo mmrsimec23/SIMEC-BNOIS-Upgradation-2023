@@ -177,8 +177,8 @@
             <PropertyRef Name="BnoisLogId" />
           </Key>
           <Property Name="BnoisLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TableName" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="TableEntryForm" Type="nvarchar" MaxLength="550" />
+          <Property Name="TableName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TableEntryForm" Type="nvarchar(max)" />
           <Property Name="PreviousValue" Type="nvarchar(max)" Nullable="false" />
           <Property Name="UpdatedValue" Type="nvarchar(max)" />
           <Property Name="LogStatus" Type="int" Nullable="false" />
@@ -922,6 +922,7 @@
           <Property Name="MscPermissionTypeId" Type="int" />
           <Property Name="CountryId" Type="int" />
           <Property Name="PassingYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="PermissionYear" Type="nvarchar" MaxLength="50" />
           <Property Name="Results" Type="nvarchar" MaxLength="50" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="1500" />
           <Property Name="IsComplete" Type="bit" />
@@ -9553,31 +9554,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             <End Role="Branch" EntitySet="Branch" />
             <End Role="CareerForecastSetting" EntitySet="CareerForecastSetting" />
           </AssociationSet>
-          <EntitySet Name="EmployeeMscEducation" EntityType="BnoisdbModel.EmployeeMscEducation" />
-          <AssociationSet Name="FK_EmployeeMscEducation_Country" Association="BnoisdbModel.FK_EmployeeMscEducation_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMscEducation_Employee" Association="BnoisdbModel.FK_EmployeeMscEducation_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMscEducation_MscEducationType" Association="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType">
-            <End Role="MscEducationType" EntitySet="MscEducationType" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMscEducation_MscInstitute" Association="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute">
-            <End Role="MscInstitute" EntitySet="MscInstitute" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMscEducation_MscPermissionType" Association="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType">
-            <End Role="MscPermissionType" EntitySet="MscPermissionType" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMscEducation_Rank" Association="BnoisdbModel.FK_EmployeeMscEducation_Rank">
-            <End Role="Rank" EntitySet="Rank" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
           <EntitySet Name="BnoisLog" EntityType="BnoisdbModel.BnoisLog" />
           <EntitySet Name="Office" EntityType="BnoisdbModel.Office" />
           <AssociationSet Name="FK_Achievement_Office" Association="BnoisdbModel.FK_Achievement_Office">
@@ -9721,6 +9697,31 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <AssociationSet Name="FK_Remark_Employee" Association="BnoisdbModel.FK_Remark_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Remark" EntitySet="Remark" />
+          </AssociationSet>
+          <EntitySet Name="EmployeeMscEducation" EntityType="BnoisdbModel.EmployeeMscEducation" />
+          <AssociationSet Name="FK_EmployeeMscEducation_Country" Association="BnoisdbModel.FK_EmployeeMscEducation_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_Employee" Association="BnoisdbModel.FK_EmployeeMscEducation_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_MscEducationType" Association="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType">
+            <End Role="MscEducationType" EntitySet="MscEducationType" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_MscInstitute" Association="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute">
+            <End Role="MscInstitute" EntitySet="MscInstitute" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_MscPermissionType" Association="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType">
+            <End Role="MscPermissionType" EntitySet="MscPermissionType" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_Rank" Association="BnoisdbModel.FK_EmployeeMscEducation_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
@@ -9931,9 +9932,9 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <NavigationProperty Name="EmployeeTransferFuturePlan" Relationship="BnoisdbModel.FK_EmployeeTransferFuturePlan_Country" FromRole="Country" ToRole="EmployeeTransferFuturePlan" />
           <NavigationProperty Name="PreCommissionCourse" Relationship="BnoisdbModel.FK_PreCommissionCourse_Country" FromRole="Country" ToRole="PreCommissionCourse" />
           <NavigationProperty Name="EmployeeFamilyPermission" Relationship="BnoisdbModel.FK_EmployeeFamilyPermission_Country" FromRole="Country" ToRole="EmployeeFamilyPermission" />
-          <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Country" FromRole="Country" ToRole="EmployeeMscEducation" />
           <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_Office_Country" FromRole="Country" ToRole="Office" />
           <NavigationProperty Name="Office1" Relationship="BnoisdbModel.FK_Office_Country1" FromRole="Country" ToRole="Office" />
+          <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Country" FromRole="Country" ToRole="EmployeeMscEducation" />
           </EntityType>
         <EntityType Name="District">
           <Key>
@@ -15300,12 +15301,12 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <NavigationProperty Name="EmployeeFamilyPermission" Relationship="BnoisdbModel.FK_EmployeeFamilyPermission_Employee" FromRole="Employee" ToRole="EmployeeFamilyPermission" />
           <NavigationProperty Name="EmployeeCarLoan" Relationship="BnoisdbModel.FK_EmployeeCarLoan_Employee" FromRole="Employee" ToRole="EmployeeCarLoan" />
           <NavigationProperty Name="EmployeeSecurityClearance" Relationship="BnoisdbModel.FK_EmployeeSecurityClearance_Employee" FromRole="Employee" ToRole="EmployeeSecurityClearance" />
-          <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="Employee" ToRole="EmployeeMscEducation" />
           <NavigationProperty Name="EmployeeChildren" Relationship="BnoisdbModel.FK_EmployeeChildren_Employee" FromRole="Employee" ToRole="EmployeeChildren" />
           <NavigationProperty Name="CareerForecast" Relationship="BnoisdbModel.FK_CareerForecast_Employee" FromRole="Employee" ToRole="CareerForecast" />
           <NavigationProperty Name="EmployeeGeneral" Relationship="BnoisdbModel.FK_EmployeeGeneral_Employee" FromRole="Employee" ToRole="EmployeeGeneral" />
           <NavigationProperty Name="CoXoService" Relationship="BnoisdbModel.FK_CoXoService_Employee" FromRole="Employee" ToRole="CoXoService" />
           <NavigationProperty Name="Remark" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Employee" ToRole="Remark" />
+          <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="Employee" ToRole="EmployeeMscEducation" />
         </EntityType>
         <EntityType Name="ExecutionRemark">
           <Key>
@@ -16447,114 +16448,13 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="EmployeeMscEducation">
-          <Key>
-            <PropertyRef Name="EmployeeMscEducationId" />
-          </Key>
-          <Property Name="EmployeeMscEducationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="RankId" Type="Int32" />
-          <Property Name="MscEducationTypeId" Type="Int32" />
-          <Property Name="MscInstituteId" Type="Int32" />
-          <Property Name="MscPermissionTypeId" Type="Int32" />
-          <Property Name="CountryId" Type="Int32" />
-          <Property Name="PassingYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Results" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="IsComplete" Type="Boolean" />
-          <Property Name="FromDate" Type="DateTime" Precision="0" />
-          <Property Name="ToDate" Type="DateTime" Precision="0" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Country" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Country" FromRole="EmployeeMscEducation" ToRole="Country" />
-          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="EmployeeMscEducation" ToRole="Employee" />
-          <NavigationProperty Name="MscEducationType" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType" FromRole="EmployeeMscEducation" ToRole="MscEducationType" />
-          <NavigationProperty Name="MscInstitute" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute" FromRole="EmployeeMscEducation" ToRole="MscInstitute" />
-          <NavigationProperty Name="MscPermissionType" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType" FromRole="EmployeeMscEducation" ToRole="MscPermissionType" />
-          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Rank" FromRole="EmployeeMscEducation" ToRole="Rank" />
-        </EntityType>
-        <Association Name="FK_EmployeeMscEducation_Country">
-          <End Type="BnoisdbModel.Country" Role="Country" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMscEducation_Employee">
-          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMscEducation_MscEducationType">
-          <End Type="BnoisdbModel.MscEducationType" Role="MscEducationType" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MscEducationType">
-              <PropertyRef Name="MscEducationTypeId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="MscEducationTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMscEducation_MscInstitute">
-          <End Type="BnoisdbModel.MscInstitute" Role="MscInstitute" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MscInstitute">
-              <PropertyRef Name="MscInstituteId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="MscInstituteId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMscEducation_MscPermissionType">
-          <End Type="BnoisdbModel.MscPermissionType" Role="MscPermissionType" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MscPermissionType">
-              <PropertyRef Name="MscPermissionTypeId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="MscPermissionTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMscEducation_Rank">
-          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rank">
-              <PropertyRef Name="RankId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="RankId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="BnoisLog">
           <Key>
             <PropertyRef Name="BnoisLogId" />
           </Key>
           <Property Name="BnoisLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TableName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="TableEntryForm" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="TableName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TableEntryForm" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PreviousValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LogStatus" Type="Int32" Nullable="false" />
@@ -17201,6 +17101,108 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Principal>
             <Dependent Role="Remark">
               <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmployeeMscEducation">
+          <Key>
+            <PropertyRef Name="EmployeeMscEducationId" />
+          </Key>
+          <Property Name="EmployeeMscEducationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="MscEducationTypeId" Type="Int32" />
+          <Property Name="MscInstituteId" Type="Int32" />
+          <Property Name="MscPermissionTypeId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="PassingYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PermissionYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Results" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="IsComplete" Type="Boolean" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Country" FromRole="EmployeeMscEducation" ToRole="Country" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="EmployeeMscEducation" ToRole="Employee" />
+          <NavigationProperty Name="MscEducationType" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType" FromRole="EmployeeMscEducation" ToRole="MscEducationType" />
+          <NavigationProperty Name="MscInstitute" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute" FromRole="EmployeeMscEducation" ToRole="MscInstitute" />
+          <NavigationProperty Name="MscPermissionType" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType" FromRole="EmployeeMscEducation" ToRole="MscPermissionType" />
+          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Rank" FromRole="EmployeeMscEducation" ToRole="Rank" />
+        </EntityType>
+        <Association Name="FK_EmployeeMscEducation_Country">
+          <End Type="BnoisdbModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_MscEducationType">
+          <End Type="BnoisdbModel.MscEducationType" Role="MscEducationType" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MscEducationType">
+              <PropertyRef Name="MscEducationTypeId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="MscEducationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_MscInstitute">
+          <End Type="BnoisdbModel.MscInstitute" Role="MscInstitute" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MscInstitute">
+              <PropertyRef Name="MscInstituteId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="MscInstituteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_MscPermissionType">
+          <End Type="BnoisdbModel.MscPermissionType" Role="MscPermissionType" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MscPermissionType">
+              <PropertyRef Name="MscPermissionTypeId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="MscPermissionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_Rank">
+          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -20455,30 +20457,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EmployeeMscEducation">
-            <EntityTypeMapping TypeName="BnoisdbModel.EmployeeMscEducation">
-              <MappingFragment StoreEntitySet="EmployeeMscEducation">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Results" ColumnName="Results" />
-                <ScalarProperty Name="PassingYear" ColumnName="PassingYear" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="MscPermissionTypeId" ColumnName="MscPermissionTypeId" />
-                <ScalarProperty Name="MscInstituteId" ColumnName="MscInstituteId" />
-                <ScalarProperty Name="MscEducationTypeId" ColumnName="MscEducationTypeId" />
-                <ScalarProperty Name="RankId" ColumnName="RankId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="EmployeeMscEducationId" ColumnName="EmployeeMscEducationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BnoisLog">
             <EntityTypeMapping TypeName="BnoisdbModel.BnoisLog">
               <MappingFragment StoreEntitySet="BnoisLog">
@@ -20697,6 +20675,31 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
                 <ScalarProperty Name="TransferId" ColumnName="TransferId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="RemarkId" ColumnName="RemarkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeMscEducation">
+            <EntityTypeMapping TypeName="BnoisdbModel.EmployeeMscEducation">
+              <MappingFragment StoreEntitySet="EmployeeMscEducation">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Results" ColumnName="Results" />
+                <ScalarProperty Name="PermissionYear" ColumnName="PermissionYear" />
+                <ScalarProperty Name="PassingYear" ColumnName="PassingYear" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="MscPermissionTypeId" ColumnName="MscPermissionTypeId" />
+                <ScalarProperty Name="MscInstituteId" ColumnName="MscInstituteId" />
+                <ScalarProperty Name="MscEducationTypeId" ColumnName="MscEducationTypeId" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmployeeMscEducationId" ColumnName="EmployeeMscEducationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -86,7 +86,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         public List<EmployeeHajjDetailModel> GetEmployeeHajjDetailsByPno(string PNo)
         {
             int employeeId = _employeeRepository.Where(x => x.PNo == PNo).Select(x => x.EmployeeId).SingleOrDefault();
-            List<EmployeeHajjDetail> employeeHajjDetails = _employeeHajjDetailRepository.Where(x => x.EmployeeId == employeeId).ToList();
+            List<EmployeeHajjDetail> employeeHajjDetails = _employeeHajjDetailRepository.Where(x => x.EmployeeId == employeeId && x.HajjOrOmra==true).ToList();
             List<EmployeeHajjDetailModel> models = ObjectConverter<EmployeeHajjDetail, EmployeeHajjDetailModel>.ConvertList(employeeHajjDetails.ToList()).ToList();
             return models;
         }

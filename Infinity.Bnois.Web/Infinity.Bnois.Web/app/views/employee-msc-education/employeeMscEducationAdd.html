@@ -36,7 +36,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="mscEducationTypeId" class="custom-label">Msc Education Type</label>
+                                <label for="mscEducationTypeId" class="custom-label">Program Type</label>
                                 <select name="mscEducationTypeId" id="mscEducationTypeId" class="form-control" ng-model="vm.employeeMscEducation.mscEducationTypeId" ng-options="option.value as option.text for option in vm.mscEducationTypeList" required>
                                     <option value="">--Select an Option--</option>
                                 </select>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="mscPermissionTypeId" class="custom-label">Msc Permission Type</label>
+                                <label for="mscPermissionTypeId" class="custom-label">Arrangement</label>
                                 <select name="mscPermissionTypeId" id="mscPermissionTypeId" class="form-control" ng-model="vm.employeeMscEducation.mscPermissionTypeId" ng-options="option.value as option.text for option in vm.mscPermissionTypeList" required>
                                     <option value="">--Select an Option--</option>
                                 </select>
@@ -68,6 +68,12 @@
                                     <option value="">--Select an Option--</option>
                                 </select>
                                 <p ng-show="vm.employeeMscEducationForm.countryId.$error.required" class="help-block errormsg">Please select an Option</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="permissionYear" class="custom-label">Permission Year</label>
+                                <input type="text" id="permissionYear" class="form-control custom-form-control" ng-model="vm.employeeMscEducation.permissionYear" name="permissionYear" />
                             </div>
                         </div>
                         <div class="col-sm-6">
