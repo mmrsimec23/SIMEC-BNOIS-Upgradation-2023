@@ -16,14 +16,18 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<StatusChange> statusChangeRepository;
         private readonly IBnoisRepository<EmployeeGeneral> employeeGeneralRepository;
         private readonly IBnoisRepository<PhysicalCondition> physicalConditionRepository;
-       
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+
         public StatusChangeService(IBnoisRepository<StatusChange> statusChangeRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository,
-            IBnoisRepository<PhysicalCondition> physicalConditionRepository)
+            IBnoisRepository<PhysicalCondition> physicalConditionRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.statusChangeRepository = statusChangeRepository;
             this.employeeGeneralRepository = employeeGeneralRepository;
             this.physicalConditionRepository = physicalConditionRepository;
-           
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
+
         }
 
         public List<StatusChangeModel> GetStatusChanges(int ps, int pn, string qs, out int total)
@@ -76,6 +80,71 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 
                 statusChange.ModifiedDate = DateTime.Now;
                 statusChange.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "StatusChange";
+                bnLog.TableEntryForm = "Status Change";
+                bnLog.PreviousValue = "Id: " + model.StatusChangeId;
+                bnLog.UpdatedValue = "Id: " + model.StatusChangeId;
+                if (statusChange.EmployeeId != model.EmployeeId)
+                {
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + statusChange.Employee.Name + " _ " + statusChange.Employee.PNo;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
+                }
+
+                if (statusChange.StatusType != model.StatusType)
+                {
+                    bnLog.PreviousValue += ", StatusType: " + (statusChange.StatusType == 1 ? "Medical Category" : statusChange.StatusType == 2 ? "Eye Vision" : statusChange.StatusType == 3 ? "Commission Type" : statusChange.StatusType == 4 ? "Branch" : "Religion");
+                    bnLog.UpdatedValue += ", StatusType: " + (model.StatusType == 1 ? "Medical Category" : model.StatusType == 2 ? "Eye Vision" : model.StatusType == 3 ? "Commission Type" : model.StatusType == 4 ? "Branch" : "Religion");
+                }
+                if (statusChange.PreviousId != model.PreviousId)
+                {
+                    bnLog.PreviousValue += ", Previous: " + statusChange.PreviousId;
+                    bnLog.UpdatedValue += ", Previous: " + model.PreviousId;
+                }
+                if (statusChange.NewId != model.NewId)
+                {
+                    bnLog.PreviousValue += ", New: " + statusChange.NewId;
+                    bnLog.UpdatedValue += ", New: " + model.NewId;
+                }
+                if (statusChange.MedicalCategoryCause != model.MedicalCategoryCause)
+                {
+                    bnLog.PreviousValue += ", MedicalCategoryCause: " + statusChange.MedicalCategoryCause;
+                    bnLog.UpdatedValue += ", MedicalCategoryCause: " + model.MedicalCategoryCause;
+                }
+                if (statusChange.MedicalCategoryType != model.MedicalCategoryType)
+                {
+                    bnLog.PreviousValue += ", MedicalCategoryType: " + statusChange.MedicalCategoryType;
+                    bnLog.UpdatedValue += ", MedicalCategoryType: " + model.MedicalCategoryType;
+                }
+                if (statusChange.Date != model.Date)
+                {
+                    bnLog.PreviousValue += ", Date: " + statusChange.Date;
+                    bnLog.UpdatedValue += ", Date: " + model.Date;
+                }
+                if (statusChange.DateTo != model.DateTo)
+                {
+                    bnLog.PreviousValue += ", DateTo: " + statusChange.DateTo;
+                    bnLog.UpdatedValue += ", DateTo: " + model.DateTo;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (statusChange.EmployeeId != model.EmployeeId || statusChange.PreviousId != model.PreviousId || statusChange.NewId != model.NewId
+                    || statusChange.MedicalCategoryCause != model.MedicalCategoryCause || statusChange.MedicalCategoryType != model.MedicalCategoryType
+                    || statusChange.Date != model.Date || statusChange.DateTo != model.DateTo || statusChange.StatusType != model.StatusType)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -163,6 +232,23 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "StatusChange";
+                bnLog.TableEntryForm = "Status Change";
+                var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", statusChange.EmployeeId);
+                bnLog.PreviousValue = "Id: " + statusChange.StatusChangeId + ", Name: " + ((dynamic)emp).Name + ", Previous: " + statusChange.PreviousId
+                    + ", New: " + statusChange.NewId + ", MedicalCategoryCause: " + statusChange.MedicalCategoryCause + ", MedicalCategoryType: " + statusChange.MedicalCategoryType
+                    + ", Date: " + statusChange.Date + ", DateTo: " + statusChange.DateTo + ", StatusType: " + statusChange.StatusType;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 var result = await statusChangeRepository.DeleteAsync(statusChange);
              
                 return result;
