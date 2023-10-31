@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
+using Infinity.Bnois.Configuration;
 using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 
@@ -14,9 +15,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class CommendationService : ICommendationService
     {
         private readonly IBnoisRepository<Commendation> commendationRepository;
-        public CommendationService(IBnoisRepository<Commendation> commendationRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public CommendationService(IBnoisRepository<Commendation> commendationRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.commendationRepository = commendationRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
         public List<CommendationModel> GetCommendations(int pageSize, int pageNumber, string searchText, out int total)
@@ -75,6 +78,43 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 commendation.ModifiedDate = DateTime.Now;
                 commendation.ModifiedBy = model.ModifiedBy;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Commendation";
+                bnLog.TableEntryForm = "Commendation";
+                bnLog.PreviousValue = "Id: " + model.CommendationId;
+                bnLog.UpdatedValue = "Id: " + model.CommendationId;
+                if (commendation.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + commendation.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (commendation.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ", Short Name: " + commendation.ShortName;
+                    bnLog.UpdatedValue += ", Short Name: " + model.ShortName;
+                }
+                if (commendation.Type != model.Type)
+                {
+                    bnLog.PreviousValue += ", Type: " + (commendation.Type == 1 ? "Commendation" : commendation.Type == 2 ? "Appreciation" : "");
+                    bnLog.UpdatedValue += ", Type: " + (model.Type == 1 ? "Commendation" : model.Type == 2 ? "Appreciation" : "");
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = model.ModifiedBy;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (commendation.Name != model.Name || commendation.ShortName != model.ShortName || commendation.Type != model.Type)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -104,6 +144,21 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Commendation";
+                bnLog.TableEntryForm = "Commendation";
+                bnLog.PreviousValue = "Id: " + commendation.CommendationId + ", Name: " + commendation.Name + ", Short Name: " + commendation.ShortName + ", Type: " + (commendation.Type == 1 ? "Commendation" : commendation.Type == 2 ? "Appreciation" : "");
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await commendationRepository.DeleteAsync(commendation);
             }
         }
