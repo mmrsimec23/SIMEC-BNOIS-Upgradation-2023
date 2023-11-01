@@ -333,6 +333,8 @@
     <Content Include="app\views\career-forecast-setting\careerForecastSettingAddController.js" />
     <Content Include="app\views\career-forecast-setting\careerForecastSettings.html" />
     <Content Include="app\views\career-forecast-setting\careerForecastSettingsController.js" />
+    <Content Include="app\views\dashboard-un-mission\dashboardUnMission.html" />
+    <Content Include="app\views\dashboard-un-mission\dashboardUnMissionController.js" />
     <Content Include="app\views\emp-career-forecast\careerForecastAdd.html" />
     <Content Include="app\views\emp-career-forecast\careerForecastAddController.js" />
     <Content Include="app\views\emp-career-forecast\careerForecasts.html" />

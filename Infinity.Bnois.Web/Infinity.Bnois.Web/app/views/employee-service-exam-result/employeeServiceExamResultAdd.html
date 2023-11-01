@@ -65,7 +65,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="numberOfSubject" class="custom-label">Number Of Subject</label>
-                            <input type="number" id="numberOfSubject" class="form-control custom-form-control" ng-model="vm.employeeServiceExamResult.numberOfSubject" name="percentage" />         
+                            <input type="number" id="numberOfSubject" class="form-control custom-form-control" ng-model="vm.employeeServiceExamResult.numberOfSubject" name="percentage" />
 
                         </div>
                     </div>
@@ -119,7 +119,13 @@
                         </div>
 
                     </div>
-
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="remarks" class="custom-label">Remarks</label>
+                            <textarea type="text" id="remarks" class="form-control custom-form-control" ng-model="vm.employeeServiceExamResult.remarks" name="remarks"></textarea>
+                            <!--<p ng-show="vm.achievementForm.remarks.$error.maxlength" class="help-block errormsg">Maximum character 1000</p>-->
+                        </div>
+                    </div>
 
 
 

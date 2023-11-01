@@ -37,6 +37,17 @@ namespace Infinity.Bnois.Api.Controllers
         
 
         [HttpGet]
+        [Route("get-dashboard-un-mission")]
+        public IHttpActionResult GetDashboardUnMission(int officeId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetDashboardUnMission(officeId)
+            });
+        }
+        
+
+        [HttpGet]
         [Route("get-dashboard-branch")]
         public IHttpActionResult GetDashboardBranch()
         {

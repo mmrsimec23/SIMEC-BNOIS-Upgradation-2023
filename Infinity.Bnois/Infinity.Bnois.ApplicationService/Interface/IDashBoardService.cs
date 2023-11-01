@@ -8,6 +8,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
     {
        
         List<Object> GetDashboardOutSideNavy(int officeId);
+        List<Object> GetDashboardUnMission(int officeId);
         List<object> GetDashboardBranch();
         List<object> GetDashboardAdminAuthority();
         List<object> GetDashboardUnderMission(int rankId);

@@ -205,9 +205,6 @@
         <EntityTypeShape EntityType="BnoisdbModel.PoorCourseResult" Width="1.5" PointX="17.25" PointY="156.5" />
         <AssociationConnector Association="BnoisdbModel.FK_PoorCourseResult_ResultType" />
         <AssociationConnector Association="BnoisdbModel.FK_PoorCourseResult_TraceSetting" />
-        <EntityTypeShape EntityType="BnoisdbModel.EmployeeServiceExamResult" Width="1.5" PointX="17" PointY="127.875" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExam" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExamCategory" />
         <EntityTypeShape EntityType="BnoisdbModel.NominationDetail" Width="1.5" PointX="13" PointY="90.375" />
         <EntityTypeShape EntityType="BnoisdbModel.EmployeeLeave" Width="1.5" PointX="14.25" PointY="117.75" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeLeave_LeavePurpose" />
@@ -377,7 +374,6 @@
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeOpr_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeOther_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeePft_Employee" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeSport_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeSvrExt_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeTransferFuturePlan_Employee" />
@@ -493,6 +489,10 @@
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Rank" />
+        <EntityTypeShape EntityType="BnoisdbModel.EmployeeServiceExamResult" Width="1.5" PointX="14" PointY="125.125" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExam" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExamCategory" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

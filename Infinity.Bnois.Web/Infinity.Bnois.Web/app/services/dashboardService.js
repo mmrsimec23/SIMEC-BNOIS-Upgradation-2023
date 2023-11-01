@@ -5,6 +5,7 @@
     function dashboardService(dataConstants, apiHttpService) {
         var service = {
             getDashboardOutSideNavy: getDashboardOutSideNavy,
+            getDashboardUnMission: getDashboardUnMission,
             getDashboardBranch: getDashboardBranch,
             getDashboardAdminAuthority: getDashboardAdminAuthority,
             getDashboardInsideNavyOrganization: getDashboardInsideNavyOrganization,
@@ -34,6 +35,12 @@
      
         function getDashboardOutSideNavy(officeId) {
             var url = dataConstants.DASHBOARD_URL + 'get-dashboard-outside-navy?officeId=' + officeId;
+            return apiHttpService.GET(url);
+        }
+
+
+        function getDashboardUnMission(officeId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-dashboard-un-mission?officeId=' + officeId;
             return apiHttpService.GET(url);
         }
 

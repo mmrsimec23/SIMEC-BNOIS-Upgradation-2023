@@ -43,20 +43,20 @@ namespace Infinity.Bnois.Api.Web.Config
                   //  AbsoluteRefreshTokenLifetime = TimeSpan.FromDays(2).Seconds,
                     
                          // redirect = URI of the Angular application
-                          //"http://localhost:24123/callback.html",
-                          //"http://localhost:24123/callback.html",
+                          //"http://192.168.1.42:24123/callback.html",
+                          //"http://192.168.1.42:24123/callback.html",
 
                         //Local Pc
                     RedirectUris = new List<string>
                     {
 
-                        "http://localhost:24123/callback.html",
+                        "http://192.168.1.42:24123/callback.html",
                         // for silent refresh
-                        "http://localhost:24123/silent-renew.html",
+                        "http://192.168.1.42:24123/silent-renew.html",
                     },
                     PostLogoutRedirectUris = new List<string>()
                     {
-                        "http://localhost:24123/index.html",
+                        "http://192.168.1.42:24123/index.html",
                     },
 
 
@@ -64,13 +64,13 @@ namespace Infinity.Bnois.Api.Web.Config
                     //    RedirectUris = new List<string>
                     //{
 
-                    //    "http://localhost:24123/callback.html",
+                    //    "http://192.168.1.42:24123/callback.html",
                     //    // for silent refresh
-                    //    "http://localhost:24123/silent-renew.html",
+                    //    "http://192.168.1.42:24123/silent-renew.html",
                     //},
                     //PostLogoutRedirectUris = new List<string>()
                     //{
-                    //    "http://localhost:24123/index.html",
+                    //    "http://192.168.1.42:24123/index.html",
                     //},
 
 

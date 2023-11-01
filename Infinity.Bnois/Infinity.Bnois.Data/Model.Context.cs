@@ -149,7 +149,6 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<OfficeShipment> OfficeShipment { get; set; }
         public virtual DbSet<PtDeductPunishment> PtDeductPunishment { get; set; }
         public virtual DbSet<PoorCourseResult> PoorCourseResult { get; set; }
-        public virtual DbSet<EmployeeServiceExamResult> EmployeeServiceExamResult { get; set; }
         public virtual DbSet<NominationDetail> NominationDetail { get; set; }
         public virtual DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
         public virtual DbSet<PromotionNomination> PromotionNominations { get; set; }
@@ -218,6 +217,7 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<Institute> Institute { get; set; }
         public virtual DbSet<Remark> Remark { get; set; }
         public virtual DbSet<EmployeeMscEducation> EmployeeMscEducation { get; set; }
+        public virtual DbSet<EmployeeServiceExamResult> EmployeeServiceExamResult { get; set; }
     
         public virtual ObjectResult<GetLeaveInfo_Result> GetLeaveInfo(string employeeID, Nullable<int> idFrom, Nullable<int> idTo)
         {

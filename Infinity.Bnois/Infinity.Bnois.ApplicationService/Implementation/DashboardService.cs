@@ -28,6 +28,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             return dataTable.ToJson().ToList();
         }
 
+        public List<object> GetDashboardUnMission(int officeId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardUnMission] {0} ", officeId));
+
+            return dataTable.ToJson().ToList();
+        }
+
         public List<object> GetDashboardBranch()
         {
             DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashboardBranch]"));

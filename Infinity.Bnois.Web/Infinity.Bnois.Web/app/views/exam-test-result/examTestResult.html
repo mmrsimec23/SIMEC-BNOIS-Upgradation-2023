@@ -17,6 +17,7 @@
                                 <th>Name of Exam/Test</th>
                                 <th>Qualified Date</th>
                                 <th>Qualified in Times</th>
+                                <th>Remarks</th>
                             </tr>
                         </thead>
                         <tbody class="reportBody">
@@ -26,6 +27,7 @@
                                 <td class="reportTD">{{examTestResult.examName}}</td>
                                 <td class="reportTD" style="text-align: center;width: 100px;">{{examTestResult.qualifiedDate | date:"dd-MMM-yyyy"}}</td>
                                 <td class="reportTD" style="text-align: center">{{examTestResult.attemptTime}}</td>
+                                <td class="reportTD" style="text-align: center">{{examTestResult.remarks}}</td>
                             </tr>
                         </tbody>
                     </table>

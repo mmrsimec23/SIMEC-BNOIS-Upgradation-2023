@@ -5251,6 +5251,17 @@
                     title: 'Dashboard.Outside Navy'
                 }
             },
+
+            //-------------Dashboard.UN Mission-------
+            {
+                state: 'dashboard.un-mission',
+                config: {
+                    url: '/un-mission',
+                    templateUrl: 'app/views/dashboard-un-mission/dashboardUnMission.html',
+                    controller: 'dashboardUnMissionController as vm',
+                    title: 'Dashboard.UN Mission'
+                }
+            },
             //-------------Dashboard.Branch-------
             {
                 state: 'dashboard.branch',

@@ -29,7 +29,6 @@ namespace Infinity.Bnois.Data
             this.EmployeeOpr = new HashSet<EmployeeOpr>();
             this.EmployeeOther = new HashSet<EmployeeOther>();
             this.EmployeePft = new HashSet<EmployeePft>();
-            this.EmployeeServiceExamResult = new HashSet<EmployeeServiceExamResult>();
             this.EmployeeSport = new HashSet<EmployeeSport>();
             this.EmployeeServiceExt = new HashSet<EmployeeServiceExt>();
             this.EmployeeTransferFuturePlan = new HashSet<EmployeeTransferFuturePlan>();
@@ -74,6 +73,7 @@ namespace Infinity.Bnois.Data
             this.CoXoService = new HashSet<CoXoService>();
             this.Remark = new HashSet<Remark>();
             this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
+            this.EmployeeServiceExamResult = new HashSet<EmployeeServiceExamResult>();
         }
     
         public int EmployeeId { get; set; }
@@ -139,8 +139,6 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<EmployeeOther> EmployeeOther { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeePft> EmployeePft { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeServiceExamResult> EmployeeServiceExamResult { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeSport> EmployeeSport { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -229,5 +227,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<Remark> Remark { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeServiceExamResult> EmployeeServiceExamResult { get; set; }
     }
 }

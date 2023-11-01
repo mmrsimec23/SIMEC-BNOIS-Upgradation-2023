@@ -15,11 +15,11 @@ namespace Infinity.Bnois
 
     public static class Documents
     {
-        public static string RemoteImageUrl = "http://localhost:24116/Documents/Image/";
-        public static string RemoteFileUrl = "http://localhost:24116/Documents/File/";
+        public static string RemoteImageUrl = "http://192.168.1.42:24116/Documents/Image/";
+        public static string RemoteFileUrl = "http://192.168.1.42:24116/Documents/File/";
 
-        //        public static string RemoteImageUrl = "http://localhost:24123/Documents/Image/";
-        //        public static string RemoteFileUrl = "http://localhost:24123/Documents/File/";
+        //        public static string RemoteImageUrl = "http://192.168.1.42:24123/Documents/Image/";
+        //        public static string RemoteFileUrl = "http://192.168.1.42:24123/Documents/File/";
     }
     public enum ReportType
     {

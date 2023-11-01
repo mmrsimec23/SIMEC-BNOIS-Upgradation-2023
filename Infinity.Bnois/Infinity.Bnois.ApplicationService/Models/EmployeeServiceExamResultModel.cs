@@ -19,6 +19,7 @@ namespace Infinity.Bnois.ApplicationService.Models
         public Nullable<int> AttTime { get; set; }
         public bool IsExempted { get; set; }
         public Nullable<System.DateTime> ExemptedDate { get; set; }
+        public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public bool IsActive { get; set; }
         public string CreatedBy { get; set; }

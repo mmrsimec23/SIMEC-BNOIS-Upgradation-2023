@@ -1094,6 +1094,7 @@
           <Property Name="AttTime" Type="int" />
           <Property Name="IsExempted" Type="bit" Nullable="false" />
           <Property Name="ExemptedDate" Type="date" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
@@ -8778,15 +8779,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             <End Role="TraceSetting" EntitySet="TraceSettings" />
             <End Role="PoorCourseResult" EntitySet="PoorCourseResult" />
           </AssociationSet>
-          <EntitySet Name="EmployeeServiceExamResult" EntityType="BnoisdbModel.EmployeeServiceExamResult" />
-          <AssociationSet Name="FK_EmployeeServiceEamResult_ServiceExam" Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExam">
-            <End Role="ServiceExam" EntitySet="ServiceExams" />
-            <End Role="EmployeeServiceExamResult" EntitySet="EmployeeServiceExamResult" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeServiceEamResult_ServiceExamCategory" Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExamCategory">
-            <End Role="ServiceExamCategory" EntitySet="ServiceExamCategories" />
-            <End Role="EmployeeServiceExamResult" EntitySet="EmployeeServiceExamResult" />
-          </AssociationSet>
           <EntitySet Name="NominationDetail" EntityType="BnoisdbModel.NominationDetail" />
           <EntitySet Name="EmployeeLeaves" EntityType="BnoisdbModel.EmployeeLeave" />
           <AssociationSet Name="FK_EmployeeLeave_LeavePurpose" Association="BnoisdbModel.FK_EmployeeLeave_LeavePurpose">
@@ -9319,10 +9311,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             <End Role="Employee" EntitySet="Employee" />
             <End Role="EmployeePft" EntitySet="EmployeePfts" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmployeeServiceEamResult_Employee" Association="BnoisdbModel.FK_EmployeeServiceEamResult_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="EmployeeServiceExamResult" EntitySet="EmployeeServiceExamResult" />
-          </AssociationSet>
           <AssociationSet Name="FK_EmployeeSport_Employee" Association="BnoisdbModel.FK_EmployeeSport_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="EmployeeSport" EntitySet="EmployeeSports" />
@@ -9722,6 +9710,19 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <AssociationSet Name="FK_EmployeeMscEducation_Rank" Association="BnoisdbModel.FK_EmployeeMscEducation_Rank">
             <End Role="Rank" EntitySet="Rank" />
             <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <EntitySet Name="EmployeeServiceExamResult" EntityType="BnoisdbModel.EmployeeServiceExamResult" />
+          <AssociationSet Name="FK_EmployeeServiceEamResult_Employee" Association="BnoisdbModel.FK_EmployeeServiceEamResult_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeServiceExamResult" EntitySet="EmployeeServiceExamResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeServiceEamResult_ServiceExam" Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExam">
+            <End Role="ServiceExam" EntitySet="ServiceExams" />
+            <End Role="EmployeeServiceExamResult" EntitySet="EmployeeServiceExamResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeServiceEamResult_ServiceExamCategory" Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExamCategory">
+            <End Role="ServiceExamCategory" EntitySet="ServiceExamCategories" />
+            <End Role="EmployeeServiceExamResult" EntitySet="EmployeeServiceExamResult" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
@@ -12708,56 +12709,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="EmployeeServiceExamResult">
-          <Key>
-            <PropertyRef Name="EmployeeServiceExamResultId" />
-          </Key>
-          <Property Name="EmployeeServiceExamResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeId" Type="Int32" />
-          <Property Name="IsBackLog" Type="Boolean" Nullable="false" />
-          <Property Name="RankId" Type="Int32" />
-          <Property Name="TransferId" Type="Int32" />
-          <Property Name="ServiceExamCategoryId" Type="Int32" Nullable="false" />
-          <Property Name="ServiceExamId" Type="Int32" Nullable="false" />
-          <Property Name="ExamDate" Type="DateTime" Precision="0" />
-          <Property Name="NumberOfSubject" Type="Int32" />
-          <Property Name="PassFailResult" Type="Boolean" Nullable="false" />
-          <Property Name="AttTime" Type="Int32" />
-          <Property Name="IsExempted" Type="Boolean" Nullable="false" />
-          <Property Name="ExemptedDate" Type="DateTime" Precision="0" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ServiceExam" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExam" FromRole="EmployeeServiceExamResult" ToRole="ServiceExam" />
-          <NavigationProperty Name="ServiceExamCategory" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExamCategory" FromRole="EmployeeServiceExamResult" ToRole="ServiceExamCategory" />
-          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" FromRole="EmployeeServiceExamResult" ToRole="Employee" />
-        </EntityType>
-        <Association Name="FK_EmployeeServiceEamResult_ServiceExam">
-          <End Type="BnoisdbModel.ServiceExam" Role="ServiceExam" Multiplicity="1" />
-          <End Type="BnoisdbModel.EmployeeServiceExamResult" Role="EmployeeServiceExamResult" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ServiceExam">
-              <PropertyRef Name="ServiceExamId" />
-            </Principal>
-            <Dependent Role="EmployeeServiceExamResult">
-              <PropertyRef Name="ServiceExamId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeServiceEamResult_ServiceExamCategory">
-          <End Type="BnoisdbModel.ServiceExamCategory" Role="ServiceExamCategory" Multiplicity="1" />
-          <End Type="BnoisdbModel.EmployeeServiceExamResult" Role="EmployeeServiceExamResult" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ServiceExamCategory">
-              <PropertyRef Name="ServiceExamCategoryId" />
-            </Principal>
-            <Dependent Role="EmployeeServiceExamResult">
-              <PropertyRef Name="ServiceExamCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="NominationDetail">
           <Key>
             <PropertyRef Name="NominationDetailId" />
@@ -15262,7 +15213,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <NavigationProperty Name="EmployeeOpr" Relationship="BnoisdbModel.FK_EmployeeOpr_Employee" FromRole="Employee" ToRole="EmployeeOpr" />
           <NavigationProperty Name="EmployeeOther" Relationship="BnoisdbModel.FK_EmployeeOther_Employee" FromRole="Employee" ToRole="EmployeeOther" />
           <NavigationProperty Name="EmployeePft" Relationship="BnoisdbModel.FK_EmployeePft_Employee" FromRole="Employee" ToRole="EmployeePft" />
-          <NavigationProperty Name="EmployeeServiceExamResult" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" FromRole="Employee" ToRole="EmployeeServiceExamResult" />
           <NavigationProperty Name="EmployeeSport" Relationship="BnoisdbModel.FK_EmployeeSport_Employee" FromRole="Employee" ToRole="EmployeeSport" />
           <NavigationProperty Name="EmployeeServiceExt" Relationship="BnoisdbModel.FK_EmployeeSvrExt_Employee" FromRole="Employee" ToRole="EmployeeServiceExt" />
           <NavigationProperty Name="EmployeeTransferFuturePlan" Relationship="BnoisdbModel.FK_EmployeeTransferFuturePlan_Employee" FromRole="Employee" ToRole="EmployeeTransferFuturePlan" />
@@ -15307,6 +15257,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <NavigationProperty Name="CoXoService" Relationship="BnoisdbModel.FK_CoXoService_Employee" FromRole="Employee" ToRole="CoXoService" />
           <NavigationProperty Name="Remark" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Employee" ToRole="Remark" />
           <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="Employee" ToRole="EmployeeMscEducation" />
+          <NavigationProperty Name="EmployeeServiceExamResult" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" FromRole="Employee" ToRole="EmployeeServiceExamResult" />
         </EntityType>
         <EntityType Name="ExecutionRemark">
           <Key>
@@ -15549,18 +15500,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
               <PropertyRef Name="EmployeeId" />
             </Principal>
             <Dependent Role="EmployeePft">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeServiceEamResult_Employee">
-          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeServiceExamResult" Role="EmployeeServiceExamResult" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="EmployeeServiceExamResult">
               <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -17203,6 +17142,69 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Principal>
             <Dependent Role="EmployeeMscEducation">
               <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmployeeServiceExamResult">
+          <Key>
+            <PropertyRef Name="EmployeeServiceExamResultId" />
+          </Key>
+          <Property Name="EmployeeServiceExamResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="IsBackLog" Type="Boolean" Nullable="false" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="TransferId" Type="Int32" />
+          <Property Name="ServiceExamCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceExamId" Type="Int32" Nullable="false" />
+          <Property Name="ExamDate" Type="DateTime" Precision="0" />
+          <Property Name="NumberOfSubject" Type="Int32" />
+          <Property Name="PassFailResult" Type="Boolean" Nullable="false" />
+          <Property Name="AttTime" Type="Int32" />
+          <Property Name="IsExempted" Type="Boolean" Nullable="false" />
+          <Property Name="ExemptedDate" Type="DateTime" Precision="0" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" FromRole="EmployeeServiceExamResult" ToRole="Employee" />
+          <NavigationProperty Name="ServiceExam" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExam" FromRole="EmployeeServiceExamResult" ToRole="ServiceExam" />
+          <NavigationProperty Name="ServiceExamCategory" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExamCategory" FromRole="EmployeeServiceExamResult" ToRole="ServiceExamCategory" />
+        </EntityType>
+        <Association Name="FK_EmployeeServiceEamResult_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeServiceExamResult" Role="EmployeeServiceExamResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeServiceExamResult">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeServiceEamResult_ServiceExam">
+          <End Type="BnoisdbModel.ServiceExam" Role="ServiceExam" Multiplicity="1" />
+          <End Type="BnoisdbModel.EmployeeServiceExamResult" Role="EmployeeServiceExamResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceExam">
+              <PropertyRef Name="ServiceExamId" />
+            </Principal>
+            <Dependent Role="EmployeeServiceExamResult">
+              <PropertyRef Name="ServiceExamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeServiceEamResult_ServiceExamCategory">
+          <End Type="BnoisdbModel.ServiceExamCategory" Role="ServiceExamCategory" Multiplicity="1" />
+          <End Type="BnoisdbModel.EmployeeServiceExamResult" Role="EmployeeServiceExamResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceExamCategory">
+              <PropertyRef Name="ServiceExamCategoryId" />
+            </Principal>
+            <Dependent Role="EmployeeServiceExamResult">
+              <PropertyRef Name="ServiceExamCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -19083,30 +19085,6 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EmployeeServiceExamResult">
-            <EntityTypeMapping TypeName="BnoisdbModel.EmployeeServiceExamResult">
-              <MappingFragment StoreEntitySet="EmployeeServiceExamResult">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ExemptedDate" ColumnName="ExemptedDate" />
-                <ScalarProperty Name="IsExempted" ColumnName="IsExempted" />
-                <ScalarProperty Name="AttTime" ColumnName="AttTime" />
-                <ScalarProperty Name="PassFailResult" ColumnName="PassFailResult" />
-                <ScalarProperty Name="NumberOfSubject" ColumnName="NumberOfSubject" />
-                <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
-                <ScalarProperty Name="ServiceExamId" ColumnName="ServiceExamId" />
-                <ScalarProperty Name="ServiceExamCategoryId" ColumnName="ServiceExamCategoryId" />
-                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
-                <ScalarProperty Name="RankId" ColumnName="RankId" />
-                <ScalarProperty Name="IsBackLog" ColumnName="IsBackLog" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="EmployeeServiceExamResultId" ColumnName="EmployeeServiceExamResultId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NominationDetail">
             <EntityTypeMapping TypeName="BnoisdbModel.NominationDetail">
               <MappingFragment StoreEntitySet="NominationDetail">
@@ -20700,6 +20678,31 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
                 <ScalarProperty Name="RankId" ColumnName="RankId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="EmployeeMscEducationId" ColumnName="EmployeeMscEducationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeServiceExamResult">
+            <EntityTypeMapping TypeName="BnoisdbModel.EmployeeServiceExamResult">
+              <MappingFragment StoreEntitySet="EmployeeServiceExamResult">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ExemptedDate" ColumnName="ExemptedDate" />
+                <ScalarProperty Name="IsExempted" ColumnName="IsExempted" />
+                <ScalarProperty Name="AttTime" ColumnName="AttTime" />
+                <ScalarProperty Name="PassFailResult" ColumnName="PassFailResult" />
+                <ScalarProperty Name="NumberOfSubject" ColumnName="NumberOfSubject" />
+                <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
+                <ScalarProperty Name="ServiceExamId" ColumnName="ServiceExamId" />
+                <ScalarProperty Name="ServiceExamCategoryId" ColumnName="ServiceExamCategoryId" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="IsBackLog" ColumnName="IsBackLog" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmployeeServiceExamResultId" ColumnName="EmployeeServiceExamResultId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

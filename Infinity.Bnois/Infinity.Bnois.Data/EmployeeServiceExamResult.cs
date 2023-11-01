@@ -27,14 +27,15 @@ namespace Infinity.Bnois.Data
         public Nullable<int> AttTime { get; set; }
         public bool IsExempted { get; set; }
         public Nullable<System.DateTime> ExemptedDate { get; set; }
+        public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public bool IsActive { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
+        public virtual Employee Employee { get; set; }
         public virtual ServiceExam ServiceExam { get; set; }
         public virtual ServiceExamCategory ServiceExamCategory { get; set; }
-        public virtual Employee Employee { get; set; }
     }
 }

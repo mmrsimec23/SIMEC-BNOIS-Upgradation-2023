@@ -144,6 +144,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     bnLog.PreviousValue += ", ExemptedDate: " + employeeServiceExamResult.ExemptedDate;
                     bnLog.UpdatedValue += ", ExemptedDate: " + model.ExemptedDate;
                 }
+                if (employeeServiceExamResult.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + employeeServiceExamResult.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
@@ -151,9 +156,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 if (employeeServiceExamResult.EmployeeId != model.EmployeeId || employeeServiceExamResult.ServiceExamCategoryId != model.ServiceExamCategoryId
                     || employeeServiceExamResult.ServiceExamId != model.ServiceExamId || employeeServiceExamResult.RankId != model.RankId || employeeServiceExamResult.TransferId != model.TransferId
-                    || employeeServiceExamResult.ExamDate != model.ExamDate || employeeServiceExamResult.NumberOfSubject != model.NumberOfSubject
-                    || employeeServiceExamResult.AttTime != model.AttTime || employeeServiceExamResult.PassFailResult != model.PassFailResult
-                    || employeeServiceExamResult.IsExempted != model.IsExempted || employeeServiceExamResult.ExemptedDate != model.ExemptedDate)
+                    || employeeServiceExamResult.ExamDate != model.ExamDate || employeeServiceExamResult.NumberOfSubject != model.NumberOfSubject || employeeServiceExamResult.AttTime != model.AttTime 
+                    || employeeServiceExamResult.PassFailResult != model.PassFailResult || employeeServiceExamResult.IsExempted != model.IsExempted || employeeServiceExamResult.ExemptedDate != model.ExemptedDate
+                    || employeeServiceExamResult.Remarks != model.Remarks)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 
@@ -179,6 +184,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             employeeServiceExamResult.PassFailResult = model.PassFailResult;
             employeeServiceExamResult.IsExempted = model.IsExempted;
             employeeServiceExamResult.ExemptedDate = model.ExemptedDate;
+            employeeServiceExamResult.Remarks = model.Remarks;
 
             employeeServiceExamResult.RankId = model.Employee.RankId;
             employeeServiceExamResult.TransferId = model.Employee.TransferId;
@@ -188,7 +194,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 employeeServiceExamResult.RankId = model.RankId;
                 employeeServiceExamResult.TransferId = model.TransferId;
             }
-            employeeServiceExamResult.Employee = null;
+            //employeeServiceExamResult.Employee = null;
             await employeeServiceExamResultRepository.SaveAsync(employeeServiceExamResult);
             model.EmployeeServiceExamResultId = employeeServiceExamResult.EmployeeServiceExamResultId;
             return model;
