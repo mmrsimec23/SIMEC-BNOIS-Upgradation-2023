@@ -15,9 +15,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
 
         private readonly IBnoisRepository<Medal> medalRepository;
-        public MedalService(IBnoisRepository<Medal> medalRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public MedalService(IBnoisRepository<Medal> medalRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.medalRepository = medalRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
 
@@ -75,6 +77,80 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 medal.ModifiedDate = DateTime.Now;
                 medal.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Medal";
+                bnLog.TableEntryForm = "Medal";
+                bnLog.PreviousValue = "Id: " + model.MedalId;
+                bnLog.UpdatedValue = "Id: " + model.MedalId;
+                if (medal.MedalType != model.MedalType)
+                {
+                    bnLog.PreviousValue += ", Medal Type: " + (medal.MedalType== 1 ? "PreCommission" : medal.MedalType == 2 ? "PostCommission" : "");
+                    bnLog.UpdatedValue += ", Medal Type: " + (model.MedalType == 1 ? "PreCommission" : model.MedalType == 2 ? "PostCommission" : "");
+                }
+                if (medal.NameEng != model.NameEng)
+                {
+                    bnLog.PreviousValue += ", Name Eng: " + medal.NameEng;
+                    bnLog.UpdatedValue += ", Name Eng: " + model.NameEng;
+                }
+                if (medal.NameBan != model.NameBan)
+                {
+                    bnLog.PreviousValue += ", Name Ban: " + medal.NameBan;
+                    bnLog.UpdatedValue += ", Name Ban: " + model.NameBan;
+                }
+                if (medal.ShortNameEng != model.ShortNameEng)
+                {
+                    bnLog.PreviousValue += ", Short Name Eng: " + medal.ShortNameEng;
+                    bnLog.UpdatedValue += ", Short Name Eng: " + model.ShortNameEng;
+                }
+                if (medal.ShortNameBan != model.ShortNameBan)
+                {
+                    bnLog.PreviousValue += ", Short Name Ban: " + medal.ShortNameBan;
+                    bnLog.UpdatedValue += ", Short Name Ban: " + model.ShortNameBan;
+                }
+                if (medal.Description != model.Description)
+                {
+                    bnLog.PreviousValue += ", Description: " + medal.Description;
+                    bnLog.UpdatedValue += ", Description: " + model.Description;
+                }
+                if (medal.Priority != model.Priority)
+                {
+                    bnLog.PreviousValue += ", Priority: " + medal.Priority;
+                    bnLog.UpdatedValue += ", Priority: " + model.Priority;
+                }
+                if (medal.GoToTrace != model.GoToTrace)
+                {
+                    bnLog.PreviousValue += ", Go To Trace: " + medal.GoToTrace;
+                    bnLog.UpdatedValue += ", Go To Trace: " + model.GoToTrace;
+                }
+                if (medal.ANmCon != model.ANmCon)
+                {
+                    bnLog.PreviousValue += ", ANGF: " + medal.ANmCon;
+                    bnLog.UpdatedValue += ", ANGF: " + model.ANmCon;
+                }
+                if (medal.NmRGF != model.NmRGF)
+                {
+                    bnLog.PreviousValue += ", NmRGF: " + medal.NmRGF;
+                    bnLog.UpdatedValue += ", NmRGF: " + model.NmRGF;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (medal.NameEng != model.NameEng || medal.NameBan != model.NameBan || medal.ShortNameEng != model.ShortNameEng || medal.ShortNameBan != model.ShortNameBan
+                    || medal.Description != model.Description || medal.Priority != model.Priority || medal.MedalType != model.MedalType || medal.GoToTrace != model.GoToTrace
+                    || medal.ANmCon != model.ANmCon || medal.NmRGF != model.NmRGF)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -112,6 +188,23 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Medal";
+                bnLog.TableEntryForm = "Medal";
+                bnLog.PreviousValue = "Id: " + medal.MedalId + ", Name Eng: " + medal.NameEng + ", Name Ban: " + medal.NameBan + ", Short Name Eng: " + medal.ShortNameEng + ", Short Name Ban: " + medal.ShortNameBan
+                    + ", Description: " + medal.Description + ", Priority: " + medal.Priority + ", Medal Type: " + (medal.MedalType == 1 ? "PreCommission" : medal.MedalType == 2 ? "PostCommission" : "") 
+                    + ", Go To Trace: " + medal.GoToTrace + ", ANGF: " + medal.ANmCon + ", NmRGF: " + medal.NmRGF;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await medalRepository.DeleteAsync(medal);
             }
         }
