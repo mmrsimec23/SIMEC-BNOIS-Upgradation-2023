@@ -42,6 +42,7 @@ namespace Infinity.Bnois.Data
             {
                 Connection.Open();
                 SqlCommand cmd = new SqlCommand(query, Connection);
+                cmd.CommandTimeout = 0;
                 DataTable dt = new DataTable();
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 dataAdapter.Fill(dt);

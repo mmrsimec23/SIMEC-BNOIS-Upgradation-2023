@@ -379,6 +379,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         public bool ExecuteTransfer()
         {
             transferRepository.ExecWithSqlQuery(String.Format("exec [spUpdateEmployeeTransfer]"));
+
             return true;
         }
 

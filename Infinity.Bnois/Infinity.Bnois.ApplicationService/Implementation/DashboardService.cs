@@ -64,6 +64,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardInsideNavyOrganization]"));
 
             return dataTable.ToJson().ToList();
+
         }
         public List<object> GetDashboardBCGOrganization()
         {

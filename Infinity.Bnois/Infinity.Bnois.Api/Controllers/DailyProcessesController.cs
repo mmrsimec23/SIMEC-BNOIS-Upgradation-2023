@@ -23,8 +23,9 @@ namespace Infinity.Bnois.Api.Controllers
         private readonly ITransferService transferService;
         private readonly IPromotionBoardService promotionBoardService;
         private readonly IAdvanceSearchService advanceSearchService;
+        private readonly IDashboardService dashboardService;
         public DailyProcessesController(IPromotionBoardService promotionBoardService,IPhotoService photoService,IEmployeeService employeeService,IPromotionNominationService promotionNominationService, 
-            IPunishmentAccidentService punishmentAccidentService,ITransferService transferService, IAdvanceSearchService advanceSearchService)
+            IPunishmentAccidentService punishmentAccidentService,ITransferService transferService, IAdvanceSearchService advanceSearchService, IDashboardService dashboardService)
         {
             this.promotionNominationService = promotionNominationService;
             this.punishmentAccidentService = punishmentAccidentService;
@@ -33,6 +34,7 @@ namespace Infinity.Bnois.Api.Controllers
             this.photoService = photoService;
             this.promotionBoardService = promotionBoardService;
             this.advanceSearchService = advanceSearchService;
+            this.dashboardService = dashboardService;
         }
 
         [HttpGet]
@@ -116,7 +118,7 @@ namespace Infinity.Bnois.Api.Controllers
                 Result =  advanceSearchService.ExecuteTransferZoneService()
             });
         }
-
+        
 
         [HttpPost]
         [ModelValidation]

@@ -13,10 +13,16 @@
                             <table class="table pdfReportTable" border="1">
                                 <tbody class="reportBody">
                                     <tr class="reportTR">
-                                        <td class="reportTD" style="font-weight:bold">Full Name</td>
+                                        <td class="reportTD" style="font-weight:bold">Name</td>
                                         <td class="reportTD">{{parentInfo.fullName}}</td>
+                                        <td class="reportTD" style="font-weight:bold">Nationality</td>
+                                        <td class="reportTD">{{parentInfo.nationality}}</td>
+                                    </tr>
+                                    <tr class="reportTR">
                                         <td class="reportTD" style="font-weight:bold">Date Of Birth</td>
                                         <td class="reportTD">{{parentInfo.doB | date:"dd-MMM-yyyy"}}</td>
+                                        <td class="reportTD" style="font-weight:bold">Status</td>
+                                        <td class="reportTD">{{parentInfo.status}}</td>
                                     </tr>
                                     <!--<tr class="reportTR">
                                         <td class="reportTD" style="font-weight:bold">Age</td>
@@ -37,28 +43,21 @@
                                         <td class="reportTD">{{parentInfo.migrationDate | date:"dd-MMM-yyyy"}}</td>
                                     </tr>-->
 
-                                    <tr class="reportTR">
-                                        <td class="reportTD" style="font-weight:bold">Nationality</td>
-                                        <td class="reportTD">{{parentInfo.nationality}}</td>
-                                        <td class="reportTD" style="font-weight:bold">Status</td>
-                                        <td class="reportTD" colspan="3">{{parentInfo.status}}</td>
-                                        <!--<td class="reportTD" style="font-weight:bold">Nationality Change</td>
-                                        <td class="reportTD">{{parentInfo.isNationalityChange==1?"Yes":"No"}}</td>-->
+                                <tr class="reportTR">
 
-                                    </tr>
+                                    <td class="reportTD" style="font-weight:bold">Occupation</td>
+                                    <td class="reportTD">{{parentInfo.occupation}} | Service Address: {{parentInfo.serviceAddress}}</td>
+
+                                    <td class="reportTD" style="font-weight:bold">Contact No</td>
+                                    <td class="reportTD">{{parentInfo.otherName}}</td>
+
+                                </tr>
                                     <!--<tr class="reportTR">
                                         <td class="reportTD" style="font-weight:bold">Previous Nationality</td>
                                         <td class="reportTD">{{parentInfo.previousNationality}}</td>
                                         <td class="reportTD" style="font-weight:bold">Religion</td>
                                         <td class="reportTD">{{parentInfo.religionId}}</td>
                                     </tr>-->
-                                    <tr class="reportTR">
-                                        <!--<td class="reportTD" style="font-weight:bold">Religion Cast</td>
-                                        <td class="reportTD">{{parentInfo.religionCast}}</td>-->
-                                        <td class="reportTD" style="font-weight:bold">Occupation</td>
-                                        <td class="reportTD" colspan="3">{{parentInfo.occupation}} | Service Address: {{parentInfo.serviceAddress}}</td>
-                                        
-                                    </tr>
                                     <!--<tr class="reportTR">
                                         <td class="reportTD" style="font-weight:bold">Has Armed Force Experience</td>
                                         <td class="reportTD">{{parentInfo.isArmedForceExp==1?"Yes":"No"}}</td>
@@ -114,93 +113,104 @@
                             <tr class="reportTR">
                                 <td class="reportTD" style="font-weight: bold">Name</td>
                                 <td class="reportTD">{{spouseInfo.bNameEng}}</td>
-                                <td class="reportTD" style="font-weight: bold">Date Of Birth</td>
-                                <td class="reportTD">{{spouseInfo.dateofBirth | date:"dd-MMM-yyyy"}} <br /> <strong>Age:</strong> {{spouseInfo.age}}  </td>
+                                <td class="reportTD" style="font-weight: bold">Nationality</td>
+                                <td class="reportTD">{{spouseInfo.bNameEng}}</td>
                                 <!--<td class="reportTD" style="font-weight: bold">Name (After Marriage)</td>
-                                <td class="reportTD">{{spouseInfo.aNameEng }} </td>-->
+        <td class="reportTD">{{spouseInfo.aNameEng }} </td>-->
                             </tr>
                             <!--<tr class="reportTR">
-                                <td class="reportTD" style="font-weight: bold">Name (বাংলা)(বিবাহের পূর্বে)</td>
-                                <td class="reportTD">{{spouseInfo.bNameBan}}</td>
-                                <td class="reportTD" style="font-weight: bold">Name (বাংলা)(বিবাহের পরে)</td>
-                                <td class="reportTD">{{spouseInfo.aNameBan}}</td>
-                            </tr>
+        <td class="reportTD" style="font-weight: bold">Name (বাংলা)(বিবাহের পূর্বে)</td>
+        <td class="reportTD">{{spouseInfo.bNameBan}}</td>
+        <td class="reportTD" style="font-weight: bold">Name (বাংলা)(বিবাহের পরে)</td>
+        <td class="reportTD">{{spouseInfo.aNameBan}}</td>
+    </tr>
+    <tr class="reportTR">
+        <td class="reportTD" style="font-weight: bold">Date Of Birth</td>
+        <td class="reportTD">{{spouseInfo.dateofBirth | date:"dd-MMM-yyyy"}} <br /> <strong>Age:</strong> {{spouseInfo.age}}  </td>
+        <td class="reportTD" style="font-weight: bold">Birth Place</td>
+        <td class="reportTD">{{spouseInfo.birthPlace}}</td>
+    </tr>-->
+                            <!--<tr class="reportTR">
+        <td class="reportTD" style="font-weight: bold">Educational Qualification</td>
+        <td class="reportTD">{{spouseInfo.eduQualification}}</td>
+        <td class="reportTD" style="font-weight: bold">Identification Mark</td>
+        <td class="reportTD">{{spouseInfo.idMark}}</td>
+    </tr>-->
+
                             <tr class="reportTR">
                                 <td class="reportTD" style="font-weight: bold">Date Of Birth</td>
                                 <td class="reportTD">{{spouseInfo.dateofBirth | date:"dd-MMM-yyyy"}} <br /> <strong>Age:</strong> {{spouseInfo.age}}  </td>
-                                <td class="reportTD" style="font-weight: bold">Birth Place</td>
-                                <td class="reportTD">{{spouseInfo.birthPlace}}</td>
-                            </tr>-->
-                            <!--<tr class="reportTR">
-                                <td class="reportTD" style="font-weight: bold">Educational Qualification</td>
-                                <td class="reportTD">{{spouseInfo.eduQualification}}</td>
-                                <td class="reportTD" style="font-weight: bold">Identification Mark</td>
-                                <td class="reportTD">{{spouseInfo.idMark}}</td>
-                            </tr>-->
+                                <td class="reportTD" style="font-weight: bold">Status</td>
+                                <td class="reportTD">{{spouseInfo.currentStatus}}</td>
+
+                            </tr>
+                            <tr class="reportTR">
+                                <td class="reportTD" style="font-weight: bold">Marriage Date</td>
+                                <td class="reportTD">{{spouseInfo.marriageDate| date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="font-weight: bold">If Divorced (Date) </td>
+                                <td class="reportTD">{{spouseInfo.deadDate| date:"dd-MMM-yyyy"}}</td>
+
+
+                            </tr>
 
                             <tr class="reportTR">
                                 <td class="reportTD" style="font-weight: bold">Occupation</td>
-                                <td class="reportTD">{{spouseInfo.occupation}}</td>
-                                <td class="reportTD" style="font-weight: bold"> Address</td>
-                                <td class="reportTD">{{spouseInfo.serviceAddress}}</td>
+                                <td class="reportTD">{{spouseInfo.occupation}} | Service Address: {{spouseInfo.serviceAddress}}</td>
+
+                                <td class="reportTD" style="font-weight:bold">Contact No</td>
+                                <td class="reportTD">{{spouseInfo.aNameBan}}</td>
+
+                            </tr>
+                            <tr class="reportTR">
+
+                                <td class="reportTD" style="font-weight: bold">Father's Name </td>
+                                <td class="reportTD">{{spouseInfo.fatherName}}</td>
+                                <td class="reportTD" style="font-weight: bold">Mother's Name </td>
+                                <td class="reportTD">{{spouseInfo.motherName}}</td>
                             </tr>
 
-                            <tr class="reportTR">
-                                <!--<td class="reportTD" style="font-weight: bold">Profession</td>
-                        <td class="reportTD">{{spouseInfo.occupation}}</td>-->
-                                <td class="reportTD" style="font-weight: bold">Marriage Date</td>
-                                <td class="reportTD">{{spouseInfo.marriageDate| date:"dd-MMM-yyyy"}}</td>
-                            </tr>
-                            <tr class="reportTR">
-                                <td class="reportTD" style="font-weight: bold">Maritial Status</td>
-                                <td class="reportTD">{{spouseInfo.currentStatus}}</td>
+                            <!--<tr class="reportTR">
+            <td class="reportTD" style="font-weight: bold">Profession</td>
+    <td class="reportTD">{{spouseInfo.occupation}}</td>
+            <td class="reportTD" style="font-weight: bold">Marriage Date</td>
+            <td class="reportTD">{{spouseInfo.marriageDate| date:"dd-MMM-yyyy"}}</td>
+        </tr>-->
+                            <!--<tr class="reportTR">
+
                                 <td class="reportTD" style="font-weight: bold">Dead/Divorce Date</td>
                                 <td class="reportTD">{{spouseInfo.deadDate| date:"dd-MMM-yyyy"}}</td>
-                            </tr>
-                            <tr class="reportTR">
                                 <td class="reportTD" style="font-weight: bold">Dead/Divorce Reason</td>
-                                <td class="reportTD" colspan="3">{{spouseInfo.deadReason}}</td>
-                            </tr>
-
-                            <tr></tr>
-                            <tr class="reportTR">
-                                <td class="reportTD" style="font-weight: bold">Father Name </td>
-                                <td class="reportTD">{{spouseInfo.fatherName}}</td>
-                                <td class="reportTD" style="font-weight: bold">Mother Name </td>
-                                <td class="reportTD">{{spouseInfo.motherName}}</td>
-                                <!--<td class="reportTD" style="font-weight: bold">Father Present Address</td>
-                                 <td class="reportTD">{{spouseInfo.fatherPreAddress}}</td>-->
-
-                            </tr>
-                            <!--<tr class="reportTR">
-                                <td class="reportTD" style="font-weight: bold">Father Permanent Address</td>
-                                <td class="reportTD">{{spouseInfo.fatherPerAddress}}</td>
-                                
-                            </tr>-->
-                            <!--<tr class="reportTR">
-                                <td class="reportTD" style="font-weight: bold">Father's Other Info</td>
-                                <td class="reportTD">{{spouseInfo.fatherOtherInfo}}</td>
-                                <td class="reportTD" style="font-weight: bold">Profession</td>
-                                <td class="reportTD">{{spouseInfo.fatherOccupation}}</td>
+                                <td class="reportTD">{{spouseInfo.deadReason}}</td>
                             </tr>-->
 
+                            <!--<tr class="reportTR">
+        <td class="reportTD" style="font-weight: bold">Father Permanent Address</td>
+        <td class="reportTD">{{spouseInfo.fatherPerAddress}}</td>
+
+    </tr>-->
+                            <!--<tr class="reportTR">
+        <td class="reportTD" style="font-weight: bold">Father's Other Info</td>
+        <td class="reportTD">{{spouseInfo.fatherOtherInfo}}</td>
+        <td class="reportTD" style="font-weight: bold">Profession</td>
+        <td class="reportTD">{{spouseInfo.fatherOccupation}}</td>
+    </tr>-->
                             <!--<tr></tr>
-                            <tr class="reportTR">
-                                
+    <tr class="reportTR">
 
-                            </tr>
-                            <tr class="reportTR">
-                                <td class="reportTD" style="font-weight: bold">Mother Permanent Address</td>
-                                <td class="reportTD">{{spouseInfo.motherPerAddress}}</td>
-                                <td class="reportTD" style="font-weight: bold">Mother Present Address</td>
-                                <td class="reportTD">{{spouseInfo.motherPreAddress}}</td>
-                            </tr>
-                            <tr class="reportTR">
-                                <td class="reportTD" style="font-weight: bold">Mother's Other Info</td>
-                                <td class="reportTD">{{spouseInfo.motherOtherInfo}}</td>
-                                <td class="reportTD" style="font-weight: bold">Profession</td>
-                                <td class="reportTD">{{spouseInfo.motherOccupation}}</td>
-                            </tr>-->
+
+    </tr>
+    <tr class="reportTR">
+        <td class="reportTD" style="font-weight: bold">Mother Permanent Address</td>
+        <td class="reportTD">{{spouseInfo.motherPerAddress}}</td>
+        <td class="reportTD" style="font-weight: bold">Mother Present Address</td>
+        <td class="reportTD">{{spouseInfo.motherPreAddress}}</td>
+    </tr>
+    <tr class="reportTR">
+        <td class="reportTD" style="font-weight: bold">Mother's Other Info</td>
+        <td class="reportTD">{{spouseInfo.motherOtherInfo}}</td>
+        <td class="reportTD" style="font-weight: bold">Profession</td>
+        <td class="reportTD">{{spouseInfo.motherOccupation}}</td>
+    </tr>-->
 
 
 

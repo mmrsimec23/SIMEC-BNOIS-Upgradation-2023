@@ -205,7 +205,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 var reason = employeeService.GetDynamicTableInfoById("SecurityClearanceReason", "SecurityClearanceReasonId", employeeSecurityClearance.SecurityClearanceReasonId);
                 var transfer = employeeService.GetDynamicTableInfoById("Transfer", "TransferId", employeeSecurityClearance.TransferId ?? 0);
                 bnLog.PreviousValue = "Id: " + employeeSecurityClearance.EmployeeSecurityClearanceId + ", Name: " + ((dynamic)emp).Name + ", Rank: " + ((dynamic)rank).ShortName
-                    + ", Remarks: " + employeeSecurityClearance.Remarks + ", Reason: " + ((dynamic)reason).Reason + ", Transfer: " + ((dynamic)emp).FromDate
+                    + ", Remarks: " + employeeSecurityClearance.Remarks + ", Reason: " + ((dynamic)reason).Reason + ", Transfer: " + ((dynamic)transfer).FromDate
                     + ", IsCleared: " + employeeSecurityClearance.IsCleared + ", NotClearReason: " + employeeSecurityClearance.NotClearReason + ", ClearanceDate: " + employeeSecurityClearance.ClearanceDate + ", Expirydate: " + employeeSecurityClearance.Expirydate;
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
@@ -216,7 +216,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 await bnoisLogRepository.SaveAsync(bnLog);
 
                 //data log section end
-                return await employeeSecurityClearanceRepository.DeleteAsync(employeeSecurityClearance);
+                return  employeeSecurityClearanceRepository.Delete(employeeSecurityClearance);
             }
         }
     }

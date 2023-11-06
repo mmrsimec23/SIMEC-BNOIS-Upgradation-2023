@@ -88,7 +88,7 @@
                                 <th>Baloty/ Non-Baloty</th>
                                 <th>Arranged By</th>
                                 <th>Royel Guest</th>
-                                <th>Acompany By</th>
+                                <th>Accompanied By</th>
                             </tr>
                         </thead>
                         <tbody class="reportBody">
@@ -106,7 +106,7 @@
                                 <td ng-if="employeeHajjDetail.royelGuest==true">Yes</td>
                                 <td ng-if="employeeHajjDetail.royelGuest==false">No</td>
                                 <td ng-if="employeeHajjDetail.royelGuest==null"></td>
-                                <td>{{employeeHajjDetail.aCompanyBy}}</td>
+                                <td>{{employeeHajjDetail.aCompanyBy=='NULL' ? '' : employeeHajjDetail.aCompanyBy}}</td>
                             </tr>
 
                         </tbody>

@@ -63,7 +63,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             if (id > 0)
             {
-                employeeFamilyPermission = employeeFamilyPermissionRepository.FindOne(x => x.EmployeeFamilyPermissionId == id, new List<string> { "Employee", "Employee.Rank", "Relation", "Country" });
+                employeeFamilyPermission = employeeFamilyPermissionRepository.FindOne(x => x.EmployeeFamilyPermissionId == id);
                 if (employeeFamilyPermission == null)
                 {
                     throw new InfinityNotFoundException("Employee Family Permission not found !");
@@ -80,26 +80,30 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.UpdatedValue = "Id: " + model.EmployeeFamilyPermissionId;
                 if (employeeFamilyPermission.EmployeeId != model.EmployeeId)
                 {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeFamilyPermission.EmployeeId);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Name: " + employeeFamilyPermission.Employee.Name + " _ " + employeeFamilyPermission.Employee.PNo;
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).Name + " _ " + ((dynamic)prevemp).PNo;
                     bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
                 }
                 if (employeeFamilyPermission.RelationId != model.RelationId)
                 {
+                    var prevrelation = employeeService.GetDynamicTableInfoById("Relation", "RelationId", employeeFamilyPermission.RelationId??0);
                     var relation = employeeService.GetDynamicTableInfoById("Relation", "RelationId", model.RelationId??0);
-                    bnLog.PreviousValue += ", Relation: " + employeeFamilyPermission.Relation.Name;
+                    bnLog.PreviousValue += ", Relation: " + ((dynamic)prevrelation).Name;
                     bnLog.UpdatedValue += ", Relation: " + ((dynamic)relation).Name;
                 }
                 if (employeeFamilyPermission.CountryId != model.CountryId)
                 {
+                    var prevcoun = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeFamilyPermission.CountryId??0);
                     var coun = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId??0);
-                    bnLog.PreviousValue += ", Country: " + employeeFamilyPermission.Country.FullName;
+                    bnLog.PreviousValue += ", Country: " + ((dynamic)prevcoun).FullName;
                     bnLog.UpdatedValue += ", Country: " + ((dynamic)coun).FullName;
                 }
                 if (employeeFamilyPermission.RankId != model.RankId)
                 {
+                    var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeFamilyPermission.RankId??0);
                     var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId??0);
-                    bnLog.PreviousValue += ", Rank: " + employeeFamilyPermission.Rank.ShortName;
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
                     bnLog.UpdatedValue += ", Rank: " + ((dynamic)rank).ShortName;
                 }
                 if (employeeFamilyPermission.RelativeName != model.RelativeName)
@@ -167,7 +171,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             //    employeeFamilyPermission.TransferId = model.TransferId;
             //}
 
-            //employeeFamilyPermission.Employee = null;
+            employeeFamilyPermission.Employee = null;
             //employeeFamilyPermission.Country = null;
             //employeeFamilyPermission.Relation = null;
             //employeeFamilyPermission.Rank = null;
