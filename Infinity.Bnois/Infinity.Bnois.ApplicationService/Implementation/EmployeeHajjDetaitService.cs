@@ -43,9 +43,10 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "EmployeeHajjDetail";
                 bnLog.TableEntryForm = "Hajj Information";
-                bnLog.PreviousValue = "Id: " + employeeHajjDetail.EmployeeHajjDetailId + ", Name: " + employeeHajjDetail.EmployeeId + ", BalotyNonBaloty: " + employeeHajjDetail.BalotyNonBaloty
-                    + ", RoyelGuest: " + employeeHajjDetail.RoyelGuest + ", HajjOrOmra: " + employeeHajjDetail.HajjOrOmra + ", ArrangedBy: " + employeeHajjDetail.ArrangedBy
-                    + ", ACompanyBy: " + employeeHajjDetail.ACompanyBy + ", FromDate: " + employeeHajjDetail.FromDate + ", ToDate: " + employeeHajjDetail.ToDate;
+                var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeHajjDetail.EmployeeId ?? 0);
+                bnLog.PreviousValue = "Id: " + employeeHajjDetail.EmployeeHajjDetailId + ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng + ", Baloty Non Baloty: " + employeeHajjDetail.BalotyNonBaloty
+                    + ", Royel Guest: " + employeeHajjDetail.RoyelGuest + ", Hajj Or Omra: " + employeeHajjDetail.HajjOrOmra + ", Arranged By: " + employeeHajjDetail.ArrangedBy
+                    + ", Accompanied By: " + employeeHajjDetail.ACompanyBy + ", From Date: " + employeeHajjDetail.FromDate.ToString("dd/MM/yyyy") + ", To Date: " + employeeHajjDetail.ToDate.ToString("dd/MM/yyyy");
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete
@@ -106,7 +107,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             EmployeeHajjDetail employeeHajjDetail = ObjectConverter<EmployeeHajjDetailModel, EmployeeHajjDetail>.Convert(model);
             if (id > 0)
             {
-                employeeHajjDetail = _employeeHajjDetailRepository.FindOne(x => x.EmployeeHajjDetailId == id, new List<string> { "Employee" });
+                employeeHajjDetail = _employeeHajjDetailRepository.FindOne(x => x.EmployeeHajjDetailId == id);
                 if (employeeHajjDetail == null)
                 {
                     throw new InfinityNotFoundException("Employee Hajj  Detail not found !");
@@ -122,44 +123,45 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.UpdatedValue = "Id: " + model.EmployeeHajjDetailId;
                 if (employeeHajjDetail.EmployeeId != model.EmployeeId)
                 {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeHajjDetail.EmployeeId ?? 0);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId ?? 0);
-                    bnLog.PreviousValue += ", Name: " + employeeHajjDetail.Employee.Name + " _ " + employeeHajjDetail.Employee.PNo;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
                 }
                 if (employeeHajjDetail.BalotyNonBaloty != model.BalotyNonBaloty)
                 {
-                    bnLog.PreviousValue += ", BalotyNonBaloty: " + employeeHajjDetail.BalotyNonBaloty;
-                    bnLog.UpdatedValue += ", BalotyNonBaloty: " + model.BalotyNonBaloty;
+                    bnLog.PreviousValue += ", Baloty Non Baloty: " + employeeHajjDetail.BalotyNonBaloty;
+                    bnLog.UpdatedValue += ", Baloty Non Baloty: " + model.BalotyNonBaloty;
                 }
                 if (employeeHajjDetail.RoyelGuest != model.RoyelGuest)
                 {
-                    bnLog.PreviousValue += ", RoyelGuest: " + employeeHajjDetail.RoyelGuest;
-                    bnLog.UpdatedValue += ", RoyelGuest: " + model.RoyelGuest;
+                    bnLog.PreviousValue += ", Royel Guest: " + employeeHajjDetail.RoyelGuest;
+                    bnLog.UpdatedValue += ", Royel Guest: " + model.RoyelGuest;
                 }
                 if (employeeHajjDetail.HajjOrOmra != model.HajjOrOmra)
                 {
-                    bnLog.PreviousValue += ", HajjOrOmra: " + employeeHajjDetail.HajjOrOmra;
-                    bnLog.UpdatedValue += ", HajjOrOmra: " + model.HajjOrOmra;
+                    bnLog.PreviousValue += ", Hajj Or Omra: " + employeeHajjDetail.HajjOrOmra;
+                    bnLog.UpdatedValue += ", Hajj Or Omra: " + model.HajjOrOmra;
                 }
                 if (employeeHajjDetail.ArrangedBy != model.ArrangedBy)
                 {
-                    bnLog.PreviousValue += ", ArrangedBy: " + employeeHajjDetail.ArrangedBy;
-                    bnLog.UpdatedValue += ", ArrangedBy: " + model.ArrangedBy;
+                    bnLog.PreviousValue += ", Arranged By: " + employeeHajjDetail.ArrangedBy;
+                    bnLog.UpdatedValue += ", Arranged By: " + model.ArrangedBy;
                 }
                 if (employeeHajjDetail.ACompanyBy != model.ACompanyBy)
                 {
-                    bnLog.PreviousValue += ", ACompanyBy: " + employeeHajjDetail.ACompanyBy;
-                    bnLog.UpdatedValue += ", ACompanyBy: " + model.ACompanyBy;
+                    bnLog.PreviousValue += ", Accompanied By: " + employeeHajjDetail.ACompanyBy;
+                    bnLog.UpdatedValue += ", Accompanied By: " + model.ACompanyBy;
                 }
                 if (employeeHajjDetail.FromDate != model.FromDate)
                 {
-                    bnLog.PreviousValue += ", FromDate: " + employeeHajjDetail.FromDate;
-                    bnLog.UpdatedValue += ", FromDate: " + model.FromDate;
+                    bnLog.PreviousValue += ", From Date: " + employeeHajjDetail.FromDate.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", From Date: " + model.FromDate.ToString("dd/MM/yyyy");
                 }
                 if (employeeHajjDetail.ToDate != model.ToDate)
                 {
-                    bnLog.PreviousValue += ", ToDate: " + employeeHajjDetail.ToDate;
-                    bnLog.UpdatedValue += ", ToDate: " + model.ToDate;
+                    bnLog.PreviousValue += ", To Date: " + employeeHajjDetail.ToDate.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", To Date: " + model.ToDate.ToString("dd/MM/yyyy");
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete

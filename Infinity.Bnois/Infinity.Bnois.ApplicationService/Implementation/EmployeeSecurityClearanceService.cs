@@ -63,7 +63,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             if (id > 0)
             {
-                employeeSecurityClearance = employeeSecurityClearanceRepository.FindOne(x => x.EmployeeSecurityClearanceId == id, new List<string> { "Employee", "Employee.Rank", "SecurityClearanceReason" });
+                employeeSecurityClearance = employeeSecurityClearanceRepository.FindOne(x => x.EmployeeSecurityClearanceId == id);
                 if (employeeSecurityClearance == null)
                 {
                     throw new InfinityNotFoundException("Employee Security Clearance not found !");
@@ -80,26 +80,32 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.UpdatedValue = "Id: " + model.EmployeeSecurityClearanceId;
                 if (employeeSecurityClearance.EmployeeId != model.EmployeeId)
                 {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeSecurityClearance.EmployeeId);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Name: " + employeeSecurityClearance.Employee.Name + " _ " + employeeSecurityClearance.Employee.PNo;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
                 }
                 if (employeeSecurityClearance.RankId != model.RankId)
                 {
+                    var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeSecurityClearance.RankId ?? 0);
                     var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId ?? 0);
-                    bnLog.PreviousValue += ", Rank: " + employeeSecurityClearance.Rank.ShortName;
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
                     bnLog.UpdatedValue += ", Rank: " + ((dynamic)rank).ShortName;
                 }
                 if (employeeSecurityClearance.SecurityClearanceReasonId != model.SecurityClearanceReasonId)
                 {
+                    var prevreason = employeeService.GetDynamicTableInfoById("SecurityClearanceReason", "SecurityClearanceReasonId", employeeSecurityClearance.SecurityClearanceReasonId);
                     var reason = employeeService.GetDynamicTableInfoById("SecurityClearanceReason", "SecurityClearanceReasonId", model.SecurityClearanceReasonId);
-                    bnLog.PreviousValue += ", Reason: " + employeeSecurityClearance.SecurityClearanceReason.Reason;
+                    bnLog.PreviousValue += ", Reason: " + ((dynamic)reason).prevreason;
                     bnLog.UpdatedValue += ", Reason: " + ((dynamic)reason).Reason;
                 }
                 if (employeeSecurityClearance.TransferId != model.TransferId)
                 {
-                    bnLog.PreviousValue += ", Transfer: " + employeeSecurityClearance.TransferId;
-                    bnLog.UpdatedValue += ", Transfer: " + model.TransferId;
+                    var prevTransfer = employeeService.GetDynamicTableInfoById("vwTransfer", "TransferId", employeeSecurityClearance.TransferId ?? 0);
+                    var newTransfer = employeeService.GetDynamicTableInfoById("vwTransfer", "TransferId", model.TransferId ?? 0);
+                    bnLog.PreviousValue += ", Born/Attach/Appointment: " + ((dynamic)prevTransfer).BornOffice + '/' + ((dynamic)prevTransfer).CurrentAttach + '/' + ((dynamic)prevTransfer).Appointment;
+                    bnLog.UpdatedValue += ", Born/Attach/Appointment: " + ((dynamic)newTransfer).BornOffice + '/' + ((dynamic)newTransfer).CurrentAttach + '/' + ((dynamic)newTransfer).Appointment;
+
                 }
                 if (employeeSecurityClearance.IsCleared != model.IsCleared)
                 {
@@ -113,13 +119,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (employeeSecurityClearance.ClearanceDate != model.ClearanceDate)
                 {
-                    bnLog.PreviousValue += ", ClearanceDate: " + employeeSecurityClearance.ClearanceDate;
-                    bnLog.UpdatedValue += ", ClearanceDate: " + model.ClearanceDate;
+                    bnLog.PreviousValue += ", ClearanceDate: " + employeeSecurityClearance.ClearanceDate.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", ClearanceDate: " + model.ClearanceDate?.ToString("dd/MM/yyyy");
                 }
                 if (employeeSecurityClearance.Expirydate != model.Expirydate)
                 {
-                    bnLog.PreviousValue += ", Expirydate: " + employeeSecurityClearance.Expirydate;
-                    bnLog.UpdatedValue += ", Expirydate: " + model.Expirydate;
+                    bnLog.PreviousValue += ", Expirydate: " + employeeSecurityClearance.Expirydate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Expirydate: " + model.Expirydate?.ToString("dd/MM/yyyy");
                 }
                 if (employeeSecurityClearance.Remarks != model.Remarks)
                 {
@@ -203,10 +209,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeSecurityClearance.EmployeeId);
                 var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeSecurityClearance.RankId ?? 0);
                 var reason = employeeService.GetDynamicTableInfoById("SecurityClearanceReason", "SecurityClearanceReasonId", employeeSecurityClearance.SecurityClearanceReasonId);
-                var transfer = employeeService.GetDynamicTableInfoById("Transfer", "TransferId", employeeSecurityClearance.TransferId ?? 0);
-                bnLog.PreviousValue = "Id: " + employeeSecurityClearance.EmployeeSecurityClearanceId + ", Name: " + ((dynamic)emp).Name + ", Rank: " + ((dynamic)rank).ShortName
-                    + ", Remarks: " + employeeSecurityClearance.Remarks + ", Reason: " + ((dynamic)reason).Reason + ", Transfer: " + ((dynamic)transfer).FromDate
-                    + ", IsCleared: " + employeeSecurityClearance.IsCleared + ", NotClearReason: " + employeeSecurityClearance.NotClearReason + ", ClearanceDate: " + employeeSecurityClearance.ClearanceDate + ", Expirydate: " + employeeSecurityClearance.Expirydate;
+                var transfer = employeeService.GetDynamicTableInfoById("vwTransfer", "TransferId", employeeSecurityClearance.TransferId ?? 0);
+                
+                
+                bnLog.PreviousValue = "Id: " + employeeSecurityClearance.EmployeeSecurityClearanceId + ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng + ", Rank: " + ((dynamic)rank).ShortName
+                    + ", Remarks: " + employeeSecurityClearance.Remarks + ", Reason: " + ((dynamic)reason).Reason + ", Born/Attach/Appointment: " + ((dynamic)transfer).BornOffice + '/' + ((dynamic)transfer).CurrentAttach + '/' + ((dynamic)transfer).Appointment
+                    + ", IsCleared: " + employeeSecurityClearance.IsCleared + ", NotClearReason: " + employeeSecurityClearance.NotClearReason + ", ClearanceDate: " + employeeSecurityClearance.ClearanceDate.ToString("dd/MM/yyyy") + ", Expirydate: " + employeeSecurityClearance.Expirydate?.ToString("dd/MM/yyyy");
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete

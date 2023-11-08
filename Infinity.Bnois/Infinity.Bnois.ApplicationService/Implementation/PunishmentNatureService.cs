@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
+using Infinity.Bnois.Configuration;
 using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 
@@ -14,9 +15,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class PunishmentNatureService : IPunishmentNatureService
     {
         private readonly IBnoisRepository<PunishmentNature> punishmentNatureRepository;
-        public PunishmentNatureService(IBnoisRepository<PunishmentNature> punishmentNatureRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public PunishmentNatureService(IBnoisRepository<PunishmentNature> punishmentNatureRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.punishmentNatureRepository = punishmentNatureRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<PunishmentNatureModel> GetPunishmentNatures(int pageSize, int pageNumber, string searchText, out int total)
@@ -69,6 +74,45 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 punishmentNature.ModifiedDate = DateTime.Now;
                 punishmentNature.ModifiedBy = model.ModifiedBy;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PunishmentNature";
+                bnLog.TableEntryForm = "Punishment Nature";
+                bnLog.PreviousValue = "Id: " + model.PunishmentNatureId;
+                bnLog.UpdatedValue = "Id: " + model.PunishmentNatureId;
+
+                if (punishmentNature.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + punishmentNature.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (punishmentNature.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ", Short Name: " + punishmentNature.ShortName;
+                    bnLog.UpdatedValue += ", Short Name: " + model.ShortName;
+                }
+                if (punishmentNature.Priority != model.Priority)
+                {
+                    bnLog.PreviousValue += ", Priority: " + punishmentNature.Priority;
+                    bnLog.UpdatedValue += ", Priority: " + model.Priority;
+                }
+
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = model.ModifiedBy;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (punishmentNature.Name != model.Name || punishmentNature.ShortName != model.ShortName || punishmentNature.Priority != model.Priority)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -98,6 +142,19 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PunishmentNature";
+                bnLog.TableEntryForm = "Punishment Nature";
+
+                bnLog.PreviousValue = "Id: " + punishmentNature.PunishmentNatureId + ", Name: " + punishmentNature.Name + ", Short Name: " + punishmentNature.ShortName + ", Priority: " + punishmentNature.Priority;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
                 return await punishmentNatureRepository.DeleteAsync(punishmentNature);
             }
         }

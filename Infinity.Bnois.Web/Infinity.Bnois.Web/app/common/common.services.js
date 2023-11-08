@@ -1,9 +1,9 @@
 ﻿(function () {
     "use strict";
 
-	window.baseAPIUrl = 'http://192.168.1.42:24116/';//API URL
-    window.identityServerUrl = "http://192.168.1.42:24116/core";
-    window.identityServerAPI = "http://192.168.1.42:24116/";
+	window.baseAPIUrl = 'http://localhost:24116/';//API URL
+    window.identityServerUrl = "http://localhost:24116/core";
+    window.identityServerAPI = "http://localhost:24116/";
 
     var commonServie = angular.module("common.services", []);
 

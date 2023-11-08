@@ -22,7 +22,7 @@
                     var nodeTemplate = function (data) {
                         return `
         
-        <a target="_blank" href="http://192.168.1.42:24123/office-appointment-structures/${data.officeId}">
+        <a target="_blank" href="http://localhost:24123/office-appointment-structures/${data.officeId}">
         <div class="title">${data.shortName}</div>
         <div class="content">${data.count}</div>
   </a>

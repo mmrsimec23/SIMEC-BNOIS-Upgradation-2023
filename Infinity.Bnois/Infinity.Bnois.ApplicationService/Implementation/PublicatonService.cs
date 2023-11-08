@@ -15,9 +15,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
 
         private readonly IBnoisRepository<Publication> publicationRepository;
-        public PublicationService(IBnoisRepository<Publication> publicationRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public PublicationService(IBnoisRepository<Publication> publicationRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.publicationRepository = publicationRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<PublicationModel> GetPublications(int ps, int pn, string qs, out int total)
@@ -71,6 +75,52 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 	            publication.ModifiedDate = DateTime.Now;
 	            publication.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Publication";
+                bnLog.TableEntryForm = "Publication";
+                bnLog.PreviousValue = "Id: " + model.PublicationId;
+                bnLog.UpdatedValue = "Id: " + model.PublicationId;
+                if (publication.PublicationCategoryId != model.PublicationCategoryId)
+                {
+                    if (publication.PublicationCategoryId > 0)
+                    {
+                        var prevPublicationCategory = employeeService.GetDynamicTableInfoById("PublicationCategory", "PublicationCategoryId", publication.PublicationCategoryId);
+                        bnLog.PreviousValue += ", Publication Category: " + ((dynamic)prevPublicationCategory).Name;
+                    }
+                    if (model.PublicationCategoryId > 0)
+                    {
+                        var newPublicationCategory = employeeService.GetDynamicTableInfoById("PublicationCategory", "PublicationCategoryId", model.PublicationCategoryId);
+                        bnLog.UpdatedValue += ", PublicationCategory: " + ((dynamic)newPublicationCategory).Name;
+                    }
+                }
+                if (publication.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + publication.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (publication.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ", Short Name: " + publication.ShortName;
+                    bnLog.UpdatedValue += ", Short Name: " + model.ShortName;
+                }
+                
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (publication.PublicationCategoryId != model.PublicationCategoryId || publication.Name != model.Name || publication.ShortName != model.ShortName)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -100,6 +150,21 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Publication";
+                bnLog.TableEntryForm = "Publication";
+
+                var prevPublicationCategory = employeeService.GetDynamicTableInfoById("PublicationCategory", "PublicationCategoryId", publication.PublicationCategoryId);
+                
+                bnLog.PreviousValue = "Id: " + publication.PublicationId + ", Publication Category: " + ((dynamic)prevPublicationCategory).Name + ", Name: " + publication.Name + ", ShortName: " + publication.ShortName;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
                 return await publicationRepository.DeleteAsync(publication);
             }
         }

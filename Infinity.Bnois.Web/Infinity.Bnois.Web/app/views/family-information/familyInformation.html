@@ -183,11 +183,13 @@
                                 <td class="reportTD">{{spouseInfo.deadReason}}</td>
                             </tr>-->
 
-                            <!--<tr class="reportTR">
-        <td class="reportTD" style="font-weight: bold">Father Permanent Address</td>
-        <td class="reportTD">{{spouseInfo.fatherPerAddress}}</td>
+                            <tr class="reportTR">
+                                <td class="reportTD" style="font-weight: bold">Present Address</td>
+                                <td class="reportTD">{{spouseInfo.fatherPreAddress}}</td>
+                                <td class="reportTD" style="font-weight: bold">Permanent Address</td>
+                                <td class="reportTD">{{spouseInfo.fatherPerAddress}}</td>
 
-    </tr>-->
+                            </tr>
                             <!--<tr class="reportTR">
         <td class="reportTD" style="font-weight: bold">Father's Other Info</td>
         <td class="reportTD">{{spouseInfo.fatherOtherInfo}}</td>
@@ -362,7 +364,7 @@
                         <tr class="reportTR" ng-repeat="familyPermissionRelation in vm.familyPermissionRelations">
                             <td class="reportTD" style="text-align: center; width: 50px;">{{$index+1}}</td>
                             <td class="reportTD" style="text-align: left;">{{familyPermissionRelation.relation}}</td>
-                            <td class="reportTD" style="text-align: center;"><a target="_blank" href="http://192.168.1.42:24123/family-permission-list-by-type/{{familyPermissionRelation.pno}}/{{familyPermissionRelation.relationId}}" style="text-decoration: none;"><strong>{{familyPermissionRelation.total}}</strong></a></td>
+                            <td class="reportTD" style="text-align: center;"><a target="_blank" href="http://localhost:24123/family-permission-list-by-type/{{familyPermissionRelation.pno}}/{{familyPermissionRelation.relationId}}" style="text-decoration: none;"><strong>{{familyPermissionRelation.total}}</strong></a></td>
                         </tr>
                     </tbody>
                 </table>

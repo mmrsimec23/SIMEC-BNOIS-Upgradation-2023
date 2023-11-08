@@ -17,12 +17,16 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<PtDeductPunishment> ptDeductPunishmentRepository;
         private readonly IBnoisRepository<PunishmentCategory> punishmentCategoryRepository;
         private readonly IBnoisRepository<EmployeeGeneral> employeeGeneralRepository;
-        public PunishmentAccidentService(IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<PunishmentCategory> punishmentCategoryRepository, IBnoisRepository<PunishmentAccident> punishmentAccidentRepository, IBnoisRepository<PtDeductPunishment> ptDeductPunishmentRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public PunishmentAccidentService(IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<PunishmentCategory> punishmentCategoryRepository, IBnoisRepository<PunishmentAccident> punishmentAccidentRepository, IBnoisRepository<PtDeductPunishment> ptDeductPunishmentRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.punishmentAccidentRepository = punishmentAccidentRepository;
             this.ptDeductPunishmentRepository = ptDeductPunishmentRepository;
             this.punishmentCategoryRepository = punishmentCategoryRepository;
             this.employeeGeneralRepository = employeeGeneralRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<PunishmentAccidentModel> GetPunishmentAccidents(int ps, int pn, string qs, out int total)
@@ -75,6 +79,155 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 punishmentAccident.ModifiedDate = DateTime.Now;
                 punishmentAccident.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PunishmentAccident";
+                bnLog.TableEntryForm = "Punishment & Accident";
+                bnLog.PreviousValue = "Id: " + model.PunishmentAccidentId;
+                bnLog.UpdatedValue = "Id: " + model.PunishmentAccidentId;
+                if (punishmentAccident.EmployeeId != model.EmployeeId)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", punishmentAccident.EmployeeId);
+                    var newemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", Employee: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Employee: " + ((dynamic)newemp).PNo + "_" + ((dynamic)newemp).FullNameEng;
+                }
+                if (punishmentAccident.RankId != model.RankId)
+                {
+                    if(punishmentAccident.RankId > 0)
+                    {
+                        var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", punishmentAccident.RankId ?? 0);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
+                    }
+                    if (model.RankId > 0)
+                    {
+                        var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId ?? 0);
+                        bnLog.UpdatedValue += ", Rank: " + ((dynamic)rank).ShortName;
+                    }
+                }
+                if (punishmentAccident.IsBackLog != model.IsBackLog)
+                {
+                    bnLog.PreviousValue += ", Back Log: " + punishmentAccident.IsBackLog;
+                    bnLog.UpdatedValue += ", Back Log: " + model.IsBackLog;
+                }
+
+                if (punishmentAccident.TransferId != model.TransferId)
+                {
+                    if(punishmentAccident.TransferId > 0)
+                    {
+                        var prevTransfer = employeeService.GetDynamicTableInfoById("vwTransfer", "TransferId", punishmentAccident.TransferId ?? 0);
+                        bnLog.PreviousValue += ", Born/Attach/Appointment: " + ((dynamic)prevTransfer).BornOffice + '/' + ((dynamic)prevTransfer).CurrentAttach + '/' + ((dynamic)prevTransfer).Appointment;
+
+                    }
+                    if (model.TransferId > 0)
+                    {
+                        var newTransfer = employeeService.GetDynamicTableInfoById("vwTransfer", "TransferId", model.TransferId ?? 0);
+                        bnLog.UpdatedValue += ", Born/Attach/Appointment: " + ((dynamic)newTransfer).BornOffice + '/' + ((dynamic)newTransfer).CurrentAttach + '/' + ((dynamic)newTransfer).Appointment;
+
+                    }
+                }
+                if (punishmentAccident.Type != model.Type)
+                {
+                    bnLog.PreviousValue += ", Type: " + (punishmentAccident.Type == 1 ? "Punishment" : punishmentAccident.Type == 2 ? "Accident" : "");
+                    bnLog.UpdatedValue += ", Type: " + (model.Type == 1 ? "Punishment" : model.Type == 2 ? "Accident" : "");
+                }
+                if (punishmentAccident.PunishmentCategoryId != model.PunishmentCategoryId)
+                {
+                    if (punishmentAccident.PunishmentCategoryId > 0)
+                    {
+                        var prevcat = employeeService.GetDynamicTableInfoById("PunishmentCategory", "PunishmentCategoryId", punishmentAccident.PunishmentCategoryId ?? 0);
+                        bnLog.PreviousValue += ", Punishment Category: " + ((dynamic)prevcat).Name;
+                    }
+                    if (model.PunishmentCategoryId > 0)
+                    {
+                        var newcat = employeeService.GetDynamicTableInfoById("PunishmentCategory", "PunishmentCategoryId", model.PunishmentCategoryId ?? 0);
+                        bnLog.UpdatedValue += ", Punishment Category: " + ((dynamic)newcat).Name;
+                    }
+
+                }
+                if (punishmentAccident.PunishmentSubCategoryId != model.PunishmentSubCategoryId)
+                {
+                    if (punishmentAccident.PunishmentSubCategoryId > 0)
+                    {
+                        var prevsub = employeeService.GetDynamicTableInfoById("PunishmentSubCategory", "PunishmentSubCategoryId", punishmentAccident.PunishmentSubCategoryId ?? 0);
+                        bnLog.PreviousValue += ", Punishment Sub Category: " + ((dynamic)prevsub).Name;
+                    }
+                    if (model.PunishmentSubCategoryId > 0)
+                    {
+                        var newsub = employeeService.GetDynamicTableInfoById("PunishmentSubCategory", "PunishmentSubCategoryId", model.PunishmentSubCategoryId ?? 0);
+                        bnLog.UpdatedValue += ", Punishment Sub Category: " + ((dynamic)newsub).Name;
+                    }
+                }
+                if (punishmentAccident.PunishmentNatureId != model.PunishmentNatureId)
+                {
+                    if (punishmentAccident.PunishmentNatureId > 0)
+                    {
+                        var prevPunishmentNature = employeeService.GetDynamicTableInfoById("PunishmentNature", "PunishmentNatureId", punishmentAccident.PunishmentNatureId ?? 0);
+                        bnLog.PreviousValue += ", Punishment Nature: " + ((dynamic)prevPunishmentNature).Name;
+                    }
+                    if (model.PunishmentNatureId > 0)
+                    {
+                        var newPunishmentNature = employeeService.GetDynamicTableInfoById("PunishmentNature", "PunishmentNatureId", model.PunishmentNatureId ?? 0);
+                        bnLog.UpdatedValue += ", Punishment Nature: " + ((dynamic)newPunishmentNature).Name;
+                    }
+                }
+                if (punishmentAccident.DurationMonths != model.DurationMonths)
+                {
+                    bnLog.PreviousValue += ", Duration Months: " + punishmentAccident.DurationMonths;
+                    bnLog.UpdatedValue += ", Duration Months: " + model.DurationMonths;
+                }
+                if (punishmentAccident.DurationDays != model.DurationDays)
+                {
+                    bnLog.PreviousValue += ", Duration Days: " + punishmentAccident.DurationDays;
+                    bnLog.UpdatedValue += ", Duration Days: " + model.DurationDays;
+                }
+
+                if (punishmentAccident.AccedentType != model.AccedentType)
+                {
+                    bnLog.PreviousValue += ", Accedent Type: " + (punishmentAccident.AccedentType == 1 ? "Major" : punishmentAccident.AccedentType == 2 ? "Minor" : "");
+                    bnLog.UpdatedValue += ", Accedent Type: " + (model.AccedentType == 1 ? "Major" : model.AccedentType == 2 ? "Minor" : "");
+                }
+                if (punishmentAccident.Date != model.Date)
+                {
+                    bnLog.PreviousValue += ", Date: " + punishmentAccident.Date.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Date: " + model.Date?.ToString("dd/MM/yyyy");
+                }
+                if (punishmentAccident.Reason != model.Reason)
+                {
+                    bnLog.PreviousValue += ", Reason (For Report): " + punishmentAccident.Remarks;
+                    bnLog.UpdatedValue += ", Reason (For Report): " + model.Remarks;
+                }
+                if (punishmentAccident.PunishmentType != model.PunishmentType)
+                {
+                    bnLog.PreviousValue +=  ", Punishment Type (For Report): " + punishmentAccident.PunishmentType;
+                    bnLog.UpdatedValue += ", Punishment Type (For Report): " + model.PunishmentType;
+                }
+                if (punishmentAccident.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + punishmentAccident.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                }
+                if (punishmentAccident.FileName != model.FileName)
+                {
+                    bnLog.PreviousValue += ", File: " + punishmentAccident.FileName;
+                    bnLog.UpdatedValue += ", File: " + model.FileName;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (punishmentAccident.FileName != model.FileName || punishmentAccident.Remarks != model.Remarks || punishmentAccident.PunishmentType != model.PunishmentType || punishmentAccident.Reason != model.Reason || punishmentAccident.Date != model.Date || punishmentAccident.AccedentType != model.AccedentType || punishmentAccident.DurationDays != model.DurationDays || punishmentAccident.DurationMonths != model.DurationMonths || punishmentAccident.PunishmentNatureId != model.PunishmentNatureId || punishmentAccident.PunishmentSubCategoryId != model.PunishmentSubCategoryId || punishmentAccident.PunishmentCategoryId != model.PunishmentCategoryId || punishmentAccident.Type != model.Type || punishmentAccident.TransferId != model.TransferId || punishmentAccident.IsBackLog != model.IsBackLog || punishmentAccident.RankId != model.RankId || punishmentAccident.EmployeeId != model.EmployeeId)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -170,6 +323,59 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PunishmentAccident";
+                bnLog.TableEntryForm = "Punishment & Accident";
+                bnLog.PreviousValue = "Id: " + punishmentAccident.PunishmentAccidentId;
+
+                var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", punishmentAccident.EmployeeId);
+                    bnLog.PreviousValue += ", Employee: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                
+                if (punishmentAccident.RankId > 0)
+                    {
+                        var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", punishmentAccident.RankId ?? 0);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
+                    }
+                    bnLog.PreviousValue += ", Back Log: " + punishmentAccident.IsBackLog;
+                    if (punishmentAccident.TransferId > 0)
+                    {
+                        var prevTransfer = employeeService.GetDynamicTableInfoById("vwTransfer", "TransferId", punishmentAccident.TransferId ?? 0);
+                        bnLog.PreviousValue += ", Born/Attach/Appointment: " + ((dynamic)prevTransfer).BornOffice + '/' + ((dynamic)prevTransfer).CurrentAttach + '/' + ((dynamic)prevTransfer).Appointment;
+
+                    }
+                    bnLog.PreviousValue += ", Type: " + (punishmentAccident.Type == 1 ? "Punishment" : punishmentAccident.Type == 2 ? "Accident" : "");
+                    if (punishmentAccident.PunishmentCategoryId > 0)
+                    {
+                        var prevcat = employeeService.GetDynamicTableInfoById("PunishmentCategory", "PunishmentCategoryId", punishmentAccident.PunishmentCategoryId ?? 0);
+                        bnLog.PreviousValue += ", Punishment Category: " + ((dynamic)prevcat).Name;
+                    }
+                    if (punishmentAccident.PunishmentSubCategoryId > 0)
+                    {
+                        var prevsub = employeeService.GetDynamicTableInfoById("PunishmentSubCategory", "PunishmentSubCategoryId", punishmentAccident.PunishmentSubCategoryId ?? 0);
+                        bnLog.PreviousValue += ", Punishment Sub Category: " + ((dynamic)prevsub).Name;
+                    }
+                    if (punishmentAccident.PunishmentNatureId > 0)
+                    {
+                        var prevPunishmentNature = employeeService.GetDynamicTableInfoById("PunishmentNature", "PunishmentNatureId", punishmentAccident.PunishmentNatureId ?? 0);
+                        bnLog.PreviousValue += ", Punishment Nature: " + ((dynamic)prevPunishmentNature).Name;
+                    }
+                    bnLog.PreviousValue += ", Duration Months: " + punishmentAccident.DurationMonths;
+                    bnLog.PreviousValue += ", Duration Days: " + punishmentAccident.DurationDays;
+                    bnLog.PreviousValue += ", Accedent Type: " + (punishmentAccident.AccedentType == 1 ? "Major" : punishmentAccident.AccedentType == 2 ? "Minor" : "");
+                    bnLog.PreviousValue += ", Date: " + punishmentAccident.Date.ToString("dd/MM/yyyy");
+                    bnLog.PreviousValue += ", Reason (For Report): " + punishmentAccident.Remarks;
+                    bnLog.PreviousValue += ", Punishment Type (For Report): " + punishmentAccident.PunishmentType;
+                    bnLog.PreviousValue += ", Remarks: " + punishmentAccident.Remarks;
+                    bnLog.PreviousValue += ", File: " + punishmentAccident.FileName;
+                    
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
                 return await punishmentAccidentRepository.DeleteAsync(punishmentAccident);
             }
         }

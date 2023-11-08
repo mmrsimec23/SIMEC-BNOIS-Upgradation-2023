@@ -12,19 +12,19 @@
         Furlough_Leave: 5,
 
 
-        APPLICATION_URL: 'http://192.168.1.42:24123/',
-        API_URL: 'http://192.168.1.42:24116/',
-        API_OFFICER_PICTURE_URL: 'http://192.168.1.42:24116/Documents/OfficerPicture/',
-		OFFICER_SIGNATURE_URL: 'http://192.168.1.42:24116/Documents/OfficerSignature/',
-        FILE_URL:'http://192.168.1.42:24116/Documents/File/',
-        IMAGE_URL: 'http://192.168.1.42:24116/Documents/Image/'
+        APPLICATION_URL: 'http://localhost:24123/',
+        API_URL: 'http://localhost:24116/',
+        API_OFFICER_PICTURE_URL: 'http://localhost:24116/Documents/OfficerPicture/',
+		OFFICER_SIGNATURE_URL: 'http://localhost:24116/Documents/OfficerSignature/',
+        FILE_URL:'http://localhost:24116/Documents/File/',
+        IMAGE_URL: 'http://localhost:24116/Documents/Image/'
 
-  //      APPLICATION_URL: 'http://192.168.1.42:24123/',
-  //      API_URL: 'http://192.168.1.42:24116/',
-		//API_OFFICER_PICTURE_URL: 'http://192.168.1.42:24116//Documents/OfficerPicture/',
-		//OFFICER_SIGNATURE_URL: 'http://192.168.1.42:24116//Documents/OfficerSignature/',
-		//FILE_URL: 'http://192.168.1.42:24116//Documents/File/',
-		//IMAGE_URL: 'http://192.168.1.42:24116//Documents/Image/'
+  //      APPLICATION_URL: 'http://localhost:24123/',
+  //      API_URL: 'http://localhost:24116/',
+		//API_OFFICER_PICTURE_URL: 'http://localhost:24116//Documents/OfficerPicture/',
+		//OFFICER_SIGNATURE_URL: 'http://localhost:24116//Documents/OfficerSignature/',
+		//FILE_URL: 'http://localhost:24116//Documents/File/',
+		//IMAGE_URL: 'http://localhost:24116//Documents/Image/'
 
 
 	});

@@ -63,7 +63,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             if (id > 0)
             {
-                employeeMscEducation = employeeMscEducationRepository.FindOne(x => x.EmployeeMscEducationId == id, new List<string> { "Employee", "Employee.Rank", "MscEducationType", "MscInstitute", "MscPermissionType", "Country" });
+                employeeMscEducation = employeeMscEducationRepository.FindOne(x => x.EmployeeMscEducationId == id);
                 if (employeeMscEducation == null)
                 {
                     throw new InfinityNotFoundException("Employee Msc Education not found !");
@@ -80,38 +80,44 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.UpdatedValue = "Id: " + model.EmployeeMscEducationId;
                 if (employeeMscEducation.EmployeeId != model.EmployeeId)
                 {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeMscEducation.EmployeeId);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Name: " + employeeMscEducation.Employee.Name + " _ " + employeeMscEducation.Employee.PNo;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
                 }
                 if (employeeMscEducation.MscEducationTypeId != model.MscEducationTypeId)
                 {
+                    var prevmsc = employeeService.GetDynamicTableInfoById("MscEducationType", "MscEducationTypeId", employeeMscEducation.MscEducationTypeId??0);
                     var msc = employeeService.GetDynamicTableInfoById("MscEducationType", "MscEducationTypeId", model.MscEducationTypeId??0);
-                    bnLog.PreviousValue += ", MscEducationType: " + employeeMscEducation.MscEducationType.Name;
+                    bnLog.PreviousValue += ", MscEducationType: " + ((dynamic)prevmsc).Name;
                     bnLog.UpdatedValue += ", MscEducationType: " + ((dynamic)msc).Name;
                 }
                 if (employeeMscEducation.MscInstituteId != model.MscInstituteId)
                 {
+                    var prevmscins = employeeService.GetDynamicTableInfoById("MscInstitute", "MscInstituteId", employeeMscEducation.MscInstituteId ?? 0);
                     var mscins = employeeService.GetDynamicTableInfoById("MscInstitute", "MscInstituteId", model.MscInstituteId ?? 0);
-                    bnLog.PreviousValue += ", MscInstitute: " + employeeMscEducation.MscInstitute.Name;
-                    bnLog.UpdatedValue += ", MscInstitute: " + ((dynamic)mscins).Name;
+                    bnLog.PreviousValue += ", Msc Institute: " + ((dynamic)prevmscins).Name;
+                    bnLog.UpdatedValue += ", Msc Institute: " + ((dynamic)mscins).Name;
                 }
                 if (employeeMscEducation.MscPermissionTypeId != model.MscPermissionTypeId)
                 {
+                    var prevmscPer = employeeService.GetDynamicTableInfoById("MscPermissionType", "MscPermissionTypeId", employeeMscEducation.MscPermissionTypeId ?? 0);
                     var mscPer = employeeService.GetDynamicTableInfoById("MscPermissionType", "MscPermissionTypeId", model.MscPermissionTypeId ?? 0);
-                    bnLog.PreviousValue += ", MscPermissionType: " + employeeMscEducation.MscPermissionType.Name;
+                    bnLog.PreviousValue += ", Msc Permission Type: " + ((dynamic)prevmscPer).Name;
                     bnLog.UpdatedValue += ", MscPermissionType: " + ((dynamic)mscPer).Name;
                 }
                 if (employeeMscEducation.CountryId != model.CountryId)
                 {
+                    var prevcountry = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeMscEducation.CountryId ?? 0);
                     var country = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId ?? 0);
-                    bnLog.PreviousValue += ", Country: " + employeeMscEducation.Country.FullName;
+                    bnLog.PreviousValue += ", Country: " + ((dynamic)prevcountry).FullName;
                     bnLog.UpdatedValue += ", Country: " + ((dynamic)country).FullName;
                 }
                 if (employeeMscEducation.RankId != model.RankId)
                 {
+                    var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeMscEducation.RankId ?? 0);
                     var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId ?? 0);
-                    bnLog.PreviousValue += ", Rank: " + employeeMscEducation.Rank.ShortName;
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
                     bnLog.UpdatedValue += ", Rank: " + ((dynamic)rank).ShortName;
                 }
                 if (employeeMscEducation.PassingYear != model.PassingYear)
@@ -136,13 +142,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (employeeMscEducation.FromDate != model.FromDate)
                 {
-                    bnLog.PreviousValue += ", FromDate: " + employeeMscEducation.FromDate;
-                    bnLog.UpdatedValue += ", FromDate: " + model.FromDate;
+                    bnLog.PreviousValue += ", FromDate: " + employeeMscEducation.FromDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", FromDate: " + model.FromDate?.ToString("dd/MM/yyyy");
                 }
                 if (employeeMscEducation.ToDate != model.ToDate)
                 {
-                    bnLog.PreviousValue += ", ToDate: " + employeeMscEducation.ToDate;
-                    bnLog.UpdatedValue += ", ToDate: " + model.ToDate;
+                    bnLog.PreviousValue += ", ToDate: " + employeeMscEducation.ToDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", ToDate: " + model.ToDate?.ToString("dd/MM/yyyy");
                 }
                 if (employeeMscEducation.Remarks != model.Remarks)
                 {
@@ -219,10 +225,17 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "EmployeeMscEducation";
                 bnLog.TableEntryForm = "Officer Msc Edu";
-                bnLog.PreviousValue = "Id: " + employeeMscEducation.EmployeeMscEducationId + ", Name: " + employeeMscEducation.EmployeeId + ", MscEducationType: " + employeeMscEducation.MscEducationTypeId
-                    + ", Remarks: " + employeeMscEducation.Remarks + ", MscInstitute: " + employeeMscEducation.MscInstituteId + ", MscPermissionType: " + employeeMscEducation.MscPermissionTypeId
-                    + ", Country: " + employeeMscEducation.CountryId + ", Rank: " + employeeMscEducation.RankId + ", PassingYear: " + employeeMscEducation.PassingYear
-                    + ", Results: " + employeeMscEducation.Results + ", IsComplete: " + employeeMscEducation.IsComplete + ", FromDate: " + employeeMscEducation.FromDate + ", ToDate: " + employeeMscEducation.ToDate;
+                var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeMscEducation.EmployeeId);
+                var msc = employeeService.GetDynamicTableInfoById("MscEducationType", "MscEducationTypeId", employeeMscEducation.MscEducationTypeId ?? 0);
+                var mscins = employeeService.GetDynamicTableInfoById("MscInstitute", "MscInstituteId", employeeMscEducation.MscInstituteId ?? 0);
+                var mscPer = employeeService.GetDynamicTableInfoById("MscPermissionType", "MscPermissionTypeId", employeeMscEducation.MscPermissionTypeId ?? 0);
+                var country = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeMscEducation.CountryId ?? 0);
+                var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeMscEducation.RankId ?? 0);
+
+                bnLog.PreviousValue = "Id: " + employeeMscEducation.EmployeeMscEducationId + ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng + ", Msc Education Type: " + ((dynamic)msc).Name
+                    + ", Rank: " + ((dynamic)rank).ShortName + ", Remarks: " + employeeMscEducation.Remarks + ", Msc Institute: " + ((dynamic)mscins).Name + ", Msc Permission Type: " + ((dynamic)mscPer).Name
+                    + ", Country: " + ((dynamic)country).FullName + ", PassingYear: " + employeeMscEducation.PassingYear + ", Results: " + employeeMscEducation.Results + ", IsComplete: " + employeeMscEducation.IsComplete + 
+                    ", From Date: " + employeeMscEducation.FromDate?.ToString("dd/MM/yyyy") + ", To Date: " + employeeMscEducation.ToDate?.ToString("dd/MM/yyyy");
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete

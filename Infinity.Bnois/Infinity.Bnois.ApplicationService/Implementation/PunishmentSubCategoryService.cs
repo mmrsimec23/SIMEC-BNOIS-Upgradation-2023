@@ -15,9 +15,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
 
         private readonly IBnoisRepository<PunishmentSubCategory> punishmentSubCategoryRepository;
-        public PunishmentSubCategoryService(IBnoisRepository<PunishmentSubCategory> punishmentSubCategoryRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public PunishmentSubCategoryService(IBnoisRepository<PunishmentSubCategory> punishmentSubCategoryRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.punishmentSubCategoryRepository = punishmentSubCategoryRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<PunishmentSubCategoryModel> GetPunishmentSubCategories(int ps, int pn, string qs, out int total)
@@ -71,6 +75,54 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 punishmentSubCategory.ModifiedDate = DateTime.Now;
                 punishmentSubCategory.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PunishmentSubCategory";
+                bnLog.TableEntryForm = "Punishment Sub Category";
+                bnLog.PreviousValue = "Id: " + model.PunishmentSubCategoryId;
+                bnLog.UpdatedValue = "Id: " + model.PunishmentSubCategoryId;
+                if (punishmentSubCategory.PunishmentCategoryId != model.PunishmentCategoryId)
+                {
+                    
+                        var prevPublicationCategory = employeeService.GetDynamicTableInfoById("PunishmentCategory", "PunishmentCategoryId", punishmentSubCategory.PunishmentCategoryId);
+                        bnLog.PreviousValue += ", Punishment Category: " + ((dynamic)prevPublicationCategory).Name;
+                   
+                        var newPublicationCategory = employeeService.GetDynamicTableInfoById("PunishmentCategory", "PunishmentCategoryId", model.PunishmentCategoryId);
+                        bnLog.UpdatedValue += ", Punishment Category: " + ((dynamic)newPublicationCategory).Name;
+                    
+                }
+                if (punishmentSubCategory.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + punishmentSubCategory.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                }
+                if (punishmentSubCategory.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ", Short Name: " + punishmentSubCategory.ShortName;
+                    bnLog.UpdatedValue += ", Short Name: " + model.ShortName;
+                }
+                if (punishmentSubCategory.GotoTrace != model.GotoTrace)
+                {
+                    bnLog.PreviousValue += ", Go to Trace: " + punishmentSubCategory.GotoTrace;
+                    bnLog.UpdatedValue += ", Go to Trace: " + model.GotoTrace;
+                }
+
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (punishmentSubCategory.PunishmentCategoryId != model.PunishmentCategoryId || punishmentSubCategory.Name != model.Name || punishmentSubCategory.ShortName != model.ShortName || punishmentSubCategory.GotoTrace != model.GotoTrace)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -101,6 +153,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PunishmentSubCategory";
+                bnLog.TableEntryForm = "Punishment Sub Category";
+
+                bnLog.PreviousValue = "Id: " + punishmentSubCategory.PunishmentSubCategoryId + ", Name: " + punishmentSubCategory.Name + ", Short Name: " + punishmentSubCategory.ShortName + ", Go To Trace: " + punishmentSubCategory.GotoTrace;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
                 return await punishmentSubCategoryRepository.DeleteAsync(punishmentSubCategory);
             }
         }

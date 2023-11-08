@@ -21,9 +21,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<EmployeeGeneral> employeeGeneralRepository;
         private readonly IBnoisRepository<AgeServicePolicy> ageServicePolicyRepository;
         private readonly IProcessRepository processRepository;
-        public EmployeeService(IBnoisRepository<AgeServicePolicy> ageServicePolicyRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<EmployeeStatus> employeeStatusRepository, IBnoisRepository<Employee> employeeRepository, IBnoisRepository<OfficerType> officerTypeRepository, IProcessRepository processRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public EmployeeService(IBnoisRepository<AgeServicePolicy> ageServicePolicyRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<EmployeeStatus> employeeStatusRepository, IBnoisRepository<Employee> employeeRepository, IBnoisRepository<OfficerType> officerTypeRepository, IProcessRepository processRepository)
         {
             this.employeeRepository = employeeRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
             this.officerTypeRepository = officerTypeRepository;
             this.employeeStatusRepository = employeeStatusRepository;
             this.processRepository = processRepository;
@@ -72,6 +74,174 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 employee.SLCode = employeeStatus.SLCode;
                 employee.ModifiedDate = DateTime.Now;
                 employee.ModifiedBy = model.ModifiedBy;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Employee";
+                bnLog.TableEntryForm = "Employee";
+                bnLog.PreviousValue = "Id: " + model.EmployeeId;
+                bnLog.UpdatedValue = "Id: " + model.EmployeeId;
+
+                if (employee.PNo != model.PNo)
+                {
+                    bnLog.PreviousValue += ", Personal Number: " + employee.PNo;
+                    bnLog.UpdatedValue += ", Personal Number: " + model.PNo;
+                }
+                if (employee.OfficerTypeId != model.OfficerTypeId)
+                {
+                    if (employee.OfficerTypeId > 0)
+                    {
+                        var prevOfficerType = GetDynamicTableInfoById("OfficerType", "OfficerTypeId", employee.OfficerTypeId);
+                        bnLog.PreviousValue += ", Officer Type: " + ((dynamic)prevOfficerType).Name;
+                    }
+                    if (model.OfficerTypeId > 0)
+                    {
+                        var newOfficerType = GetDynamicTableInfoById("OfficerType", "OfficerTypeId", model.OfficerTypeId);
+                        bnLog.UpdatedValue += ", Officer Type: " + ((dynamic)newOfficerType).Name;
+                    }
+                }
+                if (employee.RankCategoryId != model.RankCategoryId)
+                {
+                    if (employee.RankCategoryId > 0)
+                    {
+                        var prevRankCategory = GetDynamicTableInfoById("RankCategory", "RankCategoryId", employee.RankCategoryId);
+                        bnLog.PreviousValue += ", Organization: " + ((dynamic)prevRankCategory).Name;
+                    }
+                    if (model.RankCategoryId > 0)
+                    {
+                        var newRankCategory = GetDynamicTableInfoById("RankCategory", "RankCategoryId", model.RankCategoryId);
+                        bnLog.UpdatedValue += ", Organization: " + ((dynamic)newRankCategory).Name;
+                    }
+                }
+                if (employee.CountryId != model.CountryId)
+                {
+                    if (employee.CountryId > 0)
+                    {
+                        var prevCountry = GetDynamicTableInfoById("Country", "CountryId", employee.CountryId);
+                        bnLog.PreviousValue += ", Country: " + ((dynamic)prevCountry).FullName;
+                    }
+                    if (model.CountryId > 0)
+                    {
+                        var newCountry = GetDynamicTableInfoById("Country", "CountryId", model.CountryId);
+                        bnLog.UpdatedValue += ", Country: " + ((dynamic)newCountry).FullName;
+                    }
+                }
+                if (employee.BnNo != model.BnNo)
+                {
+                    bnLog.PreviousValue += ", BN Number: " + employee.BnNo;
+                    bnLog.UpdatedValue += ", BN Number: " + model.BnNo;
+                }
+                if (employee.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Full Name: " + employee.Name;
+                    bnLog.UpdatedValue += ", Full Name: " + model.Name;
+                }
+                if (employee.FullNameBan != model.FullNameBan)
+                {
+                    bnLog.PreviousValue += ", Full Name (বাংলা): " + employee.FullNameBan;
+                    bnLog.UpdatedValue += ", Full Name (বাংলা): " + model.FullNameBan;
+                }
+
+                if (employee.BatchId != model.BatchId)
+                {
+                    if (employee.BatchId > 0)
+                    {
+                        var prevBatch = GetDynamicTableInfoById("Batch", "BatchId", employee.BatchId??0);
+                        bnLog.PreviousValue += ", Batch: " + ((dynamic)prevBatch).Name;
+                    }
+                    if (model.BatchId > 0)
+                    {
+                        var newBatch = GetDynamicTableInfoById("Batch", "BatchId", model.BatchId??0);
+                        bnLog.UpdatedValue += ", Batch: " + ((dynamic)newBatch).Name;
+                    }
+                }
+                if (employee.BatchPosition != model.BatchPosition)
+                {
+                    bnLog.PreviousValue += ", Batch Position: " + employee.BatchPosition;
+                    bnLog.UpdatedValue += ", Batch Position: " + model.BatchPosition;
+                }
+                if (employee.GenderId != model.GenderId)
+                {
+                    if (employee.GenderId > 0)
+                    {
+                        var prevGender = GetDynamicTableInfoById("Gender", "GenderId", employee.GenderId);
+                        bnLog.PreviousValue += ", Gender: " + ((dynamic)prevGender).Name;
+                    }
+                    if (model.BatchId > 0)
+                    {
+                        var newGender = GetDynamicTableInfoById("Gender", "GenderId", model.GenderId);
+                        bnLog.UpdatedValue += ", Gender: " + ((dynamic)newGender).Name;
+                    }
+                }
+                if (employee.RankId != model.RankId)
+                {
+                    if (employee.RankId > 0)
+                    {
+                        var prevRank = GetDynamicTableInfoById("Rank", "RankId", employee.RankId);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prevRank).FullName;
+                    }
+                    if (model.RankId > 0)
+                    {
+                        var newRank = GetDynamicTableInfoById("Rank", "RankId", model.RankId);
+                        bnLog.UpdatedValue += ", Gender: " + ((dynamic)newRank).FullName;
+                    }
+                }
+                if (employee.EmployeeStatusId != model.EmployeeStatusId)
+                {
+                    if (employee.EmployeeStatusId > 0)
+                    {
+                        var prevEmployeeStatus = GetDynamicTableInfoById("EmployeeStatus", "EmployeeStatusId", employee.EmployeeStatusId);
+                        bnLog.PreviousValue += ", Status: " + ((dynamic)prevEmployeeStatus).StatusTitle;
+                    }
+                    if (model.EmployeeStatusId > 0)
+                    {
+                        var newEmployeeStatus = GetDynamicTableInfoById("EmployeeStatus", "EmployeeStatusId", model.EmployeeStatusId);
+                        bnLog.UpdatedValue += ", Status: " + ((dynamic)newEmployeeStatus).StatusTitle;
+                    }
+                }
+                if (employee.Notification != model.Notification)
+                {
+                    bnLog.PreviousValue += ", Special Notification: " + employee.Notification;
+                    bnLog.UpdatedValue += ", Special Notification: " + model.Notification;
+                }
+                if (employee.ExecutionRemarkId != model.ExecutionRemarkId)
+                {
+                    if (employee.ExecutionRemarkId > 0)
+                    {
+                        var prevExecutionRemark = GetDynamicTableInfoById("ExecutionRemark", "ExecutionRemarkId", employee.ExecutionRemarkId??0);
+                        bnLog.PreviousValue += ", Board Execution Remark(Promotion): " + ((dynamic)prevExecutionRemark).Name;
+                    }
+                    if (model.ExecutionRemarkId > 0)
+                    {
+                        var newExecutionRemark = GetDynamicTableInfoById("ExecutionRemark", "ExecutionRemarkId", model.ExecutionRemarkId??0);
+                        bnLog.UpdatedValue += ", Board Execution Remark(Promotion): " + ((dynamic)newExecutionRemark).Name;
+                    }
+                }
+                if (employee.BExecutionDate != model.BExecutionDate)
+                {
+                    bnLog.PreviousValue += ", Board Execution Date (Promotion): " + employee.BExecutionDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Board Execution Date (Promotion): " + model.BExecutionDate?.ToString("dd/MM/yyyy");
+                }
+                if (employee.BSpRemarks != model.BSpRemarks)
+                {
+                    bnLog.PreviousValue += ", Broad Sheet Special Remarks (Nomination): " + employee.BSpRemarks;
+                    bnLog.UpdatedValue += ", Broad Sheet Special Remarks (Nomination): " + model.BSpRemarks;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = model.ModifiedBy;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (employee.PNo != model.PNo || employee.OfficerTypeId != model.OfficerTypeId || employee.RankCategoryId != model.RankCategoryId || employee.CountryId != model.CountryId || employee.BnNo != model.BnNo || employee.Name != model.Name || employee.FullNameBan != model.FullNameBan || employee.BatchId != model.BatchId || employee.BatchPosition != model.BatchPosition || employee.GenderId != model.GenderId || employee.RankId != model.RankId || employee.EmployeeStatusId != model.EmployeeStatusId || employee.Notification != model.Notification || employee.ExecutionRemarkId != model.ExecutionRemarkId || employee.BExecutionDate != model.BExecutionDate || employee.BSpRemarks != model.BSpRemarks)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -121,6 +291,73 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+
+                bnLog.TableName = "Employee";
+                bnLog.TableEntryForm = "Employee";
+                bnLog.PreviousValue = "Id: " + employee.EmployeeId + ", Personal Number: " + employee.PNo;
+                if (employee.OfficerTypeId > 0)
+                {
+                    var OfficerType = GetDynamicTableInfoById("OfficerType", "OfficerTypeId", employee.OfficerTypeId);
+                    bnLog.PreviousValue += ", Officer Type: " + ((dynamic)OfficerType).Name;
+                }
+                if (employee.RankCategoryId > 0)
+                {
+                    var prevRankCategory = GetDynamicTableInfoById("RankCategory", "RankCategoryId", employee.RankCategoryId);
+                    bnLog.PreviousValue += ", Organization: " + ((dynamic)prevRankCategory).Name;
+                }
+                if (employee.CountryId > 0)
+                {
+                    var prevCountry = GetDynamicTableInfoById("Country", "CountryId", employee.CountryId);
+                    bnLog.PreviousValue += ", Country: " + ((dynamic)prevCountry).FullName;
+                }
+                bnLog.PreviousValue += ", BN Number: " + employee.BnNo + ", Full Name: " + employee.Name + ", Full Name (বাংলা): " + employee.FullNameBan;
+                if (employee.BatchId > 0)
+                {
+                    var prevBatch = GetDynamicTableInfoById("Batch", "BatchId", employee.BatchId ?? 0);
+                    bnLog.PreviousValue += ", Batch: " + ((dynamic)prevBatch).Name;
+                }
+                bnLog.PreviousValue += ", Batch Position: " + employee.BatchPosition;
+                if (employee.GenderId > 0)
+                {
+                    var prevGender = GetDynamicTableInfoById("Gender", "GenderId", employee.GenderId);
+                    bnLog.PreviousValue += ", Gender: " + ((dynamic)prevGender).Name;
+                }
+                if (employee.RankId > 0)
+                {
+                    var prevRank = GetDynamicTableInfoById("Rank", "RankId", employee.RankId);
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prevRank).FullName;
+                }
+                if (employee.EmployeeStatusId > 0)
+                {
+                    var prevEmployeeStatus = GetDynamicTableInfoById("EmployeeStatus", "EmployeeStatusId", employee.EmployeeStatusId);
+                    bnLog.PreviousValue += ", Status: " + ((dynamic)prevEmployeeStatus).StatusTitle;
+                }
+                bnLog.PreviousValue += ", Special Notification: " + employee.Notification;
+                if (employee.ExecutionRemarkId > 0)
+                {
+                    var prevExecutionRemark = GetDynamicTableInfoById("ExecutionRemark", "ExecutionRemarkId", employee.ExecutionRemarkId ?? 0);
+                    bnLog.PreviousValue += ", Board Execution Remark(Promotion): " + ((dynamic)prevExecutionRemark).Name;
+                }
+                bnLog.PreviousValue += ", Board Execution Date (Promotion): " + employee.BExecutionDate?.ToString("dd/MM/yyyy");
+                bnLog.PreviousValue += ", Broad Sheet Special Remarks (Nomination): " + employee.BSpRemarks + ", SLCode:" + employee.SLCode + ", HasDollarSign: " + employee.HasDollarSign + ", Reason: " + employee.Reason + ", DateOfDollarSign: " + employee.DateOfDollarSign?.ToString("dd/MM/yyyy") + ", Seniority: " + employee.Seniority;
+
+                if (employee.TransferId > 0)
+                {
+                    var prevTransfer = GetDynamicTableInfoById("vwTransfer", "TransferId", employee.TransferId ?? 0);
+                    bnLog.PreviousValue += ", Born/Attach/Appointment: " + ((dynamic)prevTransfer).BornOffice + '/' + ((dynamic)prevTransfer).CurrentAttach + '/' + ((dynamic)prevTransfer).Appointment;
+                    
+                }
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
                 return await employeeRepository.DeleteAsync(employee);
             }
         }

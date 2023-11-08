@@ -82,8 +82,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 {
                     var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeFamilyPermission.EmployeeId);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).Name + " _ " + ((dynamic)prevemp).PNo;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
                 }
                 if (employeeFamilyPermission.RelationId != model.RelationId)
                 {
@@ -118,13 +118,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (employeeFamilyPermission.FromDate != model.FromDate)
                 {
-                    bnLog.PreviousValue += ", FromDate: " + employeeFamilyPermission.FromDate;
-                    bnLog.UpdatedValue += ", FromDate: " + model.FromDate;
+                    bnLog.PreviousValue += ", FromDate: " + employeeFamilyPermission.FromDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", FromDate: " + model.FromDate?.ToString("dd/MM/yyyy");
                 }
                 if (employeeFamilyPermission.ToDate != model.ToDate)
                 {
-                    bnLog.PreviousValue += ", ToDate: " + employeeFamilyPermission.ToDate;
-                    bnLog.UpdatedValue += ", ToDate: " + model.ToDate;
+                    bnLog.PreviousValue += ", ToDate: " + employeeFamilyPermission.ToDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", ToDate: " + model.ToDate?.ToString("dd/MM/yyyy");
                 }
                 if (employeeFamilyPermission.Remarks != model.Remarks)
                 {
@@ -197,11 +197,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "EmployeeFamilyPermission";
                 bnLog.TableEntryForm = "Officer Family Permission";
-                bnLog.PreviousValue = "Id: " + employeeFamilyPermission.EmployeeFamilyPermissionId + ", Name: " + employeeFamilyPermission.EmployeeId
+                var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeFamilyPermission.EmployeeId);
+                
+                bnLog.PreviousValue = "Id: " + employeeFamilyPermission.EmployeeFamilyPermissionId + ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng
                     + ", Relation: " + employeeFamilyPermission.RelationId + ", Remarks: " + employeeFamilyPermission.Remarks 
                     + ", Country: " + employeeFamilyPermission.CountryId + ", Rank: " + employeeFamilyPermission.RankId
                     + ", RelativeName: " + employeeFamilyPermission.RelativeName + ", VisitPurpose: " + employeeFamilyPermission.VisitPurpose
-                    + ", FromDate: " + employeeFamilyPermission.FromDate + ", ToDate: " + employeeFamilyPermission.ToDate;
+                    + ", FromDate: " + employeeFamilyPermission.FromDate?.ToString("dd/MM/yyyy") + ", ToDate: " + employeeFamilyPermission.ToDate?.ToString("dd/MM/yyyy");
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete

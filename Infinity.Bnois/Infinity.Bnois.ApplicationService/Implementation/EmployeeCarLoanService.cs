@@ -48,9 +48,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "EmployeeCarLoan";
                 bnLog.TableEntryForm = "Officer Car Loan";
-                bnLog.PreviousValue = "Id: " + employeeCarLoan.EmployeeCarLoanId + ", Name: " + employeeCarLoan.EmployeeId + ", BackLog: " + employeeCarLoan.IsBackLog
-                    + ", Remarks: " + employeeCarLoan.Remarks + ", Rank: " + employeeCarLoan.RankId + ", Status: " + employeeCarLoan.Status
-                    + ", CarLoanFiscalYear: " + employeeCarLoan.CarLoanFiscalYearId + ", AvailDate: " + employeeCarLoan.AvailDate + ", Amount: " + employeeCarLoan.Amount;
+                var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeCarLoan.EmployeeId ?? 0);
+                var fiscalYr = employeeService.GetDynamicTableInfoById("CarLoanFiscalYear", "CarLoanFiscalYearId", employeeCarLoan.CarLoanFiscalYearId ?? 0);
+                var rnk = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeCarLoan.RankId ?? 0);
+                bnLog.PreviousValue = "Id: " + employeeCarLoan.EmployeeCarLoanId + ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng +  ", BackLog: " + employeeCarLoan.IsBackLog
+                    + ", Remarks: " + employeeCarLoan.Remarks + ", Rank: " + ((dynamic)rnk).ShortName + ", Status: " + employeeCarLoan.Status
+                    + ", CarLoanFiscalYear: " + ((dynamic)fiscalYr).Name + ", Avail Date: " + employeeCarLoan.AvailDate?.ToString("dd/MM/yyyy") + ", Amount: " + employeeCarLoan.Amount;
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete
@@ -111,7 +114,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             EmployeeCarLoan employeeCarLoan = ObjectConverter<EmployeeCarLoanModel, EmployeeCarLoan>.Convert(model);
             if (id > 0)
             {
-                employeeCarLoan = _employeeCarLoanRepository.FindOne(x => x.EmployeeCarLoanId == id, new List<string> { "Employee", "Employee.Rank", "CarLoanFiscalYear" });
+                employeeCarLoan = _employeeCarLoanRepository.FindOne(x => x.EmployeeCarLoanId == id);
                 if (employeeCarLoan == null)
                 {
                     throw new InfinityNotFoundException("Employee Car Loan not found !");
@@ -127,9 +130,10 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.UpdatedValue = "Id: " + model.EmployeeCarLoanId;
                 if (employeeCarLoan.EmployeeId != model.EmployeeId)
                 {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeCarLoan.EmployeeId??0);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId??0);
-                    bnLog.PreviousValue += ", Name: " + employeeCarLoan.Employee.Name + " _ "+employeeCarLoan.Employee.PNo;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng ;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
                 }
                 if (employeeCarLoan.IsBackLog != model.IsBackLog)
                 {
@@ -138,8 +142,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (employeeCarLoan.RankId != model.RankId)
                 {
+                    var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeCarLoan.RankId??0);
                     var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId??0);
-                    bnLog.PreviousValue += ", Session: " + employeeCarLoan.Rank.ShortName;
+                    bnLog.PreviousValue += ", Session: " + ((dynamic)prevrank).ShortName;
                     bnLog.UpdatedValue += ", Session: " + ((dynamic)rank).ShortName;
                 }
                 if (employeeCarLoan.Status != model.Status)
@@ -149,14 +154,15 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (employeeCarLoan.CarLoanFiscalYearId != model.CarLoanFiscalYearId)
                 {
+                    var prevcarLone = employeeService.GetDynamicTableInfoById("CarLoanFiscalYear", "CarLoanFiscalYearId", employeeCarLoan.CarLoanFiscalYearId??0);
                     var carLone = employeeService.GetDynamicTableInfoById("CarLoanFiscalYear", "CarLoanFiscalYearId", model.CarLoanFiscalYearId??0);
-                    bnLog.PreviousValue += ", CarLoanFiscalYear: " + employeeCarLoan.CarLoanFiscalYear.Name;
+                    bnLog.PreviousValue += ", CarLoanFiscalYear: " + ((dynamic)prevcarLone).Name;
                     bnLog.UpdatedValue += ", CarLoanFiscalYear: " + ((dynamic)carLone).Name;
                 }
                 if (employeeCarLoan.AvailDate != model.AvailDate)
                 {
-                    bnLog.PreviousValue += ", AvailDate: " + employeeCarLoan.AvailDate;
-                    bnLog.UpdatedValue += ", AvailDate: " + model.AvailDate;
+                    bnLog.PreviousValue += ", AvailDate: " + employeeCarLoan.AvailDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", AvailDate: " + model.AvailDate?.ToString("dd/MM/yyyy");
                 }
                 if (employeeCarLoan.Amount != model.Amount)
                 {
@@ -207,6 +213,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 employeeCarLoan.RankId = model.RankId;
             }
             employeeCarLoan.Employee = null;
+            employeeCarLoan.CarLoanFiscalYear = null;
+            employeeCarLoan.Rank = null;
 
             try
             {

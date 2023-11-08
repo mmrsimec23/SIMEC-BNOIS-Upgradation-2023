@@ -35,13 +35,13 @@
             employeeMscEducationService.getEmployeeMscEducation(vm.employeeMscEducationId).then(function (data) {
                 vm.employeeMscEducation = data.result.employeeMscEducation;
                
-                //if (vm.employeeMscEducationId !== 0 && vm.employeeMscEducationId !== '') {
+                if (vm.employeeMscEducationId !== 0 && vm.employeeMscEducationId !== '') {
 
-                //    vm.employeeMscEducation.fromDate = new Date(data.result.employeeMscEducation.fromDate);
-                //    if (vm.employeeMscEducation.toDate != null) {
-                //        vm.employeeMscEducation.toDate = new Date(data.result.employeeMscEducation.toDate);
-                //    }
-                //}
+                    vm.employeeMscEducation.fromDate = new Date(data.result.employeeMscEducation.fromDate);
+                    if (vm.employeeMscEducation.toDate != null) {
+                        vm.employeeMscEducation.toDate = new Date(data.result.employeeMscEducation.toDate);
+                    }
+                }
                 vm.mscEducationTypeList = data.result.mscEducationTypeList;
                 vm.mscInstituteList = data.result.mscInstituteList;
                 vm.mscPermissionTypeList = data.result.mscPermissionTypeList;
