@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class PreviousTransferService : IPreviousTransferService
     {
         private readonly IBnoisRepository<PreviousTransfer> previousTransferRepository;
-        public PreviousTransferService(IBnoisRepository<PreviousTransfer> previousTransferRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public PreviousTransferService(IBnoisRepository<PreviousTransfer> previousTransferRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.previousTransferRepository = previousTransferRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public async Task<PreviousTransferModel> GetPreviousTransfer(int previousTransferId)
@@ -61,6 +65,74 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 previousTransfer.ModifiedDate = DateTime.Now;
                 previousTransfer.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PreviousTransfer";
+                bnLog.TableEntryForm = "Employee Previous Transfer";
+                bnLog.PreviousValue = "Id: " + model.PreviousTransferId;
+                bnLog.UpdatedValue = "Id: " + model.PreviousTransferId;
+                int bnoisUpdateCount = 0;
+                if (previousTransfer.EmployeeId != model.EmployeeId)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", previousTransfer.EmployeeId ?? 0);
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId ?? 0);
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
+                    bnoisUpdateCount += 1;
+                }
+                if (previousTransfer.Billet != model.Billet)
+                {
+                    bnLog.PreviousValue += ", Billet: " + previousTransfer.Billet;
+                    bnLog.UpdatedValue += ", Billet: " + model.Billet;
+                    bnoisUpdateCount += 1;
+                }
+                if (previousTransfer.RankId != model.RankId)
+                {
+                    if (previousTransfer.RankId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("PreCommissionRank", "PreCommissionRankId", previousTransfer.RankId ?? 0);
+                        bnLog.PreviousValue += ", Leave Type: " + ((dynamic)prev).Name;
+                    }
+                    if (model.RankId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("PreCommissionRank", "PreCommissionRankId", model.RankId ?? 0);
+                        bnLog.UpdatedValue += ", Leave Type: " + ((dynamic)newv).Name;
+                    }
+                }
+                if (previousTransfer.FromDate != model.FromDate)
+                {
+                    bnLog.PreviousValue += ", From Date: " + previousTransfer.FromDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", From Date: " + model.FromDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (previousTransfer.ToDate != model.ToDate)
+                {
+                    bnLog.PreviousValue += ", To Date: " + previousTransfer.ToDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", To Date: " + model.ToDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (previousTransfer.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + previousTransfer.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -94,6 +166,32 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PreviousTransfer";
+                bnLog.TableEntryForm = "Employee Previous Transfer";
+                bnLog.PreviousValue = "Id: " + previousTransfer.PreviousTransferId;
+
+                var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", previousTransfer.EmployeeId ?? 0);
+                bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                bnLog.PreviousValue += ", Billet: " + previousTransfer.Billet;
+                if (previousTransfer.RankId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("PreCommissionRank", "PreCommissionRankId", previousTransfer.RankId ?? 0);
+                    bnLog.PreviousValue += ", Leave Type: " + ((dynamic)prev).Name;
+                }
+                bnLog.PreviousValue += ", From Date: " + previousTransfer.FromDate?.ToString("dd/MM/yyyy") + ", To Date: " + previousTransfer.ToDate?.ToString("dd/MM/yyyy") + ", Remarks: " + previousTransfer.Remarks;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await previousTransferRepository.DeleteAsync(previousTransfer);
             }
         }

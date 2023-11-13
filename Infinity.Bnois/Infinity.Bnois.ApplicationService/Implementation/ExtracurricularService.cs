@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
    public class ExtracurricularService: IExtracurricularService
     {
         private readonly IBnoisRepository<Extracurricular> extracurricularRepository;
-        public ExtracurricularService(IBnoisRepository<Extracurricular> extracurricularRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public ExtracurricularService(IBnoisRepository<Extracurricular> extracurricularRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.extracurricularRepository = extracurricularRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public async Task<ExtracurricularModel> GetExtracurricular(int extracurricularId)
@@ -64,6 +68,62 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 extracurricular.ModifiedBy = userId;
                 extracurricular.ModifiedDate = DateTime.Now;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Extracurricular";
+                bnLog.TableEntryForm = "Employee Extra Curricular Activities";
+                bnLog.PreviousValue = "Id: " + model.ExtracurricularId;
+                bnLog.UpdatedValue = "Id: " + model.ExtracurricularId;
+                int bnoisUpdateCount = 0;
+                if (extracurricular.EmployeeId != model.EmployeeId)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", extracurricular.EmployeeId);
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
+                    bnoisUpdateCount += 1;
+                }
+                if(extracurricular.ExtracurricularTypeId != model.ExtracurricularTypeId)
+                {
+                    if(extracurricular.ExtracurricularTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("extracurricularType", "ExtracurricularTypeId", extracurricular.ExtracurricularTypeId);
+                        bnLog.PreviousValue += ", Extracurricular Type: " + ((dynamic)prev).Name;
+                    }
+                    if(model.ExtracurricularTypeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("extracurricularType", "ExtracurricularTypeId", model.ExtracurricularTypeId);
+                        bnLog.UpdatedValue += ", Extracurricular Type: " + ((dynamic)newv).Name;
+                    }
+                }
+                if (extracurricular.HoldAnyPost != model.HoldAnyPost)
+                {
+                    bnLog.PreviousValue += ", Hold any post (School/College/University): " + extracurricular.HoldAnyPost;
+                    bnLog.UpdatedValue += ", Hold any post (School/College/University): " + model.HoldAnyPost;
+                    bnoisUpdateCount += 1;
+                }
+                if (extracurricular.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + extracurricular.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+                
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -93,6 +153,31 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Extracurricular";
+                bnLog.TableEntryForm = "Employee Extra Curricular Activities";
+                bnLog.PreviousValue = "Id: " + extracurricular.ExtracurricularId;
+                
+                var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", extracurricular.EmployeeId);
+                bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                
+                if (extracurricular.ExtracurricularTypeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("extracurricularType", "ExtracurricularTypeId", extracurricular.ExtracurricularTypeId);
+                    bnLog.PreviousValue += ", Extracurricular Type: " + ((dynamic)prev).Name;
+                }
+                bnLog.PreviousValue += ", Hold any post (School/College/University): " + extracurricular.HoldAnyPost  + ", Remarks: " + extracurricular.Remarks;
+                       
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await extracurricularRepository.DeleteAsync(extracurricular);
             }
         }

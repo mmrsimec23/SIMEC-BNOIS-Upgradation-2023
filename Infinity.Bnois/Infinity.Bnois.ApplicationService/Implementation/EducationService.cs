@@ -398,21 +398,21 @@ namespace Infinity.Ers.ApplicationService
                     var prevSubject = employeeService.GetDynamicTableInfoById("Subject", "Subjectid", education.Subjectid ?? 0);
                     bnLog.PreviousValue += ", Subject/Group: " + ((dynamic)prevSubject).Name;
                 }
-                bnLog.UpdatedValue += ", Roll No.: " + education.Roll + ", Registration No.: " + education.RegNo;
+                bnLog.PreviousValue += ", Roll No.: " + education.Roll + ", Registration No.: " + education.RegNo;
                 if (education.ResultId > 0)
                 {
                     var prevResult = employeeService.GetDynamicTableInfoById("Result", "ResultId", education.ResultId ?? 0);
                     bnLog.PreviousValue += ", Result: " + ((dynamic)prevResult).Name;
                 }
                     
-                bnLog.UpdatedValue += ", GPA: " + education.Gpa;
+                bnLog.PreviousValue += ", GPA: " + education.Gpa;
 
                 if (education.ResultGradeId > 0)
                 {
                     var prevGrade = employeeService.GetDynamicTableInfoById("ResultGrade", "ResultGradeId", education.ResultGradeId ?? 0);
                     bnLog.PreviousValue += ", Grade: " + ((dynamic)prevGrade).Name;
                 }
-                bnLog.UpdatedValue += ", Marks: " + education.Marks + ", Distinction/Letter: " + education.Distiction + ", Percentage: " + education.Percentage + ", Passing Year: " + education.PassingYear + ", Course Duration (Year): " + education.CourseDuration;
+                bnLog.PreviousValue += ", Marks: " + education.Marks + ", Distinction/Letter: " + education.Distiction + ", Percentage: " + education.Percentage + ", Passing Year: " + education.PassingYear + ", Course Duration (Year): " + education.CourseDuration;
 
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 

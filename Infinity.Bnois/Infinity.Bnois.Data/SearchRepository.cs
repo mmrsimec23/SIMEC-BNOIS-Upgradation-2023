@@ -331,6 +331,17 @@ namespace Infinity.Bnois.Data
                 string updateQuery = String.Format(@"Update SearchSingleParams Set TransferToDate=getDate() where userId='{0}'", userId);
                 ExecNoneQuery(updateQuery);
             }
+            if (courseMissionAbroadFromDate == null)
+            {
+                string updateQuery = String.Format(@"Update SearchSingleParams Set courseMissionAbroadFromDate=null,courseMissionAbroadToDate=null where userId='{0}'", userId);
+                ExecNoneQuery(updateQuery);
+            }
+
+            if (courseMissionAbroadFromDate != null && courseMissionAbroadToDate == null)
+            {
+                string updateQuery = String.Format(@"Update SearchSingleParams Set courseMissionAbroadToDate=getDate() where userId='{0}'", userId);
+                ExecNoneQuery(updateQuery);
+            }
 
             if (promotionFromDate == null)
             {

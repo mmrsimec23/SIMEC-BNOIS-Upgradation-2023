@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class AddressService : IAddressService
     {
         private readonly IBnoisRepository<Address> addressRepository;
-        public AddressService(IBnoisRepository<Address> addressRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public AddressService(IBnoisRepository<Address> addressRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.addressRepository = addressRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public async Task<AddressModel> GetAddress(int addressId)
@@ -65,7 +69,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             if (model == null)
             {
-                throw new InfinityArgumentMissingException("Education data missing");
+                throw new InfinityArgumentMissingException("Address data missing");
             }
             Address address = ObjectConverter<AddressModel, Address>.Convert(model);
 
@@ -74,10 +78,128 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 address = await addressRepository.FindOneAsync(x => x.AddressId == addressId);
                 if (address == null)
                 {
-                    throw new InfinityNotFoundException("Education not found!");
+                    throw new InfinityNotFoundException("Address not found!");
                 }
                 address.ModifiedBy = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
                 address.ModifiedDate = DateTime.Now;
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Address";
+                bnLog.TableEntryForm = "Employee Address";
+                bnLog.PreviousValue = "Id: " + model.AddressId;
+                bnLog.UpdatedValue = "Id: " + model.AddressId;
+                int bnoisUpdateCount = 0;
+                if (address.EmployeeId != model.EmployeeId)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", address.EmployeeId);
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
+                    bnoisUpdateCount += 1;
+                }
+
+                if (address.AddressType != model.AddressType)
+                {
+                    bnLog.PreviousValue += ", Address Type: " + (address.AddressType== 1 ? "Permanent" : "Present");
+                    bnLog.UpdatedValue += ", Address Type: " + (model.AddressType == 1 ? "Permanent" : "Present");
+                    bnoisUpdateCount += 1;
+                }
+                if (address.AddressDetailEnglish != model.AddressDetailEnglish)
+                {
+                    bnLog.PreviousValue += ", Address (English): " + address.AddressDetailEnglish;
+                    bnLog.UpdatedValue += ", Address (English): " + model.AddressDetailEnglish;
+                    bnoisUpdateCount += 1;
+                }
+                if (address.AddressDetailBangla != model.AddressDetailBangla)
+                {
+                    bnLog.PreviousValue += ", Address (Bangla): " + address.AddressDetailBangla;
+                    bnLog.UpdatedValue += ", Address (Bangla): " + model.AddressDetailBangla;
+                    bnoisUpdateCount += 1;
+                }
+                if (address.DivisionId != model.DivisionId)
+                {
+                    if (address.DivisionId > 0)
+                    {
+                        var prevDivision = employeeService.GetDynamicTableInfoById("Division", "DivisionId", address.DivisionId ?? 0);
+                        bnLog.PreviousValue += ", Division: " + ((dynamic)prevDivision).Name;
+                    }
+                    if (model.DivisionId > 0)
+                    {
+                        var newDivision = employeeService.GetDynamicTableInfoById("Division", "DivisionId", model.DivisionId);
+                        bnLog.UpdatedValue += ", Division: " + ((dynamic)newDivision).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (address.DistrictId != model.DistrictId)
+                {
+                    if (address.DistrictId > 0)
+                    {
+                        var prevDistrict = employeeService.GetDynamicTableInfoById("District", "DistrictId", address.DistrictId ?? 0);
+                        bnLog.PreviousValue += ", District: " + ((dynamic)prevDistrict).Name;
+                    }
+                    if (model.DistrictId > 0)
+                    {
+                        var newDistrict = employeeService.GetDynamicTableInfoById("District", "DistrictId", model.DistrictId);
+                        bnLog.UpdatedValue += ", District: " + ((dynamic)newDistrict).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (address.UpazilaId != model.UpazilaId)
+                {
+                    if (address.UpazilaId > 0)
+                    {
+                        var prevUpazila = employeeService.GetDynamicTableInfoById("Upazila", "UpazilaId", (int)address.UpazilaId);
+                        bnLog.PreviousValue += ", Upazila: " + ((dynamic)prevUpazila).Name;
+                    }
+                    if (model.UpazilaId > 0)
+                    {
+                        var newUpazila = employeeService.GetDynamicTableInfoById("Upazila", "UpazilaId", (int)model.UpazilaId);
+                        bnLog.UpdatedValue += ", Upazila: " + ((dynamic)newUpazila).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (address.PostOfficeName != model.PostOfficeName)
+                {
+                    bnLog.PreviousValue += ", Post Office: " + address.PostOfficeName;
+                    bnLog.UpdatedValue += ", Post Office: " + model.PostOfficeName;
+                    
+                    bnoisUpdateCount += 1;
+                }
+
+                if (address.PostCode != model.PostCode)
+                {
+                    bnLog.PreviousValue += ", Post Code: " + address.PostCode;
+                    bnLog.UpdatedValue += ", Post Code: " + model.PostCode;
+
+                    bnoisUpdateCount += 1;
+                }
+                if (address.Phone != model.Phone)
+                {
+                    bnLog.PreviousValue += ", Contact No: " + address.Phone;
+                    bnLog.UpdatedValue += ", Contact No: " + model.Phone;
+
+                    bnoisUpdateCount += 1;
+                }
+                
+
+
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
