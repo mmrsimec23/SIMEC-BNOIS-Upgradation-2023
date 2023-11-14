@@ -99,6 +99,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                         var newv = employeeService.GetDynamicTableInfoById("LeaveType", "LeaveTypeId", model.LeaveTypeId ?? 0);
                         bnLog.UpdatedValue += ", Leave Type: " + ((dynamic)newv).TypeName;
                     }
+                    bnoisUpdateCount += 1;
                 }
                 if (previousLeave.FromDate != model.FromDate)
                 {

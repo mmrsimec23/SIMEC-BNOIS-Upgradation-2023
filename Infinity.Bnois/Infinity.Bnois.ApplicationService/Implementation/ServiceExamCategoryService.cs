@@ -78,22 +78,25 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Service Exam Category";
                 bnLog.PreviousValue = "Id: " + model.ServiceExamCategoryId;
                 bnLog.UpdatedValue = "Id: " + model.ServiceExamCategoryId;
+                int bnoisUpdateCount = 0;
                 if (serviceExamCategory.ExamName != model.ExamName)
                 {
                     bnLog.PreviousValue += ", ExamName: " + serviceExamCategory.ExamName;
                     bnLog.UpdatedValue += ", ExamName: " + model.ExamName;
+                    bnoisUpdateCount += 1;
                 }
                 if (serviceExamCategory.ShortName != model.ShortName)
                 {
                     bnLog.PreviousValue += ", ShortName: " + serviceExamCategory.ShortName;
                     bnLog.UpdatedValue += ", ShortName: " + model.ShortName;
+                    bnoisUpdateCount += 1;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = model.CreatedBy;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (serviceExamCategory.ExamName != model.ExamName || serviceExamCategory.ShortName != model.ShortName)
+                if (bnoisUpdateCount > 0)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 

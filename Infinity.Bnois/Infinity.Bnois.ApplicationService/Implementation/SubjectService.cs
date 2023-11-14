@@ -116,27 +116,31 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Subject";
                 bnLog.PreviousValue = "Id: " + model.SubjectId;
                 bnLog.UpdatedValue = "Id: " + model.SubjectId;
+                int bnoisUpdateCount = 0;
                 if (subject.Name != model.Name)
                 {
                     bnLog.PreviousValue += ", Name: " + subject.Name;
                     bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
                 }
                 if (subject.Remarks != model.Remarks)
                 {
                     bnLog.PreviousValue += ", Remarks: " + subject.Remarks;
                     bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
                 }
                 if (subject.GoToBnList != model.GoToBnList)
                 {
                     bnLog.PreviousValue += ", BnList: " + subject.GoToBnList;
                     bnLog.UpdatedValue += ", BnList: " + model.GoToBnList;
+                    bnoisUpdateCount += 1;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (subject.Name != model.Name || subject.Remarks != model.Remarks || subject.GoToBnList != model.GoToBnList)
+                if (bnoisUpdateCount > 0)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 

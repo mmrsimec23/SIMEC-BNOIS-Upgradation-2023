@@ -80,34 +80,39 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Upazila";
                 bnLog.PreviousValue = "Id: " + model.UpazilaId;
                 bnLog.UpdatedValue = "Id: " + model.UpazilaId;
+                int bnoisUpdateCount = 0;
                 if (upazila.Name != model.Name)
                 {
                     bnLog.PreviousValue += ", Name: " + upazila.Name;
                     bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
                 }
                 if (upazila.DistrictId != model.DistrictId)
                 {
                     var dis = employeeService.GetDynamicTableInfoById("District", "DistrictId", model.DistrictId);
                     bnLog.PreviousValue += ", District: " + upazila.District.Name;
                     bnLog.UpdatedValue += ", District: " + ((dynamic)dis).Name;
+                    bnoisUpdateCount += 1;
                 }
                 if (upazila.DivisionId != model.DivisionId)
                 {
                     var div = employeeService.GetDynamicTableInfoById("Division", "DivisionId", model.DivisionId??0);
                     bnLog.PreviousValue += ", Division: " + upazila.Division.Name;
                     bnLog.UpdatedValue += ", Division: " + ((dynamic)div).Name;
+                    bnoisUpdateCount += 1;
                 }
                 if (upazila.Remarks != model.Remarks)
                 {
                     bnLog.PreviousValue += ", Remarks: " + upazila.Remarks;
                     bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (upazila.Name != model.Name || upazila.DistrictId != model.DistrictId || upazila.DivisionId != model.DivisionId || upazila.Remarks != model.Remarks)
+                if (bnoisUpdateCount > 0)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 

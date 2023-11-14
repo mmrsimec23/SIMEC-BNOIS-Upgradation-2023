@@ -76,37 +76,43 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Sub Branch";
                 bnLog.PreviousValue = "Id: " + model.SubBranchId;
                 bnLog.UpdatedValue = "Id: " + model.SubBranchId;
+                int bnoisUpdateCount = 0;
                 if (subBranch.FullName != model.FullName)
                 {
                     bnLog.PreviousValue += ", FullName: " + subBranch.FullName;
                     bnLog.UpdatedValue += ", FullName: " + model.FullName;
+                    bnoisUpdateCount += 1;
                 }
                 if (subBranch.ShortName != model.ShortName)
                 {
                     bnLog.PreviousValue += ", ShortName: " + subBranch.ShortName;
                     bnLog.UpdatedValue += ", ShortName: " + model.ShortName;
+                    bnoisUpdateCount += 1;
                 }
                 if (subBranch.FullNameBan != model.FullNameBan)
                 {
                     bnLog.PreviousValue += ", FullNameBan: " + subBranch.FullNameBan;
                     bnLog.UpdatedValue += ", FullNameBan: " + model.FullNameBan;
+                    bnoisUpdateCount += 1;
                 }
                 if (subBranch.ShortNameBan != model.ShortNameBan)
                 {
                     bnLog.PreviousValue += ", ShortNameBan: " + subBranch.ShortNameBan;
                     bnLog.UpdatedValue += ", ShortNameBan: " + model.ShortNameBan;
+                    bnoisUpdateCount += 1;
                 }
                 if (subBranch.Description != model.Description)
                 {
                     bnLog.PreviousValue += ", Description: " + subBranch.Description;
                     bnLog.UpdatedValue += ", Description: " + model.Description;
+                    bnoisUpdateCount += 1;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (subBranch.FullName != model.FullName || subBranch.ShortName != model.ShortName || subBranch.FullNameBan != model.FullNameBan || subBranch.ShortNameBan != model.ShortNameBan || subBranch.Description != model.Description)
+                if (bnoisUpdateCount > 0)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 

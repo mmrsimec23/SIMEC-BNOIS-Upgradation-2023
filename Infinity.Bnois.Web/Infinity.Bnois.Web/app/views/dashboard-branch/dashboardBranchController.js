@@ -23,7 +23,7 @@
         
             dashboardService.getDashboardBranch().then(function (data) {
                 vm.dashboardBranches = data.result;
-                    
+                console.log(vm.dashboardBranches);
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

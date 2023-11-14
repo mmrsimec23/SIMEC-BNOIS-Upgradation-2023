@@ -102,6 +102,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                         var newv = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId ?? 0);
                         bnLog.UpdatedValue += ", Leave Type: " + ((dynamic)newv).FullName;
                     }
+                    bnoisUpdateCount += 1;
                 }
                 if (previousMission.FromDate != model.FromDate)
                 {

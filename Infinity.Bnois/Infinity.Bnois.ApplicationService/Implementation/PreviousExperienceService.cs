@@ -89,6 +89,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                         var newv = employeeService.GetDynamicTableInfoById("PreCommissionRankId", "PreCommissionRankId", model.PreCommissionRankId??0);
                         bnLog.UpdatedValue += ", Pre Commission Rank: " + ((dynamic)newv).Name;
                     }
+                    bnoisUpdateCount += 1;
                 }
                 if (previousExperience.ServiceNo != model.ServiceNo)
                 {
@@ -114,6 +115,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                         var newv = employeeService.GetDynamicTableInfoById("CategoryId", "CategoryId", model.CategoryId ?? 0);
                         bnLog.UpdatedValue += ", Category: " + ((dynamic)newv).Name;
                     }
+                    bnoisUpdateCount += 1;
                 }
                 if (previousExperience.Remarks != model.Remarks)
                 {

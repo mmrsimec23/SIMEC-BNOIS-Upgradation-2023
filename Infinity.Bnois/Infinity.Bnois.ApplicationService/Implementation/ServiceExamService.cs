@@ -81,45 +81,51 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Service Exam";
                 bnLog.PreviousValue = "Id: " + model.ServiceExamId;
                 bnLog.UpdatedValue = "Id: " + model.ServiceExamId;
+                int bnoisUpdateCount = 0;
                 if (serviceExam.Name != model.Name)
                 {
                     bnLog.PreviousValue += ", Name: " + serviceExam.Name;
                     bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
                 }
                 if (serviceExam.ShortName != model.ShortName)
                 {
                     bnLog.PreviousValue += ", ShortName: " + serviceExam.ShortName;
                     bnLog.UpdatedValue += ", ShortName: " + model.ShortName;
+                    bnoisUpdateCount += 1;
                 }
                 if (serviceExam.ServiceExamCategoryId != model.ServiceExamCategoryId)
                 {
                     var sec = employeeService.GetDynamicTableInfoById("ServiceExamCategory", "ServiceExamCategoryId", model.ServiceExamCategoryId);
                     bnLog.PreviousValue += ", ServiceExamCategory: " + serviceExam.ServiceExamCategory.ExamName;
                     bnLog.UpdatedValue += ", ServiceExamCategory: " + ((dynamic)sec).ExamName;
+                    bnoisUpdateCount += 1;
                 }
                 if (serviceExam.BranchId != model.BranchId)
                 {
                     var branch = employeeService.GetDynamicTableInfoById("Branch", "BranchId", model.BranchId);
                     bnLog.PreviousValue += ", Branch: " + serviceExam.Branch.Name;
                     bnLog.UpdatedValue += ", Branch: " + ((dynamic)branch).Name;
+                    bnoisUpdateCount += 1;
                 }
                 if (serviceExam.NOS != model.NOS)
                 {
                     bnLog.PreviousValue += ", NOS: " + serviceExam.NOS;
                     bnLog.UpdatedValue += ", NOS: " + model.NOS;
+                    bnoisUpdateCount += 1;
                 }
                 if (serviceExam.AttTime != model.AttTime)
                 {
                     bnLog.PreviousValue += ", AttTime: " + serviceExam.AttTime;
                     bnLog.UpdatedValue += ", AttTime: " + model.AttTime;
+                    bnoisUpdateCount += 1;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (serviceExam.Name != model.Name || serviceExam.ShortName != model.ShortName || serviceExam.ServiceExamCategoryId != model.ServiceExamCategoryId
-                    || serviceExam.BranchId != model.BranchId || serviceExam.NOS != model.NOS || serviceExam.AttTime != model.AttTime)
+                if (bnoisUpdateCount > 0)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 

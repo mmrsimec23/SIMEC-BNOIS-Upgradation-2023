@@ -99,6 +99,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                         var newv = employeeService.GetDynamicTableInfoById("PreCommissionRank", "PreCommissionRankId", model.RankId ?? 0);
                         bnLog.UpdatedValue += ", Leave Type: " + ((dynamic)newv).Name;
                     }
+                    bnoisUpdateCount += 1;
                 }
                 if (previousTransfer.FromDate != model.FromDate)
                 {

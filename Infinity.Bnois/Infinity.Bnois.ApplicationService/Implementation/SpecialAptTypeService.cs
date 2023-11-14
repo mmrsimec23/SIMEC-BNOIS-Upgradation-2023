@@ -74,22 +74,25 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Special Appointment";
                 bnLog.PreviousValue = "Id: " + model.Id;
                 bnLog.UpdatedValue = "Id: " + model.Id;
+                int bnoisUpdateCount = 0;
                 if (specialAptType.SpAptType != model.SpAptType)
                 {
                     bnLog.PreviousValue += ", SpecialAppointment: " + specialAptType.SpAptType;
                     bnLog.UpdatedValue += ", SpecialAppointment: " + model.SpAptType;
+                    bnoisUpdateCount += 1;
                 }
                 if (specialAptType.Position != model.Position)
                 {
                     bnLog.PreviousValue += ", Position: " + specialAptType.Position;
                     bnLog.UpdatedValue += ", Position: " + model.Position;
+                    bnoisUpdateCount += 1;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (specialAptType.SpAptType != model.SpAptType || specialAptType.Position != model.Position)
+                if (bnoisUpdateCount > 0)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 

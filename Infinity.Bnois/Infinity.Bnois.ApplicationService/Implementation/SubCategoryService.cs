@@ -81,98 +81,110 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Officer Naming Convention/Sub Category";
                 bnLog.PreviousValue = "Id: " + model.SubCategoryId;
                 bnLog.UpdatedValue = "Id: " + model.SubCategoryId;
+                int bnoisUpdateCount = 0;
                 if (subCategory.Name != model.Name)
                 {
                     bnLog.PreviousValue += ", Name: " + subCategory.Name;
                     bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.CategoryId != model.CategoryId)
                 {
                     var cat = employeeService.GetDynamicTableInfoById("Category", "CategoryId", model.CategoryId);
                     bnLog.PreviousValue += ", Category: " + subCategory.Category.Name;
                     bnLog.UpdatedValue += ", Category: " + ((dynamic)cat).Name;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.ShortName != model.ShortName)
                 {
                     bnLog.PreviousValue += ", ShortName: " + subCategory.ShortName;
                     bnLog.UpdatedValue += ", ShortName: " + model.ShortName;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.Description != model.Description)
                 {
                     bnLog.PreviousValue += ", Description: " + subCategory.Description;
                     bnLog.UpdatedValue += ", Description: " + model.Description;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.Prefix != model.Prefix)
                 {
                     bnLog.PreviousValue += ", Prefix: " + subCategory.Prefix;
                     bnLog.UpdatedValue += ", Prefix: " + model.Prefix;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.Rank != model.Rank)
                 {
                     bnLog.PreviousValue += ", Rank: " + subCategory.Rank;
                     bnLog.UpdatedValue += ", Rank: " + model.Rank;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.Branch != model.Branch)
                 {
                     bnLog.PreviousValue += ", Branch: " + subCategory.Branch;
                     bnLog.UpdatedValue += ", Branch: " + model.Branch;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.SubBranch != model.SubBranch)
                 {
                     bnLog.PreviousValue += ", SubBranch: " + subCategory.SubBranch;
                     bnLog.UpdatedValue += ", SubBranch: " + model.SubBranch;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.Course != model.Course)
                 {
                     bnLog.PreviousValue += ", Course: " + subCategory.Course;
                     bnLog.UpdatedValue += ", Course: " + model.Course;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.Medal != model.Medal)
                 {
                     bnLog.PreviousValue += ", Medal: " + subCategory.Medal;
                     bnLog.UpdatedValue += ", Medal: " + model.Medal;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.Award != model.Award)
                 {
                     bnLog.PreviousValue += ", Award: " + subCategory.Award;
                     bnLog.UpdatedValue += ", Award: " + model.Award;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.Prefix2 != model.Prefix2)
                 {
                     bnLog.PreviousValue += ", Prefix2: " + subCategory.Prefix2;
                     bnLog.UpdatedValue += ", Prefix2: " + model.Prefix2;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.NmConEx != model.NmConEx)
                 {
                     bnLog.PreviousValue += ", NmConEx: " + subCategory.NmConEx;
                     bnLog.UpdatedValue += ", NmConEx: " + model.NmConEx;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.Priority != model.Priority)
                 {
                     bnLog.PreviousValue += ", Priority: " + subCategory.Priority;
                     bnLog.UpdatedValue += ", Priority: " + model.Priority;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.BN != model.BN)
                 {
                     bnLog.PreviousValue += ", BN: " + subCategory.BN;
                     bnLog.UpdatedValue += ", BN: " + model.BN;
+                    bnoisUpdateCount += 1;
                 }
                 if (subCategory.BNVR != model.BNVR)
                 {
                     bnLog.PreviousValue += ", BNVR: " + subCategory.BNVR;
                     bnLog.UpdatedValue += ", BNVR: " + model.BNVR;
+                    bnoisUpdateCount += 1;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (subCategory.Name != model.Name || subCategory.CategoryId != model.CategoryId || subCategory.ShortName != model.ShortName
-                    || subCategory.Description != model.Description || subCategory.Prefix != model.Prefix || subCategory.Rank != model.Rank
-                    || subCategory.Branch != model.Branch || subCategory.SubBranch != model.SubBranch || subCategory.Course != model.Course
-                    || subCategory.Medal != model.Medal || subCategory.Award != model.Award || subCategory.Prefix2 != model.Prefix2
-                    || subCategory.NmConEx != model.NmConEx || subCategory.Priority != model.Priority || subCategory.BN != model.BN
-                    || subCategory.BNVR != model.BNVR)
+                if (bnoisUpdateCount > 0)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 

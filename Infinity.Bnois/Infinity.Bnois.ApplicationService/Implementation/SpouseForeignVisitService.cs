@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class SpouseForeignVisitService : ISpouseForeignVisitService
     {
         private readonly IBnoisRepository<SpouseForeignVisit> spouseForignVisitRepository;
-        public SpouseForeignVisitService(IBnoisRepository<SpouseForeignVisit> spouseForignVisitRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public SpouseForeignVisitService(IBnoisRepository<SpouseForeignVisit> spouseForignVisitRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.spouseForignVisitRepository = spouseForignVisitRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
         public List<SpouseForeignVisitModel> GetSpouseForeignVisits(int spouseId)
         {
@@ -58,6 +62,73 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 spouseForeignVisit.ModifiedDate = DateTime.Now;
                 spouseForeignVisit.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "SpouseForeignVisit";
+                bnLog.TableEntryForm = "Employee's Spouse Foreign Visit Information";
+                bnLog.PreviousValue = "Id: " + model.SpouseForeignVisitId;
+                bnLog.UpdatedValue = "Id: " + model.SpouseForeignVisitId;
+                int bnoisUpdateCount = 0;
+                if (spouseForeignVisit.SpouseId != model.SpouseId)
+                {
+                    bnLog.PreviousValue += ", SpouseId: " + spouseForeignVisit.SpouseId;
+                    bnLog.UpdatedValue += ", SpouseId: " + model.SpouseId;
+                    bnoisUpdateCount += 1;
+                }
+                if (spouseForeignVisit.CountryId != model.CountryId)
+                {
+                    if (spouseForeignVisit.CountryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Country", "CountryId", spouseForeignVisit.CountryId);
+                        bnLog.PreviousValue += ", Country: " + ((dynamic)prev).FullName;
+                    }
+                    if (model.CountryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId);
+                        bnLog.UpdatedValue += ", Country: " + ((dynamic)newv).FullName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (spouseForeignVisit.Purpose != model.Purpose)
+                {
+                    bnLog.PreviousValue += ", Purpose: " + spouseForeignVisit.Purpose;
+                    bnLog.UpdatedValue += ", Purpose: " + model.Purpose;
+                    bnoisUpdateCount += 1;
+                }
+                if (spouseForeignVisit.AccompaniedBy != model.AccompaniedBy)
+                {
+                    bnLog.PreviousValue += ", Accompanied By: " + spouseForeignVisit.AccompaniedBy;
+                    bnLog.UpdatedValue += ", Accompanied By: " + model.AccompaniedBy;
+                    bnoisUpdateCount += 1;
+                }
+                if (spouseForeignVisit.StayFromDate != model.StayFromDate)
+                {
+                    bnLog.PreviousValue += ", From Date: " + spouseForeignVisit.StayFromDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", From Date: " + model.StayFromDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (spouseForeignVisit.StayToDate != model.StayToDate)
+                {
+                    bnLog.PreviousValue += ", To Date: " + spouseForeignVisit.StayToDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", To Date: " + model.StayToDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {

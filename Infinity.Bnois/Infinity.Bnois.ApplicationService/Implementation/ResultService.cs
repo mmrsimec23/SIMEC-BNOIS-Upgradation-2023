@@ -70,37 +70,43 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Result";
                 bnLog.PreviousValue = "Id: " + model.ResultId;
                 bnLog.UpdatedValue = "Id: " + model.ResultId;
+                int bnoisUpdateCount = 0;
                 if (result.Name != model.Name)
                 {
                     bnLog.PreviousValue += ", Name: " + result.Name;
                     bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
                 }
                 if (result.ResultCode != model.ResultCode)
                 {
                     bnLog.PreviousValue += ", ResultCode: " + result.ResultCode;
                     bnLog.UpdatedValue += ", ResultCode: " + model.ResultCode;
+                    bnoisUpdateCount += 1;
                 }
                 if (result.Description != model.Description)
                 {
                     bnLog.PreviousValue += ", Description: " + result.Description;
                     bnLog.UpdatedValue += ", Description: " + model.Description;
+                    bnoisUpdateCount += 1;
                 }
                 if (result.MinGPA != model.MinGPA)
                 {
                     bnLog.PreviousValue += ", MinGPA: " + result.MinGPA;
                     bnLog.UpdatedValue += ", MinGPA: " + model.MinGPA;
+                    bnoisUpdateCount += 1;
                 }
                 if (result.MaxGPA != model.MaxGPA)
                 {
                     bnLog.PreviousValue += ", MaxGPA: " + result.MaxGPA;
                     bnLog.UpdatedValue += ", MaxGPA: " + model.MaxGPA;
+                    bnoisUpdateCount += 1;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = model.CreatedBy;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (result.Name != model.Name || result.ResultCode != model.ResultCode || result.Description != model.Description || result.MinGPA != model.MinGPA || result.MaxGPA != model.MaxGPA)
+                if (bnoisUpdateCount > 0)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 

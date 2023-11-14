@@ -86,56 +86,63 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Status Change";
                 bnLog.PreviousValue = "Id: " + model.StatusChangeId;
                 bnLog.UpdatedValue = "Id: " + model.StatusChangeId;
+                int bnoisUpdateCount = 0;
                 if (statusChange.EmployeeId != model.EmployeeId)
                 {
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
                     bnLog.PreviousValue += ", Name: " + statusChange.Employee.Name + " _ " + statusChange.Employee.PNo;
                     bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
+                    bnoisUpdateCount += 1;
                 }
 
                 if (statusChange.StatusType != model.StatusType)
                 {
                     bnLog.PreviousValue += ", StatusType: " + (statusChange.StatusType == 1 ? "Medical Category" : statusChange.StatusType == 2 ? "Eye Vision" : statusChange.StatusType == 3 ? "Commission Type" : statusChange.StatusType == 4 ? "Branch" : "Religion");
                     bnLog.UpdatedValue += ", StatusType: " + (model.StatusType == 1 ? "Medical Category" : model.StatusType == 2 ? "Eye Vision" : model.StatusType == 3 ? "Commission Type" : model.StatusType == 4 ? "Branch" : "Religion");
+                    bnoisUpdateCount += 1;
                 }
                 if (statusChange.PreviousId != model.PreviousId)
                 {
                     bnLog.PreviousValue += ", Previous: " + statusChange.PreviousId;
                     bnLog.UpdatedValue += ", Previous: " + model.PreviousId;
+                    bnoisUpdateCount += 1;
                 }
                 if (statusChange.NewId != model.NewId)
                 {
                     bnLog.PreviousValue += ", New: " + statusChange.NewId;
                     bnLog.UpdatedValue += ", New: " + model.NewId;
+                    bnoisUpdateCount += 1;
                 }
                 if (statusChange.MedicalCategoryCause != model.MedicalCategoryCause)
                 {
                     bnLog.PreviousValue += ", MedicalCategoryCause: " + statusChange.MedicalCategoryCause;
                     bnLog.UpdatedValue += ", MedicalCategoryCause: " + model.MedicalCategoryCause;
+                    bnoisUpdateCount += 1;
                 }
                 if (statusChange.MedicalCategoryType != model.MedicalCategoryType)
                 {
                     bnLog.PreviousValue += ", MedicalCategoryType: " + statusChange.MedicalCategoryType;
                     bnLog.UpdatedValue += ", MedicalCategoryType: " + model.MedicalCategoryType;
+                    bnoisUpdateCount += 1;
                 }
                 if (statusChange.Date != model.Date)
                 {
                     bnLog.PreviousValue += ", Date: " + statusChange.Date;
                     bnLog.UpdatedValue += ", Date: " + model.Date;
+                    bnoisUpdateCount += 1;
                 }
                 if (statusChange.DateTo != model.DateTo)
                 {
                     bnLog.PreviousValue += ", DateTo: " + statusChange.DateTo;
                     bnLog.UpdatedValue += ", DateTo: " + model.DateTo;
+                    bnoisUpdateCount += 1;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (statusChange.EmployeeId != model.EmployeeId || statusChange.PreviousId != model.PreviousId || statusChange.NewId != model.NewId
-                    || statusChange.MedicalCategoryCause != model.MedicalCategoryCause || statusChange.MedicalCategoryType != model.MedicalCategoryType
-                    || statusChange.Date != model.Date || statusChange.DateTo != model.DateTo || statusChange.StatusType != model.StatusType)
+                if (bnoisUpdateCount > 0)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 
