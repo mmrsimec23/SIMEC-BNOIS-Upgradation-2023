@@ -268,6 +268,106 @@ namespace Infinity.Bnois.Api.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("get-branch-authority-officer-9")]
+        public IHttpActionResult GetBranchAuthorityOfficer9(int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer9(branchAuthorityId)
+            });
+        }
+        [HttpGet]
+        [Route("get-branch-authority-officer-10")]
+        public IHttpActionResult GetBranchAuthorityOfficer10(int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer10(branchAuthorityId)
+            });
+        }
+        [HttpGet]
+        [Route("get-branch-authority-officer-11")]
+        public IHttpActionResult GetBranchAuthorityOfficer11(int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer11(branchAuthorityId)
+            });
+        }
+        [HttpGet]
+        [Route("get-branch-authority-officer-12")]
+        public IHttpActionResult GetBranchAuthorityOfficer12(int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer12(branchAuthorityId)
+            });
+        }
+        [HttpGet]
+        [Route("get-branch-authority-officer-13")]
+        public IHttpActionResult GetBranchAuthorityOfficer13(int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer13(branchAuthorityId)
+            });
+        }
+        [HttpGet]
+        [Route("get-branch-authority-officer-369")]
+        public IHttpActionResult GetBranchAuthorityOfficer369(int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer369(branchAuthorityId)
+            });
+        }
+        [HttpGet]
+        [Route("get-branch-authority-officer-383")]
+        public IHttpActionResult GetBranchAuthorityOfficer383(int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer383(branchAuthorityId)
+            });
+        }
+        [HttpGet]
+        [Route("get-branch-authority-officer-458")]
+        public IHttpActionResult GetBranchAuthorityOfficer458(int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer458(branchAuthorityId)
+            });
+        }
+        [HttpGet]
+        [Route("get-branch-authority-officer-513")]
+        public IHttpActionResult GetBranchAuthorityOfficer513(int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer513(branchAuthorityId)
+            });
+        }
+        [HttpGet]
+        [Route("get-branch-authority-officer-543")]
+        public IHttpActionResult GetBranchAuthorityOfficer543(int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer543(branchAuthorityId)
+            });
+        }
+        [HttpGet]
+        [Route("get-branch-authority-officer-600")]
+        public IHttpActionResult GetBranchAuthorityOfficer600()
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchAuthorityOfficer600()
+            });
+        }
+
 
 
     }

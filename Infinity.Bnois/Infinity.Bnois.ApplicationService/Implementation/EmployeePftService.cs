@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class EmployeePftService : IEmployeePftService
     {
         private readonly IBnoisRepository<EmployeePft> employeePftRepository;
-        public EmployeePftService(IBnoisRepository<EmployeePft> employeePftRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public EmployeePftService(IBnoisRepository<EmployeePft> employeePftRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.employeePftRepository = employeePftRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<EmployeePftModel> GetEmployeePfts(int ps, int pn, string qs, out int total)
@@ -70,6 +74,71 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 employeePft.ModifiedDate = DateTime.Now;
                 employeePft.ModifiedBy = userId;
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeePft";
+                bnLog.TableEntryForm = "Employee PFT";
+                bnLog.PreviousValue = "Id: " + model.EmployeePftId;
+                bnLog.UpdatedValue = "Id: " + model.EmployeePftId;
+                int bnoisUpdateCount = 0;
+                if (employeePft.EmployeeId > 0 || model.EmployeeId > 0)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeePft.EmployeeId??0);
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId??0);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeePft.PftTypeId != model.PftTypeId)
+                {
+                    if (employeePft.PftTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("PftType", "PftTypeId", employeePft.PftTypeId ?? 0);
+                        bnLog.PreviousValue += ", PFT Type: " + ((dynamic)prev).PftTitle;
+                    }
+                    if (model.PftTypeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("PftType", "PftTypeId", model.PftTypeId ?? 0);
+                        bnLog.UpdatedValue += ", PFT Type: " + ((dynamic)newv).PftTitle;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (employeePft.PftResultId != model.PftResultId)
+                {
+                    if (employeePft.PftResultId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("PftResult", "PftResultId", employeePft.PftResultId??0);
+                        bnLog.PreviousValue += ", PFT Result: " + ((dynamic)prev).ResultTitle;
+                    }
+                    if (model.PftResultId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("PftResult", "PftResultId", model.PftResultId??0);
+                        bnLog.UpdatedValue += ", PFT Result: " + ((dynamic)newv).ResultTitle;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (employeePft.PftDate != model.PftDate)
+                {
+                    bnLog.PreviousValue += ", PFT Date: " + employeePft.PftDate.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", PFT Date: " + model.PftDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -103,6 +172,39 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeePft";
+                bnLog.TableEntryForm = "Employee PFT";
+                bnLog.PreviousValue = "Id: " + employeePft.EmployeePftId;
+                if (employeePft.EmployeeId > 0)
+                {
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeePft.EmployeeId??0);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)emp).PNo;
+                }
+                if (employeePft.PftTypeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("PftType", "PftTypeId", employeePft.PftTypeId ?? 0);
+                    bnLog.PreviousValue += ", PFT Type: " + ((dynamic)prev).PftTitle;
+                }
+                if (employeePft.PftResultId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("PftResult", "PftResultId", employeePft.PftResultId ?? 0);
+                    bnLog.PreviousValue += ", PFT Result: " + ((dynamic)prev).ResultTitle;
+                }
+                bnLog.PreviousValue += ", PFT Date: " + employeePft.PftDate.ToString("dd/MM/yyyy");
+                
+                
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await employeePftRepository.DeleteAsync(employeePft);
             }
         }

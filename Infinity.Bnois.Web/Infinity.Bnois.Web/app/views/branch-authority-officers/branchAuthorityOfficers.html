@@ -1,0 +1,597 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <button  class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
+
+            <div class="panel-body pdfReportFormCover" id="print">
+                <h3 class="reportHeader">Branch Authority Officers</h3>
+                <hr />
+                <h4 class="noScreen" style="border-bottom: 3px solid blue;font-family: Arial">{{vm.officerName}} ({{vm.pNo}})</h4>
+
+
+                <div class="table-wrapper table-responsive reportCover">
+                    <!--<table class="table table-bordered pdfReportTable " border="1">
+        <thead class="reportThead">
+            <tr class="tableHeading reportTR">
+                <th style="vertical-align: middle">SL</th>
+                <th style="vertical-align: middle">Rank</th>
+                <th>Date of Promotion</th>
+
+            </tr>
+        </thead>
+        <tbody class="reportBody">
+            <tr class="reportTR" ng-repeat="promotionHistory in vm.promotionHistories">
+                <td class="reportTD" style="text-align: center; width: 50px;">{{$index+1}}</td>
+                <td class="reportTD">{{promotionHistory.rank}}</td>
+                <td class="reportTD" style="text-align: center;width: 100px;">{{promotionHistory.dateOfPromotion | date:"dd-MMM-yyyy"}}</td>
+            </tr>
+        </tbody>
+    </table>-->
+
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th colspan="16">COMDHAKA</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="6">Held</th>
+                                <th rowspan="2">%</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.branchAuthorityComDhaka">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th colspan="16">COMCHIT</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="6">Held</th>
+                                <th rowspan="2">%</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.branchAuthorityComChit">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th colspan="16">COMBAN</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="6">Held</th>
+                                <th rowspan="2">%</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.branchAuthorityComBan">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th colspan="16">COMKHUL</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="6">Held</th>
+                                <th rowspan="2">%</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.branchAuthorityComKhul">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th colspan="16">CSD</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="6">Held</th>
+                                <th rowspan="2">%</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.branchAuthorityCsd">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th colspan="16">COMNAV</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="6">Held</th>
+                                <th rowspan="2">%</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.branchAuthorityComNav">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th colspan="16">COMSWADS</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="6">Held</th>
+                                <th rowspan="2">%</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.branchAuthorityComSwads">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th colspan="16">COMSUB</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="6">Held</th>
+                                <th rowspan="2">%</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.branchAuthorityComSub">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th colspan="16">COMFLOT WEST</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="6">Held</th>
+                                <th rowspan="2">%</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.branchAuthorityComFlotWest">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th colspan="16">CHO</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="6">Held</th>
+                                <th rowspan="2">%</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.branchAuthorityCho">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

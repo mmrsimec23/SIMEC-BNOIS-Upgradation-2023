@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class EmployeeChildrenService : IEmployeeChildrenService
     {
         private readonly IBnoisRepository<EmployeeChildren> employeeChildrenRepository;
-        public EmployeeChildrenService(IBnoisRepository<EmployeeChildren> employeeChildrenRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public EmployeeChildrenService(IBnoisRepository<EmployeeChildren> employeeChildrenRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.employeeChildrenRepository = employeeChildrenRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<SelectModel> GetChildrenTypeSelectModels()
@@ -77,6 +81,151 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 employeeChildren.ModifiedBy = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
                 employeeChildren.ModifiedDate = DateTime.Now;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeeChildren";
+                bnLog.TableEntryForm = "Employee Children Information";
+                bnLog.PreviousValue = "Id: " + model.EmployeeChildrenId;
+                bnLog.UpdatedValue = "Id: " + model.EmployeeChildrenId;
+                int bnoisUpdateCount = 0;
+                if (employeeChildren.EmployeeId != model.EmployeeId)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeChildren.EmployeeId);
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.ChildrenType != model.ChildrenType)
+                {
+                    bnLog.PreviousValue += ", Children Type: " + (employeeChildren.ChildrenType == 1 ?"Son": employeeChildren.ChildrenType == 2 ? "Daughter" :"");
+                    bnLog.UpdatedValue += ", Children Type: " + (model.ChildrenType == 1 ? "Son" : model.ChildrenType == 2 ? "Daughter" : ""); ;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.Child != model.Child)
+                {
+                    if(employeeChildren.Child==0)
+                    {
+                        bnLog.PreviousValue += ", Own/Spouse Child: Own's Child";
+                    }
+                    if(model.Child==0)
+                    {
+                        bnLog.UpdatedValue += ", Own/Spouse Child: Own's Child";
+                    }
+                    if (employeeChildren.Child > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Spouse", "SpouseId", employeeChildren.Child ?? 0);
+                        bnLog.PreviousValue += ", Own/Spouse Child: " + ((dynamic)prev).ANameEng + "'s Child";
+                    }
+                    if (model.Child > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Spouse", "SpouseId", model.Child);
+                        bnLog.UpdatedValue += ", Own/Spouse Child: " + ((dynamic)newv).ANameEng + "'s Child";
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name (English): " + employeeChildren.Name;
+                    bnLog.UpdatedValue += ", Name (English): " + model.Name;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.NameBan != model.NameBan)
+                {
+                    bnLog.PreviousValue += ", Name (Bangla): " + employeeChildren.NameBan;
+                    bnLog.UpdatedValue += ", Name (Bangla): " + model.NameBan;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.DateOfBirth != model.DateOfBirth)
+                {
+                    bnLog.PreviousValue += ", Date Of Birth: " + employeeChildren.DateOfBirth?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Date Of Birth: " + model.DateOfBirth?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.FileName != model.FileName)
+                {
+                    bnLog.PreviousValue += ", File Name: " + employeeChildren.FileName;
+                    bnLog.UpdatedValue += ", File Name: " + model.FileName;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.GenFormName != model.GenFormName)
+                {
+                    bnLog.PreviousValue += ", Gen Form Name: " + employeeChildren.GenFormName;
+                    bnLog.UpdatedValue += ", Gen Form Name: " + model.GenFormName;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.LivingWith != model.LivingWith)
+                {
+                    bnLog.PreviousValue += ", Living With: " + employeeChildren.LivingWith;
+                    bnLog.UpdatedValue += ", Living With: " + model.LivingWith;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.OccupationId != model.OccupationId)
+                {
+                    if (employeeChildren.OccupationId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Occupation", "OccupationId", employeeChildren.OccupationId ?? 0);
+                        bnLog.PreviousValue += ", Occupation: " + ((dynamic)prev).Name;
+                    }
+                    if (model.OccupationId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Occupation", "OccupationId", model.OccupationId ?? 0);
+                        bnLog.UpdatedValue += ", Occupation: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.ContactAddress != model.ContactAddress)
+                {
+                    bnLog.PreviousValue += ", Contact Address: " + employeeChildren.ContactAddress;
+                    bnLog.UpdatedValue += ", Contact Address: " + model.ContactAddress;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.OfficeAddress != model.OfficeAddress)
+                {
+                    bnLog.PreviousValue += ", Office Address: " + employeeChildren.OfficeAddress;
+                    bnLog.UpdatedValue += ", Office Address: " + model.OfficeAddress;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.GoldenChild != model.GoldenChild)
+                {
+                    bnLog.PreviousValue += ", Golden Child: " + employeeChildren.GoldenChild;
+                    bnLog.UpdatedValue += ", Golden Child: " + model.GoldenChild;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.IsDead != model.IsDead)
+                {
+                    bnLog.PreviousValue += ", Status: " + (employeeChildren.IsDead==true?"Dead":"Alive");
+                    bnLog.UpdatedValue += ", Status: " + (model.IsDead == true ? "Dead" : "Alive");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.DeadDate != model.DeadDate)
+                {
+                    bnLog.PreviousValue += ", Dead Date: " + employeeChildren.DeadDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Dead Date: " + model.DeadDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeChildren.DeadReason != model.DeadReason)
+                {
+                    bnLog.PreviousValue += ", Dead Reason: " + employeeChildren.DeadReason;
+                    bnLog.UpdatedValue += ", Dead Reason: " + model.DeadReason;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -118,7 +267,55 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
-                return await employeeChildrenRepository.DeleteAsync(employeeChildren);
+                bool IsDeleted = false;
+                try
+                {
+                    // data log section start
+                    BnoisLog bnLog = new BnoisLog();
+                    bnLog.TableName = "EmployeeChildren";
+                    bnLog.TableEntryForm = "Employee Children Information";
+                    bnLog.PreviousValue = "Id: " + employeeChildren.EmployeeChildrenId;
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeChildren.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.PreviousValue += ", Children Type: " + (employeeChildren.ChildrenType == 1 ? "Son" : employeeChildren.ChildrenType == 2 ? "Daughter" : "");
+                    if (employeeChildren.Child == 0 || employeeChildren.Child == null)
+                    {
+                        bnLog.PreviousValue += ", Own/Spouse Child: Own's Child";
+                    }
+                    else
+                    {
+                        if (employeeChildren.Child > 0)
+                        {
+                            var prev = employeeService.GetDynamicTableInfoById("Spouse", "SpouseId", employeeChildren.Child ?? 0);
+                            bnLog.PreviousValue += ", Own/Spouse Child: " + ((dynamic)prev).ANameEng + "'s Child";
+                        }
+                    }
+                    bnLog.PreviousValue += ", Name (English): " + employeeChildren.Name + ", Name (Bangla): " + employeeChildren.NameBan + ", Date Of Birth: " + employeeChildren.DateOfBirth?.ToString("dd/MM/yyyy");
+                    bnLog.PreviousValue += ", File Name: " + employeeChildren.FileName + ", Gen Form Name: " + employeeChildren.GenFormName + ", Living With: " + employeeChildren.LivingWith;
+                    if (employeeChildren.OccupationId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Occupation", "OccupationId", employeeChildren.OccupationId ?? 0);
+                        bnLog.PreviousValue += ", Occupation: " + ((dynamic)prev).Name;
+                    }
+                    bnLog.PreviousValue += ", Contact Address: " + employeeChildren.ContactAddress + ", Office Address: " + employeeChildren.OfficeAddress;
+                    bnLog.PreviousValue += ", Golden Child: " + employeeChildren.GoldenChild + ", Status: " + (employeeChildren.IsDead == true ? "Dead" : "Alive");
+                    bnLog.PreviousValue += ", Dead Date: " + employeeChildren.DeadDate?.ToString("dd/MM/yyyy") + ", Dead Reason: " + employeeChildren.DeadReason;
+                    bnLog.UpdatedValue = "This Record has been Deleted!";
+                    bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                    bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                    bnLog.LogCreatedDate = DateTime.Now;
+
+
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                    //data log section end
+                    IsDeleted = await employeeChildrenRepository.DeleteAsync(employeeChildren);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                return IsDeleted;
             }
         }
 

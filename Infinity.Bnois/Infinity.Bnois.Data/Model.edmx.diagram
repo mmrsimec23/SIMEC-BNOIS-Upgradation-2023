@@ -493,6 +493,12 @@
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExam" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExamCategory" />
+        <EntityTypeShape EntityType="BnoisdbModel.ToeAuthorized" Width="1.5" PointX="31.25" PointY="127" />
+        <AssociationConnector Association="BnoisdbModel.FK_ToeAuthorized_Branch" />
+        <AssociationConnector Association="BnoisdbModel.FK_ToeAuthorized_Office" />
+        <AssociationConnector Association="BnoisdbModel.FK_ToeAuthorized_Rank" />
+        <EntityTypeShape EntityType="BnoisdbModel.DashBoardBranchByAdminAuthority600Entry" Width="1.5" PointX="8.75" PointY="102.75" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardBranchByAdminAuthority600Entry_Rank" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

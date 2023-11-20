@@ -12,7 +12,7 @@ namespace Infinity.Bnois.ApplicationService.Models
         public int EmployeeId { get; set; }
         public int ChildrenType { get; set; }
         public string ChildrenTypeName { get; set; }//extra field
-        public Nullable<int> Child { get; set; }
+        public int Child { get; set; }
         public string FileName { get; set; }
         public string GenFormName { get; set; }
         public string Name { get; set; }

@@ -1,0 +1,62 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">Toe Authorized<span class="pull-right text-success">{{vm.title}}</span></h2>
+                </div>
+                <form name="vm.toeAuthorizedForm">
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="branchId" class="custom-label">Branch</label>
+                            <select name="branchId" id="branchId" class="form-control" ng-model="vm.toeAuthorized.branchId" ng-options="option.value as option.text for option in vm.branchList">
+                                <option value="">--Select an Option--</option>
+                                <option value="100">Misc</option>
+                            </select>
+                            <p ng-show="vm.toeAuthorizedForm.branchId.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="rankId" class="custom-label">Rank</label>
+                            <select name="rankId" id="rankId" class="form-control" ng-model="vm.toeAuthorized.rankId" ng-options="option.value as option.text for option in vm.rankList">
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.toeAuthorizedForm.rankId.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="officeId" class="custom-label"> Office</label>
+                            <select name="officeId" id="officeId" class="form-control" ng-model="vm.toeAuthorized.officeId" ng-options="option.value as option.text for option in vm.officeList">
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.toeAuthorizedForm.officeId.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="no" class="custom-label">No</label>
+                            <input type="text" id="no" name="no"  class="form-control custom-form-control" ng-model="vm.toeAuthorized.no" />
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="remarks" class="custom-label">Remarks</label>
+                            <textarea type="text" id="remarks" class="form-control custom-form-control" ng-model="vm.toeAuthorized.remarks" name="remarks" maxlength="250" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.toeAuthorizedForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

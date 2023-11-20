@@ -78,47 +78,77 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Officer Msc Edu";
                 bnLog.PreviousValue = "Id: " + model.EmployeeMscEducationId;
                 bnLog.UpdatedValue = "Id: " + model.EmployeeMscEducationId;
-                if (employeeMscEducation.EmployeeId != model.EmployeeId)
+                if (employeeMscEducation.EmployeeId > 0 || model.EmployeeId > 0)
                 {
                     var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeMscEducation.EmployeeId);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
                 }
                 if (employeeMscEducation.MscEducationTypeId != model.MscEducationTypeId)
                 {
-                    var prevmsc = employeeService.GetDynamicTableInfoById("MscEducationType", "MscEducationTypeId", employeeMscEducation.MscEducationTypeId??0);
-                    var msc = employeeService.GetDynamicTableInfoById("MscEducationType", "MscEducationTypeId", model.MscEducationTypeId??0);
-                    bnLog.PreviousValue += ", MscEducationType: " + ((dynamic)prevmsc).Name;
-                    bnLog.UpdatedValue += ", MscEducationType: " + ((dynamic)msc).Name;
+                    if (employeeMscEducation.MscEducationTypeId > 0)
+                    {
+                        var prevmsc = employeeService.GetDynamicTableInfoById("MscEducationType", "MscEducationTypeId", employeeMscEducation.MscEducationTypeId ?? 0);
+                        bnLog.PreviousValue += ", MscEducationType: " + ((dynamic)prevmsc).Name;
+                    }
+                    if (model.MscEducationTypeId > 0)
+                    {
+                        var msc = employeeService.GetDynamicTableInfoById("MscEducationType", "MscEducationTypeId", model.MscEducationTypeId ?? 0);
+                        bnLog.UpdatedValue += ", MscEducationType: " + ((dynamic)msc).Name;
+                    }
                 }
                 if (employeeMscEducation.MscInstituteId != model.MscInstituteId)
                 {
-                    var prevmscins = employeeService.GetDynamicTableInfoById("MscInstitute", "MscInstituteId", employeeMscEducation.MscInstituteId ?? 0);
-                    var mscins = employeeService.GetDynamicTableInfoById("MscInstitute", "MscInstituteId", model.MscInstituteId ?? 0);
-                    bnLog.PreviousValue += ", Msc Institute: " + ((dynamic)prevmscins).Name;
-                    bnLog.UpdatedValue += ", Msc Institute: " + ((dynamic)mscins).Name;
+                    if (employeeMscEducation.MscInstituteId > 0)
+                    {
+                        var prevmscins = employeeService.GetDynamicTableInfoById("MscInstitute", "MscInstituteId", employeeMscEducation.MscInstituteId ?? 0);
+                        bnLog.PreviousValue += ", Msc Institute: " + ((dynamic)prevmscins).Name;
+                    }
+                    if (model.MscInstituteId > 0)
+                    {
+                        var mscins = employeeService.GetDynamicTableInfoById("MscInstitute", "MscInstituteId", model.MscInstituteId ?? 0);
+                        bnLog.UpdatedValue += ", Msc Institute: " + ((dynamic)mscins).Name;
+                    }
                 }
                 if (employeeMscEducation.MscPermissionTypeId != model.MscPermissionTypeId)
                 {
-                    var prevmscPer = employeeService.GetDynamicTableInfoById("MscPermissionType", "MscPermissionTypeId", employeeMscEducation.MscPermissionTypeId ?? 0);
-                    var mscPer = employeeService.GetDynamicTableInfoById("MscPermissionType", "MscPermissionTypeId", model.MscPermissionTypeId ?? 0);
-                    bnLog.PreviousValue += ", Msc Permission Type: " + ((dynamic)prevmscPer).Name;
-                    bnLog.UpdatedValue += ", MscPermissionType: " + ((dynamic)mscPer).Name;
+                    if (employeeMscEducation.MscPermissionTypeId > 0)
+                    {
+                        var prevmscPer = employeeService.GetDynamicTableInfoById("MscPermissionType", "MscPermissionTypeId", employeeMscEducation.MscPermissionTypeId ?? 0);
+                        bnLog.PreviousValue += ", Msc Permission Type: " + ((dynamic)prevmscPer).Name;
+                    }
+                    if (model.MscPermissionTypeId > 0)
+                    {
+                        var mscPer = employeeService.GetDynamicTableInfoById("MscPermissionType", "MscPermissionTypeId", model.MscPermissionTypeId ?? 0);
+                        bnLog.UpdatedValue += ", MscPermissionType: " + ((dynamic)mscPer).Name;
+                    }
                 }
                 if (employeeMscEducation.CountryId != model.CountryId)
                 {
-                    var prevcountry = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeMscEducation.CountryId ?? 0);
-                    var country = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId ?? 0);
-                    bnLog.PreviousValue += ", Country: " + ((dynamic)prevcountry).FullName;
-                    bnLog.UpdatedValue += ", Country: " + ((dynamic)country).FullName;
+                    if (employeeMscEducation.MscPermissionTypeId > 0)
+                    {
+                        var prevcountry = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeMscEducation.CountryId ?? 0);
+                        bnLog.PreviousValue += ", Country: " + ((dynamic)prevcountry).FullName;
+                    }
+                    if (model.MscPermissionTypeId > 0)
+                    {
+                        var country = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId ?? 0);
+                        bnLog.UpdatedValue += ", Country: " + ((dynamic)country).FullName;
+                    }
                 }
                 if (employeeMscEducation.RankId != model.RankId)
                 {
-                    var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeMscEducation.RankId ?? 0);
-                    var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId ?? 0);
-                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
-                    bnLog.UpdatedValue += ", Rank: " + ((dynamic)rank).ShortName;
+                    if (employeeMscEducation.MscPermissionTypeId > 0)
+                    {
+                        var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeMscEducation.RankId ?? 0);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
+                    }
+                    if (model.MscPermissionTypeId > 0)
+                    {
+                        var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId ?? 0);
+                        bnLog.UpdatedValue += ", Rank: " + ((dynamic)rank).ShortName;
+                    }
                 }
                 if (employeeMscEducation.PassingYear != model.PassingYear)
                 {
@@ -225,17 +255,40 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "EmployeeMscEducation";
                 bnLog.TableEntryForm = "Officer Msc Edu";
-                var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeMscEducation.EmployeeId);
-                var msc = employeeService.GetDynamicTableInfoById("MscEducationType", "MscEducationTypeId", employeeMscEducation.MscEducationTypeId ?? 0);
-                var mscins = employeeService.GetDynamicTableInfoById("MscInstitute", "MscInstituteId", employeeMscEducation.MscInstituteId ?? 0);
-                var mscPer = employeeService.GetDynamicTableInfoById("MscPermissionType", "MscPermissionTypeId", employeeMscEducation.MscPermissionTypeId ?? 0);
-                var country = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeMscEducation.CountryId ?? 0);
-                var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeMscEducation.RankId ?? 0);
+                bnLog.PreviousValue = "Id: " + employeeMscEducation.EmployeeMscEducationId;
+                if (employeeMscEducation.EmployeeId > 0)
+                {
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeMscEducation.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)emp).PNo;
+                }
 
-                bnLog.PreviousValue = "Id: " + employeeMscEducation.EmployeeMscEducationId + ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng + ", Msc Education Type: " + ((dynamic)msc).Name
-                    + ", Rank: " + ((dynamic)rank).ShortName + ", Remarks: " + employeeMscEducation.Remarks + ", Msc Institute: " + ((dynamic)mscins).Name + ", Msc Permission Type: " + ((dynamic)mscPer).Name
-                    + ", Country: " + ((dynamic)country).FullName + ", PassingYear: " + employeeMscEducation.PassingYear + ", Results: " + employeeMscEducation.Results + ", IsComplete: " + employeeMscEducation.IsComplete + 
-                    ", From Date: " + employeeMscEducation.FromDate?.ToString("dd/MM/yyyy") + ", To Date: " + employeeMscEducation.ToDate?.ToString("dd/MM/yyyy");
+                if (employeeMscEducation.MscEducationTypeId > 0)
+                {
+                    var prevmsc = employeeService.GetDynamicTableInfoById("MscEducationType", "MscEducationTypeId", employeeMscEducation.MscEducationTypeId ?? 0);
+                    bnLog.PreviousValue += ", MscEducationType: " + ((dynamic)prevmsc).Name;
+                }
+                if (employeeMscEducation.MscInstituteId > 0)
+                {
+                    var prevmscins = employeeService.GetDynamicTableInfoById("MscInstitute", "MscInstituteId", employeeMscEducation.MscInstituteId ?? 0);
+                    bnLog.PreviousValue += ", Msc Institute: " + ((dynamic)prevmscins).Name;
+                }
+                if (employeeMscEducation.MscPermissionTypeId > 0)
+                {
+                    var prevmscPer = employeeService.GetDynamicTableInfoById("MscPermissionType", "MscPermissionTypeId", employeeMscEducation.MscPermissionTypeId ?? 0);
+                    bnLog.PreviousValue += ", Msc Permission Type: " + ((dynamic)prevmscPer).Name;
+                }
+                if (employeeMscEducation.MscPermissionTypeId > 0)
+                {
+                    var prevcountry = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeMscEducation.CountryId ?? 0);
+                    bnLog.PreviousValue += ", Country: " + ((dynamic)prevcountry).FullName;
+                }
+                if (employeeMscEducation.MscPermissionTypeId > 0)
+                {
+                    var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeMscEducation.RankId ?? 0);
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
+                }
+                bnLog.PreviousValue +=  ", PassingYear: " + employeeMscEducation.PassingYear + ", Results: " + employeeMscEducation.Results + ", IsComplete: " + employeeMscEducation.IsComplete + 
+                    ", From Date: " + employeeMscEducation.FromDate?.ToString("dd/MM/yyyy") + ", To Date: " + employeeMscEducation.ToDate?.ToString("dd/MM/yyyy") + ", Remarks: " + employeeMscEducation.Remarks;
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete

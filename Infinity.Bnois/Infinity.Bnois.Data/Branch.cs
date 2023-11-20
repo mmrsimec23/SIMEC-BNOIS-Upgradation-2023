@@ -26,6 +26,7 @@ namespace Infinity.Bnois.Data
             this.BraCtryCoursePoints = new HashSet<BraCtryCoursePoint>();
             this.CareerForecastSetting = new HashSet<CareerForecastSetting>();
             this.EmployeeGeneral = new HashSet<EmployeeGeneral>();
+            this.ToeAuthorized = new HashSet<ToeAuthorized>();
         }
     
         public int BranchId { get; set; }
@@ -59,5 +60,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<CareerForecastSetting> CareerForecastSetting { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeGeneral> EmployeeGeneral { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ToeAuthorized> ToeAuthorized { get; set; }
     }
 }

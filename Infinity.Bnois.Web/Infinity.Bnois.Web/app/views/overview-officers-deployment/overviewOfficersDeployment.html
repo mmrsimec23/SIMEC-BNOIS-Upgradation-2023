@@ -1,0 +1,64 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <button  class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
+
+            <div class="panel-body pdfReportFormCover" id="print">
+                <h3 class="reportHeader">Overview of Officers Deployment</h3>
+                <hr />
+                
+
+                <div class="table-wrapper table-responsive reportCover">
+                    
+
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Ser</th>
+                                <th rowspan="2">Rank</th>
+                                <th colspan="5">Auth</th>
+                                <th colspan="5">Held</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>Within Navy</th>
+                                <th>Second ment</th>
+                                <th>CG</th>
+                                <th>ISO & Others </th>
+                                <th>Total</th>
+                                <th>Within Navy</th>
+                                <th>Second ment</th>
+                                <th>CG</th>
+                                <th>ISO & Others </th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.overviewOfficersDeploymentList">
+                                <td><strong>{{$index+1}}</strong></td>
+                                <td><strong>{{branch.rankName}}</strong></td>
+                                <td style="text-align: center"> <strong>{{branch.authWithinNavy}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.authSecondMent}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authCG}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authIsoOther}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldWithinNavy}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldSecondMent}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldCG}}</strong>  </td>
+                                <td style="text-align: center"> <strong>{{branch.heldIsoOther}}</strong> </td>
+                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

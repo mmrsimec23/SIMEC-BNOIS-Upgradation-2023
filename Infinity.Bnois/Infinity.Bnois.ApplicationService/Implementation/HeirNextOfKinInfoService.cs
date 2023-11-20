@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
 
         private readonly IBnoisRepository<HeirNextOfKinInfo> heirNextOfKinInfoRepository;
-        public HeirNextOfKinInfoService(IBnoisRepository<HeirNextOfKinInfo> heirNextOfKinInfoRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public HeirNextOfKinInfoService(IBnoisRepository<HeirNextOfKinInfo> heirNextOfKinInfoRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.heirNextOfKinInfoRepository = heirNextOfKinInfoRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
 
@@ -83,6 +87,148 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 heirNextOfKinInfo.ModifiedDate = DateTime.Now;
                 heirNextOfKinInfo.ModifiedBy = userId;
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "HeirNextOfKinInfo";
+                bnLog.TableEntryForm = "Employee Heir & Next Of Kin Information";
+                bnLog.PreviousValue = "Id: " + model.HeirNextOfKinInfoId;
+                bnLog.UpdatedValue = "Id: " + model.HeirNextOfKinInfoId;
+                int bnoisUpdateCount = 0;
+                if (heirNextOfKinInfo.EmployeeId != model.EmployeeId)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", heirNextOfKinInfo.EmployeeId);
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.HeirKinType != model.HeirKinType)
+                {
+                    bnLog.PreviousValue += ", Type: " + (heirNextOfKinInfo.HeirKinType == 1 ? "Next_Of_Kin" : heirNextOfKinInfo.HeirKinType == 2 ? "Heir" : "");
+                    bnLog.UpdatedValue += ", Type: " + (model.HeirKinType == 1 ? "Next_Of_Kin" : model.HeirKinType == 2 ? "Heir" : ""); ;
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.HeirTypeId != model.HeirTypeId)
+                {
+                    if (heirNextOfKinInfo.HeirTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("HeirType", "HeirTypeId", heirNextOfKinInfo.HeirTypeId ?? 0);
+                        bnLog.PreviousValue += ", Heir Type: " + ((dynamic)prev).Name;
+                    }
+                    if (model.HeirTypeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("HeirType", "HeirTypeId", model.HeirTypeId ?? 0);
+                        bnLog.UpdatedValue += ", Heir Type: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.NameEng != model.NameEng)
+                {
+                    bnLog.PreviousValue += ", Name: " + heirNextOfKinInfo.NameEng;
+                    bnLog.UpdatedValue += ", Name: " + model.NameEng;
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.NameBan != model.NameBan)
+                {
+                    bnLog.PreviousValue += ", Name (বাংলা): " + heirNextOfKinInfo.NameBan;
+                    bnLog.UpdatedValue += ", Name (বাংলা): " + model.NameBan;
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.GenderId != model.GenderId)
+                {
+                    if (heirNextOfKinInfo.GenderId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Gender", "GenderId", heirNextOfKinInfo.GenderId);
+                        bnLog.PreviousValue += ", Gender: " + ((dynamic)prev).Name;
+                    }
+                    if (model.GenderId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Gender", "GenderId", model.GenderId);
+                        bnLog.UpdatedValue += ", Gender: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.RelationId != model.RelationId)
+                {
+                    if (heirNextOfKinInfo.RelationId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Relation", "RelationId", heirNextOfKinInfo.RelationId);
+                        bnLog.PreviousValue += ", Relation: " + ((dynamic)prev).Name;
+                    }
+                    if (model.RelationId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Relation", "RelationId", model.RelationId);
+                        bnLog.UpdatedValue += ", Relation: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.Email != model.Email)
+                {
+                    bnLog.PreviousValue += ", Email: " + heirNextOfKinInfo.Email;
+                    bnLog.UpdatedValue += ", Email: " + model.Email;
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.ContactNumber != model.ContactNumber)
+                {
+                    bnLog.PreviousValue += ", Contact Number: " + heirNextOfKinInfo.ContactNumber;
+                    bnLog.UpdatedValue += ", Contact Number: " + model.ContactNumber;
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.PresentAddress != model.PresentAddress)
+                {
+                    bnLog.PreviousValue += ", Present Address: " + heirNextOfKinInfo.PresentAddress;
+                    bnLog.UpdatedValue += ", Present Address: " + model.PresentAddress;
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.PermanentAddress != model.PermanentAddress)
+                {
+                    bnLog.PreviousValue += ", Permanent Address: " + heirNextOfKinInfo.PermanentAddress;
+                    bnLog.UpdatedValue += ", Permanent Address: " + model.PermanentAddress;
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.PassportNumber != model.PassportNumber)
+                {
+                    bnLog.PreviousValue += ", Passport Number: " + heirNextOfKinInfo.PassportNumber;
+                    bnLog.UpdatedValue += ", Passport Number: " + model.PassportNumber;
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.OccupationId != model.OccupationId)
+                {
+                    if (heirNextOfKinInfo.OccupationId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Occupation", "OccupationId", heirNextOfKinInfo.OccupationId ?? 0);
+                        bnLog.PreviousValue += ", Occupation: " + ((dynamic)prev).Name;
+                    }
+                    if (model.OccupationId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Occupation", "OccupationId", model.OccupationId ?? 0);
+                        bnLog.UpdatedValue += ", Occupation: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (heirNextOfKinInfo.Pradhikar != model.Pradhikar)
+                {
+                    bnLog.PreviousValue += ", Pradhikar (% of Wealth): " + heirNextOfKinInfo.Pradhikar;
+                    bnLog.UpdatedValue += ", Pradhikar (% of Wealth): " + model.Pradhikar;
+                    bnoisUpdateCount += 1;
+                }
+                
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -128,7 +274,59 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
-                return await heirNextOfKinInfoRepository.DeleteAsync(nextOfKinInfo);
+                bool IsDeleted = false;
+                try
+                {
+                    // data log section start
+                    BnoisLog bnLog = new BnoisLog();
+                    bnLog.TableName = "HeirNextOfKinInfo";
+                    bnLog.TableEntryForm = "Employee Heir & Next Of Kin Information";
+                    bnLog.PreviousValue = "Id: " + nextOfKinInfo.HeirNextOfKinInfoId;
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", nextOfKinInfo.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.PreviousValue += ", Type: " + (nextOfKinInfo.HeirKinType == 1 ? "Next_Of_Kin" : nextOfKinInfo.HeirKinType == 2 ? "Heir" : "");
+                    if (nextOfKinInfo.HeirTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("HeirType", "HeirTypeId", nextOfKinInfo.HeirTypeId ?? 0);
+                        bnLog.PreviousValue += ", Heir Type: " + ((dynamic)prev).Name;
+                    }
+                    bnLog.PreviousValue += ", Name: " + nextOfKinInfo.NameEng + ", Name (বাংলা): " + nextOfKinInfo.NameBan;
+                    if (nextOfKinInfo.GenderId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Gender", "GenderId", nextOfKinInfo.GenderId);
+                        bnLog.PreviousValue += ", Gender: " + ((dynamic)prev).Name;
+                    }
+                    if (nextOfKinInfo.RelationId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Relation", "RelationId", nextOfKinInfo.RelationId);
+                        bnLog.PreviousValue += ", Relation: " + ((dynamic)prev).Name;
+                    }
+                    bnLog.PreviousValue += ", Email: " + nextOfKinInfo.Email + ", Contact Number: " + nextOfKinInfo.ContactNumber + ", Present Address: " + nextOfKinInfo.PresentAddress;
+                    bnLog.PreviousValue += ", Permanent Address: " + nextOfKinInfo.PermanentAddress + ", Passport Number: " + nextOfKinInfo.PassportNumber;
+                    if (nextOfKinInfo.OccupationId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Occupation", "OccupationId", nextOfKinInfo.OccupationId ?? 0);
+                        bnLog.PreviousValue += ", Occupation: " + ((dynamic)prev).Name;
+                    }
+                    bnLog.PreviousValue += ", Pradhikar (% of Wealth): " + nextOfKinInfo.Pradhikar;
+                   
+                    bnLog.UpdatedValue = "This Record has been Deleted!";
+                    
+                    bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                    bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                    bnLog.LogCreatedDate = DateTime.Now;
+
+
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                    //data log section end
+                    IsDeleted = await heirNextOfKinInfoRepository.DeleteAsync(nextOfKinInfo);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                return IsDeleted;
             }
         }
 

@@ -17,12 +17,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<EmployeeGeneral> employeeGeneralRepository;
         private readonly IBnoisRepository<CareerForecast> careerForecastRepository;
         private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
-        public CareerForecastSettingService(IBnoisRepository<CareerForecastSetting> careerForecastSettingRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<CareerForecast> careerForecastRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
+        private readonly IEmployeeService employeeService;
+        public CareerForecastSettingService(IBnoisRepository<CareerForecastSetting> careerForecastSettingRepository, IEmployeeService employeeService, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<CareerForecast> careerForecastRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.careerForecastSettingRepository = careerForecastSettingRepository;
             this.employeeGeneralRepository = employeeGeneralRepository;
             this.careerForecastRepository = careerForecastRepository;
             this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
         
 
@@ -107,8 +109,16 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (careerForecastSettings.BranchId != model.BranchId)
                 {
-                    bnLog.PreviousValue += ", BranchId: " + careerForecastSettings.BranchId;
-                    bnLog.UpdatedValue += ", BranchId: " + model.BranchId;
+                    if (careerForecastSettings.BranchId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Branch", "BranchId", careerForecastSettings.BranchId);
+                        bnLog.PreviousValue += ", Branch: " + ((dynamic)prev).Name;
+                    }
+                    if (model.BranchId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Branch", "BranchId", model.BranchId);
+                        bnLog.UpdatedValue += ", Branch: " + ((dynamic)newv).Name;
+                    }
                 }
                 if (careerForecastSettings.PositionNo != model.PositionNo)
                 {
@@ -163,7 +173,15 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "careerForecastSettings";
                 bnLog.TableEntryForm = "career Forecast Settings";
-                bnLog.PreviousValue = "Id: " + careerForecastSettings.CareerForecastSettingId + ", Name: " + careerForecastSettings.Name + ", Shortname: " + careerForecastSettings.Shortname + ", BranchId: " + careerForecastSettings.BranchId + ", PositionNo: " + careerForecastSettings.PositionNo;
+                bnLog.PreviousValue = "Id: " + careerForecastSettings.CareerForecastSettingId + ", Name: " + careerForecastSettings.Name + ", Shortname: " + careerForecastSettings.Shortname;
+                
+                if (careerForecastSettings.BranchId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Branch", "BranchId", careerForecastSettings.BranchId);
+                    bnLog.PreviousValue += ", Branch: " + ((dynamic)prev).Name;
+                }
+                bnLog.PreviousValue += ", PositionNo: " + careerForecastSettings.PositionNo;
+
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete

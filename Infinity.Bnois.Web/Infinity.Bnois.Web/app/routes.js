@@ -179,6 +179,62 @@
                     title: 'Rank'
                 }
             },
+            //-------------Toe Authorized-------
+            {
+                state: 'toe-authorizeds',
+                config: {
+                    url: '/toe-authorizeds?ps&pn&q',
+                    templateUrl: 'app/views/toe-authorized/toeAuthorizeds.html',
+                    controller: 'toeAuthorizedController as vm',
+                    title: 'Toe Authorized'
+                }
+            },
+            {
+                state: 'toe-authorized-create',
+                config: {
+                    url: '/toe-authorized-create',
+                    templateUrl: 'app/views/toe-authorized/toeAuthorizedAdd.html',
+                    controller: 'toeAuthorizedAddController as vm',
+                    title: 'Toe Authorized'
+                }
+            },
+            {
+                state: "toe-authorized-modify",
+                config: {
+                    url: '/toe-authorized-modify/:id',
+                    templateUrl: 'app/views/toe-authorized/toeAuthorizedAdd.html',
+                    controller: 'toeAuthorizedAddController as vm',
+                    title: 'Toe Authorized'
+                }
+            },
+            //-------------Overview of Officers Deployment Entry-------
+            {
+                state: 'overview-officers-deployment-entry-list',
+                config: {
+                    url: '/overview-officers-deployment-entry-list?ps&pn&q',
+                    templateUrl: 'app/views/overview-officers-deployment-entry/overviewOfficersDeploymentList.html',
+                    controller: 'overviewOfficersDeploymentListController as vm',
+                    title: 'Overview of Officers Deployment'
+                }
+            },
+            {
+                state: 'overview-officers-deployment-entry-create',
+                config: {
+                    url: '/overview-officers-deployment-entry-create',
+                    templateUrl: 'app/views/overview-officers-deployment-entry/overviewOfficersDeploymentAdd.html',
+                    controller: 'overviewOfficersDeploymentAddController as vm',
+                    title: 'Overview of Officers Deployment'
+                }
+            },
+            {
+                state: "overview-officers-deployment-entry-modify",
+                config: {
+                    url: '/overview-officers-deployment-entry-modify/:id',
+                    templateUrl: 'app/views/overview-officers-deployment-entry/overviewOfficersDeploymentAdd.html',
+                    controller: 'overviewOfficersDeploymentAddController as vm',
+                    title: 'Overview of Officers Deployment'
+                }
+            },
 
             //-------------Rank Category-------
             {
@@ -5815,6 +5871,34 @@
                     templateUrl: 'app/views/shipwise-proposed-waiting-coxo-list/shipwiseProposedWaitingCoXoList.html',
                     controller: 'shipwiseProposedWaitingCoXoListController as vm',
                     title: 'Ship Wise CO/XO List'
+                }
+            },
+            {
+                state: "branch-authority-officers",
+                config: {
+                    url: "/branch-authority-officers",
+                    templateUrl: 'app/views/branch-authority-officers/branchAuthorityOfficers.html',
+                    controller: 'branchAuthorityOfficersController as vm',
+                    title: 'Branch Authority Officers'
+                }
+            },
+            {
+                state: "overview-officers-deployment",
+                config: {
+                    url: "/overview-officers-deployment",
+                    templateUrl: 'app/views/overview-officers-deployment/overviewOfficersDeployment.html',
+                    controller: 'overviewOfficersDeploymentController as vm',
+                    title: 'Branch Authority Officers'
+                }
+            },
+            //-------------Branch Officer-------
+            {
+                state: 'branch-authority-officer-list',
+                config: {
+                    url: '/branch-authority-officer-list/:adminAuthorityId/:rankId/:branch/:categoryId/:subCategoryId/:commissionTypeId',
+                    templateUrl: 'app/views/branch-authority-officers/branchOfficer.html',
+                    controller: 'branchOfficerController as vm',
+                    title: 'Branch Officer'
                 }
             }
 

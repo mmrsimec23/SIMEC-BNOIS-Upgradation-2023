@@ -26,6 +26,17 @@
             getStreamOfficer: getStreamOfficer,
             getCategoryOfficer: getCategoryOfficer,
             getOfficersByOffice: getOfficersByOffice,
+            getBranchAuthorityOfficers9: getBranchAuthorityOfficers9,
+            getBranchAuthorityOfficers10: getBranchAuthorityOfficers10,
+            getBranchAuthorityOfficers11: getBranchAuthorityOfficers11,
+            getBranchAuthorityOfficers12: getBranchAuthorityOfficers12,
+            getBranchAuthorityOfficers13: getBranchAuthorityOfficers13,
+            getBranchAuthorityOfficers369: getBranchAuthorityOfficers369,
+            getBranchAuthorityOfficers383: getBranchAuthorityOfficers383,
+            getBranchAuthorityOfficers458: getBranchAuthorityOfficers458,
+            getBranchAuthorityOfficers513: getBranchAuthorityOfficers513,
+            getBranchAuthorityOfficers543: getBranchAuthorityOfficers543,
+            getBranchAuthorityOfficers600: getBranchAuthorityOfficers600,
             getGenderOfficer: getGenderOfficer
            
            
@@ -154,9 +165,50 @@
             var url = dataConstants.DASHBOARD_URL + 'get-gender-officer?rankId=' + rankId + '&branch=' + branch + '&categoryId=' + categoryId + '&subCategoryId=' + subCategoryId + '&commissionTypeId=' + commissionTypeId + '&genderId=' + genderId;
             return apiHttpService.GET(url);
         }
-
-
-
+        function getBranchAuthorityOfficers9(branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-9?branchAuthorityId=' + branchAuthorityId;
+            return apiHttpService.GET(url);
+        }
+        function getBranchAuthorityOfficers10(branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-10?branchAuthorityId=' + branchAuthorityId;
+            return apiHttpService.GET(url);
+        }
+        function getBranchAuthorityOfficers11(branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-11?branchAuthorityId=' + branchAuthorityId;
+            return apiHttpService.GET(url);
+        }
+        function getBranchAuthorityOfficers12(branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-12?branchAuthorityId=' + branchAuthorityId;
+            return apiHttpService.GET(url);
+        }
+        function getBranchAuthorityOfficers13(branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-13?branchAuthorityId=' + branchAuthorityId;
+            return apiHttpService.GET(url);
+        }
+        function getBranchAuthorityOfficers369(branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-369?branchAuthorityId=' + branchAuthorityId;
+            return apiHttpService.GET(url);
+        }
+        function getBranchAuthorityOfficers383(branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-383?branchAuthorityId=' + branchAuthorityId;
+            return apiHttpService.GET(url);
+        }
+        function getBranchAuthorityOfficers458(branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-458?branchAuthorityId=' + branchAuthorityId;
+            return apiHttpService.GET(url);
+        }
+        function getBranchAuthorityOfficers513(branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-513?branchAuthorityId=' + branchAuthorityId;
+            return apiHttpService.GET(url);
+        }
+        function getBranchAuthorityOfficers543(branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-543?branchAuthorityId=' + branchAuthorityId;
+            return apiHttpService.GET(url);
+        }
+        function getBranchAuthorityOfficers600() {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-600';
+            return apiHttpService.GET(url);
+        }
        
 
     }

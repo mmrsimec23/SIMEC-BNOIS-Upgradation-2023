@@ -298,6 +298,13 @@ namespace Infinity.Bnois
         Course = 2,
         Mission = 3
     }
+    public enum OODOrgType
+    {
+        Within_Navy = 1,
+        Second_Ment = 2,
+        CG = 3,
+        ISO_And_Others = 4
+    }
 
     public enum TemporaryTransferType
     {

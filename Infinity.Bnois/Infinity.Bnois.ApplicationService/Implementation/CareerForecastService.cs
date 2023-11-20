@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
 
         private readonly IBnoisRepository<CareerForecast> careerForecastRepository;
-        public CareerForecastService(IBnoisRepository<CareerForecast> careerForecastRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public CareerForecastService(IBnoisRepository<CareerForecast> careerForecastRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.careerForecastRepository = careerForecastRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
   
@@ -131,7 +135,45 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
-                return await careerForecastRepository.DeleteAsync(EmployeeCareerForecast);
+                bool IsDeleted = false;
+                try
+                {
+                    // data log section start
+                    BnoisLog bnLog = new BnoisLog();
+                    bnLog.TableName = "CareerForecast";
+                    bnLog.TableEntryForm = "Employee Career Forecast";
+                    bnLog.PreviousValue = "Id: " + EmployeeCareerForecast.CareerForecastId;
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", EmployeeCareerForecast.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    if (EmployeeCareerForecast.CareerForecastSettingId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("CareerForecastSetting", "CareerForecastSettingId", EmployeeCareerForecast.CareerForecastSettingId ?? 0);
+                        bnLog.PreviousValue += ", Exam Title: " + ((dynamic)prev).PositionNo + " - " + ((dynamic)prev).Name;
+                    }
+                    if (EmployeeCareerForecast.BranchId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Branch", "BranchId", EmployeeCareerForecast.BranchId ?? 0);
+                        bnLog.PreviousValue += ", Branch: " + ((dynamic)prev).Name;
+                    }
+                    bnLog.PreviousValue += ", Status: " + (EmployeeCareerForecast.ForecastStatus == 1 ? "Complete" : EmployeeCareerForecast.ForecastStatus == 2 ? "Bypass" : "");
+                    
+                    bnLog.UpdatedValue = "This Record has been Deleted!";
+                    
+                    bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                    bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                    bnLog.LogCreatedDate = DateTime.Now;
+
+
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                    //data log section end
+                    IsDeleted =  await careerForecastRepository.DeleteAsync(EmployeeCareerForecast);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                return IsDeleted;
             }
         }
     }

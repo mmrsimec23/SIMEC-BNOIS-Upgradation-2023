@@ -550,6 +550,21 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="DashBoardBranchByAdminAuthority600Entry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RankId" Type="int" />
+          <Property Name="OrgType" Type="int" />
+          <Property Name="No" Type="int" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="District">
           <Key>
             <PropertyRef Name="DistrictId" />
@@ -818,13 +833,13 @@
           <Property Name="IsContract" Type="bit" Nullable="false" />
           <Property Name="ContractEndDate" Type="datetime" />
           <Property Name="DeadReason" Type="nvarchar" MaxLength="300" />
-          <Property Name="SasbStatus" Type="int" />
-          <Property Name="SasbRemarks" Type="nvarchar" MaxLength="1500" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="SasbStatus" Type="int" />
+          <Property Name="SasbRemarks" Type="nvarchar" MaxLength="1500" />
         </EntityType>
         <EntityType Name="EmployeeHajjDetail">
           <Key>
@@ -922,17 +937,17 @@
           <Property Name="MscPermissionTypeId" Type="int" />
           <Property Name="CountryId" Type="int" />
           <Property Name="PassingYear" Type="nvarchar" MaxLength="50" />
-          <Property Name="PermissionYear" Type="nvarchar" MaxLength="50" />
           <Property Name="Results" Type="nvarchar" MaxLength="50" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="1500" />
-          <Property Name="IsComplete" Type="bit" />
-          <Property Name="FromDate" Type="date" />
-          <Property Name="ToDate" Type="date" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsComplete" Type="bit" />
+          <Property Name="FromDate" Type="date" />
+          <Property Name="ToDate" Type="date" />
+          <Property Name="PermissionYear" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="EmployeeOpr">
           <Key>
@@ -1094,12 +1109,12 @@
           <Property Name="AttTime" Type="int" />
           <Property Name="IsExempted" Type="bit" Nullable="false" />
           <Property Name="ExemptedDate" Type="date" />
-          <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="EmployeeServiceExt">
           <Key>
@@ -1148,7 +1163,7 @@
           <Property Name="SLCode" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb2.dbo.EmployeeTraining' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmployeeTraining">
           <Key>
             <PropertyRef Name="EmployeTrainingId" />
@@ -1809,7 +1824,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.EmployeeTraining' does not have a pri
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="OPatCd" Type="int" />
           <Property Name="OrgCd" Type="int" />
-          <Property Name="IsSubmarineCount" Type="bit" Nullable="false" />
+          <Property Name="IsSubmarineCount" Type="bit" />
           <Property Name="ActiveStatus" Type="bit" />
         </EntityType>
         <EntityType Name="OfficeAppBranch">
@@ -2585,7 +2600,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.EmployeeTraining' does not have a pri
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="TransferId" Type="int" />
           <Property Name="NoteType" Type="int" />
-          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="Date" Type="date" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
@@ -2920,9 +2935,9 @@ warning 6002: The table/view 'Bnoisdb2.dbo.EmployeeTraining' does not have a pri
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="DateTo" Type="date" />
-          <Property Name="MedicalCategoryType" Type="int" />
           <Property Name="MedicalCategoryCause" Type="nvarchar" MaxLength="1500" />
+          <Property Name="MedicalCategoryType" Type="int" />
+          <Property Name="DateTo" Type="date" />
         </EntityType>
         <EntityType Name="SubBranch">
           <Key>
@@ -3003,6 +3018,22 @@ warning 6002: The table/view 'Bnoisdb2.dbo.EmployeeTraining' does not have a pri
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToeAuthorized">
+          <Key>
+            <PropertyRef Name="ToeAuthorizedid" />
+          </Key>
+          <Property Name="ToeAuthorizedid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="RankId" Type="int" />
+          <Property Name="OfficeId" Type="int" />
+          <Property Name="No" Type="int" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TraceSetting">
@@ -3254,7 +3285,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.EmployeeTraining' does not have a pri
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb2.dbo.vwNomination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb.dbo.vwNomination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwNomination">
           <Key>
             <PropertyRef Name="NominationId" />
@@ -3285,7 +3316,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwNomination' does not have a primary
           <Property Name="TitleName" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwTransfer">
           <Key>
             <PropertyRef Name="TransferId" />
@@ -3815,6 +3846,18 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Principal>
             <Dependent Role="CoXoService">
               <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardBranchByAdminAuthority600Entry_Rank">
+          <End Role="Rank" Type="Self.Rank" Multiplicity="0..1" />
+          <End Role="DashBoardBranchByAdminAuthority600Entry" Type="Self.DashBoardBranchByAdminAuthority600Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="DashBoardBranchByAdminAuthority600Entry">
+              <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6596,6 +6639,42 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ToeAuthorized_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+          <End Role="ToeAuthorized" Type="Self.ToeAuthorized" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="ToeAuthorized">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToeAuthorized_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="0..1" />
+          <End Role="ToeAuthorized" Type="Self.ToeAuthorized" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="ToeAuthorized">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToeAuthorized_Rank">
+          <End Role="Rank" Type="Self.Rank" Multiplicity="0..1" />
+          <End Role="ToeAuthorized" Type="Self.ToeAuthorized" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="ToeAuthorized">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TrainingBranch_Branch">
           <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
           <End Role="TrainingBranch" Type="Self.TrainingBranch" Multiplicity="*" />
@@ -6930,6 +7009,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <EntitySet Name="CoursePoint" EntityType="Self.CoursePoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourseSubCategory" EntityType="Self.CourseSubCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoXoService" EntityType="Self.CoXoService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DashBoardBranchByAdminAuthority600Entry" EntityType="Self.DashBoardBranchByAdminAuthority600Entry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
@@ -7070,6 +7150,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suitability" EntityType="Self.Suitability" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TerminationType" EntityType="Self.TerminationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ToeAuthorized" EntityType="Self.ToeAuthorized" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TraceSetting" EntityType="Self.TraceSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrainingBranch" EntityType="Self.TrainingBranch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrainingInstitute" EntityType="Self.TrainingInstitute" Schema="dbo" store:Type="Tables" />
@@ -7309,6 +7390,10 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <AssociationSet Name="FK_CoXoService_Office" Association="Self.FK_CoXoService_Office">
             <End Role="Office" EntitySet="Office" />
             <End Role="CoXoService" EntitySet="CoXoService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardBranchByAdminAuthority600Entry_Rank" Association="Self.FK_DashBoardBranchByAdminAuthority600Entry_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="DashBoardBranchByAdminAuthority600Entry" EntitySet="DashBoardBranchByAdminAuthority600Entry" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_District_dbo_Divission_DivissionId" Association="Self.FK_dbo_District_dbo_Divission_DivissionId">
             <End Role="Division" EntitySet="Division" />
@@ -8233,6 +8318,18 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="SubCategory" EntitySet="SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToeAuthorized_Branch" Association="Self.FK_ToeAuthorized_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="ToeAuthorized" EntitySet="ToeAuthorized" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToeAuthorized_Office" Association="Self.FK_ToeAuthorized_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="ToeAuthorized" EntitySet="ToeAuthorized" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToeAuthorized_Rank" Association="Self.FK_ToeAuthorized_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="ToeAuthorized" EntitySet="ToeAuthorized" />
           </AssociationSet>
           <AssociationSet Name="FK_TrainingBranch_Branch" Association="Self.FK_TrainingBranch_Branch">
             <End Role="Branch" EntitySet="Branch" />
@@ -9723,6 +9820,24 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <AssociationSet Name="FK_EmployeeServiceEamResult_ServiceExamCategory" Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExamCategory">
             <End Role="ServiceExamCategory" EntitySet="ServiceExamCategories" />
             <End Role="EmployeeServiceExamResult" EntitySet="EmployeeServiceExamResult" />
+          </AssociationSet>
+          <EntitySet Name="ToeAuthorized" EntityType="BnoisdbModel.ToeAuthorized" />
+          <AssociationSet Name="FK_ToeAuthorized_Branch" Association="BnoisdbModel.FK_ToeAuthorized_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="ToeAuthorized" EntitySet="ToeAuthorized" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToeAuthorized_Office" Association="BnoisdbModel.FK_ToeAuthorized_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="ToeAuthorized" EntitySet="ToeAuthorized" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToeAuthorized_Rank" Association="BnoisdbModel.FK_ToeAuthorized_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="ToeAuthorized" EntitySet="ToeAuthorized" />
+          </AssociationSet>
+          <EntitySet Name="DashBoardBranchByAdminAuthority600Entry" EntityType="BnoisdbModel.DashBoardBranchByAdminAuthority600Entry" />
+          <AssociationSet Name="FK_DashBoardBranchByAdminAuthority600Entry_Rank" Association="BnoisdbModel.FK_DashBoardBranchByAdminAuthority600Entry_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="DashBoardBranchByAdminAuthority600Entry" EntitySet="DashBoardBranchByAdminAuthority600Entry" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
@@ -11799,6 +11914,8 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <NavigationProperty Name="EmployeeCarLoan" Relationship="BnoisdbModel.FK_EmployeeCarLoan_Rank" FromRole="Rank" ToRole="EmployeeCarLoan" />
           <NavigationProperty Name="EmployeeSecurityClearance" Relationship="BnoisdbModel.FK_EmployeeSecurityClearance_Rank" FromRole="Rank" ToRole="EmployeeSecurityClearance" />
           <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Rank" FromRole="Rank" ToRole="EmployeeMscEducation" />
+          <NavigationProperty Name="ToeAuthorized" Relationship="BnoisdbModel.FK_ToeAuthorized_Rank" FromRole="Rank" ToRole="ToeAuthorized" />
+          <NavigationProperty Name="DashBoardBranchByAdminAuthority600Entry" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority600Entry_Rank" FromRole="Rank" ToRole="DashBoardBranchByAdminAuthority600Entry" />
           </EntityType>
         <EntityType Name="SubBranch">
           <Key>
@@ -11962,6 +12079,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <NavigationProperty Name="BraCtryCoursePoints" Relationship="BnoisdbModel.FK_BraCtryCoursePoint_Branch" FromRole="Branch" ToRole="BraCtryCoursePoint" />
           <NavigationProperty Name="CareerForecastSetting" Relationship="BnoisdbModel.FK_CareerForecastSetting_Branch" FromRole="Branch" ToRole="CareerForecastSetting" />
           <NavigationProperty Name="EmployeeGeneral" Relationship="BnoisdbModel.FK_EmployeeGeneral_Branch" FromRole="Branch" ToRole="EmployeeGeneral" />
+          <NavigationProperty Name="ToeAuthorized" Relationship="BnoisdbModel.FK_ToeAuthorized_Branch" FromRole="Branch" ToRole="ToeAuthorized" />
         </EntityType>
         <Association Name="FK_MissionAppBranch_Branch">
           <End Type="BnoisdbModel.Branch" Role="Branch" Multiplicity="1" />
@@ -16451,7 +16569,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="OPatCd" Type="Int32" />
           <Property Name="OrgCd" Type="Int32" />
-          <Property Name="IsSubmarineCount" Type="Boolean" Nullable="false" />
+          <Property Name="IsSubmarineCount" Type="Boolean" />
           <Property Name="ActiveStatus" Type="Boolean" />
           <NavigationProperty Name="Achievement" Relationship="BnoisdbModel.FK_Achievement_Office" FromRole="Office" ToRole="Achievement" />
           <NavigationProperty Name="Country" Relationship="BnoisdbModel.FK_Office_Country" FromRole="Office" ToRole="Country" />
@@ -16467,6 +16585,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <NavigationProperty Name="ProposalDetail" Relationship="BnoisdbModel.FK_ProposalDetail_Office" FromRole="Office" ToRole="ProposalDetail" />
           <NavigationProperty Name="Transfer" Relationship="BnoisdbModel.FK_Transfer_PreBorn" FromRole="Office" ToRole="Transfer" />
           <NavigationProperty Name="CoXoService" Relationship="BnoisdbModel.FK_CoXoService_Office" FromRole="Office" ToRole="CoXoService" />
+          <NavigationProperty Name="ToeAuthorized" Relationship="BnoisdbModel.FK_ToeAuthorized_Office" FromRole="Office" ToRole="ToeAuthorized" />
         </EntityType>
         <Association Name="FK_Achievement_Office">
           <End Type="BnoisdbModel.Office" Role="Office" Multiplicity="0..1" />
@@ -17021,7 +17140,7 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="TransferId" Type="Int32" />
           <Property Name="NoteType" Type="Int32" />
-          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -17205,6 +17324,89 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
             </Principal>
             <Dependent Role="EmployeeServiceExamResult">
               <PropertyRef Name="ServiceExamCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ToeAuthorized">
+          <Key>
+            <PropertyRef Name="ToeAuthorizedid" />
+          </Key>
+          <Property Name="ToeAuthorizedid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="OfficeId" Type="Int32" />
+          <Property Name="No" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Branch" Relationship="BnoisdbModel.FK_ToeAuthorized_Branch" FromRole="ToeAuthorized" ToRole="Branch" />
+          <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_ToeAuthorized_Office" FromRole="ToeAuthorized" ToRole="Office" />
+          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_ToeAuthorized_Rank" FromRole="ToeAuthorized" ToRole="Rank" />
+        </EntityType>
+        <Association Name="FK_ToeAuthorized_Branch">
+          <End Type="BnoisdbModel.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.ToeAuthorized" Role="ToeAuthorized" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="ToeAuthorized">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToeAuthorized_Office">
+          <End Type="BnoisdbModel.Office" Role="Office" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.ToeAuthorized" Role="ToeAuthorized" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="ToeAuthorized">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToeAuthorized_Rank">
+          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.ToeAuthorized" Role="ToeAuthorized" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="ToeAuthorized">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DashBoardBranchByAdminAuthority600Entry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="OrgType" Type="Int32" />
+          <Property Name="No" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority600Entry_Rank" FromRole="DashBoardBranchByAdminAuthority600Entry" ToRole="Rank" />
+        </EntityType>
+        <Association Name="FK_DashBoardBranchByAdminAuthority600Entry_Rank">
+          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.DashBoardBranchByAdminAuthority600Entry" Role="DashBoardBranchByAdminAuthority600Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="DashBoardBranchByAdminAuthority600Entry">
+              <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -20703,6 +20905,39 @@ warning 6002: The table/view 'Bnoisdb2.dbo.vwTransfer' does not have a primary k
                 <ScalarProperty Name="IsBackLog" ColumnName="IsBackLog" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="EmployeeServiceExamResultId" ColumnName="EmployeeServiceExamResultId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToeAuthorized">
+            <EntityTypeMapping TypeName="BnoisdbModel.ToeAuthorized">
+              <MappingFragment StoreEntitySet="ToeAuthorized">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="ToeAuthorizedid" ColumnName="ToeAuthorizedid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DashBoardBranchByAdminAuthority600Entry">
+            <EntityTypeMapping TypeName="BnoisdbModel.DashBoardBranchByAdminAuthority600Entry">
+              <MappingFragment StoreEntitySet="DashBoardBranchByAdminAuthority600Entry">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="OrgType" ColumnName="OrgType" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

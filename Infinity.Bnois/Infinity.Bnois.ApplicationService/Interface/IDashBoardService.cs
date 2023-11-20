@@ -30,5 +30,16 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<object> GetGenderOfficer(int rankId, string branch, int categoryId, int subCategoryId, int commissionTypeId, int genderId);
         List<object> GetDashboardCategory(int categoryId);
         List<object> GetDashboardGender(int genderId);
+        List<object> GetBranchAuthorityOfficer9(int branchAuthorityId);
+        List<object> GetBranchAuthorityOfficer10(int branchAuthorityId);
+        List<object> GetBranchAuthorityOfficer11(int branchAuthorityId);
+        List<object> GetBranchAuthorityOfficer12(int branchAuthorityId);
+        List<object> GetBranchAuthorityOfficer13(int branchAuthorityId);
+        List<object> GetBranchAuthorityOfficer369(int branchAuthorityId);
+        List<object> GetBranchAuthorityOfficer383(int branchAuthorityId);
+        List<object> GetBranchAuthorityOfficer458(int branchAuthorityId);
+        List<object> GetBranchAuthorityOfficer513(int branchAuthorityId);
+        List<object> GetBranchAuthorityOfficer543(int branchAuthorityId);
+        List<object> GetBranchAuthorityOfficer600();
     }
 }

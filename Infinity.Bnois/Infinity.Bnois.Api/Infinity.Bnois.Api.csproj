@@ -73,6 +73,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\OverviewOfficersDeploymentEntryController.cs" />
+    <Compile Include="Controllers\ToeAuthorizedsController.cs" />
     <Compile Include="Controllers\RoasterListController.cs" />
     <Compile Include="Controllers\EmployeeCoXoServiceController.cs" />
     <Compile Include="Controllers\BackLogController.cs" />
@@ -259,6 +261,8 @@
     <Compile Include="Models\PreviousLeaveViewModel.cs" />
     <Compile Include="Models\ExtraAppointmentViewModel.cs" />
     <Compile Include="Models\ForeignProjectViewModel.cs" />
+    <Compile Include="Models\DashBoardBranchByAdminAuthority600EntryViewModel.cs" />
+    <Compile Include="Models\ToeAuthorizedViewModel.cs" />
     <Compile Include="Models\StatusChangeViewModel.cs" />
     <Compile Include="Models\BackLogViewModel.cs" />
     <Compile Include="Models\ShipMovementViewModel.cs" />

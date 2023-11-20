@@ -26,6 +26,7 @@ namespace Infinity.Bnois.Data
             this.ProposalDetail = new HashSet<ProposalDetail>();
             this.Transfer = new HashSet<Transfer>();
             this.CoXoService = new HashSet<CoXoService>();
+            this.ToeAuthorized = new HashSet<ToeAuthorized>();
         }
     
         public int OfficeId { get; set; }
@@ -75,7 +76,7 @@ namespace Infinity.Bnois.Data
         public bool IsActive { get; set; }
         public Nullable<int> OPatCd { get; set; }
         public Nullable<int> OrgCd { get; set; }
-        public bool IsSubmarineCount { get; set; }
+        public Nullable<bool> IsSubmarineCount { get; set; }
         public Nullable<bool> ActiveStatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -101,5 +102,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<Transfer> Transfer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoXoService> CoXoService { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ToeAuthorized> ToeAuthorized { get; set; }
     }
 }

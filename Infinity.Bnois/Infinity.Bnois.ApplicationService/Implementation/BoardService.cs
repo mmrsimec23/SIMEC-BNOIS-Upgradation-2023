@@ -79,8 +79,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.UpdatedValue = "Id: " + model.BoardId;
                 if (board.BoardType != model.BoardType)
                 {
-                    bnLog.PreviousValue += ", Type: " + board.BoardType;
-                    bnLog.UpdatedValue += ", Type: " + model.BoardType;
+                    bnLog.PreviousValue += ", Type: " + (board.BoardType == 1 ? "Board" : board.BoardType == 2 ? "University" : "");
+                    bnLog.UpdatedValue += ", Type: " + (model.BoardType == 1 ? "Board" : model.BoardType == 2 ? "University" : "");
                 }
                 if (board.Name != model.Name)
                 {
@@ -146,7 +146,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "Board";
                 bnLog.TableEntryForm = "Board";
-                bnLog.PreviousValue = "Id: " + board.BoardId + ", Type: " + board.BoardType + ", Name: " + board.Name + ", BoardCode: " + board.BoardCode + ", Remarks: " + board.Remarks;
+                bnLog.PreviousValue = "Id: " + board.BoardId + ", Type: " + (board.BoardType == 1 ? "Board" : board.BoardType == 2 ? "University" : "") + ", Name: " + board.Name + ", BoardCode: " + board.BoardCode + ", Remarks: " + board.Remarks;
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete

@@ -78,33 +78,51 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Officer Family Permission";
                 bnLog.PreviousValue = "Id: " + model.EmployeeFamilyPermissionId;
                 bnLog.UpdatedValue = "Id: " + model.EmployeeFamilyPermissionId;
-                if (employeeFamilyPermission.EmployeeId != model.EmployeeId)
+                if (employeeFamilyPermission.EmployeeId >0 || model.EmployeeId>0)
                 {
                     var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeFamilyPermission.EmployeeId);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
                 }
                 if (employeeFamilyPermission.RelationId != model.RelationId)
                 {
-                    var prevrelation = employeeService.GetDynamicTableInfoById("Relation", "RelationId", employeeFamilyPermission.RelationId??0);
-                    var relation = employeeService.GetDynamicTableInfoById("Relation", "RelationId", model.RelationId??0);
-                    bnLog.PreviousValue += ", Relation: " + ((dynamic)prevrelation).Name;
-                    bnLog.UpdatedValue += ", Relation: " + ((dynamic)relation).Name;
+                    if(employeeFamilyPermission.RelationId > 0)
+                    {
+                        var prevrelation = employeeService.GetDynamicTableInfoById("Relation", "RelationId", employeeFamilyPermission.RelationId ?? 0);
+                        bnLog.PreviousValue += ", Relation: " + ((dynamic)prevrelation).Name;
+                    }
+                    if(model.RelationId > 0)
+                    {
+                        var relation = employeeService.GetDynamicTableInfoById("Relation", "RelationId", model.RelationId ?? 0);
+                        bnLog.UpdatedValue += ", Relation: " + ((dynamic)relation).Name;
+                    }
                 }
                 if (employeeFamilyPermission.CountryId != model.CountryId)
                 {
-                    var prevcoun = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeFamilyPermission.CountryId??0);
-                    var coun = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId??0);
-                    bnLog.PreviousValue += ", Country: " + ((dynamic)prevcoun).FullName;
-                    bnLog.UpdatedValue += ", Country: " + ((dynamic)coun).FullName;
+                    if(employeeFamilyPermission.CountryId > 0)
+                    {
+                        var prevcoun = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeFamilyPermission.CountryId ?? 0);
+                        bnLog.PreviousValue += ", Country: " + ((dynamic)prevcoun).FullName;
+                    }
+                    if (model.CountryId > 0)
+                    {
+                        var coun = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId ?? 0);
+                        bnLog.UpdatedValue += ", Country: " + ((dynamic)coun).FullName;
+                    }
                 }
                 if (employeeFamilyPermission.RankId != model.RankId)
                 {
-                    var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeFamilyPermission.RankId??0);
-                    var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId??0);
-                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
-                    bnLog.UpdatedValue += ", Rank: " + ((dynamic)rank).ShortName;
+                    if(employeeFamilyPermission.RankId > 0)
+                    {
+                        var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeFamilyPermission.RankId ?? 0);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
+                    }
+                    if(model.RankId > 0)
+                    {
+                        var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId ?? 0);
+                        bnLog.UpdatedValue += ", Rank: " + ((dynamic)rank).ShortName;
+                    }
                 }
                 if (employeeFamilyPermission.RelativeName != model.RelativeName)
                 {
@@ -197,12 +215,28 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "EmployeeFamilyPermission";
                 bnLog.TableEntryForm = "Officer Family Permission";
-                var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeFamilyPermission.EmployeeId);
-                
-                bnLog.PreviousValue = "Id: " + employeeFamilyPermission.EmployeeFamilyPermissionId + ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng
-                    + ", Relation: " + employeeFamilyPermission.RelationId + ", Remarks: " + employeeFamilyPermission.Remarks 
-                    + ", Country: " + employeeFamilyPermission.CountryId + ", Rank: " + employeeFamilyPermission.RankId
-                    + ", RelativeName: " + employeeFamilyPermission.RelativeName + ", VisitPurpose: " + employeeFamilyPermission.VisitPurpose
+                bnLog.PreviousValue = "Id: " + employeeFamilyPermission.EmployeeFamilyPermissionId;
+                if (employeeFamilyPermission.EmployeeId > 0)
+                {
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeFamilyPermission.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)emp).PNo;
+                }
+                if (employeeFamilyPermission.RelationId > 0)
+                {
+                    var prevrelation = employeeService.GetDynamicTableInfoById("Relation", "RelationId", employeeFamilyPermission.RelationId ?? 0);
+                    bnLog.PreviousValue += ", Relation: " + ((dynamic)prevrelation).Name;
+                }
+                if (employeeFamilyPermission.CountryId > 0)
+                {
+                    var prevcoun = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeFamilyPermission.CountryId ?? 0);
+                    bnLog.PreviousValue += ", Country: " + ((dynamic)prevcoun).FullName;
+                }
+                if (employeeFamilyPermission.RankId > 0)
+                {
+                    var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeFamilyPermission.RankId ?? 0);
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
+                }
+                bnLog.PreviousValue +=   ", Remarks: " + employeeFamilyPermission.Remarks + ", RelativeName: " + employeeFamilyPermission.RelativeName + ", VisitPurpose: " + employeeFamilyPermission.VisitPurpose
                     + ", FromDate: " + employeeFamilyPermission.FromDate?.ToString("dd/MM/yyyy") + ", ToDate: " + employeeFamilyPermission.ToDate?.ToString("dd/MM/yyyy");
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 

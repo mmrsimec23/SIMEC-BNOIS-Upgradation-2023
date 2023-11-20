@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
 
         private readonly IBnoisRepository<Sibling> siblingRepository;
-        public SiblingService(IBnoisRepository<Sibling> siblingRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public SiblingService(IBnoisRepository<Sibling> siblingRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.siblingRepository = siblingRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
 
@@ -73,6 +77,87 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 sibling.ModifiedDate = DateTime.Now;
                 sibling.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Sibling";
+                bnLog.TableEntryForm = "Employee Siblings Information";
+                bnLog.PreviousValue = "Id: " + model.SiblingId;
+                bnLog.UpdatedValue = "Id: " + model.SiblingId;
+                int bnoisUpdateCount = 0;
+                if (sibling.EmployeeId != model.EmployeeId)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", sibling.EmployeeId);
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
+                    bnoisUpdateCount += 1;
+                }
+                if (sibling.SiblingType != model.SiblingType)
+                {
+                    bnLog.PreviousValue += ", Sibling Type: " + (sibling.SiblingType == 1 ? "Brother" : sibling.SiblingType == 2 ? "Sister" : "");
+                    bnLog.UpdatedValue += ", Sibling Type: " + (model.SiblingType == 1 ? "Brother" : model.SiblingType == 2 ? "Sister" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (sibling.OccupationId != model.OccupationId)
+                {
+                    if (sibling.OccupationId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Occupation", "OccupationId", sibling.OccupationId ?? 0);
+                        bnLog.PreviousValue += ", Occupation: " + ((dynamic)prev).Name;
+                    }
+                    if (model.OccupationId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Occupation", "OccupationId", model.OccupationId ?? 0);
+                        bnLog.UpdatedValue += ", Occupation: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (sibling.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + sibling.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
+                }
+                if (sibling.SpouseName != model.SpouseName)
+                {
+                    bnLog.PreviousValue += ", Name of the spouse: " + sibling.SpouseName;
+                    bnLog.UpdatedValue += ", Name of the spouse: " + model.SpouseName;
+                    bnoisUpdateCount += 1;
+                }
+                if (sibling.DateOfBirth != model.DateOfBirth)
+                {
+                    bnLog.PreviousValue += ", Date Of Birth: " + sibling.DateOfBirth?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Date Of Birth: " + model.DateOfBirth?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (sibling.Age != model.Age)
+                {
+                    bnLog.PreviousValue += ", Age: " + sibling.Age;
+                    bnLog.UpdatedValue += ", Age: " + model.Age;
+                    bnoisUpdateCount += 1;
+                }
+                if (sibling.FileName != model.FileName)
+                {
+                    bnLog.PreviousValue += ", File Name: " + sibling.FileName;
+                    bnLog.UpdatedValue += ", File Name: " + model.FileName;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -109,7 +194,42 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
-                return await siblingRepository.DeleteAsync(sibling);
+                bool IsDeleted = false;
+                try
+                {
+                    // data log section start
+                    BnoisLog bnLog = new BnoisLog();
+                    bnLog.TableName = "Sibling";
+                    bnLog.TableEntryForm = "Employee Siblings Information";
+                    bnLog.PreviousValue = "Id: " + sibling.SiblingId;
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", sibling.EmployeeId);
+                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.PreviousValue += ", Sibling Type: " + (sibling.SiblingType == 1 ? "Brother" : sibling.SiblingType == 2 ? "Sister" : "");
+                    if (sibling.OccupationId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Occupation", "OccupationId", sibling.OccupationId ?? 0);
+                        bnLog.PreviousValue += ", Occupation: " + ((dynamic)prev).Name;
+                    }
+                    bnLog.PreviousValue += ", Name: " + sibling.Name + ", Name of the spouse: " + sibling.SpouseName + ", Date Of Birth: " + sibling.DateOfBirth?.ToString("dd/MM/yyyy");
+                    bnLog.PreviousValue += ", Age: " + sibling.Age + ", File Name: " + sibling.FileName;
+
+
+                    bnLog.UpdatedValue = "This Record has been Deleted!";
+                    bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                    bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                    bnLog.LogCreatedDate = DateTime.Now;
+
+
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                    //data log section end
+                    IsDeleted =  siblingRepository.Delete(sibling);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                return IsDeleted;
             }
         }
 

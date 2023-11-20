@@ -96,6 +96,8 @@
     <Content Include="app\services\advanceSearchService.js" />
     <Content Include="app\services\careerForecastSettingService.js" />
     <Content Include="app\services\bnoisLogInfoService.js" />
+    <Content Include="app\services\overviewOfficersDeploymentService.js" />
+    <Content Include="app\services\toeAuthorizedService.js" />
     <Content Include="app\services\roasterListService.js" />
     <Content Include="app\services\employeeProposedCoxoService.js" />
     <Content Include="app\services\employeeMscEducationService.js" />
@@ -329,6 +331,10 @@
     <Content Include="app\views\basic-search\basicSearchController.js" />
     <Content Include="app\views\bnois-log-info\bnoisLogInfo.html" />
     <Content Include="app\views\bnois-log-info\bnoisLogInfoController.js" />
+    <Content Include="app\views\overview-officers-deployment\overviewOfficersDeployment.html" />
+    <Content Include="app\views\overview-officers-deployment\overviewOfficersDeploymentController.js" />
+    <Content Include="app\views\branch-authority-officers\branchOfficer.html" />
+    <Content Include="app\views\branch-authority-officers\branchOfficerController.js" />
     <Content Include="app\views\career-forecast-setting\careerForecastSettingAdd.html" />
     <Content Include="app\views\career-forecast-setting\careerForecastSettingAddController.js" />
     <Content Include="app\views\career-forecast-setting\careerForecastSettings.html" />
@@ -347,6 +353,16 @@
     <Content Include="app\views\family-permissions\familyPermissionsController.js" />
     <Content Include="app\views\car-loan\carLoan.html" />
     <Content Include="app\views\car-loan\carLoanController.js" />
+    <Content Include="app\views\branch-authority-officers\branchAuthorityOfficers.html" />
+    <Content Include="app\views\branch-authority-officers\branchAuthorityOfficersController.js" />
+    <Content Include="app\views\overview-officers-deployment-entry\overviewOfficersDeploymentAdd.html" />
+    <Content Include="app\views\overview-officers-deployment-entry\overviewOfficersDeploymentAddController.js" />
+    <Content Include="app\views\overview-officers-deployment-entry\overviewOfficersDeploymentListController.js" />
+    <Content Include="app\views\overview-officers-deployment-entry\overviewOfficersDeploymentList.html" />
+    <Content Include="app\views\toe-authorized\toeAuthorizedAdd.html" />
+    <Content Include="app\views\toe-authorized\toeAuthorizedAddController.js" />
+    <Content Include="app\views\toe-authorized\toeAuthorizeds.html" />
+    <Content Include="app\views\toe-authorized\toeAuthorizedController.js" />
     <Content Include="app\views\shipwise-proposed-waiting-coxo-list\shipwiseProposedWaitingCoXoList.html" />
     <Content Include="app\views\shipwise-proposed-waiting-coxo-list\shipwiseProposedWaitingCoXoListController.js" />
     <Content Include="app\views\medium-ship-coxo\mediumShipCoXo.html" />

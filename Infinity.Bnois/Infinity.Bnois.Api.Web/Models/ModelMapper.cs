@@ -25,6 +25,12 @@ namespace Infinity.Bnois.Api.Web.Models
 
                 cfg.CreateMap<RankCategory, RankCategoryModel>();
                 cfg.CreateMap<Rank, RankModel>();
+                cfg.CreateMap<ToeAuthorized, ToeAuthorizedModel>()
+                .ForMember(d => d.Branch, opt => opt.MapFrom(s => s.Branch))
+                .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank))
+                .ForMember(d => d.Office, opt => opt.MapFrom(s => s.Office));
+                cfg.CreateMap<DashBoardBranchByAdminAuthority600Entry, DashBoardBranchByAdminAuthority600EntryModel>()
+                .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
                 cfg.CreateMap<RankMap, RankMapModel>()
                 .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank))
                 .ForMember(d => d.Rank1, opt => opt.MapFrom(s => s.Rank1))
@@ -553,6 +559,15 @@ namespace Infinity.Bnois.Api.Web.Models
                 cfg.CreateMap<EmployeeCarLoanModel, EmployeeCarLoan>()
                 .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
                 .ForMember(d => d.CarLoanFiscalYear, opt => opt.MapFrom(s => s.CarLoanFiscalYear))
+                .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
+
+
+                cfg.CreateMap<ToeAuthorizedModel, ToeAuthorized>()
+                .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank))
+                .ForMember(d => d.Branch, opt => opt.MapFrom(s => s.Branch))
+                .ForMember(d => d.Office, opt => opt.MapFrom(s => s.Office));
+
+                cfg.CreateMap<DashBoardBranchByAdminAuthority600EntryModel, DashBoardBranchByAdminAuthority600Entry>()
                 .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
 
                 cfg.CreateMap<MedicalCategoryModel, MedicalCategory>();

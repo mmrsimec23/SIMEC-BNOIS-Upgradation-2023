@@ -87,11 +87,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.PreviousValue = "Id: " + model.StatusChangeId;
                 bnLog.UpdatedValue = "Id: " + model.StatusChangeId;
                 int bnoisUpdateCount = 0;
-                if (statusChange.EmployeeId != model.EmployeeId)
+                if (statusChange.EmployeeId > 0 || model.EmployeeId > 0)
                 {
-                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Name: " + statusChange.Employee.Name + " _ " + statusChange.Employee.PNo;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
+                    var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", statusChange.EmployeeId);
+                    var newv = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prev).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)newv).PNo;
                     bnoisUpdateCount += 1;
                 }
 
@@ -244,9 +245,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableName = "StatusChange";
                 bnLog.TableEntryForm = "Status Change";
                 var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", statusChange.EmployeeId);
-                bnLog.PreviousValue = "Id: " + statusChange.StatusChangeId + ", Name: " + ((dynamic)emp).Name + ", Previous: " + statusChange.PreviousId
+                bnLog.PreviousValue = "Id: " + statusChange.StatusChangeId + ", PNo: " + ((dynamic)emp).PNo + ", StatusType: " + (statusChange.StatusType == 1 ? "Medical Category" : statusChange.StatusType == 2 ? "Eye Vision" : statusChange.StatusType == 3 ? "Commission Type" : statusChange.StatusType == 4 ? "Branch" : "Religion") + ", Previous: " + statusChange.PreviousId
                     + ", New: " + statusChange.NewId + ", MedicalCategoryCause: " + statusChange.MedicalCategoryCause + ", MedicalCategoryType: " + statusChange.MedicalCategoryType
-                    + ", Date: " + statusChange.Date + ", DateTo: " + statusChange.DateTo + ", StatusType: " + statusChange.StatusType;
+                    + ", Date: " + statusChange.Date + ", DateTo: " + statusChange.DateTo ;
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete

@@ -149,7 +149,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         {
 
             List<EmployeeReportDataModel> seaService = employeeReportRepository.GetSeaServiceGraph(userId);
-            List<string> employeePnoList = seaService.Select(x => x.PNo).ToList();
+            List<string> employeePnoList = seaService.Select(x => x.PNo +" ( " + x.SeaTDayInTex + " ) ").ToList();
             var list = new List<object>();
             var colorList = new List<object>();
 
@@ -270,7 +270,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         {
 
             List<EmployeeReportDataModel> seaService = employeeReportRepository.GetSeaCommandServiceGraph(userId);
-            List<string> employeePnoList = seaService.Select(x => x.PNo).ToList();
+            List<string> employeePnoList = seaService.Select(x => x.PNo + " ( Sea Comm - " + x.TDayInTex + " , Sea Ser - " + x.SeaTDayInTex + " )").ToList();
             var list = new List<object>();
             var colorList = new List<object>();
 

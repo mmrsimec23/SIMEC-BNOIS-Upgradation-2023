@@ -110,8 +110,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (spouse.BNameBan != model.BNameBan)
                 {
-                    bnLog.PreviousValue += ", Full Name (বাংলা): " + spouse.BNameBan;
-                    bnLog.UpdatedValue += ", Name (বাংলা) Before Marriage: " + model.BNameBan;
+                    bnLog.PreviousValue += ", Nationality: " + spouse.BNameBan;
+                    bnLog.UpdatedValue += ", Nationality: " + model.BNameBan;
                     bnoisUpdateCount += 1;
                 }
                 if (spouse.ANameEng != model.ANameEng)

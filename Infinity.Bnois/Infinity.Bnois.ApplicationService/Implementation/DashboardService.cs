@@ -107,6 +107,75 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             return dataTable.ToJson().ToList();
         }
+        
+
+        public List<object> GetBranchAuthorityOfficer9(int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority9] {0}", branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetBranchAuthorityOfficer10(int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority10] {0}", branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetBranchAuthorityOfficer11(int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority11] {0}", branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetBranchAuthorityOfficer12(int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority12] {0}", branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetBranchAuthorityOfficer13(int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority13] {0}", branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetBranchAuthorityOfficer369(int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority369] {0}", branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetBranchAuthorityOfficer383(int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority383] {0}", branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
+        
+        public List<object> GetBranchAuthorityOfficer458(int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority458] {0}", branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetBranchAuthorityOfficer513(int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority513] {0}", branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetBranchAuthorityOfficer543(int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority543] {0}", branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetBranchAuthorityOfficer600()
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority600]"));
+
+            return dataTable.ToJson().ToList();
+        }
 
         public List<object> GetDashboardOfficeAppointment(int officeType, int rankId, int displayId)
         {

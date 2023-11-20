@@ -218,6 +218,8 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<Remark> Remark { get; set; }
         public virtual DbSet<EmployeeMscEducation> EmployeeMscEducation { get; set; }
         public virtual DbSet<EmployeeServiceExamResult> EmployeeServiceExamResult { get; set; }
+        public virtual DbSet<ToeAuthorized> ToeAuthorized { get; set; }
+        public virtual DbSet<DashBoardBranchByAdminAuthority600Entry> DashBoardBranchByAdminAuthority600Entry { get; set; }
     
         public virtual ObjectResult<GetLeaveInfo_Result> GetLeaveInfo(string employeeID, Nullable<int> idFrom, Nullable<int> idTo)
         {

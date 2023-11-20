@@ -158,6 +158,9 @@
     <Compile Include="CoXoService.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DashBoardBranchByAdminAuthority600Entry.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="District.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -618,6 +621,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="TerminationType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ToeAuthorized.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="TraceSetting.cs">

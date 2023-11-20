@@ -146,5 +146,7 @@ namespace Infinity.Bnois.Api.Right
         public const int BNOIS_LOG_INFO = 1134;
         public const int EMPLOYEE_COXO_SERVICE = 1135;
         public const int ROASTER_LIST = 1136;
+        public const int TOEAUTHORIZED = 1137;
+        public const int OODENTRY = 1138;
     }
 }

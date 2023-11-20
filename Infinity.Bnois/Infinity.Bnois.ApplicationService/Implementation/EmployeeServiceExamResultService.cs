@@ -71,7 +71,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             EmployeeServiceExamResult employeeServiceExamResult = ObjectConverter<EmployeeServiceExamResultModel, EmployeeServiceExamResult>.Convert(model);
             if (id > 0)
             {
-                employeeServiceExamResult = employeeServiceExamResultRepository.FindOne(x => x.EmployeeServiceExamResultId == id, new List<string> { "Employee", "Employee.Rank", "ServiceExamCategory", "ServiceExam" });
+                employeeServiceExamResult = employeeServiceExamResultRepository.FindOne(x => x.EmployeeServiceExamResultId == id);
                 if (employeeServiceExamResult == null)
                 {
                     throw new InfinityNotFoundException("Employee Service Exam Result not found !");
@@ -85,80 +85,111 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Service Exam Result";
                 bnLog.PreviousValue = "Id: " + model.EmployeeServiceExamResultId;
                 bnLog.UpdatedValue = "Id: " + model.EmployeeServiceExamResultId;
-                if (employeeServiceExamResult.EmployeeId != model.EmployeeId)
+                int bnoisUpdateCount = 0;
+                if (employeeServiceExamResult.EmployeeId>0 || model.EmployeeId > 0)
                 {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeServiceExamResult.EmployeeId ?? 0);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId ?? 0);
-                    bnLog.PreviousValue += ", Name: " + employeeServiceExamResult.Employee.Name + " _ " + employeeServiceExamResult.Employee.PNo;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).Name + " _ " + ((dynamic)emp).PNo;
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
                 }
+                
                 if (employeeServiceExamResult.ServiceExamCategoryId != model.ServiceExamCategoryId)
                 {
-                    var sec = employeeService.GetDynamicTableInfoById("ServiceExamCategory", "ServiceExamCategoryId", model.ServiceExamCategoryId);
-                    bnLog.PreviousValue += ", Category: " + employeeServiceExamResult.ServiceExamCategory.ExamName;
-                    bnLog.UpdatedValue += ", Category: " + ((dynamic)sec).ExamName;
+                    if (employeeServiceExamResult.ServiceExamCategoryId>0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("ServiceExamCategory", "ServiceExamCategoryId", employeeServiceExamResult.ServiceExamCategoryId);
+                        bnLog.PreviousValue += ", Category: " + ((dynamic)prev).ExamName;
+                    }
+                    if (model.ServiceExamCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("ServiceExamCategory", "ServiceExamCategoryId", model.ServiceExamCategoryId);
+                        bnLog.UpdatedValue += ", Category: " + ((dynamic)newv).ExamName;
+                    }
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeServiceExamResult.ServiceExamId != model.ServiceExamId)
                 {
-                    var sexam = employeeService.GetDynamicTableInfoById("ServiceExam", "ServiceExamId", model.ServiceExamId);
-                    bnLog.PreviousValue += ", ServiceExam: " + employeeServiceExamResult.ServiceExam.Name;
-                    bnLog.UpdatedValue += ", ServiceExam: " + ((dynamic)sexam).Name;
+                    if (employeeServiceExamResult.ServiceExamId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("ServiceExam", "ServiceExamId", employeeServiceExamResult.ServiceExamId);
+                        bnLog.PreviousValue += ", ServiceExam: " + ((dynamic)prev).Name;
+                    }
+                    if (model.ServiceExamId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("ServiceExam", "ServiceExamId", model.ServiceExamId);
+                        bnLog.UpdatedValue += ", ServiceExam: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeServiceExamResult.RankId != model.RankId)
                 {
-                    var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId ?? 0);
-                    bnLog.PreviousValue += ", Rank: " + employeeServiceExamResult.Employee.Rank.ShortName;
-                    bnLog.UpdatedValue += ", Rank: " + ((dynamic)rank).ShortName;
+                    if (employeeServiceExamResult.RankId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeServiceExamResult.RankId ?? 0);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prev).ShortName;
+                    }
+                    if (model.RankId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId ?? 0);
+                        bnLog.UpdatedValue += ", Rank: " + ((dynamic)newv).ShortName;
+                    }
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeServiceExamResult.TransferId != model.TransferId)
                 {
                     bnLog.PreviousValue += ", Transfer: " + employeeServiceExamResult.TransferId;
                     bnLog.UpdatedValue += ", Transfer: " + model.TransferId;
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeServiceExamResult.ExamDate != model.ExamDate)
                 {
                     bnLog.PreviousValue += ", ExamDate: " + employeeServiceExamResult.ExamDate;
                     bnLog.UpdatedValue += ", ExamDate: " + model.ExamDate;
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeServiceExamResult.NumberOfSubject != model.NumberOfSubject)
                 {
                     bnLog.PreviousValue += ", NumberOfSubject: " + employeeServiceExamResult.NumberOfSubject;
                     bnLog.UpdatedValue += ", NumberOfSubject: " + model.NumberOfSubject;
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeServiceExamResult.AttTime != model.AttTime)
                 {
                     bnLog.PreviousValue += ", AttTime: " + employeeServiceExamResult.AttTime;
                     bnLog.UpdatedValue += ", AttTime: " + model.AttTime;
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeServiceExamResult.PassFailResult != model.PassFailResult)
                 {
                     bnLog.PreviousValue += ", PassFailResult: " + employeeServiceExamResult.PassFailResult;
                     bnLog.UpdatedValue += ", PassFailResult: " + model.PassFailResult;
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeServiceExamResult.IsExempted != model.IsExempted)
                 {
                     bnLog.PreviousValue += ", IsExempted: " + employeeServiceExamResult.IsExempted;
                     bnLog.UpdatedValue += ", IsExempted: " + model.IsExempted;
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeServiceExamResult.ExemptedDate != model.ExemptedDate)
                 {
                     bnLog.PreviousValue += ", ExemptedDate: " + employeeServiceExamResult.ExemptedDate;
                     bnLog.UpdatedValue += ", ExemptedDate: " + model.ExemptedDate;
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeServiceExamResult.Remarks != model.Remarks)
                 {
                     bnLog.PreviousValue += ", Remarks: " + employeeServiceExamResult.Remarks;
                     bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
                 }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (employeeServiceExamResult.EmployeeId != model.EmployeeId || employeeServiceExamResult.ServiceExamCategoryId != model.ServiceExamCategoryId
-                    || employeeServiceExamResult.ServiceExamId != model.ServiceExamId || employeeServiceExamResult.RankId != model.RankId || employeeServiceExamResult.TransferId != model.TransferId
-                    || employeeServiceExamResult.ExamDate != model.ExamDate || employeeServiceExamResult.NumberOfSubject != model.NumberOfSubject || employeeServiceExamResult.AttTime != model.AttTime 
-                    || employeeServiceExamResult.PassFailResult != model.PassFailResult || employeeServiceExamResult.IsExempted != model.IsExempted || employeeServiceExamResult.ExemptedDate != model.ExemptedDate
-                    || employeeServiceExamResult.Remarks != model.Remarks)
+                if (bnoisUpdateCount > 0)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 
@@ -194,7 +225,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 employeeServiceExamResult.RankId = model.RankId;
                 employeeServiceExamResult.TransferId = model.TransferId;
             }
-            //employeeServiceExamResult.Employee = null;
+            employeeServiceExamResult.Employee = null;
             await employeeServiceExamResultRepository.SaveAsync(employeeServiceExamResult);
             model.EmployeeServiceExamResultId = employeeServiceExamResult.EmployeeServiceExamResultId;
             return model;
@@ -220,12 +251,24 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableName = "EmployeeServiceExamResult";
                 bnLog.TableEntryForm = "Service Exam Result";
                 var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeServiceExamResult.EmployeeId ?? 0);
-                var sec = employeeService.GetDynamicTableInfoById("ServiceExamCategory", "ServiceExamCategoryId", employeeServiceExamResult.ServiceExamCategoryId);
-                var sexam = employeeService.GetDynamicTableInfoById("ServiceExam", "ServiceExamId", employeeServiceExamResult.ServiceExamId);
-                var rank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeServiceExamResult.RankId ?? 0);
-                bnLog.PreviousValue = "Id: " + employeeServiceExamResult.EmployeeServiceExamResultId + ", Name: " + ((dynamic)emp).Name + ", Category: " + ((dynamic)sec).ExamName
-                    + ", ServiceExam: " + ((dynamic)sexam).Name + ", Rank: " + ((dynamic)rank).ShortName + ", Transfer: " + employeeServiceExamResult.TransferId
-                    + ", ExamDate: " + employeeServiceExamResult.ExamDate + ", NumberOfSubject: " + employeeServiceExamResult.NumberOfSubject + ", AttTime: " + employeeServiceExamResult.AttTime
+                bnLog.PreviousValue = "Id: " + employeeServiceExamResult.EmployeeServiceExamResultId;
+                bnLog.PreviousValue += ", PNo: " + ((dynamic)emp).PNo;
+                if (employeeServiceExamResult.ServiceExamCategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("ServiceExamCategory", "ServiceExamCategoryId", employeeServiceExamResult.ServiceExamCategoryId);
+                        bnLog.PreviousValue += ", Category: " + ((dynamic)prev).ExamName;
+                    }
+                if (employeeServiceExamResult.ServiceExamId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("ServiceExam", "ServiceExamId", employeeServiceExamResult.ServiceExamId);
+                        bnLog.PreviousValue += ", ServiceExam: " + ((dynamic)prev).Name;
+                    }
+                if (employeeServiceExamResult.RankId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeServiceExamResult.RankId ?? 0);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prev).ShortName;
+                    }
+                bnLog.PreviousValue += ", Transfer: " + employeeServiceExamResult.TransferId + ", ExamDate: " + employeeServiceExamResult.ExamDate + ", NumberOfSubject: " + employeeServiceExamResult.NumberOfSubject + ", AttTime: " + employeeServiceExamResult.AttTime
                     + ", PassFailResult: " + employeeServiceExamResult.PassFailResult + ", IsExempted: " + employeeServiceExamResult.IsExempted + ", ExemptedDate: " + employeeServiceExamResult.ExemptedDate;
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 

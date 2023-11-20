@@ -43,9 +43,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "EmployeeHajjDetail";
                 bnLog.TableEntryForm = "Hajj Information";
-                var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeHajjDetail.EmployeeId ?? 0);
-                bnLog.PreviousValue = "Id: " + employeeHajjDetail.EmployeeHajjDetailId + ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng + ", Baloty Non Baloty: " + employeeHajjDetail.BalotyNonBaloty
-                    + ", Royel Guest: " + employeeHajjDetail.RoyelGuest + ", Hajj Or Omra: " + employeeHajjDetail.HajjOrOmra + ", Arranged By: " + employeeHajjDetail.ArrangedBy
+                bnLog.PreviousValue = "Id: " + employeeHajjDetail.EmployeeHajjDetailId;
+                if (employeeHajjDetail.EmployeeId > 0)
+                {
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeHajjDetail.EmployeeId ?? 0);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)emp).PNo;
+                }
+                
+                bnLog.PreviousValue += ", Baloty : " + employeeHajjDetail.BalotyNonBaloty + ", Royel Guest: " + employeeHajjDetail.RoyelGuest + ", Hajj Or Omra: " + (employeeHajjDetail.HajjOrOmra==true?"Hajj":"Umrah") + ", Arranged By: " + employeeHajjDetail.ArrangedBy
                     + ", Accompanied By: " + employeeHajjDetail.ACompanyBy + ", From Date: " + employeeHajjDetail.FromDate.ToString("dd/MM/yyyy") + ", To Date: " + employeeHajjDetail.ToDate.ToString("dd/MM/yyyy");
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
@@ -121,17 +126,17 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Hajj Information";
                 bnLog.PreviousValue = "Id: " + model.EmployeeHajjDetailId;
                 bnLog.UpdatedValue = "Id: " + model.EmployeeHajjDetailId;
-                if (employeeHajjDetail.EmployeeId != model.EmployeeId)
+                if (employeeHajjDetail.EmployeeId > 0 || model.EmployeeId > 0)
                 {
                     var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeHajjDetail.EmployeeId ?? 0);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId ?? 0);
-                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
                 }
                 if (employeeHajjDetail.BalotyNonBaloty != model.BalotyNonBaloty)
                 {
-                    bnLog.PreviousValue += ", Baloty Non Baloty: " + employeeHajjDetail.BalotyNonBaloty;
-                    bnLog.UpdatedValue += ", Baloty Non Baloty: " + model.BalotyNonBaloty;
+                    bnLog.PreviousValue += ", Baloty: " + employeeHajjDetail.BalotyNonBaloty;
+                    bnLog.UpdatedValue += ", Baloty: " + model.BalotyNonBaloty;
                 }
                 if (employeeHajjDetail.RoyelGuest != model.RoyelGuest)
                 {
@@ -140,8 +145,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 if (employeeHajjDetail.HajjOrOmra != model.HajjOrOmra)
                 {
-                    bnLog.PreviousValue += ", Hajj Or Omra: " + employeeHajjDetail.HajjOrOmra;
-                    bnLog.UpdatedValue += ", Hajj Or Omra: " + model.HajjOrOmra;
+                    bnLog.PreviousValue += ", Hajj Or Omra: " + (employeeHajjDetail.HajjOrOmra == true ? "Hajj" : "Umrah");
+                    bnLog.UpdatedValue += ", Hajj Or Omra: " + (model.HajjOrOmra == true ? "Hajj" : "Umrah");
                 }
                 if (employeeHajjDetail.ArrangedBy != model.ArrangedBy)
                 {
