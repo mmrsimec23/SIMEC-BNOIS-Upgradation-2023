@@ -14,10 +14,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	public class AppointmentCategoryService : IAppointmentCategoryService
 	{
 		private readonly IBnoisRepository<AptCat> appoitmentCategoryRepository;
-		public AppointmentCategoryService(IBnoisRepository<AptCat> appoitmentCategoryRepository)
-		{
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public AppointmentCategoryService(IBnoisRepository<AptCat> appoitmentCategoryRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
+        {
 			this.appoitmentCategoryRepository = appoitmentCategoryRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
+        }
 
 		public async Task<bool> DeleteAppointmentCategory(int id)
 		{
@@ -32,7 +36,25 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 			}
 			else
 			{
-				return await appoitmentCategoryRepository.DeleteAsync(appointmentCategory);
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "AptCat";
+                bnLog.TableEntryForm = "Appointment Category";
+                bnLog.PreviousValue = "Id: " + appointmentCategory.AcatId;
+                if (appointmentCategory.ANatId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("AptNat", "ANatId", appointmentCategory.ANatId);
+                    bnLog.PreviousValue += ", Appointment Nature: " + ((dynamic)prev).ANatNm;
+                }
+                bnLog.PreviousValue += ", Appointment Category: " + appointmentCategory.AcatNm + ", Appointment Category(Bangla): " + appointmentCategory.AcatNmBng + ", Short Name: " + appointmentCategory.ACatShNm + ", Short Name(Bangla): " + appointmentCategory.ACatShNmBng + ", Go To ACR: " + appointmentCategory.GoAcr;
+                
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+                return await appoitmentCategoryRepository.DeleteAsync(appointmentCategory);
 			}
 		}
 
@@ -85,8 +107,76 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 				AppointmentCategory.ModifiedDate = DateTime.Now;
 				AppointmentCategory.ModifiedBy = userId;
-			}
-			else
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "AptCat";
+                bnLog.TableEntryForm = "Appointment Category";
+                bnLog.PreviousValue = "Id: " + model.AcatId;
+                bnLog.UpdatedValue = "Id: " + model.AcatId;
+                int bnoisUpdateCount = 0;
+
+                if (AppointmentCategory.ANatId != model.ANatId)
+                {
+                    if (AppointmentCategory.ANatId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("AptNat", "ANatId", AppointmentCategory.ANatId);
+                        bnLog.PreviousValue += ", Appointment Nature: " + ((dynamic)prev).ANatNm;
+                    }
+                    if (model.ANatId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("AptNat", "ANatId", model.ANatId);
+                        bnLog.UpdatedValue += ", Appointment Nature: " + ((dynamic)newv).ANatNm;
+                    }
+					bnoisUpdateCount += 1;
+                }
+                if (AppointmentCategory.AcatNm != model.AcatNm)
+                {
+                    bnLog.PreviousValue += ", Appointment Category: " + AppointmentCategory.AcatNm;
+                    bnLog.UpdatedValue += ", Appointment Category: " + model.AcatNm;
+                    bnoisUpdateCount += 1;
+                }
+                if (AppointmentCategory.AcatNmBng != model.AcatNmBng)
+                {
+                    bnLog.PreviousValue += ", Appointment Category(Bangla): " + AppointmentCategory.AcatNmBng;
+                    bnLog.UpdatedValue += ", Appointment Category(Bangla): " + model.AcatNmBng;
+                    bnoisUpdateCount += 1;
+                }
+                if (AppointmentCategory.ACatShNm != model.ACatShNm)
+                {
+                    bnLog.PreviousValue += ", Short Name: " + AppointmentCategory.ACatShNm;
+                    bnLog.UpdatedValue += ", Short Name: " + model.ACatShNm;
+                    bnoisUpdateCount += 1;
+                }
+                if (AppointmentCategory.ACatShNmBng != model.ACatShNmBng)
+                {
+                    bnLog.PreviousValue += ", Short Name(Bangla): " + AppointmentCategory.ACatShNmBng;
+                    bnLog.UpdatedValue += ", Short Name(Bangla): " + model.ACatShNmBng;
+                    bnoisUpdateCount += 1;
+                }
+                if (AppointmentCategory.GoAcr != model.GoAcr)
+                {
+                    bnLog.PreviousValue += ", Go To ACR: " + AppointmentCategory.GoAcr;
+                    bnLog.UpdatedValue += ", Go To ACR: " + model.GoAcr;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = model.CreatedBy;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
+            }
+            else
 			{
 				AppointmentCategory.IsActive = true;
 				AppointmentCategory.CreatedDate = DateTime.Now;

@@ -79,14 +79,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "Employee";
                 bnLog.TableEntryForm = "Employee";
-                bnLog.PreviousValue = "Id: " + model.EmployeeId;
-                bnLog.UpdatedValue = "Id: " + model.EmployeeId;
+                bnLog.PreviousValue = "Id: " + model.EmployeeId + ", Personal Number: " + employee.PNo;
+                bnLog.UpdatedValue = "Id: " + model.EmployeeId + ", Personal Number: " + model.PNo; 
 
-                if (employee.PNo != model.PNo)
-                {
-                    bnLog.PreviousValue += ", Personal Number: " + employee.PNo;
-                    bnLog.UpdatedValue += ", Personal Number: " + model.PNo;
-                }
                 if (employee.OfficerTypeId != model.OfficerTypeId)
                 {
                     if (employee.OfficerTypeId > 0)
@@ -296,7 +291,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 bnLog.TableName = "Employee";
                 bnLog.TableEntryForm = "Employee";
-                bnLog.PreviousValue = "Id: " + employee.EmployeeId + ", Personal Number: " + employee.PNo;
+                bnLog.PreviousValue = "Id: " + employee.EmployeeId + ", PNo: " + employee.PNo;
                 if (employee.OfficerTypeId > 0)
                 {
                     var OfficerType = GetDynamicTableInfoById("OfficerType", "OfficerTypeId", employee.OfficerTypeId);

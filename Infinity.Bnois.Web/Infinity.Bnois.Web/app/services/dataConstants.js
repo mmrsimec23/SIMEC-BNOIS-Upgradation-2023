@@ -193,5 +193,6 @@
         ROASTER_LIST_URL: baseAPIUrl + 'api/bnois/roaster-list/',
         TOE_AUTHORIZED_URL: baseAPIUrl + 'api/bnois/toe-authorized/',
         OODENTRY_URL: baseAPIUrl + 'api/bnois/overview-officers-deployment-entry/',
+        TOEOSENTRY_URL: baseAPIUrl + 'api/bnois/toe-officer-state-entry/',
     });
 })();

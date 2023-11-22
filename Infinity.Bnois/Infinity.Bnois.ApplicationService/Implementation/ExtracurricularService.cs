@@ -76,12 +76,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.PreviousValue = "Id: " + model.ExtracurricularId;
                 bnLog.UpdatedValue = "Id: " + model.ExtracurricularId;
                 int bnoisUpdateCount = 0;
-                if (extracurricular.EmployeeId != model.EmployeeId)
+                if (extracurricular.EmployeeId > 0 || model.EmployeeId > 0)
                 {
                     var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", extracurricular.EmployeeId);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
                     bnoisUpdateCount += 1;
                 }
                 if(extracurricular.ExtracurricularTypeId != model.ExtracurricularTypeId)

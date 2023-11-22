@@ -65,6 +65,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 toeAuthorized.ModifiedDate = DateTime.Now;
                 toeAuthorized.ModifiedBy = userId;
 
+                ToeAuthorized updateDataExist = await toeAuthorizedRepository.FindOneAsync(x => x.ToeAuthorizedid != model.ToeAuthorizedid && x.BranchId == model.BranchId && x.RankId == model.RankId && x.OfficeId == model.OfficeId);
+                if (updateDataExist != null)
+                {
+                    throw new InfinityArgumentMissingException("Record with Same Branch, Rank and Type is already inserted!");
+                }
+
                 // data log section start
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "ToeAuthorized";
@@ -145,6 +151,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                ToeAuthorized updateDataExist = await toeAuthorizedRepository.FindOneAsync(x => x.BranchId == model.BranchId && x.RankId == model.RankId && x.OfficeId == model.OfficeId);
+                if (updateDataExist != null)
+                {
+                    throw new InfinityArgumentMissingException("Record with Same Branch, Rank and Type is already inserted!");
+                }
                 toeAuthorized.CreatedBy = userId;
                 toeAuthorized.CreatedDate = DateTime.Now;
                 toeAuthorized.IsActive = true;

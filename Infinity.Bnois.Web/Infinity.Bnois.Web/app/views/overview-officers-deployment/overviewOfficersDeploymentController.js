@@ -14,6 +14,7 @@
         vm.pNo = 0;
         vm.overviewOfficersDeploymentList = [];
         vm.printSection = printSection;
+        vm.getOverviewOfficerDeploymentList = getOverviewOfficerDeploymentList;
 
         if ($stateParams.pno !== undefined && $stateParams.pno !== null) {
             vm.pNo = $stateParams.pno;
@@ -25,13 +26,18 @@
             
             dashboardService.getBranchAuthorityOfficers600().then(function (data) {
                 vm.overviewOfficersDeploymentList = data.result;
+
+                console.log(vm.overviewOfficersDeploymentList)
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
             
         };
+        function getOverviewOfficerDeploymentList(rankId, officerTypeId, coastGuard, outsideOrg) {
+            $state.goNewTab('overview-deployment-officer-list', { rankId: rankId, officerTypeId: officerTypeId, coastGuard: coastGuard, outsideOrg: outsideOrg });
 
+        }
 
         function printSection(printSectionId) {
             var innerContents = document.getElementById(printSectionId).innerHTML;

@@ -161,6 +161,9 @@
     <Compile Include="DashBoardBranchByAdminAuthority600Entry.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DashBoardBranchByAdminAuthority700.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="District.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

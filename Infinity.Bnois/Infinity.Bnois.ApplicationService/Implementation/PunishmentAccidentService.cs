@@ -86,12 +86,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Punishment & Accident";
                 bnLog.PreviousValue = "Id: " + model.PunishmentAccidentId;
                 bnLog.UpdatedValue = "Id: " + model.PunishmentAccidentId;
-                if (punishmentAccident.EmployeeId != model.EmployeeId)
+                if (punishmentAccident.EmployeeId > 0 || model.EmployeeId > 0)
                 {
                     var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", punishmentAccident.EmployeeId);
                     var newemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Employee: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
-                    bnLog.UpdatedValue += ", Employee: " + ((dynamic)newemp).PNo + "_" + ((dynamic)newemp).FullNameEng;
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)newemp).PNo;
                 }
                 if (punishmentAccident.RankId != model.RankId)
                 {
@@ -330,7 +330,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.PreviousValue = "Id: " + punishmentAccident.PunishmentAccidentId;
 
                 var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", punishmentAccident.EmployeeId);
-                    bnLog.PreviousValue += ", Employee: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
                 
                 if (punishmentAccident.RankId > 0)
                     {

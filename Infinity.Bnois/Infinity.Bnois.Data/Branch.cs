@@ -27,6 +27,7 @@ namespace Infinity.Bnois.Data
             this.CareerForecastSetting = new HashSet<CareerForecastSetting>();
             this.EmployeeGeneral = new HashSet<EmployeeGeneral>();
             this.ToeAuthorized = new HashSet<ToeAuthorized>();
+            this.DashBoardBranchByAdminAuthority700 = new HashSet<DashBoardBranchByAdminAuthority700>();
         }
     
         public int BranchId { get; set; }
@@ -62,5 +63,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<EmployeeGeneral> EmployeeGeneral { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ToeAuthorized> ToeAuthorized { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DashBoardBranchByAdminAuthority700> DashBoardBranchByAdminAuthority700 { get; set; }
     }
 }

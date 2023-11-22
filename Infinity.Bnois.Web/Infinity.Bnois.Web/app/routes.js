@@ -206,6 +206,33 @@
                     controller: 'toeAuthorizedAddController as vm',
                     title: 'Toe Authorized'
                 }
+            },//-------------Toe Officer state entry-------
+            {
+                state: 'toe-officer-state-entry-list',
+                config: {
+                    url: '/toe-officer-state-entry-list?ps&pn&q',
+                    templateUrl: 'app/views/toe-officer-state-entry/toeOfficerStateEntryList.html',
+                    controller: 'toeOfficerStateEntryListController as vm',
+                    title: 'Toe Officer State Entry'
+                }
+            },
+            {
+                state: 'toe-officer-state-entry-create',
+                config: {
+                    url: '/toe-officer-state-entry-create',
+                    templateUrl: 'app/views/toe-officer-state-entry/toeOfficerStateEntryAdd.html',
+                    controller: 'toeOfficerStateEntryAddController as vm',
+                    title: 'Toe Officer State Entry'
+                }
+            },
+            {
+                state: "toe-officer-state-entry-modify",
+                config: {
+                    url: '/toe-officer-state-entry-modify/:id',
+                    templateUrl: 'app/views/toe-officer-state-entry/toeOfficerStateEntryAdd.html',
+                    controller: 'toeOfficerStateEntryAddController as vm',
+                    title: 'Toe Officer State Entry'
+                }
             },
             //-------------Overview of Officers Deployment Entry-------
             {
@@ -5467,6 +5494,27 @@
                     title: 'Gender Officer'
                 }
             },
+            //-------------TO & E  Officer By Transfer Type-------
+            {
+                state: 'toe-officer-by-transfer-type',
+                config: {
+                    url: '/toe-officer-by-transfer-type/:rankId/:branch/:categoryId/:subCategoryId/:commissionTypeId/:transferType',
+                    templateUrl: 'app/views/toe-officer-state/toeOfficerListByTransferType.html',
+                    controller: 'toeOfficerListByTransferTypeController as vm',
+                    title: 'TO & E Officer List By Transfer Type'
+                }
+            },
+            //-------------Overview officer deployment List-------
+            {
+                state: 'overview-deployment-officer-list',
+                config: {
+                    url: '/overview-deployment-officer-list/:rankId/:officerTypeId/:coastGuard/:outsideOrg',
+                    //url: '/overview-deployment-officer-list',
+                    templateUrl: 'app/views/overview-officers-deployment/overviewDeploymentOfficersList.html',
+                    controller: 'overviewDeploymentOfficersListController as vm',
+                    title: 'overview Deployment Officers List'
+                }
+            },
             //-------------Category Officer-------
             {
                 state: 'category-officer',
@@ -5880,6 +5928,15 @@
                     templateUrl: 'app/views/branch-authority-officers/branchAuthorityOfficers.html',
                     controller: 'branchAuthorityOfficersController as vm',
                     title: 'Branch Authority Officers'
+                }
+            },
+            {
+                state: "toe-officer-state",
+                config: {
+                    url: "/toe-officer-state",
+                    templateUrl: 'app/views/toe-officer-state/toeOfficerState.html',
+                    controller: 'toeOfficerStateController as vm',
+                    title: 'TO & E Officer State'
                 }
             },
             {

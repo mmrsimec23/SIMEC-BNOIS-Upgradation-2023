@@ -84,12 +84,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Medal Award";
                 bnLog.PreviousValue = "Id: " + model.MedalAwardId;
                 bnLog.UpdatedValue = "Id: " + model.MedalAwardId;
-                if (medalAward.EmployeeId != model.EmployeeId)
+                if (medalAward.EmployeeId > 0 || model.EmployeeId > 0)
                 {
                     var prevEmployee = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", medalAward.EmployeeId);
                     var newEmployee = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Employee: " + ((dynamic)prevEmployee).FullNameEng;
-                    bnLog.UpdatedValue += ", Employee: " + ((dynamic)newEmployee).FullNameEng;
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevEmployee).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)newEmployee).PNo;
                 }
                 if (medalAward.IsBackLog != model.IsBackLog)
                 {

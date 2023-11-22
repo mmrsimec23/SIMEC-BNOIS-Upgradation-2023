@@ -65,6 +65,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 dashBoardBranchByAdminAuthority600Entry.ModifiedDate = DateTime.Now;
                 dashBoardBranchByAdminAuthority600Entry.ModifiedBy = userId;
 
+                DashBoardBranchByAdminAuthority600Entry updateDataExist = await dashBoardBranchByAdminAuthority600EntryRepository.FindOneAsync(x => x.Id != model.Id && x.RankId == model.RankId && x.OrgType == model.OrgType);
+                if (updateDataExist != null)
+                {
+                    throw new InfinityArgumentMissingException("Record with Same Branch, Rank and Type is already inserted!");
+                }
+
                 // data log section start
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "DashBoardBranchByAdminAuthority600Entry";
@@ -123,6 +129,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                DashBoardBranchByAdminAuthority600Entry updateDataExist = await dashBoardBranchByAdminAuthority600EntryRepository.FindOneAsync(x => x.RankId == model.RankId && x.OrgType == model.OrgType);
+                if (updateDataExist != null)
+                {
+                    throw new InfinityArgumentMissingException("Record with Same Branch, Rank and Type is already inserted!");
+                }
+
                 dashBoardBranchByAdminAuthority600Entry.CreatedBy = userId;
                 dashBoardBranchByAdminAuthority600Entry.CreatedDate = DateTime.Now;
                 dashBoardBranchByAdminAuthority600Entry.IsActive = true;

@@ -565,6 +565,21 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="DashBoardBranchByAdminAuthority700">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="RankId" Type="int" />
+          <Property Name="TransferTypeId" Type="int" />
+          <Property Name="No" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="120" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="District">
           <Key>
             <PropertyRef Name="DistrictId" />
@@ -1163,7 +1178,7 @@
           <Property Name="SLCode" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb20.dbo.EmployeeTraining' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmployeeTraining">
           <Key>
             <PropertyRef Name="EmployeTrainingId" />
@@ -3285,7 +3300,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a prim
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb.dbo.vwNomination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb20.dbo.vwNomination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwNomination">
           <Key>
             <PropertyRef Name="NominationId" />
@@ -3316,7 +3331,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwNomination' does not have a primary 
           <Property Name="TitleName" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwTransfer">
           <Key>
             <PropertyRef Name="TransferId" />
@@ -3857,6 +3872,30 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
               <PropertyRef Name="RankId" />
             </Principal>
             <Dependent Role="DashBoardBranchByAdminAuthority600Entry">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardBranchByAdminAuthority700_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+          <End Role="DashBoardBranchByAdminAuthority700" Type="Self.DashBoardBranchByAdminAuthority700" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="DashBoardBranchByAdminAuthority700">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardBranchByAdminAuthority700_Rank">
+          <End Role="Rank" Type="Self.Rank" Multiplicity="0..1" />
+          <End Role="DashBoardBranchByAdminAuthority700" Type="Self.DashBoardBranchByAdminAuthority700" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="DashBoardBranchByAdminAuthority700">
               <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
@@ -7010,6 +7049,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <EntitySet Name="CourseSubCategory" EntityType="Self.CourseSubCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoXoService" EntityType="Self.CoXoService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DashBoardBranchByAdminAuthority600Entry" EntityType="Self.DashBoardBranchByAdminAuthority600Entry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DashBoardBranchByAdminAuthority700" EntityType="Self.DashBoardBranchByAdminAuthority700" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
@@ -7394,6 +7434,14 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <AssociationSet Name="FK_DashBoardBranchByAdminAuthority600Entry_Rank" Association="Self.FK_DashBoardBranchByAdminAuthority600Entry_Rank">
             <End Role="Rank" EntitySet="Rank" />
             <End Role="DashBoardBranchByAdminAuthority600Entry" EntitySet="DashBoardBranchByAdminAuthority600Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardBranchByAdminAuthority700_Branch" Association="Self.FK_DashBoardBranchByAdminAuthority700_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="DashBoardBranchByAdminAuthority700" EntitySet="DashBoardBranchByAdminAuthority700" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardBranchByAdminAuthority700_Rank" Association="Self.FK_DashBoardBranchByAdminAuthority700_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="DashBoardBranchByAdminAuthority700" EntitySet="DashBoardBranchByAdminAuthority700" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_District_dbo_Divission_DivissionId" Association="Self.FK_dbo_District_dbo_Divission_DivissionId">
             <End Role="Division" EntitySet="Division" />
@@ -9839,6 +9887,15 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="Rank" EntitySet="Rank" />
             <End Role="DashBoardBranchByAdminAuthority600Entry" EntitySet="DashBoardBranchByAdminAuthority600Entry" />
           </AssociationSet>
+          <EntitySet Name="DashBoardBranchByAdminAuthority700" EntityType="BnoisdbModel.DashBoardBranchByAdminAuthority700" />
+          <AssociationSet Name="FK_DashBoardBranchByAdminAuthority700_Branch" Association="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="DashBoardBranchByAdminAuthority700" EntitySet="DashBoardBranchByAdminAuthority700" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardBranchByAdminAuthority700_Rank" Association="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="DashBoardBranchByAdminAuthority700" EntitySet="DashBoardBranchByAdminAuthority700" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
           <Property Type="Int32" Name="Value" Nullable="false" />
@@ -11916,6 +11973,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Rank" FromRole="Rank" ToRole="EmployeeMscEducation" />
           <NavigationProperty Name="ToeAuthorized" Relationship="BnoisdbModel.FK_ToeAuthorized_Rank" FromRole="Rank" ToRole="ToeAuthorized" />
           <NavigationProperty Name="DashBoardBranchByAdminAuthority600Entry" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority600Entry_Rank" FromRole="Rank" ToRole="DashBoardBranchByAdminAuthority600Entry" />
+          <NavigationProperty Name="DashBoardBranchByAdminAuthority700" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Rank" FromRole="Rank" ToRole="DashBoardBranchByAdminAuthority700" />
           </EntityType>
         <EntityType Name="SubBranch">
           <Key>
@@ -12080,6 +12138,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="CareerForecastSetting" Relationship="BnoisdbModel.FK_CareerForecastSetting_Branch" FromRole="Branch" ToRole="CareerForecastSetting" />
           <NavigationProperty Name="EmployeeGeneral" Relationship="BnoisdbModel.FK_EmployeeGeneral_Branch" FromRole="Branch" ToRole="EmployeeGeneral" />
           <NavigationProperty Name="ToeAuthorized" Relationship="BnoisdbModel.FK_ToeAuthorized_Branch" FromRole="Branch" ToRole="ToeAuthorized" />
+          <NavigationProperty Name="DashBoardBranchByAdminAuthority700" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Branch" FromRole="Branch" ToRole="DashBoardBranchByAdminAuthority700" />
         </EntityType>
         <Association Name="FK_MissionAppBranch_Branch">
           <End Type="BnoisdbModel.Branch" Role="Branch" Multiplicity="1" />
@@ -17410,6 +17469,47 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DashBoardBranchByAdminAuthority700">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="TransferTypeId" Type="Int32" />
+          <Property Name="No" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Branch" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Branch" FromRole="DashBoardBranchByAdminAuthority700" ToRole="Branch" />
+          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Rank" FromRole="DashBoardBranchByAdminAuthority700" ToRole="Rank" />
+        </EntityType>
+        <Association Name="FK_DashBoardBranchByAdminAuthority700_Branch">
+          <End Type="BnoisdbModel.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.DashBoardBranchByAdminAuthority700" Role="DashBoardBranchByAdminAuthority700" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="DashBoardBranchByAdminAuthority700">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardBranchByAdminAuthority700_Rank">
+          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.DashBoardBranchByAdminAuthority700" Role="DashBoardBranchByAdminAuthority700" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="DashBoardBranchByAdminAuthority700">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -20937,6 +21037,22 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
                 <ScalarProperty Name="No" ColumnName="No" />
                 <ScalarProperty Name="OrgType" ColumnName="OrgType" />
                 <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DashBoardBranchByAdminAuthority700">
+            <EntityTypeMapping TypeName="BnoisdbModel.DashBoardBranchByAdminAuthority700">
+              <MappingFragment StoreEntitySet="DashBoardBranchByAdminAuthority700">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="TransferTypeId" ColumnName="TransferTypeId" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

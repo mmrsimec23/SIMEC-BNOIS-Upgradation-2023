@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Infinity.Bnois.ApplicationService.Interface;
@@ -176,6 +177,18 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             return dataTable.ToJson().ToList();
         }
+        public List<object> getToeOfficerStateInside()
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranch800]"));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> getToeOfficerStateInNavy()
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranch900]"));
+
+            return dataTable.ToJson().ToList();
+        }
 
         public List<object> GetDashboardOfficeAppointment(int officeType, int rankId, int displayId)
         {
@@ -257,6 +270,36 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             return dataTable.ToJson().ToList();
         }
+        public List<object> GetOverviewOfficerDeploymentList(int rankId, int officerTypeId, int coastGuard, int outsideOrg)
+        {
+            string query = String.Format("exec [spGetOverviewOfOfficerDeploymentList] {0},{1},{2},{3}", rankId, officerTypeId, coastGuard, outsideOrg);
+
+            if (outsideOrg == 100)
+            {
+                if (coastGuard == 100)
+                {
+                    if (officerTypeId == 100)
+                    {
+                        query = String.Format("exec [spGetOverviewOfOfficerDeploymentList] {0},null,null,null", rankId);
+                    }
+                    else
+                    {
+                        query = String.Format("exec [spGetOverviewOfOfficerDeploymentList] {0},{1},null,null", rankId, officerTypeId);
+                    }
+                }
+                else
+                {
+                    query = String.Format("exec [spGetOverviewOfOfficerDeploymentList] {0},{1},{2},null", rankId, officerTypeId, coastGuard);
+                } 
+            }
+            //else
+            //{
+            //    query = String.Format("exec [spGetOverviewOfOfficerDeploymentList] {0},{1},{2},{3}", rankId, officerTypeId, coastGuard, outsideOrg);
+            //}
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(query);
+
+            return dataTable.ToJson().ToList();
+        }
 
         public List<object> GetCategoryOfficer(int rankId, string branch, int categoryId)
         {
@@ -278,6 +321,19 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             if (branch == null)
             {
                 query = String.Format("exec [spGetGenderOfficer] {0},null,{1},{2},{3},{4}", rankId, categoryId, subCategoryId, commissionTypeId, genderId);
+            }
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(query);
+
+            return dataTable.ToJson().ToList();
+        }
+
+        public List<object> GetToeOfficerByTransferType(int rankId, string branch,int categoryId,int subCategoryId,int commissionTypeId, int transferType)
+        {
+            string query = String.Format("exec [spGetToeOfficerByTransferType] {0},'{1}',{2},{3},{4},{5}", rankId, branch, categoryId, subCategoryId, commissionTypeId, transferType);
+
+            if (branch == null)
+            {
+                query = String.Format("exec [spGetToeOfficerByTransferType] {0},null,{1},{2},{3},{4}", rankId, categoryId, subCategoryId, commissionTypeId, transferType);
             }
             DataTable dataTable = employeeRepository.ExecWithSqlQuery(query);
 

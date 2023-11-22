@@ -107,13 +107,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.PreviousValue = "Id: " + model.EmployeeGeneralId;
                 bnLog.UpdatedValue = "Id: " + model.EmployeeGeneralId;
                 int bnoisUpdateCount = 0;
-                if (employeeGeneral.EmployeeId != model.EmployeeId)
+                if (employeeGeneral.EmployeeId > 0 || model.EmployeeId > 0)
                 {
                     var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeGeneral.EmployeeId);
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
-                    bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
-                    bnoisUpdateCount += 1;
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
+                    //bnoisUpdateCount += 1;
                 }
                 if (employeeGeneral.ShortName != model.ShortName)
                 {

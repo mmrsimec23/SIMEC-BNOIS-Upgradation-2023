@@ -87,7 +87,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId??0);
                     bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
                     bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
-                    bnoisUpdateCount += 1;
+                    //bnoisUpdateCount += 1;
                 }
                 if (employeePft.PftTypeId != model.PftTypeId)
                 {

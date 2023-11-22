@@ -1,0 +1,54 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">TO&E Officer State Entry<span class="pull-right text-success">{{vm.title}}</span></h2>
+                </div>
+                <form name="vm.toeOfficerStateEntryForm">
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="branchId" class="custom-label">Branch</label>
+                            <select name="branchId" id="branchId" class="form-control" ng-model="vm.toeOfficerStateEntry.branchId" ng-options="option.value as option.text for option in vm.branchList">
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.toeOfficerStateEntryForm.branchId.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="rankId" class="custom-label">Rank</label>
+                            <select name="rankId" id="rankId" class="form-control" ng-model="vm.toeOfficerStateEntry.rankId" ng-options="option.value as option.text for option in vm.rankList">
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.toeOfficerStateEntryForm.rankId.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="transferTypeId" class="custom-label"> Type</label>
+                            <select name="transferTypeId" id="transferTypeId" class="form-control" ng-model="vm.toeOfficerStateEntry.transferTypeId" ng-options="option.value as option.text for option in vm.transferTypes">
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.toeOfficerStateEntryForm.transferTypeId.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="no" class="custom-label">No</label>
+                            <input type="text" id="no" name="no"  class="form-control custom-form-control" ng-model="vm.toeOfficerStateEntry.no" />
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.toeOfficerStateEntryForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

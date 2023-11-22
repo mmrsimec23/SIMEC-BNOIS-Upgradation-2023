@@ -1,0 +1,136 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <button  class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
+
+            <div class="panel-body pdfReportFormCover" id="print">
+                <h3 class="reportHeader">TO&E Vs Born State Inside BN</h3>
+                <hr />
+                <div class="table-wrapper table-responsive reportCover">
+
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="9">Held</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>SD </th>
+                                <th>WMO</th>
+                                <th>Instr<br /> MO</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.officerStateInside">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getToeOfficerListByTransferType(branch.id,branch.heldX,0,0,0,1)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getToeOfficerListByTransferType(branch.id,branch.heldE,0,0,0,1)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getToeOfficerListByTransferType(branch.id,branch.heldS,0,0,0,1)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getToeOfficerListByTransferType(branch.id,branch.heldEdu,0,0,0,1)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getToeOfficerListByTransferType(branch.id,branch.heldL,0,0,0,1)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSDValue>0" ng-click="vm.getToeOfficerListByTransferType(branch.id,null,4,0,0,1)"><strong>{{branch.heldSDValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldMedValue>0" ng-click="vm.getToeOfficerListByTransferType(branch.id,branch.heldMed,4,10,1,1)"><strong>{{branch.heldMedValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldInstrMOValue>0" ng-click="vm.getToeOfficerListByTransferType(branch.id,branch.heldInstrMo,2,6,2,1)"><strong>{{branch.heldInstrMOValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getToeOfficerListByTransferType(branch.id,null,0,0,0,1)"><strong>{{branch.heldTotal}}</strong></a> </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <h3 class="reportHeader">TO&E Vs Born State in BN</h3>
+                <hr />
+                <div class="table-wrapper table-responsive reportCover">
+
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                            </tr>
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Name</th>
+                                <th colspan="7">Authorized</th>
+                                <th colspan="9">Held</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>Edn </th>
+                                <th>L</th>
+                                <th>Misc</th>
+                                <th>Total</th>
+                                <th>X</th>
+                                <th>E</th>
+                                <th>S</th>
+                                <th>L</th>
+                                <th>Edu </th>
+                                <th>SD </th>
+                                <th>WMO</th>
+                                <th>Instr<br /> MO</th>
+                                <th>Total</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.officerStateInNavy">
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"><a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"><a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a></td>
+                                <td style="text-align: center"><a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a></td>
+                                <td style="text-align: center"><a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a></td>
+                                <td style="text-align: center"><a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a></td>
+                                <td style="text-align: center"><a href="" ng-if="branch.heldSDValue>0" ng-click="vm.getOfficerList(branch.id,null,4,0,0)"><strong>{{branch.heldSDValue}}</strong></a></td>
+                                <td style="text-align: center"><a href="" ng-if="branch.heldMedValue>0" ng-click="vm.getOfficerList(branch.id,branch.heldMed,4,10,1)"><strong>{{branch.heldMedValue}}</strong></a> </td>
+                                <td style="text-align: center"><a href="" ng-if="branch.heldInstrMOValue>0" ng-click="vm.getOfficerList(branch.id,branch.heldInstrMo,2,6,2)"><strong>{{branch.heldInstrMOValue}}</strong></a> </td>
+                                <td style="text-align: center"><a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

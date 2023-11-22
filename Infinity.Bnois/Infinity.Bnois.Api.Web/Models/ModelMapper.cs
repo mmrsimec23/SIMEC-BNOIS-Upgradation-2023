@@ -29,6 +29,9 @@ namespace Infinity.Bnois.Api.Web.Models
                 .ForMember(d => d.Branch, opt => opt.MapFrom(s => s.Branch))
                 .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank))
                 .ForMember(d => d.Office, opt => opt.MapFrom(s => s.Office));
+                cfg.CreateMap<DashBoardBranchByAdminAuthority700, DashBoardBranchByAdminAuthority700Model>()
+                .ForMember(d => d.Branch, opt => opt.MapFrom(s => s.Branch))
+                .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
                 cfg.CreateMap<DashBoardBranchByAdminAuthority600Entry, DashBoardBranchByAdminAuthority600EntryModel>()
                 .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
                 cfg.CreateMap<RankMap, RankMapModel>()
@@ -566,6 +569,10 @@ namespace Infinity.Bnois.Api.Web.Models
                 .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank))
                 .ForMember(d => d.Branch, opt => opt.MapFrom(s => s.Branch))
                 .ForMember(d => d.Office, opt => opt.MapFrom(s => s.Office));
+
+                cfg.CreateMap<DashBoardBranchByAdminAuthority700Model, DashBoardBranchByAdminAuthority700>()
+                .ForMember(d => d.Branch, opt => opt.MapFrom(s => s.Branch))
+                .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
 
                 cfg.CreateMap<DashBoardBranchByAdminAuthority600EntryModel, DashBoardBranchByAdminAuthority600Entry>()
                 .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));

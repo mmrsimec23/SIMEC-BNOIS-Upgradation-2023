@@ -40,16 +40,16 @@
                             <tr ng-repeat="branch in vm.overviewOfficersDeploymentList">
                                 <td><strong>{{$index+1}}</strong></td>
                                 <td><strong>{{branch.rankName}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authWithinNavy}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authSecondMent}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authCG}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authIsoOther}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldWithinNavy}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSecondMent}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldCG}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldIsoOther}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authWithinNavy>0">{{branch.authWithinNavy}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSecondMent>0">{{branch.authSecondMent}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authCG>0">{{branch.authCG}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authIsoOther>0">{{branch.authIsoOther}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldWithinNavy>0" ng-click="vm.getOverviewOfficerDeploymentList(branch.rankID,1,100,100)"><strong>{{branch.heldWithinNavy}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSecondMent>0" ng-click="vm.getOverviewOfficerDeploymentList(branch.rankID,2,0,0)"><strong>{{branch.heldSecondMent}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldCG>0" ng-click="vm.getOverviewOfficerDeploymentList(branch.rankID,1,1,0)"><strong>{{branch.heldCG}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldIsoOther>0" ng-click="vm.getOverviewOfficerDeploymentList(branch.rankID,1,0,1)"><strong>{{branch.heldIsoOther}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOverviewOfficerDeploymentList(branch.rankID,100,100,100)"><strong>{{branch.heldTotal}}</strong></a> </td>
 
                             </tr>
 

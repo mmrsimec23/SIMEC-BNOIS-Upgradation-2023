@@ -14,10 +14,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	public class AppointmentNatureService : IAppointmentNatureService
 	{
 		private readonly IBnoisRepository<AptNat> appoitmentNatureRepository;
-		public AppointmentNatureService(IBnoisRepository<AptNat> appoitmentNatureRepository)
-		{
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public AppointmentNatureService(IBnoisRepository<AptNat> appoitmentNatureRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
+        {
 			this.appoitmentNatureRepository = appoitmentNatureRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
+        }
 
 		public async Task<bool> DeleteAppointmentNature(int id)
 		{
@@ -32,7 +36,21 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 			}
 			else
 			{
-				return await appoitmentNatureRepository.DeleteAsync(appointmentNature);
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "AptNat";
+                bnLog.TableEntryForm = "Appointment Nature";
+                bnLog.PreviousValue = "Id: " + appointmentNature.ANatId;
+                bnLog.PreviousValue += ", Appointment Nature: " + appointmentNature.ANatNm + ", Appointment Nature(Bangla): " + appointmentNature.ANatNmBng + ", Short Name: " + appointmentNature.ANatShnm + ", Short Name(Bangla): " + appointmentNature.ANatShnmBng + ",  Outside Navy: " + appointmentNature.AptFr + ", Staff Duties: " + appointmentNature.IsStaffDuty;
+                
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+                // data log section end
+                return await appoitmentNatureRepository.DeleteAsync(appointmentNature);
 			}
 		}
 
@@ -96,8 +114,69 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 				AppointmentNature.ModifiedDate = DateTime.Now;
 				AppointmentNature.ModifiedBy = userId;
-			}
-			else
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "AptNat";
+                bnLog.TableEntryForm = "Appointment Nature";
+                bnLog.PreviousValue = "Id: " + model.ANatId;
+                bnLog.UpdatedValue = "Id: " + model.ANatId;
+                int bnoisUpdateCount = 0;
+
+                
+                if (AppointmentNature.ANatNm != model.ANatNm)
+                {
+                    bnLog.PreviousValue += ", Appointment Nature: " + AppointmentNature.ANatNm;
+                    bnLog.UpdatedValue += ", Appointment Nature: " + model.ANatNm;
+                    bnoisUpdateCount += 1;
+                }
+                if (AppointmentNature.ANatNmBng != model.ANatNmBng)
+                {
+                    bnLog.PreviousValue += ", Appointment Nature(Bangla): " + AppointmentNature.ANatNmBng;
+                    bnLog.UpdatedValue += ", Appointment Nature(Bangla): " + model.ANatNmBng;
+                    bnoisUpdateCount += 1;
+                }
+                if (AppointmentNature.ANatShnm != model.ANatShnm)
+                {
+                    bnLog.PreviousValue += ", Short Name: " + AppointmentNature.ANatShnm;
+                    bnLog.UpdatedValue += ", Short Name: " + model.ANatShnm;
+                    bnoisUpdateCount += 1;
+                }
+                if (AppointmentNature.ANatShnmBng != model.ANatShnmBng)
+                {
+                    bnLog.PreviousValue += ", Short Name(Bangla): " + AppointmentNature.ANatShnmBng;
+                    bnLog.UpdatedValue += ", Short Name(Bangla): " + model.ANatShnmBng;
+                    bnoisUpdateCount += 1;
+                }
+                if (AppointmentNature.AptFr != model.AptFr)
+                {
+                    bnLog.PreviousValue += ",  Outside Navy: " + AppointmentNature.AptFr;
+                    bnLog.UpdatedValue += ",  Outside Navy: " + model.AptFr;
+                    bnoisUpdateCount += 1;
+                }
+                if (AppointmentNature.IsStaffDuty != model.IsStaffDuty)
+                {
+                    bnLog.PreviousValue += ", Staff Duties: " + AppointmentNature.IsStaffDuty;
+                    bnLog.UpdatedValue += ", Staff Duties: " + model.IsStaffDuty;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
+            }
+            else
 			{
 				AppointmentNature.IsActive = true;
 				AppointmentNature.CreatedDate = DateTime.Now;

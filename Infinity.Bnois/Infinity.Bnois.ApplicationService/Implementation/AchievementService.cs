@@ -84,18 +84,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Personal Achievement";
                 bnLog.PreviousValue = "Id: " + model.AchievementId;
                 bnLog.UpdatedValue = "Id: " + model.AchievementId;
-                if (achievement.EmployeeId != model.EmployeeId)
+                if (achievement.EmployeeId > 0 || model.EmployeeId > 0)
                 {
-                    if (achievement.EmployeeId > 0)
-                    {
-                        var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", achievement.EmployeeId);
-                        bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
-                    }
-                    if (model.EmployeeId > 0)
-                    {
-                        var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                        bnLog.UpdatedValue += ", Name: " + ((dynamic)emp).PNo + "_" + ((dynamic)emp).FullNameEng;
-                    }
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", achievement.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
+                    
                 }
                 if (achievement.RankId != model.RankId)
                 {
@@ -318,7 +313,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 if (achievement.EmployeeId > 0)
                     {
                         var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", achievement.EmployeeId);
-                        bnLog.PreviousValue += ", Name: " + ((dynamic)prevemp).PNo + "_" + ((dynamic)prevemp).FullNameEng;
+                        bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
                     }
                     
                 if (achievement.RankId > 0)

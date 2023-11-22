@@ -14,10 +14,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	public class PatternService : IPatternService
 	{
 		private readonly IBnoisRepository<Pattern> patternRepository;
-		public PatternService(IBnoisRepository<Pattern> patternRepository)
-		{
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public PatternService(IBnoisRepository<Pattern> patternRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
+        {
 			this.patternRepository = patternRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
+        }
 
 		public async Task<bool> DeletePattern(int id)
 		{
@@ -32,7 +36,24 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 			}
 			else
 			{
-				return await patternRepository.DeleteAsync(pattern);
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Pattern";
+                bnLog.TableEntryForm = "Pattern";
+                bnLog.PreviousValue = "Id: " + pattern.PatternId;
+				
+				bnLog.PreviousValue += ", Name: " + pattern.Name + ", Type: " + (pattern.PType == "S" ? "Sea" : pattern.PType == "L" ? "Shore" : "") + ", MoveAble: " + pattern.IsMoveAble;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+                return await patternRepository.DeleteAsync(pattern);
 			}
 		}
 
@@ -84,8 +105,51 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 		        pattern.ModifiedDate = DateTime.Now;
 		        pattern.ModifiedBy = userId;
-		    }
-		    else
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Pattern";
+                bnLog.TableEntryForm = "Pattern";
+                bnLog.PreviousValue = "Id: " + model.PatternId;
+                bnLog.UpdatedValue = "Id: " + model.PatternId;
+                int bnoisUpdateCount = 0;
+
+
+                if (pattern.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + pattern.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
+                }
+                if (pattern.PType != model.PType)
+                {
+                    bnLog.PreviousValue += ", Type: " + (pattern.PType == "S" ? "Sea": pattern.PType == "L" ? "Shore" : "");
+                    bnLog.UpdatedValue += ", Type: " + (model.PType == "S" ? "Sea" : model.PType == "L" ? "Shore" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (pattern.IsMoveAble != model.IsMoveAble)
+                {
+                    bnLog.PreviousValue += ", MoveAble: " + pattern.IsMoveAble;
+                    bnLog.UpdatedValue += ", MoveAble: " + model.IsMoveAble;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
+            }
+            else
 		    {
 		        pattern.IsActive = true;
 		        pattern.CreatedDate = DateTime.Now;

@@ -257,6 +257,15 @@ namespace Infinity.Bnois.Api.Controllers
                 Result = dashboardService.GetGenderOfficer(rankId, branch, categoryId, subCategoryId, commissionTypeId, genderId)
             });
         }
+        [HttpGet]
+        [Route("toe-officer-by-transfer-type")]
+        public IHttpActionResult GetToeOfficerByTransferType(int rankId, string branch, int categoryId, int subCategoryId, int commissionTypeId, int transferType)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetToeOfficerByTransferType(rankId, branch, categoryId, subCategoryId, commissionTypeId, transferType)
+            });
+        }
 
         [HttpGet]
         [Route("get-stream-officer")]
@@ -265,6 +274,16 @@ namespace Infinity.Bnois.Api.Controllers
             return Ok(new ResponseMessage<List<object>>()
             {
                 Result = dashboardService.GetStreamOfficer(rankId, branch, streamId)
+            });
+        }
+
+        [HttpGet]
+        [Route("get-overview-officer-deployment-list")]
+        public IHttpActionResult GetOverviewOfficerDeploymentList(int rankId, int officerTypeId, int coastGuard, int outsideOrg)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetOverviewOfficerDeploymentList(rankId, officerTypeId, coastGuard, outsideOrg)
             });
         }
 
@@ -365,6 +384,26 @@ namespace Infinity.Bnois.Api.Controllers
             return Ok(new ResponseMessage<List<object>>()
             {
                 Result = dashboardService.GetBranchAuthorityOfficer600()
+            });
+        }
+
+        [HttpGet]
+        [Route("get-toe-officer-state-in-navy")]
+        public IHttpActionResult getToeOfficerStateInNavy()
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.getToeOfficerStateInNavy()
+            });
+        }
+
+        [HttpGet]
+        [Route("get-toe-officer-state-inside")]
+        public IHttpActionResult getToeOfficerStateInside()
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.getToeOfficerStateInside()
             });
         }
 

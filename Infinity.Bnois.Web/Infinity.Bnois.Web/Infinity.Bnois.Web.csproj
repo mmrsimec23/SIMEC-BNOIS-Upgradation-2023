@@ -96,6 +96,7 @@
     <Content Include="app\services\advanceSearchService.js" />
     <Content Include="app\services\careerForecastSettingService.js" />
     <Content Include="app\services\bnoisLogInfoService.js" />
+    <Content Include="app\services\toeOfficerStateEntryService.js" />
     <Content Include="app\services\overviewOfficersDeploymentService.js" />
     <Content Include="app\services\toeAuthorizedService.js" />
     <Content Include="app\services\roasterListService.js" />
@@ -331,6 +332,16 @@
     <Content Include="app\views\basic-search\basicSearchController.js" />
     <Content Include="app\views\bnois-log-info\bnoisLogInfo.html" />
     <Content Include="app\views\bnois-log-info\bnoisLogInfoController.js" />
+    <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryAdd.html" />
+    <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryAddController.js" />
+    <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryList.html" />
+    <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryListController.js" />
+    <Content Include="app\views\overview-officers-deployment\overviewDeploymentOfficersList.html" />
+    <Content Include="app\views\overview-officers-deployment\overviewDeploymentOfficersListController.js" />
+    <Content Include="app\views\toe-officer-state\toeOfficerState.html" />
+    <Content Include="app\views\toe-officer-state\toeOfficerStateController.js" />
+    <Content Include="app\views\toe-officer-state\toeOfficerListByTransferType.html" />
+    <Content Include="app\views\toe-officer-state\toeOfficerListByTransferTypeController.js" />
     <Content Include="app\views\overview-officers-deployment\overviewOfficersDeployment.html" />
     <Content Include="app\views\overview-officers-deployment\overviewOfficersDeploymentController.js" />
     <Content Include="app\views\branch-authority-officers\branchOfficer.html" />

@@ -81,12 +81,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 bnLog.TableEntryForm = "Observation & Intelligent Report";
                 bnLog.PreviousValue = "Id: " + model.ObservationIntelligentId;
                 bnLog.UpdatedValue = "Id: " + model.ObservationIntelligentId;
-                if (observationIntelligent.EmployeeId != model.EmployeeId)
+                if (observationIntelligent.EmployeeId > 0 || model.EmployeeId > 0)
                 {
                     var prevEmployee = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", observationIntelligent.EmployeeId);
                     var newEmployee = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
-                    bnLog.PreviousValue += ", Employee: " + ((dynamic)prevEmployee).FullNameEng;
-                    bnLog.UpdatedValue += ", Employee: " + ((dynamic)newEmployee).FullNameEng;
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevEmployee).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)newEmployee).PNo;
                 }
                 if (observationIntelligent.IsBackLog != model.IsBackLog)
                 {

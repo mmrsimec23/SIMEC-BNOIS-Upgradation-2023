@@ -14,9 +14,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class ShipCategoryService : IShipCategoryService
     {
         private readonly IBnoisRepository<ShipCategory> shipCategoryRepository;
-        public ShipCategoryService(IBnoisRepository<ShipCategory> shipCategoryRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public ShipCategoryService(IBnoisRepository<ShipCategory> shipCategoryRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.shipCategoryRepository = shipCategoryRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
     
@@ -67,6 +69,55 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 	            shipCategory.ModifiedDate = DateTime.Now;
 	            shipCategory.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "ShipCategory";
+                bnLog.TableEntryForm = "Ship Category";
+                bnLog.PreviousValue = "Id: " + model.ShipCategoryId;
+                bnLog.UpdatedValue = "Id: " + model.ShipCategoryId;
+                int bnoisUpdateCount = 0;
+
+
+                if (shipCategory.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + shipCategory.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
+                }
+                if (shipCategory.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ", Short Name: " + shipCategory.ShortName;
+                    bnLog.UpdatedValue += ", Short Name: " + model.ShortName;
+                    bnoisUpdateCount += 1;
+                }
+                if (shipCategory.Priority != model.Priority)
+                {
+                    bnLog.PreviousValue += ", Priority: " + shipCategory.Priority;
+                    bnLog.UpdatedValue += ", Priority: " + model.Priority;
+                    bnoisUpdateCount += 1;
+                }
+                if (shipCategory.Purpose != model.Purpose)
+                {
+                    bnLog.PreviousValue += ", Purpose: " + shipCategory.Purpose;
+                    bnLog.UpdatedValue += ", Purpose: " + model.Purpose;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -97,6 +148,24 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "ShipCategory";
+                bnLog.TableEntryForm = "Ship Category";
+                bnLog.PreviousValue = "Id: " + shipCategory.ShipCategoryId;
+
+
+                bnLog.PreviousValue += ", Name: " + shipCategory.Name + ", Short Name: " + shipCategory.ShortName + ", Priority: " + shipCategory.Priority + ", Purpose: " + shipCategory.Purpose;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+                //data log section end
                 return await shipCategoryRepository.DeleteAsync(shipCategory);
             }
         }

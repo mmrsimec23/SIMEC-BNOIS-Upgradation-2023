@@ -37,7 +37,11 @@
             getBranchAuthorityOfficers513: getBranchAuthorityOfficers513,
             getBranchAuthorityOfficers543: getBranchAuthorityOfficers543,
             getBranchAuthorityOfficers600: getBranchAuthorityOfficers600,
-            getGenderOfficer: getGenderOfficer
+            getToeOfficerStateInNavy: getToeOfficerStateInNavy,
+            getToeOfficerStateInside: getToeOfficerStateInside,
+            getGenderOfficer: getGenderOfficer,
+            getToeOfficerListByTransferType: getToeOfficerListByTransferType,
+            GetOverviewOfficerDeploymentList: GetOverviewOfficerDeploymentList
            
            
         };
@@ -165,6 +169,14 @@
             var url = dataConstants.DASHBOARD_URL + 'get-gender-officer?rankId=' + rankId + '&branch=' + branch + '&categoryId=' + categoryId + '&subCategoryId=' + subCategoryId + '&commissionTypeId=' + commissionTypeId + '&genderId=' + genderId;
             return apiHttpService.GET(url);
         }
+        function getToeOfficerListByTransferType(rankId, branch, categoryId, subCategoryId, commissionTypeId, transferType) {
+            var url = dataConstants.DASHBOARD_URL + 'toe-officer-by-transfer-type?rankId=' + rankId + '&branch=' + branch + '&categoryId=' + categoryId + '&subCategoryId=' + subCategoryId + '&commissionTypeId=' + commissionTypeId + '&transferType=' + transferType;
+            return apiHttpService.GET(url);
+        }
+        function GetOverviewOfficerDeploymentList(rankId, officerTypeId, coastGuard, outsideOrg) {
+            var url = dataConstants.DASHBOARD_URL + 'get-overview-officer-deployment-list?rankId=' + rankId + '&officerTypeId=' + officerTypeId + '&coastGuard=' + coastGuard + '&outsideOrg=' + outsideOrg;
+            return apiHttpService.GET(url);
+        }
         function getBranchAuthorityOfficers9(branchAuthorityId) {
             var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-9?branchAuthorityId=' + branchAuthorityId;
             return apiHttpService.GET(url);
@@ -207,6 +219,14 @@
         }
         function getBranchAuthorityOfficers600() {
             var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-600';
+            return apiHttpService.GET(url);
+        }
+        function getToeOfficerStateInNavy() {
+            var url = dataConstants.DASHBOARD_URL + 'get-toe-officer-state-in-navy';
+            return apiHttpService.GET(url);
+        }
+        function getToeOfficerStateInside() {
+            var url = dataConstants.DASHBOARD_URL + 'get-toe-officer-state-inside';
             return apiHttpService.GET(url);
         }
        

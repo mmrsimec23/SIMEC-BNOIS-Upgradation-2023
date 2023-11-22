@@ -93,7 +93,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     var newv = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
                     bnLog.PreviousValue += ", PNo: " + ((dynamic)prev).PNo;
                     bnLog.UpdatedValue += ", PNo: " + ((dynamic)newv).PNo;
-                    bnoisUpdateCount += 1;
+                    //bnoisUpdateCount += 1;
                 }
 
                 if (statusChange.StatusType != model.StatusType)

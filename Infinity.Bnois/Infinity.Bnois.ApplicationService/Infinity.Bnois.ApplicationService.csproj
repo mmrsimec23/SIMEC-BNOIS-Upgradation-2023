@@ -102,6 +102,7 @@
     <Compile Include="Implementation\CareerForecastSettingService.cs" />
     <Compile Include="Implementation\CareerForecastService.cs" />
     <Compile Include="Implementation\BnoisLogInfoService.cs" />
+    <Compile Include="Implementation\ToeOfficerStateEntryService.cs" />
     <Compile Include="Implementation\OverviewOfficersDeploymentEntryServiceService.cs" />
     <Compile Include="Implementation\ToeAuthorizedService.cs" />
     <Compile Include="Implementation\RoasterListService.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="Implementation\VisitSubCategoryService.cs" />
     <Compile Include="Implementation\OfficeShipmentService.cs" />
     <Compile Include="Implementation\ZoneService.cs" />
+    <Compile Include="Interface\IToeOfficerStateEntryService.cs" />
     <Compile Include="Interface\IOverviewOfficersDeploymentEntryService.cs" />
     <Compile Include="Interface\IToeAuthorizedService.cs" />
     <Compile Include="Interface\IRoasterListService.cs" />
@@ -450,6 +452,7 @@
     <Compile Include="Implementation\PreviousTransferService.cs" />
     <Compile Include="Models\AchievementModel.cs" />
     <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\DashBoardBranchByAdminAuthority700Model.cs" />
     <Compile Include="Models\DashBoardBranchByAdminAuthority600EntryModel.cs" />
     <Compile Include="Models\ToeAuthorizedModel.cs" />
     <Compile Include="Models\EmployeeCoxoServiceModel.cs" />
