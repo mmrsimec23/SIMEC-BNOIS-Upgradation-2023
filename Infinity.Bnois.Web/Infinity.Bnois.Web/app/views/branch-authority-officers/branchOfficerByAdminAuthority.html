@@ -21,17 +21,19 @@
                                  <th>PNo</th>
                                 <th>Billet-Appointment</th>
                                  <th>Since</th>
+                                 <th>Govt Approved</th>
 
                             </tr>
                         </thead>
                         <tbody class="reportBody">
-                            <tr class="reportTR" ng-repeat="item in vm.branchOfficers">
+                            <tr class="reportTR" ng-repeat="item in vm.branchOfficerByAdminAuthoritys">
                                 <td  class="reportTD"style="text-align: center; width: 50px;"><strong> {{$index+1}}</strong> </td>
                                 <td class="reportTD hideElement" ><a href="" ng-click="vm.officerDetails(item.pNo)"> <strong>{{item.officerName}}</strong></a> </td>
                                 <td class="reportTD noScreen" ><strong>{{item.officerName}}</strong></td>
                                 <td class="reportTD" style="text-align: center"> <strong>{{item.pNo}}</strong> </td>
                                 <td class="reportTD"><strong>{{item.presentBillet}} </strong> </td>
                                 <td class="reportTD" style="text-align: center; width: 100px;"><strong> {{item.since | date:'dd/MM/yyyy'}}</strong>  </td>
+                                <td class="reportTD" style="text-align: center; width: 100px;"><strong> {{item.govtApproved==true ? "Approved" : "Not Approved"}}</strong>  </td>
                                
                             </tr>
                         </tbody>

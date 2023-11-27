@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c156cc6eb9dd4bb29c430ebf9fbb2b1c" Name="Diagram1" ZoomLevel="56">
+      <Diagram DiagramId="c156cc6eb9dd4bb29c430ebf9fbb2b1c" Name="Diagram1" ZoomLevel="41">
         <EntityTypeShape EntityType="BnoisdbModel.Address" Width="1.5" PointX="8.25" PointY="134.375" />
         <EntityTypeShape EntityType="BnoisdbModel.AptCat" Width="1.5" PointX="24" PointY="151" />
         <EntityTypeShape EntityType="BnoisdbModel.AttributeType" Width="1.5" PointX="0.75" PointY="0.75" />
@@ -340,19 +340,10 @@
         <AssociationConnector Association="BnoisdbModel.FK_PreCommissionCourse_Medal" />
         <AssociationConnector Association="BnoisdbModel.FK_PreCommissionCourseDetail_PreCommissionCourse" />
         <EntityTypeShape EntityType="BnoisdbModel.EmployeeOpr" Width="1.5" PointX="22.25" PointY="66.5" />
-        <EntityTypeShape EntityType="BnoisdbModel.OfficeAppointment" Width="1.5" PointX="32.25" PointY="136.875" />
-        <AssociationConnector Association="BnoisdbModel.FK_OfficeAppointment_AptCat" />
-        <AssociationConnector Association="BnoisdbModel.FK_OfficeAppointment_AptNat" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeOpr_OfficeAppointment" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeOpr_OprOccasion" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeOpr_Rank" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeOpr_RecomandationType" />
         <AssociationConnector Association="BnoisdbModel.FK_OprAptSuitability_EmployeeOpr" />
-        <AssociationConnector Association="BnoisdbModel.FK_ExtraAppointment_OfficeAppointment" />
-        <AssociationConnector Association="BnoisdbModel.FK_OfficeAppBranch_OfficeAppointment" />
-        <AssociationConnector Association="BnoisdbModel.FK_OfficeRank_OfficeAppointment" />
-        <AssociationConnector Association="BnoisdbModel.FK_ProposalDetail_OfficeAppointment" />
-        <AssociationConnector Association="BnoisdbModel.FK_Transfer_OfficeAppointment" />
         <EntityTypeShape EntityType="BnoisdbModel.Employee" Width="1.5" PointX="10.75" PointY="73.625" />
         <EntityTypeShape EntityType="BnoisdbModel.ExecutionRemark" Width="1.5" PointX="8.5" PointY="84" />
         <AssociationConnector Association="BnoisdbModel.FK_Achievement_Employee" />
@@ -452,7 +443,6 @@
         <AssociationConnector Association="BnoisdbModel.FK_Office_Pattern" />
         <AssociationConnector Association="BnoisdbModel.FK_Office_ShipCategory" />
         <AssociationConnector Association="BnoisdbModel.FK_Office_Zone" />
-        <AssociationConnector Association="BnoisdbModel.FK_OfficeAppointment_Office" />
         <AssociationConnector Association="BnoisdbModel.FK_ProposalDetail_Office" />
         <AssociationConnector Association="BnoisdbModel.FK_Transfer_PreBorn" />
         <EntityTypeShape EntityType="BnoisdbModel.EmployeeChildren" Width="1.5" PointX="26.25" PointY="81.5" />
@@ -502,6 +492,16 @@
         <EntityTypeShape EntityType="BnoisdbModel.DashBoardBranchByAdminAuthority700" Width="1.5" PointX="9.75" PointY="117.25" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Branch" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Rank" />
+        <EntityTypeShape EntityType="BnoisdbModel.OfficeAppointment" Width="1.5" PointX="32.25" PointY="137.75" />
+        <AssociationConnector Association="BnoisdbModel.FK_OfficeAppointment_AptCat" />
+        <AssociationConnector Association="BnoisdbModel.FK_OfficeAppointment_AptNat" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeOpr_OfficeAppointment" />
+        <AssociationConnector Association="BnoisdbModel.FK_ExtraAppointment_OfficeAppointment" />
+        <AssociationConnector Association="BnoisdbModel.FK_OfficeAppointment_Office" />
+        <AssociationConnector Association="BnoisdbModel.FK_OfficeAppBranch_OfficeAppointment" />
+        <AssociationConnector Association="BnoisdbModel.FK_OfficeRank_OfficeAppointment" />
+        <AssociationConnector Association="BnoisdbModel.FK_ProposalDetail_OfficeAppointment" />
+        <AssociationConnector Association="BnoisdbModel.FK_Transfer_OfficeAppointment" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

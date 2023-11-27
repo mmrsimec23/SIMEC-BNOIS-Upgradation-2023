@@ -4,20 +4,19 @@
 
     'use strict';
 
-    var controllerId = 'branchOfficerController'; 
+    var controllerId = 'bnOfficerStatesListController'; 
 
-    angular.module('app').controller(controllerId, branchOfficerController);
-    branchOfficerController.$inject = ['$stateParams', '$rootScope', 'dashboardService', 'downloadService','reportService', 'notificationService', '$state'];
+    angular.module('app').controller(controllerId, bnOfficerStatesListController);
+    bnOfficerStatesListController.$inject = ['$stateParams', '$rootScope', 'dashboardService', 'downloadService','reportService', 'notificationService', '$state'];
 
-    function branchOfficerController($stateParams, $rootScope, dashboardService, downloadService, reportService ,notificationService, $state) {
+    function bnOfficerStatesListController($stateParams, $rootScope, dashboardService, downloadService, reportService ,notificationService, $state) {
         var vm = this;
         vm.officerDetails = officerDetails;
-        vm.branchOfficers = [];
+        vm.overviewOfficersDeploymentLists = [];
         vm.rankId = 0;
-        vm.branch = '';
-        vm.categoryId = 0;
-        vm.subCategoryId = 0;
-        vm.commissionTypeId = 0;
+        vm.officerTypeId = 0;
+        vm.coastGuard = 0;
+        vm.outsideOrg = 0;
         vm.printSection = printSection;
 
         if ($stateParams.rankId !== undefined && $stateParams.rankId !== null) {
@@ -25,34 +24,29 @@
 
         }
 
-        if ($stateParams.branch !== undefined && $stateParams.branch !== null) {
-            vm.branch = $stateParams.branch;
+        if ($stateParams.officerTypeId !== undefined && $stateParams.officerTypeId !== null) {
+            vm.officerTypeId = $stateParams.officerTypeId;
 
         }
 
-        if ($stateParams.categoryId !== undefined && $stateParams.categoryId !== null) {
-            vm.categoryId = $stateParams.categoryId;
+        if ($stateParams.coastGuard !== undefined && $stateParams.coastGuard !== null) {
+            vm.coastGuard = $stateParams.coastGuard;
 
         }
 
-        if ($stateParams.subCategoryId !== undefined && $stateParams.subCategoryId !== null) {
-            vm.subCategoryId = $stateParams.subCategoryId;
+        if ($stateParams.outsideOrg !== undefined && $stateParams.outsideOrg !== null) {
+            vm.outsideOrg = $stateParams.outsideOrg;
 
         }
-
-        if ($stateParams.commissionTypeId !== undefined && $stateParams.commissionTypeId !== null) {
-            vm.commissionTypeId = $stateParams.commissionTypeId;
-
-        }
-
+        
 
 
         Init();
         function Init() {
-            dashboardService.getBranchOfficer(vm.rankId, vm.branch, vm.categoryId, vm.subCategoryId, vm.commissionTypeId).then(function (data) {
+            dashboardService.GetOverviewOfficerDeploymentList(vm.rankId, vm.officerTypeId, vm.coastGuard, vm.outsideOrg).then(function (data) {
 
-                vm.branchOfficers = data.result;
-                vm.totalResult = vm.branchOfficers.length;
+                vm.overviewOfficersDeploymentLists = data.result;
+                vm.totalResult = vm.overviewOfficersDeploymentLists.length;
 
                 },
                 function (errorMessage) {

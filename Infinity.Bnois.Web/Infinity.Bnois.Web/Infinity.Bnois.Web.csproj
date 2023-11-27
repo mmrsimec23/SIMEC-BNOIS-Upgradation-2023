@@ -332,6 +332,10 @@
     <Content Include="app\views\basic-search\basicSearchController.js" />
     <Content Include="app\views\bnois-log-info\bnoisLogInfo.html" />
     <Content Include="app\views\bnois-log-info\bnoisLogInfoController.js" />
+    <Content Include="app\views\bn-officer-states\bnOfficerStatesList.html" />
+    <Content Include="app\views\bn-officer-states\bnOfficerStatesListController.js" />
+    <Content Include="app\views\bn-officer-states\bnOfficerStates.html" />
+    <Content Include="app\views\bn-officer-states\bnOfficerStatesController.js" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryAdd.html" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryAddController.js" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryList.html" />
@@ -344,8 +348,8 @@
     <Content Include="app\views\toe-officer-state\toeOfficerListByTransferTypeController.js" />
     <Content Include="app\views\overview-officers-deployment\overviewOfficersDeployment.html" />
     <Content Include="app\views\overview-officers-deployment\overviewOfficersDeploymentController.js" />
-    <Content Include="app\views\branch-authority-officers\branchOfficer.html" />
-    <Content Include="app\views\branch-authority-officers\branchOfficerController.js" />
+    <Content Include="app\views\branch-authority-officers\branchOfficerByAdminAuthority.html" />
+    <Content Include="app\views\branch-authority-officers\branchOfficerByAdminAuthorityController.js" />
     <Content Include="app\views\career-forecast-setting\careerForecastSettingAdd.html" />
     <Content Include="app\views\career-forecast-setting\careerForecastSettingAddController.js" />
     <Content Include="app\views\career-forecast-setting\careerForecastSettings.html" />

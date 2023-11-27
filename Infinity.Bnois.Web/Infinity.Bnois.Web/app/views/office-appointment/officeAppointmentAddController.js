@@ -36,6 +36,7 @@
         function Init() {
             officeAppointmentService.getOfficeAppointment(vm.officeAppointmentId, vm.officeId).then(function (data) {
                 vm.officeAppointment = data.result.officeAppointment;
+                console.log(vm.officeAppointment);
                // vm.officeAppointment.rankIds = [1, 2, 3, 5, 6];
                 vm.aptNats = data.result.aptNats;
                 vm.aptCats = data.result.aptCats;

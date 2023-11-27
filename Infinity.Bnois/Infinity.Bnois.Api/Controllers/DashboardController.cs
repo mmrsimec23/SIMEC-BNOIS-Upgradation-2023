@@ -239,6 +239,16 @@ namespace Infinity.Bnois.Api.Controllers
         }
 
         [HttpGet]
+        [Route("get-branch-officer-by-admin-authority")]
+        public IHttpActionResult GetBranchOfficerByAdminAuthority(int adminAuthorityId, int rankId,string branch, int categoryId,int subCategoryId, int commissionTypeId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetBranchOfficerByAdminAuthority(adminAuthorityId, rankId, branch, categoryId, subCategoryId, commissionTypeId)
+            });
+        }
+
+        [HttpGet]
         [Route("get-category-officer")]
         public IHttpActionResult GetCategoryOfficer(int rankId,string branch, int categoryId)
         {
@@ -287,6 +297,15 @@ namespace Infinity.Bnois.Api.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("get-officer-by-admin-authority-with-dynamic-query")]
+        public IHttpActionResult GetOfficerByAdminAuthorityWithDynamicQuery(string tableName,int branchAuthorityId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.GetOfficerByAdminAuthorityWithDynamicQuery(tableName,branchAuthorityId)
+            });
+        }
         [HttpGet]
         [Route("get-branch-authority-officer-9")]
         public IHttpActionResult GetBranchAuthorityOfficer9(int branchAuthorityId)
@@ -384,6 +403,15 @@ namespace Infinity.Bnois.Api.Controllers
             return Ok(new ResponseMessage<List<object>>()
             {
                 Result = dashboardService.GetBranchAuthorityOfficer600()
+            });
+        }
+        [HttpGet]
+        [Route("get-bn-officer-states-950")]
+        public IHttpActionResult getBNOfficerStates950()
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = dashboardService.getBNOfficerStates950()
             });
         }
 

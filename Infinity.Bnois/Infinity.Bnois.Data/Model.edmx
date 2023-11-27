@@ -1178,7 +1178,7 @@
           <Property Name="SLCode" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb20.dbo.EmployeeTraining' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmployeeTraining">
           <Key>
             <PropertyRef Name="EmployeTrainingId" />
@@ -1878,7 +1878,7 @@ warning 6002: The table/view 'Bnoisdb20.dbo.EmployeeTraining' does not have a pr
           <Property Name="TestBranch" Type="varchar" MaxLength="50" />
           <Property Name="OApcd" Type="varchar" MaxLength="50" />
           <Property Name="OPatCd" Type="varchar" MaxLength="50" />
-          <Property Name="OrgCd" Type="varchar" MaxLength="50" />
+          <Property Name="OrgCd" Type="bit" />
           <Property Name="AptCd" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OfficeAppRank">
@@ -3300,7 +3300,7 @@ warning 6002: The table/view 'Bnoisdb20.dbo.EmployeeTraining' does not have a pr
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb20.dbo.vwNomination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb.dbo.vwNomination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwNomination">
           <Key>
             <PropertyRef Name="NominationId" />
@@ -3331,7 +3331,7 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwNomination' does not have a primar
           <Property Name="TitleName" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwTransfer">
           <Key>
             <PropertyRef Name="TransferId" />
@@ -9329,19 +9329,6 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
             <End Role="PreCommissionCourseDetail" EntitySet="PreCommissionCourseDetails" />
           </AssociationSet>
           <EntitySet Name="EmployeeOpr" EntityType="BnoisdbModel.EmployeeOpr" />
-          <EntitySet Name="OfficeAppointment" EntityType="BnoisdbModel.OfficeAppointment" />
-          <AssociationSet Name="FK_OfficeAppointment_AptCat" Association="BnoisdbModel.FK_OfficeAppointment_AptCat">
-            <End Role="AptCat" EntitySet="AptCats" />
-            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OfficeAppointment_AptNat" Association="BnoisdbModel.FK_OfficeAppointment_AptNat">
-            <End Role="AptNat" EntitySet="AptNat" />
-            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeOpr_OfficeAppointment" Association="BnoisdbModel.FK_EmployeeOpr_OfficeAppointment">
-            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
-            <End Role="EmployeeOpr" EntitySet="EmployeeOpr" />
-          </AssociationSet>
           <AssociationSet Name="FK_EmployeeOpr_OprOccasion" Association="BnoisdbModel.FK_EmployeeOpr_OprOccasion">
             <End Role="OprOccasion" EntitySet="OprOccasions" />
             <End Role="EmployeeOpr" EntitySet="EmployeeOpr" />
@@ -9357,26 +9344,6 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
           <AssociationSet Name="FK_OprAptSuitability_EmployeeOpr" Association="BnoisdbModel.FK_OprAptSuitability_EmployeeOpr">
             <End Role="EmployeeOpr" EntitySet="EmployeeOpr" />
             <End Role="OprAptSuitability" EntitySet="OprAptSuitabilities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExtraAppointment_OfficeAppointment" Association="BnoisdbModel.FK_ExtraAppointment_OfficeAppointment">
-            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
-            <End Role="ExtraAppointment" EntitySet="ExtraAppointment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OfficeAppBranch_OfficeAppointment" Association="BnoisdbModel.FK_OfficeAppBranch_OfficeAppointment">
-            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
-            <End Role="OfficeAppBranch" EntitySet="OfficeAppBranch" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OfficeRank_OfficeAppointment" Association="BnoisdbModel.FK_OfficeRank_OfficeAppointment">
-            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
-            <End Role="OfficeAppRank" EntitySet="OfficeAppRank" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProposalDetail_OfficeAppointment" Association="BnoisdbModel.FK_ProposalDetail_OfficeAppointment">
-            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
-            <End Role="ProposalDetail" EntitySet="ProposalDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transfer_OfficeAppointment" Association="BnoisdbModel.FK_Transfer_OfficeAppointment">
-            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
-            <End Role="Transfer" EntitySet="Transfer" />
           </AssociationSet>
           <EntitySet Name="Employee" EntityType="BnoisdbModel.Employee" />
           <EntitySet Name="ExecutionRemark" EntityType="BnoisdbModel.ExecutionRemark" />
@@ -9729,10 +9696,6 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
             <End Role="Zone" EntitySet="Zones" />
             <End Role="Office" EntitySet="Office" />
           </AssociationSet>
-          <AssociationSet Name="FK_OfficeAppointment_Office" Association="BnoisdbModel.FK_OfficeAppointment_Office">
-            <End Role="Office" EntitySet="Office" />
-            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProposalDetail_Office" Association="BnoisdbModel.FK_ProposalDetail_Office">
             <End Role="Office" EntitySet="Office" />
             <End Role="ProposalDetail" EntitySet="ProposalDetails" />
@@ -9895,6 +9858,43 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
           <AssociationSet Name="FK_DashBoardBranchByAdminAuthority700_Rank" Association="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Rank">
             <End Role="Rank" EntitySet="Rank" />
             <End Role="DashBoardBranchByAdminAuthority700" EntitySet="DashBoardBranchByAdminAuthority700" />
+          </AssociationSet>
+          <EntitySet Name="OfficeAppointment" EntityType="BnoisdbModel.OfficeAppointment" />
+          <AssociationSet Name="FK_OfficeAppointment_AptCat" Association="BnoisdbModel.FK_OfficeAppointment_AptCat">
+            <End Role="AptCat" EntitySet="AptCats" />
+            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfficeAppointment_AptNat" Association="BnoisdbModel.FK_OfficeAppointment_AptNat">
+            <End Role="AptNat" EntitySet="AptNat" />
+            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeOpr_OfficeAppointment" Association="BnoisdbModel.FK_EmployeeOpr_OfficeAppointment">
+            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
+            <End Role="EmployeeOpr" EntitySet="EmployeeOpr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExtraAppointment_OfficeAppointment" Association="BnoisdbModel.FK_ExtraAppointment_OfficeAppointment">
+            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
+            <End Role="ExtraAppointment" EntitySet="ExtraAppointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfficeAppointment_Office" Association="BnoisdbModel.FK_OfficeAppointment_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfficeAppBranch_OfficeAppointment" Association="BnoisdbModel.FK_OfficeAppBranch_OfficeAppointment">
+            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
+            <End Role="OfficeAppBranch" EntitySet="OfficeAppBranch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfficeRank_OfficeAppointment" Association="BnoisdbModel.FK_OfficeRank_OfficeAppointment">
+            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
+            <End Role="OfficeAppRank" EntitySet="OfficeAppRank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProposalDetail_OfficeAppointment" Association="BnoisdbModel.FK_ProposalDetail_OfficeAppointment">
+            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
+            <End Role="ProposalDetail" EntitySet="ProposalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_OfficeAppointment" Association="BnoisdbModel.FK_Transfer_OfficeAppointment">
+            <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
+            <End Role="Transfer" EntitySet="Transfer" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
@@ -14212,8 +14212,8 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ProposalCandidates" Relationship="BnoisdbModel.FK_ProposalCadidate_ProposalDetail" FromRole="ProposalDetail" ToRole="ProposalCandidate" />
           <NavigationProperty Name="TransferProposal" Relationship="BnoisdbModel.FK_ProposalDetail_TransferProposal" FromRole="ProposalDetail" ToRole="TransferProposal" />
-          <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_ProposalDetail_OfficeAppointment" FromRole="ProposalDetail" ToRole="OfficeAppointment" />
           <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_ProposalDetail_Office" FromRole="ProposalDetail" ToRole="Office" />
+          <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_ProposalDetail_OfficeAppointment" FromRole="ProposalDetail" ToRole="OfficeAppointment" />
         </EntityType>
         <Association Name="FK_ProposalCadidate_ProposalDetail">
           <End Type="BnoisdbModel.ProposalDetail" Role="ProposalDetail" Multiplicity="1" />
@@ -14799,10 +14799,10 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
           <Property Name="AptCd" Type="Int32" />
           <Property Name="NOAPCD" Type="Int32" />
           <NavigationProperty Name="ExtraAppointment" Relationship="BnoisdbModel.FK_ExtraAppointment_Transfer" FromRole="Transfer" ToRole="ExtraAppointment" />
-          <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_Transfer_OfficeAppointment" FromRole="Transfer" ToRole="OfficeAppointment" />
           <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_Transfer_Employee" FromRole="Transfer" ToRole="Employee" />
           <NavigationProperty Name="EmployeeSecurityClearance" Relationship="BnoisdbModel.FK_EmployeeSecurityClearance_Transfer" FromRole="Transfer" ToRole="EmployeeSecurityClearance" />
           <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_Transfer_PreBorn" FromRole="Transfer" ToRole="Office" />
+          <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_Transfer_OfficeAppointment" FromRole="Transfer" ToRole="OfficeAppointment" />
         </EntityType>
         <Association Name="FK_Transfer_District">
           <End Type="BnoisdbModel.District" Role="District" Multiplicity="0..1" />
@@ -14950,9 +14950,9 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
           <Property Name="TYear" Type="Int32" />
           <Property Name="Transcd" Type="Int32" />
           <NavigationProperty Name="Transfer" Relationship="BnoisdbModel.FK_ExtraAppointment_Transfer" FromRole="ExtraAppointment" ToRole="Transfer" />
-          <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_ExtraAppointment_OfficeAppointment" FromRole="ExtraAppointment" ToRole="OfficeAppointment" />
           <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_ExtraAppointment_Employee" FromRole="ExtraAppointment" ToRole="Employee" />
           <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_ExtraAppointment_Office" FromRole="ExtraAppointment" ToRole="Office" />
+          <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_ExtraAppointment_OfficeAppointment" FromRole="ExtraAppointment" ToRole="OfficeAppointment" />
         </EntityType>
         <Association Name="FK_ExtraAppointment_Transfer">
           <End Type="BnoisdbModel.Transfer" Role="Transfer" Multiplicity="0..1" />
@@ -15142,7 +15142,6 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="BOffCId" Type="Int32" />
           <Property Name="AppoinmentId" Type="Int32" />
-          <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_EmployeeOpr_OfficeAppointment" FromRole="EmployeeOpr" ToRole="OfficeAppointment" />
           <NavigationProperty Name="OprOccasion" Relationship="BnoisdbModel.FK_EmployeeOpr_OprOccasion" FromRole="EmployeeOpr" ToRole="OprOccasion" />
           <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_EmployeeOpr_Rank" FromRole="EmployeeOpr" ToRole="Rank" />
           <NavigationProperty Name="RecomandationType" Relationship="BnoisdbModel.FK_EmployeeOpr_RecomandationType" FromRole="EmployeeOpr" ToRole="RecomandationType" />
@@ -15151,83 +15150,8 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
           <Property Name="OtherAppointment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_EmployeeOpr_Office" FromRole="EmployeeOpr" ToRole="Office" />
           <NavigationProperty Name="Office1" Relationship="BnoisdbModel.FK_EmployeeOpr_Office1" FromRole="EmployeeOpr" ToRole="Office" />
+          <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_EmployeeOpr_OfficeAppointment" FromRole="EmployeeOpr" ToRole="OfficeAppointment" />
           </EntityType>
-        <EntityType Name="OfficeAppointment">
-          <Key>
-            <PropertyRef Name="OffAppId" />
-          </Key>
-          <Property Name="OffAppId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OfficeId" Type="Int32" Nullable="false" />
-          <Property Name="AptNatId" Type="Int32" Nullable="false" />
-          <Property Name="AptCatId" Type="Int32" Nullable="false" />
-          <Property Name="AppointmentType" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NameBangla" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ShortNameBangla" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="GovtApproved" Type="Boolean" Nullable="false" />
-          <Property Name="HeadofDpt" Type="Boolean" Nullable="false" />
-          <Property Name="OfficeHead" Type="Boolean" Nullable="false" />
-          <Property Name="IsInstrServiceCount" Type="Boolean" Nullable="false" />
-          <Property Name="ParentOffAppId" Type="Int32" Nullable="false" />
-          <Property Name="IsAdditional" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="TestRank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TestBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OApcd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OPatCd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OrgCd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AptCd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AptCat" Relationship="BnoisdbModel.FK_OfficeAppointment_AptCat" FromRole="OfficeAppointment" ToRole="AptCat" />
-          <NavigationProperty Name="AptNat" Relationship="BnoisdbModel.FK_OfficeAppointment_AptNat" FromRole="OfficeAppointment" ToRole="AptNat" />
-          <NavigationProperty Name="EmployeeOpr" Relationship="BnoisdbModel.FK_EmployeeOpr_OfficeAppointment" FromRole="OfficeAppointment" ToRole="EmployeeOpr" />
-          <NavigationProperty Name="ExtraAppointment" Relationship="BnoisdbModel.FK_ExtraAppointment_OfficeAppointment" FromRole="OfficeAppointment" ToRole="ExtraAppointment" />
-          <NavigationProperty Name="OfficeAppBranch" Relationship="BnoisdbModel.FK_OfficeAppBranch_OfficeAppointment" FromRole="OfficeAppointment" ToRole="OfficeAppBranch" />
-          <NavigationProperty Name="OfficeAppRank" Relationship="BnoisdbModel.FK_OfficeRank_OfficeAppointment" FromRole="OfficeAppointment" ToRole="OfficeAppRank" />
-          <NavigationProperty Name="ProposalDetail" Relationship="BnoisdbModel.FK_ProposalDetail_OfficeAppointment" FromRole="OfficeAppointment" ToRole="ProposalDetail" />
-          <NavigationProperty Name="Transfer" Relationship="BnoisdbModel.FK_Transfer_OfficeAppointment" FromRole="OfficeAppointment" ToRole="Transfer" />
-          <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_OfficeAppointment_Office" FromRole="OfficeAppointment" ToRole="Office" />
-        </EntityType>
-        <Association Name="FK_OfficeAppointment_AptCat">
-          <End Type="BnoisdbModel.AptCat" Role="AptCat" Multiplicity="1" />
-          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AptCat">
-              <PropertyRef Name="AcatId" />
-            </Principal>
-            <Dependent Role="OfficeAppointment">
-              <PropertyRef Name="AptCatId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OfficeAppointment_AptNat">
-          <End Type="BnoisdbModel.AptNat" Role="AptNat" Multiplicity="1" />
-          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AptNat">
-              <PropertyRef Name="ANatId" />
-            </Principal>
-            <Dependent Role="OfficeAppointment">
-              <PropertyRef Name="AptNatId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeOpr_OfficeAppointment">
-          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeOpr" Role="EmployeeOpr" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OfficeAppointment">
-              <PropertyRef Name="OffAppId" />
-            </Principal>
-            <Dependent Role="EmployeeOpr">
-              <PropertyRef Name="AppoinmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EmployeeOpr_OprOccasion">
           <End Type="BnoisdbModel.OprOccasion" Role="OprOccasion" Multiplicity="1" />
           <End Type="BnoisdbModel.EmployeeOpr" Role="EmployeeOpr" Multiplicity="*" />
@@ -15273,66 +15197,6 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
             </Principal>
             <Dependent Role="OprAptSuitability">
               <PropertyRef Name="EmployeeOprId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExtraAppointment_OfficeAppointment">
-          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.ExtraAppointment" Role="ExtraAppointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OfficeAppointment">
-              <PropertyRef Name="OffAppId" />
-            </Principal>
-            <Dependent Role="ExtraAppointment">
-              <PropertyRef Name="AppointmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OfficeAppBranch_OfficeAppointment">
-          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="1" />
-          <End Type="BnoisdbModel.OfficeAppBranch" Role="OfficeAppBranch" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OfficeAppointment">
-              <PropertyRef Name="OffAppId" />
-            </Principal>
-            <Dependent Role="OfficeAppBranch">
-              <PropertyRef Name="OffAppId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OfficeRank_OfficeAppointment">
-          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="1" />
-          <End Type="BnoisdbModel.OfficeAppRank" Role="OfficeAppRank" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OfficeAppointment">
-              <PropertyRef Name="OffAppId" />
-            </Principal>
-            <Dependent Role="OfficeAppRank">
-              <PropertyRef Name="OffAppId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProposalDetail_OfficeAppointment">
-          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.ProposalDetail" Role="ProposalDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OfficeAppointment">
-              <PropertyRef Name="OffAppId" />
-            </Principal>
-            <Dependent Role="ProposalDetail">
-              <PropertyRef Name="AppointmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transfer_OfficeAppointment">
-          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.Transfer" Role="Transfer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OfficeAppointment">
-              <PropertyRef Name="OffAppId" />
-            </Principal>
-            <Dependent Role="Transfer">
-              <PropertyRef Name="AppointmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -16640,11 +16504,11 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
           <NavigationProperty Name="Pattern" Relationship="BnoisdbModel.FK_Office_Pattern" FromRole="Office" ToRole="Pattern" />
           <NavigationProperty Name="ShipCategory" Relationship="BnoisdbModel.FK_Office_ShipCategory" FromRole="Office" ToRole="ShipCategory" />
           <NavigationProperty Name="Zone" Relationship="BnoisdbModel.FK_Office_Zone" FromRole="Office" ToRole="Zone" />
-          <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_OfficeAppointment_Office" FromRole="Office" ToRole="OfficeAppointment" />
           <NavigationProperty Name="ProposalDetail" Relationship="BnoisdbModel.FK_ProposalDetail_Office" FromRole="Office" ToRole="ProposalDetail" />
           <NavigationProperty Name="Transfer" Relationship="BnoisdbModel.FK_Transfer_PreBorn" FromRole="Office" ToRole="Transfer" />
           <NavigationProperty Name="CoXoService" Relationship="BnoisdbModel.FK_CoXoService_Office" FromRole="Office" ToRole="CoXoService" />
           <NavigationProperty Name="ToeAuthorized" Relationship="BnoisdbModel.FK_ToeAuthorized_Office" FromRole="Office" ToRole="ToeAuthorized" />
+          <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_OfficeAppointment_Office" FromRole="Office" ToRole="OfficeAppointment" />
         </EntityType>
         <Association Name="FK_Achievement_Office">
           <End Type="BnoisdbModel.Office" Role="Office" Multiplicity="0..1" />
@@ -16763,18 +16627,6 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
             </Principal>
             <Dependent Role="Office">
               <PropertyRef Name="ZoneId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OfficeAppointment_Office">
-          <End Type="BnoisdbModel.Office" Role="Office" Multiplicity="1" />
-          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Office">
-              <PropertyRef Name="OfficeId" />
-            </Principal>
-            <Dependent Role="OfficeAppointment">
-              <PropertyRef Name="OfficeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -17507,6 +17359,154 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
             </Principal>
             <Dependent Role="DashBoardBranchByAdminAuthority700">
               <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OfficeAppointment">
+          <Key>
+            <PropertyRef Name="OffAppId" />
+          </Key>
+          <Property Name="OffAppId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfficeId" Type="Int32" Nullable="false" />
+          <Property Name="AptNatId" Type="Int32" Nullable="false" />
+          <Property Name="AptCatId" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentType" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameBangla" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ShortNameBangla" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GovtApproved" Type="Boolean" Nullable="false" />
+          <Property Name="HeadofDpt" Type="Boolean" Nullable="false" />
+          <Property Name="OfficeHead" Type="Boolean" Nullable="false" />
+          <Property Name="IsInstrServiceCount" Type="Boolean" Nullable="false" />
+          <Property Name="ParentOffAppId" Type="Int32" Nullable="false" />
+          <Property Name="IsAdditional" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="TestRank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TestBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OApcd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OPatCd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrgCd" Type="Boolean" />
+          <Property Name="AptCd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AptCat" Relationship="BnoisdbModel.FK_OfficeAppointment_AptCat" FromRole="OfficeAppointment" ToRole="AptCat" />
+          <NavigationProperty Name="AptNat" Relationship="BnoisdbModel.FK_OfficeAppointment_AptNat" FromRole="OfficeAppointment" ToRole="AptNat" />
+          <NavigationProperty Name="EmployeeOpr" Relationship="BnoisdbModel.FK_EmployeeOpr_OfficeAppointment" FromRole="OfficeAppointment" ToRole="EmployeeOpr" />
+          <NavigationProperty Name="ExtraAppointment" Relationship="BnoisdbModel.FK_ExtraAppointment_OfficeAppointment" FromRole="OfficeAppointment" ToRole="ExtraAppointment" />
+          <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_OfficeAppointment_Office" FromRole="OfficeAppointment" ToRole="Office" />
+          <NavigationProperty Name="OfficeAppBranch" Relationship="BnoisdbModel.FK_OfficeAppBranch_OfficeAppointment" FromRole="OfficeAppointment" ToRole="OfficeAppBranch" />
+          <NavigationProperty Name="OfficeAppRank" Relationship="BnoisdbModel.FK_OfficeRank_OfficeAppointment" FromRole="OfficeAppointment" ToRole="OfficeAppRank" />
+          <NavigationProperty Name="ProposalDetail" Relationship="BnoisdbModel.FK_ProposalDetail_OfficeAppointment" FromRole="OfficeAppointment" ToRole="ProposalDetail" />
+          <NavigationProperty Name="Transfer" Relationship="BnoisdbModel.FK_Transfer_OfficeAppointment" FromRole="OfficeAppointment" ToRole="Transfer" />
+        </EntityType>
+        <Association Name="FK_OfficeAppointment_AptCat">
+          <End Type="BnoisdbModel.AptCat" Role="AptCat" Multiplicity="1" />
+          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AptCat">
+              <PropertyRef Name="AcatId" />
+            </Principal>
+            <Dependent Role="OfficeAppointment">
+              <PropertyRef Name="AptCatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfficeAppointment_AptNat">
+          <End Type="BnoisdbModel.AptNat" Role="AptNat" Multiplicity="1" />
+          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AptNat">
+              <PropertyRef Name="ANatId" />
+            </Principal>
+            <Dependent Role="OfficeAppointment">
+              <PropertyRef Name="AptNatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeOpr_OfficeAppointment">
+          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeOpr" Role="EmployeeOpr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeAppointment">
+              <PropertyRef Name="OffAppId" />
+            </Principal>
+            <Dependent Role="EmployeeOpr">
+              <PropertyRef Name="AppoinmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExtraAppointment_OfficeAppointment">
+          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.ExtraAppointment" Role="ExtraAppointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeAppointment">
+              <PropertyRef Name="OffAppId" />
+            </Principal>
+            <Dependent Role="ExtraAppointment">
+              <PropertyRef Name="AppointmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfficeAppointment_Office">
+          <End Type="BnoisdbModel.Office" Role="Office" Multiplicity="1" />
+          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="OfficeAppointment">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfficeAppBranch_OfficeAppointment">
+          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="1" />
+          <End Type="BnoisdbModel.OfficeAppBranch" Role="OfficeAppBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeAppointment">
+              <PropertyRef Name="OffAppId" />
+            </Principal>
+            <Dependent Role="OfficeAppBranch">
+              <PropertyRef Name="OffAppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfficeRank_OfficeAppointment">
+          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="1" />
+          <End Type="BnoisdbModel.OfficeAppRank" Role="OfficeAppRank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeAppointment">
+              <PropertyRef Name="OffAppId" />
+            </Principal>
+            <Dependent Role="OfficeAppRank">
+              <PropertyRef Name="OffAppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProposalDetail_OfficeAppointment">
+          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.ProposalDetail" Role="ProposalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeAppointment">
+              <PropertyRef Name="OffAppId" />
+            </Principal>
+            <Dependent Role="ProposalDetail">
+              <PropertyRef Name="AppointmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_OfficeAppointment">
+          <End Type="BnoisdbModel.OfficeAppointment" Role="OfficeAppointment" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.Transfer" Role="Transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeAppointment">
+              <PropertyRef Name="OffAppId" />
+            </Principal>
+            <Dependent Role="Transfer">
+              <PropertyRef Name="AppointmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -20445,38 +20445,6 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OfficeAppointment">
-            <EntityTypeMapping TypeName="BnoisdbModel.OfficeAppointment">
-              <MappingFragment StoreEntitySet="OfficeAppointment">
-                <ScalarProperty Name="AptCd" ColumnName="AptCd" />
-                <ScalarProperty Name="OrgCd" ColumnName="OrgCd" />
-                <ScalarProperty Name="OPatCd" ColumnName="OPatCd" />
-                <ScalarProperty Name="OApcd" ColumnName="OApcd" />
-                <ScalarProperty Name="TestBranch" ColumnName="TestBranch" />
-                <ScalarProperty Name="TestRank" ColumnName="TestRank" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="IsAdditional" ColumnName="IsAdditional" />
-                <ScalarProperty Name="ParentOffAppId" ColumnName="ParentOffAppId" />
-                <ScalarProperty Name="IsInstrServiceCount" ColumnName="IsInstrServiceCount" />
-                <ScalarProperty Name="OfficeHead" ColumnName="OfficeHead" />
-                <ScalarProperty Name="HeadofDpt" ColumnName="HeadofDpt" />
-                <ScalarProperty Name="GovtApproved" ColumnName="GovtApproved" />
-                <ScalarProperty Name="ShortNameBangla" ColumnName="ShortNameBangla" />
-                <ScalarProperty Name="NameBangla" ColumnName="NameBangla" />
-                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="AppointmentType" ColumnName="AppointmentType" />
-                <ScalarProperty Name="AptCatId" ColumnName="AptCatId" />
-                <ScalarProperty Name="AptNatId" ColumnName="AptNatId" />
-                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
-                <ScalarProperty Name="OffAppId" ColumnName="OffAppId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="BnoisdbModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
@@ -21054,6 +21022,38 @@ warning 6002: The table/view 'Bnoisdb20.dbo.vwTransfer' does not have a primary 
                 <ScalarProperty Name="RankId" ColumnName="RankId" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficeAppointment">
+            <EntityTypeMapping TypeName="BnoisdbModel.OfficeAppointment">
+              <MappingFragment StoreEntitySet="OfficeAppointment">
+                <ScalarProperty Name="AptCd" ColumnName="AptCd" />
+                <ScalarProperty Name="OrgCd" ColumnName="OrgCd" />
+                <ScalarProperty Name="OPatCd" ColumnName="OPatCd" />
+                <ScalarProperty Name="OApcd" ColumnName="OApcd" />
+                <ScalarProperty Name="TestBranch" ColumnName="TestBranch" />
+                <ScalarProperty Name="TestRank" ColumnName="TestRank" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsAdditional" ColumnName="IsAdditional" />
+                <ScalarProperty Name="ParentOffAppId" ColumnName="ParentOffAppId" />
+                <ScalarProperty Name="IsInstrServiceCount" ColumnName="IsInstrServiceCount" />
+                <ScalarProperty Name="OfficeHead" ColumnName="OfficeHead" />
+                <ScalarProperty Name="HeadofDpt" ColumnName="HeadofDpt" />
+                <ScalarProperty Name="GovtApproved" ColumnName="GovtApproved" />
+                <ScalarProperty Name="ShortNameBangla" ColumnName="ShortNameBangla" />
+                <ScalarProperty Name="NameBangla" ColumnName="NameBangla" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AppointmentType" ColumnName="AppointmentType" />
+                <ScalarProperty Name="AptCatId" ColumnName="AptCatId" />
+                <ScalarProperty Name="AptNatId" ColumnName="AptNatId" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="OffAppId" ColumnName="OffAppId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -34,7 +34,7 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProposalCandidate> ProposalCandidates { get; set; }
         public virtual TransferProposal TransferProposal { get; set; }
-        public virtual OfficeAppointment OfficeAppointment { get; set; }
         public virtual Office Office { get; set; }
+        public virtual OfficeAppointment OfficeAppointment { get; set; }
     }
 }

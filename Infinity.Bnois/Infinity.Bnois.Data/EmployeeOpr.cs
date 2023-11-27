@@ -50,7 +50,6 @@ namespace Infinity.Bnois.Data
         public Nullable<int> AppoinmentId { get; set; }
         public string OtherAppointment { get; set; }
     
-        public virtual OfficeAppointment OfficeAppointment { get; set; }
         public virtual OprOccasion OprOccasion { get; set; }
         public virtual Rank Rank { get; set; }
         public virtual RecomandationType RecomandationType { get; set; }
@@ -59,5 +58,6 @@ namespace Infinity.Bnois.Data
         public virtual Employee Employee { get; set; }
         public virtual Office Office { get; set; }
         public virtual Office Office1 { get; set; }
+        public virtual OfficeAppointment OfficeAppointment { get; set; }
     }
 }

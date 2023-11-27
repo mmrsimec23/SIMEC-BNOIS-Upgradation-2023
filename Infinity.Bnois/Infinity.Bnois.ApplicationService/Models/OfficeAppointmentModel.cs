@@ -24,7 +24,10 @@ namespace Infinity.Bnois.ApplicationService.Models
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public bool IsActive { get; set; }
-
+        public string OApcd { get; set; }
+        public string OPatCd { get; set; }
+        public Nullable<bool> OrgCd { get; set; }
+        public string AptCd { get; set; }
 
         public int[] RankIds { get; set; }
         public int[] BranchIds { get; set; }

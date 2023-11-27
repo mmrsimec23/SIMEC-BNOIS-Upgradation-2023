@@ -22,6 +22,7 @@
         vm.branchAuthorityComSub = [];
         vm.branchAuthorityComFlotWest = [];
         vm.branchAuthorityCho = [];
+        vm.getOfficerList = getOfficerList;
         vm.printSection = printSection;
 
         if ($stateParams.pno !== undefined && $stateParams.pno !== null) {
@@ -40,61 +41,71 @@
             //    });
 
             
-            dashboardService.getBranchAuthorityOfficers9(9).then(function (data) {
+            //dashboardService.getBranchAuthorityOfficers9(9).then(function (data) {
+            dashboardService.getOfficerByAdminAuthorityWithDynamicQuery('DashBoardBranchByAdminAuthority9',9).then(function (data) {
                 vm.branchAuthorityComDhaka = data.result;
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
-            dashboardService.getBranchAuthorityOfficers10(10).then(function (data) {
+            //dashboardService.getBranchAuthorityOfficers10(10).then(function (data) {
+            dashboardService.getOfficerByAdminAuthorityWithDynamicQuery('DashBoardBranchByAdminAuthority10',10).then(function (data) {
                 vm.branchAuthorityComChit = data.result;
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
-            dashboardService.getBranchAuthorityOfficers11(11).then(function (data) {
+            //dashboardService.getBranchAuthorityOfficers11(11).then(function (data) {
+            dashboardService.getOfficerByAdminAuthorityWithDynamicQuery('DashBoardBranchByAdminAuthority11',11).then(function (data) {
                 vm.branchAuthorityComBan = data.result;
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
-            dashboardService.getBranchAuthorityOfficers12(12).then(function (data) {
+            //dashboardService.getBranchAuthorityOfficers12(12).then(function (data) {
+            dashboardService.getOfficerByAdminAuthorityWithDynamicQuery('DashBoardBranchByAdminAuthority12',12).then(function (data) {
                 vm.branchAuthorityComKhul = data.result;
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
-            dashboardService.getBranchAuthorityOfficers13(13).then(function (data) {
+            //dashboardService.getBranchAuthorityOfficers13(13).then(function (data) {
+            dashboardService.getOfficerByAdminAuthorityWithDynamicQuery('DashBoardBranchByAdminAuthority13', 13).then(function (data) {
                 vm.branchAuthorityCsd = data.result;
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
-            dashboardService.getBranchAuthorityOfficers369(369).then(function (data) {
+            //dashboardService.getBranchAuthorityOfficers369(369).then(function (data) {
+            dashboardService.getOfficerByAdminAuthorityWithDynamicQuery('DashBoardBranchByAdminAuthority369', 369).then(function (data) {
                 vm.branchAuthorityComNav = data.result;
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
-            dashboardService.getBranchAuthorityOfficers383(383).then(function (data) {
+            //dashboardService.getBranchAuthorityOfficers383(383).then(function (data) {
+            dashboardService.getOfficerByAdminAuthorityWithDynamicQuery('DashBoardBranchByAdminAuthority383', 383).then(function (data) {
                 vm.branchAuthorityComSwads = data.result;
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
-            dashboardService.getBranchAuthorityOfficers458(458).then(function (data) {
+            //dashboardService.getBranchAuthorityOfficers458(458).then(function (data) {
+            dashboardService.getOfficerByAdminAuthorityWithDynamicQuery('DashBoardBranchByAdminAuthority458', 458).then(function (data) {
                 vm.branchAuthorityComSub = data.result;
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
-            dashboardService.getBranchAuthorityOfficers513(513).then(function (data) {
+            //dashboardService.getBranchAuthorityOfficers513(513).then(function (data) {
+            dashboardService.getOfficerByAdminAuthorityWithDynamicQuery('DashBoardBranchByAdminAuthority513', 513).then(function (data) {
                 vm.branchAuthorityComFlotWest = data.result;
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
-            dashboardService.getBranchAuthorityOfficers543(543).then(function (data) {
+            //dashboardService.getBranchAuthorityOfficers543(543).then(function (data) {
+            dashboardService.getOfficerByAdminAuthorityWithDynamicQuery('DashBoardBranchByAdminAuthority543', 543).then(function (data) {
                 vm.branchAuthorityCho = data.result;
                 },
                 function (errorMessage) {
@@ -102,6 +113,10 @@
                 });
         };
 
+        function getOfficerList(adminAuthorityId, rankId, branch, categoryId, subCategoryId, commissionTypeId) {
+            $state.goNewTab('branch-authority-officer-list', { adminAuthorityId: adminAuthorityId, rankId: rankId, branch: branch, categoryId: categoryId, subCategoryId: subCategoryId, commissionTypeId: commissionTypeId });
+
+        }
 
         function printSection(printSectionId) {
             var innerContents = document.getElementById(printSectionId).innerHTML;

@@ -78,7 +78,7 @@
 
     <div class="col-md-12">
         <h5>Office Appointment Type</h5>
-       
+
 
         <div class="col-sm-3">
             <input type="checkbox" id="govtApproved" class="form-check-input"
@@ -106,7 +106,14 @@
             <label for="isInstrServiceCount" class="custom-label"> Instructor Service</label>
 
         </div>
-      
+
+        <div class="col-sm-3">
+            <input type="checkbox" id="orgCd" class="form-check-input"
+                   ng-model="vm.officeAppointment.orgCd" name="orgCd" />
+            <label for="orgCd" class="custom-label"> Additional for Training</label>
+
+        </div>
+
 
     </div>
     <div class="col-sm-12">

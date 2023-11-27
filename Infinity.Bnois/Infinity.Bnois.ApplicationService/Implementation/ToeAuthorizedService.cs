@@ -27,7 +27,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         {
             IQueryable<ToeAuthorized> toeAuthorizeds = toeAuthorizedRepository.FilterWithInclude(x => x.IsActive && ((x.Branch.ShortName.Contains(searchText) || String.IsNullOrEmpty(searchText)) || (x.Office.ShortName.Contains(searchText) || String.IsNullOrEmpty(searchText)) || (x.Rank.ShortName.Contains(searchText) || String.IsNullOrEmpty(searchText))), "Rank","Branch","Office");
             total = toeAuthorizeds.Count();
-            toeAuthorizeds = toeAuthorizeds.OrderByDescending(x => x.ToeAuthorizedid).Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            toeAuthorizeds = toeAuthorizeds.OrderByDescending(x => x.OfficeId).Skip((pageNumber - 1) * pageSize).Take(pageSize);
             List<ToeAuthorizedModel> models = ObjectConverter<ToeAuthorized, ToeAuthorizedModel>.ConvertList(toeAuthorizeds.ToList()).ToList();
             return models;
         }

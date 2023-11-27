@@ -25,6 +25,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<object> GetLeaveOfficer(int leaveType, int rankLevel);
         List<object> GetExBDLeaveOfficer( int rankLevel);
         List<object> GetBranchOfficer(int rankId, string branch, int categoryId, int subCategoryId, int commissionTypeId);
+        List<object> GetBranchOfficerByAdminAuthority(int addAuthId, int rankId, string branch, int categoryId, int subCategoryId, int commissionTypeId);
         List<object> GetStreamOfficer(int rankId, string branch,int streamId);
         List<object> GetOverviewOfficerDeploymentList(int rankId, int officerTypeId, int coastGuard, int outsideOrg);
         List<object> GetCategoryOfficer(int rankId, string branch,int categoryId);
@@ -42,7 +43,9 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<object> GetBranchAuthorityOfficer458(int branchAuthorityId);
         List<object> GetBranchAuthorityOfficer513(int branchAuthorityId);
         List<object> GetBranchAuthorityOfficer543(int branchAuthorityId);
+        List<object> GetOfficerByAdminAuthorityWithDynamicQuery(string tableName,int branchAuthorityId);
         List<object> GetBranchAuthorityOfficer600();
+        List<object> getBNOfficerStates950();
         List<object> getToeOfficerStateInNavy();
         List<object> getToeOfficerStateInside();
     }

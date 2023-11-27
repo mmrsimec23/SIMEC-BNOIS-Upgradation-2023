@@ -33,7 +33,7 @@
         }
 
         function deleteForeignProject(foreignProjectId) {
-            var url = dataConstants.SEA_SERVICE_URL + 'delete-foreign-project/' + foreignProjectId;
+            var url = dataConstants.FOREIGN_PROJECT_URL + 'delete-foreign-project/' + foreignProjectId;
             return apiHttpService.DELETE(url);
         }
         

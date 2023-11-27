@@ -22,11 +22,11 @@ namespace Infinity.Bnois.Data
             this.EmployeeOpr1 = new HashSet<EmployeeOpr>();
             this.EmployeeTransferFuturePlan = new HashSet<EmployeeTransferFuturePlan>();
             this.ExtraAppointment = new HashSet<ExtraAppointment>();
-            this.OfficeAppointment = new HashSet<OfficeAppointment>();
             this.ProposalDetail = new HashSet<ProposalDetail>();
             this.Transfer = new HashSet<Transfer>();
             this.CoXoService = new HashSet<CoXoService>();
             this.ToeAuthorized = new HashSet<ToeAuthorized>();
+            this.OfficeAppointment = new HashSet<OfficeAppointment>();
         }
     
         public int OfficeId { get; set; }
@@ -95,8 +95,6 @@ namespace Infinity.Bnois.Data
         public virtual ShipCategory ShipCategory { get; set; }
         public virtual Zone Zone { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OfficeAppointment> OfficeAppointment { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProposalDetail> ProposalDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transfer> Transfer { get; set; }
@@ -104,5 +102,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<CoXoService> CoXoService { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ToeAuthorized> ToeAuthorized { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OfficeAppointment> OfficeAppointment { get; set; }
     }
 }

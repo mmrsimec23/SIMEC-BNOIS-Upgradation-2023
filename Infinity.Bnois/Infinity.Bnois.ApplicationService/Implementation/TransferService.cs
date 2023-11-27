@@ -19,8 +19,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<EmployeeGeneral> employeeGeneralRepository;
         private readonly IBnoisRepository<OfficeAppRank> officeAppRankRepository;
         private readonly IBnoisRepository<OfficeAppBranch> officeAppBranchRepository;
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
         public TransferService(IBnoisRepository<Transfer> transferRepository, IBnoisRepository<vwTransfer> vwTransferRepository, IBnoisRepository<Employee> employeeRepository,
-            IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<OfficeAppRank> officeAppRankRepository, IBnoisRepository<OfficeAppBranch> officeAppBranchRepository)
+            IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<OfficeAppRank> officeAppRankRepository, IBnoisRepository<OfficeAppBranch> officeAppBranchRepository,
+            IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.transferRepository = transferRepository;
             this.vwTransferRepository = vwTransferRepository;
@@ -28,6 +31,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             this.employeeGeneralRepository = employeeGeneralRepository;
             this.officeAppRankRepository = officeAppRankRepository;
             this.officeAppBranchRepository = officeAppBranchRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
 
         }
 
@@ -135,6 +140,179 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 {
                     throw new InfinityNotFoundException("Transfer not found !");
                 }
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Transfer";
+                bnLog.TableEntryForm = "Transfer";
+                bnLog.PreviousValue = "Id: " + model.TransferId;
+                bnLog.UpdatedValue = "Id: " + model.TransferId;
+                int bnoisUpdateCount = 0;
+
+                if (transfer.EmployeeId > 0 || model.EmployeeId > 0)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", transfer.EmployeeId);
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
+                    //bnoisUpdateCount += 1;
+                }
+                if (transfer.DistrictId != model.DistrictId)
+                {
+                    if (transfer.DistrictId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("District", "DistrictId", transfer.DistrictId ?? 0);
+                        bnLog.PreviousValue += ", District: " + ((dynamic)prev).Name;
+                    }
+                    if (model.DistrictId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("District", "DistrictId", model.DistrictId ?? 0);
+                        bnLog.UpdatedValue += ", District: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.RankId != model.RankId)
+                {
+                    if (transfer.RankId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Rank", "RankId", transfer.RankId ?? 0);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prev).ShortName;
+                    }
+                    if (model.DistrictId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId ?? 0);
+                        bnLog.UpdatedValue += ", Rank: " + ((dynamic)newv).ShortName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.TransferFor != model.TransferFor)
+                {
+                    bnLog.PreviousValue += ", Transfer For: " + (transfer.TransferFor == 1 ? "Office": transfer.TransferFor == 2 ? "Course" : transfer.TransferFor == 3 ? "Mission" : "");
+                    bnLog.UpdatedValue += ", Transfer For: " + (model.TransferFor == 1 ? "Office" : model.TransferFor == 2 ? "Course" : model.TransferFor == 3 ? "Mission" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.TransferMode != model.TransferMode)
+                {
+                    bnLog.PreviousValue += ", Transfer Mode: " + (transfer.TransferMode == 1 ? "Permanent" : transfer.TransferMode == 2 ? "Temporary" : "");
+                    bnLog.UpdatedValue += ", Transfer Mode: " + (model.TransferMode == 1 ? "Permanent" : model.TransferMode == 2 ? "Temporary" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.TranferType != model.TranferType)
+                {
+                    bnLog.PreviousValue += ", Tranfer Type: " + (transfer.TranferType == 1 ? "Inside" : transfer.TranferType == 2 ? "Outside" : transfer.TranferType == 3 ? "CostGuard" : "");
+                    bnLog.UpdatedValue += ", Tranfer Type: " + (model.TranferType == 1 ? "Inside" : model.TranferType == 2 ? "Outside" : model.TranferType == 3 ? "CostGuard" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.TempTransferType != model.TempTransferType)
+                {
+                    bnLog.PreviousValue += ", Temporary  Tranfer Type: " + (transfer.TempTransferType == 1 ? "TY_Duty" : transfer.TempTransferType == 2 ? "TY_Attachment" : "");
+                    bnLog.UpdatedValue += ", Temporary  Tranfer Type: " + (model.TempTransferType == 1 ? "TY_Duty" : model.TempTransferType == 2 ? "TY_Attachment" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.FromDate != model.FromDate)
+                {
+                    bnLog.PreviousValue += ", From Date: " + transfer.FromDate.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", From Date: " + model.FromDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.ToDate != model.ToDate)
+                {
+                    bnLog.PreviousValue += ", From Date: " + transfer.ToDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", From Date: " + model.ToDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.CurrentBornOfficeId != model.CurrentBornOfficeId)
+                {
+                    if (transfer.CurrentBornOfficeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Office", "OfficeId", transfer.CurrentBornOfficeId ?? 0);
+                        bnLog.PreviousValue += ", Current Born Office: " + ((dynamic)prev).ShortName;
+                    }
+                    if (model.CurrentBornOfficeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Office", "OfficeId", model.CurrentBornOfficeId ?? 0);
+                        bnLog.UpdatedValue += ", Current Born Office: " + ((dynamic)newv).ShortName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.AttachOfficeId != model.AttachOfficeId)
+                {
+                    if (transfer.AttachOfficeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Office", "OfficeId", transfer.AttachOfficeId ?? 0);
+                        bnLog.PreviousValue += ", Attach Office: " + ((dynamic)prev).ShortName;
+                    }
+                    if (model.AttachOfficeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Office", "OfficeId", model.AttachOfficeId ?? 0);
+                        bnLog.UpdatedValue += ", Attach Office: " + ((dynamic)newv).ShortName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.AppointmentId != model.AppointmentId)
+                {
+                    if (transfer.AppointmentId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("OfficeAppointment", "OffAppId", transfer.AppointmentId ?? 0);
+                        bnLog.PreviousValue += ", Appointment: " + ((dynamic)prev).ShortName;
+                    }
+                    if (model.AppointmentId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("OfficeAppointment", "OffAppId", model.AppointmentId ?? 0);
+                        bnLog.UpdatedValue += ", Appointment: " + ((dynamic)newv).ShortName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.AppointmentType != model.AppointmentType)
+                {
+                    bnLog.PreviousValue += ", Appointment Type: " + (transfer.AppointmentType == 1 ? "Without Appointment" : transfer.AppointmentType == 2 ? "Additional" : transfer.AppointmentType == 3 ? "Additional for Retirement" : "");
+                    bnLog.UpdatedValue += ", Appointment Type: " + (model.AppointmentType == 1 ? "Without Appointment" : model.AppointmentType == 2 ? "Additional" : model.AppointmentType == 3 ? "Additional for Retirement" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.NominationId != model.NominationId)
+                {
+                    if (transfer.NominationId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("vwNomination", "NominationId", transfer.NominationId ?? 0);
+                        bnLog.PreviousValue += ", Nomination: " + ((dynamic)prev).Nomination + " [" + ((dynamic)prev).MissionAppointment + "]";
+                    }
+                    if (model.NominationId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("vwNomination", "NominationId", model.NominationId ?? 0);
+                        bnLog.UpdatedValue += ", Nomination: " + ((dynamic)newv).Nomination + " [" + ((dynamic)newv).MissionAppointment + "]";
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                
+                if (transfer.IsBackLog != model.IsBackLog)
+                {
+                    bnLog.PreviousValue += ", Back Log: " + transfer.IsBackLog;
+                    bnLog.UpdatedValue += ", Back Log: " + model.IsBackLog;
+                    bnoisUpdateCount += 1;
+                }
+                if (transfer.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + transfer.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
+
                 transfer.RankId = model.RankId;
                 transfer.ModifiedDate = DateTime.Now;
                 transfer.ModifiedBy = userId;
@@ -283,6 +461,71 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 if (deletedTransferInfo)
                 {
+                    // data log section start
+                    BnoisLog bnLog = new BnoisLog();
+                    bnLog.TableName = "Transfer";
+                    bnLog.TableEntryForm = "Transfer";
+                    bnLog.PreviousValue = "Id: " + transfer.TransferId;
+
+                    if (transfer.EmployeeId > 0)
+                    {
+                        var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", transfer.EmployeeId);
+                        bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    }
+                    if (transfer.DistrictId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("District", "DistrictId", transfer.DistrictId ?? 0);
+                        bnLog.PreviousValue += ", District: " + ((dynamic)prev).Name;
+                    }
+                    if (transfer.RankId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Rank", "RankId", transfer.RankId ?? 0);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prev).ShortName;
+                    }
+                    bnLog.PreviousValue += ", Transfer For: " + (transfer.TransferFor == 1 ? "Office" : transfer.TransferFor == 2 ? "Course" : transfer.TransferFor == 3 ? "Mission" : "");
+
+                    bnLog.PreviousValue += ", Transfer Mode: " + (transfer.TransferMode == 1 ? "Permanent" : transfer.TransferMode == 2 ? "Temporary" : "");
+
+                    bnLog.PreviousValue += ", Tranfer Type: " + (transfer.TranferType == 1 ? "Inside" : transfer.TranferType == 2 ? "Outside" : transfer.TranferType == 3 ? "CostGuard" : "");
+
+                    bnLog.PreviousValue += ", Temporary  Tranfer Type: " + (transfer.TempTransferType == 1 ? "TY_Duty" : transfer.TempTransferType == 2 ? "TY_Attachment" : "");
+
+                    bnLog.PreviousValue += ", From Date: " + transfer.FromDate.ToString("dd/MM/yyyy") + ", From Date: " + transfer.ToDate?.ToString("dd/MM/yyyy");
+
+                    if (transfer.CurrentBornOfficeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Office", "OfficeId", transfer.CurrentBornOfficeId ?? 0);
+                        bnLog.PreviousValue += ", Current Born Office: " + ((dynamic)prev).ShortName;
+                    }
+                    if (transfer.AttachOfficeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Office", "OfficeId", transfer.AttachOfficeId ?? 0);
+                        bnLog.PreviousValue += ", Attach Office: " + ((dynamic)prev).ShortName;
+                    }
+                    if (transfer.AppointmentId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("OfficeAppointment", "OffAppId", transfer.AppointmentId ?? 0);
+                        bnLog.PreviousValue += ", Appointment: " + ((dynamic)prev).ShortName;
+                    }
+                    bnLog.PreviousValue += ", Appointment Type: " + (transfer.AppointmentType == 1 ? "Without Appointment" : transfer.AppointmentType == 2 ? "Additional" : transfer.AppointmentType == 3 ? "Additional for Retirement" : "");
+
+                    if (transfer.NominationId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("vwNomination", "NominationId", transfer.NominationId ?? 0);
+                        bnLog.PreviousValue += ", Nomination: " + ((dynamic)prev).Nomination + " [" + ((dynamic)prev).MissionAppointment + "]";
+                    }
+                    bnLog.PreviousValue += ", Back Log: " + transfer.IsBackLog + ", Remarks: " + transfer.Remarks;
+                    bnLog.UpdatedValue = "This Record has been Deleted!";
+
+
+                    bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                    bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                    bnLog.LogCreatedDate = DateTime.Now;
+
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                    //data log section end
+
                     var permanentTransferInfo = transferRepository.Where(x => x.EmployeeId == transfer.EmployeeId && x.TransferMode == (int)TransferMode.Permanent && x.IsActive).OrderByDescending(x => x.FromDate).FirstOrDefault();
 
                     var employee = await employeeRepository.FindOneAsync(x => x.EmployeeId == transfer.EmployeeId);
@@ -303,7 +546,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     }
 
                 }
-
+                
                 return deletedTransferInfo;
             }
         }

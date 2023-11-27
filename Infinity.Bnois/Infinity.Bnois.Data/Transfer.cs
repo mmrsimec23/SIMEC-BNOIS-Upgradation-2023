@@ -59,10 +59,10 @@ namespace Infinity.Bnois.Data
         public virtual Rank Rank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExtraAppointment> ExtraAppointment { get; set; }
-        public virtual OfficeAppointment OfficeAppointment { get; set; }
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeSecurityClearance> EmployeeSecurityClearance { get; set; }
         public virtual Office Office { get; set; }
+        public virtual OfficeAppointment OfficeAppointment { get; set; }
     }
 }

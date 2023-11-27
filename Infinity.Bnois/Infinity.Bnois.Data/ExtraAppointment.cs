@@ -32,8 +32,8 @@ namespace Infinity.Bnois.Data
         public Nullable<int> Transcd { get; set; }
     
         public virtual Transfer Transfer { get; set; }
-        public virtual OfficeAppointment OfficeAppointment { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Office Office { get; set; }
+        public virtual OfficeAppointment OfficeAppointment { get; set; }
     }
 }

@@ -171,9 +171,21 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             return dataTable.ToJson().ToList();
         }
+        public List<object> GetOfficerByAdminAuthorityWithDynamicQuery(string tableName,int branchAuthorityId)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetOfficerByAdminAuthorityWithDynamicQuery] '{0}',{1}", tableName, branchAuthorityId));
+
+            return dataTable.ToJson().ToList();
+        }
         public List<object> GetBranchAuthorityOfficer600()
         {
             DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranchByAdminAuthority600]"));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> getBNOfficerStates950()
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetDashBoardBranch950]"));
 
             return dataTable.ToJson().ToList();
         }
@@ -252,6 +264,19 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             if (branch == null)
             {
                 query = String.Format("exec [spGetBranchOfficer] {0},null, {1},{2},{3}", rankId, categoryId, subCategoryId, commissionTypeId);
+            }
+
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(query);
+            
+            return dataTable.ToJson().ToList();
+        }
+
+        public List<object> GetBranchOfficerByAdminAuthority(int addAuthId, int rankId, string branch,int categoryId, int subCategoryId, int commissionTypeId)
+        {
+            string query= String.Format("exec [spGetBranchOfficerByAdminAuthority] {0},{1},'{2}',{3},{4},{5}", addAuthId, rankId, branch, categoryId, subCategoryId, commissionTypeId);
+            if (branch == null)
+            {
+                query = String.Format("exec [spGetBranchOfficerByAdminAuthority] {0}, {1},null,{2},{3},{4}", addAuthId, rankId, categoryId, subCategoryId, commissionTypeId);
             }
 
             DataTable dataTable = employeeRepository.ExecWithSqlQuery(query);

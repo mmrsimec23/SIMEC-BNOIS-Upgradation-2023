@@ -5948,14 +5948,23 @@
                     title: 'Branch Authority Officers'
                 }
             },
-            //-------------Branch Officer-------
+            {
+                state: "bn-officer-states",
+                config: {
+                    url: "/bn-officer-states",
+                    templateUrl: 'app/views/bn-officer-states/bnOfficerStates.html',
+                    controller: 'bnOfficerStatesController as vm',
+                    title: 'BN Officer States'
+                }
+            },
+            //-------------Branch Officer By Admin Authority-------
             {
                 state: 'branch-authority-officer-list',
                 config: {
                     url: '/branch-authority-officer-list/:adminAuthorityId/:rankId/:branch/:categoryId/:subCategoryId/:commissionTypeId',
-                    templateUrl: 'app/views/branch-authority-officers/branchOfficer.html',
-                    controller: 'branchOfficerController as vm',
-                    title: 'Branch Officer'
+                    templateUrl: 'app/views/branch-authority-officers/branchOfficerByAdminAuthority.html',
+                    controller: 'branchOfficerByAdminAuthorityController as vm',
+                    title: 'Branch Officer By Admin Authority'
                 }
             }
 

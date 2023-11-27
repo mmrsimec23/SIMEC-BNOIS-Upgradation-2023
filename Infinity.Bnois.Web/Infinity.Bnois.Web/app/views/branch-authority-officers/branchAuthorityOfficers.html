@@ -64,20 +64,21 @@
                         <tbody>
                             <tr ng-repeat="branch in vm.branchAuthorityComDhaka">
                                 <td><strong>{{branch.name}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+                                <td style="text-align: center"> <strong ng-if="branch.getPercent>0">{{branch.getPercent}}</strong> </td>
 
                             </tr>
 
@@ -121,20 +122,21 @@
                         <tbody>
                             <tr ng-repeat="branch in vm.branchAuthorityComChit">
                                 <td><strong>{{branch.name}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+                                <td style="text-align: center"> <strong ng-if="branch.getPercent>0">{{branch.getPercent}}</strong> </td>
 
                             </tr>
 
@@ -177,20 +179,21 @@
                         <tbody>
                             <tr ng-repeat="branch in vm.branchAuthorityComBan">
                                 <td><strong>{{branch.name}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+                                <td style="text-align: center"> <strong ng-if="branch.getPercent>0">{{branch.getPercent}}</strong> </td>
 
                             </tr>
 
@@ -233,20 +236,21 @@
                         <tbody>
                             <tr ng-repeat="branch in vm.branchAuthorityComKhul">
                                 <td><strong>{{branch.name}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+                                <td style="text-align: center"> <strong ng-if="branch.getPercent>0">{{branch.getPercent}}</strong> </td>
 
                             </tr>
 
@@ -289,20 +293,21 @@
                         <tbody>
                             <tr ng-repeat="branch in vm.branchAuthorityCsd">
                                 <td><strong>{{branch.name}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+                                <td style="text-align: center"> <strong ng-if="branch.getPercent>0">{{branch.getPercent}}</strong> </td>
 
                             </tr>
 
@@ -345,20 +350,21 @@
                         <tbody>
                             <tr ng-repeat="branch in vm.branchAuthorityComNav">
                                 <td><strong>{{branch.name}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+                                <td style="text-align: center"> <strong ng-if="branch.getPercent>0">{{branch.getPercent}}</strong> </td>
 
                             </tr>
 
@@ -401,20 +407,21 @@
                         <tbody>
                             <tr ng-repeat="branch in vm.branchAuthorityComSwads">
                                 <td><strong>{{branch.name}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+                                <td style="text-align: center"> <strong ng-if="branch.getPercent>0">{{branch.getPercent}}</strong> </td>
 
                             </tr>
 
@@ -457,20 +464,21 @@
                         <tbody>
                             <tr ng-repeat="branch in vm.branchAuthorityComSub">
                                 <td><strong>{{branch.name}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+                                <td style="text-align: center"> <strong ng-if="branch.getPercent>0">{{branch.getPercent}}</strong> </td>
 
                             </tr>
 
@@ -513,20 +521,21 @@
                         <tbody>
                             <tr ng-repeat="branch in vm.branchAuthorityComFlotWest">
                                 <td><strong>{{branch.name}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+                                <td style="text-align: center"> <strong ng-if="branch.getPercent>0">{{branch.getPercent}}</strong> </td>
 
                             </tr>
 
@@ -569,20 +578,21 @@
                         <tbody>
                             <tr ng-repeat="branch in vm.branchAuthorityCho">
                                 <td><strong>{{branch.name}}</strong></td>
-                                <td style="text-align: center"> <strong>{{branch.authXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.authEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authMiscValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.authTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldXValue}}</strong>  </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldSValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldEduValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldLValue}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.heldTotal}}</strong> </td>
-                                <td style="text-align: center"> <strong>{{branch.getPercent}}</strong> </td>
+
+                                <td style="text-align: center"> <strong ng-if="branch.authXValue>0">{{branch.authXValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEValue>0">{{branch.authEValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authSValue>0">{{branch.authSValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authEduValue>0">{{branch.authEduValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authLValue>0">{{branch.authLValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authMiscValue>0">{{branch.authMiscValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.authTotal>0">{{branch.authTotal}}</strong> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldXValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldX,0,0,0)"><strong>{{branch.heldXValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldE,0,0,0)"><strong>{{branch.heldEValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldS,0,0,0)"><strong>{{branch.heldSValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldEduValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldEdu,0,0,0)"><strong>{{branch.heldEduValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldLValue>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,branch.heldL,0,0,0)"><strong>{{branch.heldLValue}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOfficerList(branch.adminAuthorityId,branch.id,null,0,0,0)"><strong>{{branch.heldTotal}}</strong></a></td>
+                                <td style="text-align: center"> <strong ng-if="branch.getPercent>0">{{branch.getPercent}}</strong> </td>
 
                             </tr>
 

@@ -14,10 +14,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class ExtraAppointmentService : IExtraAppointmentService
     {
         private readonly IBnoisRepository<ExtraAppointment> ExtraAppointmentRepository;
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
 
-        public ExtraAppointmentService(IBnoisRepository<ExtraAppointment> ExtraAppointmentRepository)
+        public ExtraAppointmentService(IBnoisRepository<ExtraAppointment> ExtraAppointmentRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.ExtraAppointmentRepository = ExtraAppointmentRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<ExtraAppointmentModel> GetExtraAppointments(int ps, int pn, string qs, out int total)
@@ -65,6 +69,87 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     throw new InfinityNotFoundException("Extra Appointment not found !");
                 }
 
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "ExtraAppointment";
+                bnLog.TableEntryForm = "Extra Appointment";
+                bnLog.PreviousValue = "Id: " + model.ExtraAppointmentId;
+                bnLog.UpdatedValue = "Id: " + model.ExtraAppointmentId;
+                int bnoisUpdateCount = 0;
+
+                if (extraAppointment.EmployeeId > 0 || model.EmployeeId > 0)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", extraAppointment.EmployeeId);
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
+                    //bnoisUpdateCount += 1;
+                }
+                if (extraAppointment.OfficeId != model.OfficeId)
+                {
+                    if (extraAppointment.OfficeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Office", "OfficeId", extraAppointment.OfficeId);
+                        bnLog.PreviousValue += ", Office: " + ((dynamic)prev).ShortName;
+                    }
+                    if (model.AppointmentId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Office", "OfficeId", model.OfficeId);
+                        bnLog.UpdatedValue += ", Office: " + ((dynamic)newv).ShortName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (extraAppointment.AppointmentId != model.AppointmentId)
+                {
+                    if (extraAppointment.AppointmentId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("OfficeAppointment", "OffAppId", extraAppointment.AppointmentId ?? 0);
+                        bnLog.PreviousValue += ", Appointment: " + ((dynamic)prev).Name;
+                    }
+                    if (model.AppointmentId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("OfficeAppointment", "OffAppId", model.AppointmentId ?? 0);
+                        bnLog.UpdatedValue += ", Appointment: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (extraAppointment.AssignDate != model.AssignDate)
+                {
+                    bnLog.PreviousValue += ", Assign Date: " + extraAppointment.AssignDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Assign Date: " + model.AssignDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (extraAppointment.EndDate != model.EndDate)
+                {
+                    bnLog.PreviousValue += ", End Date: " + extraAppointment.EndDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", End Date: " + model.EndDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                
+                if (extraAppointment.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + extraAppointment.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
+
+
                 extraAppointment.ModifiedDate = DateTime.Now;
                 extraAppointment.ModifiedBy = userId;
             }
@@ -102,6 +187,37 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             {
                 throw new InfinityNotFoundException("Extra Appointment not found");
             }
+
+            // data log section start
+            BnoisLog bnLog = new BnoisLog();
+            bnLog.TableName = "ExtraAppointment";
+            bnLog.TableEntryForm = "Extra Appointment";
+            bnLog.PreviousValue = "Id: " + extraAppointment.ExtraAppointmentId;
+            if (extraAppointment.EmployeeId > 0)
+            {
+                var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", extraAppointment.EmployeeId);
+                bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+            }
+            if (extraAppointment.OfficeId > 0)
+            {
+                var prev = employeeService.GetDynamicTableInfoById("Office", "OfficeId", extraAppointment.OfficeId);
+                bnLog.PreviousValue += ", Office: " + ((dynamic)prev).ShortName;
+            }
+            if (extraAppointment.AppointmentId > 0)
+            {
+                var prev = employeeService.GetDynamicTableInfoById("OfficeAppointment", "OffAppId", extraAppointment.AppointmentId ?? 0);
+                bnLog.PreviousValue += ", Appointment: " + ((dynamic)prev).Name;
+            }
+            bnLog.PreviousValue += ", Assign Date: " + extraAppointment.AssignDate?.ToString("dd/MM/yyyy") + ", End Date: " + extraAppointment.EndDate?.ToString("dd/MM/yyyy") + ", Remarks: " + extraAppointment.Remarks;
+            bnLog.UpdatedValue = "This Record has been Deleted!";
+
+            bnLog.LogStatus = 2; // 1 for update, 2 for delete
+            bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+            bnLog.LogCreatedDate = DateTime.Now;
+
+            await bnoisLogRepository.SaveAsync(bnLog);
+
+            //data log section end
 
             return await ExtraAppointmentRepository.DeleteAsync(extraAppointment); ;
            

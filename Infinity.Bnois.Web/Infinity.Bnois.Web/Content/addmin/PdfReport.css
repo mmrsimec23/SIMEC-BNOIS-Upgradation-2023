@@ -14,7 +14,10 @@
     padding-bottom: 30px;
     margin-bottom: 30px;
 }
-
+.pdfReportTable td a {
+    text-decoration: none;
+    color: #000000;
+}
 .reportTitle {
     text-align: center;
     /*font-family: Calibri;*/

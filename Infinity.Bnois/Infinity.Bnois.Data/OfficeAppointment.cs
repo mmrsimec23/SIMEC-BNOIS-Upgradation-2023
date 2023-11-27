@@ -49,7 +49,7 @@ namespace Infinity.Bnois.Data
         public string TestBranch { get; set; }
         public string OApcd { get; set; }
         public string OPatCd { get; set; }
-        public string OrgCd { get; set; }
+        public Nullable<bool> OrgCd { get; set; }
         public string AptCd { get; set; }
     
         public virtual AptCat AptCat { get; set; }
@@ -58,6 +58,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<EmployeeOpr> EmployeeOpr { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExtraAppointment> ExtraAppointment { get; set; }
+        public virtual Office Office { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OfficeAppBranch> OfficeAppBranch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -66,6 +67,5 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<ProposalDetail> ProposalDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transfer> Transfer { get; set; }
-        public virtual Office Office { get; set; }
     }
 }

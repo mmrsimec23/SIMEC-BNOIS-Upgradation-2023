@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class SeaServiceService : ISeaServiceService
     {
         private readonly IBnoisRepository<SeaService> seaServiceRepository;
-        public SeaServiceService(IBnoisRepository<SeaService> seaServiceRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public SeaServiceService(IBnoisRepository<SeaService> seaServiceRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.seaServiceRepository = seaServiceRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<SeaServiceModel> GetSeaServices(int ps, int pn, string qs, out int total)
@@ -72,6 +76,105 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 	            seaService.ModifiedDate = DateTime.Now;
 	            seaService.ModifiedBy = userId;
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "SeaService";
+                bnLog.TableEntryForm = "Sea Service";
+                bnLog.PreviousValue = "Id: " + model.SeaServiceId;
+                bnLog.UpdatedValue = "Id: " + model.SeaServiceId;
+                int bnoisUpdateCount = 0;
+                if (seaService.EmployeeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", seaService.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prev).PNo;
+                }
+                if (model.EmployeeId > 0)
+                {
+                    var newv = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)newv).PNo;
+                }
+
+                if (seaService.CountryId != model.CountryId)
+                {
+                    if (seaService.CountryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Country", "CountryId", seaService.CountryId??0);
+                        bnLog.PreviousValue += ", Country: " + ((dynamic)prev).FullName;
+                    }
+                    if (model.CountryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId ?? 0);
+                        bnLog.UpdatedValue += ", Country: " + ((dynamic)newv).FullName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (seaService.ShipType != model.ShipType)
+                {
+                    bnLog.PreviousValue += ", Ship Type: " + (seaService.ShipType == 1 ? "Small" : seaService.ShipType == 2 ? "Medium" : seaService.ShipType == 3 ? "Large" : "");
+                    bnLog.UpdatedValue += ", Ship Type: " + (model.ShipType == 1 ? "Small" : model.ShipType == 2 ? "Medium" : model.ShipType == 3 ? "Large" : "");
+                    bnoisUpdateCount += 1;
+                }
+                
+                if (seaService.ShipName != model.ShipName)
+                {
+                    bnLog.PreviousValue += ",  Ship Name: " + seaService.ShipName;
+                    bnLog.UpdatedValue += ",  Ship Name: " + model.ShipName;
+                    bnoisUpdateCount += 1;
+                }
+                if (seaService.OrganizationName != model.OrganizationName)
+                {
+                    bnLog.PreviousValue += ",  Organization Name: " + seaService.OrganizationName;
+                    bnLog.UpdatedValue += ",  Organization Name: " + model.OrganizationName;
+                    bnoisUpdateCount += 1;
+                }
+                if (seaService.AppointmentName != model.AppointmentName)
+                {
+                    bnLog.PreviousValue += ", Appointment: " + seaService.AppointmentName;
+                    bnLog.UpdatedValue += ", Appointment: " + model.AppointmentName;
+                    bnoisUpdateCount += 1;
+                }
+                if (seaService.FromDate != model.FromDate)
+                {
+                    bnLog.PreviousValue += ", From Date: " + seaService.FromDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", From Date: " + model.FromDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (seaService.ToDate != model.ToDate)
+                {
+                    bnLog.PreviousValue += ", To Date: " + seaService.ToDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", To Date: " + model.ToDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (seaService.Purpose != model.Purpose)
+                {
+                    bnLog.PreviousValue += ",  Purpose: " + seaService.Purpose;
+                    bnLog.UpdatedValue += ",  Purpose: " + model.Purpose;
+                    bnoisUpdateCount += 1;
+                }
+                if (seaService.Reference != model.Reference)
+                {
+                    bnLog.PreviousValue += ", Reference: " + seaService.Reference;
+                    bnLog.UpdatedValue += ", Reference: " + model.Reference;
+                    bnoisUpdateCount += 1;
+                }
+                
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -109,6 +212,36 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "SeaService";
+                bnLog.TableEntryForm = "Sea Service";
+                bnLog.PreviousValue = "Id: " + seaService.SeaServiceId;
+                bnLog.UpdatedValue = "Id: " + seaService.SeaServiceId;
+                if (seaService.EmployeeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", seaService.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prev).PNo;
+                }
+
+                if (seaService.CountryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Country", "CountryId", seaService.CountryId ?? 0);
+                    bnLog.PreviousValue += ", Country: " + ((dynamic)prev).FullName;
+                }
+                bnLog.PreviousValue += ", Ship Type: " + (seaService.ShipType == 1 ? "Small" : seaService.ShipType == 2 ? "Medium" : seaService.ShipType == 3 ? "Large" : "");
+                bnLog.PreviousValue += ",  Ship Name: " + seaService.ShipName + ",  Organization Name: " + seaService.OrganizationName + ", Appointment: " + seaService.AppointmentName + ", From Date: " + seaService.FromDate?.ToString("dd/MM/yyyy") + ", To Date: " + seaService.ToDate?.ToString("dd/MM/yyyy") + ",  Purpose: " + seaService.Purpose + ", Reference: " + seaService.Reference;
+
+                bnLog.UpdatedValue += "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await seaServiceRepository.DeleteAsync(seaService);
             }
         }

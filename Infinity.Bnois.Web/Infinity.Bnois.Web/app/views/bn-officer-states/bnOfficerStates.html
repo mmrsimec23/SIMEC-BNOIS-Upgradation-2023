@@ -1,0 +1,72 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <button  class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
+
+            <div class="panel-body pdfReportFormCover" id="print">
+                <h3 class="reportHeader">STATE OF OFFICERS IN BN</h3>
+                <hr />
+                
+
+                <div class="table-wrapper table-responsive reportCover">
+                    
+
+                    <table class="table table-bordered pdfReportTable " border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+
+                                <th rowspan="2">Ser</th>
+                                <th rowspan="2">Rank</th>
+                                <th colspan="4">Born</th>
+                                <th rowspan="2">UNM</th>
+                                <th colspan="3">Doing Course</th>
+                                <th colspan="2">Available in BN</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>BN</th>
+                                <th>Deputation/<br /> Outside BN</th>
+                                <th>Total</th>
+                                <th>%</th>
+                                <th>Home</th>
+                                <th>Abroad</th>
+                                <th>Total</th>
+                                <th>Total</th>
+                                <th>% </th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="branch in vm.bnOfficerStatesList">
+                                <td style="text-align:center;"><strong>{{$index+1}}</strong></td>
+                                <td><strong>{{branch.name}}</strong></td>
+                                <td style="text-align: center"> <strong ng-if="branch.bornBnValue>0">{{branch.bornBnValue}}</strong>  </td>
+                                <td style="text-align: center"> <strong ng-if="branch.bornDeptValue>0">{{branch.bornDeptValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.bornTotalValue>0">{{branch.bornTotalValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.bornPercentageValue>0">{{branch.bornPercentageValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.unmValue>0">{{branch.unmValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.courseHomeValue>0">{{branch.courseHomeValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.courseAbroadValue>0">{{branch.courseAbroadValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.courseTotalValue>0">{{branch.courseTotalValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.totalValue>0">{{branch.totalValue}}</strong> </td>
+                                <td style="text-align: center"> <strong ng-if="branch.totalPercentageValue>0">{{branch.totalPercentageValue}}</strong> </td>
+
+
+                                <!--<td style="text-align: center"> <a href="" ng-if="branch.heldWithinNavy>0" ng-click="vm.getOverviewOfficerDeploymentList(branch.rankID,1,100,100)"><strong>{{branch.heldWithinNavy}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldSecondMent>0" ng-click="vm.getOverviewOfficerDeploymentList(branch.rankID,2,0,0)"><strong>{{branch.heldSecondMent}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldCG>0" ng-click="vm.getOverviewOfficerDeploymentList(branch.rankID,1,1,0)"><strong>{{branch.heldCG}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldIsoOther>0" ng-click="vm.getOverviewOfficerDeploymentList(branch.rankID,1,0,1)"><strong>{{branch.heldIsoOther}}</strong></a> </td>
+                                <td style="text-align: center"> <a href="" ng-if="branch.heldTotal>0" ng-click="vm.getOverviewOfficerDeploymentList(branch.rankID,100,100,100)"><strong>{{branch.heldTotal}}</strong></a> </td>-->
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

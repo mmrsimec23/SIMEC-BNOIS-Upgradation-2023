@@ -26,6 +26,7 @@
             getStreamOfficer: getStreamOfficer,
             getCategoryOfficer: getCategoryOfficer,
             getOfficersByOffice: getOfficersByOffice,
+            getOfficerByAdminAuthorityWithDynamicQuery: getOfficerByAdminAuthorityWithDynamicQuery,
             getBranchAuthorityOfficers9: getBranchAuthorityOfficers9,
             getBranchAuthorityOfficers10: getBranchAuthorityOfficers10,
             getBranchAuthorityOfficers11: getBranchAuthorityOfficers11,
@@ -37,9 +38,11 @@
             getBranchAuthorityOfficers513: getBranchAuthorityOfficers513,
             getBranchAuthorityOfficers543: getBranchAuthorityOfficers543,
             getBranchAuthorityOfficers600: getBranchAuthorityOfficers600,
+            getBNOfficerStates950: getBNOfficerStates950,
             getToeOfficerStateInNavy: getToeOfficerStateInNavy,
             getToeOfficerStateInside: getToeOfficerStateInside,
             getGenderOfficer: getGenderOfficer,
+            getGenderOfficerByAuthority: getGenderOfficerByAuthority,
             getToeOfficerListByTransferType: getToeOfficerListByTransferType,
             GetOverviewOfficerDeploymentList: GetOverviewOfficerDeploymentList
            
@@ -169,12 +172,20 @@
             var url = dataConstants.DASHBOARD_URL + 'get-gender-officer?rankId=' + rankId + '&branch=' + branch + '&categoryId=' + categoryId + '&subCategoryId=' + subCategoryId + '&commissionTypeId=' + commissionTypeId + '&genderId=' + genderId;
             return apiHttpService.GET(url);
         }
+        function getGenderOfficerByAuthority(adminAuthorityId,rankId, branch, categoryId, subCategoryId, commissionTypeId, genderId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-branch-officer-by-admin-authority?adminAuthorityId=' + adminAuthorityId +'&rankId=' + rankId + '&branch=' + branch + '&categoryId=' + categoryId + '&subCategoryId=' + subCategoryId + '&commissionTypeId=' + commissionTypeId + '&genderId=' + genderId;
+            return apiHttpService.GET(url);
+        }
         function getToeOfficerListByTransferType(rankId, branch, categoryId, subCategoryId, commissionTypeId, transferType) {
             var url = dataConstants.DASHBOARD_URL + 'toe-officer-by-transfer-type?rankId=' + rankId + '&branch=' + branch + '&categoryId=' + categoryId + '&subCategoryId=' + subCategoryId + '&commissionTypeId=' + commissionTypeId + '&transferType=' + transferType;
             return apiHttpService.GET(url);
         }
         function GetOverviewOfficerDeploymentList(rankId, officerTypeId, coastGuard, outsideOrg) {
             var url = dataConstants.DASHBOARD_URL + 'get-overview-officer-deployment-list?rankId=' + rankId + '&officerTypeId=' + officerTypeId + '&coastGuard=' + coastGuard + '&outsideOrg=' + outsideOrg;
+            return apiHttpService.GET(url);
+        }
+        function getOfficerByAdminAuthorityWithDynamicQuery(tableName,branchAuthorityId) {
+            var url = dataConstants.DASHBOARD_URL + 'get-officer-by-admin-authority-with-dynamic-query?tableName=' + tableName + '&branchAuthorityId=' + branchAuthorityId;
             return apiHttpService.GET(url);
         }
         function getBranchAuthorityOfficers9(branchAuthorityId) {
@@ -219,6 +230,10 @@
         }
         function getBranchAuthorityOfficers600() {
             var url = dataConstants.DASHBOARD_URL + 'get-branch-authority-officer-600';
+            return apiHttpService.GET(url);
+        }
+        function getBNOfficerStates950() {
+            var url = dataConstants.DASHBOARD_URL + 'get-bn-officer-states-950';
             return apiHttpService.GET(url);
         }
         function getToeOfficerStateInNavy() {
