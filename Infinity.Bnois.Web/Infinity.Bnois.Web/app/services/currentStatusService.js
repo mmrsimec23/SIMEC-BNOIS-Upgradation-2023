@@ -55,6 +55,7 @@
             GetFamilyPermissionRelationCount: GetFamilyPermissionRelationCount,
             GetFamilyPermissions: GetFamilyPermissions,
             getZoneServices: getZoneServices,
+            getUnmDeferment : getUnmDeferment,
             getZoneCourseMissionServices: getZoneCourseMissionServices,
             getMscEducationQualification: getMscEducationQualification,
             getBatchPosition: getBatchPosition
@@ -83,6 +84,11 @@
 
         function getCourseAttended(pNo) {
             var url = dataConstants.CURRENT_STATUS_URL + 'get-course-attended?pNo=' + pNo;
+            return apiHttpService.GET(url);
+        }
+
+        function getUnmDeferment(pNo) {
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-unm-deferment?pNo=' + pNo;
             return apiHttpService.GET(url);
         }
 

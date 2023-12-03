@@ -1,4 +1,14 @@
-﻿<section class="sidebar-section" ng-controller="LeftSideBarNavigationController as vm">
+﻿<style>
+    .module-6 {
+        background: #050d3cc4;
+        pointer-events: none;
+        cursor: no-drop;
+    }
+    .module-5, .module-4, .module-3, .module-2, .module-1, .module-23, .module-30 {
+        background: #050d3cc4;
+    }
+</style>
+<section class="sidebar-section" ng-controller="LeftSideBarNavigationController as vm">
     <div id="sidebar-wrapper">
         <script type="text/ng-template" id="panelTemplate.html">
             <div id="{{parentId}}" class="sidebar-wrapper">
@@ -6,7 +16,7 @@
                     <div data-toggle="collapse" data-parent="#{{parentId}}" data-target="#child{{$index}}" ng-click="model.selected = item">
                         <ul class="sidebar-nav">
                             <li>
-                                <a href="" class="sidebar-nav-item" ng-click="vm.toggole()">
+                                <a href="" class="sidebar-nav-item module-{{item.orderNo}}" ng-click="vm.toggole()">
                                     {{item.name}}  
                                     <i class="fa fa-angle-down"  aria-hidden="true" style="float:right"></i>
                                 </a>

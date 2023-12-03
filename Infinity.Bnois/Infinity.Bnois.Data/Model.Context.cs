@@ -221,6 +221,7 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<DashBoardBranchByAdminAuthority600Entry> DashBoardBranchByAdminAuthority600Entry { get; set; }
         public virtual DbSet<DashBoardBranchByAdminAuthority700> DashBoardBranchByAdminAuthority700 { get; set; }
         public virtual DbSet<OfficeAppointment> OfficeAppointment { get; set; }
+        public virtual DbSet<DashBoardBranch975> DashBoardBranch975 { get; set; }
     
         public virtual ObjectResult<GetLeaveInfo_Result> GetLeaveInfo(string employeeID, Nullable<int> idFrom, Nullable<int> idTo)
         {

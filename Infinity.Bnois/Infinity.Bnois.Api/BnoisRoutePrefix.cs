@@ -123,6 +123,7 @@ namespace Infinity.Bnois.Api
         public const string EmployeeSecurityClearances = BnoisRoutePrefixBase + "employee-security-clearances";
         public const string EmployeeFamilyPermission = BnoisRoutePrefixBase + "employee-family-permission";
         public const string EmployeeMscEducation = BnoisRoutePrefixBase + "employee-msc-education";
+        public const string EmployeeUnmDeferment = BnoisRoutePrefixBase + "employee-unm-deferment";
         public const string CareerForecast = BnoisRoutePrefixBase + "career-forecast";
         public const string SecurityClearanceReasons = BnoisRoutePrefixBase + "security-clearance-reasons";
         public const string ServiceExamCategories = BnoisRoutePrefixBase + "service-exam-categories";

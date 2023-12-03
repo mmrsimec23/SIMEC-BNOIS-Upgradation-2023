@@ -74,6 +74,7 @@ namespace Infinity.Bnois.Data
             this.Remark = new HashSet<Remark>();
             this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
             this.EmployeeServiceExamResult = new HashSet<EmployeeServiceExamResult>();
+            this.DashBoardBranch975 = new HashSet<DashBoardBranch975>();
         }
     
         public int EmployeeId { get; set; }
@@ -229,5 +230,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeServiceExamResult> EmployeeServiceExamResult { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DashBoardBranch975> DashBoardBranch975 { get; set; }
     }
 }

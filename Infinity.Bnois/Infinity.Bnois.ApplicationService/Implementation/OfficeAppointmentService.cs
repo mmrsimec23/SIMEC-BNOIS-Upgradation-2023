@@ -141,132 +141,132 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 officeAppointment.ModifiedDate = DateTime.Now;
                 officeAppointment.ModifiedBy = userId;
 
-                // data log section start
-                BnoisLog bnLog = new BnoisLog();
-                bnLog.TableName = "OfficeAppointment";
-                bnLog.TableEntryForm = "Office Appointment";
-                bnLog.PreviousValue = ", Id: " + model.OffAppId;
-                bnLog.UpdatedValue = ", Id: " + model.OffAppId;
-                int bnoisUpdateCount = 0;
+                //// data log section start
+                //BnoisLog bnLog = new BnoisLog();
+                //bnLog.TableName = "OfficeAppointment";
+                //bnLog.TableEntryForm = "Office Appointment";
+                //bnLog.PreviousValue = ", Id: " + model.OffAppId;
+                //bnLog.UpdatedValue = ", Id: " + model.OffAppId;
+                //int bnoisUpdateCount = 0;
 
 
-                if (officeAppointment.OfficeId != model.OfficeId)
-                {
-                    if (officeAppointment.OfficeId > 0)
-                    {
-                        var prev = employeeService.GetDynamicTableInfoById("Office", "OfficeId", officeAppointment.OfficeId);
-                        bnLog.PreviousValue += ", Office: " + ((dynamic)prev).ShortName;
-                    }
-                    if (model.OfficeId > 0)
-                    {
-                        var newv = employeeService.GetDynamicTableInfoById("Office", "OfficeId", model.OfficeId);
-                        bnLog.UpdatedValue += ", Office: " + ((dynamic)newv).ShortName;
-                    }
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.AptNatId != model.AptNatId)
-                {
-                    if (officeAppointment.AptNatId > 0)
-                    {
-                        var prev = employeeService.GetDynamicTableInfoById("AptNat", "AptNatId", officeAppointment.AptNatId);
-                        bnLog.PreviousValue += ", Appointment Nature: " + ((dynamic)prev).ANatNm;
-                    }
-                    if (model.AptNatId > 0)
-                    {
-                        var newv = employeeService.GetDynamicTableInfoById("AptNat", "AptNatId", model.AptNatId);
-                        bnLog.UpdatedValue += ", Appointment Nature: " + ((dynamic)newv).ANatNm;
-                    }
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.AptCatId != model.AptCatId)
-                {
-                    if (officeAppointment.AptCatId > 0)
-                    {
-                        var prev = employeeService.GetDynamicTableInfoById("AptCat", "AptCatId", officeAppointment.AptCatId);
-                        bnLog.PreviousValue += ", Appointment Category: " + ((dynamic)prev).AcatNm;
-                    }
-                    if (model.AptCatId > 0)
-                    {
-                        var newv = employeeService.GetDynamicTableInfoById("AptCat", "AptCatId", model.AptCatId);
-                        bnLog.UpdatedValue += ", Appointment Category: " + ((dynamic)newv).AcatNm;
-                    }
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.AppointmentType != model.AppointmentType)
-                {
-                    bnLog.PreviousValue += ", Appointment Type: " + (officeAppointment.AppointmentType==1?"Permanent": officeAppointment.AppointmentType ==2?"Additional":"");
-                    bnLog.UpdatedValue += ", Appointment Type: " + (model.AppointmentType == 1 ? "Permanent" : model.AppointmentType == 2 ? "Additional" : "");
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.Name != model.Name)
-                {
-                    bnLog.PreviousValue += ",  Name: " + officeAppointment.Name;
-                    bnLog.UpdatedValue += ",  Name: " + model.Name;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.ShortName != model.ShortName)
-                {
-                    bnLog.PreviousValue += ",  Short Name: " + officeAppointment.ShortName;
-                    bnLog.UpdatedValue += ",  Short Name: " + model.ShortName;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.NameBangla != model.NameBangla)
-                {
-                    bnLog.PreviousValue += ", Name (বাংলা): " + officeAppointment.NameBangla;
-                    bnLog.UpdatedValue += ", Name (বাংলা): " + model.NameBangla;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.ShortNameBangla != model.ShortNameBangla)
-                {
-                    bnLog.PreviousValue += ", Short Name (বাংলা): " + officeAppointment.ShortNameBangla;
-                    bnLog.UpdatedValue += ", Short Name (বাংলা): " + model.ShortNameBangla;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.GovtApproved != model.GovtApproved)
-                {
-                    bnLog.PreviousValue += ",  Govt. Approved: " + officeAppointment.GovtApproved;
-                    bnLog.UpdatedValue += ",  Govt. Approved: " + model.GovtApproved;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.HeadofDpt != model.HeadofDpt)
-                {
-                    bnLog.PreviousValue += ", HOD: " + officeAppointment.HeadofDpt;
-                    bnLog.UpdatedValue += ", HOD: " + model.HeadofDpt;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.OfficeHead != model.OfficeHead)
-                {
-                    bnLog.PreviousValue += ", Office Head: " + officeAppointment.OfficeHead;
-                    bnLog.UpdatedValue += ", Office Head: " + model.OfficeHead;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.IsInstrServiceCount != model.IsInstrServiceCount)
-                {
-                    bnLog.PreviousValue += ", Instructor Service: " + officeAppointment.IsInstrServiceCount;
-                    bnLog.UpdatedValue += ", Instructor Service: " + model.IsInstrServiceCount;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.OrgCd != model.OrgCd)
-                {
-                    bnLog.PreviousValue += ", Additional for Training: " + officeAppointment.OrgCd;
-                    bnLog.UpdatedValue += ", Additional for Training: " + model.OrgCd;
-                    bnoisUpdateCount += 1;
-                }
+                //if (officeAppointment.OfficeId != model.OfficeId)
+                //{
+                //    if (officeAppointment.OfficeId > 0)
+                //    {
+                //        var prev = employeeService.GetDynamicTableInfoById("Office", "OfficeId", officeAppointment.OfficeId);
+                //        bnLog.PreviousValue += ", Office: " + ((dynamic)prev).ShortName;
+                //    }
+                //    if (model.OfficeId > 0)
+                //    {
+                //        var newv = employeeService.GetDynamicTableInfoById("Office", "OfficeId", model.OfficeId);
+                //        bnLog.UpdatedValue += ", Office: " + ((dynamic)newv).ShortName;
+                //    }
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.AptNatId != model.AptNatId)
+                //{
+                //    if (officeAppointment.AptNatId > 0)
+                //    {
+                //        var prev = employeeService.GetDynamicTableInfoById("AptNat", "AptNatId", officeAppointment.AptNatId);
+                //        bnLog.PreviousValue += ", Appointment Nature: " + ((dynamic)prev).ANatNm;
+                //    }
+                //    if (model.AptNatId > 0)
+                //    {
+                //        var newv = employeeService.GetDynamicTableInfoById("AptNat", "AptNatId", model.AptNatId);
+                //        bnLog.UpdatedValue += ", Appointment Nature: " + ((dynamic)newv).ANatNm;
+                //    }
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.AptCatId != model.AptCatId)
+                //{
+                //    if (officeAppointment.AptCatId > 0)
+                //    {
+                //        var prev = employeeService.GetDynamicTableInfoById("AptCat", "AptCatId", officeAppointment.AptCatId);
+                //        bnLog.PreviousValue += ", Appointment Category: " + ((dynamic)prev).AcatNm;
+                //    }
+                //    if (model.AptCatId > 0)
+                //    {
+                //        var newv = employeeService.GetDynamicTableInfoById("AptCat", "AptCatId", model.AptCatId);
+                //        bnLog.UpdatedValue += ", Appointment Category: " + ((dynamic)newv).AcatNm;
+                //    }
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.AppointmentType != model.AppointmentType)
+                //{
+                //    bnLog.PreviousValue += ", Appointment Type: " + (officeAppointment.AppointmentType==1?"Permanent": officeAppointment.AppointmentType ==2?"Additional":"");
+                //    bnLog.UpdatedValue += ", Appointment Type: " + (model.AppointmentType == 1 ? "Permanent" : model.AppointmentType == 2 ? "Additional" : "");
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.Name != model.Name)
+                //{
+                //    bnLog.PreviousValue += ",  Name: " + officeAppointment.Name;
+                //    bnLog.UpdatedValue += ",  Name: " + model.Name;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.ShortName != model.ShortName)
+                //{
+                //    bnLog.PreviousValue += ",  Short Name: " + officeAppointment.ShortName;
+                //    bnLog.UpdatedValue += ",  Short Name: " + model.ShortName;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.NameBangla != model.NameBangla)
+                //{
+                //    bnLog.PreviousValue += ", Name (বাংলা): " + officeAppointment.NameBangla;
+                //    bnLog.UpdatedValue += ", Name (বাংলা): " + model.NameBangla;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.ShortNameBangla != model.ShortNameBangla)
+                //{
+                //    bnLog.PreviousValue += ", Short Name (বাংলা): " + officeAppointment.ShortNameBangla;
+                //    bnLog.UpdatedValue += ", Short Name (বাংলা): " + model.ShortNameBangla;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.GovtApproved != model.GovtApproved)
+                //{
+                //    bnLog.PreviousValue += ",  Govt. Approved: " + officeAppointment.GovtApproved;
+                //    bnLog.UpdatedValue += ",  Govt. Approved: " + model.GovtApproved;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.HeadofDpt != model.HeadofDpt)
+                //{
+                //    bnLog.PreviousValue += ", HOD: " + officeAppointment.HeadofDpt;
+                //    bnLog.UpdatedValue += ", HOD: " + model.HeadofDpt;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.OfficeHead != model.OfficeHead)
+                //{
+                //    bnLog.PreviousValue += ", Office Head: " + officeAppointment.OfficeHead;
+                //    bnLog.UpdatedValue += ", Office Head: " + model.OfficeHead;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.IsInstrServiceCount != model.IsInstrServiceCount)
+                //{
+                //    bnLog.PreviousValue += ", Instructor Service: " + officeAppointment.IsInstrServiceCount;
+                //    bnLog.UpdatedValue += ", Instructor Service: " + model.IsInstrServiceCount;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.OrgCd != model.OrgCd)
+                //{
+                //    bnLog.PreviousValue += ", Additional for Training: " + officeAppointment.OrgCd;
+                //    bnLog.UpdatedValue += ", Additional for Training: " + model.OrgCd;
+                //    bnoisUpdateCount += 1;
+                //}
                 
-                bnLog.LogStatus = 1; // 1 for update, 2 for delete
-                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
-                bnLog.LogCreatedDate = DateTime.Now;
+                //bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                //bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                //bnLog.LogCreatedDate = DateTime.Now;
 
-                if (bnoisUpdateCount > 0)
-                {
-                    await bnoisLogRepository.SaveAsync(bnLog);
+                //if (bnoisUpdateCount > 0)
+                //{
+                //    await bnoisLogRepository.SaveAsync(bnLog);
 
-                }
-                else
-                {
-                    throw new InfinityNotFoundException("Please Update Any Field!");
-                }
-                //data log section end
+                //}
+                //else
+                //{
+                //    throw new InfinityNotFoundException("Please Update Any Field!");
+                //}
+                ////data log section end
             }
             else
             {
@@ -324,132 +324,132 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 officeAppointment.ModifiedDate = DateTime.Now;
                 officeAppointment.ModifiedBy = userId;
 
-                // data log section start
-                BnoisLog bnLog = new BnoisLog();
-                bnLog.TableName = "OfficeAppointment";
-                bnLog.TableEntryForm = "Office Appointment";
-                bnLog.PreviousValue = ", Id: " + model.OffAppId;
-                bnLog.UpdatedValue = ", Id: " + model.OffAppId;
-                int bnoisUpdateCount = 0;
+                //// data log section start
+                //BnoisLog bnLog = new BnoisLog();
+                //bnLog.TableName = "OfficeAppointment";
+                //bnLog.TableEntryForm = "Office Appointment";
+                //bnLog.PreviousValue = ", Id: " + model.OffAppId;
+                //bnLog.UpdatedValue = ", Id: " + model.OffAppId;
+                //int bnoisUpdateCount = 0;
 
 
-                if (officeAppointment.OfficeId != model.OfficeId)
-                {
-                    if (officeAppointment.OfficeId > 0)
-                    {
-                        var prev = employeeService.GetDynamicTableInfoById("Office", "OfficeId", officeAppointment.OfficeId);
-                        bnLog.PreviousValue += ", Office: " + ((dynamic)prev).ShortName;
-                    }
-                    if (model.OfficeId > 0)
-                    {
-                        var newv = employeeService.GetDynamicTableInfoById("Office", "OfficeId", model.OfficeId);
-                        bnLog.UpdatedValue += ", Office: " + ((dynamic)newv).ShortName;
-                    }
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.AptNatId != model.AptNatId)
-                {
-                    if (officeAppointment.AptNatId > 0)
-                    {
-                        var prev = employeeService.GetDynamicTableInfoById("AptNat", "AptNatId", officeAppointment.AptNatId);
-                        bnLog.PreviousValue += ", Appointment Nature: " + ((dynamic)prev).ANatNm;
-                    }
-                    if (model.AptNatId > 0)
-                    {
-                        var newv = employeeService.GetDynamicTableInfoById("AptNat", "AptNatId", model.AptNatId);
-                        bnLog.UpdatedValue += ", Appointment Nature: " + ((dynamic)newv).ANatNm;
-                    }
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.AptCatId != model.AptCatId)
-                {
-                    if (officeAppointment.AptCatId > 0)
-                    {
-                        var prev = employeeService.GetDynamicTableInfoById("AptCat", "AptCatId", officeAppointment.AptCatId);
-                        bnLog.PreviousValue += ", Appointment Category: " + ((dynamic)prev).AcatNm;
-                    }
-                    if (model.AptCatId > 0)
-                    {
-                        var newv = employeeService.GetDynamicTableInfoById("AptCat", "AptCatId", model.AptCatId);
-                        bnLog.UpdatedValue += ", Appointment Category: " + ((dynamic)newv).AcatNm;
-                    }
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.AppointmentType != model.AppointmentType)
-                {
-                    bnLog.PreviousValue += ", Appointment Type: " + (officeAppointment.AppointmentType == 1 ? "Permanent" : officeAppointment.AppointmentType == 2 ? "Additional" : "");
-                    bnLog.UpdatedValue += ", Appointment Type: " + (model.AppointmentType == 1 ? "Permanent" : model.AppointmentType == 2 ? "Additional" : "");
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.Name != model.Name)
-                {
-                    bnLog.PreviousValue += ",  Name: " + officeAppointment.Name;
-                    bnLog.UpdatedValue += ",  Name: " + model.Name;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.ShortName != model.ShortName)
-                {
-                    bnLog.PreviousValue += ",  Short Name: " + officeAppointment.ShortName;
-                    bnLog.UpdatedValue += ",  Short Name: " + model.ShortName;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.NameBangla != model.NameBangla)
-                {
-                    bnLog.PreviousValue += ", Name (বাংলা): " + officeAppointment.NameBangla;
-                    bnLog.UpdatedValue += ", Name (বাংলা): " + model.NameBangla;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.ShortNameBangla != model.ShortNameBangla)
-                {
-                    bnLog.PreviousValue += ", Short Name (বাংলা): " + officeAppointment.ShortNameBangla;
-                    bnLog.UpdatedValue += ", Short Name (বাংলা): " + model.ShortNameBangla;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.GovtApproved != model.GovtApproved)
-                {
-                    bnLog.PreviousValue += ",  Govt. Approved: " + officeAppointment.GovtApproved;
-                    bnLog.UpdatedValue += ",  Govt. Approved: " + model.GovtApproved;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.HeadofDpt != model.HeadofDpt)
-                {
-                    bnLog.PreviousValue += ", HOD: " + officeAppointment.HeadofDpt;
-                    bnLog.UpdatedValue += ", HOD: " + model.HeadofDpt;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.OfficeHead != model.OfficeHead)
-                {
-                    bnLog.PreviousValue += ", Office Head: " + officeAppointment.OfficeHead;
-                    bnLog.UpdatedValue += ", Office Head: " + model.OfficeHead;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.IsInstrServiceCount != model.IsInstrServiceCount)
-                {
-                    bnLog.PreviousValue += ", Instructor Service: " + officeAppointment.IsInstrServiceCount;
-                    bnLog.UpdatedValue += ", Instructor Service: " + model.IsInstrServiceCount;
-                    bnoisUpdateCount += 1;
-                }
-                if (officeAppointment.OrgCd != model.OrgCd)
-                {
-                    bnLog.PreviousValue += ", Additional for Training: " + officeAppointment.OrgCd;
-                    bnLog.UpdatedValue += ", Additional for Training: " + model.OrgCd;
-                    bnoisUpdateCount += 1;
-                }
+                //if (officeAppointment.OfficeId != model.OfficeId)
+                //{
+                //    if (officeAppointment.OfficeId > 0)
+                //    {
+                //        var prev = employeeService.GetDynamicTableInfoById("Office", "OfficeId", officeAppointment.OfficeId);
+                //        bnLog.PreviousValue += ", Office: " + ((dynamic)prev).ShortName;
+                //    }
+                //    if (model.OfficeId > 0)
+                //    {
+                //        var newv = employeeService.GetDynamicTableInfoById("Office", "OfficeId", model.OfficeId);
+                //        bnLog.UpdatedValue += ", Office: " + ((dynamic)newv).ShortName;
+                //    }
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.AptNatId != model.AptNatId)
+                //{
+                //    if (officeAppointment.AptNatId > 0)
+                //    {
+                //        var prev = employeeService.GetDynamicTableInfoById("AptNat", "AptNatId", officeAppointment.AptNatId);
+                //        bnLog.PreviousValue += ", Appointment Nature: " + ((dynamic)prev).ANatNm;
+                //    }
+                //    if (model.AptNatId > 0)
+                //    {
+                //        var newv = employeeService.GetDynamicTableInfoById("AptNat", "AptNatId", model.AptNatId);
+                //        bnLog.UpdatedValue += ", Appointment Nature: " + ((dynamic)newv).ANatNm;
+                //    }
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.AptCatId != model.AptCatId)
+                //{
+                //    if (officeAppointment.AptCatId > 0)
+                //    {
+                //        var prev = employeeService.GetDynamicTableInfoById("AptCat", "AptCatId", officeAppointment.AptCatId);
+                //        bnLog.PreviousValue += ", Appointment Category: " + ((dynamic)prev).AcatNm;
+                //    }
+                //    if (model.AptCatId > 0)
+                //    {
+                //        var newv = employeeService.GetDynamicTableInfoById("AptCat", "AptCatId", model.AptCatId);
+                //        bnLog.UpdatedValue += ", Appointment Category: " + ((dynamic)newv).AcatNm;
+                //    }
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.AppointmentType != model.AppointmentType)
+                //{
+                //    bnLog.PreviousValue += ", Appointment Type: " + (officeAppointment.AppointmentType == 1 ? "Permanent" : officeAppointment.AppointmentType == 2 ? "Additional" : "");
+                //    bnLog.UpdatedValue += ", Appointment Type: " + (model.AppointmentType == 1 ? "Permanent" : model.AppointmentType == 2 ? "Additional" : "");
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.Name != model.Name)
+                //{
+                //    bnLog.PreviousValue += ",  Name: " + officeAppointment.Name;
+                //    bnLog.UpdatedValue += ",  Name: " + model.Name;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.ShortName != model.ShortName)
+                //{
+                //    bnLog.PreviousValue += ",  Short Name: " + officeAppointment.ShortName;
+                //    bnLog.UpdatedValue += ",  Short Name: " + model.ShortName;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.NameBangla != model.NameBangla)
+                //{
+                //    bnLog.PreviousValue += ", Name (বাংলা): " + officeAppointment.NameBangla;
+                //    bnLog.UpdatedValue += ", Name (বাংলা): " + model.NameBangla;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.ShortNameBangla != model.ShortNameBangla)
+                //{
+                //    bnLog.PreviousValue += ", Short Name (বাংলা): " + officeAppointment.ShortNameBangla;
+                //    bnLog.UpdatedValue += ", Short Name (বাংলা): " + model.ShortNameBangla;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.GovtApproved != model.GovtApproved)
+                //{
+                //    bnLog.PreviousValue += ",  Govt. Approved: " + officeAppointment.GovtApproved;
+                //    bnLog.UpdatedValue += ",  Govt. Approved: " + model.GovtApproved;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.HeadofDpt != model.HeadofDpt)
+                //{
+                //    bnLog.PreviousValue += ", HOD: " + officeAppointment.HeadofDpt;
+                //    bnLog.UpdatedValue += ", HOD: " + model.HeadofDpt;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.OfficeHead != model.OfficeHead)
+                //{
+                //    bnLog.PreviousValue += ", Office Head: " + officeAppointment.OfficeHead;
+                //    bnLog.UpdatedValue += ", Office Head: " + model.OfficeHead;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.IsInstrServiceCount != model.IsInstrServiceCount)
+                //{
+                //    bnLog.PreviousValue += ", Instructor Service: " + officeAppointment.IsInstrServiceCount;
+                //    bnLog.UpdatedValue += ", Instructor Service: " + model.IsInstrServiceCount;
+                //    bnoisUpdateCount += 1;
+                //}
+                //if (officeAppointment.OrgCd != model.OrgCd)
+                //{
+                //    bnLog.PreviousValue += ", Additional for Training: " + officeAppointment.OrgCd;
+                //    bnLog.UpdatedValue += ", Additional for Training: " + model.OrgCd;
+                //    bnoisUpdateCount += 1;
+                //}
 
-                bnLog.LogStatus = 1; // 1 for update, 2 for delete
-                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
-                bnLog.LogCreatedDate = DateTime.Now;
+                //bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                //bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                //bnLog.LogCreatedDate = DateTime.Now;
 
-                if (bnoisUpdateCount > 0)
-                {
-                    await bnoisLogRepository.SaveAsync(bnLog);
+                //if (bnoisUpdateCount > 0)
+                //{
+                //    await bnoisLogRepository.SaveAsync(bnLog);
 
-                }
-                else
-                {
-                    throw new InfinityNotFoundException("Please Update Any Field!");
-                }
-                //data log section end
+                //}
+                //else
+                //{
+                //    throw new InfinityNotFoundException("Please Update Any Field!");
+                //}
+                ////data log section end
             }
             else
             {

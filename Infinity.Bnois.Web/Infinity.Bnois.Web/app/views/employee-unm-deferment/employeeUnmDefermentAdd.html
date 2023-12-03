@@ -1,0 +1,63 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">Officer UNM Deferment<span class="pull-right text-success">{{vm.title}}</span></h2>
+                </div>
+                <form name="vm.employeeUnmDefermentForm">
+
+                    <employee-search ng-model="vm.employeeUnmDeferment.employee"></employee-search>
+
+                    
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="unmReason" class="custom-label">Reason</label>
+                                <select name="unmReason" id="unmReason" class="form-control" ng-model="vm.employeeUnmDeferment.unmReason" ng-options="option.value as option.text for option in vm.resons" required>
+                                    <option value="">--Select an Option--</option>
+                                </select>
+                                <p ng-show="vm.employeeUnmDefermentForm.unmReason.$error.required" class="help-block errormsg">Please select an Option</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="defermentFrom" class="custom-label">  Deferment From</label>
+                                <input kendo-date-picker id="defermentFrom" class="form-control custom-form-control" k-ng-model="vm.employeeUnmDeferment.defermentFrom" k-format="'dd-MM-yyyy'" name="defermentFrom" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="durationYear" class="custom-label">Deferment Duration</label>
+                                <input type="number" id="durationYear" class="form-control custom-form-control" ng-model="vm.employeeUnmDeferment.durationYear" name="durationYear" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="unwillingMissionRemarks" class="custom-label">Name of Mission</label>
+                                <textarea type="text" id="unwillingMissionRemarks" class="form-control custom-form-control" ng-model="vm.employeeUnmDeferment.unwillingMissionRemarks" name="unwillingMissionRemarks" maxlength="1500"></textarea>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="unmReference" class="custom-label">Authority</label>
+                                <textarea type="text" id="unmReference" class="form-control custom-form-control" ng-model="vm.employeeUnmDeferment.unmReference" name="unmReference" maxlength="1500"></textarea>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xs-12">
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.employeeUnmDefermentForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

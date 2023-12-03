@@ -87,6 +87,10 @@ namespace Infinity.Bnois.Api.Web.Models
                .ForMember(d => d.District, opt => opt.MapFrom(s => s.District))
                  .ForMember(d => d.Upazila, opt => opt.MapFrom(s => s.Upazila));
 
+                cfg.CreateMap<DashBoardBranch975, DashBoardBranch975Model>()
+               .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
+               .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
+
 
 
                 cfg.CreateMap<SocialAttribute, SocialAttributeModel>();
@@ -591,6 +595,10 @@ namespace Infinity.Bnois.Api.Web.Models
               .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank))
               .ForMember(d => d.Rank1, opt => opt.MapFrom(s => s.Rank1))
               .ForMember(d => d.Rank2, opt => opt.MapFrom(s => s.Rank2));
+
+                cfg.CreateMap<DashBoardBranch975Model, DashBoardBranch975>()
+              .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
+              .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
 
                 cfg.CreateMap<ExtracurricularTypeModel, ExtracurricularType>();
 

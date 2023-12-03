@@ -37,7 +37,10 @@
                
                 if (vm.employeeMscEducationId !== 0 && vm.employeeMscEducationId !== '') {
 
-                    vm.employeeMscEducation.fromDate = new Date(data.result.employeeMscEducation.fromDate);
+                    
+                    if (vm.employeeMscEducation.fromDate != null) {
+                        vm.employeeMscEducation.fromDate = new Date(data.result.employeeMscEducation.fromDate);
+                    }
                     if (vm.employeeMscEducation.toDate != null) {
                         vm.employeeMscEducation.toDate = new Date(data.result.employeeMscEducation.toDate);
                     }

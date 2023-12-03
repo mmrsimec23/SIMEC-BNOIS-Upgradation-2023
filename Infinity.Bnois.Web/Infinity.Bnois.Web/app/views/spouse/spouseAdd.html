@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                <div class="col-sm-6">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label for="bNameEng" class="custom-label">Name (Before Marriage)</label>
                             <input type="text" id="bNameEng" class="form-control custom-form-control" ng-model="vm.spouse.bNameEng" name="bNameEng" maxlength="250" required />
@@ -50,13 +50,6 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nickName" class="custom-label">Nick Name</label>
-                            <input type="text" id="nickName" class="form-control custom-form-control" ng-model="vm.spouse.nickName" name="nickName" maxlength="50" />
-                            <p ng-show="vm.spouseForm.nickName.$error.maxlength" class="help-block errormsg">Maximum length 50 characters</p>
-                        </div>
-                    </div>
 
 
                     <div class="col-sm-6">
@@ -82,9 +75,17 @@
                             <p ng-show="vm.spouseForm.birthPlace.$error.maxlength" class="help-block errormsg">Maximum length 250 characters</p>
                         </div>
                     </div>
+
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nid" class="custom-label">National ID </label>
+                            <label for="nickName" class="custom-label">TIN (If available)</label>
+                            <input type="text" id="nickName" class="form-control custom-form-control" ng-model="vm.spouse.nickName" name="nickName" maxlength="50" />
+                            <p ng-show="vm.spouseForm.nickName.$error.maxlength" class="help-block errormsg">Maximum length 50 characters</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nid" class="custom-label">NID Number</label>
                             <input type="text" id="nId" class="form-control custom-form-control" ng-model="vm.spouse.nid" name="nId" maxlength="250" />
                             <p ng-show="vm.spouseForm.nid.$error.maxlength" class="help-block errormsg">Maximum length 250 characters</p>
                         </div>
@@ -94,7 +95,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="eduQualification" class="custom-label">Educational Qualification</label>
-                            <input type="text" id="eduQualification" class="form-control custom-form-control" ng-model="vm.spouse.eduQualification" name="eduQualification" maxlength="250"  /> 
+                            <input type="text" id="eduQualification" class="form-control custom-form-control" ng-model="vm.spouse.eduQualification" name="eduQualification" maxlength="250" />
                             <p ng-show="vm.spouseForm.eduQualification.$error.maxlength" class="help-block errormsg">Maximum length 250 characters</p>
                         </div>
                     </div>
@@ -141,7 +142,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="occupationId" class="custom-label">Profession</label>
-                            <select name="occupationId" id="occupationId" class="form-control" ng-model="vm.spouse.occupationId" ng-options="option.value as option.text for option in vm.occupations" >
+                            <select name="occupationId" id="occupationId" class="form-control" ng-model="vm.spouse.occupationId" ng-options="option.value as option.text for option in vm.occupations">
                                 <option value="">--Select an Option--</option>
                             </select>
                             <p ng-show="vm.spouseForm.occupationId.$error.required" class="help-block errormsg">Please select an Option</p>

@@ -232,6 +232,7 @@ namespace Infinity.Bnois.ApplicationService.Models
         public string VisitNotToDate { get; set; }
 
         public int SpCurrentStatus { get; set; }
+        public int viewForeignProject { get; set; }
         public int ViewAchievement { get; set; }
         public int ViewModal { get; set; }
         public int ViewAward { get; set; }

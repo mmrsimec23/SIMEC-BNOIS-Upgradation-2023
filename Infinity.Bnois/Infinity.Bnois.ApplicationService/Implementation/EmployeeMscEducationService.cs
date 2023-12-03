@@ -277,12 +277,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     var prevmscPer = employeeService.GetDynamicTableInfoById("MscPermissionType", "MscPermissionTypeId", employeeMscEducation.MscPermissionTypeId ?? 0);
                     bnLog.PreviousValue += ", Msc Permission Type: " + ((dynamic)prevmscPer).Name;
                 }
-                if (employeeMscEducation.MscPermissionTypeId > 0)
+                if (employeeMscEducation.CountryId > 0)
                 {
                     var prevcountry = employeeService.GetDynamicTableInfoById("Country", "CountryId", employeeMscEducation.CountryId ?? 0);
                     bnLog.PreviousValue += ", Country: " + ((dynamic)prevcountry).FullName;
                 }
-                if (employeeMscEducation.MscPermissionTypeId > 0)
+                if (employeeMscEducation.RankId > 0)
                 {
                     var prevrank = employeeService.GetDynamicTableInfoById("Rank", "RankId", employeeMscEducation.RankId ?? 0);
                     bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;

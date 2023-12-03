@@ -93,6 +93,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                         var newv = employeeService.GetDynamicTableInfoById("Sport", "SportId", model.SportId);
                         bnLog.UpdatedValue += ", Sport: " + ((dynamic)newv).Name;
                     }
+                    bnoisUpdateCount += 1;
                 }
                 if (employeeSport.TeamName != model.TeamName)
                 {

@@ -117,7 +117,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 NominationSchedule.CreatedBy = userId;
             
             }
-
+            if (model.NominationScheduleType == 2)
+            {
+                NominationSchedule.VisitCategoryId = model.VisitCategoryId;
+                NominationSchedule.VisitSubCategoryId = model.VisitSubCategoryId;
+            }
+            
             NominationSchedule.CountryId = model.CountryId;
             NominationSchedule.NominationScheduleType = model.NominationScheduleType;
             NominationSchedule.TitleName = model.TitleName;
@@ -128,7 +133,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             NominationSchedule.Remarks = model.Remarks;
             NominationSchedule.NumberOfPost = model.NumberOfPost;
             NominationSchedule.AssignPost = model.AssignPost;
-            await nominationScheduleRepository.SaveAsync(NominationSchedule);
+            try
+            {
+                await nominationScheduleRepository.SaveAsync(NominationSchedule);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             model.NominationScheduleId = NominationSchedule.NominationScheduleId;
             return model;
         }

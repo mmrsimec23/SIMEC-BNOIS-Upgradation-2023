@@ -38,6 +38,41 @@
 
                 </div>
 
+                <br />
+
+
+                <h3 class="reportHeader"> Deferment For UNM</h3>
+                <hr />
+                <div ng-if="vm.unmDeferments.length>0" class="table-wrapper table-responsive reportCover">
+                    <table class="table table-bordered pdfReportTable">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                                <th>Ser</th>
+                                <th>Reason</th>
+                                <th>Name of Mission</th>
+                                <th>Deferment From</th>
+                                <th>Deferment To </th>
+                                <th>Duration</th>
+                                <th>Authority</th>
+                            </tr>
+                        </thead>
+                        <tbody class="reportBody">
+                            <tr class="reportTR" ng-repeat="item in vm.unmDeferments">
+
+                                <td class="reportTD">{{$index+1}}</td>
+                                <td class="reportTD">{{item.defermentReason}}</td>
+                                <td class="reportTD">{{item.unwillingMissionRemarks}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;">{{item.defermentFrom | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;">{{item.defermentTo | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center;">{{item.durationYear}} y</td>
+                                <td class="reportTD" style="text-align: center;">{{item.unmReference}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
 
                 <br />
 
@@ -81,7 +116,7 @@
                     <table class="table table-bordered pdfReportTable">
                         <thead class="reportThead">
                             <tr class="tableHeading reportTR">
-                                <th>SL</th>                             
+                                <th>SL</th>
                                 <th>Hajj Type</th>
                                 <th>Date From</th>
                                 <th>Date To</th>
@@ -93,7 +128,7 @@
                         </thead>
                         <tbody class="reportBody">
                             <tr class="reportTR" ng-repeat="employeeHajjDetail in vm.hajjDetails">
-                                <td>{{$index + 1}}</td>                        
+                                <td>{{$index + 1}}</td>
                                 <td>Hajj</td>
                                 <td>{{employeeHajjDetail.fromDate | date: "dd-MMM-yyyy"}}</td>
                                 <td>{{employeeHajjDetail.toDate | date: "dd-MMM-yyyy"}}</td>

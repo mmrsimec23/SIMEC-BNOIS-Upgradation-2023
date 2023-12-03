@@ -682,6 +682,15 @@
                 vm.appreciationShow = false;
 
             }
+            else if (value == 62 && checked) {
+                vm.foreignProjectShow = true;
+                
+
+            }
+            else if (value == 62 && !checked) {
+                vm.foreignProjectShow = false;
+
+            }
 
             else if (value == 45 && checked) {
                 vm.exBdLeaveShow = true;
@@ -960,6 +969,7 @@
             vm.publicationShow = false;
             vm.commendationShow = false;
             vm.appreciationShow = false;
+            vm.foreignProjectShow = false;
             vm.exBdLeaveShow = false;
             vm.clearanceShow = false;
             vm.issbShow = false;

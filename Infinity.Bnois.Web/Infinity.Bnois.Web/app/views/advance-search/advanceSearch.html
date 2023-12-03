@@ -90,6 +90,19 @@
                     
                 </div>
 
+                <div class="col-sm-12" ng-show="vm.foreignProjectShow">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="courseId" class="custom-label">Foreign Project</label><br />
+                                <input type="radio" id="viewAchievement" ng-model="vm.advanceSearch.viewForeignProject" ng-value="1"> Yes
+                                <input type="radio" id="viewAchievement" ng-model="vm.advanceSearch.viewForeignProject" ng-value="2"> No
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
 
                 <div class="col-sm-3" ng-show="vm.ageShow">
 

@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>E:\publish\WEB</_PublishTargetUrl>
-    <History>True|2023-11-21T12:50:40.2593048Z;True|2023-11-19T18:37:34.7517660+06:00;True|2023-11-13T10:05:38.7980866+06:00;True|2023-11-12T15:13:08.0521405+06:00;True|2023-11-12T10:12:17.1001227+06:00;True|2023-11-08T09:29:05.6057718+06:00;True|2023-10-26T17:53:33.3283100+06:00;</History>
+    <History>True|2023-11-30T07:00:04.9972466Z;True|2023-11-21T18:50:40.2593048+06:00;True|2023-11-19T18:37:34.7517660+06:00;True|2023-11-13T10:05:38.7980866+06:00;True|2023-11-12T15:13:08.0521405+06:00;True|2023-11-12T10:12:17.1001227+06:00;True|2023-11-08T09:29:05.6057718+06:00;True|2023-10-26T17:53:33.3283100+06:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -13,13 +13,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/common/codeValue.js">
-      <publishTime>11/26/2023 10:51:56</publishTime>
+      <publishTime>11/30/2023 12:58:51</publishTime>
     </File>
     <File Include="app/common/common.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/common/common.services.js">
-      <publishTime>11/26/2023 10:51:50</publishTime>
+      <publishTime>11/30/2023 12:58:34</publishTime>
     </File>
     <File Include="app/common/config.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -49,10 +49,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/layout/leftSideBarNavigation.html">
-      <publishTime>10/25/2023 11:29:51</publishTime>
+      <publishTime>11/30/2023 12:11:11</publishTime>
     </File>
     <File Include="app/layout/leftSideBarNavigationController.js">
-      <publishTime>10/25/2023 11:29:51</publishTime>
+      <publishTime>11/30/2023 11:46:31</publishTime>
     </File>
     <File Include="app/layout/shell.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -67,7 +67,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/routes.js">
-      <publishTime>11/23/2023 12:03:34</publishTime>
+      <publishTime>11/29/2023 12:07:33</publishTime>
     </File>
     <File Include="app/services/accountHeadService.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -169,16 +169,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/services/currentStatusService.js">
-      <publishTime>10/30/2023 15:11:19</publishTime>
+      <publishTime>11/29/2023 13:56:48</publishTime>
     </File>
     <File Include="app/services/dailyProcessService.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/services/dashboardService.js">
-      <publishTime>11/23/2023 17:48:51</publishTime>
+      <publishTime>11/27/2023 15:43:50</publishTime>
     </File>
     <File Include="app/services/dataConstants.js">
-      <publishTime>11/22/2023 10:45:04</publishTime>
+      <publishTime>11/29/2023 11:56:05</publishTime>
     </File>
     <File Include="app/services/departmentService.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -264,6 +264,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="app/services/employeeSportService.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
+    <File Include="app/services/employeeUnmDefermentService.js">
+      <publishTime>11/29/2023 11:56:05</publishTime>
+    </File>
     <File Include="app/services/empRejoinService.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
@@ -310,7 +313,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/services/foreignProjectService.js">
-      <publishTime>10/25/2023 11:29:51</publishTime>
+      <publishTime>11/27/2023 18:17:20</publishTime>
     </File>
     <File Include="app/services/genderService.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -721,10 +724,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/advance-search/advanceSearch.html">
-      <publishTime>10/26/2023 16:00:25</publishTime>
+      <publishTime>11/29/2023 15:50:00</publishTime>
     </File>
     <File Include="app/views/advance-search/advanceSearchController.js">
-      <publishTime>10/26/2023 15:50:48</publishTime>
+      <publishTime>11/29/2023 15:41:30</publishTime>
     </File>
     <File Include="app/views/advance-search/advanceSearchResult.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -810,6 +813,18 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="app/views/blood-group/bloodGroupsController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
+    <File Include="app/views/bn-officer-states/bnOfficerStates.html">
+      <publishTime>11/27/2023 16:13:26</publishTime>
+    </File>
+    <File Include="app/views/bn-officer-states/bnOfficerStatesController.js">
+      <publishTime>11/27/2023 15:43:50</publishTime>
+    </File>
+    <File Include="app/views/bn-officer-states/bnOfficerStatesList.html">
+      <publishTime>11/27/2023 15:40:34</publishTime>
+    </File>
+    <File Include="app/views/bn-officer-states/bnOfficerStatesListController.js">
+      <publishTime>11/27/2023 15:42:15</publishTime>
+    </File>
     <File Include="app/views/bnois-log-info/bnoisLogInfo.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
@@ -850,10 +865,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/16/2023 10:33:55</publishTime>
     </File>
     <File Include="app/views/branch-authority-officers/branchOfficerByAdminAuthority.html">
-      <publishTime>11/23/2023 12:03:16</publishTime>
+      <publishTime>11/26/2023 12:29:21</publishTime>
     </File>
     <File Include="app/views/branch-authority-officers/branchOfficerByAdminAuthorityController.js">
-      <publishTime>11/23/2023 12:02:29</publishTime>
+      <publishTime>11/26/2023 12:25:09</publishTime>
     </File>
     <File Include="app/views/branch-authority-officers/branchOfficerController.js">
       <publishTime>11/16/2023 10:27:45</publishTime>
@@ -1057,7 +1072,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/current-status/currentStatus.html">
-      <publishTime>11/26/2023 10:51:56</publishTime>
+      <publishTime>11/30/2023 12:58:51</publishTime>
     </File>
     <File Include="app/views/current-status/currentStatusController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -1348,7 +1363,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2023 16:32:15</publishTime>
     </File>
     <File Include="app/views/employee-msc-education/employeeMscEducationAddController.js">
-      <publishTime>11/07/2023 14:00:35</publishTime>
+      <publishTime>11/29/2023 09:51:39</publishTime>
     </File>
     <File Include="app/views/employee-msc-education/employeeMscEducationList.html">
       <publishTime>10/30/2023 16:36:11</publishTime>
@@ -1475,6 +1490,18 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="app/views/employee-sport/employeeSportsController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
+    </File>
+    <File Include="app/views/employee-unm-deferment/employeeUnmDefermentAdd.html">
+      <publishTime>11/29/2023 14:13:08</publishTime>
+    </File>
+    <File Include="app/views/employee-unm-deferment/employeeUnmDefermentAddController.js">
+      <publishTime>11/29/2023 13:46:49</publishTime>
+    </File>
+    <File Include="app/views/employee-unm-deferment/employeeUnmDefermentList.html">
+      <publishTime>11/29/2023 13:04:35</publishTime>
+    </File>
+    <File Include="app/views/employee-unm-deferment/employeeUnmDefermentListController.js">
+      <publishTime>11/29/2023 13:08:22</publishTime>
     </File>
     <File Include="app/views/employee/employeeAdd.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -1609,7 +1636,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/family-information/familyInformation.html">
-      <publishTime>11/26/2023 10:51:56</publishTime>
+      <publishTime>11/30/2023 12:58:51</publishTime>
     </File>
     <File Include="app/views/family-information/familyInformationController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -1936,10 +1963,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/mission-foreign-project/missionForeignProjects.html">
-      <publishTime>11/05/2023 13:58:48</publishTime>
+      <publishTime>11/29/2023 14:11:52</publishTime>
     </File>
     <File Include="app/views/mission-foreign-project/missionForeignProjectsController.js">
-      <publishTime>10/30/2023 12:49:58</publishTime>
+      <publishTime>11/29/2023 13:57:26</publishTime>
     </File>
     <File Include="app/views/mission-schedule/missionScheduleAdd.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -2074,10 +2101,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/office-appointment/officeAppointmentAdd.html">
-      <publishTime>10/25/2023 11:29:51</publishTime>
+      <publishTime>11/26/2023 13:46:19</publishTime>
     </File>
     <File Include="app/views/office-appointment/officeAppointmentAddController.js">
-      <publishTime>10/25/2023 11:29:51</publishTime>
+      <publishTime>11/26/2023 13:49:47</publishTime>
     </File>
     <File Include="app/views/office-appointment/officeAppointments.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -2095,7 +2122,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/office-structure/officeStructuresController.js">
-      <publishTime>11/26/2023 10:51:56</publishTime>
+      <publishTime>11/30/2023 12:58:51</publishTime>
     </File>
     <File Include="app/views/office-transfer/officeTransfers.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -2218,10 +2245,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/21/2023 17:57:05</publishTime>
     </File>
     <File Include="app/views/parent/parent.html">
-      <publishTime>11/05/2023 14:37:01</publishTime>
+      <publishTime>11/30/2023 12:24:33</publishTime>
     </File>
     <File Include="app/views/parent/parentAdd.html">
-      <publishTime>11/05/2023 14:07:07</publishTime>
+      <publishTime>11/30/2023 12:24:33</publishTime>
     </File>
     <File Include="app/views/parent/parentController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -2647,7 +2674,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/report-viewer/report-viewer.html">
-      <publishTime>10/25/2023 11:29:51</publishTime>
+      <publishTime>11/30/2023 10:28:43</publishTime>
     </File>
     <File Include="app/views/report-viewer/reportViwerController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -2758,7 +2785,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/sea-services/seaServices.html">
-      <publishTime>10/25/2023 11:29:51</publishTime>
+      <publishTime>11/30/2023 12:40:39</publishTime>
     </File>
     <File Include="app/views/security-clearance-reason/securityClearanceReasonAdd.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -2890,7 +2917,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/spouse/spouseAdd.html">
-      <publishTime>11/15/2023 11:26:58</publishTime>
+      <publishTime>11/30/2023 12:24:14</publishTime>
     </File>
     <File Include="app/views/spouse/spouseAddController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -3274,10 +3301,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="bin/Infinity.Tms.Web.dll">
-      <publishTime>11/26/2023 10:53:32</publishTime>
+      <publishTime>11/30/2023 13:00:00</publishTime>
     </File>
     <File Include="bin/Infinity.Tms.Web.pdb">
-      <publishTime>11/26/2023 10:53:32</publishTime>
+      <publishTime>11/30/2023 13:00:00</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -3937,7 +3964,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:50</publishTime>
     </File>
     <File Include="index.html">
-      <publishTime>11/23/2023 10:23:26</publishTime>
+      <publishTime>11/29/2023 11:59:36</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>10/25/2023 11:29:51</publishTime>

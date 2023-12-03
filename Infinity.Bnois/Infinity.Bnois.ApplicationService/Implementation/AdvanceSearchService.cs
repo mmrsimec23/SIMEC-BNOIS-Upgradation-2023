@@ -38,7 +38,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 		        new SelectModel {Value = 7, Text = "Blood group"},
 		        new SelectModel {Value = 8, Text = "Civil Education"},
 		        new SelectModel {Value = 9, Text = "Comm Svc Length"},
-		        new SelectModel {Value = 10, Text = "Commission Type"},
+		        //new SelectModel {Value = 10, Text = "Commission Type"},
 		        new SelectModel {Value = 11, Text = "Course"},
 		        new SelectModel {Value = 12, Text = "Current Status"},
 		        new SelectModel {Value = 13, Text = "District (Permanent)"},
@@ -46,16 +46,16 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 		        new SelectModel {Value = 15, Text = "Foreign Visit"},
 		        new SelectModel {Value = 16, Text = "Gender"},
 		        new SelectModel {Value = 17, Text = "Height"},
-		        new SelectModel {Value = 18, Text = "Joining Date"},
+		        //new SelectModel {Value = 18, Text = "Joining Date"},
 		        new SelectModel {Value = 19, Text = "LPR Date"},
 		        new SelectModel {Value = 20, Text = "Marital Status"},
 		        new SelectModel {Value = 21, Text = "Medical Category"},
 		        new SelectModel {Value = 22, Text = "Officer Category"},
-		        new SelectModel {Value = 23, Text = "Officer Service From"},
+		        //new SelectModel {Value = 23, Text = "Officer Service From"},
 		        new SelectModel {Value = 24, Text = "Officer's Name"},
 		        new SelectModel {Value = 25, Text = "OPR"},
 		        new SelectModel {Value = 26, Text = "Passport"},
-		        new SelectModel {Value = 27, Text = "Physical Structure"},
+		        //new SelectModel {Value = 27, Text = "Physical Structure"},
 		        new SelectModel {Value = 28, Text = "Promotion Status"},
 		        new SelectModel {Value = 29, Text = "Rank"},
 		        new SelectModel {Value = 30, Text = "Religion"},
@@ -89,7 +89,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 new SelectModel {Value = 58, Text = "Seniority"},
                 new SelectModel {Value = 59, Text = "Leave"},
                 new SelectModel {Value = 60, Text = "Spouse Info"},
-                new SelectModel {Value = 61, Text = "Remarks, Persuation & NS Note"}
+                new SelectModel {Value = 61, Text = "Remarks, Persuation & NS Note"},
+                new SelectModel {Value = 62, Text = "Foreign Project"}
 
             };
 
@@ -187,7 +188,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	            model.ServingCommandService,model.PromotionFromDate,model.PromotionToDate,model.ServiceExtension,model.RlFromDate,model.RlToDate,model.StatusType,model.VisitFromDate,model.VisitToDate,model.LeaveFromDate,model.LeaveToDate,model.GpaFrom,model.GpaTo, model.Hajj, model.AdditionalApt,model.ServedAdditionalApt,
 				model.NotServedAdditionalApt,model.MissionFromDate,model.MissionToDate, model.HajjOrOmra,model.CarLoan, model.GoldenChild, model.MedicalCategoryFromDate, model.MedicalCategoryToDate,model.MedicalCategoryStatus, model.SecurityClearanceFromDate, model.SecurityClearanceToDate, model.SecurityClearanceStatus,
 				model.FamilyPermissionFromDate, model.FamilyPermissionToDate, model.CarLoanFromDate, model.CarLoanToDate, model.PromotionRankFromDate, model.PromotionRankToDate, model.SeniorityFilter, model.SeniorityCommissionToDate, model.OfficerLeaveFromDate, model.OfficerLeaveToDate,model.PunishmentFromDate,model.PunishmentToDate,
-				model.SpCurrentStatus, model.ViewAchievement, model.ViewModal, model.ViewAward, model.ViewPublication, model.ViewPunishment, model.CourseMissionAbroadFromDate, model.CourseMissionAbroadToDate, model.CourseNotDoneFromDate, model.CourseNotDoneToDate, model.VisitNotFromDate, model.VisitNotToDate);
+				model.SpCurrentStatus, model.viewForeignProject, model.ViewAchievement, model.ViewModal, model.ViewAward, model.ViewPublication, model.ViewPunishment, model.CourseMissionAbroadFromDate, model.CourseMissionAbroadToDate, model.CourseNotDoneFromDate, model.CourseNotDoneToDate, model.VisitNotFromDate, model.VisitNotToDate);
 
             //Insert Multiple Dropdown Selected Item
 

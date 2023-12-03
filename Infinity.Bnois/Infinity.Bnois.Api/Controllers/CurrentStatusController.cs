@@ -101,6 +101,17 @@ namespace Infinity.Bnois.Api.Controllers
         
 
         [HttpGet]
+        [Route("get-unm-deferment")]
+        public IHttpActionResult GetUnmDeferment(string pNo)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = currentStatusService.GetUnmDeferment(pNo)
+            });
+        }
+        
+
+        [HttpGet]
         [Route("get-career-forecast")]
         public IHttpActionResult GetCareerForecast(string pNo)
         {

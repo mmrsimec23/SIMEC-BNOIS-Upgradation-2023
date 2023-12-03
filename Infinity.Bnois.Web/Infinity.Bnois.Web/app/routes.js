@@ -5856,6 +5856,34 @@
                     title: 'Career Forecast Setting'
                 }
             },
+            //-------------employee UNM Deferment-------
+            {
+                state: 'employee-unm-deferment-list',
+                config: {
+                    url: '/employee-unm-deferment-list?ps&pn&q',
+                    templateUrl: 'app/views/employee-unm-deferment/employeeUnmDefermentList.html',
+                    controller: 'employeeUnmDefermentListController as vm',
+                    title: 'Employee Unm Deferment List'
+                }
+            },
+            {
+                state: 'employee-unm-deferment-create',
+                config: {
+                    url: '/employee-unm-deferment-create',
+                    templateUrl: 'app/views/employee-unm-deferment/employeeUnmDefermentAdd.html',
+                    controller: 'employeeUnmDefermentAddController as vm',
+                    title: 'Employee Unm Deferment'
+                }
+            },
+            {
+                state: "employee-unm-deferment-modify",
+                config: {
+                    url: "employee-unm-deferment-modify/:id",
+                    templateUrl: 'app/views/employee-unm-deferment/employeeUnmDefermentAdd.html',
+                    controller: 'employeeUnmDefermentAddController as vm',
+                    title: 'Employee UNM Deferment'
+                }
+            },
             {
                 state: "bnois-log-info",
                 config: {

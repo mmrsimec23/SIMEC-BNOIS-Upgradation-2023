@@ -5,15 +5,15 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>E:\publish\API</_PublishTargetUrl>
-    <History>True|2023-10-30T10:06:26.8107187Z;True|2023-10-19T14:01:31.7085278+06:00;True|2023-10-16T16:07:08.8838374+06:00;True|2023-10-12T14:38:09.6165292+06:00;True|2023-10-11T17:27:56.7454038+06:00;True|2023-10-11T13:27:18.1874437+06:00;True|2023-10-01T18:36:14.7312816+06:00;True|2023-10-01T15:10:19.3957769+06:00;</History>
+    <History>True|2023-11-30T06:57:45.3643928Z;True|2023-10-30T16:06:26.8107187+06:00;True|2023-10-19T14:01:31.7085278+06:00;True|2023-10-16T16:07:08.8838374+06:00;True|2023-10-12T14:38:09.6165292+06:00;True|2023-10-11T17:27:56.7454038+06:00;True|2023-10-11T13:27:18.1874437+06:00;True|2023-10-01T18:36:14.7312816+06:00;True|2023-10-01T15:10:19.3957769+06:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="AppConfig/BnoisAppSettings.config">
-      <publishTime>11/16/2023 16:51:34</publishTime>
+      <publishTime>11/30/2023 13:53:56</publishTime>
     </File>
     <File Include="AppConfig/BnoisDbConnection.config">
-      <publishTime>11/14/2023 09:54:12</publishTime>
+      <publishTime>11/26/2023 13:40:29</publishTime>
     </File>
     <File Include="ApplicationInsights.config">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -145,61 +145,61 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:52</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Api.Core.dll">
-      <publishTime>11/16/2023 16:52:27</publishTime>
+      <publishTime>11/30/2023 13:54:38</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Api.Core.dll.config">
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Api.Core.pdb">
-      <publishTime>11/16/2023 16:52:27</publishTime>
+      <publishTime>11/30/2023 13:54:38</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Api.dll">
-      <publishTime>11/16/2023 16:52:29</publishTime>
+      <publishTime>11/30/2023 13:54:39</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Api.dll.config">
       <publishTime>10/25/2023 11:29:52</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Api.pdb">
-      <publishTime>11/16/2023 16:52:29</publishTime>
+      <publishTime>11/30/2023 13:54:39</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Api.Web.dll">
-      <publishTime>11/16/2023 16:52:32</publishTime>
+      <publishTime>11/30/2023 13:54:42</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Api.Web.pdb">
-      <publishTime>11/16/2023 16:52:32</publishTime>
+      <publishTime>11/30/2023 13:54:42</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.ApplicationService.dll">
-      <publishTime>11/16/2023 16:52:28</publishTime>
+      <publishTime>11/30/2023 13:54:39</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.ApplicationService.dll.config">
       <publishTime>10/25/2023 11:29:52</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.ApplicationService.pdb">
-      <publishTime>11/16/2023 16:52:28</publishTime>
+      <publishTime>11/30/2023 13:54:39</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Configuration.dll">
-      <publishTime>11/16/2023 16:52:27</publishTime>
+      <publishTime>11/30/2023 13:54:37</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Configuration.dll.config">
       <publishTime>10/25/2023 11:29:52</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Configuration.pdb">
-      <publishTime>11/16/2023 16:52:27</publishTime>
+      <publishTime>11/30/2023 13:54:37</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Data.dll">
-      <publishTime>11/16/2023 16:52:26</publishTime>
+      <publishTime>11/30/2023 12:57:35</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Data.dll.config">
-      <publishTime>10/25/2023 11:29:52</publishTime>
+      <publishTime>11/26/2023 14:02:44</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Data.pdb">
-      <publishTime>11/16/2023 16:52:26</publishTime>
+      <publishTime>11/30/2023 12:57:35</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Shared.dll">
-      <publishTime>11/16/2023 16:52:26</publishTime>
+      <publishTime>11/30/2023 13:54:37</publishTime>
     </File>
     <File Include="bin/Infinity.Bnois.Shared.pdb">
-      <publishTime>11/16/2023 16:52:26</publishTime>
+      <publishTime>11/30/2023 13:54:37</publishTime>
     </File>
     <File Include="bin/Infinity.Tms.Data.Core.dll">
       <publishTime>10/26/2023 17:52:29</publishTime>
@@ -3244,7 +3244,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/16/2023 16:52:33</publishTime>
+      <publishTime>11/30/2023 12:57:42</publishTime>
     </File>
   </ItemGroup>
 </Project>

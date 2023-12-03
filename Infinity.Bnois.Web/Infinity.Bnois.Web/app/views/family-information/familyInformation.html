@@ -83,6 +83,12 @@
                                         <td class="reportTD">{{parentInfo.yearlyIncome}}</td>
                                     </tr>-->
                                     <tr class="reportTR">
+                                        <td class="reportTD" style="font-weight:bold">NID No</td>
+                                        <td class="reportTD">{{parentInfo.nid}}</td>
+                                        <td class="reportTD" style="font-weight:bold">TIN (If available)</td>
+                                        <td class="reportTD">{{parentInfo.tinNo}}</td>
+                                    </tr>
+                                    <tr class="reportTR">
                                         <td class="reportTD" style="font-weight:bold">Present Address</td>
                                         <td class="reportTD">{{parentInfo.presentAddress}}</td>
                                         <td class="reportTD" style="font-weight:bold">Permanent Address</td>
@@ -161,6 +167,13 @@
                                 <td class="reportTD">{{spouseInfo.aNameBan}}</td>
 
                             </tr>
+
+                            <tr class="reportTR">
+                                <td class="reportTD" style="font-weight:bold">NID No</td>
+                                <td class="reportTD">{{spouseInfo.nid}}</td>
+                                <td class="reportTD" style="font-weight:bold">TIN (If available)</td>
+                                <td class="reportTD">{{spouseInfo.tinNo}}</td>
+                            </tr>
                             <tr class="reportTR">
 
                                 <td class="reportTD" style="font-weight: bold">Father's Name </td>
@@ -177,11 +190,11 @@
         </tr>-->
                             <!--<tr class="reportTR">
 
-                                <td class="reportTD" style="font-weight: bold">Dead/Divorce Date</td>
-                                <td class="reportTD">{{spouseInfo.deadDate| date:"dd-MMM-yyyy"}}</td>
-                                <td class="reportTD" style="font-weight: bold">Dead/Divorce Reason</td>
-                                <td class="reportTD">{{spouseInfo.deadReason}}</td>
-                            </tr>-->
+        <td class="reportTD" style="font-weight: bold">Dead/Divorce Date</td>
+        <td class="reportTD">{{spouseInfo.deadDate| date:"dd-MMM-yyyy"}}</td>
+        <td class="reportTD" style="font-weight: bold">Dead/Divorce Reason</td>
+        <td class="reportTD">{{spouseInfo.deadReason}}</td>
+    </tr>-->
 
                             <tr class="reportTR">
                                 <td class="reportTD" style="font-weight: bold">Present Address</td>

@@ -502,6 +502,9 @@
         <AssociationConnector Association="BnoisdbModel.FK_OfficeRank_OfficeAppointment" />
         <AssociationConnector Association="BnoisdbModel.FK_ProposalDetail_OfficeAppointment" />
         <AssociationConnector Association="BnoisdbModel.FK_Transfer_OfficeAppointment" />
+        <EntityTypeShape EntityType="BnoisdbModel.DashBoardBranch975" Width="1.5" PointX="16" PointY="76.875" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardBranch975_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardBranch975_Rank" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

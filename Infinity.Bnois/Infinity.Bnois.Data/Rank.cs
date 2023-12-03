@@ -46,6 +46,7 @@ namespace Infinity.Bnois.Data
             this.ToeAuthorized = new HashSet<ToeAuthorized>();
             this.DashBoardBranchByAdminAuthority600Entry = new HashSet<DashBoardBranchByAdminAuthority600Entry>();
             this.DashBoardBranchByAdminAuthority700 = new HashSet<DashBoardBranchByAdminAuthority700>();
+            this.DashBoardBranch975 = new HashSet<DashBoardBranch975>();
         }
     
         public int RankId { get; set; }
@@ -122,5 +123,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<DashBoardBranchByAdminAuthority600Entry> DashBoardBranchByAdminAuthority600Entry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DashBoardBranchByAdminAuthority700> DashBoardBranchByAdminAuthority700 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DashBoardBranch975> DashBoardBranch975 { get; set; }
     }
 }

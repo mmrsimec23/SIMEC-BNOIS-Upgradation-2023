@@ -22,25 +22,18 @@
                         </div>
                     </div>
 
+
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nickName" class="custom-label">Nick Name</label>
-                            <input type="text" id="nickName" class="form-control custom-form-control" ng-model="vm.parent.nickName" name="nickName" ng-maxlength="50" />
-                            <p ng-show="vm.parentForm.nickName.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
+                            <label for="otherName" class="custom-label">Contact No</label>
+                            <input type="text" id="otherName" class="form-control custom-form-control" ng-model="vm.parent.otherName" name="otherName" ng-maxlength="50" />
+                            <p ng-show="vm.parentForm.otherName.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
                         </div>
                     </div>
-                    
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="otherName" class="custom-label">Contact No</label>
-                        <input type="text" id="otherName" class="form-control custom-form-control" ng-model="vm.parent.otherName" name="otherName" ng-maxlength="50" />
-                        <p ng-show="vm.parentForm.otherName.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
-                    </div>
-                </div>
 
-                
 
-                <div class="col-sm-6">
+
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label for="familyTitle" class="custom-label">Family Title</label>
                             <input type="text" id="familyTitle" class="form-control custom-form-control" ng-model="vm.parent.familyTitle" name="familyTitle" ng-maxlength="250" />
@@ -105,16 +98,23 @@
                             <p ng-show="vm.parentForm.nationalityId.$error.required" class="help-block errormsg">Please select an Option</p>
                         </div>
                     </div>
-                    
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="nID" class="custom-label">NID</label>
-                        <input type="text" id="nID" class="form-control custom-form-control" ng-model="vm.parent.nid" name="nID" ng-maxlength="50" />
-                        <p ng-show="vm.parentForm.nID.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
-                    </div>
-                </div>
 
-                <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nickName" class="custom-label">TIN (If Available)</label>
+                            <input type="text" id="nickName" class="form-control custom-form-control" ng-model="vm.parent.nickName" name="nickName" ng-maxlength="50" />
+                            <p ng-show="vm.parentForm.nickName.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nID" class="custom-label">NID Number</label>
+                            <input type="text" id="nID" class="form-control custom-form-control" ng-model="vm.parent.nid" name="nID" ng-maxlength="50" />
+                            <p ng-show="vm.parentForm.nID.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label for="isNationalityChange" class="custom-label">Nationality Change</label>
                             <input type="radio" ng-model="vm.parent.isNationalityChange" ng-value="false">No
@@ -143,7 +143,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="educationalQualification" class="custom-label">Educational Qualification</label>
-                            <textarea type="text" id="educationalQualification" class="form-control custom-form-control" ng-model="vm.parent.educationalQualification" name="educationalQualification" ng-maxlength="350"  />
+                            <textarea type="text" id="educationalQualification" class="form-control custom-form-control" ng-model="vm.parent.educationalQualification" name="educationalQualification" ng-maxlength="350" />
                             <p ng-show="vm.parentForm.educationalQualification.$error.maxlength" class="help-block errormsg">Maximum character 350</p>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="religionId" class="custom-label">Religion</label>
-                            <select name="religionId" id="religionId" class="form-control" ng-model="vm.parent.religionId" ng-change="vm.getReligionCastByReligion(vm.parent.religionId)" ng-options="option.value as option.text for option in vm.religions" >
+                            <select name="religionId" id="religionId" class="form-control" ng-model="vm.parent.religionId" ng-change="vm.getReligionCastByReligion(vm.parent.religionId)" ng-options="option.value as option.text for option in vm.religions">
                                 <option value="">--Select an Option--</option>
                             </select>
                             <p ng-show="vm.parentForm.religionId.$error.required" class="help-block errormsg">Please select an Option</p>

@@ -68,6 +68,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 			return dataTable.ToJson().ToList();
 		}
+        public List<object> GetUnmDeferment(string pNo)
+		{
+			DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetUnmDeferment] '{0}' ", pNo));
+
+			return dataTable.ToJson().ToList();
+		}
 
 
         public List<object> GetCareerForecast(string pNo)

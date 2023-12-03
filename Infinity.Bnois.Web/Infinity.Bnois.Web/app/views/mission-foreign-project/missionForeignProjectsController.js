@@ -14,6 +14,7 @@
         vm.pNo = 0;
         vm.foreignProjects = [];
         vm.missions = [];
+        vm.unmDeferments = [];
         vm.hajjDetails = [];
         vm.printSection = printSection;
 
@@ -35,6 +36,15 @@
 
             currentStatusService.getForeignProjects(vm.pNo).then(function (data) {
                 vm.foreignProjects = data.result;
+
+                },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+
+
+            currentStatusService.getUnmDeferment(vm.pNo).then(function (data) {
+                vm.unmDeferments = data.result;
 
                 },
                 function (errorMessage) {

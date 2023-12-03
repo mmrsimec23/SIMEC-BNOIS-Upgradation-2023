@@ -30,7 +30,7 @@ namespace Infinity.Bnois.Data
             string visitFromDate, string visitToDate, string leaveFromDate, string leaveToDate, double gpaFrom, double gpaTo, int? hajj, int additionalApt,int servedAdditionalApt, int notServedAdditionalApt, string missionFromDate, string missionToDate,
             int HajjOrOmra, int CarLoan, int GoldenChild, string medicalCategoryFromDate, string medicalCategoryToDate, int medicalCategoryStatus, string securityClearanceFromDate, string securityClearanceToDate, int securityClearanceStatus, 
             string familyPermissionFromDate, string familyPermissionToDate, string carLoanFromDate, string carLoanToDate, string promotionRankFromDate, string promotionRankToDate, int seniorityFilter, string seniorityCommissionToDate,
-            string officerLeaveFromDate, string officerLeaveToDate, string punishmentFromDate, string punishmentToDate, int spCurrentStatus, int viewAchievement, int viewModal, int viewAward, int viewPublication, int viewPunishment,
+            string officerLeaveFromDate, string officerLeaveToDate, string punishmentFromDate, string punishmentToDate, int spCurrentStatus, int viewForeignProject, int viewAchievement, int viewModal, int viewAward, int viewPublication, int viewPunishment,
             string courseMissionAbroadFromDate, string courseMissionAbroadToDate, string courseNotDoneFromDate, string courseNotDoneToDate, string visitNotFromDate, string visitNotToDate);
 
         int SaveAreasSelected(object value, string userId);

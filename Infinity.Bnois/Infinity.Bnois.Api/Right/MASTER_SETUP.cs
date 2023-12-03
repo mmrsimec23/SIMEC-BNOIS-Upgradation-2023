@@ -149,5 +149,6 @@ namespace Infinity.Bnois.Api.Right
         public const int TOEAUTHORIZED = 1137;
         public const int OODENTRY = 1138;
         public const int TOEOSENTRY = 1139;
+        public const int EMPLOYEE_UNM_DEFERMENT = 1140;
     }
 }
