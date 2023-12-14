@@ -58,7 +58,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 throw new InfinityArgumentMissingException("Heir/Next Of Kin Info data missing");
             }
 
-            bool isExistData = heirNextOfKinInfoRepository.Exists(x => x.OccupationId == model.OccupationId && x.GenderId==model.GenderId && x.RelationId==model.RelationId && x.NameEng == model.NameEng && x.HeirTypeId==model.HeirTypeId  && x.HeirNextOfKinInfoId != model.HeirNextOfKinInfoId);
+            bool isExistData = heirNextOfKinInfoRepository.Exists(x => x.OccupationId == model.OccupationId && x.EmployeeId==model.EmployeeId && x.GenderId==model.GenderId && x.RelationId==model.RelationId && x.NameEng == model.NameEng && x.HeirTypeId==model.HeirTypeId  && x.HeirNextOfKinInfoId != model.HeirNextOfKinInfoId);
             if (isExistData)
             {
                 throw new InfinityInvalidDataException("Data already exists !");
@@ -252,6 +252,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             heirNextOfKinInfo.EmployeeId = model.EmployeeId;
             heirNextOfKinInfo.OccupationId = model.OccupationId;
 
+            heirNextOfKinInfo.Employee = null;
 
             await heirNextOfKinInfoRepository.SaveAsync(heirNextOfKinInfo);
             model.HeirNextOfKinInfoId = heirNextOfKinInfo.HeirNextOfKinInfoId;

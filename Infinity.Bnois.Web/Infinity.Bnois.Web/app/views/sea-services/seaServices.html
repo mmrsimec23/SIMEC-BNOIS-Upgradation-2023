@@ -136,6 +136,32 @@
                     </table>
 
                 </div>
+                <h3 class="reportHeader">Shore Command Service</h3>
+                <hr />
+                <div class="table-wrapper table-responsive reportCover">
+                    <table class="table table-bordered pdfReportTable" border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                                <th>Office Name</th>
+                                <th>From Date</th>
+                                <th>To Date </th>
+                                <th>Duration</th>
+                                <th>Total Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody class="reportBody">
+                            
+                            <tr class="reportTR" ng-repeat="seaCommandService in vm.shoreCommandServices">
+                                <td class="reportTD">{{seaCommandService.shipName}}</td>
+                                <td class="reportTD" style="width: 100px;">{{seaCommandService.fromDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="width: 100px;">{{seaCommandService.toDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="width: 100px;" style="text-transform: lowercase;">{{seaCommandService.duration}}</td>
+                                <td class="reportTD" rowspan="{{shoreCommandServices.length}}" style="vertical-align : middle;text-align:center;text-transform: lowercase;">{{vm.shoreCommandServices[0].subTotalDuration}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
     </div>

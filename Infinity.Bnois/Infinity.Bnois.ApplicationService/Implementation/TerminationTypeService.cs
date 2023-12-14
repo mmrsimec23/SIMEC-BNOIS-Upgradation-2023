@@ -13,9 +13,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class TerminationTypeService : ITerminationTypeService
     {
         private readonly IBnoisRepository<TerminationType> terminationTypeRepository;
-        public TerminationTypeService(IBnoisRepository<TerminationType> terminationTypeRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public TerminationTypeService(IBnoisRepository<TerminationType> terminationTypeRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.terminationTypeRepository = terminationTypeRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
 
@@ -67,6 +71,41 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 terminationType.ModifiedDate = DateTime.Now;
                 terminationType.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "TerminationType";
+                bnLog.TableEntryForm = "Termination Type";
+                bnLog.PreviousValue = "Id: " + model.TerminationTypeId;
+                bnLog.UpdatedValue = "Id: " + model.TerminationTypeId;
+                int bnoisUpdateCount = 0;
+                if (terminationType.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + terminationType.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
+                }
+                if (terminationType.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + terminationType.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString(); ;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -96,6 +135,22 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "TerminationType";
+                bnLog.TableEntryForm = "Termination Type";
+                bnLog.PreviousValue = "Id: " + terminationType.TerminationTypeId + ", Name: " + terminationType.Name + ", Remarks: " + terminationType.Remarks;
+                
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await terminationTypeRepository.DeleteAsync(terminationType);
             }
         }

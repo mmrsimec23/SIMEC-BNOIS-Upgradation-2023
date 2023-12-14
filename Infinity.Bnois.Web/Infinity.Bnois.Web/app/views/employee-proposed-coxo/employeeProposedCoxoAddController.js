@@ -72,6 +72,7 @@
         }
 
         function insertemployeeProposedCoxo() {
+            vm.employeeProposedCoxo.type = 1;
             employeeProposedCoxoService.saveemployeeProposedCoxo(vm.employeeProposedCoxo).then(function (data) {
                 close();
             },

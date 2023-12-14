@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Controllers\EmployeeUnmDefermentController.cs" />
     <Compile Include="Controllers\OverviewOfficersDeploymentEntryController - Copy.cs" />
+    <Compile Include="Controllers\CoFfRecomController.cs" />
     <Compile Include="Controllers\ToeOfficerStateEntryController.cs" />
     <Compile Include="Controllers\ToeAuthorizedsController.cs" />
     <Compile Include="Controllers\RoasterListController.cs" />

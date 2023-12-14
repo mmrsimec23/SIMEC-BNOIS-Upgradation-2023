@@ -7,6 +7,9 @@
             downlaodBroadSheetForeignCourseVisitMission: downlaodBroadSheetForeignCourseVisitMission,
             downloadPromotionBoardTraceReport: downloadPromotionBoardTraceReport,
             downlaodTransferProposalUrl: downlaodTransferProposalUrl,
+            downlaodTransferProposalWithPicUrl: downlaodTransferProposalWithPicUrl,
+            downlaodTransferProposalXBranchUrl: downlaodTransferProposalXBranchUrl,
+            downlaodTransferProposalWithoutXBranchUrl: downlaodTransferProposalWithoutXBranchUrl,
             downloadReportUrl: downloadReportUrl,
             downloadPromotionBroadSheetReportUrl: downloadPromotionBroadSheetReportUrl,
             downloadPersonalReport: downloadPersonalReport,
@@ -50,6 +53,15 @@
         }
         function downlaodTransferProposalUrl(transferProposalId, reportType) {
             return dataConstants.REPORT_URL + 'download-transfer-proposal?transferProposalId=' + transferProposalId + '&type=' + reportType;
+        }
+        function downlaodTransferProposalWithPicUrl(transferProposalId, reportType) {
+            return dataConstants.REPORT_URL + 'download-transfer-proposal-with-pic?transferProposalId=' + transferProposalId + '&type=' + reportType;
+        }
+        function downlaodTransferProposalXBranchUrl(transferProposalId, reportType) {
+            return dataConstants.REPORT_URL + 'download-transfer-proposal-xbranch?transferProposalId=' + transferProposalId + '&type=' + reportType;
+        }
+        function downlaodTransferProposalWithoutXBranchUrl(transferProposalId, reportType) {
+            return dataConstants.REPORT_URL + 'download-transfer-proposal-without-xbranch?transferProposalId=' + transferProposalId + '&type=' + reportType;
         }
 
         function downloadSearchResult(header, type,orientation) {

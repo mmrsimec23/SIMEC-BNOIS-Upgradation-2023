@@ -176,7 +176,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             employeeSecurityClearance.EmployeeId = model.EmployeeId;
             employeeSecurityClearance.SecurityClearanceReasonId = model.SecurityClearanceReasonId;
-            employeeSecurityClearance.Remarks = model.Remarks;
+            employeeSecurityClearance.Remarks = (model.Remarks==null ? "" : model.Remarks);
             employeeSecurityClearance.IsCleared = model.IsCleared;
             employeeSecurityClearance.NotClearReason = model.NotClearReason;
             employeeSecurityClearance.ClearanceDate =(DateTime) model.ClearanceDate;

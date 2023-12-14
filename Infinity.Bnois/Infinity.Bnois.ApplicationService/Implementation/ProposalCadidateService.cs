@@ -47,6 +47,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             proposalCadidate.CreatedDate = DateTime.Now;
             proposalCadidate.CreatedBy = userId;
             proposalCadidate.ProposalDetailId = model.ProposalDetailId;
+            proposalCadidate.ProposedBillet = model.ProposedBillet;
             proposalCadidate.EmployeeId = model.EmployeeId;
             proposalCadidate.Employee = null;
             await proposalCandidateRepository.SaveAsync(proposalCadidate);

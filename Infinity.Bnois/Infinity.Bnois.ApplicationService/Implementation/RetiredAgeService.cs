@@ -13,9 +13,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class RetiredAgeService : IRetiredAgeService
     {
         private readonly IBnoisRepository<RetiredAge> retiredAgeRepository;
-        public RetiredAgeService(IBnoisRepository<RetiredAge> retiredAgeRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public RetiredAgeService(IBnoisRepository<RetiredAge> retiredAgeRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.retiredAgeRepository = retiredAgeRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<RetiredAgeModel> GetRetiredAges(int ps, int pn, string qs, out int total)
@@ -69,6 +73,88 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 retiredAge.ModifiedDate = DateTime.Now;
                 retiredAge.ModifiedBy = userId;
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "RetiredAge";
+                bnLog.TableEntryForm = "Retired Age List Policy";
+                bnLog.PreviousValue = "Id: " + model.RetiredAgeId;
+                bnLog.UpdatedValue = "Id: " + model.RetiredAgeId;
+                int bnoisUpdateCount = 0;
+
+                if (retiredAge.CategoryId != model.CategoryId)
+                {
+                    if (retiredAge.CategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Category", "CategoryId", retiredAge.CategoryId);
+                        bnLog.PreviousValue += ", Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.CategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Category", "CategoryId", model.CategoryId);
+                        bnLog.UpdatedValue += ", Category: " + ((dynamic)newv).PNo;
+                    }
+                }
+                if (retiredAge.SubCategoryId != model.SubCategoryId)
+                {
+                    if (retiredAge.SubCategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("SubCategory", "SubCategoryId", retiredAge.SubCategoryId);
+                        bnLog.PreviousValue += ", Sub Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.SubCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("SubCategory", "SubCategoryId", model.SubCategoryId);
+                        bnLog.UpdatedValue += ", Sub Category: " + ((dynamic)newv).PNo;
+                    }
+                }
+                if (retiredAge.RankId != model.RankId)
+                {
+                    if (retiredAge.RankId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Rank", "RankId", retiredAge.RankId);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prev).ShortName;
+                    }
+                    if (model.SubCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId);
+                        bnLog.UpdatedValue += ", Rank: " + ((dynamic)newv).ShortName;
+                    }
+                }
+                if (retiredAge.AgeLimit != model.AgeLimit)
+                {
+                    bnLog.PreviousValue += ", Retirement Date: " + retiredAge.AgeLimit;
+                    bnLog.UpdatedValue += ", Retirement Date: " + model.AgeLimit;
+                    bnoisUpdateCount += 1;
+                }
+                if (retiredAge.RStatus != model.RStatus)
+                {
+                    bnLog.PreviousValue += ", List Type: " + (retiredAge.RStatus == 1 ? "Retired" : retiredAge.RStatus == 2 ? "Emergency" : retiredAge.RStatus == 3 ? "Reserve" : "");
+                    bnLog.UpdatedValue += ", List Type: " + (model.RStatus == 1 ? "Retired" : model.RStatus == 2 ? "Emergency" : model.RStatus == 3 ? "Reserve" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (retiredAge.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + retiredAge.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString(); ;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -103,6 +189,36 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "RetiredAge";
+                bnLog.TableEntryForm = "Retired Age List Policy";
+                bnLog.PreviousValue = "Id: " + retiredAge.RetiredAgeId;
+                if (retiredAge.CategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Category", "CategoryId", retiredAge.CategoryId);
+                    bnLog.PreviousValue += ", Category: " + ((dynamic)prev).Name;
+                }
+                if (retiredAge.SubCategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("SubCategory", "SubCategoryId", retiredAge.SubCategoryId);
+                    bnLog.PreviousValue += ", Sub Category: " + ((dynamic)prev).Name;
+                }
+                if (retiredAge.RankId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Rank", "RankId", retiredAge.RankId);
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prev).ShortName;
+                }
+                bnLog.PreviousValue += ", Retirement Date: " + retiredAge.AgeLimit + ", List Type: " + (retiredAge.RStatus == 1 ? "Retired" : retiredAge.RStatus == 2 ? "Emergency" : retiredAge.RStatus == 3 ? "Reserve" : "") + ", Remarks: " + retiredAge.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await retiredAgeRepository.DeleteAsync(retiredAge);
             }
         }

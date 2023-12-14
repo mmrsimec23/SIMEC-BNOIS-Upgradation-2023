@@ -5,6 +5,9 @@
     function roasterListService(dataConstants, apiHttpService) {
         var service = {
             getRoasterListByShipType: getRoasterListByShipType,
+            getLargeShipCoWaitingList: getLargeShipCoWaitingList,
+            getLargeShipXoWaitingList: getLargeShipXoWaitingList,
+            getMediumShipCoWaitingList: getMediumShipCoWaitingList,
             getLargeShipProposedWaitingCoXoList: getLargeShipProposedWaitingCoXoList
 
         };
@@ -18,6 +21,18 @@
 
         function getLargeShipProposedWaitingCoXoList(officeId, appointment) {
             var url = dataConstants.ROASTER_LIST_URL + 'get-proposed-waiting-coxo-list?officeId=' + officeId + '&appointment=' + appointment;
+            return apiHttpService.GET(url);
+        }
+        function getLargeShipCoWaitingList() {
+            var url = dataConstants.ROASTER_LIST_URL + 'get-large-ship-co-waiting-list';
+            return apiHttpService.GET(url);
+        }
+        function getLargeShipXoWaitingList() {
+            var url = dataConstants.ROASTER_LIST_URL + 'get-large-ship-xo-waiting-list';
+            return apiHttpService.GET(url);
+        }
+        function getMediumShipCoWaitingList() {
+            var url = dataConstants.ROASTER_LIST_URL + 'get-medium-ship-co-waiting-list';
             return apiHttpService.GET(url);
         }
     }

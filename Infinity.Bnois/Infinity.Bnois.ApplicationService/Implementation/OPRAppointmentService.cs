@@ -14,10 +14,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	public class OPRAppointmentService : IOPRAppointmentService
 	{
 		private readonly IBnoisRepository<OprAptSuitability> OPRAppointmentRepository;
-		public OPRAppointmentService(IBnoisRepository<OprAptSuitability> OPRAppointmentRepository)
-		{
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public OPRAppointmentService(IBnoisRepository<OprAptSuitability> OPRAppointmentRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
+        {
 			this.OPRAppointmentRepository = OPRAppointmentRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
+        }
 
 
 
@@ -81,6 +85,36 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "OprAptSuitability";
+                bnLog.TableEntryForm = "Suitability for Special Type of Appointment (Section-VI)";
+                bnLog.PreviousValue = "Id: " + OPRAppointment.Id;
+
+                bnLog.PreviousValue += ", EmployeeOprId: " + OPRAppointment.EmployeeOprId;
+
+                if (OPRAppointment.SpecialAptTypeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("SpecialAptType", "Id", OPRAppointment.SpecialAptTypeId);
+                    bnLog.PreviousValue += ", Special Type of Appointment: " + ((dynamic)prev).SpAptType;
+                }
+                if (OPRAppointment.SuitabilityId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Suitability", "Id", OPRAppointment.SuitabilityId);
+                    bnLog.PreviousValue += ", Suitability: " + ((dynamic)prev).SuitabilityName;
+                }
+                bnLog.PreviousValue += ", Note: " + OPRAppointment.Note;
+                
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await OPRAppointmentRepository.DeleteAsync(OPRAppointment);
             }
         }

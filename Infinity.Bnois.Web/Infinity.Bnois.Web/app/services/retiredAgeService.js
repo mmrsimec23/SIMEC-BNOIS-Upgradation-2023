@@ -33,7 +33,7 @@
         }
 
         function deleteRetiredAge(id) {
-            var url = dataConstants.RETIRED_AGE_URL_URL + 'delete-retired-age/' + id;
+            var url = dataConstants.RETIRED_AGE_URL + 'delete-retired-age/' + id;
             return apiHttpService.DELETE(url);
         }
     }

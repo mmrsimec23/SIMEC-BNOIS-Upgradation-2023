@@ -8,5 +8,8 @@ namespace Infinity.Bnois.ApplicationService.Interface
     {
         List<Object> GetRoasterListByShipType(int shipType, int coxoStatus);
         List<Object> GetLargeShipProposedWaitingCoXoList(int officeId, int appointment);
+        List<Object> GetLargeShipCoWaitingList();
+        List<Object> GetLargeShipXoWaitingList();
+        List<Object> GetMediumShipCoWaitingList();
     }
 }

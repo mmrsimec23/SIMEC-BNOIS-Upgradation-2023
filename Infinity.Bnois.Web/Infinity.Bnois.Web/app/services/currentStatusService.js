@@ -49,6 +49,7 @@
             getMissions: getMissions,
             getHODServices: getHODServices,
             getDockyardServices: getDockyardServices,
+            getShoreCommandServices: getShoreCommandServices,
             getSubmarineServices: getSubmarineServices,
             getDeputationServices: getDeputationServices,
             getOutsideServices: getOutsideServices,
@@ -229,6 +230,11 @@
 
         function getSeaCommandServices(pNo) {
             var url = dataConstants.CURRENT_STATUS_URL + 'get-sea-command-services?pNo=' + pNo;
+            return apiHttpService.GET(url);
+        }
+
+        function getShoreCommandServices(pNo) {
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-shore-command-services?pNo=' + pNo;
             return apiHttpService.GET(url);
         }
 

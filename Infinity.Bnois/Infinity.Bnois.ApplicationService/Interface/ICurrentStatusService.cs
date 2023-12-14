@@ -68,6 +68,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<Object> GetDockyardServices(string pNo);
         List<Object> GetSubmarineServices(string pNo);
         List<Object> GetDeputationServices(string pNo);
+        List<Object> GetShoreCommandServices(string pNo);
         List<Object> GetOutsideServices(string pNo);
         List<Object> GetFamilyPermissionRelationCount(string pNo);
         List<Object> GetFamilyPermissions(string pNo, int relationId);

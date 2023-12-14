@@ -62,7 +62,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 throw new InfinityArgumentMissingException("Spouse data missing");
             }
 
-            bool isExistData = spouseRepository.Exists(x => x.OccupationId == model.OccupationId && x.BNameEng == model.BNameEng && x.ANameEng == model.ANameEng && x.SpouseId != spouseId);
+            var isExistData = spouseRepository.Exists(x => x.SpouseId != spouseId && x.EmployeeId == model.EmployeeId && x.OccupationId == model.OccupationId && x.BNameEng == model.BNameEng && x.ANameEng == model.ANameEng);
             if (isExistData)
             {
                 throw new InfinityInvalidDataException("Data already exists !");

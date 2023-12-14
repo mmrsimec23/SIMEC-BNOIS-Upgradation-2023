@@ -14,10 +14,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	public class LprCalculateInfoService : ILprCalculateInfoService
 	{
 		private readonly IBnoisRepository<LprCalculateInfo> lprCalculationRepository;
-		public LprCalculateInfoService(IBnoisRepository<LprCalculateInfo> lprCalculationRepository)
-		{
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public LprCalculateInfoService(IBnoisRepository<LprCalculateInfo> lprCalculationRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
+        {
 			this.lprCalculationRepository = lprCalculationRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
+        }
 
 		public async Task<bool> DeleteLprCalculate(int id)
 		{
@@ -32,7 +36,33 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 			}
 			else
 			{
-				return await lprCalculationRepository.DeleteAsync(lprCalculateInfo);
+                // data log section start
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "LprCalculateInfo";
+                bnLog.TableEntryForm = "LPR Calculate Info";
+                bnLog.PreviousValue = "Id: " + lprCalculateInfo.LprCalculateId;
+
+                if (lprCalculateInfo.EmployeeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", lprCalculateInfo.EmployeeId);
+                    bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                }
+                
+                bnLog.PreviousValue += ", Leave as Sailor: " + lprCalculateInfo.SailorDue + ", Privilege Leave: " + lprCalculateInfo.LPR + ", Furlough Leave: " + lprCalculateInfo.FlLeave + ", Terminal Leave: " + lprCalculateInfo.TerminalLeave + ", Survey Leave: " + lprCalculateInfo.SurveyLeave;
+                
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
+                return await lprCalculationRepository.DeleteAsync(lprCalculateInfo);
 			}
 		}
 
@@ -83,7 +113,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 			}
 
 
-		    bool isExist = lprCalculationRepository.Exists(x => x.EmployeeId == model.Employee.EmployeeId);
+		    bool isExist = lprCalculationRepository.Exists(x => x.LprCalculateId != model.LprCalculateId && x.EmployeeId == model.Employee.EmployeeId);
 		    if (isExist)
 		    {
 		        throw new InfinityInvalidDataException("Data already exists !");
@@ -103,8 +133,75 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 				lprCalculate.ModifiedDate = DateTime.Now;
 				lprCalculate.ModifiedBy = userId;
-			}
-			else
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "LprCalculateInfo";
+                bnLog.TableEntryForm = "LPR Calculate Info";
+                bnLog.PreviousValue = "Id: " + model.LprCalculateId;
+                bnLog.UpdatedValue = "Id: " + model.LprCalculateId;
+                int bnoisUpdateCount = 0;
+                if (lprCalculate.EmployeeId > 0 || model.EmployeeId > 0)
+                {
+                    if (lprCalculate.EmployeeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", lprCalculate.EmployeeId);
+                        bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                    }
+                    if (model.EmployeeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                        bnLog.UpdatedValue += ", P No: " + ((dynamic)prev).PNo;
+                    }
+                }
+                if (lprCalculate.SailorDue != model.SailorDue)
+                {
+                    bnLog.PreviousValue += ", Leave as Sailor: " + lprCalculate.SailorDue;
+                    bnLog.UpdatedValue += ", Leave as Sailor: " + model.SailorDue;
+                    bnoisUpdateCount += 1;
+                }
+                if (lprCalculate.LPR != model.LPR)
+                {
+                    bnLog.PreviousValue += ", Privilege Leave: " + lprCalculate.LPR;
+                    bnLog.UpdatedValue += ", Privilege Leave: " + model.LPR;
+                    bnoisUpdateCount += 1;
+                }
+                if (lprCalculate.FlLeave != model.FlLeave)
+                {
+                    bnLog.PreviousValue += ", Furlough Leave: " + lprCalculate.FlLeave;
+                    bnLog.UpdatedValue += ", Furlough Leave: " + model.FlLeave;
+                    bnoisUpdateCount += 1;
+                }
+                if (lprCalculate.TerminalLeave != model.TerminalLeave)
+                {
+                    bnLog.PreviousValue += ", Terminal Leave: " + lprCalculate.TerminalLeave;
+                    bnLog.UpdatedValue += ", Terminal Leave: " + model.TerminalLeave;
+                    bnoisUpdateCount += 1;
+                }
+                if (lprCalculate.SurveyLeave != model.SurveyLeave)
+                {
+                    bnLog.PreviousValue += ", Survey Leave: " + lprCalculate.SurveyLeave;
+                    bnLog.UpdatedValue += ", Survey Leave: " + model.SurveyLeave;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
+            }
+            else
 			{
 				lprCalculate.IsActive = true;
 				lprCalculate.CreatedDate = DateTime.Now;

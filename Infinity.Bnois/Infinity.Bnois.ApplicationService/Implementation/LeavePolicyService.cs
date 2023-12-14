@@ -14,10 +14,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	public class LeavePolicyService : ILeavePolicyService
 	{
 		private readonly IBnoisRepository<LeavePolicy> leavePolicyRepository;
-		public LeavePolicyService(IBnoisRepository<LeavePolicy> leavePolicyRepository)
-		{
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public LeavePolicyService(IBnoisRepository<LeavePolicy> leavePolicyRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
+        {
 			this.leavePolicyRepository = leavePolicyRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
+        }
 
 		public async Task<bool> DeleteLeavePolicy(int id)
 		{
@@ -25,14 +29,46 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 			{
 				throw new InfinityArgumentMissingException("Invalid Request");
 			}
-			LeavePolicy batch = await leavePolicyRepository.FindOneAsync(x => x.LeavePolicyId == id);
-			if (batch == null)
+			LeavePolicy leavePolicy = await leavePolicyRepository.FindOneAsync(x => x.LeavePolicyId == id);
+			if (leavePolicy == null)
 			{
 				throw new InfinityNotFoundException("Leave Policy not found");
 			}
 			else
 			{
-				return await leavePolicyRepository.DeleteAsync(batch);
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "LeavePolicy";
+                bnLog.TableEntryForm = "Leave Policy";
+                bnLog.PreviousValue = "Id: " + leavePolicy.LeavePolicyId;
+                
+
+                if (leavePolicy.CommissionTypeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("CommissionType", "CommissionTypeId", leavePolicy.CommissionTypeId);
+                    bnLog.PreviousValue += ", Commission Type: " + ((dynamic)prev).TypeName;
+                }
+                if (leavePolicy.LeaveTypeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("LeaveType", "LeaveTypeId", leavePolicy.LeaveTypeId);
+                    bnLog.PreviousValue += ", Leave Type: " + ((dynamic)prev).TypeName;
+                }
+                bnLog.PreviousValue += ", Duration: " + leavePolicy.LeaveDuration + ", Duration Type: " + (leavePolicy.LeaveDurationType == "1" ? "Month" : leavePolicy.LeaveDurationType == "2" ? "Day" : "") + ", Slot: " + leavePolicy.Slot + ", Foreign Duration: " + leavePolicy.ForeignDuration + ", Foreign Duration Type: " + (leavePolicy.ForeignDurationType == "1" ? "Month" : leavePolicy.ForeignDurationType == "2" ? "Day" : "") + ", Foreign Duration Type: " + (leavePolicy.WATP == "Y" ? "Year" : leavePolicy.WATP == "W" ? "Whole Year" : leavePolicy.WATP == "A" ? "After" : "") + ", Tm Year: " + leavePolicy.TmYear;
+
+
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+                return await leavePolicyRepository.DeleteAsync(leavePolicy);
 			}
 		}
 
@@ -96,8 +132,100 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 			    leavePolicy.ModifiedDate = DateTime.Now;
 			    leavePolicy.ModifiedBy = userId;
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "LeavePolicy";
+                bnLog.TableEntryForm = "Leave Policy";
+                bnLog.PreviousValue = "Id: " + model.LeavePolicyId;
+                bnLog.UpdatedValue = "Id: " + model.LeavePolicyId;
+                int bnoisUpdateCount = 0;
+                if (leavePolicy.CommissionTypeId != model.CommissionTypeId)
+                {
+                    if (leavePolicy.CommissionTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("CommissionType", "CommissionTypeId", leavePolicy.CommissionTypeId);
+                        bnLog.PreviousValue += ", Commission Type: " + ((dynamic)prev).TypeName;
+                    }
+                    if (model.CommissionTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("CommissionType", "CommissionTypeId", model.CommissionTypeId);
+                        bnLog.UpdatedValue += ", Commission Type: " + ((dynamic)prev).TypeName;
+                    }
+                }
+                if (leavePolicy.LeaveTypeId != model.LeaveTypeId)
+                {
+                    if (leavePolicy.LeaveTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("LeaveType", "LeaveTypeId", leavePolicy.LeaveTypeId);
+                        bnLog.PreviousValue += ", Leave Type: " + ((dynamic)prev).TypeName;
+                    }
+                    if (model.LeaveTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("LeaveType", "LeaveTypeId", model.LeaveTypeId);
+                        bnLog.UpdatedValue += ", Leave Type: " + ((dynamic)prev).TypeName;
+                    }
+                }
+                if (leavePolicy.LeaveDuration != model.LeaveDuration)
+                {
+                    bnLog.PreviousValue += ", Duration: " + leavePolicy.LeaveDuration;
+                    bnLog.UpdatedValue += ", Duration: " + model.LeaveDuration;
+                    bnoisUpdateCount += 1;
+                }
+                if (leavePolicy.LeaveDurationType != model.LeaveDurationType)
+                {
+                    bnLog.PreviousValue += ", Duration Type: " + (leavePolicy.LeaveDurationType == "1" ? "Month" : leavePolicy.LeaveDurationType == "2" ? "Day" : "");
+                    bnLog.UpdatedValue += ", Duration Type: " + (model.LeaveDurationType == "1" ? "Month" : model.LeaveDurationType == "2" ? "Day" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (leavePolicy.Slot != model.Slot)
+                {
+                    bnLog.PreviousValue += ", Slot: " + leavePolicy.Slot;
+                    bnLog.UpdatedValue += ", Slot: " + model.Slot;
+                    bnoisUpdateCount += 1;
+                }
+                if (leavePolicy.ForeignDuration != model.ForeignDuration)
+                {
+                    bnLog.PreviousValue += ", Foreign Duration: " + leavePolicy.ForeignDuration;
+                    bnLog.UpdatedValue += ", Foreign Duration: " + model.ForeignDuration;
+                    bnoisUpdateCount += 1;
+                }
+                if (leavePolicy.ForeignDurationType != model.ForeignDurationType)
+                {
+                    bnLog.PreviousValue += ", Foreign Duration Type: " + (leavePolicy.ForeignDurationType == "1" ? "Month" : leavePolicy.ForeignDurationType == "2" ? "Day" : "");
+                    bnLog.UpdatedValue += ", Foreign Duration Type: " + (model.ForeignDurationType == "1" ? "Month" : model.ForeignDurationType == "2" ? "Day" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (leavePolicy.WATP != model.WATP)
+                {
+                    bnLog.PreviousValue += ", Foreign Duration Type: " + (leavePolicy.WATP == "Y" ? "Year" : leavePolicy.WATP == "W" ? "Whole Year" : leavePolicy.WATP == "A" ? "After" : "");
+                    bnLog.UpdatedValue += ", Foreign Duration Type: " + (model.WATP == "Y" ? "Year" : model.WATP == "W" ? "Whole Year" : model.WATP == "A" ? "After" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (leavePolicy.TmYear != model.TmYear)
+                {
+                    bnLog.PreviousValue += ", Tm Year: " + leavePolicy.TmYear;
+                    bnLog.UpdatedValue += ", Tm Year: " + model.TmYear;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
-			else
+            else
 			{
 				leavePolicy.IsActive = true;
 				leavePolicy.CreatedDate = DateTime.Now;

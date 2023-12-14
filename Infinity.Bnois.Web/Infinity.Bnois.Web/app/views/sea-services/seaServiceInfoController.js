@@ -16,9 +16,11 @@
         vm.additionalSeaServices = [];
 
         vm.seaServicesGrandTotal = 0;
+        vm.shoreCommandServicesGrandTotal = 0;
         vm.seaCommandServicesGrandTotal = 0;
         vm.seaServices = [];
         vm.seaCommandServices = [];
+        vm.shoreCommandServices = [];
         vm.printSection = printSection;
 
         if ($stateParams.pno !== undefined && $stateParams.pno !== null) {
@@ -58,6 +60,14 @@
             currentStatusService.getSeaCommandServices(vm.pNo).then(function (data) {
                 vm.seaCommandServices = data.result.services;
                 vm.seaCommandServicesGrandTotal = data.result.grandTotal;
+
+            },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+
+            currentStatusService.getShoreCommandServices(vm.pNo).then(function (data) {
+                vm.shoreCommandServices = data.result;
 
             },
                 function (errorMessage) {

@@ -1,0 +1,47 @@
+﻿<div class="container-fluid">
+	<div class="row">
+		<div class="panel">
+			<button class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
+
+			<div class="panel-body pdfReportFormCover" id="print">
+				<h3 class="reportHeader">WAITING LIST (CO/MEDIUM SHIP)</h3>
+				<hr />
+
+				<div ng-if="vm.mediumShipCoWaitingLists.length>0" class="table-wrapper table-responsive reportCover">
+					<table class="table table-bordered pdfReportTable" border="1">
+						<thead class="reportThead">
+							<tr class="tableHeading reportTR">
+								<th style="vertical-align: middle; width: 20px;"> Ser</th>
+								<th style="vertical-align: middle; width: 50px; "> P No</th>
+								<th style="vertical-align: middle; width: 300px; ">Rank & Name</th>
+								<th style="vertical-align: middle; width: 200px;">Present Billet</th>
+								<th style="vertical-align: middle; width: 60px;">Batch</th>
+								<th style="vertical-align: middle; width: 115px;">Since</th>
+								<th style="vertical-align: middle; width: 80px; ">OPR Avarage</th>
+								<th style="vertical-align: middle; width: 80px; ">PSC Result</th>
+								<th style="vertical-align: middle; width: 100px; ">Sea Svc</th>
+								<th style="vertical-align: middle; width: 100px; ">Total Comd Svc</th>
+							</tr>
+						</thead>
+						<tbody class="reportBody" style="border-bottom: 1px solid;">
+							<tr ng-repeat="mediumShipCo in vm.mediumShipCoWaitingLists" class="reportTR">
+								<td class="reportTD">{{$index+1}}</td>
+								<td class="reportTD">{{mediumShipCo.pNo}}</td>
+								<td class="reportTD"><a href="" ng-click="vm.officeCurrentStatus(mediumShipCo.pNo)"> <strong>{{mediumShipCo.fullNameEng}}</strong></a></td>
+								<td class="reportTD">{{mediumShipCo.billet}}</td>
+								<td class="reportTD">{{mediumShipCo.batchName}}</td>
+								<td class="reportTD">{{mediumShipCo.since | date:"dd-MMM-yyyy"}}</td>
+								<td class="reportTD {{mediumShipCo.oprAverage > 6 ? 'normal' : 'Completed'}}">{{mediumShipCo.oprAverage}}</td>
+								<td class="reportTD {{mediumShipCo.staffCourseResult > 60 ? 'normal' : 'Completed'}}">{{mediumShipCo.staffCourseResult}}</td>
+								<td class="reportTD">{{mediumShipCo.totalSeaServiceDuration}}</td>
+								<td class="reportTD">{{mediumShipCo.totalSeaCmdDuration}}</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

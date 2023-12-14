@@ -15,9 +15,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
 
         private readonly IBnoisRepository<VisitSubCategory> visitSubCategoryRepository;
-        public VisitSubCategoryService(IBnoisRepository<VisitSubCategory> visitSubCategoryRepository)
+        private readonly IEmployeeService employeeService;
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public VisitSubCategoryService(IBnoisRepository<VisitSubCategory> visitSubCategoryRepository, IEmployeeService employeeService, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.visitSubCategoryRepository = visitSubCategoryRepository;
+            this.employeeService = employeeService;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
         public List<VisitSubCategoryModel> GetVisitSubCategories(int ps, int pn, string qs, out int total)
@@ -71,6 +75,58 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 visitSubCategory.ModifiedDate = DateTime.Now;
                 visitSubCategory.ModifiedBy = userId;
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "VisitSubCategory";
+                bnLog.TableEntryForm = "Visit Sub Category";
+                bnLog.PreviousValue = "Id: " + model.VisitSubCategoryId;
+                bnLog.UpdatedValue = "Id: " + model.VisitSubCategoryId;
+                int bnoisUpdateCount = 0;
+
+
+                if (visitSubCategory.VisitCategoryId != model.VisitCategoryId)
+                {
+                    if (visitSubCategory.VisitCategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("VisitCategory", "VisitCategoryId", visitSubCategory.VisitCategoryId);
+                        bnLog.PreviousValue += ", Visit Sub Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.VisitCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("VisitCategory", "VisitCategoryId", model.VisitCategoryId);
+                        bnLog.UpdatedValue += ", Visit Sub Category: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (visitSubCategory.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ",  Name: " + visitSubCategory.Name;
+                    bnLog.UpdatedValue += ",  Name: " + model.Name;
+                    bnoisUpdateCount += 1;
+                }
+                if (visitSubCategory.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ",  Remarks: " + visitSubCategory.Remarks;
+                    bnLog.UpdatedValue += ",  Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -100,6 +156,29 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "VisitSubCategory";
+                bnLog.TableEntryForm = "Visit Sub Category";
+                bnLog.PreviousValue = "Id: " + visitSubCategory.VisitSubCategoryId;
+
+
+                if (visitSubCategory.VisitCategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("VisitCategory", "VisitCategoryId", visitSubCategory.VisitCategoryId);
+                    bnLog.PreviousValue += ", Visit Sub Category: " + ((dynamic)prev).Name;
+                }
+                
+
+                bnLog.PreviousValue += ",  Name: " + visitSubCategory.Name + ",  Remarks: " + visitSubCategory.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
                 return await visitSubCategoryRepository.DeleteAsync(visitSubCategory);
             }
         }

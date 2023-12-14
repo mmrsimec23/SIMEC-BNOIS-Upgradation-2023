@@ -14,10 +14,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	public class LeavePurposeService : ILeavePurposeService
 	{
 		private readonly IBnoisRepository<LeavePurpose> leavePurposeRepository;
-		public LeavePurposeService(IBnoisRepository<LeavePurpose> leavePurposeRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public LeavePurposeService(IBnoisRepository<LeavePurpose> leavePurposeRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
 		{
 			this.leavePurposeRepository = leavePurposeRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+        }
 
 		public List<LeavePurposeModel> GetPurposes(int ps, int pn, string qs, out int total)
 		{
@@ -69,8 +71,46 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 				leavePurpose.ModifiedDate = DateTime.Now;
 				leavePurpose.ModifiedBy = userId;
-			}
-			else
+
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "LeavePurpose";
+                bnLog.TableEntryForm = "Leave Purpose";
+                bnLog.PreviousValue = "Id: " + model.PurposeId;
+                bnLog.UpdatedValue = "Id: " + model.PurposeId;
+                int bnoisUpdateCount = 0;
+                
+                if (leavePurpose.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + leavePurpose.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
+                }
+                if (leavePurpose.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Survey Leave: " + leavePurpose.Remarks;
+                    bnLog.UpdatedValue += ", Survey Leave: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
+            }
+            else
 			{
 				leavePurpose.CreatedDate = DateTime.Now;
 				leavePurpose.CreatedBy = userId;
@@ -95,7 +135,25 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 			}
 			else
 			{
-				return await leavePurposeRepository.DeleteAsync(leavePurpose);
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "LeavePurpose";
+                bnLog.TableEntryForm = "Leave Purpose";
+                bnLog.PreviousValue = "Id: " + leavePurpose.PurposeId;
+                
+				bnLog.PreviousValue += ", Name: " + leavePurpose.Name + ", Survey Leave: " + leavePurpose.Remarks;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+                return await leavePurposeRepository.DeleteAsync(leavePurpose);
 			}
 		}
 

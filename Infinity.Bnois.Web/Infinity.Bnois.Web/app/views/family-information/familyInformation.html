@@ -241,10 +241,9 @@
                 <table class="table table-bordered pdfReportTable" border="1">
                     <thead class="reportThead">
                         <tr class="tableHeading reportTR">
-                            <th>SL</th>
-                            <th>Type</th>
+                            <th>Ser</th>
                             <th>Name (ENG)</th>
-                            <th>Name (বাংলা)</th>
+                            <th>Relation</th>
                             <th>DOB</th>
                             <th>Age</th>
                             <th>Golden Child</th>
@@ -254,9 +253,8 @@
                     <tbody>
                         <tr class="reportTR" ng-repeat="children in vm.childrens">
                             <td class="reportTD" style="text-align: center; width: 50px;">{{$index+1}}</td>
-                            <td class="reportTD">{{children.childrenType==1?"Son":"Daughter"}}</td>
                             <td class="reportTD">{{children.nameEng}}</td>
-                            <td class="reportTD">{{children.nameBan}}</td>
+                            <td class="reportTD">{{children.childrenType==1?"Son":"Daughter"}}</td>
                             <td class="reportTD" style="text-align: center;width: 100px;">{{children.dateOfBirth | date:"dd-MMM-yyyy"}}</td>
                             <td class="reportTD">{{children.age}}</td>
                             <td>{{children.goldenChild==1?"Yes":"No"}}</td>
@@ -272,9 +270,9 @@
                 <table class="table table-bordered pdfReportTable" border="1">
                     <thead class="reportThead">
                         <tr class="tableHeading reportTR">
-                            <th>SL</th>
-                            <th>Relation</th>
+                            <th>Ser</th>
                             <th>Name </th>
+                            <th>Relation</th>
                             <!--<th>Spouse Name</th>-->
                             <th>DOB</th>
                             <!--<th>Age</th>-->
@@ -285,8 +283,8 @@
                     <tbody class="reportBody">
                         <tr class="reportTR" ng-repeat="sibling in vm.siblings">
                             <td class="reportTD" style="text-align: center; width: 50px;">{{$index+1}}</td>
-                            <td class="reportTD">{{sibling.siblingType==1?"Brother":"Sister"}}</td>
                             <td class="reportTD">{{sibling.name}}</td>
+                            <td class="reportTD">{{sibling.siblingType==1?"Brother":"Sister"}}</td>
                             <!--<td class="reportTD">{{sibling.spouseName}}</td>-->
                             <td class="reportTD" style="text-align: center;width: 100px;">{{sibling.dateOfBirth | date:"dd-MMM-yyyy"}}</td>
                             <!--<td class="reportTD" style="text-align: center;">{{sibling.age}}</td>-->
@@ -311,7 +309,7 @@
                             <!--<th>Occupation</th>
                             <th>Contact No</th>
                             <th>Present Address</th>-->
-                            <th>Address</th>
+                            <!--<th>Address</th>-->
 
                         </tr>
                     </thead>
@@ -324,7 +322,7 @@
                             <!--<td class="reportTD">{{item.profession}}</td>
                             <td class="reportTD" style="width: 110px;text-align: center">{{item.contactNumber}}</td>
                             <td class="reportTD">{{item.presentAddress}}</td>-->
-                            <td class="reportTD">{{item.permanentAddress }}</td>
+                            <!--<td class="reportTD">{{item.permanentAddress }}</td>-->
                         </tr>
                     </tbody>
                 </table>
@@ -377,7 +375,7 @@
                         <tr class="reportTR" ng-repeat="familyPermissionRelation in vm.familyPermissionRelations">
                             <td class="reportTD" style="text-align: center; width: 50px;">{{$index+1}}</td>
                             <td class="reportTD" style="text-align: left;">{{familyPermissionRelation.relation}}</td>
-                            <td class="reportTD" style="text-align: center;"><a target="_blank" href="http://localhost:24123/family-permission-list-by-type/{{familyPermissionRelation.pno}}/{{familyPermissionRelation.relationId}}" style="text-decoration: none;"><strong>{{familyPermissionRelation.total}}</strong></a></td>
+                            <td class="reportTD" style="text-align: center;"><a target="_blank" href="http://192.168.1.200:8091/family-permission-list-by-type/{{familyPermissionRelation.pno}}/{{familyPermissionRelation.relationId}}" style="text-decoration: none;"><strong>{{familyPermissionRelation.total}}</strong></a></td>
                         </tr>
                     </tbody>
                 </table>

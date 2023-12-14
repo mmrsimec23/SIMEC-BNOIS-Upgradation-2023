@@ -73,7 +73,7 @@
         }
 
         function updateNomination(nomination) {
-            $state.go('nomination-modify', { type: vm.type,id: nomination.nominationId });
+            $state.go('nomination-modify', { type: vm.type,id: 35528 });
         }
 
         function deleteNomination(nomination) {

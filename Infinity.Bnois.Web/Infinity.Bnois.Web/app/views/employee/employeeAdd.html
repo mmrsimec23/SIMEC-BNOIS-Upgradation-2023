@@ -64,14 +64,6 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="fullNameBan" class="custom-label">Full Name (বাংলা)</label>
-                            <input type="text" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employee.fullNameBan" name="fullNameBan" maxlength="250" />
-                            <!-- <p ng-show="vm.employeeForm.fullNameBan.$error.required" class="help-block errormsg"> Full Name Bangla is required</p> -->
-                            <p ng-show="vm.employeeForm.fullNameBan.$error.maxlength" class="help-block errormsg">Maximum character 250</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
                             <label for="batchId" class="custom-label">Batch</label>
                             <select name="batchId" id="batchId" class="form-control" ng-model="vm.employee.batchId" ng-options="option.value as option.text for option in vm.batches" required>
                                 <option value="">--Select an Option--</option>
@@ -133,7 +125,7 @@
                             </select>
                             <p ng-show="vm.employeeForm.executionRemarkId.$error.required" class="help-block errormsg">Please select an Option</p>
                         </div>
-                    </div>              
+                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="bExecutionDate" class="custom-label">Board Execution Date (Promotion)</label>
@@ -147,6 +139,14 @@
                             <textarea id="bSpRemarks" class="form-control custom-form-control" ng-model="vm.employee.bSpRemarks" name="bSpRemarks" maxlength="1000"></textarea>
                             <p ng-show="vm.employeeForm.bSpRemarks.$error.maxlength" class="help-block errormsg">Maximum character 1000</p>
 
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="fullNameBan" class="custom-label">Trace Mark</label>
+                            <input type="text" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employee.fullNameBan" name="fullNameBan" maxlength="250" />
+                            <!-- <p ng-show="vm.employeeForm.fullNameBan.$error.required" class="help-block errormsg"> Full Name Bangla is required</p> -->
+                            <p ng-show="vm.employeeForm.fullNameBan.$error.maxlength" class="help-block errormsg">Maximum character 250</p>
                         </div>
                     </div>
 

@@ -150,5 +150,6 @@ namespace Infinity.Bnois.Api.Right
         public const int OODENTRY = 1138;
         public const int TOEOSENTRY = 1139;
         public const int EMPLOYEE_UNM_DEFERMENT = 1140;
+        public const int CO_FF_RECOM = 1141;
     }
 }

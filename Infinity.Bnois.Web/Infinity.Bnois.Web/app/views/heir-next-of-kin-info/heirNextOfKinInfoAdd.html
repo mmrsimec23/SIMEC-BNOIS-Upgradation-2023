@@ -46,7 +46,7 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="genderId" class="custom-label">Gender</label>
+                            <label for="genderId" class="custom-label">Gender<span class="text-danger">*</span></label>
                             <select name="genderId" id="genderId" class="form-control" ng-model="vm.heirNextOfKinInfo.genderId" ng-options="option.value as option.text for option in vm.genders" required>
                                 <option value="">--Select an Option--</option>
                             </select>
@@ -56,7 +56,7 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="relationId" class="custom-label">Relation</label>
+                            <label for="relationId" class="custom-label">Relation<span class="text-danger">*</span></label>
                             <select name="relationId" id="relationId" class="form-control" ng-model="vm.heirNextOfKinInfo.relationId" ng-options="option.value as option.text for option in vm.relations" required>
                                 <option value="">--Select an Option--</option>
                             </select>

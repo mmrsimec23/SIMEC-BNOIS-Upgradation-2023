@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
+using Infinity.Bnois.Configuration;
 using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 
@@ -14,9 +15,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class VisitCategoryService : IVisitCategoryService
     {
         private readonly IBnoisRepository<VisitCategory> visitCategoryRepository;
-        public VisitCategoryService(IBnoisRepository<VisitCategory> visitCategoryRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public VisitCategoryService(IBnoisRepository<VisitCategory> visitCategoryRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.visitCategoryRepository = visitCategoryRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
         public List<VisitCategoryModel> GetVisitCategories(int pageSize, int pageNumber, string searchText, out int total)
@@ -69,6 +72,44 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 visitCategory.ModifiedDate = DateTime.Now;
                 visitCategory.ModifiedBy = model.ModifiedBy;
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "VisitCategory";
+                bnLog.TableEntryForm = "Visit Category";
+                bnLog.PreviousValue = "Id: " + model.VisitCategoryId;
+                bnLog.UpdatedValue = "Id: " + model.VisitCategoryId;
+                int bnoisUpdateCount = 0;
+
+                
+                if (visitCategory.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ",  Name: " + visitCategory.Name;
+                    bnLog.UpdatedValue += ",  Name: " + model.Name;
+                    bnoisUpdateCount += 1;
+                }
+                if (visitCategory.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ",  Remarks: " + visitCategory.Remarks;
+                    bnLog.UpdatedValue += ",  Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -97,6 +138,21 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "VisitCategory";
+                bnLog.TableEntryForm = "Visit Category";
+                bnLog.PreviousValue = "Id: " + visitCategory.VisitCategoryId;
+               
+                bnLog.PreviousValue += ",  Name: " + visitCategory.Name + ",  Remarks: " + visitCategory.Remarks;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
                 return await visitCategoryRepository.DeleteAsync(visitCategory);
             }
         }

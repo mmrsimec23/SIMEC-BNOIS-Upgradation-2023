@@ -366,7 +366,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                         var prevOfficerStream = employeeService.GetDynamicTableInfoById("OfficerStream", "OfficerStreamId", employeeGeneral.OfficerStreamId ?? 0);
                         bnLog.PreviousValue += ", Stream: " + ((dynamic)prevOfficerStream).Name;
                     }
-                    if (model.SubjectId > 0)
+                    if (model.OfficerStreamId > 0)
                     {
                         var newOfficerStream = employeeService.GetDynamicTableInfoById("OfficerStream", "OfficerStreamId", model.OfficerStreamId ?? 0);
                         bnLog.UpdatedValue += ", Stream: " + ((dynamic)newOfficerStream).Name;

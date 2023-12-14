@@ -14,10 +14,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     {
         private readonly IBnoisRepository<EmployeeServiceExt> employeeServiceExtensionRepository;
         private readonly IBnoisRepository<EmployeeGeneral> employeeGeneralRepository;
-        public EmployeeServiceExtensionService(IBnoisRepository<EmployeeServiceExt> employeeServiceExtensionRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public EmployeeServiceExtensionService(IBnoisRepository<EmployeeServiceExt> employeeServiceExtensionRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.employeeServiceExtensionRepository = employeeServiceExtensionRepository;
             this.employeeGeneralRepository = employeeGeneralRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
 
@@ -87,6 +91,73 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 employeeServiceExtension.ModifiedDate = DateTime.Now;
                 employeeServiceExtension.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeeServiceExt";
+                bnLog.TableEntryForm = "Officer Service Extention";
+                bnLog.PreviousValue = "Id: " + model.EmpSvrExtId;
+                bnLog.UpdatedValue = "Id: " + model.EmpSvrExtId;
+                int bnoisUpdateCount = 0;
+
+                if (employeeServiceExtension.EmployeeId > 0 || model.EmployeeId > 0)
+                {
+                    if(employeeServiceExtension.EmployeeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeServiceExtension.EmployeeId ?? 0);
+                        bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                    }
+                    if(model.EmployeeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId ?? 0);
+                        bnLog.UpdatedValue += ", P No: " + ((dynamic)newv).PNo;
+                    }
+                }
+                if (employeeServiceExtension.RetirementDate != model.RetirementDate)
+                {
+                    bnLog.PreviousValue += ", Retirement Date: " + employeeServiceExtension.RetirementDate.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Retirement Date: " + model.RetirementDate.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeServiceExtension.ExtMonth != model.ExtMonth)
+                {
+                    bnLog.PreviousValue += ", Extension For Months: " + employeeServiceExtension.ExtMonth;
+                    bnLog.UpdatedValue += ", Extension For Months: " + model.ExtMonth;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeServiceExtension.ExtDays != model.ExtDays)
+                {
+                    bnLog.PreviousValue += ", Extension For Days: " + employeeServiceExtension.ExtDays;
+                    bnLog.UpdatedValue += ", Extension For Days: " + model.ExtDays;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeServiceExtension.ExtLprDate != model.ExtLprDate)
+                {
+                    bnLog.PreviousValue += ", Ext Lpr Date: " + employeeServiceExtension.ExtLprDate.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Ext Lpr Date: " + model.ExtLprDate.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeServiceExtension.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + employeeServiceExtension.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString(); ;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -139,6 +210,29 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeeServiceExt";
+                bnLog.TableEntryForm = "Officer Service Extention";
+                bnLog.PreviousValue = "Id: " + employeeServiceExtension.EmpSvrExtId;
+
+                if (employeeServiceExtension.EmployeeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeServiceExtension.EmployeeId ?? 0);
+                    bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                }
+                bnLog.PreviousValue += ", Retirement Date: " + employeeServiceExtension.RetirementDate.ToString("dd/MM/yyyy") + ", Extension For Months: " + employeeServiceExtension.ExtMonth + ", Extension For Days: " + employeeServiceExtension.ExtDays + ", Ext Lpr Date: " + employeeServiceExtension.ExtLprDate.ToString("dd/MM/yyyy") + ", Remarks: " + employeeServiceExtension.Remarks;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await employeeServiceExtensionRepository.DeleteAsync(employeeServiceExtension);
             }
         }

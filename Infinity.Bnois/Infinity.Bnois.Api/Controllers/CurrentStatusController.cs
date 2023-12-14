@@ -87,6 +87,15 @@ namespace Infinity.Bnois.Api.Controllers
                 Result = currentStatusService.GetForeignCourseVisitGrandTotal(pNo)
             });
         }
+        [HttpGet]
+        [Route("get-shore-command-services")]
+        public IHttpActionResult GetShoreCommandServices(string pNo)
+        {
+            return Ok(new ResponseMessage<object>()
+            {
+                Result = currentStatusService.GetShoreCommandServices(pNo)
+            });
+        }
 
 
         [HttpGet]

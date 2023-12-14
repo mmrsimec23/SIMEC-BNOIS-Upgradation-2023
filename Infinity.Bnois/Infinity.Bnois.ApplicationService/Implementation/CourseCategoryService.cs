@@ -14,9 +14,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class CourseCategoryService : ICourseCategoryService
     {
         private readonly IBnoisRepository<CourseCategory> courseCategoryRepository;
-        public CourseCategoryService(IBnoisRepository<CourseCategory> courseCategoryRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public CourseCategoryService(IBnoisRepository<CourseCategory> courseCategoryRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.courseCategoryRepository = courseCategoryRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
        
 
@@ -68,6 +70,104 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 courseCategory.ModifiedDate = DateTime.Now;
                 courseCategory.ModifiedBy = userId;
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "CourseCategory";
+                bnLog.TableEntryForm = "Course Category";
+                bnLog.PreviousValue = "Id: " + model.CourseCategoryId;
+                bnLog.UpdatedValue = "Id: " + model.CourseCategoryId;
+                int bnoisUpdateCount = 0;
+
+
+                if (courseCategory.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Full Name: " + courseCategory.Name;
+                    bnLog.UpdatedValue += ", Full Name: " + model.Name;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.NameBan != model.NameBan)
+                {
+                    bnLog.PreviousValue += ", Full Name (বাংলা): " + courseCategory.NameBan;
+                    bnLog.UpdatedValue += ", Full Name (বাংলা): " + model.NameBan;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ",  Short Name: " + courseCategory.ShortName;
+                    bnLog.UpdatedValue += ",  Short Name: " + model.ShortName;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.ShortNameBan != model.ShortNameBan)
+                {
+                    bnLog.PreviousValue += ",  Short Name (বাংলা): " + courseCategory.ShortNameBan;
+                    bnLog.UpdatedValue += ",  Short Name (বাংলা): " + model.ShortNameBan;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.Priority != model.Priority)
+                {
+                    bnLog.PreviousValue += ", Priority: " + courseCategory.Priority;
+                    bnLog.UpdatedValue += ", Priority: " + model.Priority;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.Trace != model.Trace)
+                {
+                    bnLog.PreviousValue += ", Trace: " + courseCategory.Trace;
+                    bnLog.UpdatedValue += ", Trace: " + model.Trace;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.SASB != model.SASB)
+                {
+                    bnLog.PreviousValue += ", SASB: " + courseCategory.SASB;
+                    bnLog.UpdatedValue += ", SASB: " + model.SASB;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.PromotionBoard != model.PromotionBoard)
+                {
+                    bnLog.PreviousValue += ", Go To Promotion Board: " + courseCategory.PromotionBoard;
+                    bnLog.UpdatedValue += ", Go To Promotion Board: " + model.PromotionBoard;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.BnList != model.BnList)
+                {
+                    bnLog.PreviousValue += ", BN List: " + courseCategory.BnList;
+                    bnLog.UpdatedValue += ", BN List: " + model.BnList;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.BnListPriority != model.BnListPriority)
+                {
+                    bnLog.PreviousValue += ", BN List Priority: " + courseCategory.BnListPriority;
+                    bnLog.UpdatedValue += ", BN List Priority: " + model.BnListPriority;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.TransferProposal != model.TransferProposal)
+                {
+                    bnLog.PreviousValue += ", Transfer Proposal: " + courseCategory.TransferProposal;
+                    bnLog.UpdatedValue += ", Transfer Proposal: " + model.TransferProposal;
+                    bnoisUpdateCount += 1;
+                }
+                if (courseCategory.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + courseCategory.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -104,6 +204,25 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "CourseCategory";
+                bnLog.TableEntryForm = "Course Category";
+                bnLog.PreviousValue = "Id: " + courseCategory.CourseCategoryId;
+                
+                bnLog.PreviousValue += ", Full Name: " + courseCategory.Name + ", Full Name (বাংলা): " + courseCategory.NameBan + ",  Short Name: " + courseCategory.ShortName + ",  Short Name (বাংলা): " + courseCategory.ShortNameBan + ", Priority: " + courseCategory.Priority + ", Trace: " + courseCategory.Trace + ", SASB: " + courseCategory.SASB + ", Go To Promotion Board: " + courseCategory.PromotionBoard + ", BN List: " + courseCategory.BnList + ", BN List Priority: " + courseCategory.BnListPriority + ", Transfer Proposal: " + courseCategory.TransferProposal + ", Remarks: " + courseCategory.Remarks;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await courseCategoryRepository.DeleteAsync(courseCategory);
             }
         }

@@ -13,9 +13,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class AgeServicePolicyService :IAgeServicePolicyService
     {
         private readonly IBnoisRepository<AgeServicePolicy> ageServicePolicyRepository;
-        public AgeServicePolicyService(IBnoisRepository<AgeServicePolicy> ageServicePolicyRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public AgeServicePolicyService(IBnoisRepository<AgeServicePolicy> ageServicePolicyRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.ageServicePolicyRepository = ageServicePolicyRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<AgeServicePolicyModel> GetAgeServicePolicies(int ps, int pn, string qs, out int total)
@@ -70,6 +74,87 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 ageServicePolicy.ModifiedDate = DateTime.Now;
                 ageServicePolicy.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "AgeServicePolicy";
+                bnLog.TableEntryForm = "Service Age Policy";
+                bnLog.PreviousValue = "Id: " + model.AgeServiceId;
+                bnLog.UpdatedValue = "Id: " + model.AgeServiceId;
+                int bnoisUpdateCount = 0;
+
+                if (ageServicePolicy.CategoryId != model.CategoryId)
+                {
+                    if (ageServicePolicy.CategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Category", "CategoryId", ageServicePolicy.CategoryId);
+                        bnLog.PreviousValue += ", Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.CategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Category", "CategoryId", model.CategoryId);
+                        bnLog.UpdatedValue += ", Category: " + ((dynamic)newv).Name;
+                    }
+                }
+                if (ageServicePolicy.SubCategoryId != model.SubCategoryId)
+                {
+                    if (ageServicePolicy.SubCategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("SubCategory", "SubCategoryId", ageServicePolicy.SubCategoryId);
+                        bnLog.PreviousValue += ", Sub Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.SubCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("SubCategory", "SubCategoryId", model.SubCategoryId);
+                        bnLog.UpdatedValue += ", Sub Category: " + ((dynamic)newv).Name;
+                    }
+                }
+                if (ageServicePolicy.RankId != model.RankId)
+                {
+                    if (ageServicePolicy.RankId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Rank", "RankId", ageServicePolicy.RankId);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prev).FullName;
+                    }
+                    if (model.RankId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId);
+                        bnLog.UpdatedValue += ", Rank: " + ((dynamic)newv).FullName;
+                    }
+                }
+                if (ageServicePolicy.ServiceLimit != model.ServiceLimit)
+                {
+                    bnLog.PreviousValue += ", Service Limit (In years): " + ageServicePolicy.ServiceLimit;
+                    bnLog.UpdatedValue += ", Service Limit (In years): " + model.ServiceLimit;
+                    bnoisUpdateCount += 1;
+                }
+                if (ageServicePolicy.AgeLimit != model.AgeLimit)
+                {
+                    bnLog.PreviousValue += ", Age Limit (In years): " + ageServicePolicy.AgeLimit;
+                    bnLog.UpdatedValue += ", Age Limit (In years): " + model.AgeLimit;
+                    bnoisUpdateCount += 1;
+                }
+                if (ageServicePolicy.EarlyStatus != model.EarlyStatus)
+                {
+                    bnLog.PreviousValue += ", Status: " + (ageServicePolicy.EarlyStatus == 1 ? "Early" : ageServicePolicy.EarlyStatus == 2 ? "Later" : "");
+                    bnLog.UpdatedValue += ", Status: " + (model.EarlyStatus == 1 ? "Early" : model.EarlyStatus == 2 ? "Later" : "");
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString(); ;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -103,6 +188,39 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "AgeServicePolicy";
+                bnLog.TableEntryForm = "Service Age Policy";
+                bnLog.PreviousValue = "Id: " + ageServicePolicy.AgeServiceId;
+
+                if (ageServicePolicy.CategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Category", "CategoryId", ageServicePolicy.CategoryId);
+                    bnLog.PreviousValue += ", Category: " + ((dynamic)prev).Name;
+                }
+                if (ageServicePolicy.SubCategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("SubCategory", "SubCategoryId", ageServicePolicy.SubCategoryId);
+                    bnLog.PreviousValue += ", Sub Category: " + ((dynamic)prev).Name;
+                }
+                if (ageServicePolicy.RankId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Rank", "RankId", ageServicePolicy.RankId);
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prev).FullName;
+                }
+                bnLog.PreviousValue += ", Service Limit (In years): " + ageServicePolicy.ServiceLimit + ", Age Limit (In years): " + ageServicePolicy.AgeLimit + ", Status: " + (ageServicePolicy.EarlyStatus == 1 ? "Early" : ageServicePolicy.EarlyStatus == 2 ? "Later" : "");
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await ageServicePolicyRepository.DeleteAsync(ageServicePolicy);
             }
         }

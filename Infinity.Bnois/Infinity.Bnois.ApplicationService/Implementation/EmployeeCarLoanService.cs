@@ -118,7 +118,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             {
                 throw new InfinityArgumentMissingException("Employee Car Loan data missing");
             }
-            bool isExistData = _employeeCarLoanRepository.Exists(x => x.EmployeeCarLoanId == model.EmployeeId  && x.EmployeeCarLoanId != id);
+            bool isExistData = _employeeCarLoanRepository.Exists(x => x.EmployeeId == model.EmployeeId  && x.EmployeeCarLoanId != id);
             if (isExistData)
             {
                 throw new InfinityInvalidDataException("Data already exists !");

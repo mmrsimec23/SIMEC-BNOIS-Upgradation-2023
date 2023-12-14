@@ -569,6 +569,21 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="DashBoardBranch980">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="RankId" Type="int" />
+          <Property Name="RecomStatus" Type="int" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="1500" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="DashBoardBranchByAdminAuthority600Entry">
           <Key>
             <PropertyRef Name="Id" />
@@ -2353,6 +2368,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a prim
           <Property Name="ProposalCandidateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProposalDetailId" Type="int" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="ProposedBillet" Type="nvarchar" MaxLength="1500" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
@@ -3903,6 +3919,30 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
               <PropertyRef Name="RankId" />
             </Principal>
             <Dependent Role="DashBoardBranch975">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardBranch980_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="DashBoardBranch980" Type="Self.DashBoardBranch980" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="DashBoardBranch980">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardBranch980_Rank">
+          <End Role="Rank" Type="Self.Rank" Multiplicity="0..1" />
+          <End Role="DashBoardBranch980" Type="Self.DashBoardBranch980" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="DashBoardBranch980">
               <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
@@ -7092,6 +7132,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <EntitySet Name="CourseSubCategory" EntityType="Self.CourseSubCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoXoService" EntityType="Self.CoXoService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DashBoardBranch975" EntityType="Self.DashBoardBranch975" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DashBoardBranch980" EntityType="Self.DashBoardBranch980" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DashBoardBranchByAdminAuthority600Entry" EntityType="Self.DashBoardBranchByAdminAuthority600Entry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DashBoardBranchByAdminAuthority700" EntityType="Self.DashBoardBranchByAdminAuthority700" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
@@ -7482,6 +7523,14 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <AssociationSet Name="FK_DashBoardBranch975_Rank" Association="Self.FK_DashBoardBranch975_Rank">
             <End Role="Rank" EntitySet="Rank" />
             <End Role="DashBoardBranch975" EntitySet="DashBoardBranch975" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardBranch980_Employee" Association="Self.FK_DashBoardBranch980_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DashBoardBranch980" EntitySet="DashBoardBranch980" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardBranch980_Rank" Association="Self.FK_DashBoardBranch980_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="DashBoardBranch980" EntitySet="DashBoardBranch980" />
           </AssociationSet>
           <AssociationSet Name="FK_DashBoardBranchByAdminAuthority600Entry_Rank" Association="Self.FK_DashBoardBranchByAdminAuthority600Entry_Rank">
             <End Role="Rank" EntitySet="Rank" />
@@ -8875,7 +8924,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="RetiredEmpCountry" EntitySet="RetiredEmpCountry" />
           </AssociationSet>
           <EntitySet Name="SocialAttribute" EntityType="BnoisdbModel.SocialAttribute" />
-          <EntitySet Name="ProposalCandidate" EntityType="BnoisdbModel.ProposalCandidate" />
           <EntitySet Name="SearchColumn" EntityType="BnoisdbModel.SearchColumn" />
           <EntitySet Name="EmployeeServiceExt" EntityType="BnoisdbModel.EmployeeServiceExt" />
           <AssociationSet Name="FK_EmployeeServiceExt_EmployeeServiceExt" Association="BnoisdbModel.FK_EmployeeServiceExt_EmployeeServiceExt">
@@ -9204,10 +9252,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="PunishmentAccident" EntitySet="PunishmentAccidents" />
           </AssociationSet>
           <EntitySet Name="ProposalDetails" EntityType="BnoisdbModel.ProposalDetail" />
-          <AssociationSet Name="FK_ProposalCadidate_ProposalDetail" Association="BnoisdbModel.FK_ProposalCadidate_ProposalDetail">
-            <End Role="ProposalDetail" EntitySet="ProposalDetails" />
-            <End Role="ProposalCandidate" EntitySet="ProposalCandidate" />
-          </AssociationSet>
           <EntitySet Name="CourseCategories" EntityType="BnoisdbModel.CourseCategory" />
           <AssociationSet Name="FK_BraCtryCoursePoint_CourseCategory" Association="BnoisdbModel.FK_BraCtryCoursePoint_CourseCategory">
             <End Role="CourseCategory" EntitySet="CourseCategories" />
@@ -9567,10 +9611,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="Employee" EntitySet="Employee" />
             <End Role="PromotionNomination" EntitySet="PromotionNominations" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProposalCadidate_Employee" Association="BnoisdbModel.FK_ProposalCadidate_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="ProposalCandidate" EntitySet="ProposalCandidate" />
-          </AssociationSet>
           <AssociationSet Name="FK_PunishmentAccident_Employee" Association="BnoisdbModel.FK_PunishmentAccident_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="PunishmentAccident" EntitySet="PunishmentAccidents" />
@@ -9911,6 +9951,24 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="Rank" EntitySet="Rank" />
             <End Role="DashBoardBranchByAdminAuthority700" EntitySet="DashBoardBranchByAdminAuthority700" />
           </AssociationSet>
+          <EntitySet Name="DashBoardBranch975" EntityType="BnoisdbModel.DashBoardBranch975" />
+          <AssociationSet Name="FK_DashBoardBranch975_Employee" Association="BnoisdbModel.FK_DashBoardBranch975_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DashBoardBranch975" EntitySet="DashBoardBranch975" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardBranch975_Rank" Association="BnoisdbModel.FK_DashBoardBranch975_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="DashBoardBranch975" EntitySet="DashBoardBranch975" />
+          </AssociationSet>
+          <EntitySet Name="DashBoardBranch980" EntityType="BnoisdbModel.DashBoardBranch980" />
+          <AssociationSet Name="FK_DashBoardBranch980_Employee" Association="BnoisdbModel.FK_DashBoardBranch980_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DashBoardBranch980" EntitySet="DashBoardBranch980" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardBranch980_Rank" Association="BnoisdbModel.FK_DashBoardBranch980_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="DashBoardBranch980" EntitySet="DashBoardBranch980" />
+          </AssociationSet>
           <EntitySet Name="OfficeAppointment" EntityType="BnoisdbModel.OfficeAppointment" />
           <AssociationSet Name="FK_OfficeAppointment_AptCat" Association="BnoisdbModel.FK_OfficeAppointment_AptCat">
             <End Role="AptCat" EntitySet="AptCats" />
@@ -9948,14 +10006,14 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="OfficeAppointment" EntitySet="OfficeAppointment" />
             <End Role="Transfer" EntitySet="Transfer" />
           </AssociationSet>
-          <EntitySet Name="DashBoardBranch975" EntityType="BnoisdbModel.DashBoardBranch975" />
-          <AssociationSet Name="FK_DashBoardBranch975_Employee" Association="BnoisdbModel.FK_DashBoardBranch975_Employee">
+          <EntitySet Name="ProposalCandidate" EntityType="BnoisdbModel.ProposalCandidate" />
+          <AssociationSet Name="FK_ProposalCadidate_Employee" Association="BnoisdbModel.FK_ProposalCadidate_Employee">
             <End Role="Employee" EntitySet="Employee" />
-            <End Role="DashBoardBranch975" EntitySet="DashBoardBranch975" />
+            <End Role="ProposalCandidate" EntitySet="ProposalCandidate" />
           </AssociationSet>
-          <AssociationSet Name="FK_DashBoardBranch975_Rank" Association="BnoisdbModel.FK_DashBoardBranch975_Rank">
-            <End Role="Rank" EntitySet="Rank" />
-            <End Role="DashBoardBranch975" EntitySet="DashBoardBranch975" />
+          <AssociationSet Name="FK_ProposalCadidate_ProposalDetail" Association="BnoisdbModel.FK_ProposalCadidate_ProposalDetail">
+            <End Role="ProposalDetail" EntitySet="ProposalDetails" />
+            <End Role="ProposalCandidate" EntitySet="ProposalCandidate" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
@@ -12036,6 +12094,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="DashBoardBranchByAdminAuthority600Entry" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority600Entry_Rank" FromRole="Rank" ToRole="DashBoardBranchByAdminAuthority600Entry" />
           <NavigationProperty Name="DashBoardBranchByAdminAuthority700" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Rank" FromRole="Rank" ToRole="DashBoardBranchByAdminAuthority700" />
           <NavigationProperty Name="DashBoardBranch975" Relationship="BnoisdbModel.FK_DashBoardBranch975_Rank" FromRole="Rank" ToRole="DashBoardBranch975" />
+          <NavigationProperty Name="DashBoardBranch980" Relationship="BnoisdbModel.FK_DashBoardBranch980_Rank" FromRole="Rank" ToRole="DashBoardBranch980" />
           </EntityType>
         <EntityType Name="SubBranch">
           <Key>
@@ -12372,21 +12431,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_SocialAttribute_Employee" FromRole="SocialAttribute" ToRole="Employee" />
-        </EntityType>
-        <EntityType Name="ProposalCandidate">
-          <Key>
-            <PropertyRef Name="ProposalCandidateId" />
-          </Key>
-          <Property Name="ProposalCandidateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProposalDetailId" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ProposalDetail" Relationship="BnoisdbModel.FK_ProposalCadidate_ProposalDetail" FromRole="ProposalCandidate" ToRole="ProposalDetail" />
-          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_ProposalCadidate_Employee" FromRole="ProposalCandidate" ToRole="Employee" />
         </EntityType>
         <EntityType Name="SearchColumn">
           <Key>
@@ -14272,23 +14316,11 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ProposalCandidates" Relationship="BnoisdbModel.FK_ProposalCadidate_ProposalDetail" FromRole="ProposalDetail" ToRole="ProposalCandidate" />
           <NavigationProperty Name="TransferProposal" Relationship="BnoisdbModel.FK_ProposalDetail_TransferProposal" FromRole="ProposalDetail" ToRole="TransferProposal" />
           <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_ProposalDetail_Office" FromRole="ProposalDetail" ToRole="Office" />
           <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_ProposalDetail_OfficeAppointment" FromRole="ProposalDetail" ToRole="OfficeAppointment" />
+          <NavigationProperty Name="ProposalCandidate" Relationship="BnoisdbModel.FK_ProposalCadidate_ProposalDetail" FromRole="ProposalDetail" ToRole="ProposalCandidate" />
         </EntityType>
-        <Association Name="FK_ProposalCadidate_ProposalDetail">
-          <End Type="BnoisdbModel.ProposalDetail" Role="ProposalDetail" Multiplicity="1" />
-          <End Type="BnoisdbModel.ProposalCandidate" Role="ProposalCandidate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProposalDetail">
-              <PropertyRef Name="ProposalDetailId" />
-            </Principal>
-            <Dependent Role="ProposalCandidate">
-              <PropertyRef Name="ProposalDetailId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CourseCategory">
           <Key>
             <PropertyRef Name="CourseCategoryId" />
@@ -15339,7 +15371,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="PreviousPunishment" Relationship="BnoisdbModel.FK_PreviousPunishment_Employee" FromRole="Employee" ToRole="PreviousPunishment" />
           <NavigationProperty Name="PreviousTransfer" Relationship="BnoisdbModel.FK_PreviousTransfer_Employee" FromRole="Employee" ToRole="PreviousTransfer" />
           <NavigationProperty Name="PromotionNomination" Relationship="BnoisdbModel.FK_PromotionNomination_Employee" FromRole="Employee" ToRole="PromotionNomination" />
-          <NavigationProperty Name="ProposalCandidate" Relationship="BnoisdbModel.FK_ProposalCadidate_Employee" FromRole="Employee" ToRole="ProposalCandidate" />
           <NavigationProperty Name="PunishmentAccident" Relationship="BnoisdbModel.FK_PunishmentAccident_Employee" FromRole="Employee" ToRole="PunishmentAccident" />
           <NavigationProperty Name="RetiredEmployee" Relationship="BnoisdbModel.FK_RetiredEmployee_Employee" FromRole="Employee" ToRole="RetiredEmployee" />
           <NavigationProperty Name="SeaService" Relationship="BnoisdbModel.FK_SeaService_Employee" FromRole="Employee" ToRole="SeaService" />
@@ -15362,6 +15393,8 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="Employee" ToRole="EmployeeMscEducation" />
           <NavigationProperty Name="EmployeeServiceExamResult" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" FromRole="Employee" ToRole="EmployeeServiceExamResult" />
           <NavigationProperty Name="DashBoardBranch975" Relationship="BnoisdbModel.FK_DashBoardBranch975_Employee" FromRole="Employee" ToRole="DashBoardBranch975" />
+          <NavigationProperty Name="DashBoardBranch980" Relationship="BnoisdbModel.FK_DashBoardBranch980_Employee" FromRole="Employee" ToRole="DashBoardBranch980" />
+          <NavigationProperty Name="ProposalCandidate" Relationship="BnoisdbModel.FK_ProposalCadidate_Employee" FromRole="Employee" ToRole="ProposalCandidate" />
         </EntityType>
         <EntityType Name="ExecutionRemark">
           <Key>
@@ -15880,18 +15913,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
               <PropertyRef Name="EmployeeId" />
             </Principal>
             <Dependent Role="PromotionNomination">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProposalCadidate_Employee">
-          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="BnoisdbModel.ProposalCandidate" Role="ProposalCandidate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="ProposalCandidate">
               <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -17425,6 +17446,92 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DashBoardBranch975">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="DefermentFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DurationYear" Type="Int32" />
+          <Property Name="DefermentTo" Type="DateTime" Precision="3" />
+          <Property Name="UnmReason" Type="Int32" />
+          <Property Name="UnwillingMissionRemarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="UnmReference" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_DashBoardBranch975_Employee" FromRole="DashBoardBranch975" ToRole="Employee" />
+          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_DashBoardBranch975_Rank" FromRole="DashBoardBranch975" ToRole="Rank" />
+        </EntityType>
+        <Association Name="FK_DashBoardBranch975_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.DashBoardBranch975" Role="DashBoardBranch975" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="DashBoardBranch975">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardBranch975_Rank">
+          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.DashBoardBranch975" Role="DashBoardBranch975" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="DashBoardBranch975">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DashBoardBranch980">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="RecomStatus" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_DashBoardBranch980_Employee" FromRole="DashBoardBranch980" ToRole="Employee" />
+          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_DashBoardBranch980_Rank" FromRole="DashBoardBranch980" ToRole="Rank" />
+        </EntityType>
+        <Association Name="FK_DashBoardBranch980_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.DashBoardBranch980" Role="DashBoardBranch980" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="DashBoardBranch980">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardBranch980_Rank">
+          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.DashBoardBranch980" Role="DashBoardBranch980" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="DashBoardBranch980">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="OfficeAppointment">
           <Key>
             <PropertyRef Name="OffAppId" />
@@ -17573,48 +17680,43 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="DashBoardBranch975">
+        <EntityType Name="ProposalCandidate">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ProposalCandidateId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProposalCandidateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProposalDetailId" Type="Int32" Nullable="false" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="RankId" Type="Int32" />
-          <Property Name="DefermentFrom" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DurationYear" Type="Int32" />
-          <Property Name="DefermentTo" Type="DateTime" Precision="3" />
-          <Property Name="UnmReason" Type="Int32" />
-          <Property Name="UnwillingMissionRemarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="UnmReference" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProposedBillet" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_DashBoardBranch975_Employee" FromRole="DashBoardBranch975" ToRole="Employee" />
-          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_DashBoardBranch975_Rank" FromRole="DashBoardBranch975" ToRole="Rank" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_ProposalCadidate_Employee" FromRole="ProposalCandidate" ToRole="Employee" />
+          <NavigationProperty Name="ProposalDetail" Relationship="BnoisdbModel.FK_ProposalCadidate_ProposalDetail" FromRole="ProposalCandidate" ToRole="ProposalDetail" />
         </EntityType>
-        <Association Name="FK_DashBoardBranch975_Employee">
+        <Association Name="FK_ProposalCadidate_Employee">
           <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="BnoisdbModel.DashBoardBranch975" Role="DashBoardBranch975" Multiplicity="*" />
+          <End Type="BnoisdbModel.ProposalCandidate" Role="ProposalCandidate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="EmployeeId" />
             </Principal>
-            <Dependent Role="DashBoardBranch975">
+            <Dependent Role="ProposalCandidate">
               <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DashBoardBranch975_Rank">
-          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.DashBoardBranch975" Role="DashBoardBranch975" Multiplicity="*" />
+        <Association Name="FK_ProposalCadidate_ProposalDetail">
+          <End Type="BnoisdbModel.ProposalDetail" Role="ProposalDetail" Multiplicity="1" />
+          <End Type="BnoisdbModel.ProposalCandidate" Role="ProposalCandidate" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Rank">
-              <PropertyRef Name="RankId" />
+            <Principal Role="ProposalDetail">
+              <PropertyRef Name="ProposalDetailId" />
             </Principal>
-            <Dependent Role="DashBoardBranch975">
-              <PropertyRef Name="RankId" />
+            <Dependent Role="ProposalCandidate">
+              <PropertyRef Name="ProposalDetailId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -19189,20 +19291,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
                 <ScalarProperty Name="IsSocialAttribute" ColumnName="IsSocialAttribute" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="SocialAttributeId" ColumnName="SocialAttributeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProposalCandidate">
-            <EntityTypeMapping TypeName="BnoisdbModel.ProposalCandidate">
-              <MappingFragment StoreEntitySet="ProposalCandidate">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="ProposalDetailId" ColumnName="ProposalDetailId" />
-                <ScalarProperty Name="ProposalCandidateId" ColumnName="ProposalCandidateId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -21133,6 +21221,42 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DashBoardBranch975">
+            <EntityTypeMapping TypeName="BnoisdbModel.DashBoardBranch975">
+              <MappingFragment StoreEntitySet="DashBoardBranch975">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UnmReference" ColumnName="UnmReference" />
+                <ScalarProperty Name="UnwillingMissionRemarks" ColumnName="UnwillingMissionRemarks" />
+                <ScalarProperty Name="UnmReason" ColumnName="UnmReason" />
+                <ScalarProperty Name="DefermentTo" ColumnName="DefermentTo" />
+                <ScalarProperty Name="DurationYear" ColumnName="DurationYear" />
+                <ScalarProperty Name="DefermentFrom" ColumnName="DefermentFrom" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DashBoardBranch980">
+            <EntityTypeMapping TypeName="BnoisdbModel.DashBoardBranch980">
+              <MappingFragment StoreEntitySet="DashBoardBranch980">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="RecomStatus" ColumnName="RecomStatus" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="OfficeAppointment">
             <EntityTypeMapping TypeName="BnoisdbModel.OfficeAppointment">
               <MappingFragment StoreEntitySet="OfficeAppointment">
@@ -21165,23 +21289,18 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DashBoardBranch975">
-            <EntityTypeMapping TypeName="BnoisdbModel.DashBoardBranch975">
-              <MappingFragment StoreEntitySet="DashBoardBranch975">
+          <EntitySetMapping Name="ProposalCandidate">
+            <EntityTypeMapping TypeName="BnoisdbModel.ProposalCandidate">
+              <MappingFragment StoreEntitySet="ProposalCandidate">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UnmReference" ColumnName="UnmReference" />
-                <ScalarProperty Name="UnwillingMissionRemarks" ColumnName="UnwillingMissionRemarks" />
-                <ScalarProperty Name="UnmReason" ColumnName="UnmReason" />
-                <ScalarProperty Name="DefermentTo" ColumnName="DefermentTo" />
-                <ScalarProperty Name="DurationYear" ColumnName="DurationYear" />
-                <ScalarProperty Name="DefermentFrom" ColumnName="DefermentFrom" />
-                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProposedBillet" ColumnName="ProposedBillet" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProposalDetailId" ColumnName="ProposalDetailId" />
+                <ScalarProperty Name="ProposalCandidateId" ColumnName="ProposalCandidateId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

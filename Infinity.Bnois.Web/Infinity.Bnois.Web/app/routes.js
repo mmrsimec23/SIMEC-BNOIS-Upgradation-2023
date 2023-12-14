@@ -5275,6 +5275,16 @@
                     title: 'Transfer Proposal Candidate'
                 }
             },
+            //-------------CO FF Recom-------
+            {
+                state: 'co-ff-recoms',
+                config: {
+                    url: '/co-ff-recoms',
+                    templateUrl: 'app/views/co-ff-recom/coFfRecoms.html',
+                    controller: 'coFfRecomsController as vm',
+                    title: 'CO FF Recom'
+                }
+            },
 
 
             //-------------Advance Search-------
@@ -5929,6 +5939,33 @@
                     templateUrl: 'app/views/large-ship-coxo/largeShipCoXo.html',
                     controller: 'largeShipCoXoController as vm',
                     title: 'CO/XO Large Ships'
+                }
+            },
+            {
+                state: "co-large-ship-waiting-list",
+                config: {
+                    url: "/co-large-ship-waiting-list",
+                    templateUrl: 'app/views/large-ship-co-waiting-list/largeShipCoWaitingList.html',
+                    controller: 'largeShipCoWaitingListController as vm',
+                    title: 'CO Large Ship Waiting List'
+                }
+            },
+            {
+                state: "xo-large-ship-waiting-list",
+                config: {
+                    url: "/xo-large-ship-waiting-list",
+                    templateUrl: 'app/views/large-ship-xo-waiting-list/largeShipXoWaitingList.html',
+                    controller: 'largeShipXoWaitingListController as vm',
+                    title: 'XO Large Ship Waiting List'
+                }
+            },
+            {
+                state: "co-medium-ship-waiting-list",
+                config: {
+                    url: "/co-medium-ship-waiting-list",
+                    templateUrl: 'app/views/medium-ship-co-waiting-list/mediumShipCoWaitingList.html',
+                    controller: 'mediumShipCoWaitingListController as vm',
+                    title: 'CO Medium Ship Waiting List'
                 }
             },
             {

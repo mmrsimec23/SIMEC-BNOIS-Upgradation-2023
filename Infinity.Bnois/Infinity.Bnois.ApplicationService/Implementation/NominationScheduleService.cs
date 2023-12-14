@@ -14,10 +14,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class NominationScheduleService : INominationScheduleService
     {
         private readonly IBnoisRepository<NominationSchedule> nominationScheduleRepository;
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
 
-        public NominationScheduleService(IBnoisRepository<NominationSchedule> nominationScheduleRepository)
+        public NominationScheduleService(IBnoisRepository<NominationSchedule> nominationScheduleRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.nominationScheduleRepository = nominationScheduleRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
 
         }
 
@@ -109,6 +113,125 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 NominationSchedule.ModifiedDate = DateTime.Now;
                 NominationSchedule.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "NominationSchedule";
+                bnLog.TableEntryForm = "Nomination Schedule";
+                bnLog.PreviousValue = "Id: " + model.NominationScheduleId;
+                bnLog.UpdatedValue = "Id: " + model.NominationScheduleId;
+                int bnoisUpdateCount = 0;
+
+
+                bnLog.PreviousValue += ", Nomination Schedule Type: " + (NominationSchedule.NominationScheduleType == 1 ? "UN Mission" : NominationSchedule.NominationScheduleType == 2 ? "Foreign Visit" : NominationSchedule.NominationScheduleType == 3 ? "Others" : "");
+                bnLog.UpdatedValue += ", Nomination Schedule Type: " + (model.NominationScheduleType == 1 ? "UN Mission" : model.NominationScheduleType == 2 ? "Foreign Visit" : model.NominationScheduleType == 3 ? "Others" : "");
+                    
+                
+                if (NominationSchedule.VisitCategoryId != model.VisitCategoryId)
+                {
+                    if (NominationSchedule.VisitCategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("VisitCategory", "VisitCategoryId", NominationSchedule.VisitCategoryId ?? 0);
+                        bnLog.PreviousValue += ", Visit Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.VisitCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("VisitCategory", "VisitCategoryId", model.VisitCategoryId ?? 0);
+                        bnLog.UpdatedValue += ", Visit Category: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (NominationSchedule.VisitSubCategoryId != model.VisitSubCategoryId)
+                {
+                    if (NominationSchedule.VisitSubCategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("VisitSubCategory", "VisitSubCategoryId", NominationSchedule.VisitSubCategoryId ?? 0);
+                        bnLog.PreviousValue += ", Visit Sub Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.VisitSubCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("VisitSubCategory", "VisitSubCategoryId", model.VisitSubCategoryId ?? 0);
+                        bnLog.UpdatedValue += ", Visit Sub Category: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (NominationSchedule.CountryId != model.CountryId)
+                {
+                    if (NominationSchedule.CountryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Country", "CountryId", NominationSchedule.CountryId ?? 0);
+                        bnLog.PreviousValue += ", Country: " + ((dynamic)prev).FullName;
+                    }
+                    if (model.CountryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId ?? 0);
+                        bnLog.UpdatedValue += ", Country: " + ((dynamic)newv).FullName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (NominationSchedule.TitleName != model.TitleName)
+                {
+                    bnLog.PreviousValue += ", Title Name: " + NominationSchedule.TitleName;
+                    bnLog.UpdatedValue += ", Title Name: " + model.TitleName;
+                    bnoisUpdateCount += 1;
+                }
+                if (NominationSchedule.Purpose != model.Purpose)
+                {
+                    bnLog.PreviousValue += ",  Purpose: " + NominationSchedule.Purpose;
+                    bnLog.UpdatedValue += ",  Purpose: " + model.Purpose;
+                    bnoisUpdateCount += 1;
+                }
+                if (NominationSchedule.Location != model.Location)
+                {
+                    bnLog.PreviousValue += ",  Location: " + NominationSchedule.Location;
+                    bnLog.UpdatedValue += ",  Location: " + model.Location;
+                    bnoisUpdateCount += 1;
+                }
+                if (NominationSchedule.FromDate != model.FromDate)
+                {
+                    bnLog.PreviousValue += ", From Date: " + NominationSchedule.FromDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", From Date: " + model.FromDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (NominationSchedule.ToDate != model.ToDate)
+                {
+                    bnLog.PreviousValue += ", To Date: " + NominationSchedule.ToDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", To Date: " + model.ToDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (NominationSchedule.NumberOfPost != model.NumberOfPost)
+                {
+                    bnLog.PreviousValue += ", Number Of Post: " + NominationSchedule.NumberOfPost;
+                    bnLog.UpdatedValue += ", Number Of Post: " + model.NumberOfPost;
+                    bnoisUpdateCount += 1;
+                }
+                if (NominationSchedule.AssignPost != model.AssignPost)
+                {
+                    bnLog.PreviousValue += ",  Assign Post: " + NominationSchedule.AssignPost;
+                    bnLog.UpdatedValue += ",  Assign Post: " + model.AssignPost;
+                    bnoisUpdateCount += 1;
+                }
+                if (NominationSchedule.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ",  Remarks: " + NominationSchedule.Remarks;
+                    bnLog.UpdatedValue += ",  Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -159,6 +282,41 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "NominationSchedule";
+                bnLog.TableEntryForm = "Nomination Schedule";
+                bnLog.PreviousValue = "Id: " + nominationSchedule.NominationScheduleId;
+                
+                bnLog.PreviousValue += ", Nomination Schedule Type: " + (nominationSchedule.NominationScheduleType == 1 ? "UN Mission" : nominationSchedule.NominationScheduleType == 2 ? "Foreign Visit" : nominationSchedule.NominationScheduleType == 3 ? "Others" : "");
+                
+                if (nominationSchedule.VisitCategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("VisitCategory", "VisitCategoryId", nominationSchedule.VisitCategoryId ?? 0);
+                    bnLog.PreviousValue += ", Visit Category: " + ((dynamic)prev).Name;
+                }
+                if (nominationSchedule.VisitSubCategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("VisitSubCategory", "VisitSubCategoryId", nominationSchedule.VisitSubCategoryId ?? 0);
+                    bnLog.PreviousValue += ", Visit Sub Category: " + ((dynamic)prev).Name;
+                }
+                if (nominationSchedule.CountryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Country", "CountryId", nominationSchedule.CountryId ?? 0);
+                    bnLog.PreviousValue += ", Country: " + ((dynamic)prev).FullName;
+                }
+                bnLog.PreviousValue += ", Title Name: " + nominationSchedule.TitleName + ",  Purpose: " + nominationSchedule.Purpose + ",  Location: " + nominationSchedule.Location + ", From Date: " + nominationSchedule.FromDate?.ToString("dd/MM/yyyy") + ", To Date: " + nominationSchedule.ToDate?.ToString("dd/MM/yyyy") + ", Number Of Post: " + nominationSchedule.NumberOfPost + ",  Assign Post: " + nominationSchedule.AssignPost + ",  Remarks: " + nominationSchedule.Remarks;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await nominationScheduleRepository.DeleteAsync(nominationSchedule);
             }
         }

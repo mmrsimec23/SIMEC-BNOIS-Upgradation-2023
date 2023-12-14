@@ -97,6 +97,7 @@
     <Content Include="app\services\careerForecastSettingService.js" />
     <Content Include="app\services\bnoisLogInfoService.js" />
     <Content Include="app\services\employeeUnmDefermentService.js" />
+    <Content Include="app\services\coFfRecomService.js" />
     <Content Include="app\services\toeOfficerStateEntryService.js" />
     <Content Include="app\services\overviewOfficersDeploymentService.js" />
     <Content Include="app\services\toeAuthorizedService.js" />
@@ -341,6 +342,14 @@
     <Content Include="app\views\employee-unm-deferment\employeeUnmDefermentAddController.js" />
     <Content Include="app\views\employee-unm-deferment\employeeUnmDefermentList.html" />
     <Content Include="app\views\employee-unm-deferment\employeeUnmDefermentListController.js" />
+    <Content Include="app\views\large-ship-co-waiting-list\largeShipCoWaitingList.html" />
+    <Content Include="app\views\large-ship-co-waiting-list\largeShipCoWaitingListController.js" />
+    <Content Include="app\views\large-ship-xo-waiting-list\largeShipXoWaitingList.html" />
+    <Content Include="app\views\large-ship-xo-waiting-list\largeShipXoWaitingListController.js" />
+    <Content Include="app\views\medium-ship-co-waiting-list\mediumShipCoWaitingList.html" />
+    <Content Include="app\views\medium-ship-co-waiting-list\mediumShipCoWaitingListController.js" />
+    <Content Include="app\views\co-ff-recom\coFfRecoms.html" />
+    <Content Include="app\views\co-ff-recom\coFfRecomsController.js" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryAdd.html" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryAddController.js" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryList.html" />

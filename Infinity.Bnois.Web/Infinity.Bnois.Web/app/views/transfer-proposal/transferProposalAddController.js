@@ -47,6 +47,7 @@
         }
 
         function insertTransferProposal() {
+            vm.transferProposal.ltCdrLevel = 1;
              transferProposalService.saveTransferProposal(vm.transferProposal).then(function (data) {
                 close();
             },

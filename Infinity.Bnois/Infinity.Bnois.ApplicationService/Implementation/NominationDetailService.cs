@@ -22,10 +22,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 		private readonly IBnoisRepository<MissionAppBranch> missionAppBranchRepository;
 	    private readonly IBnoisRepository<TrainingPlan> trainingPlanRepository;
 	    private readonly IBnoisRepository<NominationSchedule> nominationScheduleRepository;
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
         public NominationDetailService(IBnoisRepository<NominationDetail> nominationDetailRepository, IBnoisRepository<TrainingBranch> trainingBranchRepository,
 		    IBnoisRepository<TrainingRank> trainingRankRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<Nomination> nominationRepository,
-		    IBnoisRepository<MissionAppRank> missionAppRankRepository, IBnoisRepository<MissionAppBranch> missionAppBranchRepository, 
-            IBnoisRepository<TrainingPlan> trainingPlanRepository, IBnoisRepository<NominationSchedule> nominationScheduleRepository)
+		    IBnoisRepository<MissionAppRank> missionAppRankRepository, IBnoisRepository<MissionAppBranch> missionAppBranchRepository, IEmployeeService employeeService,
+            IBnoisRepository<TrainingPlan> trainingPlanRepository, IBnoisRepository<NominationSchedule> nominationScheduleRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
 		{
 			this.nominationDetailRepository = nominationDetailRepository;
 			this.trainingBranchRepository = trainingBranchRepository;
@@ -36,6 +38,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 			this.missionAppBranchRepository = missionAppBranchRepository;
 			this.trainingPlanRepository = trainingPlanRepository;
 			this.nominationScheduleRepository = nominationScheduleRepository;
+            this.employeeService = employeeService;
+            this.bnoisLogRepository = bnoisLogRepository;
 		}
         public async Task<NominationDetailModel> GetNominationDetail(int id)
         {
@@ -245,6 +249,36 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "NominationDetail";
+                bnLog.TableEntryForm = "Nomination Detail";
+                bnLog.PreviousValue = "Id: " + nominationDetail.NominationDetailId;
+
+                bnLog.PreviousValue += ", NominationId: " + nominationDetail.NominationId;
+                
+                if (nominationDetail.EmployeeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", nominationDetail.EmployeeId);
+                    bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                }
+                bnLog.PreviousValue += ", IsBackLog: " + nominationDetail.IsBackLog;
+                if (nominationDetail.RankId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Rank", "RankId", nominationDetail.RankId??0);
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prev).ShortName;
+                }
+                bnLog.PreviousValue += ", Is Apporved: " + nominationDetail.IsApporved + ", Remarks: " + nominationDetail.Remarks;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await nominationDetailRepository.DeleteAsync(nominationDetail);
             }
         }

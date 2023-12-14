@@ -47,11 +47,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             {
                 throw new InfinityArgumentMissingException("Transfer Proposal data missing");
             }
-            bool isExist = transferProposalRepository.Exists(x => x.Name == model.Name && x.TransferProposalId != id);
-            if (isExist)
-            {
-                throw new InfinityInvalidDataException("Data already exists !");
-            }
+            //bool isExist = transferProposalRepository.Exists(x => x.Name == model.Name && x.TransferProposalId != id);
+            //if (isExist)
+            //{
+            //    throw new InfinityInvalidDataException("Data already exists !");
+            //}
 
             string userId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
             TransferProposal transferProposal = ObjectConverter<TransferProposalModel, TransferProposal>.Convert(model);

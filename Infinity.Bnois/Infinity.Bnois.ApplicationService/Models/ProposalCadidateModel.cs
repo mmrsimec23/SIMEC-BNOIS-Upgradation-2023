@@ -11,6 +11,7 @@ namespace Infinity.Bnois.ApplicationService.Models
         public int ProposalCandidateId { get; set; }
         public int ProposalDetailId { get; set; }
         public int EmployeeId { get; set; }
+        public string ProposedBillet { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }

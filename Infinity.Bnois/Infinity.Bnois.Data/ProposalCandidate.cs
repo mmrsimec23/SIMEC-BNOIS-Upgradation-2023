@@ -17,13 +17,14 @@ namespace Infinity.Bnois.Data
         public int ProposalCandidateId { get; set; }
         public int ProposalDetailId { get; set; }
         public int EmployeeId { get; set; }
+        public string ProposedBillet { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public bool IsActive { get; set; }
     
-        public virtual ProposalDetail ProposalDetail { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual ProposalDetail ProposalDetail { get; set; }
     }
 }

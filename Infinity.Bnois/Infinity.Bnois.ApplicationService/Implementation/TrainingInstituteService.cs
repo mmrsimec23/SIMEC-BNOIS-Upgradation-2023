@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class TrainingInstituteService : ITrainingInstituteService
     {
         private readonly IBnoisRepository<TrainingInstitute> trainingInstituteRepository;
-        public TrainingInstituteService(IBnoisRepository<TrainingInstitute> trainingInstituteRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public TrainingInstituteService(IBnoisRepository<TrainingInstitute> trainingInstituteRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.trainingInstituteRepository = trainingInstituteRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<TrainingInstituteModel> GetTrainingInstitutes(int ps, int pn, string qs, out int total)
@@ -69,6 +73,75 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 trainingInstitute.ModifiedDate = DateTime.Now;
                 trainingInstitute.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "TrainingInstitute";
+                bnLog.TableEntryForm = "Training Institute";
+                bnLog.PreviousValue = "Id: " + model.InstituteId;
+                bnLog.UpdatedValue = "Id: " + model.InstituteId;
+                int bnoisUpdateCount = 0;
+
+
+                if (trainingInstitute.CountryType != model.CountryType)
+                {
+                    bnLog.PreviousValue += ",  Country Type: " + (trainingInstitute.CountryType == 1 ? "Local" : trainingInstitute.CountryType == 2 ? "Foreign" : "");
+                    bnLog.UpdatedValue += ",  Country Type: " + (model.CountryType == 1 ? "Local" : model.CountryType == 2 ? "Foreign" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingInstitute.CountryId != model.CountryId)
+                {
+                    if (trainingInstitute.CountryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Country", "CountryId", trainingInstitute.CountryId);
+                        bnLog.PreviousValue += ", Country: " + ((dynamic)prev).FullName;
+                    }
+                    if (model.CountryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId);
+                        bnLog.UpdatedValue += ", Country: " + ((dynamic)newv).FullName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingInstitute.FullName != model.FullName)
+                {
+                    bnLog.PreviousValue += ", Full Name: " + trainingInstitute.FullName;
+                    bnLog.UpdatedValue += ", Full Name: " + model.FullName;
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingInstitute.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ",  Short Name: " + trainingInstitute.ShortName;
+                    bnLog.UpdatedValue += ",  Short Name: " + model.ShortName;
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingInstitute.NameInBangla != model.NameInBangla)
+                {
+                    bnLog.PreviousValue += ",  Name In Bangla: " + trainingInstitute.NameInBangla;
+                    bnLog.UpdatedValue += ",  Name In Bangla: " + model.NameInBangla;
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingInstitute.AddressInfo != model.AddressInfo)
+                {
+                    bnLog.PreviousValue += ", Address Info: " + trainingInstitute.AddressInfo;
+                    bnLog.UpdatedValue += ", Address Info: " + model.AddressInfo;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -103,6 +176,33 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "TrainingInstitute";
+                bnLog.TableEntryForm = "Training Institute";
+                bnLog.PreviousValue = "Id: " + trainingInstitute.InstituteId;
+
+
+                bnLog.PreviousValue += ",  Country Type: " + (trainingInstitute.CountryType == 1 ? "Local" : trainingInstitute.CountryType == 2 ? "Foreign" : "");
+                
+                if (trainingInstitute.CountryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Country", "CountryId", trainingInstitute.CountryId);
+                    bnLog.PreviousValue += ", Country: " + ((dynamic)prev).FullName;
+                }
+                bnLog.PreviousValue += ", Full Name: " + trainingInstitute.FullName +  ",  Short Name: " + trainingInstitute.ShortName + ",  Name In Bangla: " + trainingInstitute.NameInBangla + ", Address Info: " + trainingInstitute.AddressInfo;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await trainingInstituteRepository.DeleteAsync(trainingInstitute);
             }
         }

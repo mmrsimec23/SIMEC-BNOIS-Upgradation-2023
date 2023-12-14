@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class CourseService : ICourseService
     {
         private readonly IBnoisRepository<Course> courseRepository;
-        public CourseService(IBnoisRepository<Course> courseRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public CourseService(IBnoisRepository<Course> courseRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.courseRepository = courseRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<CourseModel> GetCourses(int ps, int pn, string qs, out int total)
@@ -69,6 +73,109 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 course.ModifiedDate = DateTime.Now;
                 course.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Course";
+                bnLog.TableEntryForm = "Course";
+                bnLog.PreviousValue = "Id: " + model.CourseId;
+                bnLog.UpdatedValue = "Id: " + model.CourseId;
+                int bnoisUpdateCount = 0;
+
+
+                if (course.CourseCategoryId != model.CourseCategoryId)
+                {
+                    if (course.CourseCategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("CourseCategory", "CourseCategoryId", course.CourseCategoryId);
+                        bnLog.PreviousValue += ", Course Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.CourseCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("CourseCategory", "CourseCategoryId", model.CourseCategoryId);
+                        bnLog.UpdatedValue += ", Course Category: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (course.CourseSubCategoryId != model.CourseSubCategoryId)
+                {
+                    if (course.CourseSubCategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("CourseSubCategory", "CourseSubCategoryId", course.CourseSubCategoryId);
+                        bnLog.PreviousValue += ", Course Sub Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.CourseSubCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("CourseSubCategory", "CourseSubCategoryId", model.CourseSubCategoryId);
+                        bnLog.UpdatedValue += ", Course Sub Category: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (course.CountryId != model.CountryId)
+                {
+                    if (course.CountryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Country", "CountryId", course.CountryId??0);
+                        bnLog.PreviousValue += ", Country: " + ((dynamic)prev).FullName;
+                    }
+                    if (model.CountryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Country", "CountryId", model.CountryId??0);
+                        bnLog.UpdatedValue += ", Country: " + ((dynamic)newv).FullName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (course.FullName != model.FullName)
+                {
+                    bnLog.PreviousValue += ", Full Name: " + course.FullName;
+                    bnLog.UpdatedValue += ", Full Name: " + model.FullName;
+                    bnoisUpdateCount += 1;
+                }
+                if (course.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ",  Short Name: " + course.ShortName;
+                    bnLog.UpdatedValue += ",  Short Name: " + model.ShortName;
+                    bnoisUpdateCount += 1;
+                }
+                if (course.NameInBangla != model.NameInBangla)
+                {
+                    bnLog.PreviousValue += ",  Name In Bangla: " + course.NameInBangla;
+                    bnLog.UpdatedValue += ",  Name In Bangla: " + model.NameInBangla;
+                    bnoisUpdateCount += 1;
+                }
+                if (course.Priority != model.Priority)
+                {
+                    bnLog.PreviousValue += ", Priority: " + course.Priority;
+                    bnLog.UpdatedValue += ", Priority: " + model.Priority;
+                    bnoisUpdateCount += 1;
+                }
+                if (course.ANGF != model.ANGF)
+                {
+                    bnLog.PreviousValue += ", ANGF: " + course.ANGF;
+                    bnLog.UpdatedValue += ", ANGF: " + model.ANGF;
+                    bnoisUpdateCount += 1;
+                }
+                if (course.SplQualification != model.SplQualification)
+                {
+                    bnLog.PreviousValue += ",  Spl Qualification: " + course.SplQualification;
+                    bnLog.UpdatedValue += ",  Spl Qualification: " + model.SplQualification;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -104,6 +211,43 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Course";
+                bnLog.TableEntryForm = "Course";
+                bnLog.PreviousValue = "Id: " + course.CourseId;
+                
+
+
+                if (course.CourseCategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("CourseCategory", "CourseCategoryId", course.CourseCategoryId);
+                    bnLog.PreviousValue += ", Course Category: " + ((dynamic)prev).Name;
+                }
+                    
+                if (course.CourseSubCategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("CourseSubCategory", "CourseSubCategoryId", course.CourseSubCategoryId);
+                    bnLog.PreviousValue += ", Course Sub Category: " + ((dynamic)prev).Name;
+                }
+                if (course.CountryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Country", "CountryId", course.CountryId ?? 0);
+                    bnLog.PreviousValue += ", Country: " + ((dynamic)prev).FullName;
+                }
+                bnLog.PreviousValue += ", Full Name: " + course.FullName + ",  Short Name: " + course.ShortName + ",  Name In Bangla: " + course.NameInBangla + ", Priority: " + course.Priority + ", ANGF: " + course.ANGF + ",  Spl Qualification: " + course.SplQualification;
+
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await courseRepository.DeleteAsync(course);
             }
         }

@@ -18,13 +18,17 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IProcessRepository processRepository;
         private readonly IBnoisRepository<NominationDetail> nominationDetailRepository;
         private readonly IBnoisRepository<Nomination> nominationRepository;
-        public TrainingResultService(IBnoisRepository<TrainingResult> trainingResultRepository, IBnoisRepository<TrainingPlan> trainingPlanRepository, IProcessRepository processRepository, IBnoisRepository<NominationDetail> nominationDetailRepository, IBnoisRepository<Nomination> nominationRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public TrainingResultService(IBnoisRepository<TrainingResult> trainingResultRepository, IBnoisRepository<TrainingPlan> trainingPlanRepository, IProcessRepository processRepository, IBnoisRepository<NominationDetail> nominationDetailRepository, IBnoisRepository<Nomination> nominationRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.trainingResultRepository = trainingResultRepository;
             this.trainingPlanRepository = trainingPlanRepository;
             this.processRepository = processRepository;
             this.nominationDetailRepository = nominationDetailRepository;
             this.nominationRepository = nominationRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public List<TrainingResultModel> GetTrainingResults(int ps, int pn, string qs, out int total)
@@ -128,6 +132,145 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 trainingResult.ModifiedDate = DateTime.Now;
                 trainingResult.ModifiedBy = userId;
+
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "TrainingResult";
+                bnLog.TableEntryForm = "Participant Result";
+                bnLog.PreviousValue = "Id: " + model.TrainingResultId;
+                bnLog.UpdatedValue = "Id: " + model.TrainingResultId;
+                int bnoisUpdateCount = 0;
+
+
+                if (trainingResult.EmployeeId > 0)
+                {
+                    if (trainingResult.EmployeeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", trainingResult.EmployeeId);
+                        bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                    }
+                    if (model.EmployeeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                        bnLog.UpdatedValue += ", P No: " + ((dynamic)newv).PNo;
+                    }
+                    //bnoisUpdateCount += 1;
+                }
+                if (trainingResult.CourseCategoryId != model.CourseCategoryId)
+                {
+                    if (trainingResult.CourseCategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("CourseCategory", "CourseCategoryId", trainingResult.CourseCategoryId??0);
+                        bnLog.PreviousValue += ", Course Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.EmployeeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("CourseCategory", "CourseCategoryId", model.CourseCategoryId??0);
+                        bnLog.UpdatedValue += ", Course Category: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingResult.CourseSubCategoryId != model.CourseSubCategoryId)
+                {
+                    if (trainingResult.CourseSubCategoryId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("CourseSubCategory", "CourseSubCategoryId", trainingResult.CourseSubCategoryId ?? 0);
+                        bnLog.PreviousValue += ", Course Sub Category: " + ((dynamic)prev).Name;
+                    }
+                    if (model.CourseSubCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("CourseSubCategory", "CourseSubCategoryId", model.CourseSubCategoryId ?? 0);
+                        bnLog.UpdatedValue += ", Course Sub Category: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingResult.TrainingPlanId != model.TrainingPlanId)
+                {
+                    if (trainingResult.TrainingPlanId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("TrainingPlan", "TrainingPlanId", trainingResult.TrainingPlanId);
+                        bnLog.PreviousValue += ", TrainingPlanId: " + ((dynamic)prev).TrainingPlanId;
+                    }
+                    if (model.CourseSubCategoryId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("TrainingPlanId", "TrainingPlanId", model.TrainingPlanId);
+                        bnLog.UpdatedValue += ", TrainingPlanId: " + ((dynamic)newv).TrainingPlanId;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingResult.ResultTypeId != model.ResultTypeId)
+                {
+                    if (trainingResult.ResultTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("ResultType", "ResultTypeId", trainingResult.ResultTypeId);
+                        bnLog.PreviousValue += ", Result Type: " + ((dynamic)prev).TypeName;
+                    }
+                    if (model.ResultTypeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("ResultTypeId", "ResultTypeId", model.ResultTypeId);
+                        bnLog.UpdatedValue += ", Result Type: " + ((dynamic)newv).TpyeName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingResult.ResultDate != model.ResultDate)
+                {
+                    bnLog.PreviousValue += ", Result Date: " + trainingResult.ResultDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Result Date: " + model.ResultDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingResult.Percentage != model.Percentage)
+                {
+                    bnLog.PreviousValue += ", Percentage: " + trainingResult.Percentage;
+                    bnLog.UpdatedValue += ", Percentage: " + model.Percentage;
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingResult.Positon != model.Positon)
+                {
+                    bnLog.PreviousValue += ", Positon: " + trainingResult.Positon;
+                    bnLog.UpdatedValue += ", Positon: " + model.Positon;
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingResult.ResultStatus != model.ResultStatus)
+                {
+                    bnLog.PreviousValue += ",  Result Status: " + (trainingResult.ResultStatus == 1 ? "Good" : trainingResult.ResultStatus == 2 ? "Poor" : "");
+                    bnLog.UpdatedValue += ",  Result Status: " + (model.ResultStatus == 1 ? "Good" : model.ResultStatus == 2 ? "Poor" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingResult.ResultSection != model.ResultSection)
+                {
+                    bnLog.PreviousValue += ", Result Section: " + trainingResult.ResultSection;
+                    bnLog.UpdatedValue += ", Result Section: " + model.ResultSection;
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingResult.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + trainingResult.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+                if (trainingResult.Unit != model.Unit)
+                {
+                    bnLog.PreviousValue += ", Appointment Reccomendation (For Report): " + trainingResult.Unit;
+                    bnLog.UpdatedValue += ", Appointment Reccomendation (For Report): " + model.Unit;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -168,6 +311,50 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "TrainingResult";
+                bnLog.TableEntryForm = "Participant Result";
+                bnLog.PreviousValue = "Id: " + trainingResult.TrainingResultId;
+
+                if (trainingResult.EmployeeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", trainingResult.EmployeeId);
+                    bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                }
+                if (trainingResult.CourseCategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("CourseCategory", "CourseCategoryId", trainingResult.CourseCategoryId ?? 0);
+                    bnLog.PreviousValue += ", Course Category: " + ((dynamic)prev).Name;
+                }
+                if (trainingResult.CourseSubCategoryId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("CourseSubCategory", "CourseSubCategoryId", trainingResult.CourseSubCategoryId ?? 0);
+                    bnLog.PreviousValue += ", Course Sub Category: " + ((dynamic)prev).Name;
+                }
+                if (trainingResult.TrainingPlanId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("TrainingPlan", "TrainingPlanId", trainingResult.TrainingPlanId);
+                    bnLog.PreviousValue += ", TrainingPlanId: " + ((dynamic)prev).TrainingPlanId;
+                }
+                if (trainingResult.ResultTypeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("ResultType", "ResultTypeId", trainingResult.ResultTypeId);
+                    bnLog.PreviousValue += ", Result Type: " + ((dynamic)prev).TypeName;
+                }
+                bnLog.PreviousValue += ", Result Date: " + trainingResult.ResultDate?.ToString("dd/MM/yyyy") + ", Percentage: " + trainingResult.Percentage + ", Positon: " + trainingResult.Positon + ",  Result Status: " + (trainingResult.ResultStatus == 1 ? "Good" : trainingResult.ResultStatus == 2 ? "Poor" : "") + ", Result Section: " + trainingResult.ResultSection + ", Remarks: " + trainingResult.Remarks + ", Appointment Reccomendation (For Report): " + trainingResult.Unit;
+
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+                //data log section end
+
                 var result = await trainingResultRepository.DeleteAsync(trainingResult);
                 await processRepository.UpdateNamingConvention(trainingResult.EmployeeId);
                 return result;

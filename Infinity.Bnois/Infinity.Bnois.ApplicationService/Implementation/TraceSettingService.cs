@@ -14,9 +14,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
    public class TraceSettingService: ITraceSettingService
     {
         private readonly IBnoisRepository<TraceSetting> traceSettingRepository;
-        public TraceSettingService(IBnoisRepository<TraceSetting> traceSettingRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public TraceSettingService(IBnoisRepository<TraceSetting> traceSettingRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.traceSettingRepository = traceSettingRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
         
 
@@ -63,6 +67,121 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 traceSetting.ModifiedDate = DateTime.Now;
                 traceSetting.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "TraceSetting";
+                bnLog.TableEntryForm = "Trace Setting";
+                bnLog.PreviousValue = "Id: " + model.TraceSettingId;
+                bnLog.UpdatedValue = "Id: " + model.TraceSettingId;
+                int bnoisUpdateCount = 0;
+                
+                if (traceSetting.CreationDate != model.CreationDate)
+                {
+                    bnLog.PreviousValue += ", From Date: " + traceSetting.CreationDate.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", From Date: " + model.CreationDate.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.Active != model.Active)
+                {
+                    bnLog.PreviousValue += ", Active: " + traceSetting.Active;
+                    bnLog.UpdatedValue += ", Active: " + model.Active;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.OPR != model.OPR)
+                {
+                    bnLog.PreviousValue += ", OPR: " + traceSetting.OPR;
+                    bnLog.UpdatedValue += ", OPR: " + model.OPR;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.Course != model.Course)
+                {
+                    bnLog.PreviousValue += ", Course: " + traceSetting.Course;
+                    bnLog.UpdatedValue += ", Course: " + model.Course;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.PFT != model.PFT)
+                {
+                    bnLog.PreviousValue += ", PFT: " + traceSetting.PFT;
+                    bnLog.UpdatedValue += ", PFT: " + model.PFT;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.TotalPoint != model.TotalPoint)
+                {
+                    bnLog.PreviousValue += ", Total Point: " + traceSetting.TotalPoint;
+                    bnLog.UpdatedValue += ", Total Point: " + model.TotalPoint;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.WeightPreRank != model.WeightPreRank)
+                {
+                    bnLog.PreviousValue += ", Weightage for Present Rank Service: " + traceSetting.WeightPreRank;
+                    bnLog.UpdatedValue += ", Weightage for Present Rank Service: " + model.WeightPreRank;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.WeightPrevRank != model.WeightPrevRank)
+                {
+                    bnLog.PreviousValue += ", Weightage for Previous Rank Service: " + traceSetting.WeightPrevRank;
+                    bnLog.UpdatedValue += ", Weightage for Previous Rank Service: " + model.WeightPrevRank;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.OprCount != model.OprCount)
+                {
+                    bnLog.PreviousValue += ", OPR Count For: " + traceSetting.OprCount;
+                    bnLog.UpdatedValue += ", OPR Count For: " + model.OprCount;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.OprLastYear != model.OprLastYear)
+                {
+                    bnLog.PreviousValue += ", OPR Last Year: " + traceSetting.OprLastYear;
+                    bnLog.UpdatedValue += ", OPR Last Year: " + model.OprLastYear;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.DivisionalFactor != model.DivisionalFactor)
+                {
+                    bnLog.PreviousValue += ", Divisional Factor: " + traceSetting.DivisionalFactor;
+                    bnLog.UpdatedValue += ", Divisional Factor: " + model.DivisionalFactor;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.PftCountYear != model.PftCountYear)
+                {
+                    bnLog.PreviousValue += ", PFT Count For Last: " + traceSetting.PftCountYear;
+                    bnLog.UpdatedValue += ", PFT Count For Last: " + model.PftCountYear;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.DductPtPerPft != model.DductPtPerPft)
+                {
+                    bnLog.PreviousValue += ", Deduct/Add Point for each PFT: " + traceSetting.DductPtPerPft;
+                    bnLog.UpdatedValue += ", Deduct/Add Point for each PFT: " + model.DductPtPerPft;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.OWPenalCLOpr != model.OWPenalCLOpr)
+                {
+                    bnLog.PreviousValue += ", Penalty Count for Last (OPR): " + traceSetting.OWPenalCLOpr;
+                    bnLog.UpdatedValue += ", Penalty Count for Last (OPR): " + model.OWPenalCLOpr;
+                    bnoisUpdateCount += 1;
+                }
+                if (traceSetting.DductPtPerOWKG != model.DductPtPerOWKG)
+                {
+                    bnLog.PreviousValue += ", Deduct Point For Each Over Weight in Kgs: " + traceSetting.DductPtPerOWKG;
+                    bnLog.UpdatedValue += ", Deduct Point For Each Over Weight in Kgs: " + model.DductPtPerOWKG;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
+
             }
             else
             {
@@ -104,6 +223,25 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "TraceSetting";
+                bnLog.TableEntryForm = "Trace Setting";
+                bnLog.PreviousValue = "Id: " + traceSetting.TraceSettingId;
+                int bnoisUpdateCount = 0;
+
+                bnLog.PreviousValue += ", From Date: " + traceSetting.CreationDate.ToString("dd/MM/yyyy") + ", Active: " + traceSetting.Active + ", OPR: " + traceSetting.OPR + ", Course: " + traceSetting.Course + ", PFT: " + traceSetting.PFT + ", Total Point: " + traceSetting.TotalPoint + ", Weightage for Present Rank Service: " + traceSetting.WeightPreRank + ", Weightage for Previous Rank Service: " + traceSetting.WeightPrevRank + ", OPR Count For: " + traceSetting.OprCount + ", OPR Last Year: " + traceSetting.OprLastYear + ", Divisional Factor: " + traceSetting.DivisionalFactor + ", PFT Count For Last: " + traceSetting.PftCountYear + ", Deduct/Add Point for each PFT: " + traceSetting.DductPtPerPft + ", Penalty Count for Last (OPR): " + traceSetting.OWPenalCLOpr + ", Deduct Point For Each Over Weight in Kgs: " + traceSetting.DductPtPerOWKG;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await traceSettingRepository.DeleteAsync(traceSetting);
             }
         }

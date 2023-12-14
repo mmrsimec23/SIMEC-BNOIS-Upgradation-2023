@@ -16,11 +16,15 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	{
 		private readonly IBnoisRepository<Nomination> nominationRepository;
 	    private readonly IBnoisRepository<vwNomination> vwGetNominationInfoRepository;
-		public NominationService(IBnoisRepository<Nomination> nominationRepository, IBnoisRepository<vwNomination> vwGetNominationInfoRepository)
-		{
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public NominationService(IBnoisRepository<Nomination> nominationRepository, IBnoisRepository<vwNomination> vwGetNominationInfoRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
+        {
 			this.nominationRepository = nominationRepository;
 			this.vwGetNominationInfoRepository = vwGetNominationInfoRepository;
-		}
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
+        }
 
 
         public async Task<NominationModel> GetNomination(int id)
@@ -92,6 +96,77 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 nomination.ModifiedDate = DateTime.Now;
                 nomination.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Nomination";
+                bnLog.TableEntryForm = "Nomination";
+                bnLog.PreviousValue = "Id: " + model.NominationId;
+                bnLog.UpdatedValue = "Id: " + model.NominationId;
+                int bnoisUpdateCount = 0;
+
+                bnLog.PreviousValue += ", Enitity Type: " + (nomination.EnitityType == 1 ? "Course" : nomination.EnitityType == 2 ? "Mission" : nomination.EnitityType == 3 ? "Foreign Visit" : "Other");
+                bnLog.UpdatedValue += ", Enitity Type: " + (model.EnitityType == 1 ? "Course" : model.EnitityType == 2 ? "Mission" : model.EnitityType == 3 ? "Foreign Visit" : "Other");
+                
+                if (nomination.EntityId != model.EntityId)
+                {
+                    bnLog.PreviousValue += ", EntityId: " + nomination.EntityId;
+                    bnLog.UpdatedValue += ", EntityId: " + model.EntityId;
+                    bnoisUpdateCount += 1;
+                }
+                if (nomination.MissoinAppointmentId != model.MissoinAppointmentId)
+                {
+                    if (nomination.MissoinAppointmentId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("MissionAppointment", "MissoinAppointmentId", nomination.MissoinAppointmentId??0);
+                        bnLog.PreviousValue += ", Missoin Appointment: " + ((dynamic)prev).Name;
+                    }
+                    if (model.MissoinAppointmentId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("MissoinAppointment", "MissoinAppointmentId", model.MissoinAppointmentId??0);
+                        bnLog.UpdatedValue += ", Missoin Appointment: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (nomination.EntryDate != model.EntryDate)
+                {
+                    bnLog.PreviousValue += ", Entry Date: " + nomination.EntryDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Entry Date: " + model.EntryDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (nomination.WithoutTransfer != model.WithoutTransfer)
+                {
+                    bnLog.PreviousValue += ",  Without Transfer: " + nomination.WithoutTransfer;
+                    bnLog.UpdatedValue += ",  Without Transfer: " + model.WithoutTransfer;
+                    bnoisUpdateCount += 1;
+                }
+                if (nomination.WithoutAppointment != model.WithoutAppointment)
+                {
+                    bnLog.PreviousValue += ",  Without Appointment: " + nomination.WithoutAppointment;
+                    bnLog.UpdatedValue += ",  Without Appointment: " + model.WithoutAppointment;
+                    bnoisUpdateCount += 1;
+                }
+                if (nomination.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + nomination.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -126,6 +201,30 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "Nomination";
+                bnLog.TableEntryForm = "Nomination";
+                bnLog.PreviousValue = "Id: " + nomination.NominationId;
+                
+                bnLog.PreviousValue += ", Enitity Type: " + (nomination.EnitityType == 1 ? "Course" : nomination.EnitityType == 2 ? "Mission" : nomination.EnitityType == 3 ? "Foreign Visit" : "Other") + ", EntityId: " + nomination.EntityId;
+                if (nomination.MissoinAppointmentId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("MissionAppointment", "MissoinAppointmentId", nomination.MissoinAppointmentId ?? 0);
+                    bnLog.PreviousValue += ", Missoin Appointment: " + ((dynamic)prev).Name;
+                }
+                bnLog.PreviousValue += ", Entry Date: " + nomination.EntryDate?.ToString("dd/MM/yyyy") + ",  Without Transfer: " + nomination.WithoutTransfer + ",  Without Appointment: " + nomination.WithoutAppointment + ", Remarks: " + nomination.Remarks;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
                 return await nominationRepository.DeleteAsync(nomination);
             }
         }

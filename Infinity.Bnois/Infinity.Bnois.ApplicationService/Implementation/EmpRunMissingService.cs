@@ -17,15 +17,19 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<Employee> employeeRepository;
         private readonly IBnoisRepository<EmployeeGeneral> employeeGeneralRepository;
         private readonly IBnoisRepository<EmployeeStatus> employeeStatusRepository;
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
 
         public EmpRunMissingService(IBnoisRepository<EmpRunMissing> empRunMissingRepository,
             IBnoisRepository<Employee> employeeRepository,IBnoisRepository<EmployeeGeneral> employeeGeneralRepository,
-            IBnoisRepository<EmployeeStatus> employeeStatusRepository)
+            IBnoisRepository<EmployeeStatus> employeeStatusRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.empRunMissingRepository = empRunMissingRepository;
             this.employeeRepository = employeeRepository;
             this.employeeGeneralRepository = employeeGeneralRepository;
             this.employeeStatusRepository = employeeStatusRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
 
@@ -102,6 +106,107 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 empRunMissing.ModifiedDate = DateTime.Now;
                 empRunMissing.ModifiedBy = userId;
+
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmpRunMissing";
+                bnLog.TableEntryForm = "Officer's Run/Missing";
+                bnLog.PreviousValue = "Id: " + model.EmpRunMissingId;
+                bnLog.UpdatedValue = "Id: " + model.EmpRunMissingId;
+                int bnoisUpdateCount = 0;
+
+                if (empRunMissing.EmployeeId > 0 || model.EmployeeId > 0)
+                {
+                    if (empRunMissing.EmployeeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", empRunMissing.EmployeeId);
+                        bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                    }
+                    if (model.EmployeeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                        bnLog.UpdatedValue += ", P No: " + ((dynamic)newv).PNo;
+                    }
+                }
+                if (empRunMissing.IsBackLog != model.IsBackLog)
+                {
+                    bnLog.PreviousValue += ", Back Log: " + empRunMissing.IsBackLog;
+                    bnLog.UpdatedValue += ", Back Log: " + model.IsBackLog;
+                    bnoisUpdateCount += 1;
+                }
+                if (empRunMissing.TransferId != model.TransferId)
+                {
+                    if (empRunMissing.TransferId > 0)
+                    {
+                        var prevTransfer = employeeService.GetDynamicTableInfoById("vwTransfer", "TransferId", empRunMissing.TransferId ?? 0);
+                        bnLog.PreviousValue += ", Born/Attach/Appointment: " + ((dynamic)prevTransfer).BornOffice + '/' + ((dynamic)prevTransfer).CurrentAttach + '/' + ((dynamic)prevTransfer).Appointment;
+                    }
+                    if (model.TransferId > 0)
+                    {
+                        var newTransfer = employeeService.GetDynamicTableInfoById("vwTransfer", "TransferId", model.TransferId ?? 0);
+                        bnLog.UpdatedValue += ", Born/Attach/Appointment: " + ((dynamic)newTransfer).BornOffice + '/' + ((dynamic)newTransfer).CurrentAttach + '/' + ((dynamic)newTransfer).Appointment;
+                    }
+                }
+                if (empRunMissing.RankId != model.RankId)
+                {
+                    if (empRunMissing.RankId > 0)
+                    {
+                        var prevTransfer = employeeService.GetDynamicTableInfoById("Rank", "RankId", empRunMissing.RankId ?? 0);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prevTransfer).ShortName;
+                    }
+                    if (model.TransferId > 0)
+                    {
+                        var newTransfer = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId ?? 0);
+                        bnLog.UpdatedValue += ", Rank: " + ((dynamic)newTransfer).ShortName;
+                    }
+                }
+                if (empRunMissing.BranchId != model.BranchId)
+                {
+                    if (empRunMissing.BranchId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Branch", "BranchId", empRunMissing.BranchId ?? 0);
+                        bnLog.PreviousValue += ", Branch: " + ((dynamic)prev).Name;
+                    }
+                    if (model.BranchId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Branch", "BranchId", model.BranchId ?? 0);
+                        bnLog.UpdatedValue += ", Branch: " + ((dynamic)newv).Name;
+                    }
+                }
+                if (empRunMissing.Type != model.Type)
+                {
+                    bnLog.PreviousValue += ", Status: " + (empRunMissing.Type == 3 ? "Run" : empRunMissing.Type == 4 ? "Missing" : empRunMissing.Type == 9 ? "Return from Run/Missing" : "");
+                    bnLog.UpdatedValue += ", Status: " + (model.Type == 3 ? "Run" : model.Type == 4 ? "Missing" : model.Type == 9 ? "Return from Run/Missing" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (empRunMissing.Date != model.Date)
+                {
+                    bnLog.PreviousValue += ", Date: " + empRunMissing.Date.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Date: " + model.Date.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (empRunMissing.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + empRunMissing.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString(); ;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -148,6 +253,44 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmpRunMissing";
+                bnLog.TableEntryForm = "Officer's Run/Missing";
+                bnLog.PreviousValue = "Id: " + empRunMissing.EmpRunMissingId;
+                if (empRunMissing.EmployeeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", empRunMissing.EmployeeId);
+                    bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                }
+                bnLog.PreviousValue += ", Back Log: " + empRunMissing.IsBackLog;
+                if (empRunMissing.TransferId > 0)
+                {
+                    var prevTransfer = employeeService.GetDynamicTableInfoById("vwTransfer", "TransferId", empRunMissing.TransferId ?? 0);
+                    bnLog.PreviousValue += ", Born/Attach/Appointment: " + ((dynamic)prevTransfer).BornOffice + '/' + ((dynamic)prevTransfer).CurrentAttach + '/' + ((dynamic)prevTransfer).Appointment;
+                }
+                if (empRunMissing.RankId > 0)
+                {
+                    var prevTransfer = employeeService.GetDynamicTableInfoById("Rank", "RankId", empRunMissing.RankId ?? 0);
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prevTransfer).ShortName;
+                }
+                if (empRunMissing.BranchId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Branch", "BranchId", empRunMissing.BranchId ?? 0);
+                    bnLog.PreviousValue += ", Branch: " + ((dynamic)prev).Name;
+                }
+                bnLog.PreviousValue += ", Status: " + (empRunMissing.Type == 3 ? "Run" : empRunMissing.Type == 4 ? "Missing" : empRunMissing.Type == 9 ? "Return from Run/Missing" : "") + ", Date: " + empRunMissing.Date.ToString("dd/MM/yyyy") + ", Remarks: " + empRunMissing.Remarks;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await empRunMissingRepository.DeleteAsync(empRunMissing);
             }
         }

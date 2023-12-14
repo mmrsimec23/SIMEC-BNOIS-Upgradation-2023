@@ -45,5 +45,33 @@ namespace Infinity.Bnois.Api.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("get-large-ship-co-waiting-list")]
+        public IHttpActionResult GetLargeShipCoWaitingList()
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = roasterListService.GetLargeShipCoWaitingList()
+            });
+        }
+        [HttpGet]
+        [Route("get-large-ship-xo-waiting-list")]
+        public IHttpActionResult GetLargeShipXoWaitingList()
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = roasterListService.GetLargeShipXoWaitingList()
+            });
+        }
+        [HttpGet]
+        [Route("get-medium-ship-co-waiting-list")]
+        public IHttpActionResult GetMediumShipCoWaitingList()
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = roasterListService.GetMediumShipCoWaitingList()
+            });
+        }
+
     }
 }

@@ -219,29 +219,8 @@ namespace Infinity.Bnois.Api.Controllers
             string extension = string.Empty;
             string mimeType = string.Empty;
             string reportName = string.Empty;
-            if(transferProposal.LtCdrLevel == 1 && transferProposal.WithPicture)
-                reportName = "TransferProposalLtCdrAboveSpecial";
-            else if(transferProposal.LtCdrLevel == 1)
-                reportName = "TransferProposalLtCdrAbove";
-            else if (transferProposal.LtCdrLevel == 2 && transferProposal.WithPicture)
-                reportName = "TransferProposalSpecial";
-            else if(transferProposal.LtCdrLevel == 2)
-                reportName = "TransferProposal";
-            //if (transferProposal.WithPicture)
-            //{
-            //    reportName = "TransferProposalLtCdrAboveSpecial";
-            //}
-            //else
-            //{
-            //    if (transferProposal.LtCdrLevel == 1)
-            //    {
-            //        reportName = "TransferProposal";
-            //    }
-            //    else
-            //    {
-            //        reportName = "TransferProposalLtCdrAbove";
-            //    }
-            //}
+            reportName = "TransferProposalLtCdrAbove";
+            
             var parms = new List<ReportParameter> { new ReportParameter("TransferProposalId", transferProposalId.ToString()) };
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage
             {
@@ -251,7 +230,93 @@ namespace Infinity.Bnois.Api.Controllers
 
             httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                FileName = reportName + "." + extension
+                FileName = reportName + transferProposalId + "." + extension
+            };
+            httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+
+            httpResponseMessage.StatusCode = HttpStatusCode.OK;
+            return httpResponseMessage;
+
+        }
+
+
+        [HttpGet]
+        [Route("download-transfer-proposal-xbranch")]
+        public async Task<HttpResponseMessage> DownloadTransferProposalXBranch(int transferProposalId, ReportType type)
+        {
+            TransferProposalModel transferProposal = await transferProposalService.GetTransferProposal(transferProposalId);
+            string extension = string.Empty;
+            string mimeType = string.Empty;
+            string reportName = string.Empty;
+            reportName = "TransferProposalLtCdrAboveXBranch";
+            
+            var parms = new List<ReportParameter> { new ReportParameter("TransferProposalId", transferProposalId.ToString()) };
+            HttpResponseMessage httpResponseMessage = new HttpResponseMessage
+            {
+                Content = ReportExtension.ToByteArray(type, reportName, parms, out extension, out mimeType)
+            };
+            httpResponseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+
+            httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = transferProposal.Name + transferProposalId + "." + extension
+            };
+            httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+
+            httpResponseMessage.StatusCode = HttpStatusCode.OK;
+            return httpResponseMessage;
+
+        }
+
+
+        [HttpGet]
+        [Route("download-transfer-proposal-without-xbranch")]
+        public async Task<HttpResponseMessage> DownloadTransferProposalWithoutXBranch(int transferProposalId, ReportType type)
+        {
+            TransferProposalModel transferProposal = await transferProposalService.GetTransferProposal(transferProposalId);
+            string extension = string.Empty;
+            string mimeType = string.Empty;
+            string reportName = string.Empty;
+            reportName = "TransferProposalLtCdrAboveXBranchELSBranch";
+            
+            var parms = new List<ReportParameter> { new ReportParameter("TransferProposalId", transferProposalId.ToString()) };
+            HttpResponseMessage httpResponseMessage = new HttpResponseMessage
+            {
+                Content = ReportExtension.ToByteArray(type, reportName, parms, out extension, out mimeType)
+            };
+            httpResponseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+
+            httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = transferProposal.Name + transferProposalId + "." + extension
+            };
+            httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+
+            httpResponseMessage.StatusCode = HttpStatusCode.OK;
+            return httpResponseMessage;
+
+        }
+
+        [HttpGet]
+        [Route("download-transfer-proposal-with-pic")]
+        public async Task<HttpResponseMessage> DownloadTransferProposalWithPic(int transferProposalId, ReportType type)
+        {
+            TransferProposalModel transferProposal = await transferProposalService.GetTransferProposal(transferProposalId);
+            string extension = string.Empty;
+            string mimeType = string.Empty;
+            string reportName = string.Empty;
+            reportName = "TransferProposalLtCdrAboveSpecial";
+            
+            var parms = new List<ReportParameter> { new ReportParameter("TransferProposalId", transferProposalId.ToString()) };
+            HttpResponseMessage httpResponseMessage = new HttpResponseMessage
+            {
+                Content = ReportExtension.ToByteArray(type, reportName, parms, out extension, out mimeType)
+            };
+            httpResponseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+
+            httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = transferProposal.Name + transferProposalId + "." + extension
             };
             httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
 

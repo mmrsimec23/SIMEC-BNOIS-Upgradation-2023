@@ -15,6 +15,9 @@
         vm.deleteTransferProposal = deleteTransferProposal;
         vm.getTransferProposalDetails = getTransferProposalDetails;
         vm.downlaodTransferProposal = downlaodTransferProposal;
+        vm.downlaodTransferProposalForXBranch = downlaodTransferProposalForXBranch;
+        vm.downlaodTransferProposalWithoutXBranch = downlaodTransferProposalWithoutXBranch;
+        vm.downlaodTransferProposalWithPic = downlaodTransferProposalWithPic;
         vm.pageChanged = pageChanged;
         vm.searchText = "";
         vm.onSearch = onSearch;
@@ -78,6 +81,19 @@
 
         function downlaodTransferProposal(transferProposal) {
             var url = reportService.downlaodTransferProposalUrl(transferProposal.transferProposalId, vm.reportType );
+            downloadService.downloadFile(url);
+        }
+
+        function downlaodTransferProposalForXBranch(transferProposal) {
+            var url = reportService.downlaodTransferProposalXBranchUrl(transferProposal.transferProposalId, vm.reportType );
+            downloadService.downloadFile(url);
+        }
+        function downlaodTransferProposalWithoutXBranch(transferProposal) {
+            var url = reportService.downlaodTransferProposalWithoutXBranchUrl(transferProposal.transferProposalId, vm.reportType );
+            downloadService.downloadFile(url);
+        }
+        function downlaodTransferProposalWithPic(transferProposal) {
+            var url = reportService.downlaodTransferProposalWithPicUrl(transferProposal.transferProposalId, vm.reportType );
             downloadService.downloadFile(url);
         }
 

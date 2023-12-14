@@ -11,7 +11,16 @@
     z-index: 1;
     max-width: 200px;
 }
-
+td.text-danger {
+    color: red !important;
+}
+td.fw-bolder {
+    font-weight: bolder !important;
+}
+td.Completed {
+    color: red !important;
+    font-weight: bold !important;
+}
 .fixed-header-section {
     /* background:linear-gradient(to right, #0C7586, #0C7586, #155F8C); */
     /*background: #1C4E80;*/

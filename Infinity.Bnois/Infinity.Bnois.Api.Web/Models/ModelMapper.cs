@@ -505,6 +505,9 @@ namespace Infinity.Bnois.Api.Web.Models
                     .ForMember(d => d.ProposalDetail, opt => opt.MapFrom(s => s.ProposalDetail))
                     .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee));
 
+                cfg.CreateMap<DashBoardBranch980, CoFfRecomModel>()
+                    .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee));
+
 
                 cfg.CreateMap<UsedStoreProcedure, UsedStoreProcedureModel>()
                     .ForMember(d => d.UsedReport, opt => opt.MapFrom(s => s.UsedReport));
@@ -1044,6 +1047,9 @@ namespace Infinity.Bnois.Api.Web.Models
 
                 cfg.CreateMap<ProposalCandidateModel, ProposalCandidate>()
                   .ForMember(d => d.ProposalDetail, opt => opt.MapFrom(s => s.ProposalDetail))
+                  .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee));
+
+                cfg.CreateMap<CoFfRecomModel, DashBoardBranch980>()
                   .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee));
 
 
