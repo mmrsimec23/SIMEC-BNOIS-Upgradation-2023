@@ -62,6 +62,15 @@ namespace Infinity.Bnois.Api.Web.Models
                 cfg.CreateMap<ExamSubject, ExamSubjectModel>()
                  .ForMember(d => d.Examination, opt => opt.MapFrom(s => s.Examination));
 
+                cfg.CreateMap<DashBoardMinuite100, DashBoardMinuite100Model>()
+                 .ForMember(d => d.Country, opt => opt.MapFrom(s => s.Country))
+                 .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee));
+
+
+                cfg.CreateMap<DashBoardMinuite110, DashBoardMinuite110Model>()
+                 .ForMember(d => d.Minuite, opt => opt.MapFrom(s => s.DashBoardMinuite100))
+                 .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee));
+
                 cfg.CreateMap<Result, ResultModel>();
 
                 cfg.CreateMap<ExtracurricularType, ExtracurricularTypeModel>();
@@ -696,6 +705,15 @@ namespace Infinity.Bnois.Api.Web.Models
                 cfg.CreateMap<MemberRoleModel, MemberRole>();
                 cfg.CreateMap<ExamSubjectModel, ExamSubject>()
                .ForMember(d => d.Examination, opt => opt.MapFrom(s => s.Examination));
+
+                cfg.CreateMap<DashBoardMinuite100Model, DashBoardMinuite100>()
+               .ForMember(d => d.Country, opt => opt.MapFrom(s => s.Country))
+               .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee));
+
+                cfg.CreateMap<DashBoardMinuite110Model, DashBoardMinuite110>()
+               .ForMember(d => d.DashBoardMinuite100, opt => opt.MapFrom(s => s.Minuite))
+               .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee));
+
                 cfg.CreateMap<ResultModel, Result>();
 
                 cfg.CreateMap<DivisionModel, Division>();

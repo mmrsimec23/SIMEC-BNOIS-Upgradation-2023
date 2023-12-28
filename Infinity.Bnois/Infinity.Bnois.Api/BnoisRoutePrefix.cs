@@ -154,6 +154,8 @@ namespace Infinity.Bnois.Api
         public const string EmployeeReports = BnoisRoutePrefixBase + "employee-reports";
         public const string Reports = BnoisRoutePrefixBase + "reports";
         public const string TransferProposals = BnoisRoutePrefixBase + "transfer-proposals";
+        public const string minuites = BnoisRoutePrefixBase + "minuites";
+        public const string minuiteCandidate = BnoisRoutePrefixBase + "minuite-candidates";
         public const string ProposalDetails = BnoisRoutePrefixBase + "proposal-details";
         public const string ProposalCadidates = BnoisRoutePrefixBase + "proposal-candidates";
         public const string COFFRecom = BnoisRoutePrefixBase + "co-ff-recom";

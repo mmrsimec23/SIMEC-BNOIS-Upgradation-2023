@@ -930,6 +930,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             return dataTable.ToJson().ToList();
         }
+        public List<object> GetShipMovementHistory(int shipId)
+        {
+            System.Data.DataTable dataTable = officeRepository.ExecWithSqlQuery(String.Format("exec [spGetShipMovementInfo] {0} ", shipId));
+
+            return dataTable.ToJson().ToList();
+        }
 
 
     }

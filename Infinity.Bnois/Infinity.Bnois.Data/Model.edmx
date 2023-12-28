@@ -614,6 +614,62 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="DashBoardMinuite100">
+          <Key>
+            <PropertyRef Name="MinuiteId" />
+          </Key>
+          <Property Name="MinuiteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MinuiteNo" Type="nvarchar" MaxLength="256" />
+          <Property Name="NextMinuiteNo" Type="nvarchar" MaxLength="256" />
+          <Property Name="MinuiteCategory" Type="int" />
+          <Property Name="MinuiteName" Type="nvarchar" MaxLength="1500" />
+          <Property Name="LetterNo" Type="nvarchar" MaxLength="1500" />
+          <Property Name="OfferedBy" Type="nvarchar" MaxLength="1500" />
+          <Property Name="Vacency" Type="int" />
+          <Property Name="Nominate" Type="int" />
+          <Property Name="Purpose" Type="nvarchar" MaxLength="1500" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Location" Type="nvarchar" MaxLength="1500" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="RankName" Type="nvarchar" MaxLength="1500" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="1500" />
+          <Property Name="officerRankof" Type="nvarchar" MaxLength="1500" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="MinuiteDate" Type="datetime" />
+          <Property Name="PreRequQul" Type="nvarchar" MaxLength="1500" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="1500" />
+          <Property Name="ServiceExperiance" Type="nvarchar" MaxLength="1500" />
+          <Property Name="Competencies" Type="nvarchar" MaxLength="1500" />
+          <Property Name="ExtraRemarks1" Type="nvarchar" MaxLength="1500" />
+          <Property Name="ExtraRemarks2" Type="nvarchar" MaxLength="1500" />
+          <Property Name="ExtraRemarks3" Type="nvarchar" MaxLength="1500" />
+          <Property Name="ExtraRemarks4" Type="nvarchar" MaxLength="1500" />
+          <Property Name="ExtraRemarks5" Type="nvarchar" MaxLength="1500" />
+          <Property Name="ExtraRemarks6" Type="int" />
+          <Property Name="ExtraRemarks7" Type="int" />
+          <Property Name="ExtraRemarks8" Type="int" />
+          <Property Name="ExtraRemarks9" Type="int" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DashBoardMinuite110">
+          <Key>
+            <PropertyRef Name="MinuiteCandidateId" />
+          </Key>
+          <Property Name="MinuiteCandidateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MinuiteId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="ProposedBillet" Type="nvarchar" MaxLength="1500" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="District">
           <Key>
             <PropertyRef Name="DistrictId" />
@@ -3376,6 +3432,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <PropertyRef Name="TranferType" />
             <PropertyRef Name="TransferModeName" />
             
+            <PropertyRef Name="OfficeSecurityName" />
             
             <PropertyRef Name="FromDate" />
           </Key>
@@ -3391,6 +3448,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="EmployeeStatus" Type="int" />
           <Property Name="TransferModeName" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="BornOffice" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="OfficeSecurityName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CurrentAttach" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="AppointmentCategoryId" Type="int" />
           <Property Name="AppointmentNatureId" Type="int" />
@@ -3980,6 +4038,54 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Principal>
             <Dependent Role="DashBoardBranchByAdminAuthority700">
               <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardMinuite100_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="DashBoardMinuite100" Type="Self.DashBoardMinuite100" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="DashBoardMinuite100">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardMinuite100_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="DashBoardMinuite100" Type="Self.DashBoardMinuite100" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="DashBoardMinuite100">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardMinuite110_DashBoardMinuite100">
+          <End Role="DashBoardMinuite100" Type="Self.DashBoardMinuite100" Multiplicity="1" />
+          <End Role="DashBoardMinuite110" Type="Self.DashBoardMinuite110" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DashBoardMinuite100">
+              <PropertyRef Name="MinuiteId" />
+            </Principal>
+            <Dependent Role="DashBoardMinuite110">
+              <PropertyRef Name="MinuiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardMinuite110_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="DashBoardMinuite110" Type="Self.DashBoardMinuite110" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="DashBoardMinuite110">
+              <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7135,6 +7241,8 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <EntitySet Name="DashBoardBranch980" EntityType="Self.DashBoardBranch980" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DashBoardBranchByAdminAuthority600Entry" EntityType="Self.DashBoardBranchByAdminAuthority600Entry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DashBoardBranchByAdminAuthority700" EntityType="Self.DashBoardBranchByAdminAuthority700" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DashBoardMinuite100" EntityType="Self.DashBoardMinuite100" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DashBoardMinuite110" EntityType="Self.DashBoardMinuite110" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
@@ -7335,6 +7443,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
     [vwTransfer].[EmployeeStatus] AS [EmployeeStatus], 
     [vwTransfer].[TransferModeName] AS [TransferModeName], 
     [vwTransfer].[BornOffice] AS [BornOffice], 
+    [vwTransfer].[OfficeSecurityName] AS [OfficeSecurityName], 
     [vwTransfer].[CurrentAttach] AS [CurrentAttach], 
     [vwTransfer].[AppointmentCategoryId] AS [AppointmentCategoryId], 
     [vwTransfer].[AppointmentNatureId] AS [AppointmentNatureId], 
@@ -7543,6 +7652,22 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <AssociationSet Name="FK_DashBoardBranchByAdminAuthority700_Rank" Association="Self.FK_DashBoardBranchByAdminAuthority700_Rank">
             <End Role="Rank" EntitySet="Rank" />
             <End Role="DashBoardBranchByAdminAuthority700" EntitySet="DashBoardBranchByAdminAuthority700" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardMinuite100_Country" Association="Self.FK_DashBoardMinuite100_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="DashBoardMinuite100" EntitySet="DashBoardMinuite100" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardMinuite100_Employee" Association="Self.FK_DashBoardMinuite100_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DashBoardMinuite100" EntitySet="DashBoardMinuite100" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardMinuite110_DashBoardMinuite100" Association="Self.FK_DashBoardMinuite110_DashBoardMinuite100">
+            <End Role="DashBoardMinuite100" EntitySet="DashBoardMinuite100" />
+            <End Role="DashBoardMinuite110" EntitySet="DashBoardMinuite110" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardMinuite110_Employee" Association="Self.FK_DashBoardMinuite110_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DashBoardMinuite110" EntitySet="DashBoardMinuite110" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_District_dbo_Divission_DivissionId" Association="Self.FK_dbo_District_dbo_Divission_DivissionId">
             <End Role="Division" EntitySet="Division" />
@@ -10015,6 +10140,24 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="ProposalDetail" EntitySet="ProposalDetails" />
             <End Role="ProposalCandidate" EntitySet="ProposalCandidate" />
           </AssociationSet>
+          <EntitySet Name="DashBoardMinuite110" EntityType="BnoisdbModel.DashBoardMinuite110" />
+          <AssociationSet Name="FK_DashBoardMinuite110_Employee" Association="BnoisdbModel.FK_DashBoardMinuite110_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DashBoardMinuite110" EntitySet="DashBoardMinuite110" />
+          </AssociationSet>
+          <EntitySet Name="DashBoardMinuite100" EntityType="BnoisdbModel.DashBoardMinuite100" />
+          <AssociationSet Name="FK_DashBoardMinuite100_Country" Association="BnoisdbModel.FK_DashBoardMinuite100_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="DashBoardMinuite100" EntitySet="DashBoardMinuite100" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardMinuite100_Employee" Association="BnoisdbModel.FK_DashBoardMinuite100_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DashBoardMinuite100" EntitySet="DashBoardMinuite100" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardMinuite110_DashBoardMinuite100" Association="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100">
+            <End Role="DashBoardMinuite100" EntitySet="DashBoardMinuite100" />
+            <End Role="DashBoardMinuite110" EntitySet="DashBoardMinuite110" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
           <Property Type="Int32" Name="Value" Nullable="false" />
@@ -10227,6 +10370,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_Office_Country" FromRole="Country" ToRole="Office" />
           <NavigationProperty Name="Office1" Relationship="BnoisdbModel.FK_Office_Country1" FromRole="Country" ToRole="Office" />
           <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Country" FromRole="Country" ToRole="EmployeeMscEducation" />
+          <NavigationProperty Name="DashBoardMinuite100" Relationship="BnoisdbModel.FK_DashBoardMinuite100_Country" FromRole="Country" ToRole="DashBoardMinuite100" />
           </EntityType>
         <EntityType Name="District">
           <Key>
@@ -14077,6 +14221,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <PropertyRef Name="TransferModeName" />
             <PropertyRef Name="FromDate" />
             <PropertyRef Name="TranferType" />
+            <PropertyRef Name="OfficeSecurityName" />
           </Key>
           <Property Name="TransferId" Type="Int32" Nullable="false" />
           <Property Name="TransferFor" Type="Int32" />
@@ -14105,6 +14250,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="TranferType" Type="Int32" Nullable="false" />
           <Property Name="AppointmentId" Type="Int32" />
           <Property Name="IsInstrServiceCount" Type="Boolean" />
+          <Property Name="OfficeSecurityName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -15395,6 +15541,8 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="DashBoardBranch975" Relationship="BnoisdbModel.FK_DashBoardBranch975_Employee" FromRole="Employee" ToRole="DashBoardBranch975" />
           <NavigationProperty Name="DashBoardBranch980" Relationship="BnoisdbModel.FK_DashBoardBranch980_Employee" FromRole="Employee" ToRole="DashBoardBranch980" />
           <NavigationProperty Name="ProposalCandidate" Relationship="BnoisdbModel.FK_ProposalCadidate_Employee" FromRole="Employee" ToRole="ProposalCandidate" />
+          <NavigationProperty Name="DashBoardMinuite110" Relationship="BnoisdbModel.FK_DashBoardMinuite110_Employee" FromRole="Employee" ToRole="DashBoardMinuite110" />
+          <NavigationProperty Name="DashBoardMinuite100" Relationship="BnoisdbModel.FK_DashBoardMinuite100_Employee" FromRole="Employee" ToRole="DashBoardMinuite100" />
         </EntityType>
         <EntityType Name="ExecutionRemark">
           <Key>
@@ -17717,6 +17865,115 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Principal>
             <Dependent Role="ProposalCandidate">
               <PropertyRef Name="ProposalDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DashBoardMinuite110">
+          <Key>
+            <PropertyRef Name="MinuiteCandidateId" />
+          </Key>
+          <Property Name="MinuiteCandidateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MinuiteId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="ProposedBillet" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_DashBoardMinuite110_Employee" FromRole="DashBoardMinuite110" ToRole="Employee" />
+          <NavigationProperty Name="DashBoardMinuite100" Relationship="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100" FromRole="DashBoardMinuite110" ToRole="DashBoardMinuite100" />
+        </EntityType>
+        <Association Name="FK_DashBoardMinuite110_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.DashBoardMinuite110" Role="DashBoardMinuite110" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="DashBoardMinuite110">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DashBoardMinuite100">
+          <Key>
+            <PropertyRef Name="MinuiteId" />
+          </Key>
+          <Property Name="MinuiteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MinuiteNo" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NextMinuiteNo" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="MinuiteCategory" Type="Int32" />
+          <Property Name="MinuiteName" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="LetterNo" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="OfferedBy" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Vacency" Type="Int32" />
+          <Property Name="Nominate" Type="Int32" />
+          <Property Name="Purpose" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="RankName" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="BranchName" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="officerRankof" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="MinuiteDate" Type="DateTime" Precision="3" />
+          <Property Name="PreRequQul" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceExperiance" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Competencies" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraRemarks1" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraRemarks2" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraRemarks3" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraRemarks4" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraRemarks5" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraRemarks6" Type="Int32" />
+          <Property Name="ExtraRemarks7" Type="Int32" />
+          <Property Name="ExtraRemarks8" Type="Int32" />
+          <Property Name="ExtraRemarks9" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="BnoisdbModel.FK_DashBoardMinuite100_Country" FromRole="DashBoardMinuite100" ToRole="Country" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_DashBoardMinuite100_Employee" FromRole="DashBoardMinuite100" ToRole="Employee" />
+          <NavigationProperty Name="DashBoardMinuite110" Relationship="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100" FromRole="DashBoardMinuite100" ToRole="DashBoardMinuite110" />
+        </EntityType>
+        <Association Name="FK_DashBoardMinuite100_Country">
+          <End Type="BnoisdbModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.DashBoardMinuite100" Role="DashBoardMinuite100" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="DashBoardMinuite100">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardMinuite100_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.DashBoardMinuite100" Role="DashBoardMinuite100" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="DashBoardMinuite100">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardMinuite110_DashBoardMinuite100">
+          <End Type="BnoisdbModel.DashBoardMinuite100" Role="DashBoardMinuite100" Multiplicity="1" />
+          <End Type="BnoisdbModel.DashBoardMinuite110" Role="DashBoardMinuite110" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DashBoardMinuite100">
+              <PropertyRef Name="MinuiteId" />
+            </Principal>
+            <Dependent Role="DashBoardMinuite110">
+              <PropertyRef Name="MinuiteId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -20115,6 +20372,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <EntitySetMapping Name="vwTransfers">
             <EntityTypeMapping TypeName="BnoisdbModel.vwTransfer">
               <MappingFragment StoreEntitySet="vwTransfer">
+                <ScalarProperty Name="OfficeSecurityName" ColumnName="OfficeSecurityName" />
                 <ScalarProperty Name="IsInstrServiceCount" ColumnName="IsInstrServiceCount" />
                 <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
                 <ScalarProperty Name="TranferType" ColumnName="TranferType" />
@@ -21301,6 +21559,64 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="ProposalDetailId" ColumnName="ProposalDetailId" />
                 <ScalarProperty Name="ProposalCandidateId" ColumnName="ProposalCandidateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DashBoardMinuite110">
+            <EntityTypeMapping TypeName="BnoisdbModel.DashBoardMinuite110">
+              <MappingFragment StoreEntitySet="DashBoardMinuite110">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProposedBillet" ColumnName="ProposedBillet" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="MinuiteId" ColumnName="MinuiteId" />
+                <ScalarProperty Name="MinuiteCandidateId" ColumnName="MinuiteCandidateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DashBoardMinuite100">
+            <EntityTypeMapping TypeName="BnoisdbModel.DashBoardMinuite100">
+              <MappingFragment StoreEntitySet="DashBoardMinuite100">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ExtraRemarks9" ColumnName="ExtraRemarks9" />
+                <ScalarProperty Name="ExtraRemarks8" ColumnName="ExtraRemarks8" />
+                <ScalarProperty Name="ExtraRemarks7" ColumnName="ExtraRemarks7" />
+                <ScalarProperty Name="ExtraRemarks6" ColumnName="ExtraRemarks6" />
+                <ScalarProperty Name="ExtraRemarks5" ColumnName="ExtraRemarks5" />
+                <ScalarProperty Name="ExtraRemarks4" ColumnName="ExtraRemarks4" />
+                <ScalarProperty Name="ExtraRemarks3" ColumnName="ExtraRemarks3" />
+                <ScalarProperty Name="ExtraRemarks2" ColumnName="ExtraRemarks2" />
+                <ScalarProperty Name="ExtraRemarks1" ColumnName="ExtraRemarks1" />
+                <ScalarProperty Name="Competencies" ColumnName="Competencies" />
+                <ScalarProperty Name="ServiceExperiance" ColumnName="ServiceExperiance" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="PreRequQul" ColumnName="PreRequQul" />
+                <ScalarProperty Name="MinuiteDate" ColumnName="MinuiteDate" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="officerRankof" ColumnName="officerRankof" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="RankName" ColumnName="RankName" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Nominate" ColumnName="Nominate" />
+                <ScalarProperty Name="Vacency" ColumnName="Vacency" />
+                <ScalarProperty Name="OfferedBy" ColumnName="OfferedBy" />
+                <ScalarProperty Name="LetterNo" ColumnName="LetterNo" />
+                <ScalarProperty Name="MinuiteName" ColumnName="MinuiteName" />
+                <ScalarProperty Name="MinuiteCategory" ColumnName="MinuiteCategory" />
+                <ScalarProperty Name="NextMinuiteNo" ColumnName="NextMinuiteNo" />
+                <ScalarProperty Name="MinuiteNo" ColumnName="MinuiteNo" />
+                <ScalarProperty Name="MinuiteId" ColumnName="MinuiteId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

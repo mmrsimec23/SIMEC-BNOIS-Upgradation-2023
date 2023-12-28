@@ -19,11 +19,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<EmployeeGeneral> employeeGeneralRepository;
         private readonly IBnoisRepository<EmployeeStatus> employeeStatusRepository;
         private readonly IProcessRepository processRepository;
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
 
-        public EmpRejoinService(IBnoisRepository<EmpRejoin> empRejoinRepository,
-            IBnoisRepository<Employee> employeeRepository,
-            IBnoisRepository<AgeServicePolicy> ageServicePolicyRepository,
-            IBnoisRepository<EmployeeGeneral> employeeGeneralRepository,
+        public EmpRejoinService(IBnoisRepository<EmpRejoin> empRejoinRepository,IBnoisRepository<Employee> employeeRepository, 
+            IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService, 
+            IBnoisRepository<AgeServicePolicy> ageServicePolicyRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository,
             IBnoisRepository<EmployeeStatus> employeeStatusRepository, IProcessRepository processRepository)
         {
             this.empRejoinRepository = empRejoinRepository;
@@ -31,7 +32,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             this.ageServicePolicyRepository = ageServicePolicyRepository;
             this.employeeGeneralRepository = employeeGeneralRepository;
             this.employeeStatusRepository = employeeStatusRepository;
-            this.processRepository = processRepository;
+            this.processRepository = processRepository; 
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
 
@@ -101,6 +104,69 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 empRejoin.ModifiedDate = DateTime.Now;
                 empRejoin.ModifiedBy = userId;
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmpRejoin";
+                bnLog.TableEntryForm = "Officer Rejoin";
+                bnLog.PreviousValue = "Id: " + model.EmpRejoinId;
+                bnLog.UpdatedValue = "Id: " + model.EmpRejoinId;
+                int bnoisUpdateCount = 0;
+
+                if (empRejoin.EmployeeId > 0 || model.EmployeeId > 0)
+                {
+                    if (empRejoin.EmployeeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", empRejoin.EmployeeId);
+                        bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                    }
+                    if (model.EmployeeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                        bnLog.UpdatedValue += ", P No: " + ((dynamic)newv).PNo;
+                    }
+                }
+                
+                if (empRejoin.RankId != model.RankId)
+                {
+                    if (empRejoin.RankId > 0)
+                    {
+                        var prevTransfer = employeeService.GetDynamicTableInfoById("Rank", "RankId", empRejoin.RankId);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)prevTransfer).ShortName;
+                    }
+                    if (model.RankId > 0)
+                    {
+                        var newTransfer = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.RankId);
+                        bnLog.UpdatedValue += ", Rank: " + ((dynamic)newTransfer).ShortName;
+                    }
+                }
+                if (empRejoin.RejoinDate != model.RejoinDate)
+                {
+                    bnLog.PreviousValue += ", Rejoin Date: " + empRejoin.RejoinDate.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Rejoin Date: " + model.RejoinDate.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (empRejoin.ReasonToJoin != model.ReasonToJoin)
+                {
+                    bnLog.PreviousValue += ", Reason To Join: " + empRejoin.ReasonToJoin;
+                    bnLog.UpdatedValue += ", Reason To Join: " + model.ReasonToJoin;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString(); ;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -175,6 +241,33 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmpRejoin";
+                bnLog.TableEntryForm = "Officer Rejoin";
+                bnLog.PreviousValue = "Id: " + empRejoin.EmpRejoinId;
+                if (empRejoin.EmployeeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", empRejoin.EmployeeId);
+                    bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                }
+                if (empRejoin.RankId > 0)
+                {
+                    var prevTransfer = employeeService.GetDynamicTableInfoById("Rank", "RankId", empRejoin.RankId);
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)prevTransfer).ShortName;
+                }
+                bnLog.PreviousValue += ", Rejoin Date: " + empRejoin.RejoinDate.ToString("dd/MM/yyyy") + ", Reason To Join: " + empRejoin.ReasonToJoin;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await empRejoinRepository.DeleteAsync(empRejoin);
             }
         }

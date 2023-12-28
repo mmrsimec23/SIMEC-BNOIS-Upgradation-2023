@@ -76,6 +76,8 @@ namespace Infinity.Bnois.Data
             this.DashBoardBranch975 = new HashSet<DashBoardBranch975>();
             this.DashBoardBranch980 = new HashSet<DashBoardBranch980>();
             this.ProposalCandidate = new HashSet<ProposalCandidate>();
+            this.DashBoardMinuite110 = new HashSet<DashBoardMinuite110>();
+            this.DashBoardMinuite100 = new HashSet<DashBoardMinuite100>();
         }
     
         public int EmployeeId { get; set; }
@@ -235,5 +237,9 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<DashBoardBranch980> DashBoardBranch980 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProposalCandidate> ProposalCandidate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DashBoardMinuite110> DashBoardMinuite110 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DashBoardMinuite100> DashBoardMinuite100 { get; set; }
     }
 }

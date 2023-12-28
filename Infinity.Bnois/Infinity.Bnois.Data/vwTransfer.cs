@@ -41,5 +41,6 @@ namespace Infinity.Bnois.Data
         public int TranferType { get; set; }
         public Nullable<int> AppointmentId { get; set; }
         public Nullable<bool> IsInstrServiceCount { get; set; }
+        public string OfficeSecurityName { get; set; }
     }
 }

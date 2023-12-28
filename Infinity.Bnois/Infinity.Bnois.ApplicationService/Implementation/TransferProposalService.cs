@@ -14,9 +14,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
   public  class TransferProposalService: ITransferProposalService
     {
         private readonly IBnoisRepository<TransferProposal> transferProposalRepository;
-        public TransferProposalService(IBnoisRepository<TransferProposal> transferProposalRepository)
+        private readonly IProposalDetailService proposalDetailService;
+        public TransferProposalService(IBnoisRepository<TransferProposal> transferProposalRepository, IProposalDetailService proposalDetailService)
         {
             this.transferProposalRepository = transferProposalRepository;
+            this.proposalDetailService = proposalDetailService;
         }
         public List<TransferProposalModel> GetTransferProposals(int ps, int pn, string qs, out int total)
         {
@@ -72,7 +74,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 transferProposal.CreatedDate = DateTime.Now;
                 transferProposal.CreatedBy = userId;
             }
-             transferProposal.Name = model.Name;
+             transferProposal.Name = "TRANSFER PROPOSAL";
             transferProposal.ProposalDate = model.ProposalDate ?? transferProposal.ProposalDate;
             transferProposal.LtCdrLevel = model.LtCdrLevel;
             transferProposal.WithPicture = model.WithPicture;
@@ -81,6 +83,17 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             await transferProposalRepository.SaveAsync(transferProposal);
             model.TransferProposalId = transferProposal.TransferProposalId;
+
+            if(model.TransferProposalId > 0)
+            {
+                ProposalDetailModel pdm = new ProposalDetailModel();
+                pdm.TransferProposalId = model.TransferProposalId;
+                pdm.TransferType = 1;
+                pdm.AttachOfficeId = 1;
+
+                await proposalDetailService.SaveProposalDetail(0,pdm);
+
+            }
             return model;
         }
         public async Task<bool> DeleteTransferProposal(int id)

@@ -334,9 +334,15 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
             }
 
-
+            if (model.CurrentBornOfficeId > 0)
+            {
+                var newv = employeeService.GetDynamicTableInfoById("Office", "OfficeId", model.CurrentBornOfficeId ?? 0);
+                transfer.Transcd = ((dynamic)newv).ZoneId;
+            }
 
             transfer.Employee = null;
+
+
 
 
             if (model.IsBackLog && (model.TransferMode == (int)TransferMode.Permanent))

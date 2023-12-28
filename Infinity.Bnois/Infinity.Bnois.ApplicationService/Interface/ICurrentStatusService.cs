@@ -58,6 +58,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<object> GetRemark(string pNo);
         List<object> GetCourseFuturePlan(string pNo);
         List<object> GetTransferFuturePlan(string pNo);
+        List<object> GetAdminAuthorityService(string pNo);
 
         Object GetLeaveInfo(string pNo);
         Object GetISSB(string pNo);

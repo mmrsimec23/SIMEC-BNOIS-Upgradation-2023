@@ -76,6 +76,7 @@
     <Compile Include="Controllers\EmployeeUnmDefermentController.cs" />
     <Compile Include="Controllers\OverviewOfficersDeploymentEntryController - Copy.cs" />
     <Compile Include="Controllers\CoFfRecomController.cs" />
+    <Compile Include="Controllers\MinuteCandidatesController.cs" />
     <Compile Include="Controllers\ToeOfficerStateEntryController.cs" />
     <Compile Include="Controllers\ToeAuthorizedsController.cs" />
     <Compile Include="Controllers\RoasterListController.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Controllers\CarLoanFiscalYearController.cs" />
     <Compile Include="Controllers\StatusChangesController.cs" />
     <Compile Include="Controllers\ExtraAppointmentsController.cs" />
+    <Compile Include="Controllers\MinuitesController.cs" />
     <Compile Include="Controllers\UsedStoreProceduresController.cs" />
     <Compile Include="Controllers\UsedReportsController.cs" />
     <Compile Include="Controllers\BloodGroupsController.cs" />
@@ -298,6 +300,7 @@
     <Compile Include="Models\OPREntryViewModel.cs" />
     <Compile Include="Models\SeaServiceViewModel.cs" />
     <Compile Include="Models\EmployeeCourseFuturePlanViewModel.cs" />
+    <Compile Include="Models\MinuiteViewModel.cs" />
     <Compile Include="Models\VisitSubCategoryViewModel.cs" />
     <Compile Include="Models\TransferViewModel.cs" />
     <Compile Include="Models\EmployeeLprViewModel.cs" />

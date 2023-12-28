@@ -170,6 +170,12 @@
     <Compile Include="DashBoardBranchByAdminAuthority700.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DashBoardMinuite100.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DashBoardMinuite110.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="District.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

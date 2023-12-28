@@ -608,6 +608,16 @@ namespace Infinity.Bnois.Api.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("get-admin-authority-service")]
+        public IHttpActionResult GetAdminAuthorityService(string pNo)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = currentStatusService.GetAdminAuthorityService(pNo)
+            });
+        }
+
 
         [HttpGet]
         [Route("get-current-status")]

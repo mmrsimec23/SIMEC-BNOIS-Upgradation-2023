@@ -11,6 +11,7 @@ using System.Web.Http.Cors;
 using Infinity.Bnois.Api.Models;
 using Infinity.Bnois.Api.Right;
 using Infinity.Bnois.Data;
+using Infinity.Bnois.ApplicationService.Implementation;
 
 namespace Infinity.Bnois.Api.Controllers
 {
@@ -57,6 +58,17 @@ namespace Infinity.Bnois.Api.Controllers
                 Result = await officeService.ShipMovement(officeId, model)
             });
         }
-    
+
+
+        [HttpGet]
+        [Route("get-ship-movement-history")]
+        public IHttpActionResult GetShipMovementHistory(int shipId)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = officeService.GetShipMovementHistory(shipId)
+            });
+        }
+
     }
 }

@@ -16,15 +16,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<EmployeeLpr> employeeLprRepository;
         private readonly IBnoisRepository<Employee> employeeRepository;
         private readonly IBnoisRepository<EmployeeGeneral> employeeGeneralRepository;
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
 
         public EmployeeLprService(IBnoisRepository<EmployeeLpr> employeeLprRepository,
             IBnoisRepository<EmployeeGeneral> employeeGeneralRepository,
-            IBnoisRepository<Employee> employeeRepository)
+            IBnoisRepository<Employee> employeeRepository,
+            IBnoisRepository<BnoisLog> bnoisLogRepository, 
+            IEmployeeService employeeService)
         {
             this.employeeLprRepository = employeeLprRepository;
             this.employeeGeneralRepository = employeeGeneralRepository;
             this.employeeRepository = employeeRepository;
-
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
         public async Task<bool> DeleteEmployeeLpr(int id)
@@ -40,6 +45,36 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeeLpr";
+                bnLog.TableEntryForm = "Employee LPR";
+                bnLog.PreviousValue = "Id: " + employeeLpr.EmpLprId;
+                if (employeeLpr.EmployeeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeLpr.EmployeeId);
+                    bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                }
+                if (employeeLpr.TerminationTypeId > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("TerminationType", "TerminationTypeId", employeeLpr.TerminationTypeId);
+                    bnLog.PreviousValue += ", Termination Type: " + ((dynamic)prev).Name;
+                }
+                
+                bnLog.PreviousValue += ", Current Status: " + (employeeLpr.CurrentStatus == 6 ? "LPR" : employeeLpr.CurrentStatus == 2 ? "Retired" : employeeLpr.CurrentStatus == 7 ? "Terminated" : "");
+               
+                bnLog.PreviousValue += ", Lpr Date: " + employeeLpr.LprDate?.ToString("dd/MM/yyyy") + ", Duration Month: " + employeeLpr.DurationMonth + ", Duration Day: " + employeeLpr.DurationDay + ", Retired Date: " + employeeLpr.RetireDate?.ToString("dd/MM/yyyy") + ", Termination Date: " + employeeLpr.TerminationDate?.ToString("dd/MM/yyyy") + ", R Status: " + employeeLpr.RStatus + ", Remarks: " + employeeLpr.Remarks;
+                
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await employeeLprRepository.DeleteAsync(employeeLpr);
             }
         }
@@ -126,6 +161,105 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 employeeLpr.ModifiedDate = DateTime.Now;
                 employeeLpr.ModifiedBy = userId;
+
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeeLpr";
+                bnLog.TableEntryForm = "Employee LPR";
+                bnLog.PreviousValue = "Id: " + model.EmpLprId;
+                bnLog.UpdatedValue = "Id: " + model.EmpLprId;
+                int bnoisUpdateCount = 0;
+
+                if (employeeLpr.EmployeeId > 0 || model.EmployeeId > 0)
+                {
+                    if (employeeLpr.EmployeeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeLpr.EmployeeId);
+                        bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                    }
+                    if (model.EmployeeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                        bnLog.UpdatedValue += ", P No: " + ((dynamic)newv).PNo;
+                    }
+                }
+                if (employeeLpr.CurrentStatus != model.CurrentStatus)
+                {
+                    bnLog.PreviousValue += ", Current Status: " + (employeeLpr.CurrentStatus == 6 ? "LPR" : employeeLpr.CurrentStatus == 2 ? "Retired" : employeeLpr.CurrentStatus == 7 ? "Terminated" :"");
+                    bnLog.UpdatedValue += ", Current Status: " + (model.CurrentStatus == 6 ? "LPR" : model.CurrentStatus == 2 ? "Retired" : model.CurrentStatus == 7 ? "Terminated" : "");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLpr.TerminationTypeId != model.TerminationTypeId)
+                {
+                    if (employeeLpr.TerminationTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("TerminationType", "TerminationTypeId", employeeLpr.TerminationTypeId);
+                        bnLog.PreviousValue += ", Termination Type: " + ((dynamic)prev).Name;
+                    }
+                    if (model.TerminationTypeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("TerminationType", "TerminationTypeId", model.TerminationTypeId);
+                        bnLog.UpdatedValue += ", Termination Type: " + ((dynamic)newv).Name;
+                    }
+                }
+                if (employeeLpr.LprDate != model.LprDate)
+                {
+                    bnLog.PreviousValue += ", Lpr Date: " + employeeLpr.LprDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Lpr Date: " + model.LprDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLpr.DurationMonth != model.DurationMonth)
+                {
+                    bnLog.PreviousValue += ", Duration Month: " + employeeLpr.DurationMonth;
+                    bnLog.UpdatedValue += ", Duration Month: " + model.DurationMonth;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLpr.DurationDay != model.DurationDay)
+                {
+                    bnLog.PreviousValue += ", Duration Day: " + employeeLpr.DurationDay;
+                    bnLog.UpdatedValue += ", Duration Day: " + model.DurationDay;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLpr.RetireDate != model.RetireDate)
+                {
+                    bnLog.PreviousValue += ", Retired Date: " + employeeLpr.RetireDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Retired Date: " + model.RetireDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLpr.TerminationDate != model.TerminationDate)
+                {
+                    bnLog.PreviousValue += ", Termination Date: " + employeeLpr.TerminationDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Termination Date: " + model.TerminationDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLpr.RStatus != model.RStatus)
+                {
+                    bnLog.PreviousValue += ", R Status: " + employeeLpr.RStatus;
+                    bnLog.UpdatedValue += ", R Status: " + model.RStatus;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLpr.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + employeeLpr.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString(); ;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {

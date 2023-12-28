@@ -599,6 +599,12 @@ select isnull(@GrandTotalDuration,'') as GrandTotalDuration", pNo));
 
 	        return dataTable.ToJson().ToList();
         }
+	    public List<object> GetAdminAuthorityService(string pNo)
+	    {
+	        DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetAdminAuthorityService] '{0}' ", pNo));
+
+	        return dataTable.ToJson().ToList();
+        }
 
         public List<object> GetCostGuardHistory(string pNo)
         {

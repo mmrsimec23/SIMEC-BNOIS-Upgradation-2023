@@ -24,13 +24,15 @@ namespace Infinity.Bnois.Api.Controllers
         private readonly INominationDetailService nominationDetailService;
         private readonly ITransferProposalService transferProposalService;
         private readonly IPromotionBoardService promotionBoardService;
-        public ReportsController(IPromotionBoardService promotionBoardService, ITransferProposalService transferProposalService, IAdvanceSearchService advanceSearchService, IReportService reportService, INominationDetailService nominationDetailService)
+        private readonly IMinuiteService minuiteService;
+        public ReportsController(IPromotionBoardService promotionBoardService, IMinuiteService minuiteService, ITransferProposalService transferProposalService, IAdvanceSearchService advanceSearchService, IReportService reportService, INominationDetailService nominationDetailService)
         {
             this.advanceSearchService = advanceSearchService;
             this.reportService = reportService;
             this.nominationDetailService = nominationDetailService;
             this.transferProposalService = transferProposalService;
             this.promotionBoardService = promotionBoardService;
+            this.minuiteService = minuiteService;
         }
 
         [HttpGet]
@@ -317,6 +319,54 @@ namespace Infinity.Bnois.Api.Controllers
             httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
                 FileName = transferProposal.Name + transferProposalId + "." + extension
+            };
+            httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+
+            httpResponseMessage.StatusCode = HttpStatusCode.OK;
+            return httpResponseMessage;
+
+        }
+
+        [HttpGet]
+        [Route("download-minute-report")]
+        public async Task<HttpResponseMessage> DownloadMinuteReport(int minuteId, ReportType type)
+        {
+            DashBoardMinuite100Model minute = await minuiteService.GetMinuite(minuteId);
+            string extension = string.Empty;
+            string mimeType = string.Empty;
+            string reportName = string.Empty;
+            if(minute.MinuiteCategory == 1)
+            {
+                reportName = "MinuteFormatForUNM";
+            }
+            if (minute.MinuiteCategory == 2)
+            {
+                reportName = "MinuteFormatForGeneralCourse";
+            }
+            if (minute.MinuiteCategory == 3)
+            {
+                reportName = "MinuteFormatForLongCourse";
+            }
+            if (minute.MinuiteCategory == 4)
+            {
+                reportName = "MinuteFormatForVisitEtc";
+            }
+            if (minute.MinuiteCategory == 5)
+            {
+                reportName = "MinuteFormatForStaffCourse";
+            }
+
+
+            var parms = new List<ReportParameter> { new ReportParameter("minuteId", minuteId.ToString()) };
+            HttpResponseMessage httpResponseMessage = new HttpResponseMessage
+            {
+                Content = ReportExtension.ToByteArray(type, reportName, parms, out extension, out mimeType)
+            };
+            httpResponseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+
+            httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = minute.MinuiteName + "." + extension
             };
             httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
 

@@ -36,6 +36,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<object> GetAppointedOfficer(int officeId);
         List<object> GetVacantAppointment(int officeId);
         List<object> GetOfficerListByBatch(int batchId);
+        List<object> GetShipMovementHistory(int shipId);
 
     }
 }
