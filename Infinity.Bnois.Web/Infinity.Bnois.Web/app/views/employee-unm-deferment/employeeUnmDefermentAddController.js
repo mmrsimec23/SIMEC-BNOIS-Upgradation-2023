@@ -29,18 +29,7 @@
 
         Init();
         function Init() {
-            //employeeUnmDefermentService.getEmployeeUnmDeferment(vm.employeeUnmDefermentId).then(function (data) {
-            //    vm.employeeUnmDeferment = data.result;
-            //    console.log(vm.employeeUnmDeferment);
-               
-            //        //if (vm.employeeUnmDeferment.defermentFrom != null) {
-            //        //    vm.employeeUnmDeferment.defermentFrom = new Date(data.result.defermentFrom);
-            //        //}
-                
-            //},
-            //    function (errorMessage) {
-            //        notificationService.displayError(errorMessage.message);
-            //    });
+            
 
             employeeUnmDefermentService.getEmployeeUnmDeferment(vm.employeeUnmDefermentId).then(function (data) {
                 vm.employeeUnmDeferment = data.result;

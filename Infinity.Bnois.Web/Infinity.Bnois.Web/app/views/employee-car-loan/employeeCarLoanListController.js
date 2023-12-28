@@ -35,7 +35,6 @@
             employeeCarLoanService.getEmployeeCarLoanList(vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
 
                 vm.employeeCarLoanList = data.result;
-                console.log(vm.employeeCarLoanList);
                 vm.total = data.total;
                 vm.permission = data.permission;
             },

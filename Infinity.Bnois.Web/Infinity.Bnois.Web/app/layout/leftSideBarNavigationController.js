@@ -17,7 +17,6 @@
         function init() {
             moduleService.getModuleFeaturs().then(function (data) {
                 vm.model = data.result;
-                console.log(vm.model)
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

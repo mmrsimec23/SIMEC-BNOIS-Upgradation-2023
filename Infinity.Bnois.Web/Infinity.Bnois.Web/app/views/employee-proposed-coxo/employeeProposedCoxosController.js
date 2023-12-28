@@ -37,7 +37,6 @@
             employeeProposedCoxoService.getemployeeProposedCoxos(vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
                 vm.employeeProposedCoxos = data.result;
                 vm.total = data.total; vm.permission = data.permission;
-                console.log(vm.employeeProposedCoxos);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

@@ -26,7 +26,6 @@
         function init() {
             traceSettingService.getBonusPtComApps(vm.traceSettingId).then(function (data) {
                 vm.bonusPtComApps = data.result;
-                console.log(vm.bonusPtComApps);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

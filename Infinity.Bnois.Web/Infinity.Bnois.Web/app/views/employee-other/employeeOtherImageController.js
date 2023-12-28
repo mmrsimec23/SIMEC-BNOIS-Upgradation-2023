@@ -113,7 +113,6 @@
             } else {
                
                 vm.employeeOther = response.result;
-                console.log(vm.employeeOther);
                 notificationService.displaySuccess('National Id Uploaded Successfully');
             }
         };

@@ -42,7 +42,6 @@
                 vm.coxoShipTypes = data.result.coxoShipTypes;
                 vm.coxoAppoinments = data.result.coxoAppoinments;
                 vm.offices = data.result.offices;
-                console.log(data.result);
                 if (vm.employeeProposedCoxoId !== 0 && vm.employeeProposedCoxoId !== '') {
 
                     if (vm.employeeProposedCoxo.proposedDate != null) {

@@ -21,6 +21,7 @@
         vm.seaServices = [];
         vm.seaCommandServices = [];
         vm.shoreCommandServices = [];
+        vm.adminAuthorityServices = [];
         vm.printSection = printSection;
 
         if ($stateParams.pno !== undefined && $stateParams.pno !== null) {
@@ -68,6 +69,15 @@
 
             currentStatusService.getShoreCommandServices(vm.pNo).then(function (data) {
                 vm.shoreCommandServices = data.result;
+
+            },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+
+
+            currentStatusService.getAdminAuthorityService(vm.pNo).then(function (data) {
+                vm.adminAuthorityServices = data.result;
 
             },
                 function (errorMessage) {

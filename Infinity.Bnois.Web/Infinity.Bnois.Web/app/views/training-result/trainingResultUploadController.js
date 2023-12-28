@@ -25,7 +25,6 @@
             trainingResultService.getTrainingResult(vm.trainingResultId).then(function (data) {
                 vm.trainingResult = data.result.trainingResult;
                 vm.fileModel = data.result.file;
-                console.log(data);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
@@ -165,7 +164,6 @@
                 notificationService.displayError(response.message);
                 return;
             } else {
-                console.log(response);
                 vm.fileModel = response.result.file;
                 notificationService.displaySuccess('Result Section Uploaded Successfully');
             }

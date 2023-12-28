@@ -55,7 +55,6 @@
         }
 
         function updateSpouseForeignVisit(spouseForeignVisit) {
-            console.log(spouseForeignVisit);
             $state.go('employee-tabs.employee-spouse-foreign-visit-modify', { spouseId: vm.spouseId, spouseForeignVisitId: spouseForeignVisit.spouseForeignVisitId });
         }
 

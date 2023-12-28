@@ -33,7 +33,6 @@
             roasterListService.getLargeShipProposedWaitingCoXoList(vm.officeId,vm.appointment).then(function (data) {
                 vm.largeShipCoXos = data.result;
                 vm.shipName = vm.largeShipCoXos[0].shortName;
-                console.log(vm.shipName);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

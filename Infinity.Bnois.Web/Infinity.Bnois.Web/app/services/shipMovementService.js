@@ -5,6 +5,7 @@
     function shipMovementService(dataConstants, apiHttpService) {
         var service = {
             getShipMovementSelectModels: getShipMovementSelectModels,
+            getShipMovementHistory: getShipMovementHistory,
             updateShipMovement: updateShipMovement
             
         };
@@ -14,6 +15,11 @@
 
         function getShipMovementSelectModels() {
             var url = dataConstants.SHIP_MOVEMENT_URL + 'get-ship-movement-select-models';
+            return apiHttpService.GET(url);
+        }
+
+        function getShipMovementHistory(shipId) {
+            var url = dataConstants.SHIP_MOVEMENT_URL + 'get-ship-movement-history?shipId=' + shipId;
             return apiHttpService.GET(url);
         }
 

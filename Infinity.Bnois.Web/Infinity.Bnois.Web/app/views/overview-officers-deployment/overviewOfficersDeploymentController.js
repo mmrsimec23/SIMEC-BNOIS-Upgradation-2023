@@ -27,7 +27,6 @@
             dashboardService.getBranchAuthorityOfficers600().then(function (data) {
                 vm.overviewOfficersDeploymentList = data.result;
 
-                console.log(vm.overviewOfficersDeploymentList)
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

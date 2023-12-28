@@ -38,10 +38,7 @@
             currentStatusService.getSeaCommandServices(vm.pNo).then(function (data) {
                 vm.seaCommandServices = data.result.services;
                 vm.seaCommandServicesGrandTotal = data.result.grandTotal;
-
-                    
-               
-                console.log(vm.object);
+                
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

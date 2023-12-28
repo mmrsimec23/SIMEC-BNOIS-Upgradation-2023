@@ -59,7 +59,6 @@
                     
                     linkElement.setAttribute('href', url);
                     linkElement.setAttribute("download", nameWithExtension);
-                    console.log(linkElement);
                     var clickEvent = new MouseEvent("click", {
                         "view": window,
                         "bubbles": true,

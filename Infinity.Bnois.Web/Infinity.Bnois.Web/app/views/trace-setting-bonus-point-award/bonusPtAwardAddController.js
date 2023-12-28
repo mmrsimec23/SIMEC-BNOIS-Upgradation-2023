@@ -33,7 +33,6 @@
         function init() {
             traceSettingService.getBonusPtAward(vm.traceSettingId,vm.bonusPtAwardId).then(function (data) {
                 vm.bonusPtAward = data.result.bonusPtAward;
-                console.log(vm.bonusPtAward );
                 vm.awards = data.result.awards;
             },
                 function (errorMessage) {

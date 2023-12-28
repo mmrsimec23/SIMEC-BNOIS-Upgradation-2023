@@ -28,7 +28,6 @@
 
             roasterListService.getRoasterListByShipType(vm.shipType, vm.coxoStatus).then(function (data) {
                 vm.largeShipCoXos = data.result;
-                console.log(vm.largeShipCoXos);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

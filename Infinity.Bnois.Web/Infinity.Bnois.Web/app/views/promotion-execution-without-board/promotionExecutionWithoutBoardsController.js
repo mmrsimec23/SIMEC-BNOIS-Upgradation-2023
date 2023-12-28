@@ -54,7 +54,6 @@
         }
 
         function updatePromotionExecutionWithoutBoard(promotionNomination) {
-            console.log(promotionNomination);
             $state.go('promotion-execution-without-board-modify', { promotionNominationId: promotionNomination.promotionNominationId });
         }
 

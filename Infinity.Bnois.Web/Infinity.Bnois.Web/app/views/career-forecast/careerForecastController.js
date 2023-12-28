@@ -34,7 +34,6 @@
 
             currentStatusService.getCareerForecast(vm.pNo).then(function (data) {
                 vm.careerForecast = data.result;
-                console.log(vm.careerForecast);
                 if (vm.careerForecast == null) {
                     vm.forecastIsEmpty = true;
                 } else {

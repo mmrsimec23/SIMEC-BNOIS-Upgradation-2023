@@ -25,7 +25,6 @@
         function Init() {
             oprEntryService.getOprFileUpload(vm.id).then(function (data) {
                 vm.employeeOpr = data.result.employeeOpr;
-                console.log(data);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

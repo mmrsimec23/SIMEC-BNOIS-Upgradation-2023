@@ -36,7 +36,6 @@
             employeeFamilyPermissionService.getEmployeeFamilyPermissions(vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
                 vm.employeeFamilyPermissionList = data.result;
                 vm.total = data.total; vm.permission = data.permission;
-                console.log(vm.employeeFamilyPermissionList);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

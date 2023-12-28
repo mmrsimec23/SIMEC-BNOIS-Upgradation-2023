@@ -36,7 +36,6 @@
             employeeMscEducationService.getEmployeeMscEducations(vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
                 vm.employeeMscEducationList = data.result;
                 vm.total = data.total; vm.permission = data.permission;
-                console.log(vm.employeeMscEducationList);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

@@ -86,7 +86,6 @@
                     vm.resultLeaveBreakDowns.push(vm.resultLeaveBreakDown);
 
                 }
-                // console.log("Result:" + vm.resultLeaveBreakDowns);
 
             },
                 function (errorMessage) {

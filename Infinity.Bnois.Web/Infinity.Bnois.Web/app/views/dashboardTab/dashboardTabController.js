@@ -88,8 +88,6 @@
         }
 
         function searchByOfficeId() {
-            console.log("result click");
-            console.log(vm.searchedOfficeId);
             if (vm.searchedOfficeId > 0) {
                 $state.goNewTab('office-search-result', { officeId: vm.searchedOfficeId });
 

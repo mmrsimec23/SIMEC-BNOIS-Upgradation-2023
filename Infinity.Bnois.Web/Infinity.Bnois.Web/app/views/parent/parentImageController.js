@@ -47,7 +47,6 @@
             parentService.getParent(vm.employeeId, vm.relationType).then(function (data) {
                 vm.parent = data.result.parent;
                 vm.fileModel = data.result.file;
-                console.log(data);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
@@ -129,7 +128,6 @@
                 notificationService.displayError(response.message);
                 return;
             } else {
-                console.log(response);
                 vm.fileModel = response.result.file;
                 notificationService.displaySuccess('Image Uploaded Successfully');
             }

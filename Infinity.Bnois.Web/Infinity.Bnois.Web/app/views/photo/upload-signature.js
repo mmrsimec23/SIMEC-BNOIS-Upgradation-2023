@@ -90,7 +90,6 @@
                     var img = new Image();
                     img.onload = function (scope) {
                         alert(img.height);
-                        //console.log(img.width, img.height);
                     };
                     //if (img.height === 80 && img.width == 300) {
                     //    img.src = event.target.result;

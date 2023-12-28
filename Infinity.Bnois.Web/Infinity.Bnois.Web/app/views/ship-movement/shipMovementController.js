@@ -19,9 +19,12 @@
         vm.shipMovement = shipMovement;
         vm.localSearchAttach = localSearchAttach;
         vm.selectedAttach = selectedAttach;
+        vm.getShipMovementHistory = getShipMovementHistory;
 
         vm.office = {};
-    
+
+        vm.shipId = 0;
+        vm.shipHistories = [];
 
         Init();
         function Init() {
@@ -31,6 +34,8 @@
                 vm.offices = data.result.offices;
 
             });
+
+            vm.getShipMovementHistory(vm.shipId);
           
         }
 
@@ -70,6 +75,18 @@
 
         function selectedAttach(object) {
             vm.office.parentId = object.originalObject.value;
+           
+        }
+
+        function getShipMovementHistory(shipId) {
+            
+            shipMovementService.getShipMovementHistory(shipId).then(function (data) {
+                vm.shipHistories = data.result;
+                console.log(vm.shipHistories);
+            },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
            
         }
 

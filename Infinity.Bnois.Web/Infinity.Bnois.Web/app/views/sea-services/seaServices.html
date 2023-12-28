@@ -150,13 +150,41 @@
                             </tr>
                         </thead>
                         <tbody class="reportBody">
-                            
+                            <tr class="reportTR">
+                                <td class="reportTR" colspan="4"></td>
+                                <td class="reportTR" rowspan="120" style="vertical-align : middle;text-align:center;">{{vm.shoreCommandServices[0].subTotalDuration}}</td>
+                            </tr>
                             <tr class="reportTR" ng-repeat="seaCommandService in vm.shoreCommandServices">
                                 <td class="reportTD">{{seaCommandService.shipName}}</td>
                                 <td class="reportTD" style="width: 100px;">{{seaCommandService.fromDate | date:"dd-MMM-yyyy"}}</td>
                                 <td class="reportTD" style="width: 100px;">{{seaCommandService.toDate | date:"dd-MMM-yyyy"}}</td>
                                 <td class="reportTD" style="width: 100px;" style="text-transform: lowercase;">{{seaCommandService.duration}}</td>
-                                <td class="reportTD" rowspan="{{shoreCommandServices.length}}" style="vertical-align : middle;text-align:center;text-transform: lowercase;">{{vm.shoreCommandServices[0].subTotalDuration}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <h3 class="reportHeader">Admin Authority Service</h3>
+                <hr />
+                <div class="table-wrapper table-responsive reportCover">
+                    <table class="table table-bordered pdfReportTable" border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                                <th>Office Name</th>
+                                <th>Appointment</th>
+                                <th>From Date</th>
+                                <th>To Date </th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody class="reportBody">
+
+                            <tr class="reportTR" ng-repeat="service in vm.adminAuthorityServices">
+                                <td class="reportTD">{{service.organizationName}}</td>
+                                <td class="reportTD">{{service.appointment}}</td>
+                                <td class="reportTD" style="width: 100px;">{{service.fromDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="width: 100px;">{{service.toDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="width: 100px;" style="text-transform: lowercase;">{{service.duration}}</td>
                             </tr>
                         </tbody>
                     </table>

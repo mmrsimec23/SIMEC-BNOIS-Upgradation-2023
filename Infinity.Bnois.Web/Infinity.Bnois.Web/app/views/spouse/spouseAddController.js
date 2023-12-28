@@ -108,7 +108,6 @@
 
 
         function deadInformation(currentStatus) {
-            console.log(currentStatus);
             if (currentStatus == 1) {
 
                 vm.deadDisabled = true;

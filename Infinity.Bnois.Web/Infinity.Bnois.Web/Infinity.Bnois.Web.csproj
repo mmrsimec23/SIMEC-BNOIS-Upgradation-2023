@@ -98,6 +98,7 @@
     <Content Include="app\services\bnoisLogInfoService.js" />
     <Content Include="app\services\employeeUnmDefermentService.js" />
     <Content Include="app\services\coFfRecomService.js" />
+    <Content Include="app\services\minuteCandidateService.js" />
     <Content Include="app\services\toeOfficerStateEntryService.js" />
     <Content Include="app\services\overviewOfficersDeploymentService.js" />
     <Content Include="app\services\toeAuthorizedService.js" />
@@ -132,6 +133,7 @@
     <Content Include="app\services\carLoanFiscalYearService.js" />
     <Content Include="app\services\statusChangeService.js" />
     <Content Include="app\services\extraAppointmentService.js" />
+    <Content Include="app\services\minuiteService.js" />
     <Content Include="app\services\transferProposalService.js" />
     <Content Include="app\services\reportService.js" />
     <Content Include="app\services\employeeReportService.js" />
@@ -350,6 +352,8 @@
     <Content Include="app\views\medium-ship-co-waiting-list\mediumShipCoWaitingListController.js" />
     <Content Include="app\views\co-ff-recom\coFfRecoms.html" />
     <Content Include="app\views\co-ff-recom\coFfRecomsController.js" />
+    <Content Include="app\views\minute-candidate\minuteCandidates.html" />
+    <Content Include="app\views\minute-candidate\minuteCandidatesController.js" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryAdd.html" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryAddController.js" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryList.html" />
@@ -1147,6 +1151,10 @@
     <Content Include="app\views\transfer-history\transferHistory.html" />
     <Content Include="app\views\transfer-history\costguardController.js" />
     <Content Include="app\views\transfer-history\transferHistoryController.js" />
+    <Content Include="app\views\minuite\minuiteAdd.html" />
+    <Content Include="app\views\minuite\minuiteAddController.js" />
+    <Content Include="app\views\minuite\minuites.html" />
+    <Content Include="app\views\minuite\minuitesController.js" />
     <Content Include="app\views\transfer-proposal\transferProposalAdd.html" />
     <Content Include="app\views\transfer-proposal\transferProposalAddController.js" />
     <Content Include="app\views\transfer-proposal\transferProposals.html" />

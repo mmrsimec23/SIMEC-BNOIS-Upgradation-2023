@@ -30,7 +30,6 @@
 		Init();
 		function Init() {
 			lprCalculateInfoService.getLprCalculateInfo(vm.lprCalculateInfoId).then(function (data) {
-				console.log(data.result.lprCalculate);
 				vm.lprCalculate = data.result.lprCalculate;
 
 

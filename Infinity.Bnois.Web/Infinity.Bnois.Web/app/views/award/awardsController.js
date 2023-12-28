@@ -36,7 +36,6 @@
         function init() {
             awardService.getAwards(vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
                 vm.awards = data.result;
-                console.log(data.result);
                 vm.total = data.total; vm.permission = data.permission;
             },
                 function (errorMessage) {

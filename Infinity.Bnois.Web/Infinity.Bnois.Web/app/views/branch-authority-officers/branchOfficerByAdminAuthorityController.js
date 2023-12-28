@@ -58,7 +58,6 @@
 
                 vm.branchOfficerByAdminAuthoritys = data.result;
                 vm.totalResult = vm.branchOfficerByAdminAuthoritys.length;
-                console.log(vm.branchOfficerByAdminAuthoritys);
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

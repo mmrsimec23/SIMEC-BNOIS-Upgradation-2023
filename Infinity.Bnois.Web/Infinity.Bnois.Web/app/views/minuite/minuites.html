@@ -1,0 +1,58 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">Minute</h2>
+                    <button ng-show="vm.permission.add" class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.addMinuite()"><span class="glyphicon glyphicon-user"></span> Add</button>
+                    <div ng-include="'app/templates/search.html'" class="search-wrapper"></div>
+                </div>
+                <div class="table-wrapper table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Minute No</th>
+                                <th>Minute Name</th>
+                                <th>Letter No</th>
+                                <th>Country</th>
+                                <th>Start Date</th>
+                                <th class="text-right">
+                                    <select style="width: 101px; height: 22px;color: navy;" ng-model="vm.reportType" ng-options="option.value as option.text for option in vm.reportTypes"></select>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="minuite in vm.minuites">
+                                <td>{{$index+1}}</td>
+                                <td>{{minuite.minuiteNo}}</td>
+                                <td>{{minuite.minuiteName}}</td>
+                                <td>{{minuite.letterNo}}</td>
+                                <td>{{minuite.country.fullName}}</td>
+                                <td style="width: 100px;">{{minuite.startDate| date:"dd-MMM-yyyy"}}</td>
+                                <td class="text-right">
+                                    <a  class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.downlaodMinute(minuite)"><span class="fa fa-download" aria-hidden="true" title="Download (All Branch)"></span></a>
+                                    <!--<a  class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.downlaodTransferProposalForXBranch(minuite)"><span class="fa fa-download" aria-hidden="true" title="Download (X Br)"></span></a>
+                                    <a  class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.downlaodTransferProposalWithoutXBranch(minuite)"><span class="fa fa-download" aria-hidden="true" title="Download (E/S/Edu/L Br)"></span></a>
+                                    <a  class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.downlaodTransferProposalWithPic(minuite)"><span class="fa fa-download" aria-hidden="true" title="Download (All Br With Picture)"></span></a>-->
+                                    <a  class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.getMinuteCandidates(minuite)"><span class="fa fa-wrench" aria-hidden="true" title="Proposal Details"></span></a>
+                                    <a ng-show="vm.permission.update" class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.updateMinuite(minuite)"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span></a>
+                                    <a ng-show="vm.permission.delete" class="btn custom-btn btn-delete btn-danger btn-xs" style="cursor:pointer" ng-confirmation-click="vm.deleteMinuite(minuite)"
+                                       ng-confirmation-message="Do you want to Minute ?"
+                                       ng-confirmation-title="Delete Minute ?"
+                                       ng-confirmation-yes-text="Yes"
+                                       ng-confirmation-cancel-text="No"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Transfer Proposal"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagenation-wrapper" ng-if="vm.minuites.length > 0">
+                        <ul uib-pagination items-per-page="vm.pageSize" total-items="vm.total" ng-change="vm.pageChanged()" ng-model="vm.pageNumber" max-size="5" class="pagination" boundary-link-numbers="true"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,167 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">Minuite<span class="pull-right text-success">{{vm.title}}</span></h2>
+                </div>
+                <form name="vm.minuiteForm">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="minuiteCategory" class="custom-label">Minute Category</label>
+                            <select name="minuiteCategory" id="minuiteCategory" class="form-control" ng-model="vm.minuite.minuiteCategory"
+                                    ng-options="option.value as option.text for option in vm.categories" required>
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.minuiteForm.minuiteCategory.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="minuiteNo" class="custom-label">Minuite No</label>
+                            <input type="text" id="minuiteNo" class="form-control custom-form-control" ng-model="vm.minuite.minuiteNo" name="minuiteNo" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="minuiteName" class="custom-label">Minuite Name</label>
+                            <input type="text" id="minuiteName" class="form-control custom-form-control" ng-model="vm.minuite.minuiteName" name="minuiteName" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nextMinuiteNo" class="custom-label">Next Minuite No</label>
+                            <input type="text" id="nextMinuiteNo" class="form-control custom-form-control" ng-model="vm.minuite.nextMinuiteNo" name="nextMinuiteNo" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="letterNo" class="custom-label">letter No</label>
+                            <input type="text" id="letterNo" class="form-control custom-form-control" ng-model="vm.minuite.letterNo" name="letterNo" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="offeredBy" class="custom-label">Offered By</label>
+                            <input type="text" id="offeredBy" class="form-control custom-form-control" ng-model="vm.minuite.offeredBy" name="offeredBy" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="vacency" class="custom-label">vacency</label>
+                            <input type="number" id="vacency" class="form-control custom-form-control" ng-model="vm.minuite.vacency" name="vacency" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nominate" class="custom-label">nominate</label>
+                            <input type="number" id="nominate" class="form-control custom-form-control" ng-model="vm.minuite.nominate" name="nominate" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="purpose" class="custom-label">purpose</label>
+                            <input type="text" id="purpose" class="form-control custom-form-control" ng-model="vm.minuite.purpose" name="purpose" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="extraRemarks3" class="custom-label">Name of Course</label>
+                            <input type="text" id="extraRemarks3" class="form-control custom-form-control" ng-model="vm.minuite.extraRemarks3" name="extraRemarks3" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="startDate" class="custom-label">start Date</label>
+                            <input kendo-date-picker id="startDate" class="form-control custom-form-control" k-ng-model="vm.minuite.startDate" k-format="'dd-MM-yyyy'" name="startDate" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="endDate" class="custom-label">end Date</label>
+                            <input kendo-date-picker id="endDate" class="form-control custom-form-control" k-ng-model="vm.minuite.endDate" k-format="'dd-MM-yyyy'" name="endDate" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="location" class="custom-label">location</label>
+                            <input type="text" id="location" class="form-control custom-form-control" ng-model="vm.minuite.location" name="location" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="countryId" class="custom-label">Country</label>
+                            <select name="countryId" id="countryId" class="form-control" ng-model="vm.minuite.countryId"
+                                    ng-options="option.value as option.text for option in vm.countries">
+                                <option value="">--Select an Option--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="rankName" class="custom-label">rank Name</label>
+                            <input type="text" id="rankName" class="form-control custom-form-control" ng-model="vm.minuite.rankName" name="rankName" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="branchName" class="custom-label">branch Name</label>
+                            <input type="text" id="branchName" class="form-control custom-form-control" ng-model="vm.minuite.branchName" name="branchName" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="extraRemarks1" class="custom-label">Level</label>
+                            <input type="text" id="extraRemarks1" class="form-control custom-form-control" ng-model="vm.minuite.extraRemarks1" name="extraRemarks1" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="extraRemarks2" class="custom-label">Age</label>
+                            <input type="text" id="extraRemarks2" class="form-control custom-form-control" ng-model="vm.minuite.extraRemarks2" name="extraRemarks2" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="officerRankof" class="custom-label">Officer Rank of</label>
+                            <input type="text" id="officerRankof" class="form-control custom-form-control" ng-model="vm.minuite.officerRankof" name="officerRankof" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="preRequQul" class="custom-label">pre Requ Qul </label>
+                            <input type="text" id="preRequQul" class="form-control custom-form-control" ng-model="vm.minuite.preRequQul" name="preRequQul" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="serviceExperiance" class="custom-label">service Experiance</label>
+                            <input type="text" id="serviceExperiance" class="form-control custom-form-control" ng-model="vm.minuite.serviceExperiance" name="serviceExperiance" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="competencies" class="custom-label">competencies</label>
+                            <input type="text" id="competencies" class="form-control custom-form-control" ng-model="vm.minuite.competencies" name="competencies" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <employee-search ng-model="vm.minuite.employee"></employee-search>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="minuiteDate" class="custom-label">minute Date</label>
+                                <input kendo-date-picker id="minuiteDate" class="form-control custom-form-control" k-ng-model="vm.minuite.minuiteDate" k-format="'dd-MM-yyyy'" name="minuiteDate" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.transferProposalForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

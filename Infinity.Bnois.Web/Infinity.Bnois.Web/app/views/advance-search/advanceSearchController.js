@@ -287,7 +287,7 @@
 
 
             advanceSearchService.getAdvanceSearchSelectModels().then(function (data) {
-                console.log(data.result);
+                
                 vm.columnFilters = data.result.columnFilters;
                 vm.columnDisplays = data.result.columnDisplays;
                 vm.areas = data.result.areas;

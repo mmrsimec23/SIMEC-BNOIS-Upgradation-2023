@@ -36,7 +36,6 @@
         function init() {
             colorService.getColors(vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
                 vm.colors = data.result;
-                console.log(data.result);
                 vm.total = data.total; vm.permission = data.permission;
             },
                 function (errorMessage) {

@@ -5,70 +5,105 @@
                 <div class="col-sm-12 page-header">
                     <h2 class="warning page-header-item">Ship Movement<span class="pull-right text-success">{{vm.title}}</span></h2>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="officeId" class="custom-label">Ship</label>
-                        <br />
-                        <select name="officeId" id="officeId" class="form-control" ng-model="vm.officeId"
-                                ng-options="option.value as option.text for option in vm.ships">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="officeId" class="custom-label">Ship</label>
+                            <br />
+                            <select name="officeId" id="officeId" class="form-control" ng-model="vm.officeId" ng-change="vm.getShipMovementHistory(vm.officeId)"
+                                    ng-options="option.value as option.text for option in vm.ships">
 
-                            <option value="">--Select a Ship--</option>
+                                <option value="">--Select a Ship--</option>
 
-                        </select>
-
-
-                    </div>
-                </div>
+                            </select>
 
 
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="rankId" class="custom-label">Office</label>
-                        <angucomplete-alt id="parentId"
-                                          placeholder="Search Attach Office"
-                                          pause="400"
-                                          maxlength="250"
-                                          minlength="2"
-                                          selected-object="vm.selectedAttach"
-                                          local-data="vm.offices"
-                                          local-search="vm.localSearchAttach"
-                                          title-field="text"
-                                          match-class="highlight"
-                                          field-required="true"
-                                          input-name="attachOfficeId"
-                                          override-suggestions="true"
-                                          auto-match="true"
-                                          text-no-results="Office Not Found"
-                                          input-class="form-control form-control-small" />
-                        <!-- <select name="rankId" id="rankId" class="form-control" ng-model="vm.office.parentId" -->
-                        <!--         ng-options="option.value as option.text for option in vm.offices"> -->
-                        <!-- -->
-                        <!--     <option value="">--Select an Office --</option> -->
-                        <!-- </select> -->
+                        </div>
                     </div>
 
 
-                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="rankId" class="custom-label">Office</label>
+                            <angucomplete-alt id="parentId"
+                                              placeholder="Search Attach Office"
+                                              pause="400"
+                                              maxlength="250"
+                                              minlength="2"
+                                              selected-object="vm.selectedAttach"
+                                              local-data="vm.offices"
+                                              local-search="vm.localSearchAttach"
+                                              title-field="text"
+                                              match-class="highlight"
+                                              field-required="true"
+                                              input-name="attachOfficeId"
+                                              override-suggestions="true"
+                                              auto-match="true"
+                                              text-no-results="Office Not Found"
+                                              input-class="form-control form-control-small" />
+                            <!-- <select name="rankId" id="rankId" class="form-control" ng-model="vm.office.parentId" -->
+                            <!--         ng-options="option.value as option.text for option in vm.offices"> -->
+                            <!-- -->
+                            <!--     <option value="">--Select an Office --</option> -->
+                            <!-- </select> -->
+                        </div>
 
-
-
-
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="shipDate" class="custom-label"> Ship Date</label>
-                        <input kendo-date-picker id="fromDate" class="form-control custom-form-control" k-ng-model="vm.office.shipDate" k-format="'dd-MM-yyyy'" name="shipDate" required />
 
                     </div>
 
+
+
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="shipDate" class="custom-label"> Ship Date</label>
+                            <input kendo-date-picker id="fromDate" class="form-control custom-form-control" k-ng-model="vm.office.shipDate" k-format="'dd-MM-yyyy'" name="shipDate" required />
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-12"></div>
+                    <div class="col-sm-2 pull-right">
+                        <button type="button" class="btn custom-btn btn-info " ng-click="vm.shipMovement(vm.officeId)" ng-disabled="vm.officeId==null">Move <span class="glyphicon glyphicon-arrow-right"></span></button>
+                    </div>
                 </div>
-
-
-                <div class="col-sm-12"></div>
-                <div class="col-sm-2 pull-right">
-                    <button type="button" class="btn custom-btn btn-info " ng-click="vm.shipMovement(vm.officeId)" ng-disabled="vm.officeId==null">Move <span class="glyphicon glyphicon-arrow-right"></span></button>
+                <br />
+                <br />
+                <br />
+                <div class="row">
+                    <div class="table-wrapper table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Ship Name</th>
+                                    <th>Previous Parent Office</th>
+                                    <th>Previous Zone</th>
+                                    <th>Previous Admin Authority</th>
+                                    <th>Previous Address</th>
+                                    <th>Shipment Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="shipHistory in vm.shipHistories">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{shipHistory.officeName}}</td>
+                                    <td>{{shipHistory.prevParentName}}</td>
+                                    <td>{{shipHistory.prevZoneName}}</td>
+                                    <td>{{shipHistory.prevAdmAuthName}}</td>
+                                    <td>{{shipHistory.preAddress}}</td>
+                                    <td>{{shipHistory.shipDate | date:"dd-MMM-yyyy"}}</td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagenation-wrapper" ng-if="vm.shipCategories.length > 0">
+                            <ul uib-pagination items-per-page="vm.pageSize" total-items="vm.total" ng-change="vm.pageChanged()" ng-model="vm.pageNumber" max-size="5" class="pagination" boundary-link-numbers="true"></ul>
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
         </div>
     </div>

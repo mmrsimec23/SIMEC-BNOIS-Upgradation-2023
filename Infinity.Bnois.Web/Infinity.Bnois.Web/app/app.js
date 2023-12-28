@@ -47,7 +47,6 @@
                     // if it's a request to the API, we need to provide the
                     // access token as bearer token.  
                     var mgr = OidcManager.OidcTokenManager();
-                    //console.log($httpProvider.defaults.withCredentials);
                     // config.url = config.url.replace("{company}", mgr.profile.company_id);
                     if (config.url.indexOf(appSettings.scerpAPI) === 0 || config.url.indexOf(appSettings.IdentityServer) === 0 || config.url.indexOf(appSettings.identityServerAPI) === 0) {
                         config.headers.Authorization = 'Bearer ' + OidcManager.OidcTokenManager().access_token;

@@ -44,6 +44,7 @@
             getTransferFuturePlan: getTransferFuturePlan,
             getTemporaryTransferHistory: getTemporaryTransferHistory,
             getLeaveInfo: getLeaveInfo,
+            getAdminAuthorityService: getAdminAuthorityService,
             getISSB: getISSB,
             getForeignProjects: getForeignProjects,
             getMissions: getMissions,
@@ -341,6 +342,11 @@
 
         function getLeaveInfo(pNo) {
             var url = dataConstants.CURRENT_STATUS_URL + 'get-leave-info?pNo=' + pNo;
+            return apiHttpService.GET(url);
+        }
+
+        function getAdminAuthorityService(pNo) {
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-admin-authority-service?pNo=' + pNo;
             return apiHttpService.GET(url);
         }
 

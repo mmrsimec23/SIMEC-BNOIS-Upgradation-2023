@@ -25,7 +25,6 @@
 
             roasterListService.getLargeShipCoWaitingList().then(function (data) {
                 vm.largeShipCoWaitingLists = data.result;
-                console.log(vm.largeShipCoWaitingLists);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

@@ -40,7 +40,6 @@
               
             oprAppointmentService.getoprAppointments(vm.oprAppointment.employeeOprId).then(function (data) {
                 vm.oprAppointments = data.result;
-                console.log(vm.oprAppointments);
                     vm.permission = data.permission;
 
                 },

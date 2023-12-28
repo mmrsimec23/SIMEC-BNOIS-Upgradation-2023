@@ -64,7 +64,6 @@
 
             employeeHajjDetailService.GetEmployeeHajjDetailsByPno(vm.pNo).then(function (data) {
                 vm.hajjDetails = data.result;
-                console.log(vm.hajjDetails)
 
             },
                 function (errorMessage) {

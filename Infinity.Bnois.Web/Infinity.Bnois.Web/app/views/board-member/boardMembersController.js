@@ -74,7 +74,6 @@
         }
 
         function updateBoardMember(boardMember) {
-            console.log(boardMember);
             $state.go('board-member-modify', { type: vm.type, title: vm.title, promotionBoardId: vm.promotionBoardId, boardMemberId: boardMember.boardMemberId });
         }
 

@@ -22,7 +22,7 @@
         init();
         function init() {
             extracurricularService.getExtracurriculars(vm.employeeId).then(function (data) {
-                console.log(data.result);
+                
                 vm.extracurriculars = data.result;
                     vm.permission = data.permission;
                 },

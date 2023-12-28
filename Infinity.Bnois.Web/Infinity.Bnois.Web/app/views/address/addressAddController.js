@@ -41,7 +41,6 @@
                 vm.addressTypes = data.result.addressTypes;
                 vm.divisions = data.result.divisions;
                 vm.districts = data.result.districts;
-                console.log("District:"+vm.districts );
                 vm.upazilas = data.result.upazilas;
             },
                 function (errorMessage) {

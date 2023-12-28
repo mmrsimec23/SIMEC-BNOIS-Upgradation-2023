@@ -35,7 +35,6 @@
 
             dashboardService.getToeOfficerStateInNavy().then(function (data) {
                 vm.officerStateInNavy = data.result;
-                console.log(vm.officerStateInNavy)
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

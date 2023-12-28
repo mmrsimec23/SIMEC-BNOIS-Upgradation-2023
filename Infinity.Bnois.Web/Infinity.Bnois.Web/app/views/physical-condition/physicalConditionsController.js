@@ -21,7 +21,6 @@
             physicalConditionService.getPhysicalConditions(vm.employeeId).then(function (data) {
                 vm.physicalCondition = data.result.physicalCondition;
                  vm.fileModel = data.result.file;
-                console.log(vm.physicalCondition);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

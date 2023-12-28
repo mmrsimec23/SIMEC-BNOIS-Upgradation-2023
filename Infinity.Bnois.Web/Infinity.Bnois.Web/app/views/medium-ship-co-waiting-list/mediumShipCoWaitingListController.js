@@ -25,7 +25,6 @@
 
             roasterListService.getMediumShipCoWaitingList().then(function (data) {
                 vm.mediumShipCoWaitingLists = data.result;
-                console.log(vm.mediumShipCoWaitingLists);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

@@ -43,7 +43,6 @@
         function init() {
             roleService.getRoles(vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
                 vm.rolesListWithInactiveUsers = data.result.rolesListWithInactiveUsers;
-                console.log(vm.rolesListWithInactiveUsers);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage);

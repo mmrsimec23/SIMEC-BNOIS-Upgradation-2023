@@ -290,6 +290,33 @@
                     controller: 'rankCategoryAddController as vm',
                     title: 'Rank Category'
                 }
+            },//-------------minuite-------
+            {
+                state: 'minuites',
+                config: {
+                    url: '/minuites?ps&pn&q',
+                    templateUrl: 'app/views/minuite/minuites.html',
+                    controller: 'minuitesController as vm',
+                    title: 'Minuite'
+                }
+            },
+            {
+                state: 'minuite-create',
+                config: {
+                    url: '/minuite-create',
+                    templateUrl: 'app/views/minuite/minuiteAdd.html',
+                    controller: 'minuiteAddController as vm',
+                    title: 'Minuite'
+                }
+            },
+            {
+                state: "minuite-modify",
+                config: {
+                    url: "/minuite-modify/:id",
+                    templateUrl: 'app/views/minuite/minuiteAdd.html',
+                    controller: 'minuiteAddController as vm',
+                    title: 'Minuite'
+                }
             },
             //------------- Category-------
             {
@@ -5273,6 +5300,16 @@
                     templateUrl: 'app/views/proposal-candidate/proposalCandidates.html',
                     controller: 'proposalCandidatesController as vm',
                     title: 'Transfer Proposal Candidate'
+                }
+            },
+            //-------------minute Candidate-------
+            {
+                state: 'minute-candidates',
+                config: {
+                    url: '/minute-candidates?minuiteId',
+                    templateUrl: 'app/views/minute-candidate/minuteCandidates.html',
+                    controller: 'minuteCandidatesController as vm',
+                    title: 'minute Candidate'
                 }
             },
             //-------------CO FF Recom-------

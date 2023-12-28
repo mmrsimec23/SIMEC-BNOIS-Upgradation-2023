@@ -34,7 +34,6 @@
                 });
             currentStatusService.getISSB(vm.pNo).then(function (data) {
                 vm.preCommissionTest = data.result;
-                console.log(vm.preCommissionTest)
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
@@ -42,7 +41,6 @@
 
             currentStatusService.getBatchPosition(vm.pNo).then(function (data) {
                 vm.batchPosition = data.result;
-                console.log(vm.batchPosition);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

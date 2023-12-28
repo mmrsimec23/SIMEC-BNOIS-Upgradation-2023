@@ -196,5 +196,7 @@
         TOEOSENTRY_URL: baseAPIUrl + 'api/bnois/toe-officer-state-entry/',
         EMPLOYEE_UNM_DEFERMENT_URL: baseAPIUrl + 'api/bnois/employee-unm-deferment/',
         CO_FF_RECOM_URL: baseAPIUrl + 'api/bnois/co-ff-recom/',
+        MINUITE_URL: baseAPIUrl + 'api/bnois/minuites/',
+        MINUTE_CANDIDATE_URL: baseAPIUrl + 'api/bnois/minuite-candidates/',
     });
 })();

@@ -11,6 +11,7 @@
             downlaodTransferProposalXBranchUrl: downlaodTransferProposalXBranchUrl,
             downlaodTransferProposalWithoutXBranchUrl: downlaodTransferProposalWithoutXBranchUrl,
             downloadReportUrl: downloadReportUrl,
+            downlaodMinuiteUrl: downlaodMinuiteUrl,
             downloadPromotionBroadSheetReportUrl: downloadPromotionBroadSheetReportUrl,
             downloadPersonalReport: downloadPersonalReport,
             downloadSASBBoardSheetReportUrl: downloadSASBBoardSheetReportUrl,
@@ -56,6 +57,9 @@
         }
         function downlaodTransferProposalWithPicUrl(transferProposalId, reportType) {
             return dataConstants.REPORT_URL + 'download-transfer-proposal-with-pic?transferProposalId=' + transferProposalId + '&type=' + reportType;
+        }
+        function downlaodMinuiteUrl(minuteId, reportType) {
+            return dataConstants.REPORT_URL + 'download-minute-report?minuteId=' + minuteId + '&type=' + reportType;
         }
         function downlaodTransferProposalXBranchUrl(transferProposalId, reportType) {
             return dataConstants.REPORT_URL + 'download-transfer-proposal-xbranch?transferProposalId=' + transferProposalId + '&type=' + reportType;

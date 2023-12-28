@@ -26,8 +26,7 @@
             
             dashboardService.getBNOfficerStates950().then(function (data) {
                 vm.bnOfficerStatesList = data.result;
-
-                console.log(vm.bnOfficerStatesList)
+                
                 },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

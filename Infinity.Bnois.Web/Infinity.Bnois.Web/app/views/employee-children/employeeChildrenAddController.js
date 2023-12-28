@@ -48,7 +48,6 @@
         
      
         function save() {
-            console.log(vm.employeeChildren);
             if (vm.employeeChildrenId > 0 && vm.employeeChildrenId !== '') {
                 updateEmployeeChildren();
             } else {  

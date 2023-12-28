@@ -28,7 +28,6 @@
                 vm.spouse = data.result.spouse;
                 vm.fileModel = data.result.file;
                 vm.fileModel1 = data.result.genFormFile;
-                console.log(data);
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
@@ -110,7 +109,6 @@
                 notificationService.displayError(response.message);
                 return;
             } else {
-                console.log(response);
                 vm.fileModel = response.result.file;
                 notificationService.displaySuccess('Image Uploaded Successfully');
             }
@@ -191,7 +189,6 @@
                 notificationService.displayError(response.message);
                 return;
             } else {
-                console.log(response);
                 vm.fileModel1 = response.result.genFormFile;
                 notificationService.displaySuccess('Gen Form Uploaded Successfully');
             }
