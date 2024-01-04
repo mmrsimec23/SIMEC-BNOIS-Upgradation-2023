@@ -15,8 +15,8 @@
                             <p ng-show="vm.retiredEmployeeForm.tsNo.$error.required" class="help-block errormsg">TS No is required</p>
                         </div>
                     </div>
-                   
-                    
+
+
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="isVisitAbroad" class="custom-label"> Permission to Visit Abroad</label>
@@ -24,7 +24,7 @@
                             <input type="radio" name="isVisitAbroad" ng-model="vm.retiredEmployee.isVisitAbroad" ng-value="true">Yes
                         </div>
                     </div>
-                    
+
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="isPensionIssued" class="custom-label"> Pension Issued</label>
@@ -50,8 +50,8 @@
 
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="isJobAbroad" class="custom-label"> Permission to Job Aboard</label>
@@ -59,7 +59,7 @@
                             <input type="radio" name="isJobAbroad" ng-model="vm.retiredEmployee.isJobAbroad" ng-value="true">Yes
                         </div>
                     </div>
-                    
+
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="countryIds" class="custom-label"> Country</label>
@@ -71,14 +71,20 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="certificateIds" class="custom-label"> Certificate Given For</label>
-                            <select kendo-multi-select k-options="vm.certificateOptions" k-ng-model="vm.retiredEmployee.certificateIds" ></select>
+                            <select kendo-multi-select k-options="vm.certificateOptions" k-ng-model="vm.retiredEmployee.certificateIds"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="changeRetirementType" class="custom-label"> Change Retirement Type</label>
+                            <input type="text" id="changeRetirementType" class="form-control custom-form-control" ng-model="vm.retiredEmployee.changeRetirementType" name="changeRetirementType"  />
+                            
                         </div>
                     </div>
 
-                  
-                    
 
-                 
+
+
 
 
 

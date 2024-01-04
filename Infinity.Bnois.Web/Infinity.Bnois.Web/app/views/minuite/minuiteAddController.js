@@ -13,7 +13,7 @@
         vm.title = 'ADD MODE';
         vm.minuite = {};
         vm.countries = [];
-        vm.categories = [{ text: 'UNM', value: 1 }, { text: 'General Course', value: 2 }, { text: 'Long Course', value: 3 }, { text: 'Visit/FAT/Seminar etc', value: 4 }, { text: 'Staff Course', value: 5 }];
+        vm.categories = [{ text: 'UNM', value: 1 }, { text: 'General Course', value: 2 }, { text: 'Long Course (E,L,S)', value: 3 }, { text: 'Visit/Seminar etc', value: 4 }, { text: 'Staff Course', value: 5 }, { text: 'FAT/PSI', value: 6 }];
         vm.saveButtonText = 'Save';
         vm.save = save;
         vm.close = close;
