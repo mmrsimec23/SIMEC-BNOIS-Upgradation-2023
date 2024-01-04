@@ -17,23 +17,25 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<RetiredEmpCountry> retiredEmpCountryRepository;
         private readonly IBnoisRepository<RetiredEmpCertificate> retiredEmpCertificateRepository;
         private readonly IBnoisRepository<Employee> employeeRepository;
+        private readonly IBnoisRepository<EmployeeGeneral> employeeGeneralRepository;
 
         public RetiredEmployeeService(IBnoisRepository<RetiredEmployee> retiredEmployeeRepository,
             IBnoisRepository<RetiredEmpCountry> retiredEmpCountryRepository,
             IBnoisRepository<RetiredEmpCertificate> retiredEmpCertificateRepository,
-            IBnoisRepository<Employee> employeeRepository)
+            IBnoisRepository<Employee> employeeRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository)
         {
             this.retiredEmployeeRepository = retiredEmployeeRepository;
             this.retiredEmpCountryRepository = retiredEmpCountryRepository;
             this.retiredEmpCertificateRepository = retiredEmpCertificateRepository;
             this.employeeRepository = employeeRepository;
+            this.employeeGeneralRepository = employeeGeneralRepository;
         }
 
 
 
         public List<EmployeeModel> GetRetiredEmployees(int ps, int pn, string qs, out int total)
         {
-            IQueryable<Employee> employees = employeeRepository.FilterWithInclude(x => x.Active && x.EmployeeStatusId==(int)OfficerCurrentStatus.Retired && (x.PNo==(qs) ||
+            IQueryable<Employee> employees = employeeRepository.FilterWithInclude(x => x.Active && (x.EmployeeStatusId==(int)OfficerCurrentStatus.Retired || x.EmployeeStatusId == (int)OfficerCurrentStatus.Dead || x.EmployeeStatusId == (int)OfficerCurrentStatus.LPR || x.EmployeeStatusId == (int)OfficerCurrentStatus.Terminated) && (x.PNo==(qs) ||
                                                                                                     x.FullNameEng.Contains(qs) ||
                                                                                                    
                                                                                                     String.IsNullOrEmpty(qs)), "Batch", "Gender", "Rank");
@@ -62,6 +64,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             RetiredEmployeeModel model = ObjectConverter<RetiredEmployee, RetiredEmployeeModel>.Convert(retiredEmployee);
             model.CountryIds = countryIds;
             model.CertificateIds = certificateIds;
+            if (retiredEmployee.EmployeeId > 0)
+            {
+                EmployeeGeneral emp = await employeeGeneralRepository.FindOneAsync(x => x.EmployeeId == retiredEmployee.EmployeeId);
+                model.ChangeRetirementType = emp.NickNameBan;
+
+            }
             return model;
         }
 
@@ -115,6 +123,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             retiredEmployee.IsPensionIssued = model.IsPensionIssued;
             retiredEmployee.BookNo = model.BookNo;
             retiredEmployee.IssueDate = model.IssueDate;
+
+            if (retiredEmployee.EmployeeId > 0)
+            {
+                EmployeeGeneral emp = await employeeGeneralRepository.FindOneAsync(x=> x.EmployeeId == retiredEmployee.EmployeeId);
+                emp.NickNameBan = model.ChangeRetirementType;
+
+                await employeeGeneralRepository.SaveAsync(emp);
+            }
 
             await retiredEmployeeRepository.SaveAsync(retiredEmployee);
             model.RetiredEmployeeId = retiredEmployee.RetiredEmployeeId;

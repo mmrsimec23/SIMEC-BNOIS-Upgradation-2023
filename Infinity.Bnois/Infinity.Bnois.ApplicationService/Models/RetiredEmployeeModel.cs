@@ -12,6 +12,7 @@ namespace Infinity.Bnois.ApplicationService.Models
         public bool IsPensionIssued { get; set; }
         public string BookNo { get; set; }
         public Nullable<System.DateTime> IssueDate { get; set; }
+        public string ChangeRetirementType { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }

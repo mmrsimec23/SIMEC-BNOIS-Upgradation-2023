@@ -355,6 +355,10 @@ namespace Infinity.Bnois.Api.Controllers
             {
                 reportName = "MinuteFormatForStaffCourse";
             }
+            if (minute.MinuiteCategory == 6)
+            {
+                reportName = "MinuteFormatForFat";
+            }
 
 
             var parms = new List<ReportParameter> { new ReportParameter("minuteId", minuteId.ToString()) };
