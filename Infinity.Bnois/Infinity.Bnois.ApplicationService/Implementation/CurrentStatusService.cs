@@ -478,6 +478,27 @@ select isnull(@GrandTotalDuration,'') as GrandTotalDuration", pNo));
 	        return dataTable.ToJson().ToList();
 	    }
 
+	    public List<object> GetNsdServices(string pNo)
+	    {
+	        DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetNsdServices] '{0}' ", pNo));
+
+	        return dataTable.ToJson().ToList();
+	    }
+
+	    public List<object> GetBsdServices(string pNo)
+	    {
+	        DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetBsdServices] '{0}' ", pNo));
+
+	        return dataTable.ToJson().ToList();
+	    }
+
+	    public List<object> GetBsoServices(string pNo)
+	    {
+	        DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetBsoServices] '{0}' ", pNo));
+
+	        return dataTable.ToJson().ToList();
+	    }
+
 	    public List<object> GetSubmarineServices(string pNo)
 	    {
 	        DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetSubmarineServices] '{0}' ", pNo));

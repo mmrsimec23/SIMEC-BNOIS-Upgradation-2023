@@ -476,6 +476,36 @@ namespace Infinity.Bnois.Api.Controllers
                 Result = currentStatusService.GetDockyardServices(pNo)
             });
         }
+
+        [HttpGet]
+        [Route("get-nsd-services")]
+        public IHttpActionResult GetNsdServices(string pNo)
+        {
+            return Ok(new ResponseMessage<object>()
+            {
+                Result = currentStatusService.GetNsdServices(pNo)
+            });
+        }
+
+        [HttpGet]
+        [Route("get-bsd-services")]
+        public IHttpActionResult GetBsdServices(string pNo)
+        {
+            return Ok(new ResponseMessage<object>()
+            {
+                Result = currentStatusService.GetBsdServices(pNo)
+            });
+        }
+
+        [HttpGet]
+        [Route("get-bso-services")]
+        public IHttpActionResult GetBsoServices(string pNo)
+        {
+            return Ok(new ResponseMessage<object>()
+            {
+                Result = currentStatusService.GetBsoServices(pNo)
+            });
+        }
         
 
 

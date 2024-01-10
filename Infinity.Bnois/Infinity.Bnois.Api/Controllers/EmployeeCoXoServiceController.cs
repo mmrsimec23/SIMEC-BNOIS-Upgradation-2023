@@ -43,10 +43,10 @@ namespace Infinity.Bnois.Api.Controllers
 
         [HttpGet]
         [Route("get-employee-coxo-services")]
-        public IHttpActionResult GetEmployeeCoXoService(int ps, int pn, string qs)
+        public IHttpActionResult GetEmployeeCoXoService(int type,int ps, int pn, string qs)
         {
             int total = 0;
-            List<EmployeeCoxoServiceModel> models = EmployeeCoxoService.GetEmployeeCoxoServices(ps, pn, qs, out total);
+            List<EmployeeCoxoServiceModel> models = EmployeeCoxoService.GetEmployeeCoxoServices(type,ps, pn, qs, out total);
             RoleFeature permission = base.GetFeature(MASTER_SETUP.EMPLOYEE_COXO_SERVICE);
             return Ok(new ResponseMessage<List<EmployeeCoxoServiceModel>>()
             {

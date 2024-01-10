@@ -9,7 +9,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
 {
     public interface IEmployeeCoxoService
     {
-        List<EmployeeCoxoServiceModel> GetEmployeeCoxoServices(int ps, int pn, string qs, out int total);
+        List<EmployeeCoxoServiceModel> GetEmployeeCoxoServices(int type, int ps, int pn, string qs, out int total);
         Task<EmployeeCoxoServiceModel> GetEmployeeCoxoService(int id);
         Task<EmployeeCoxoServiceModel> SaveEmployeeCoxoService(int v, EmployeeCoxoServiceModel model);
         Task<bool> DeleteEmployeeCoxoService(int id);

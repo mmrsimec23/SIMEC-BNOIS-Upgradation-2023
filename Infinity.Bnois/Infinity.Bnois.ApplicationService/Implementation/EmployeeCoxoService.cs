@@ -19,9 +19,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             this.EmployeeCoxoServiceRepository = EmployeeCoxoServiceRepository;
         }
 
-        public List<EmployeeCoxoServiceModel> GetEmployeeCoxoServices(int ps, int pn, string qs, out int total)
+        public List<EmployeeCoxoServiceModel> GetEmployeeCoxoServices(int type, int ps, int pn, string qs, out int total)
         {
-            IQueryable<CoXoService> EmployeeCoxoServices = EmployeeCoxoServiceRepository.FilterWithInclude(x => x.IsActive
+            IQueryable<CoXoService> EmployeeCoxoServices = EmployeeCoxoServiceRepository.FilterWithInclude(x => x.IsActive && x.Type == type
                  && (x.Employee.PNo == (qs) || x.Employee.FullNameEng.Contains(qs) || String.IsNullOrEmpty(qs)), "Employee", "Office");
             total = EmployeeCoxoServices.Count();
             EmployeeCoxoServices = EmployeeCoxoServices.OrderByDescending(x => x.CoXoServiceId).Skip((pn - 1) * ps).Take(ps);

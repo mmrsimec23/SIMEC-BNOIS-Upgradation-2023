@@ -67,6 +67,9 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<Object> GetForeignProjects(string pNo);
         List<Object> GetHODServices(string pNo);
         List<Object> GetDockyardServices(string pNo);
+        List<Object> GetNsdServices(string pNo);
+        List<Object> GetBsdServices(string pNo);
+        List<Object> GetBsoServices(string pNo);
         List<Object> GetSubmarineServices(string pNo);
         List<Object> GetDeputationServices(string pNo);
         List<Object> GetShoreCommandServices(string pNo);
