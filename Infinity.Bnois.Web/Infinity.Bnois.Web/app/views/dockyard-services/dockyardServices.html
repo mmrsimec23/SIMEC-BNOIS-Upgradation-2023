@@ -9,7 +9,6 @@
                 <hr />
                 <h4 class="noScreen" style="border-bottom: 3px solid blue;font-family: Arial">{{vm.officerName}} ({{vm.pNo}})</h4>
 
-
                 <div ng-if="vm.dockyardServices.length>0" class="table-wrapper table-responsive reportCover">
                     <table class="table table-bordered pdfReportTable" border="1">
                         <thead class="reportThead">
@@ -30,6 +29,95 @@
                                 <td  class="reportTD" style="text-align: center; width: 100px;" ng-if="dockyardService.toDate !='Total'">{{dockyardService.toDate | date:"dd-MMM-yyyy"}}</td>
                                 <td  class="reportTD" style="text-align: center; width: 100px;" ng-if="dockyardService.toDate=='Total'"><strong>{{dockyardService.toDate | date:"dd-MMM-yyyy"}}</strong></td>
                                 <td  class="reportTD" style="text-align: center;text-transform: lowercase;">{{dockyardService.duration}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+			    </div>
+                
+                <h3> NSD Services</h3>
+                <hr />
+                <h4 class="noScreen" style="border-bottom: 3px solid blue;font-family: Arial">{{vm.officerName}} ({{vm.pNo}})</h4>
+
+                <div ng-if="vm.nsdServices.length>0" class="table-wrapper table-responsive reportCover">
+                    <table class="table table-bordered pdfReportTable" border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                                <th>Office Name</th>
+                                <th>Appointment</th>
+                                <th>From Date</th>
+                                <th>To Date </th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody class="reportBody">
+                            <tr class="reportTR" ng-repeat="nsdService in vm.nsdServices">
+
+                                <td class="reportTD">{{nsdService.organizationName}}</td>
+                                <td class="reportTD">{{nsdService.appointment}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;">{{nsdService.fromDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;" ng-if="nsdService.toDate !='Total'">{{nsdService.toDate | date:"dd-MMM-yyyy"}}</td>
+                                <td  class="reportTD" style="text-align: center; width: 100px;" ng-if="nsdService.toDate=='Total'"><strong>{{nsdService.toDate | date:"dd-MMM-yyyy"}}</strong></td>
+                                <td class="reportTD" style="text-align: center;text-transform: lowercase;">{{nsdService.duration}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+			    </div>
+                
+                <h3> BSD Services</h3>
+                <hr />
+                <div ng-if="vm.bsdServices.length>0" class="table-wrapper table-responsive reportCover">
+                    <table class="table table-bordered pdfReportTable" border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                                <th>Office Name</th>
+                                <th>Appointment</th>
+                                <th>From Date</th>
+                                <th>To Date </th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody class="reportBody">
+                            <tr class="reportTR" ng-repeat="bsdService in vm.bsdServices">
+
+                                <td class="reportTD">{{bsdService.organizationName}}</td>
+                                <td class="reportTD">{{bsdService.appointment}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;">{{bsdService.fromDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;" ng-if="bsdService.toDate !='Total'">{{bsdService.toDate | date:"dd-MMM-yyyy"}}</td>
+                                <td  class="reportTD" style="text-align: center; width: 100px;" ng-if="bsdService.toDate=='Total'"><strong>{{bsdService.toDate | date:"dd-MMM-yyyy"}}</strong></td>
+                                <td class="reportTD" style="text-align: center;text-transform: lowercase;">{{bsdService.duration}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+			    </div>
+                
+                <h3> BSO Services</h3>
+                <hr />
+                <div ng-if="vm.bsoServices.length>0" class="table-wrapper table-responsive reportCover">
+                    <table class="table table-bordered pdfReportTable" border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                                <th>Office Name</th>
+                                <th>Appointment</th>
+                                <th>From Date</th>
+                                <th>To Date </th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody class="reportBody">
+                            <tr class="reportTR" ng-repeat="bsoService in vm.bsoServices">
+
+                                <td class="reportTD">{{bsoService.organizationName}}</td>
+                                <td class="reportTD">{{bsoService.appointment}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;">{{bsoService.fromDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center; width: 100px;" ng-if="bsoService.toDate !='Total'">{{bsoService.toDate | date:"dd-MMM-yyyy"}}</td>
+                                <td  class="reportTD" style="text-align: center; width: 100px;" ng-if="bsoService.toDate=='Total'"><strong>{{bsoService.toDate | date:"dd-MMM-yyyy"}}</strong></td>
+                                <td class="reportTD" style="text-align: center;text-transform: lowercase;">{{bsoService.duration}}</td>
                             </tr>
 
                         </tbody>

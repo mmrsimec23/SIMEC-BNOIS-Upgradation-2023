@@ -50,6 +50,9 @@
             getMissions: getMissions,
             getHODServices: getHODServices,
             getDockyardServices: getDockyardServices,
+            getNsdServices: getNsdServices,
+            getBsdServices: getBsdServices,
+            getBsoServices: getBsoServices,
             getShoreCommandServices: getShoreCommandServices,
             getSubmarineServices: getSubmarineServices,
             getDeputationServices: getDeputationServices,
@@ -257,6 +260,21 @@
 
         function getDockyardServices(pNo) {
             var url = dataConstants.CURRENT_STATUS_URL + 'get-dockyard-services?pNo=' + pNo;
+            return apiHttpService.GET(url);
+        }
+
+        function getNsdServices(pNo) {
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-nsd-services?pNo=' + pNo;
+            return apiHttpService.GET(url);
+        }
+
+        function getBsdServices(pNo) {
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-bsd-services?pNo=' + pNo;
+            return apiHttpService.GET(url);
+        }
+
+        function getBsoServices(pNo) {
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-bso-services?pNo=' + pNo;
             return apiHttpService.GET(url);
         }
 

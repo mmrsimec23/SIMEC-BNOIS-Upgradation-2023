@@ -18,7 +18,7 @@
 								<th rowspan="2">L</th>
 								<th rowspan="2">Edu </th>
 								<th rowspan="2">SD </th>
-								<th colspan="2">Med(Navy)</th>
+								<th rowspan="2" style=" width: 90px; "> Instr MO <br /> Med(Navy)</th>
 								<th rowspan="2">Total</th>
 								<th colspan="2">Med(Army)</th>
 								<th rowspan="2">Hon</th>
@@ -27,8 +27,8 @@
 							<tr class="tableHeading">
 
 
-								<th rowspan="2">WMO</th>
-								<th rowspan="2">Instr<br /> MO</th>
+								<!--<th rowspan="2">WMO</th>
+								<th rowspan="2">Instr<br /> MO</th>-->
 								<th rowspan="2">AFNS</th>
 								<th rowspan="2">AMC</th>
 
@@ -44,7 +44,7 @@
 								<td style="text-align: center"><a href="" ng-if="branch.lValue>0" ng-click="vm.getOfficerList(branch.id,branch.l,0,0,0)"><strong>{{branch.lValue}}</strong></a></td>
 								<td style="text-align: center"><a href="" ng-if="branch.eduValue>0" ng-click="vm.getOfficerList(branch.id,branch.edu,0,0,0)"><strong>{{branch.eduValue}}</strong></a></td>
 								<td style="text-align: center"><a href="" ng-if="branch.sdValue>0" ng-click="vm.getOfficerList(branch.id,null,4,0,0)"><strong>{{branch.sdValue}}</strong></a></td>
-								<td style="text-align: center"><a href="" ng-if="branch.medValue>0" ng-click="vm.getOfficerList(branch.id,branch.med,4,10,1)"><strong>{{branch.medValue}}</strong></a> </td>
+								<!--<td style="text-align: center"><a href="" ng-if="branch.medValue>0" ng-click="vm.getOfficerList(branch.id,branch.med,4,10,1)"><strong>{{branch.medValue}}</strong></a> </td>-->
 								<td style="text-align: center"><a href="" ng-if="branch.instrMOValue>0" ng-click="vm.getOfficerList(branch.id,branch.instrMo,2,6,2)"><strong>{{branch.instrMOValue}}</strong></a> </td>
 								<td style="text-align: center"><a href="" ng-if="branch.total>0" ng-click="vm.getOfficerList(branch.id,null,0,0,0)"><strong>{{branch.total}}</strong></a></td>
 								<td style="text-align: center"><a href="" ng-if="branch.afnsValue>0" ng-click="vm.getOfficerList(branch.id,branch.afns,6,2,6)"><strong>{{branch.afnsValue}}</strong></a> </td>

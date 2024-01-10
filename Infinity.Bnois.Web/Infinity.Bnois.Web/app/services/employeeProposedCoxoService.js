@@ -13,8 +13,8 @@
         };
 
         return service;
-        function getemployeeProposedCoxos(pageSize, pageNumber, searchText) {
-            var url = dataConstants.BNOIS_COXO_SERVICE_URL + 'get-employee-coxo-services?ps=' + pageSize + "&pn=" + pageNumber + "&qs=" + searchText;
+        function getemployeeProposedCoxos(type, pageSize, pageNumber, searchText) {
+            var url = dataConstants.BNOIS_COXO_SERVICE_URL + 'get-employee-coxo-services?type=' + type + '&ps=' + pageSize + "&pn=" + pageNumber + "&qs=" + searchText;
             return apiHttpService.GET(url);
         }
 

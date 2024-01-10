@@ -13,6 +13,9 @@
         var vm = this;
         vm.pNo = 0;
         vm.dockyardServices = [];
+        vm.nsdServices = [];
+        vm.bsdServices = [];
+        vm.bsoServices = [];
         vm.printSection = printSection;
 
 
@@ -33,6 +36,30 @@
 
             currentStatusService.getDockyardServices(vm.pNo).then(function (data) {
                 vm.dockyardServices = data.result;
+
+                },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+
+            currentStatusService.getNsdServices(vm.pNo).then(function (data) {
+                vm.nsdServices = data.result;
+
+                },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+
+            currentStatusService.getBsdServices(vm.pNo).then(function (data) {
+                vm.bsdServices = data.result;
+
+                },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+
+            currentStatusService.getBsoServices(vm.pNo).then(function (data) {
+                vm.bsoServices = data.result;
 
                 },
                 function (errorMessage) {

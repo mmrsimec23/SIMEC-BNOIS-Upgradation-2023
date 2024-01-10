@@ -34,7 +34,7 @@
         }
         init();
         function init() {
-            employeeProposedCoxoService.getemployeeProposedCoxos(vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
+            employeeProposedCoxoService.getemployeeProposedCoxos(1,vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
                 vm.employeeProposedCoxos = data.result;
                 vm.total = data.total; vm.permission = data.permission;
             },
