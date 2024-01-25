@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c156cc6eb9dd4bb29c430ebf9fbb2b1c" Name="Diagram1" ZoomLevel="35">
+      <Diagram DiagramId="c156cc6eb9dd4bb29c430ebf9fbb2b1c" Name="Diagram1" ZoomLevel="46">
         <EntityTypeShape EntityType="BnoisdbModel.Address" Width="1.5" PointX="8.25" PointY="134.375" />
         <EntityTypeShape EntityType="BnoisdbModel.AptCat" Width="1.5" PointX="24" PointY="151" />
         <EntityTypeShape EntityType="BnoisdbModel.AttributeType" Width="1.5" PointX="0.75" PointY="0.75" />
@@ -467,8 +467,6 @@
         <EntityTypeShape EntityType="BnoisdbModel.Institute" Width="1.5" PointX="14.25" PointY="159.375" />
         <AssociationConnector Association="BnoisdbModel.FK_Institute_Board" />
         <AssociationConnector Association="BnoisdbModel.FK_Education_Institute" />
-        <EntityTypeShape EntityType="BnoisdbModel.Remark" Width="1.5" PointX="13" PointY="85.5" />
-        <AssociationConnector Association="BnoisdbModel.FK_Remark_Employee" />
         <EntityTypeShape EntityType="BnoisdbModel.EmployeeMscEducation" Width="1.5" PointX="20" PointY="63.625" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Country" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Employee" />
@@ -514,6 +512,8 @@
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite100_Country" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite100_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100" />
+        <EntityTypeShape EntityType="BnoisdbModel.Remark" Width="1.5" PointX="13" PointY="85.875" />
+        <AssociationConnector Association="BnoisdbModel.FK_Remark_Employee" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,7 +14,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
         Task<EmployeeCoxoServiceModel> SaveEmployeeCoxoService(int v, EmployeeCoxoServiceModel model);
         Task<bool> DeleteEmployeeCoxoService(int id);
         List<SelectModel> GetCoxoTypeSelectModels();
-        List<SelectModel> GetCoxoAppoinmentSelectModels();
+        List<SelectModel> GetCoxoAppoinmentSelectModels(int type);
 
     }
 }

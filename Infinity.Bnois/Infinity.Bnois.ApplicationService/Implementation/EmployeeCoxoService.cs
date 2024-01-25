@@ -120,13 +120,19 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             return selectModels;
         }
 
-        public List<SelectModel> GetCoxoAppoinmentSelectModels()
+        public List<SelectModel> GetCoxoAppoinmentSelectModels(int type)
         {
-            List<SelectModel> selectModels =
-                Enum.GetValues(typeof(CoXoAppointment)).Cast<CoXoAppointment>()
-                    .Select(v => new SelectModel { Text = v.ToString(), Value = Convert.ToInt16(v) })
-                    .ToList();
-            return selectModels;
+            if (type == 1)
+            {
+                List<SelectModel> selectModels = Enum.GetValues(typeof(CoXoAppointment)).Cast<CoXoAppointment>().Select(v => new SelectModel { Text = v.ToString(), Value = Convert.ToInt16(v) }).ToList();
+                return selectModels;
+            }
+            if (type == 2)
+            {
+                List<SelectModel> selectModels = Enum.GetValues(typeof(EoLoSoAppointment)).Cast<EoLoSoAppointment>().Select(v => new SelectModel { Text = v.ToString(), Value = Convert.ToInt16(v) }).ToList();
+                return selectModels;
+            }
+            return null;
         }
 
 

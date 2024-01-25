@@ -350,4 +350,12 @@ namespace Infinity.Bnois
         CO = 1,
         XO = 2,
     }
+    public enum EoLoSoAppointment
+    {
+        EO = 3,
+        SO = 4,
+        LO = 5,
+        SEO = 6,
+        DLO = 7,
+    }
 }

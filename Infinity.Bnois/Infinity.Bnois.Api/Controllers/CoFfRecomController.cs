@@ -27,10 +27,10 @@ namespace Infinity.Bnois.Api.Controllers
 
         [HttpGet]
         [Route("get-co-ff-recoms")]
-        public IHttpActionResult GetCOFFRecoms()
+        public IHttpActionResult GetCOFFRecoms(int type)
         {
             int total = 0;
-            List<CoFfRecomModel> models = coFfRecomService.GetCOFFRecoms();
+            List<CoFfRecomModel> models = coFfRecomService.GetCOFFRecoms(type);
             RoleFeature permission = base.GetFeature(MASTER_SETUP.CO_FF_RECOM);
             return Ok(new ResponseMessage<List<CoFfRecomModel>>()
             {

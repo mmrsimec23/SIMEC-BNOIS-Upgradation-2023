@@ -126,6 +126,30 @@ namespace Infinity.Bnois.Api.Controllers
         }
 
         [HttpGet]
+        [Route("download-sasb-submarine-for-promotion")]
+        public async Task<HttpResponseMessage> DownloadSasbSubmarineReport(int promotionBoardId, ReportType type, int hsasbType)
+        {
+            string extension = string.Empty;
+            string mimeType = string.Empty;
+            string reportName = (hsasbType == 1 ? "BroadSheetSASBSubmarine" : hsasbType == 2 ? "BroadSheetHSASB" : "");
+            var parms = new List<ReportParameter> { new ReportParameter("PromotionBoardId", promotionBoardId.ToString()) };
+            HttpResponseMessage httpResponseMessage = new HttpResponseMessage
+            {
+                Content = ReportExtension.ToByteArray(type, reportName, parms, out extension, out mimeType)
+            };
+            httpResponseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+
+            httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = reportName + "." + extension
+            };
+            httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+
+            httpResponseMessage.StatusCode = HttpStatusCode.OK;
+            return httpResponseMessage;
+        }
+
+        [HttpGet]
         [Route("download-trace-for-promotion")]
         public async Task<HttpResponseMessage> DownloadPromotionBoardTraceReport(int promotionBoardId, ReportType type)
         {
@@ -186,9 +210,21 @@ namespace Infinity.Bnois.Api.Controllers
             string reportName = string.Empty;
             PromotionBoardModel promotionBoard = await promotionBoardService.GetPromotionBoard(promotionBoardId);
 
-            if (promotionBoard.LtCdrLevel==1)
+            if (promotionBoard.FromRankId==12)
             {
-                reportName = "BroadSheetPromotion";
+                reportName = "BSPromLtCaptToCdre";
+            }
+            else if (promotionBoard.FromRankId == 10)
+            {
+                reportName = "BSPCdrToCapt";
+            }
+            else if(promotionBoard.FromRankId == 8)
+            {
+                reportName = "BSPromLtCdrToCdr";
+            }
+            else if(promotionBoard.FromRankId == 6)
+            {
+                reportName = "BSPromLtToLtCdrNew";
             }
             else
             {

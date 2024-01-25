@@ -135,6 +135,7 @@ namespace Infinity.Bnois.Api
         public const string CurrentStatus = BnoisRoutePrefixBase + "current-status";
         public const string PromotionPolicies = BnoisRoutePrefixBase + "promotion-policies";
         public const string RoasterList = BnoisRoutePrefixBase + "roaster-list";
+        public const string RoasterListEoSoLo = BnoisRoutePrefixBase + "roaster-list-eosolo";
         public const string TraceSettings = BnoisRoutePrefixBase + "trace-settings";
         public const string OPREntries = BnoisRoutePrefixBase + "opr-entries";
         public const string CoursePoints = BnoisRoutePrefixBase + "course-points";

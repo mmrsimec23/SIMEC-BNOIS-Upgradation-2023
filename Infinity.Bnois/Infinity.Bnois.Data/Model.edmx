@@ -2706,7 +2706,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a prim
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="TransferId" Type="int" />
           <Property Name="NoteType" Type="int" />
-          <Property Name="Remarks" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Date" Type="date" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
@@ -10006,11 +10006,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="Institute" EntitySet="Institute" />
             <End Role="Education" EntitySet="Educations" />
           </AssociationSet>
-          <EntitySet Name="Remark" EntityType="BnoisdbModel.Remark" />
-          <AssociationSet Name="FK_Remark_Employee" Association="BnoisdbModel.FK_Remark_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Remark" EntitySet="Remark" />
-          </AssociationSet>
           <EntitySet Name="EmployeeMscEducation" EntityType="BnoisdbModel.EmployeeMscEducation" />
           <AssociationSet Name="FK_EmployeeMscEducation_Country" Association="BnoisdbModel.FK_EmployeeMscEducation_Country">
             <End Role="Country" EntitySet="Countries" />
@@ -10157,6 +10152,11 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <AssociationSet Name="FK_DashBoardMinuite110_DashBoardMinuite100" Association="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100">
             <End Role="DashBoardMinuite100" EntitySet="DashBoardMinuite100" />
             <End Role="DashBoardMinuite110" EntitySet="DashBoardMinuite110" />
+          </AssociationSet>
+          <EntitySet Name="Remark" EntityType="BnoisdbModel.Remark" />
+          <AssociationSet Name="FK_Remark_Employee" Association="BnoisdbModel.FK_Remark_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Remark" EntitySet="Remark" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
@@ -15535,7 +15535,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="CareerForecast" Relationship="BnoisdbModel.FK_CareerForecast_Employee" FromRole="Employee" ToRole="CareerForecast" />
           <NavigationProperty Name="EmployeeGeneral" Relationship="BnoisdbModel.FK_EmployeeGeneral_Employee" FromRole="Employee" ToRole="EmployeeGeneral" />
           <NavigationProperty Name="CoXoService" Relationship="BnoisdbModel.FK_CoXoService_Employee" FromRole="Employee" ToRole="CoXoService" />
-          <NavigationProperty Name="Remark" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Employee" ToRole="Remark" />
           <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="Employee" ToRole="EmployeeMscEducation" />
           <NavigationProperty Name="EmployeeServiceExamResult" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" FromRole="Employee" ToRole="EmployeeServiceExamResult" />
           <NavigationProperty Name="DashBoardBranch975" Relationship="BnoisdbModel.FK_DashBoardBranch975_Employee" FromRole="Employee" ToRole="DashBoardBranch975" />
@@ -15543,6 +15542,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="ProposalCandidate" Relationship="BnoisdbModel.FK_ProposalCadidate_Employee" FromRole="Employee" ToRole="ProposalCandidate" />
           <NavigationProperty Name="DashBoardMinuite110" Relationship="BnoisdbModel.FK_DashBoardMinuite110_Employee" FromRole="Employee" ToRole="DashBoardMinuite110" />
           <NavigationProperty Name="DashBoardMinuite100" Relationship="BnoisdbModel.FK_DashBoardMinuite100_Employee" FromRole="Employee" ToRole="DashBoardMinuite100" />
+          <NavigationProperty Name="Remark" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Employee" ToRole="Remark" />
         </EntityType>
         <EntityType Name="ExecutionRemark">
           <Key>
@@ -17275,36 +17275,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Remark">
-          <Key>
-            <PropertyRef Name="RemarkId" />
-          </Key>
-          <Property Name="RemarkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="TransferId" Type="Int32" />
-          <Property Name="NoteType" Type="Int32" />
-          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Remark" ToRole="Employee" />
-        </EntityType>
-        <Association Name="FK_Remark_Employee">
-          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="BnoisdbModel.Remark" Role="Remark" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="Remark">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="EmployeeMscEducation">
           <Key>
             <PropertyRef Name="EmployeeMscEducationId" />
@@ -17974,6 +17944,36 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Principal>
             <Dependent Role="DashBoardMinuite110">
               <PropertyRef Name="MinuiteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Remark">
+          <Key>
+            <PropertyRef Name="RemarkId" />
+          </Key>
+          <Property Name="RemarkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="TransferId" Type="Int32" />
+          <Property Name="NoteType" Type="Int32" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Remark" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Remark_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.Remark" Role="Remark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Remark">
+              <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -21362,24 +21362,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Remark">
-            <EntityTypeMapping TypeName="BnoisdbModel.Remark">
-              <MappingFragment StoreEntitySet="Remark">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="NoteType" ColumnName="NoteType" />
-                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="RemarkId" ColumnName="RemarkId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EmployeeMscEducation">
             <EntityTypeMapping TypeName="BnoisdbModel.EmployeeMscEducation">
               <MappingFragment StoreEntitySet="EmployeeMscEducation">
@@ -21617,6 +21599,24 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
                 <ScalarProperty Name="NextMinuiteNo" ColumnName="NextMinuiteNo" />
                 <ScalarProperty Name="MinuiteNo" ColumnName="MinuiteNo" />
                 <ScalarProperty Name="MinuiteId" ColumnName="MinuiteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Remark">
+            <EntityTypeMapping TypeName="BnoisdbModel.Remark">
+              <MappingFragment StoreEntitySet="Remark">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="NoteType" ColumnName="NoteType" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="RemarkId" ColumnName="RemarkId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

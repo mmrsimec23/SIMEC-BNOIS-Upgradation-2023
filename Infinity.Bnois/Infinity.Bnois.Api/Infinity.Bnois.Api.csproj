@@ -77,6 +77,7 @@
     <Compile Include="Controllers\OverviewOfficersDeploymentEntryController - Copy.cs" />
     <Compile Include="Controllers\CoFfRecomController.cs" />
     <Compile Include="Controllers\MinuteCandidatesController.cs" />
+    <Compile Include="Controllers\RoasterListEoLoXoController.cs" />
     <Compile Include="Controllers\ToeOfficerStateEntryController.cs" />
     <Compile Include="Controllers\ToeAuthorizedsController.cs" />
     <Compile Include="Controllers\RoasterListController.cs" />

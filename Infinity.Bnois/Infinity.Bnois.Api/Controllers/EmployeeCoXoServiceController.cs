@@ -58,13 +58,13 @@ namespace Infinity.Bnois.Api.Controllers
 
         [HttpGet]
         [Route("get-employee-coxo-service")]
-        public async Task<IHttpActionResult> GetEmployeeCoxoService(int id)
+        public async Task<IHttpActionResult> GetEmployeeCoxoService(int id, int type)
         {
             EmployeeCoxoServiceViewModel vm = new EmployeeCoxoServiceViewModel();
             vm.EmployeeCoxoService = await EmployeeCoxoService.GetEmployeeCoxoService(id);
             vm.CoxoTypes = EmployeeCoxoService.GetCoxoTypeSelectModels();
             vm.CoxoShipTypes = officeService.GetShipTypeSelectModels();
-            vm.CoxoAppoinments = EmployeeCoxoService.GetCoxoAppoinmentSelectModels();
+            vm.CoxoAppoinments = EmployeeCoxoService.GetCoxoAppoinmentSelectModels(type);
             vm.Offices = await officeService.GetBornOfficeSelectModel();
 
 

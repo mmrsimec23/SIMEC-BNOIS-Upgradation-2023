@@ -20,9 +20,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         }
 
        
-        public List<CoFfRecomModel> GetCOFFRecoms()
+        public List<CoFfRecomModel> GetCOFFRecoms(int type)
         {
-            IQueryable<DashBoardBranch980> coffrecoms = coFfRecomRepository.FilterWithInclude(x => x.IsActive, "Employee");
+            IQueryable<DashBoardBranch980> coffrecoms = coFfRecomRepository.FilterWithInclude(x => x.IsActive && x.RecomStatus==type, "Employee");
             coffrecoms = coffrecoms.OrderByDescending(x => x.Id);
             List<CoFfRecomModel> models = ObjectConverter<DashBoardBranch980, CoFfRecomModel>.ConvertList(coffrecoms.ToList()).ToList();
             return models;

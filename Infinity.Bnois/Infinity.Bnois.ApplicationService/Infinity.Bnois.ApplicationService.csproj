@@ -105,6 +105,7 @@
     <Compile Include="Implementation\EmployeeUnmDefermentService.cs" />
     <Compile Include="Implementation\CoFfRecomService.cs" />
     <Compile Include="Implementation\MinuteCandidateService.cs" />
+    <Compile Include="Implementation\RoasterListEoLoSoService.cs" />
     <Compile Include="Implementation\ToeOfficerStateEntryService.cs" />
     <Compile Include="Implementation\OverviewOfficersDeploymentEntryServiceService.cs" />
     <Compile Include="Implementation\ToeAuthorizedService.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Interface\IEmployeeUnmDefermentService.cs" />
     <Compile Include="Interface\ICoFfRecomService.cs" />
     <Compile Include="Interface\IMinuteCandidateService.cs" />
+    <Compile Include="Interface\IRoasterListEoLoSoService.cs" />
     <Compile Include="Interface\IToeOfficerStateEntryService.cs" />
     <Compile Include="Interface\IOverviewOfficersDeploymentEntryService.cs" />
     <Compile Include="Interface\IToeAuthorizedService.cs" />
