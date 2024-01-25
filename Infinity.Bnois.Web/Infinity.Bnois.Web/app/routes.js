@@ -5322,6 +5322,16 @@
                     title: 'CO FF Recom'
                 }
             },
+            //-------------CO FF Recom-------
+            {
+                state: 'eosolo-ff-recoms',
+                config: {
+                    url: '/eosolo-ff-recoms',
+                    templateUrl: 'app/views/eosolo-ff-recom/eosoloFfRecoms.html',
+                    controller: 'eosoloFfRecomsController as vm',
+                    title: 'EOSOLO FF Recom'
+                }
+            },
 
 
             //-------------Advance Search-------
@@ -5941,7 +5951,7 @@
                 }
             },
 
-            //-------------Employee PFT-------
+            //-------------Employee proposed coxo-------
             {
                 state: 'employee-proposed-coxos',
                 config: {
@@ -5969,6 +5979,35 @@
                     title: 'Employee PFT'
                 }
             },
+
+            //-------------Employee proposed eosolo-------
+            {
+                state: 'employee-proposed-eosolos',
+                config: {
+                    url: '/employee-proposed-eosolos?ps&pn&q',
+                    templateUrl: 'app/views/employee-proposed-eosolo/employeeProposedEoSoLos.html',
+                    controller: 'employeeProposedEoSoLosController as vm',
+                    title: 'Employee EoSoLo'
+                }
+            },
+            {
+                state: 'employee-proposed-eosolo-create',
+                config: {
+                    url: '/employee-proposed-eosolo-create',
+                    templateUrl: 'app/views/employee-proposed-eosolo/employeeProposedEoSoLoAdd.html',
+                    controller: 'employeeProposedEoSoLoAddController as vm',
+                    title: 'Employee EoSoLo'
+                }
+            },
+            {
+                state: "employee-proposed-eosolo-modify",
+                config: {
+                    url: "employee-proposed-eosolo-modify/:id",
+                    templateUrl: 'app/views/employee-proposed-eosolo/employeeProposedEoSoLoAdd.html',
+                    controller: 'employeeProposedEoSoLoAddController as vm',
+                    title: 'Employee EoSoLo'
+                }
+            },
             {
                 state: "coxo-large-ships",
                 config: {
@@ -5979,12 +6018,57 @@
                 }
             },
             {
+                state: "eosolo-large-ships",
+                config: {
+                    url: "/eosolo-large-ships",
+                    templateUrl: 'app/views/large-ship-eosolo/largeShipEoSoLo.html',
+                    controller: 'largeShipEoSoLoController as vm',
+                    title: 'EO/SO/LO Large Ships'
+                }
+            },
+            {
+                state: "eosolo-medium-ships",
+                config: {
+                    url: "/eosolo-medium-ships",
+                    templateUrl: 'app/views/medium-ship-eosolo/mediumShipEoSoLo.html',
+                    controller: 'mediumShipEoSoLoController as vm',
+                    title: 'EO/SO/LO Medium Ships'
+                }
+            },
+            {
                 state: "co-large-ship-waiting-list",
                 config: {
                     url: "/co-large-ship-waiting-list",
                     templateUrl: 'app/views/large-ship-co-waiting-list/largeShipCoWaitingList.html',
                     controller: 'largeShipCoWaitingListController as vm',
                     title: 'CO Large Ship Waiting List'
+                }
+            },
+            {
+                state: "eosolo-large-ship-waiting-list",
+                config: {
+                    url: "/eosolo-large-ship-waiting-list",
+                    templateUrl: 'app/views/large-ship-eosolo-waiting-list/largeShipEosoloWaitingList.html',
+                    controller: 'largeShipEosoloWaitingListController as vm',
+                    title: 'Eosolo Large Ship Waiting List'
+                }
+            },
+            {
+                state: "seodlo-large-ship-waiting-list",
+                config: {
+                    url: "/seodlo-large-ship-waiting-list",
+                    templateUrl: 'app/views/large-ship-seodlo-waiting-list/largeShipSeodloWaitingList.html',
+                    controller: 'largeShipSeodloWaitingListController as vm',
+                    title: 'Seodlo Large Ship Waiting List'
+                }
+            },
+            {
+                state: "eosolo-medium-ship-waiting-list",
+                config: {
+                    url: "/eosolo-medium-ship-waiting-list",
+                    templateUrl: 'app/views/medium-ship-eosolo-waiting-list/mediumShipEosoloWaitingList.html',
+                    controller: 'mediumShipEosoloWaitingListController as vm',
+                    title: 'Eosolo Medium Ship Waiting List'
                 }
             },
             {

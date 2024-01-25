@@ -1,11 +1,11 @@
 ﻿(function () {
 
     'use strict';
-    var controllerId = 'coFfRecomsController';
-    angular.module('app').controller(controllerId, coFfRecomsController);
-    coFfRecomsController.$inject = ['$state', '$stateParams', '$window', 'coFfRecomService', 'notificationService', '$location'];
+    var controllerId = 'eosoloFfRecomsController';
+    angular.module('app').controller(controllerId, eosoloFfRecomsController);
+    eosoloFfRecomsController.$inject = ['$state', '$stateParams', '$window', 'coFfRecomService', 'notificationService', '$location'];
 
-    function coFfRecomsController($state, $stateParams, $window, coFfRecomService, notificationService, location) {
+    function eosoloFfRecomsController($state, $stateParams, $window, coFfRecomService, notificationService, location) {
 
         /* jshint validthis:true */
         var vm = this;
@@ -34,7 +34,7 @@
         }
         init();
         function init() {
-            coFfRecomService.getCoFfRecoms(1).then(function (data) {
+            coFfRecomService.getCoFfRecoms(2).then(function (data) {
                 vm.coFfRecoms = data.result;
             },
                 function (errorMessage) {
@@ -45,7 +45,7 @@
         function save() {
             if (vm.coFfRecom.employee.employeeId > 0) {
                 vm.coFfRecom.employeeId = vm.coFfRecom.employee.employeeId;
-                vm.coFfRecom.recomStatus = 1;
+                vm.coFfRecom.recomStatus = 2;
             } else {
                 notificationService.displayError("Please Search Valid Officer by PNo!");
             }

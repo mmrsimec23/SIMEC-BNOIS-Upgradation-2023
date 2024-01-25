@@ -1,0 +1,55 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">Proposed EO/SO/LO Officer List</h2>
+                    <button ng-show="vm.permission.add" class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.addEmployeeProposedEoSoLo()"><span class="glyphicon glyphicon-user"></span> Add</button>
+                    <div ng-include="'app/templates/search.html'" class="search-wrapper"></div>
+                </div>
+                <div class="table-wrapper table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Officer PNo</th>
+                                <th>Officer Name</th>
+                                <th>Ship Name </th>
+                                <th>Ship Type </th>
+                                <th>Appt </th>
+                                <th style="vertical-align: middle; width: 115px; ">Proposed Date</th>
+
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ProposedEoSoLo in vm.employeeProposedEoSoLos">
+                                <td>{{$index+1}}</td>
+                                <td>{{ProposedEoSoLo.employee.pNo}}</td>
+                                <td>{{ProposedEoSoLo.employee.fullNameEng}}</td>
+                                <td>{{ProposedEoSoLo.office.shortName}}</td>
+                                <td>{{ProposedEoSoLo.shipType==1 ? 'Small' : ProposedEoSoLo.shipType==2 ? 'Medium' : ProposedEoSoLo.shipType==3 ? 'Large' : ''}}</td>
+                                <td>{{ProposedEoSoLo.appointment==3 ? 'EO' : ProposedEoSoLo.appointment==4 ? 'SO' :ProposedEoSoLo.appointment==5 ? 'LO' :ProposedEoSoLo.appointment==6 ? 'SEO' :ProposedEoSoLo.appointment==7 ? 'DLO' : ''}}</td>
+                                <td style="width: 100px;">{{ProposedEoSoLo.proposedDate | date: "dd-MMM-yyyy" }}</td>
+
+                                <td class="text-right">
+                                    <a ng-show="vm.permission.update" class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.updateEmployeeProposedEoSoLo(ProposedEoSoLo)"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span></a>
+                                    <a ng-show="vm.permission.delete" class="btn custom-btn btn-delete btn-danger btn-xs" style="cursor:pointer" ng-confirmation-click="vm.deleteEmployeeProposedEoSoLo(ProposedEoSoLo)"
+                                       ng-confirmation-message="Do you want to delete Proposed CO/XO Record?"
+                                       ng-confirmation-title="Delete Employee Proposed CO/XO Record?"
+                                       ng-confirmation-yes-text="Yes"
+                                       ng-confirmation-cancel-text="No"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete employeeServiceExam Result"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagenation-wrapper" ng-if="vm.employeeProposedEoSoLos.length > 0">
+                        <ul uib-pagination items-per-page="vm.pageSize" total-items="vm.total" ng-change="vm.pageChanged()" ng-model="vm.pageNumber" max-size="5" class="pagination" boundary-link-numbers="true"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

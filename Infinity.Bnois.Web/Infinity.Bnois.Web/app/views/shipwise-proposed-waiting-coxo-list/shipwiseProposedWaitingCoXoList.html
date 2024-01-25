@@ -4,7 +4,7 @@
 			<button class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
 
 			<div class="panel-body pdfReportFormCover" id="print">
-				<h3 class="reportHeader">{{vm.appointment==1 ? 'CO' : vm.appointment==2 ? 'XO' : 'CO/XO'}} PROPOSED/WAITING LIST ({{vm.shipName}})</h3>
+				<h3 class="reportHeader">PROPOSED {{vm.appointment==1 ? 'CO' : vm.appointment==2 ? 'XO' :  vm.appointment==3 ? 'EO' :  vm.appointment==4 ? 'SO' :  vm.appointment==5 ? 'LO' :  vm.appointment==6 ? 'SEO' :  vm.appointment==7 ? 'DLO' : ''}}  LIST ({{vm.shipName}})</h3>
 				<hr />
 
 				<div ng-if="vm.largeShipCoXos.length>0" class="table-wrapper table-responsive reportCover">

@@ -19,6 +19,7 @@
         vm.downloadReport = downloadReport;
         vm.downloadPromotionBroadSheetReport = downloadPromotionBroadSheetReport;
         vm.downloadSASBBoardSheetReport = downloadSASBBoardSheetReport;
+        vm.downloadSASBBoardSheetSubmarineReport = downloadSASBBoardSheetSubmarineReport;
         vm.downloadPersonalReport = downloadPersonalReport;
         vm.calculateTrace = calculateTrace;
         vm.pageChanged = pageChanged;
@@ -115,6 +116,11 @@
 
         function downloadSASBBoardSheetReport(promotionBoard) {
             var url = reportService.downloadSASBBoardSheetReportUrl(promotionBoard.promotionBoardId, vm.reportType);
+            downloadService.downloadFile(url);
+        }
+
+        function downloadSASBBoardSheetSubmarineReport(promotionBoard, hsasbType) {
+            var url = reportService.downloadSASBBoardSheetSubmarineReportUrl(promotionBoard.promotionBoardId, vm.reportType, hsasbType);
             downloadService.downloadFile(url);
         }
         

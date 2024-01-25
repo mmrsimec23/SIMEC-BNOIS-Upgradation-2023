@@ -1,0 +1,54 @@
+﻿<div class="container-fluid">
+	<div class="row">
+		<div class="panel">
+			<button class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
+
+			<div class="panel-body pdfReportFormCover" id="print">
+				<h3 class="reportHeader">PRESENT EO/SO/LO LIST (MEDIUM SHIP)</h3>
+				<hr />
+
+				<div ng-if="vm.mediumShipEoSoLos.length>0" class="table-wrapper table-responsive reportCover">
+					<table class="table table-bordered pdfReportTable" border="1">
+						<thead class="reportThead">
+							<tr class="tableHeading reportTR">
+
+
+								<th style="vertical-align: middle; width: 200px;"> Ships</th>
+								<th style="vertical-align: middle; width: 55px;">Appt</th>
+								<th style="vertical-align: middle; width: 50px; "> P No</th>
+								<th style="vertical-align: middle; width: 350px;">Rank & Name</th>
+								<th style="vertical-align: middle; width: 80px;">Batch</th>
+								<th style="vertical-align: middle; width: 85px;">Since</th>
+								<th style="text-align: center; width: 95px;">Duration</th>
+								<th style="vertical-align: middle; width: 100px;">Rotation Due</th>
+								<!--<th style="vertical-align: middle; width: 95px;">FF recom</th>-->
+								<th style="vertical-align: middle; width: 70px; ">Total Sea Svc</th>
+								<th style="vertical-align: middle; width: 250px;">Proposed</th>
+
+							</tr>
+						</thead>
+						<tbody class="reportBody" style="border-bottom: 1px solid;">
+							<tr ng-repeat="mediumShipEoSoLo in vm.mediumShipEoSoLos" class="reportTR">
+								<!--<td class="reportTD">{{mediumShipEoSoLo.shortName}}</td>-->
+								<td class="reportTD" style="{{ mediumShipEoSoLo.shipName !== vm.mediumShipEoSoLos[$index -1].shipName ? 'border-bottom:none !important;' : 'border-top:none !important;border-bottom:none !important;' }}"> {{ mediumShipEoSoLo.shipName !== vm.mediumShipEoSoLos[$index -1].shipName ? mediumShipEoSoLo.shipName : '' }} </td>
+								<td class="reportTD">{{mediumShipEoSoLo.appt}}</td>
+								<td class="reportTD">{{mediumShipEoSoLo.pNo}}</td>
+								<td class="reportTD"><a href="" ng-click="vm.officeCurrentStatus(mediumShipEoSoLo.pNo)"> <strong>{{mediumShipEoSoLo.fullNameEng}}</strong></a></td>
+								<td class="reportTD">{{mediumShipEoSoLo.batch}}</td>
+								<td class="reportTD">{{mediumShipEoSoLo.since | date:"dd-MMM-yyyy"}}</td>
+								<td class="reportTD">{{mediumShipEoSoLo.duration}}</td>
+								<!--<td class="reportTD {{mediumShipEoSoLo.officeHead == true ? mediumShipEoSoLo.coRotationDue == 'Completed' ? 'Completed' : '' : mediumShipEoSoLo.headofDpt == true ? mediumShipEoSoLo.xoRotationDue == 'Completed' ? 'Completed' : '' : '' }}">{{mediumShipEoSoLo.officeHead == true ? mediumShipEoSoLo.coRotationDue : mediumShipEoSoLo.headofDpt == true ? mediumShipEoSoLo.xoRotationDue : ''}}</td>-->
+								<td class="reportTD {{mediumShipEoSoLo.rotationDue == 'Completed' ? 'Completed' : ''}}"> {{mediumShipEoSoLo.rotationDue}}</td>
+								<!--<td class="reportTD Completed">{{mediumShipEoSoLo.recomStatus}}</td>-->
+							<td class="reportTD">{{mediumShipEoSoLo.seaTotalDuration}}</td>
+								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{mediumShipEoSoLo.officeId}}/{{mediumShipEoSoLo.proposedAppt}}" style="text-decoration: none;"><strong>{{mediumShipEoSoLo.proposed}}</strong></a></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

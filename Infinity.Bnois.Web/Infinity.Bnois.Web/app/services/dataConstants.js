@@ -191,6 +191,7 @@
         BNOIS_LOG_INFO_URL: baseAPIUrl + 'api/bnois/bnois-log-info/',
         BNOIS_COXO_SERVICE_URL: baseAPIUrl + 'api/bnois/employee-coxo-service/',
         ROASTER_LIST_URL: baseAPIUrl + 'api/bnois/roaster-list/',
+        ROASTER_LIST_EOSOLO_URL: baseAPIUrl + 'api/bnois/roaster-list-eosolo/',
         TOE_AUTHORIZED_URL: baseAPIUrl + 'api/bnois/toe-authorized/',
         OODENTRY_URL: baseAPIUrl + 'api/bnois/overview-officers-deployment-entry/',
         TOEOSENTRY_URL: baseAPIUrl + 'api/bnois/toe-officer-state-entry/',

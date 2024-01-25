@@ -15,6 +15,7 @@
             downloadPromotionBroadSheetReportUrl: downloadPromotionBroadSheetReportUrl,
             downloadPersonalReport: downloadPersonalReport,
             downloadSASBBoardSheetReportUrl: downloadSASBBoardSheetReportUrl,
+            downloadSASBBoardSheetSubmarineReportUrl: downloadSASBBoardSheetSubmarineReportUrl,
             downloadSearchResult: downloadSearchResult,
             downloadGraphicalOprListReport: downloadGraphicalOprListReport,
             downloadGraphicalOprYearlyReport: downloadGraphicalOprYearlyReport,
@@ -47,6 +48,11 @@
 
         function downloadSASBBoardSheetReportUrl(promotionBoardId, reportType) {
             return dataConstants.REPORT_URL + 'download-sasb-for-promotion?promotionBoardId=' + promotionBoardId + '&type=' + reportType;
+        }
+        
+
+        function downloadSASBBoardSheetSubmarineReportUrl(promotionBoardId, reportType, hsasbType) {
+            return dataConstants.REPORT_URL + 'download-sasb-submarine-for-promotion?promotionBoardId=' + promotionBoardId + '&type=' + reportType + '&hsasbType=' + hsasbType;
         }
 
         function downloadPromotionBoardTraceReport(promotionBoardId, reportType) {

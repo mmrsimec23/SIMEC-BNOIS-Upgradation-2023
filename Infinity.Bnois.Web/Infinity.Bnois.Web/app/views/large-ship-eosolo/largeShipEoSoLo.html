@@ -1,0 +1,59 @@
+﻿
+<div class="container-fluid">
+	<div class="row">
+		<div class="panel">
+			<button class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
+
+			<div class="panel-body" id="print">
+
+				<h3 class="reportHeader">PRESENT EO/SO/LO/SEO/DLO LIST (LARGE SHIP)</h3>
+				<hr />
+
+				<div ng-if="vm.largeShipEoSoLos.length>0" class="table-wrapper table-responsive reportCover">
+					<table class="table table-bordered pdfReportTable" border="1">
+						<thead class="reportThead">
+							<tr class="tableHeading reportTR">
+
+
+								<th style="vertical-align: middle; width: 200px;"> Ships</th>
+								<th style="vertical-align: middle; width: 55px;">Appt</th>
+								<th style="vertical-align: middle; width: 50px; "> P No</th>
+								<th style="vertical-align: middle; width: 350px;">Rank & Name</th>
+								<th style="vertical-align: middle; width: 80px;">Batch</th>
+								<th style="vertical-align: middle; width: 85px;">Since</th>
+								<th style="text-align: center; width: 95px;">Duration</th>
+								<th style="vertical-align: middle; width: 100px;">Rotation Due</th>
+								<th style="vertical-align: middle; width: 95px; ">Total Sea Svc</th>
+								<th style="vertical-align: middle; width: 95px;">FF recom</th>
+								<th style="vertical-align: middle; width: 250px;">Proposed</th>
+
+							</tr>
+						</thead>
+						<tbody class="reportBody" style="border-bottom: 1px solid;">
+							<tr ng-repeat="largeShipEoSoLo in vm.largeShipEoSoLos" class="reportTR">
+								<!--<td class="reportTD">{{largeShipEoSoLo.shortName}}</td>-->
+								<td class="reportTD" style="{{ largeShipEoSoLo.shipName !== vm.largeShipEoSoLos[$index -1].shipName ? 'border-bottom:none !important;' : 'border-top:none !important;border-bottom:none !important;' }}"> {{ largeShipEoSoLo.shipName !== vm.largeShipEoSoLos[$index -1].shipName ? largeShipEoSoLo.shipName : '' }} </td>
+								<td class="reportTD">{{largeShipEoSoLo.appt}}</td>
+								<td class="reportTD">{{largeShipEoSoLo.pNo}}</td>
+								<td class="reportTD"><a href="" ng-click="vm.officeCurrentStatus(largeShipEoSoLo.pNo)"> <strong>{{largeShipEoSoLo.fullNameEng}}</strong></a></td>
+								<td class="reportTD">{{largeShipEoSoLo.batch}}</td>
+								<td class="reportTD">{{largeShipEoSoLo.since | date:"dd-MMM-yyyy"}}</td>
+								<td class="reportTD {{largeShipEoSoLo.durationCssSignal}}">{{largeShipEoSoLo.duration}}</td>
+								<!--<td class="reportTD {{largeShipEoSoLo.officeHead == true ? largeShipEoSoLo.coRotationDue == 'Completed' ? 'Completed' : '' : largeShipEoSoLo.headofDpt == true ? largeShipEoSoLo.xoRotationDue == 'Completed' ? 'Completed' : '' : '' }}">{{largeShipEoSoLo.officeHead == true ? largeShipEoSoLo.coRotationDue : largeShipEoSoLo.headofDpt == true ? largeShipEoSoLo.xoRotationDue : ''}}</td>-->
+								<td class="reportTD {{largeShipEoSoLo.rotationDue == 'Completed' ? 'Completed' : ''}}"> {{largeShipEoSoLo.rotationDue}}</td>
+								<td class="reportTD {{largeShipEoSoLo.seaTotalDurationCssSignal}}">{{largeShipEoSoLo.seaTotalDuration}}</td>
+								<td class="reportTD Completed">{{largeShipEoSoLo.recomStatus}}</td>
+								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{largeShipEoSoLo.officeId}}/{{largeShipEoSoLo.proposedAppt}}" style="text-decoration: none;"><strong>{{largeShipEoSoLo.proposed}}</strong></a></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+
+				<!--<h5 ng-if="vm.submarineServices.length<=0" class="text-center" style="margin-top: 15px;">No data found. </h5>-->
+
+			</div>
+		</div>
+	</div>
+</div>

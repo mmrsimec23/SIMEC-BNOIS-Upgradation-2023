@@ -2,16 +2,16 @@
 
     'use strict';
 
-    var controllerId = 'employeeProposedCoxoAddController';
+    var controllerId = 'employeeProposedEoSoLoAddController';
 
-    angular.module('app').controller(controllerId, employeeProposedCoxoAddController);
-    employeeProposedCoxoAddController.$inject = ['$stateParams', 'employeeProposedCoxoService', 'serviceExamService', 'notificationService', '$state'];
+    angular.module('app').controller(controllerId, employeeProposedEoSoLoAddController);
+    employeeProposedEoSoLoAddController.$inject = ['$stateParams', 'employeeProposedCoxoService', 'serviceExamService', 'notificationService', '$state'];
 
-    function employeeProposedCoxoAddController($stateParams, employeeProposedCoxoService, serviceExamService, notificationService, $state) {
+    function employeeProposedEoSoLoAddController($stateParams, employeeProposedCoxoService, serviceExamService, notificationService, $state) {
         var vm = this;
         vm.employeeProposedCoxoId = 0;
         vm.title = 'ADD MODE';
-        vm.employeeProposedCoxo = {};
+        vm.employeeProposedEoSoLo = {};
         vm.coxoTypes = [];
         vm.coxoShipTypes = [];
         vm.coxoAppoinments = [];
@@ -20,7 +20,7 @@
         vm.saveButtonText = 'Save';
         vm.save = save;
         vm.close = close;
-        vm.employeeProposedCoxoForm = {};
+        vm.employeeProposedEoSoLoForm = {};
 
         vm.offices = [];
         //vm.localSearch = localSearch;
@@ -36,16 +36,16 @@
 
         Init();
         function Init() {
-            employeeProposedCoxoService.getemployeeProposedCoxo(vm.employeeProposedCoxoId,1).then(function (data) {
-                vm.employeeProposedCoxo = data.result.employeeCoxoService;
+            employeeProposedCoxoService.getemployeeProposedCoxo(vm.employeeProposedCoxoId, 2).then(function (data) {
+                vm.employeeProposedEoSoLo = data.result.employeeCoxoService;
                 vm.coxoTypes = data.result.coxoTypes;
                 vm.coxoShipTypes = data.result.coxoShipTypes;
                 vm.coxoAppoinments = data.result.coxoAppoinments;
                 vm.offices = data.result.offices;
                 if (vm.employeeProposedCoxoId !== 0 && vm.employeeProposedCoxoId !== '') {
 
-                    if (vm.employeeProposedCoxo.proposedDate != null) {
-                        vm.employeeProposedCoxo.proposedDate = new Date(data.result.employeeCoxoService.proposedDate);
+                    if (vm.employeeProposedEoSoLo.proposedDate != null) {
+                        vm.employeeProposedEoSoLo.proposedDate = new Date(data.result.employeeCoxoService.proposedDate);
                     }
                     getOfficeByShiptype(data.result.employeeCoxoService.shipType);
                 }
@@ -57,8 +57,8 @@
         };
 
         function save() {
-            if (vm.employeeProposedCoxo.employee.employeeId > 0) {
-                vm.employeeProposedCoxo.employeeId = vm.employeeProposedCoxo.employee.employeeId;
+            if (vm.employeeProposedEoSoLo.employee.employeeId > 0) {
+                vm.employeeProposedEoSoLo.employeeId = vm.employeeProposedEoSoLo.employee.employeeId;
             } else {
                 notificationService.displayError("Please Search Valid Officer by Pno!!");
             }
@@ -71,8 +71,8 @@
         }
 
         function insertemployeeProposedCoxo() {
-            vm.employeeProposedCoxo.type = 1;
-            employeeProposedCoxoService.saveemployeeProposedCoxo(vm.employeeProposedCoxo).then(function (data) {
+            vm.employeeProposedEoSoLo.type = 2;
+            employeeProposedCoxoService.saveemployeeProposedCoxo(vm.employeeProposedEoSoLo).then(function (data) {
                 close();
             },
                 function (errorMessage) {
@@ -80,7 +80,7 @@
                 });
         }
         function updateemployeeProposedCoxo() {
-            employeeProposedCoxoService.updateemployeeProposedCoxo(vm.employeeProposedCoxoId, vm.employeeProposedCoxo).then(function (data) {
+            employeeProposedCoxoService.updateemployeeProposedCoxo(vm.employeeProposedCoxoId, vm.employeeProposedEoSoLo).then(function (data) {
                 close();
             },
                 function (errorMessage) {
@@ -89,7 +89,7 @@
         }
 
         function close() {
-            $state.go('employee-proposed-coxos');
+            $state.go('employee-proposed-eosolos');
         }
         function getOfficeByShiptype(type) {
             employeeProposedCoxoService.GetEmployeeCoxoServiceOfficeList(type).then(function (data) {
@@ -110,7 +110,7 @@
 
 
         //function selected(object) {
-        //    vm.employeeProposedCoxo.officeId = object.originalObject.value;
+        //    vm.employeeProposedEoSoLo.officeId = object.originalObject.value;
 
         //}
 

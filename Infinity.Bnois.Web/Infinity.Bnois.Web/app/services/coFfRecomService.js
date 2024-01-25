@@ -10,8 +10,8 @@
         };
 
         return service;
-        function getCoFfRecoms() {
-            var url = dataConstants.CO_FF_RECOM_URL + 'get-co-ff-recoms/';
+        function getCoFfRecoms(type) {
+            var url = dataConstants.CO_FF_RECOM_URL + 'get-co-ff-recoms?type=' + type;
             return apiHttpService.GET(url);
         }
         

@@ -18,8 +18,8 @@
             return apiHttpService.GET(url);
         }
 
-        function getemployeeProposedCoxo(employeeProposedCoxoId) {
-            var url = dataConstants.BNOIS_COXO_SERVICE_URL + 'get-employee-coxo-service?id=' + employeeProposedCoxoId;
+        function getemployeeProposedCoxo(employeeProposedCoxoId, type) {
+            var url = dataConstants.BNOIS_COXO_SERVICE_URL + 'get-employee-coxo-service?id=' + employeeProposedCoxoId + '&type=' + type;
             return apiHttpService.GET(url);
         }
 
