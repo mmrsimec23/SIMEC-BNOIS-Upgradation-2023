@@ -4380,6 +4380,18 @@
                     title: 'OPR Grading'
                 }
             },
+            
+
+            //-------------Trace Mark-------
+            {
+                state: 'current-status-tab.trace-mark',
+                config: {
+                    url: '/trace-mark',
+                    templateUrl: 'app/views/trace-mark/traceMark.html',
+                    controller: 'traceMarkController as vm',
+                    title: 'trace mark'
+                }
+            },
 
             //-------------Promotion History-------
             {
@@ -5882,6 +5894,35 @@
                     templateUrl: 'app/views/employee-car-loan/employeeCarLoanAdd.html',
                     controller: 'employeeCarLoanAdd as vm',
                     title: 'Employee Car Loan'
+                }
+            },
+            
+            //-------------Employee Trace-------
+            {
+                state: 'employee-trace-list',
+                config: {
+                    url: '/employee-trace-list?ps&pn&q',
+                    templateUrl: 'app/views/employee-trace/employeeTraceList.html',
+                    controller: 'employeeTraceListController as vm',
+                    title: 'Employee Trace List'
+                }
+            },
+            {
+                state: 'employee-trace-create',
+                config: {
+                    url: '/employee-trace-create',
+                    templateUrl: 'app/views/employee-trace/employeeTraceAdd.html',
+                    controller: 'employeeTraceAdd as vm',
+                    title: 'Employee Trace'
+                }
+            },
+            {
+                state: "employee-trace-modify",
+                config: {
+                    url: "employee-trace-modify/:id",
+                    templateUrl: 'app/views/employee-trace/employeeTraceAdd.html',
+                    controller: 'employeeTraceAdd as vm',
+                    title: 'Employee Trace'
                 }
             },
 

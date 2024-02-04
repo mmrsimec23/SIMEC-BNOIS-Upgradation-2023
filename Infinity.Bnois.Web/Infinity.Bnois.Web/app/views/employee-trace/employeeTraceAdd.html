@@ -1,0 +1,66 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <form name="vm.employeeTraceForm">
+                    <div class="col-sm-12 page-header">
+                        <h2 class="warning page-header-item">Officer TRACE<span class="pull-right text-success">{{vm.title}}</span></h2>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="pNo" class="custom-label"> PNo</label>
+                                <input type="text" id="pNo" ng-keypress="$event.keyCode ==13 && vm.getEmployeeInfo()" class="form-control custom-form-control" ng-model="vm.employeeTrace.employee.pNo" name="pNo" required />
+                                <p ng-show="vm.employeeTraceForm.pNo.$error.required" class="help-block errormsg">PNo is required</p>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="fullNameEng" class="custom-label">Name</label>
+                                <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameEng" class="form-control custom-form-control" ng-model="vm.employeeTrace.employee.fullNameEng" name="fullNameEng" maxlength="250" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="fullNameBan" class="custom-label">Rank</label>
+                                <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employeeTrace.employee.rank.fullName" name="fullNameBan" maxlength="250" required />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="fullNameBan" class="custom-label">Batch</label>
+                                <input type="text" readonly="readonly" style="background-color:skyblue" id="fullNameBan" class="form-control custom-form-control" ng-model="vm.employeeTrace.employee.batch.name" name="fullNameBan" maxlength="250" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12"  ng-if="vm.employeeTrace.employee.employeeId>0">
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="traceMark" class="custom-label"> TRACE Mark</label>
+                                <input type="text" id="traceMark" class="form-control custom-form-control" ng-model="vm.employeeTrace.traceMark" name="traceMark" />
+                                <!--<p ng-show="vm.employeeTraceForm.aCompanyBy.$error.maxlength" class="help-block errormsg">Maximum character 500</p>-->
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="remarks" class="custom-label"> Remarks</label>
+                                <textarea type="text" id="remarks" class="form-control custom-form-control" ng-model="vm.employeeTrace.remarks" name="remarks" />
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.employeeTraceForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

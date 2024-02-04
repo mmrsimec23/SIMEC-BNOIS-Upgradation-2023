@@ -96,6 +96,7 @@
     <Content Include="app\services\advanceSearchService.js" />
     <Content Include="app\services\careerForecastSettingService.js" />
     <Content Include="app\services\bnoisLogInfoService.js" />
+    <Content Include="app\services\employeeTraceService.js" />
     <Content Include="app\services\employeeUnmDefermentService.js" />
     <Content Include="app\services\coFfRecomService.js" />
     <Content Include="app\services\minuteCandidateService.js" />
@@ -341,6 +342,10 @@
     <Content Include="app\views\bn-officer-states\bnOfficerStatesListController.js" />
     <Content Include="app\views\bn-officer-states\bnOfficerStates.html" />
     <Content Include="app\views\bn-officer-states\bnOfficerStatesController.js" />
+    <Content Include="app\views\employee-trace\employeeTraceAdd.html" />
+    <Content Include="app\views\employee-trace\employeeTraceAddController.js" />
+    <Content Include="app\views\employee-trace\employeeTraceList.html" />
+    <Content Include="app\views\employee-trace\employeeTraceListController.js" />
     <Content Include="app\views\eosolo-ff-recom\eosoloFfRecoms.html" />
     <Content Include="app\views\eosolo-ff-recom\eosoloFfRecomsController.js" />
     <Content Include="app\views\employee-proposed-eosolo\employeeProposedEoSoLoAdd.html" />
@@ -371,6 +376,8 @@
     <Content Include="app\views\co-ff-recom\coFfRecomsController.js" />
     <Content Include="app\views\minute-candidate\minuteCandidates.html" />
     <Content Include="app\views\minute-candidate\minuteCandidatesController.js" />
+    <Content Include="app\views\trace-mark\traceMark.html" />
+    <Content Include="app\views\trace-mark\traceMarkController.js" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryAdd.html" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryAddController.js" />
     <Content Include="app\views\toe-officer-state-entry\toeOfficerStateEntryList.html" />

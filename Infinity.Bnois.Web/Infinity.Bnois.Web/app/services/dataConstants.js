@@ -180,7 +180,7 @@
         SPECIAL_APPOINTMENT_URL: baseAPIUrl + 'api/bnois/special-apt-types/',
         EMPLOYEE_HAJJ_DETAILS_URL: baseAPIUrl + 'api/bnois/employee-hajj-details/',
         EVIDENCE_URL: baseAPIUrl + 'api/bnois/evidences/',
-        EMPLOYEE_CAR_LOAN_URL: baseAPIUrl + 'api/bnois/employee-car-loan/',
+        EMPLOYEE_TRACE_URL: baseAPIUrl + 'api/bnois/employee-trace/',
         CAR_LOAN_FISCAL_YEAR_URL: baseAPIUrl + 'api/bnois/car-loan-fiscal-year/',
         MSC_EDUCATION_TYPE_URL: baseAPIUrl + 'api/bnois/msc-education-type/',
         MSC_INSTITUTE_URL: baseAPIUrl + 'api/bnois/msc-institute/',

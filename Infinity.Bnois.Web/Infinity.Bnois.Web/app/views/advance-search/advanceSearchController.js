@@ -276,7 +276,7 @@
             { 'value': 3, 'text': 'Commission Type' }, { 'value': 4, 'text': 'Branch' }, { 'value': 5, 'text': 'Religion' }
         ];
 
-        vm.remarksPersuationNsList = [ { 'value': 1, 'text': 'Remarks' }, { 'value': 2, 'text': 'Persuation' }, { 'value': 3, 'text': 'NS Note' } ];
+        vm.remarksPersuationNsList = [ { 'value': 1, 'text': 'Remarks' }, { 'value': 2, 'text': 'NS/Persuations Note' }];
 
         Init();
         function Init() {

@@ -31,7 +31,7 @@
                 vm.typeName = 'Remark';
             }
             else if (vm.type == 2) {
-                vm.typeName = 'Persuasion';
+                vm.typeName = 'NS/Persuasions Note';
             }
             else if (vm.type == 3) {
                 vm.typeName = 'NS Note';

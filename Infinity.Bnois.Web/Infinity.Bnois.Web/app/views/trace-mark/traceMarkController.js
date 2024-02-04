@@ -4,16 +4,15 @@
 
     'use strict';
 
-    var controllerId = 'oprGradingController';
+    var controllerId = 'traceMarkController';
 
-    angular.module('app').controller(controllerId, oprGradingController);
-    oprGradingController.$inject = ['$stateParams','employeeService', 'notificationService','currentStatusService', '$state'];
+    angular.module('app').controller(controllerId, traceMarkController);
+    traceMarkController.$inject = ['$stateParams','employeeService', 'notificationService','currentStatusService', '$state'];
 
-    function oprGradingController($stateParams, employeeService, notificationService, currentStatusService, $state) {
+    function traceMarkController($stateParams, employeeService, notificationService, currentStatusService, $state) {
         var vm = this;
         vm.pNo = 0;
-        vm.oprGradings = [];
-        vm.traceMarkInfo = [];
+        vm.traceMarks = [];
         vm.printSection = printSection;
 
         if ($stateParams.pno !== undefined && $stateParams.pno !== null) {
@@ -30,22 +29,10 @@
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
-
-
-
-            currentStatusService.getOprGrading(vm.pNo).then(function (data) {
-                vm.oprGradings = data.result;
-
-                },
-                function (errorMessage) {
-                    notificationService.displayError(errorMessage.message);
-                });
-
-
-
+                
             currentStatusService.getTraceMark(vm.pNo).then(function (data) {
-                vm.traceMarkInfo = data.result;
-
+                vm.traceMarks = data.result;
+                console.log(vm.traceMarks)
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

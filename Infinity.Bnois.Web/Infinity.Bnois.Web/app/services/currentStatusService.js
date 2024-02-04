@@ -63,7 +63,8 @@
             getUnmDeferment : getUnmDeferment,
             getZoneCourseMissionServices: getZoneCourseMissionServices,
             getMscEducationQualification: getMscEducationQualification,
-            getBatchPosition: getBatchPosition
+            getBatchPosition: getBatchPosition,
+            getTraceMark: getTraceMark
            
         };
 
@@ -120,6 +121,11 @@
 
         function getBatchPosition(pNo) {
             var url = dataConstants.CURRENT_STATUS_URL + 'get-batch-position?pNo=' + pNo;
+            return apiHttpService.GET(url);
+        }
+
+        function getTraceMark(pNo) {
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-trace-mark?pNo=' + pNo;
             return apiHttpService.GET(url);
         }
 
