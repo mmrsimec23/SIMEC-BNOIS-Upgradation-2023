@@ -153,5 +153,6 @@ namespace Infinity.Bnois.Api.Right
         public const int CO_FF_RECOM = 1141;
         public const int MINUITE = 1142;
         public const int ROASTER_LIST_EOSOLO = 1143;
+        public const int EMPLOYEE_TRACE = 1144;
     }
 }

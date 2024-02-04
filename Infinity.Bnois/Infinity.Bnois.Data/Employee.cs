@@ -78,6 +78,7 @@ namespace Infinity.Bnois.Data
             this.DashBoardMinuite110 = new HashSet<DashBoardMinuite110>();
             this.DashBoardMinuite100 = new HashSet<DashBoardMinuite100>();
             this.Remark = new HashSet<Remark>();
+            this.DashBoardTrace990 = new HashSet<DashBoardTrace990>();
         }
     
         public int EmployeeId { get; set; }
@@ -241,5 +242,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<DashBoardMinuite100> DashBoardMinuite100 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Remark> Remark { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DashBoardTrace990> DashBoardTrace990 { get; set; }
     }
 }

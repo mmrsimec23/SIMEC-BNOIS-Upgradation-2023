@@ -670,6 +670,26 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="DashBoardTrace990">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="RankId" Type="int" Nullable="false" />
+          <Property Name="TraceMark" Type="float" />
+          <Property Name="RecomStatus" Type="int" />
+          <Property Name="RecomStatus2" Type="int" />
+          <Property Name="RecomStatus3" Type="int" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="1500" />
+          <Property Name="Remarks2" Type="nvarchar" MaxLength="1500" />
+          <Property Name="Remarks3" Type="nvarchar" MaxLength="1500" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="District">
           <Key>
             <PropertyRef Name="DistrictId" />
@@ -4089,6 +4109,30 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DashBoardTrace990_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="DashBoardTrace990" Type="Self.DashBoardTrace990" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="DashBoardTrace990">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardTrace990_Rank">
+          <End Role="Rank" Type="Self.Rank" Multiplicity="1" />
+          <End Role="DashBoardTrace990" Type="Self.DashBoardTrace990" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="DashBoardTrace990">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_District_dbo_Divission_DivissionId">
           <End Role="Division" Type="Self.Division" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -7243,6 +7287,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <EntitySet Name="DashBoardBranchByAdminAuthority700" EntityType="Self.DashBoardBranchByAdminAuthority700" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DashBoardMinuite100" EntityType="Self.DashBoardMinuite100" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DashBoardMinuite110" EntityType="Self.DashBoardMinuite110" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DashBoardTrace990" EntityType="Self.DashBoardTrace990" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
@@ -7668,6 +7713,14 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <AssociationSet Name="FK_DashBoardMinuite110_Employee" Association="Self.FK_DashBoardMinuite110_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="DashBoardMinuite110" EntitySet="DashBoardMinuite110" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardTrace990_Employee" Association="Self.FK_DashBoardTrace990_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DashBoardTrace990" EntitySet="DashBoardTrace990" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardTrace990_Rank" Association="Self.FK_DashBoardTrace990_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="DashBoardTrace990" EntitySet="DashBoardTrace990" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_District_dbo_Divission_DivissionId" Association="Self.FK_dbo_District_dbo_Divission_DivissionId">
             <End Role="Division" EntitySet="Division" />
@@ -10158,6 +10211,15 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Remark" EntitySet="Remark" />
           </AssociationSet>
+          <EntitySet Name="DashBoardTrace990" EntityType="BnoisdbModel.DashBoardTrace990" />
+          <AssociationSet Name="FK_DashBoardTrace990_Employee" Association="BnoisdbModel.FK_DashBoardTrace990_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DashBoardTrace990" EntitySet="DashBoardTrace990" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardTrace990_Rank" Association="BnoisdbModel.FK_DashBoardTrace990_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="DashBoardTrace990" EntitySet="DashBoardTrace990" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
           <Property Type="Int32" Name="Value" Nullable="false" />
@@ -12239,6 +12301,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="DashBoardBranchByAdminAuthority700" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Rank" FromRole="Rank" ToRole="DashBoardBranchByAdminAuthority700" />
           <NavigationProperty Name="DashBoardBranch975" Relationship="BnoisdbModel.FK_DashBoardBranch975_Rank" FromRole="Rank" ToRole="DashBoardBranch975" />
           <NavigationProperty Name="DashBoardBranch980" Relationship="BnoisdbModel.FK_DashBoardBranch980_Rank" FromRole="Rank" ToRole="DashBoardBranch980" />
+          <NavigationProperty Name="DashBoardTrace990" Relationship="BnoisdbModel.FK_DashBoardTrace990_Rank" FromRole="Rank" ToRole="DashBoardTrace990" />
           </EntityType>
         <EntityType Name="SubBranch">
           <Key>
@@ -15543,6 +15606,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="DashBoardMinuite110" Relationship="BnoisdbModel.FK_DashBoardMinuite110_Employee" FromRole="Employee" ToRole="DashBoardMinuite110" />
           <NavigationProperty Name="DashBoardMinuite100" Relationship="BnoisdbModel.FK_DashBoardMinuite100_Employee" FromRole="Employee" ToRole="DashBoardMinuite100" />
           <NavigationProperty Name="Remark" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Employee" ToRole="Remark" />
+          <NavigationProperty Name="DashBoardTrace990" Relationship="BnoisdbModel.FK_DashBoardTrace990_Employee" FromRole="Employee" ToRole="DashBoardTrace990" />
         </EntityType>
         <EntityType Name="ExecutionRemark">
           <Key>
@@ -17974,6 +18038,52 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Principal>
             <Dependent Role="Remark">
               <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DashBoardTrace990">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="RankId" Type="Int32" Nullable="false" />
+          <Property Name="TraceMark" Type="Double" />
+          <Property Name="RecomStatus" Type="Int32" />
+          <Property Name="RecomStatus2" Type="Int32" />
+          <Property Name="RecomStatus3" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks2" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks3" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_DashBoardTrace990_Employee" FromRole="DashBoardTrace990" ToRole="Employee" />
+          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_DashBoardTrace990_Rank" FromRole="DashBoardTrace990" ToRole="Rank" />
+        </EntityType>
+        <Association Name="FK_DashBoardTrace990_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.DashBoardTrace990" Role="DashBoardTrace990" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="DashBoardTrace990">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardTrace990_Rank">
+          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="1" />
+          <End Type="BnoisdbModel.DashBoardTrace990" Role="DashBoardTrace990" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="DashBoardTrace990">
+              <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -21617,6 +21727,27 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
                 <ScalarProperty Name="TransferId" ColumnName="TransferId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="RemarkId" ColumnName="RemarkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DashBoardTrace990">
+            <EntityTypeMapping TypeName="BnoisdbModel.DashBoardTrace990">
+              <MappingFragment StoreEntitySet="DashBoardTrace990">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks3" ColumnName="Remarks3" />
+                <ScalarProperty Name="Remarks2" ColumnName="Remarks2" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="RecomStatus3" ColumnName="RecomStatus3" />
+                <ScalarProperty Name="RecomStatus2" ColumnName="RecomStatus2" />
+                <ScalarProperty Name="RecomStatus" ColumnName="RecomStatus" />
+                <ScalarProperty Name="TraceMark" ColumnName="TraceMark" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -182,6 +182,7 @@ namespace Infinity.Bnois.Api
         public const string EmployeeHajjDetails = BnoisRoutePrefixBase + "employee-hajj-details";
         public const string Evidences = BnoisRoutePrefixBase + "evidences";
         public const string EmployeeCarLoan = BnoisRoutePrefixBase + "employee-car-loan";
+        public const string EmployeeTrace = BnoisRoutePrefixBase + "employee-trace";
         public const string CareerForecastSetting = BnoisRoutePrefixBase + "career-forecast-setting";
         public const string BnoisLogInfo = BnoisRoutePrefixBase + "bnois-log-info";
         public const string EmployeeCoXoService = BnoisRoutePrefixBase + "employee-coxo-service";

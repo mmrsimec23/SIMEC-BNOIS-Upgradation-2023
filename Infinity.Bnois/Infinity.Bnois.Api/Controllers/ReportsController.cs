@@ -51,7 +51,7 @@ namespace Infinity.Bnois.Api.Controllers
 
             httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                FileName = reportName + "." + extension
+                FileName = reportName + nominationId + "." + extension
             };
             httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
 
@@ -108,6 +108,7 @@ namespace Infinity.Bnois.Api.Controllers
             string extension = string.Empty;
             string mimeType = string.Empty;
             string reportName = "BroadSheetSASB";
+            PromotionBoardModel promotionBoard = await promotionBoardService.GetPromotionBoard(promotionBoardId);
             var parms = new List<ReportParameter> { new ReportParameter("PromotionBoardId", promotionBoardId.ToString()) };
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage
             {
@@ -117,7 +118,7 @@ namespace Infinity.Bnois.Api.Controllers
 
             httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                FileName = reportName + "." + extension
+                FileName = promotionBoard.BoardName + reportName + "." + extension
             };
             httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
 
@@ -132,6 +133,7 @@ namespace Infinity.Bnois.Api.Controllers
             string extension = string.Empty;
             string mimeType = string.Empty;
             string reportName = (hsasbType == 1 ? "BroadSheetSASBSubmarine" : hsasbType == 2 ? "BroadSheetHSASB" : "");
+            PromotionBoardModel promotionBoard = await promotionBoardService.GetPromotionBoard(promotionBoardId);
             var parms = new List<ReportParameter> { new ReportParameter("PromotionBoardId", promotionBoardId.ToString()) };
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage
             {
@@ -141,7 +143,7 @@ namespace Infinity.Bnois.Api.Controllers
 
             httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                FileName = reportName + "." + extension
+                FileName = promotionBoard.BoardName + reportName + "." + extension
             };
             httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
 
@@ -156,6 +158,7 @@ namespace Infinity.Bnois.Api.Controllers
             string extension = string.Empty;
             string mimeType = string.Empty;
             string reportName = "TraceCalulation";
+            PromotionBoardModel promotionBoard = await promotionBoardService.GetPromotionBoard(promotionBoardId);
             var parms = new List<ReportParameter> { new ReportParameter("PromotionBoardId", promotionBoardId.ToString()) };
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage
             {
@@ -165,7 +168,7 @@ namespace Infinity.Bnois.Api.Controllers
 
             httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                FileName = reportName + "." + extension
+                FileName = promotionBoard.BoardName + reportName + "." + extension
             };
             httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
 
@@ -181,6 +184,7 @@ namespace Infinity.Bnois.Api.Controllers
             string extension = string.Empty;
             string mimeType = string.Empty;
             string reportName = "TracePersoanlInfo";
+            PromotionBoardModel promotionBoard = await promotionBoardService.GetPromotionBoard(promotionBoardId);
             var parms = new List<ReportParameter> { new ReportParameter("PromotionBoardId", promotionBoardId.ToString()) };
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage
             {
@@ -190,7 +194,7 @@ namespace Infinity.Bnois.Api.Controllers
 
             httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                FileName = reportName + "." + extension
+                FileName = promotionBoard.BoardName+"-Trace-Information" + "." + extension
             };
             httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
 
@@ -240,7 +244,7 @@ namespace Infinity.Bnois.Api.Controllers
 
             httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                FileName = reportName + "." + extension
+                FileName = promotionBoard.BoardName + "." + extension
             };
             httpResponseMessage.Content.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
 

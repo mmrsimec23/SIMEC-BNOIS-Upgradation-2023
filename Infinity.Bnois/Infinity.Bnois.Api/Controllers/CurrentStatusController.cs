@@ -682,6 +682,16 @@ namespace Infinity.Bnois.Api.Controllers
         }
 
         [HttpGet]
+        [Route("get-trace-mark")]
+        public IHttpActionResult GetTraceMark(string pNo)
+        {
+            return Ok(new ResponseMessage<object>()
+            {
+                Result = currentStatusService.GetTraceMark(pNo)
+            });
+        }
+
+        [HttpGet]
         [Route("get-leave-info")]
         public async Task<IHttpActionResult> GetLeaveInfo(string pNo)
         {

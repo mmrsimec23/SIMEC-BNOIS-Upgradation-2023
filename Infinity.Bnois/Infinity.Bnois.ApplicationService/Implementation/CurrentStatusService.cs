@@ -575,6 +575,12 @@ select isnull(@GrandTotalDuration,'') as GrandTotalDuration", pNo));
 
             return dataTable.ToJson().FirstOrDefault();
         }
+        public object GetTraceMark(string pNo)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetTraceMark] '{0}' ", pNo));
+
+            return dataTable.ToJson().FirstOrDefault();
+        }
 
         public object GetLeaveInfo(string pNo)
 	    {

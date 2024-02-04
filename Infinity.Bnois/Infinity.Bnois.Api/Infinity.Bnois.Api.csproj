@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\EmployeeTraceController.cs" />
     <Compile Include="Controllers\EmployeeUnmDefermentController.cs" />
     <Compile Include="Controllers\OverviewOfficersDeploymentEntryController - Copy.cs" />
     <Compile Include="Controllers\CoFfRecomController.cs" />

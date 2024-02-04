@@ -63,6 +63,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
         Object GetLeaveInfo(string pNo);
         Object GetISSB(string pNo);
         Object GetBatchPosition(string pNo);
+        Object GetTraceMark(string pNo);
         List<Object> GetMissions(string pNo);
         List<Object> GetForeignProjects(string pNo);
         List<Object> GetHODServices(string pNo);

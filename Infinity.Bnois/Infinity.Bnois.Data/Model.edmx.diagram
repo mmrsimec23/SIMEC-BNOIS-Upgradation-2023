@@ -514,6 +514,9 @@
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100" />
         <EntityTypeShape EntityType="BnoisdbModel.Remark" Width="1.5" PointX="13" PointY="85.875" />
         <AssociationConnector Association="BnoisdbModel.FK_Remark_Employee" />
+        <EntityTypeShape EntityType="BnoisdbModel.DashBoardTrace990" Width="1.5" PointX="29" PointY="81" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardTrace990_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardTrace990_Rank" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

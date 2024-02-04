@@ -225,6 +225,7 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<DashBoardMinuite110> DashBoardMinuite110 { get; set; }
         public virtual DbSet<DashBoardMinuite100> DashBoardMinuite100 { get; set; }
         public virtual DbSet<Remark> Remark { get; set; }
+        public virtual DbSet<DashBoardTrace990> DashBoardTrace990 { get; set; }
     
         public virtual ObjectResult<GetLeaveInfo_Result> GetLeaveInfo(string employeeID, Nullable<int> idFrom, Nullable<int> idTo)
         {

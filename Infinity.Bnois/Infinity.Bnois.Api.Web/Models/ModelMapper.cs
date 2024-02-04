@@ -45,6 +45,7 @@ namespace Infinity.Bnois.Api.Web.Models
                 cfg.CreateMap<EyeVision, EyeVisionModel>();
                 cfg.CreateMap<BloodGroup, BloodGroupModel>();
                 cfg.CreateMap<EmployeeCarLoan, EmployeeCarLoanModel>();
+                cfg.CreateMap<DashBoardTrace990, EmployeeTraceModel>();
                 cfg.CreateMap<MedicalCategory, MedicalCategoryModel>();
                 cfg.CreateMap<PhysicalStructure, PhysicalStructureModel>();
 
@@ -578,6 +579,10 @@ namespace Infinity.Bnois.Api.Web.Models
                 cfg.CreateMap<EmployeeCarLoanModel, EmployeeCarLoan>()
                 .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
                 .ForMember(d => d.CarLoanFiscalYear, opt => opt.MapFrom(s => s.CarLoanFiscalYear))
+                .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
+
+                cfg.CreateMap<EmployeeTraceModel, DashBoardTrace990>()
+                .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
                 .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
 
 

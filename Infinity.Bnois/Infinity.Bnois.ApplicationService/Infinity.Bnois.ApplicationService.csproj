@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="Implementation\AchievementService.cs" />
     <Compile Include="Implementation\AddressService.cs" />
+    <Compile Include="Implementation\EmployeeTraceService.cs" />
     <Compile Include="Implementation\EmployeeCoxoService.cs" />
     <Compile Include="Implementation\BasicSearchService.cs" />
     <Compile Include="Implementation\AgeServicePolicyService.cs" />
@@ -274,6 +275,7 @@
     <Compile Include="Implementation\VisitSubCategoryService.cs" />
     <Compile Include="Implementation\OfficeShipmentService.cs" />
     <Compile Include="Implementation\ZoneService.cs" />
+    <Compile Include="Interface\IEmployeeTraceService.cs" />
     <Compile Include="Interface\IEmployeeUnmDefermentService.cs" />
     <Compile Include="Interface\ICoFfRecomService.cs" />
     <Compile Include="Interface\IMinuteCandidateService.cs" />
@@ -468,6 +470,7 @@
     <Compile Include="Models\DashBoardBranchByAdminAuthority600EntryModel.cs" />
     <Compile Include="Models\CoFfRecomModel.cs" />
     <Compile Include="Models\DashBoardMinuite110Model.cs" />
+    <Compile Include="Models\EmployeeTraceModel.cs" />
     <Compile Include="Models\ToeAuthorizedModel.cs" />
     <Compile Include="Models\EmployeeCoxoServiceModel.cs" />
     <Compile Include="Models\BasicSearchModel.cs" />
