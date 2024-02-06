@@ -97,6 +97,7 @@
     <Content Include="app\services\careerForecastSettingService.js" />
     <Content Include="app\services\bnoisLogInfoService.js" />
     <Content Include="app\services\employeeTraceService.js" />
+    <Content Include="app\services\employeeMinuteStandbyService.js" />
     <Content Include="app\services\employeeUnmDefermentService.js" />
     <Content Include="app\services\coFfRecomService.js" />
     <Content Include="app\services\minuteCandidateService.js" />
@@ -346,6 +347,10 @@
     <Content Include="app\views\employee-trace\employeeTraceAddController.js" />
     <Content Include="app\views\employee-trace\employeeTraceList.html" />
     <Content Include="app\views\employee-trace\employeeTraceListController.js" />
+    <Content Include="app\views\employee-minute-standby\employeeMinuteStandbyAdd.html" />
+    <Content Include="app\views\employee-minute-standby\employeeMinuteStandbyAddController.js" />
+    <Content Include="app\views\employee-minute-standby\employeeMinuteStandbytList.html" />
+    <Content Include="app\views\employee-minute-standby\employeeMinuteStandbyListController.js" />
     <Content Include="app\views\eosolo-ff-recom\eosoloFfRecoms.html" />
     <Content Include="app\views\eosolo-ff-recom\eosoloFfRecomsController.js" />
     <Content Include="app\views\employee-proposed-eosolo\employeeProposedEoSoLoAdd.html" />

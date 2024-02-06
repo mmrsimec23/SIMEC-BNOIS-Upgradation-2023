@@ -199,5 +199,6 @@
         CO_FF_RECOM_URL: baseAPIUrl + 'api/bnois/co-ff-recom/',
         MINUITE_URL: baseAPIUrl + 'api/bnois/minuites/',
         MINUTE_CANDIDATE_URL: baseAPIUrl + 'api/bnois/minuite-candidates/',
+        EMPLOYEE_MINUTE_STANDBY_URL: baseAPIUrl + 'api/bnois/employee-minute-standby/',
     });
 })();

@@ -12,7 +12,7 @@
                         <thead>
                             <tr>
                                 <th>SL</th>
-                                <th>Minute No</th>
+                                <th>Minute Category</th>
                                 <th>Minute Name</th>
                                 <th>Letter No</th>
                                 <th>Country</th>
@@ -25,7 +25,7 @@
                         <tbody>
                             <tr ng-repeat="minuite in vm.minuites">
                                 <td>{{$index+1}}</td>
-                                <td>{{minuite.minuiteNo}}</td>
+                                <td style="width: 125px;">{{minuite.minuiteCategory==1 ? "UNM" : minuite.minuiteCategory==2 ? "General Course" : minuite.minuiteCategory==3 ? "Long Course (E,L,S)" : minuite.minuiteCategory==4 ? "Visit/Seminar etc" : minuite.minuiteCategory==5 ? "Staff Course" : minuite.minuiteCategory==6 ? "FAT/PSI" : "-"}}</td>
                                 <td>{{minuite.minuiteName}}</td>
                                 <td>{{minuite.letterNo}}</td>
                                 <td>{{minuite.country.fullName}}</td>

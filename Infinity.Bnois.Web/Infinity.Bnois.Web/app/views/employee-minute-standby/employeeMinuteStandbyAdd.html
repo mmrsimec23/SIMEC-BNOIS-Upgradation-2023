@@ -1,0 +1,62 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">Officer UNM Deferment<span class="pull-right text-success">{{vm.title}}</span></h2>
+                </div>
+                <form name="vm.employeeMinuteStandbyForm">
+
+                    <employee-search ng-model="vm.employeeMinuteStandby.employee"></employee-search>
+
+                    
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="standbyRemarks1" class="custom-label">Remark</label>
+                                
+                                <textarea type="text" id="standbyRemarks1" class="form-control custom-form-control" ng-model="vm.employeeMinuteStandby.standbyRemarks1" name="standbyRemarks1" maxlength="1500"></textarea>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="dateFrom" class="custom-label">  Date From</label>
+                                <input kendo-date-picker id="dateFrom" class="form-control custom-form-control" k-ng-model="vm.employeeMinuteStandby.dateFrom" k-format="'dd-MM-yyyy'" name="dateFrom" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="dateTo" class="custom-label">  Date To</label>
+                                <input kendo-date-picker id="dateTo" class="form-control custom-form-control" k-ng-model="vm.employeeMinuteStandby.dateTo" k-format="'dd-MM-yyyy'" name="dateTo" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--<div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="unwillingMissionRemarks" class="custom-label">Name of Mission</label>
+                                <textarea type="text" id="unwillingMissionRemarks" class="form-control custom-form-control" ng-model="vm.employeeMinuteStandby.unwillingMissionRemarks" name="unwillingMissionRemarks" maxlength="1500"></textarea>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="unmReference" class="custom-label">Authority</label>
+                                <textarea type="text" id="unmReference" class="form-control custom-form-control" ng-model="vm.employeeMinuteStandby.unmReference" name="unmReference" maxlength="1500"></textarea>
+                                
+                            </div>
+                        </div>
+                    </div>-->
+                    
+                    <div class="col-xs-12">
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.employeeMinuteStandbyForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

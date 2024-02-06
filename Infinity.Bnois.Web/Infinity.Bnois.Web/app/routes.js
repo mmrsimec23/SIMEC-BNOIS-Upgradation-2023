@@ -3775,13 +3775,34 @@
                     title: 'Mission Schedule'
                 }
             },
+
+
+            //-------------Employee Minute Standby-------
             {
-                state: "mission-schedule-modify",
+                state: 'employee-minute-standby-list',
                 config: {
-                    url: "mission-schedule-modify/:id",
-                    templateUrl: 'app/views/mission-schedule/missionScheduleAdd.html',
-                    controller: 'missionScheduleAddController as vm',
-                    title: 'Mission Schedule'
+                    url: '/employee-minute-standby-list?ps&pn&q',
+                    templateUrl: 'app/views/employee-minute-standby/employeeMinuteStandbytList.html',
+                    controller: 'employeeMinuteStandbyListController as vm',
+                    title: 'Employee Minute Standby'
+                }
+            },
+            {
+                state: 'employee-minute-standby-create',
+                config: {
+                    url: '/employee-minute-standby-create',
+                    templateUrl: 'app/views/employee-minute-standby/employeeMinuteStandbyAdd.html',
+                    controller: 'employeeMinuteStandbyAddController as vm',
+                    title: 'Employee Minute Standby'
+                }
+            },
+            {
+                state: "employee-minute-standby-modify",
+                config: {
+                    url: "employee-minute-standby-modify/:id",
+                    templateUrl: 'app/views/employee-minute-standby/employeeMinuteStandbyAdd.html',
+                    controller: 'employeeMinuteStandbyAddController as vm',
+                    title: 'Employee Minute Standby'
                 }
             },
 

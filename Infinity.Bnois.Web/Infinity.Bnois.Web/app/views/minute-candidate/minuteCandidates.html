@@ -10,9 +10,16 @@
                     <employee-search ng-model="vm.minuteCandidate.employee"></employee-search>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="proposedBillet" class="custom-label"> Title (for Staff Course)</label>
+                            <label for="proposedBillet" class="custom-label"> Remarks (for Staff Course/UNM)</label>
                             <input type="text" id="proposedBillet" class="form-control custom-form-control" ng-model="vm.minuteCandidate.proposedBillet" name="proposedBillet" maxlength="1500" />
-                            
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="remarks4" class="custom-label"> Position (for Staff Course)</label>
+                            <input type="number" id="remarks4" class="form-control custom-form-control" ng-model="vm.minuteCandidate.remarks4" name="remarks4" />
+
                         </div>
                     </div>
                     <div class="col-xs-12">
@@ -27,7 +34,8 @@
                                 <th>Serial No.</th>
                                 <th>PNo</th>
                                 <th>Name</th>
-                                <th>Title (only staff course)</th>
+                                <th>Remarks</th>
+                                <th>Position (Staff Course)</th>
                                 <th class="text-right">
                                    
                                 </th>
@@ -39,6 +47,7 @@
                                 <td>{{minuteCandidate.employee.pNo}}</td>
                                 <td>{{minuteCandidate.employee.fullNameEng}}</td>
                                 <td>{{minuteCandidate.proposedBillet}}</td>
+                                <td>{{minuteCandidate.remarks4}}</td>
                                 <td class="text-right">
                                     <a  class="btn custom-btn btn-delete btn-danger btn-xs" style="cursor:pointer" ng-confirmation-click="vm.deleteMinuteCandidate(minuteCandidate)"
                                        ng-confirmation-message="Do you want to Remove ?"
