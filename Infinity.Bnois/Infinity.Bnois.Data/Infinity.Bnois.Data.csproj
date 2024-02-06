@@ -176,6 +176,9 @@
     <Compile Include="DashBoardMinuite110.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DashBoardMinuteStandby975.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DashBoardTrace990.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

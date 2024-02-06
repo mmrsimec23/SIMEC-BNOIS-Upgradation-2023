@@ -101,6 +101,10 @@ namespace Infinity.Bnois.Api.Web.Models
                .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
                .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
 
+                cfg.CreateMap<DashBoardMinuteStandby975, DashBoardMinuteStandby975Model>()
+               .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
+               .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
+
 
 
                 cfg.CreateMap<SocialAttribute, SocialAttributeModel>();
@@ -614,6 +618,10 @@ namespace Infinity.Bnois.Api.Web.Models
               .ForMember(d => d.Rank2, opt => opt.MapFrom(s => s.Rank2));
 
                 cfg.CreateMap<DashBoardBranch975Model, DashBoardBranch975>()
+              .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
+              .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
+
+                cfg.CreateMap<DashBoardMinuteStandby975Model, DashBoardMinuteStandby975>()
               .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
               .ForMember(d => d.Rank, opt => opt.MapFrom(s => s.Rank));
 

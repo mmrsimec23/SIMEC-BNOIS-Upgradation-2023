@@ -103,6 +103,7 @@
     <Compile Include="Implementation\CareerForecastSettingService.cs" />
     <Compile Include="Implementation\CareerForecastService.cs" />
     <Compile Include="Implementation\BnoisLogInfoService.cs" />
+    <Compile Include="Implementation\EmployeeMinuteStandbyService.cs" />
     <Compile Include="Implementation\EmployeeUnmDefermentService.cs" />
     <Compile Include="Implementation\CoFfRecomService.cs" />
     <Compile Include="Implementation\MinuteCandidateService.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Implementation\OfficeShipmentService.cs" />
     <Compile Include="Implementation\ZoneService.cs" />
     <Compile Include="Interface\IEmployeeTraceService.cs" />
+    <Compile Include="Interface\IEmployeeMinuteStandbyService.cs" />
     <Compile Include="Interface\IEmployeeUnmDefermentService.cs" />
     <Compile Include="Interface\ICoFfRecomService.cs" />
     <Compile Include="Interface\IMinuteCandidateService.cs" />
@@ -469,6 +471,7 @@
     <Compile Include="Models\DashBoardBranchByAdminAuthority700Model.cs" />
     <Compile Include="Models\DashBoardBranchByAdminAuthority600EntryModel.cs" />
     <Compile Include="Models\CoFfRecomModel.cs" />
+    <Compile Include="Models\DashBoardMinuteStandby975Model.cs" />
     <Compile Include="Models\DashBoardMinuite110Model.cs" />
     <Compile Include="Models\EmployeeTraceModel.cs" />
     <Compile Include="Models\ToeAuthorizedModel.cs" />

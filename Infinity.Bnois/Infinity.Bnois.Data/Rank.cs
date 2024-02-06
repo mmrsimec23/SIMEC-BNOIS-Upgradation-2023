@@ -49,6 +49,7 @@ namespace Infinity.Bnois.Data
             this.DashBoardBranch975 = new HashSet<DashBoardBranch975>();
             this.DashBoardBranch980 = new HashSet<DashBoardBranch980>();
             this.DashBoardTrace990 = new HashSet<DashBoardTrace990>();
+            this.DashBoardMinuteStandby975 = new HashSet<DashBoardMinuteStandby975>();
         }
     
         public int RankId { get; set; }
@@ -131,5 +132,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<DashBoardBranch980> DashBoardBranch980 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DashBoardTrace990> DashBoardTrace990 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DashBoardMinuteStandby975> DashBoardMinuteStandby975 { get; set; }
     }
 }

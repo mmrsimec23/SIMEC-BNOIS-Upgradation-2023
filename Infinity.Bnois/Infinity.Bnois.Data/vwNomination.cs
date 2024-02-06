@@ -33,5 +33,6 @@ namespace Infinity.Bnois.Data
         public string Title { get; set; }
         public Nullable<System.DateTime> ToDate { get; set; }
         public Nullable<int> MissionAppointmentId { get; set; }
+        public string UNMRemarks { get; set; }
     }
 }

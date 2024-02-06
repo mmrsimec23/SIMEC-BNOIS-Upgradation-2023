@@ -506,17 +506,20 @@
         <EntityTypeShape EntityType="BnoisdbModel.ProposalCandidate" Width="1.5" PointX="36.75" PointY="81.875" />
         <AssociationConnector Association="BnoisdbModel.FK_ProposalCadidate_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_ProposalCadidate_ProposalDetail" />
-        <EntityTypeShape EntityType="BnoisdbModel.DashBoardMinuite110" Width="1.5" PointX="33.25" PointY="85" />
-        <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite110_Employee" />
         <EntityTypeShape EntityType="BnoisdbModel.DashBoardMinuite100" Width="1.5" PointX="31" PointY="90.625" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite100_Country" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite100_Employee" />
-        <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100" />
         <EntityTypeShape EntityType="BnoisdbModel.Remark" Width="1.5" PointX="13" PointY="85.875" />
         <AssociationConnector Association="BnoisdbModel.FK_Remark_Employee" />
         <EntityTypeShape EntityType="BnoisdbModel.DashBoardTrace990" Width="1.5" PointX="29" PointY="81" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardTrace990_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardTrace990_Rank" />
+        <EntityTypeShape EntityType="BnoisdbModel.DashBoardMinuteStandby975" Width="1.5" PointX="26" PointY="74.625" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuteStandby975_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuteStandby975_Rank" />
+        <EntityTypeShape EntityType="BnoisdbModel.DashBoardMinuite110" Width="1.5" PointX="33.25" PointY="84.375" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite110_Employee" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

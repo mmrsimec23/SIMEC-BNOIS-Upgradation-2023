@@ -48,6 +48,12 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             minuteCadidate.CreatedBy = userId;
             minuteCadidate.MinuiteId = model.MinuiteId;
             minuteCadidate.ProposedBillet = model.ProposedBillet;
+            minuteCadidate.Remarks1 = model.Remarks1;
+            minuteCadidate.Remarks2 = model.Remarks2;
+            minuteCadidate.Remarks3 = model.Remarks3;
+            minuteCadidate.Remarks4 = model.Remarks4;
+            minuteCadidate.Remarks5 = model.Remarks5;
+            minuteCadidate.Remarks6 = model.Remarks6;
             minuteCadidate.EmployeeId = model.EmployeeId;
             minuteCadidate.Employee = null;
             await minuteCandidateRepository.SaveAsync(minuteCadidate);

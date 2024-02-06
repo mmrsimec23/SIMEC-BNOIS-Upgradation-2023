@@ -75,10 +75,11 @@ namespace Infinity.Bnois.Data
             this.DashBoardBranch975 = new HashSet<DashBoardBranch975>();
             this.DashBoardBranch980 = new HashSet<DashBoardBranch980>();
             this.ProposalCandidate = new HashSet<ProposalCandidate>();
-            this.DashBoardMinuite110 = new HashSet<DashBoardMinuite110>();
             this.DashBoardMinuite100 = new HashSet<DashBoardMinuite100>();
             this.Remark = new HashSet<Remark>();
             this.DashBoardTrace990 = new HashSet<DashBoardTrace990>();
+            this.DashBoardMinuteStandby975 = new HashSet<DashBoardMinuteStandby975>();
+            this.DashBoardMinuite110 = new HashSet<DashBoardMinuite110>();
         }
     
         public int EmployeeId { get; set; }
@@ -237,12 +238,14 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProposalCandidate> ProposalCandidate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DashBoardMinuite110> DashBoardMinuite110 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DashBoardMinuite100> DashBoardMinuite100 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Remark> Remark { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DashBoardTrace990> DashBoardTrace990 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DashBoardMinuteStandby975> DashBoardMinuteStandby975 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DashBoardMinuite110> DashBoardMinuite110 { get; set; }
     }
 }

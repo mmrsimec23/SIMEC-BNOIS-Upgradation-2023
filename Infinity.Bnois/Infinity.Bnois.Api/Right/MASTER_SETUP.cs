@@ -154,5 +154,6 @@ namespace Infinity.Bnois.Api.Right
         public const int MINUITE = 1142;
         public const int ROASTER_LIST_EOSOLO = 1143;
         public const int EMPLOYEE_TRACE = 1144;
+        public const int EMPLOYEE_MINUTE_STANDBY = 1145;
     }
 }

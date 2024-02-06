@@ -13,6 +13,12 @@ namespace Infinity.Bnois.ApplicationService.Models
         public int MinuiteId { get; set; }
         public int EmployeeId { get; set; }
         public string ProposedBillet { get; set; }
+        public string Remarks1 { get; set; }
+        public string Remarks2 { get; set; }
+        public string Remarks3 { get; set; }
+        public Nullable<int> Remarks4 { get; set; }
+        public Nullable<int> Remarks5 { get; set; }
+        public Nullable<int> Remarks6 { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }

@@ -138,7 +138,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 // data log section start
                 BnoisLog bnLog = new BnoisLog();
                 bnLog.TableName = "EmployeeTrace";
-                bnLog.TableEntryForm = "Officer Car Loan";
+                bnLog.TableEntryForm = "Employee Trace";
                 bnLog.PreviousValue = "Id: " + model.Id;
                 bnLog.UpdatedValue = "Id: " + model.Id;
                 if (employeeTrace.EmployeeId > 0 || model.EmployeeId > 0)
@@ -199,12 +199,17 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     bnLog.PreviousValue += ", Remarks: " + employeeTrace.Remarks;
                     bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
                 }
+                if (employeeTrace.Remarks2 != model.Remarks2)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + employeeTrace.Remarks2;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks2;
+                }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
                 bnLog.LogCreatedDate = DateTime.Now;
 
-                if (employeeTrace.EmployeeId != model.EmployeeId || employeeTrace.Remarks != model.Remarks 
+                if (employeeTrace.EmployeeId != model.EmployeeId || employeeTrace.Remarks != model.Remarks  || employeeTrace.Remarks2 != model.Remarks2
                     || employeeTrace.RankId != model.Employee.RankId || employeeTrace.TraceMark != model.TraceMark )
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
@@ -231,6 +236,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             //employeeTrace.AvailDate = model.AvailDate;
             //employeeTrace.Amount = model.Amount;
             employeeTrace.Remarks = model.Remarks;
+            employeeTrace.Remarks2 = model.Remarks2;
             //employeeTrace.RankId = model.RankId;
             employeeTrace.Employee = null;
             //employeeTrace.TraceFiscalYear = null;
