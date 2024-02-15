@@ -10,6 +10,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
     public interface IMinuteCandidateService
     {
         List<DashBoardMinuite110Model> GetMinuteCandidates(int minuiteId);
+        Task<DashBoardMinuite110Model> getMinuteCadidate(int MinuiteCandidateId);
         Task<DashBoardMinuite110Model> SaveMinuteCadidate(int id, DashBoardMinuite110Model model);
         Task<bool> DeleteMinuteCadidate(int id);
     }

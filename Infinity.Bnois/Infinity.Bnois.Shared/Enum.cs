@@ -257,8 +257,15 @@ namespace Infinity.Bnois
 
     public enum AccidentType
     {
-        Major=1,
-        Minor=2
+        GCM=1,
+        ST=2
+    }
+
+    public enum MscCompleteType
+    {
+        Doing=1,
+        Done=2,
+        Incomplete=3
     }
 	
 

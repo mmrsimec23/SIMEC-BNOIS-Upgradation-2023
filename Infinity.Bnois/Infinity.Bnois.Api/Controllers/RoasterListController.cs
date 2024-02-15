@@ -73,5 +73,16 @@ namespace Infinity.Bnois.Api.Controllers
             });
         }
 
+
+        [HttpGet]
+        [Route("get-small-ship-coxo-waiting-list")]
+        public IHttpActionResult GetSmallShipCoXoWaitingList()
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = roasterListService.GetSmallShipCoXoWaitingList()
+            });
+        }
+
     }
 }

@@ -299,7 +299,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             punishmentAccident.DurationMonths = model.DurationMonths;
             punishmentAccident.DurationDays = model.DurationDays;
             punishmentAccident.Date =model.Date ?? punishmentAccident.Date;
-            punishmentAccident.PunishmentType = model.PunishmentType;
+            punishmentAccident.PunishmentType = (string.IsNullOrWhiteSpace(model.PunishmentType) ? null : model.PunishmentType );
             punishmentAccident.Remarks = model.Remarks;
             punishmentAccident.Reason = model.Reason;
             punishmentAccident.FileName = model.FileName;

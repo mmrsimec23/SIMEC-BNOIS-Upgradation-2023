@@ -107,6 +107,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             minuite.ExtraRemarks7 = model.ExtraRemarks7;
             minuite.ExtraRemarks8 = model.ExtraRemarks8;
             minuite.ExtraRemarks9 = model.ExtraRemarks9;
+            if (model.Employee != null)
+            {
+                minuite.EmployeeId = model.Employee.EmployeeId;
+            }
+            
 
 
             minuite.Employee = null;

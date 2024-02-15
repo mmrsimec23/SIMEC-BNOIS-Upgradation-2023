@@ -33,7 +33,6 @@ namespace Infinity.Bnois.Data
             this.EmpRunMissings = new HashSet<EmpRunMissing>();
             this.PreviousTransfers = new HashSet<PreviousTransfer>();
             this.TrainingRanks = new HashSet<TrainingRank>();
-            this.PunishmentAccidents = new HashSet<PunishmentAccident>();
             this.PromotionBoards = new HashSet<PromotionBoard>();
             this.PromotionBoards1 = new HashSet<PromotionBoard>();
             this.Transfer = new HashSet<Transfer>();
@@ -42,14 +41,15 @@ namespace Infinity.Bnois.Data
             this.EmployeeFamilyPermission = new HashSet<EmployeeFamilyPermission>();
             this.EmployeeCarLoan = new HashSet<EmployeeCarLoan>();
             this.EmployeeSecurityClearance = new HashSet<EmployeeSecurityClearance>();
-            this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
             this.ToeAuthorized = new HashSet<ToeAuthorized>();
             this.DashBoardBranchByAdminAuthority600Entry = new HashSet<DashBoardBranchByAdminAuthority600Entry>();
             this.DashBoardBranchByAdminAuthority700 = new HashSet<DashBoardBranchByAdminAuthority700>();
             this.DashBoardBranch975 = new HashSet<DashBoardBranch975>();
             this.DashBoardBranch980 = new HashSet<DashBoardBranch980>();
-            this.DashBoardTrace990 = new HashSet<DashBoardTrace990>();
             this.DashBoardMinuteStandby975 = new HashSet<DashBoardMinuteStandby975>();
+            this.DashBoardTrace990 = new HashSet<DashBoardTrace990>();
+            this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
+            this.PunishmentAccident = new HashSet<PunishmentAccident>();
         }
     
         public int RankId { get; set; }
@@ -101,8 +101,6 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrainingRank> TrainingRanks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PunishmentAccident> PunishmentAccidents { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PromotionBoard> PromotionBoards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PromotionBoard> PromotionBoards1 { get; set; }
@@ -119,8 +117,6 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeSecurityClearance> EmployeeSecurityClearance { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ToeAuthorized> ToeAuthorized { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DashBoardBranchByAdminAuthority600Entry> DashBoardBranchByAdminAuthority600Entry { get; set; }
@@ -131,8 +127,12 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DashBoardBranch980> DashBoardBranch980 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DashBoardMinuteStandby975> DashBoardMinuteStandby975 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DashBoardTrace990> DashBoardTrace990 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DashBoardMinuteStandby975> DashBoardMinuteStandby975 { get; set; }
+        public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PunishmentAccident> PunishmentAccident { get; set; }
     }
 }

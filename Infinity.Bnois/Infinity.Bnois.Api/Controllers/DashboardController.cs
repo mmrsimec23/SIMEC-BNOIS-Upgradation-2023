@@ -5,6 +5,7 @@ using System.Web.Http.Cors;
 using Infinity.Bnois.Api.Core;
 using Infinity.Bnois.Api.Models;
 using Infinity.Bnois.Api.Right;
+using Infinity.Bnois.ApplicationService.Implementation;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
 
@@ -17,11 +18,12 @@ namespace Infinity.Bnois.Api.Controllers
     public class DashboardController : BaseController
     {
         private readonly IDashboardService dashboardService;
-       
+        private readonly IOfficerStreamService officerStreamService;
 
-        public DashboardController(IDashboardService dashboardService)
+        public DashboardController(IDashboardService dashboardService, IOfficerStreamService officerStreamService)
         {
             this.dashboardService = dashboardService;
+            this.officerStreamService = officerStreamService;
         }
         
 
@@ -34,7 +36,18 @@ namespace Infinity.Bnois.Api.Controllers
                 Result = dashboardService.GetDashboardOutSideNavy(officeId)
             });
         }
-        
+
+        [HttpGet]
+        [Route("get-officer-stream-select-models")]
+        public async Task<IHttpActionResult> GetOfficerStreamSelectModels()
+        {
+
+            return Ok(new ResponseMessage<List<SelectModel>>
+            {
+                Result = await officerStreamService.GetOfficerStreamSelectModels()
+
+            });
+        }
 
         [HttpGet]
         [Route("get-dashboard-un-mission")]

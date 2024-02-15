@@ -23,7 +23,15 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             this.employeeService = employeeService;
         }
 
-  
+        public List<SelectModel> GetMscCompleteTypeSelectModels()
+        {
+            List<SelectModel> selectModels =
+                Enum.GetValues(typeof(MscCompleteType)).Cast<MscCompleteType>()
+                    .Select(v => new SelectModel { Text = v.ToString(), Value = Convert.ToInt16(v) })
+                    .ToList();
+            return selectModels;
+        }
+
 
         public List<EmployeeMscEducationModel> GetEmployeeMscEducations(int ps, int pn, string qs, out int total)
         {
@@ -185,6 +193,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     bnLog.PreviousValue += ", Remarks: " + employeeMscEducation.Remarks;
                     bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
                 }
+                if (employeeMscEducation.CompleteStatus != model.CompleteStatus)
+                {
+                    bnLog.PreviousValue += ", Complete Status: " + employeeMscEducation.CompleteStatus;
+                    bnLog.UpdatedValue += ", Complete Status: " + model.CompleteStatus;
+                }
 
                 bnLog.LogStatus = 1; // 1 for update, 2 for delete
                 bnLog.UserId = userId;
@@ -193,7 +206,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 if (employeeMscEducation.EmployeeId != model.EmployeeId || employeeMscEducation.MscEducationTypeId != model.MscEducationTypeId || employeeMscEducation.Remarks != model.Remarks 
                     || employeeMscEducation.MscInstituteId != model.MscInstituteId || employeeMscEducation.MscPermissionTypeId != model.MscPermissionTypeId || employeeMscEducation.CountryId != model.CountryId
                     || employeeMscEducation.RankId != model.RankId || employeeMscEducation.PassingYear != model.PassingYear || employeeMscEducation.PermissionYear != model.PermissionYear || employeeMscEducation.Results != model.Results
-                    || employeeMscEducation.IsComplete != model.IsComplete || employeeMscEducation.FromDate != model.FromDate || employeeMscEducation.ToDate != model.ToDate)
+                    || employeeMscEducation.IsComplete != model.IsComplete || employeeMscEducation.FromDate != model.FromDate || employeeMscEducation.ToDate != model.ToDate || employeeMscEducation.CompleteStatus != model.CompleteStatus)
                 {
                     await bnoisLogRepository.SaveAsync(bnLog);
 
@@ -223,6 +236,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             employeeMscEducation.IsComplete = model.IsComplete;
             employeeMscEducation.FromDate = model.FromDate;
             employeeMscEducation.ToDate = model.ToDate;
+            employeeMscEducation.CompleteStatus = model.CompleteStatus;
             employeeMscEducation.RankId = model.Employee.RankId;
 
             //if (model.IsBackLog)
@@ -288,7 +302,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                     bnLog.PreviousValue += ", Rank: " + ((dynamic)prevrank).ShortName;
                 }
                 bnLog.PreviousValue +=  ", PassingYear: " + employeeMscEducation.PassingYear + ", Results: " + employeeMscEducation.Results + ", IsComplete: " + employeeMscEducation.IsComplete + 
-                    ", From Date: " + employeeMscEducation.FromDate?.ToString("dd/MM/yyyy") + ", To Date: " + employeeMscEducation.ToDate?.ToString("dd/MM/yyyy") + ", Remarks: " + employeeMscEducation.Remarks;
+                    ", From Date: " + employeeMscEducation.FromDate?.ToString("dd/MM/yyyy") + ", To Date: " + employeeMscEducation.ToDate?.ToString("dd/MM/yyyy") + ", Remarks: " + employeeMscEducation.Remarks + ", Complete Status: " + employeeMscEducation.CompleteStatus;
                 bnLog.UpdatedValue = "This Record has been Deleted!";
 
                 bnLog.LogStatus = 2; // 1 for update, 2 for delete

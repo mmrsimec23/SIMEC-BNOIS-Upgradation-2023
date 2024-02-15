@@ -28,11 +28,11 @@ namespace Infinity.Bnois.Api.Web.Models
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member 'UserModel.ConfirmPassword'
 
         [Required(ErrorMessage = "First Name is required")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        //[RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member 'UserModel.FirstName'
         public string FirstName { get; set; }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member 'UserModel.FirstName'
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        //[RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         [Required(ErrorMessage = "Last Name is required")]
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member 'UserModel.LastName'
         public string LastName { get; set; }

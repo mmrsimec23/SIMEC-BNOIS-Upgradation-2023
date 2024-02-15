@@ -1,4 +1,5 @@
 ﻿using Infinity.Bnois.Api.Core;
+using Infinity.Bnois.ApplicationService.Implementation;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
 using System;
@@ -30,6 +31,24 @@ namespace Infinity.Bnois.Api.Controllers
             return Ok(new ResponseMessage<List<DashBoardMinuite110Model>>()
             {
                 Result = models
+            });
+        }
+
+        [HttpGet]
+        [Route("get-minute-candidate")]
+        public async Task<IHttpActionResult> getMinuteCandidate(int id)
+        {
+            DashBoardMinuite110Model model = await minuteCandidateService.getMinuteCadidate(id);
+            //vm.EmployeeTrace = await _employeeTraceService.getEmployeeTrace(id);
+            //vm.TraceFiscalYears = await _TraceFiscalYearService.GetTraceFiscalYearsSelectModels();
+            //vm.Ranks = await _rankService.GetRanksSelectModel();
+            //return Ok(new ResponseMessage<EmployeeTraceModel>
+            //{
+            //    Result = vm
+            //});
+            return Ok(new ResponseMessage<DashBoardMinuite110Model>
+            {
+                Result = model
             });
         }
 

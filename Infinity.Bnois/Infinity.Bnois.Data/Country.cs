@@ -34,8 +34,8 @@ namespace Infinity.Bnois.Data
             this.EmployeeFamilyPermission = new HashSet<EmployeeFamilyPermission>();
             this.Office = new HashSet<Office>();
             this.Office1 = new HashSet<Office>();
-            this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
             this.DashBoardMinuite100 = new HashSet<DashBoardMinuite100>();
+            this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
         }
     
         public int CountryId { get; set; }
@@ -87,8 +87,8 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Office> Office1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DashBoardMinuite100> DashBoardMinuite100 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
     }
 }

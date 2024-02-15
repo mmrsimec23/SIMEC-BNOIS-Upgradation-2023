@@ -45,7 +45,7 @@ namespace Infinity.Bnois.Api.Controllers
             return Ok(new ResponseMessage<List<EmployeeHajjDetailModel>>()
             {
                 Result = _employeeHajjDetaitService.GetEmployeeHajjDetailsByPno(PNo)
-        });
+            });
         }
         [HttpGet]
         [Route("get-employeeHajj-detail")]

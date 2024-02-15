@@ -18,7 +18,7 @@ namespace Infinity.Bnois.Data
         public PunishmentCategory()
         {
             this.PunishmentSubCategories = new HashSet<PunishmentSubCategory>();
-            this.PunishmentAccidents = new HashSet<PunishmentAccident>();
+            this.PunishmentAccident = new HashSet<PunishmentAccident>();
         }
     
         public int PunishmentCategoryId { get; set; }
@@ -33,6 +33,6 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PunishmentSubCategory> PunishmentSubCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PunishmentAccident> PunishmentAccidents { get; set; }
+        public virtual ICollection<PunishmentAccident> PunishmentAccident { get; set; }
     }
 }

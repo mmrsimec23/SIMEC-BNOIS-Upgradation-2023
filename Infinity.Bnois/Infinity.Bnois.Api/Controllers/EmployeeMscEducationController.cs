@@ -65,6 +65,7 @@ namespace Infinity.Bnois.Api.Controllers
             vm.MscInstituteList = await mscInstituteService.GetMscInstitutesSelectModels();
             vm.MscPermissionTypeList = await mscPermissionTypeService.GetMscPermissionTypesSelectModels();
             vm.CountryList = await countryService.GetCountriesTypeSelectModel();
+            vm.MscCompleteTypes = employeeMscEducationService.GetMscCompleteTypeSelectModels();
             return Ok(new ResponseMessage<EmployeeMscEducationViewModel>
             {
                 Result = vm

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c156cc6eb9dd4bb29c430ebf9fbb2b1c" Name="Diagram1" ZoomLevel="46">
+      <Diagram DiagramId="c156cc6eb9dd4bb29c430ebf9fbb2b1c" Name="Diagram1" ZoomLevel="40">
         <EntityTypeShape EntityType="BnoisdbModel.Address" Width="1.5" PointX="8.25" PointY="134.375" />
         <EntityTypeShape EntityType="BnoisdbModel.AptCat" Width="1.5" PointX="24" PointY="151" />
         <EntityTypeShape EntityType="BnoisdbModel.AttributeType" Width="1.5" PointX="0.75" PointY="0.75" />
@@ -272,15 +272,10 @@
         <EntityTypeShape EntityType="BnoisdbModel.Subject" Width="1.5" PointX="12" PointY="120.625" />
         <AssociationConnector Association="BnoisdbModel.FK_ExamSubject_Subject" />
         <EntityTypeShape EntityType="BnoisdbModel.MedalAward" Width="1.5" PointX="18.625" PointY="52.125" />
-        <EntityTypeShape EntityType="BnoisdbModel.PunishmentAccident" Width="1.5" PointX="28.5" PointY="91.25" />
         <AssociationConnector Association="BnoisdbModel.FK_MedalAward_Award" />
         <AssociationConnector Association="BnoisdbModel.FK_MedalAward_Medal" />
         <AssociationConnector Association="BnoisdbModel.FK_MedalAward_Publication" />
         <AssociationConnector Association="BnoisdbModel.FK_MedalAward_PublicationCategory" />
-        <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_PunishmentCategory" />
-        <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_PunishmentNature" />
-        <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_PunishmentSubCategory" />
-        <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_Rank" />
         <EntityTypeShape EntityType="BnoisdbModel.ProposalDetail" Width="1.5" PointX="34.5" PointY="74.25" />
         <EntityTypeShape EntityType="BnoisdbModel.CourseCategory" Width="1.5" PointX="0.75" PointY="117.625" />
         <AssociationConnector Association="BnoisdbModel.FK_BraCtryCoursePoint_CourseCategory" />
@@ -329,9 +324,7 @@
         <AssociationConnector Association="BnoisdbModel.FK_TrainingResult_TrainingPlan" />
         <EntityTypeShape EntityType="BnoisdbModel.ExtraAppointment" Width="1.5" PointX="36.75" PointY="108.75" />
         <AssociationConnector Association="BnoisdbModel.FK_ExtraAppointment_Transfer" />
-        <EntityTypeShape EntityType="BnoisdbModel.Achievement" Width="1.5" PointX="23.25" PointY="101" />
         <EntityTypeShape EntityType="BnoisdbModel.EmployeeLpr" Width="1.5" PointX="23.25" PointY="83.5" />
-        <AssociationConnector Association="BnoisdbModel.FK_Achievement_Commendation" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeLpr_TerminationType" />
         <EntityTypeShape EntityType="BnoisdbModel.PreCommissionCourse" Width="1.5" PointX="17" PointY="70.375" />
         <AssociationConnector Association="BnoisdbModel.FK_PreCommissionCourse_Country" />
@@ -344,8 +337,6 @@
         <AssociationConnector Association="BnoisdbModel.FK_OprAptSuitability_EmployeeOpr" />
         <EntityTypeShape EntityType="BnoisdbModel.Employee" Width="1.5" PointX="10.75" PointY="73.625" />
         <EntityTypeShape EntityType="BnoisdbModel.ExecutionRemark" Width="1.5" PointX="8.5" PointY="84" />
-        <AssociationConnector Association="BnoisdbModel.FK_Achievement_Employee" />
-        <AssociationConnector Association="BnoisdbModel.FK_Achievement_Employee1" />
         <AssociationConnector Association="BnoisdbModel.FK_Address_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_Employee_Batch" />
         <AssociationConnector Association="BnoisdbModel.FK_BoardMember_Employee" />
@@ -386,7 +377,6 @@
         <AssociationConnector Association="BnoisdbModel.FK_PreviousPunishment_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_PreviousTransfer_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_PromotionNomination_Employee" />
-        <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_RetiredEmployee_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_SeaService_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_Sibling_Employee" />
@@ -430,7 +420,6 @@
         <AssociationConnector Association="BnoisdbModel.FK_CareerForecastSetting_Branch" />
         <EntityTypeShape EntityType="BnoisdbModel.BnoisLog" Width="1.5" PointX="7.375" PointY="17.75" />
         <EntityTypeShape EntityType="BnoisdbModel.Office" Width="1.5" PointX="20" PointY="118.25" />
-        <AssociationConnector Association="BnoisdbModel.FK_Achievement_Office" />
         <AssociationConnector Association="BnoisdbModel.FK_Office_Country" />
         <AssociationConnector Association="BnoisdbModel.FK_Office_Country1" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeOpr_Office" />
@@ -467,13 +456,6 @@
         <EntityTypeShape EntityType="BnoisdbModel.Institute" Width="1.5" PointX="14.25" PointY="159.375" />
         <AssociationConnector Association="BnoisdbModel.FK_Institute_Board" />
         <AssociationConnector Association="BnoisdbModel.FK_Education_Institute" />
-        <EntityTypeShape EntityType="BnoisdbModel.EmployeeMscEducation" Width="1.5" PointX="20" PointY="63.625" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Country" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Employee" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType" />
-        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Rank" />
         <EntityTypeShape EntityType="BnoisdbModel.EmployeeServiceExamResult" Width="1.5" PointX="14" PointY="125.125" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_EmployeeServiceEamResult_ServiceExam" />
@@ -511,15 +493,33 @@
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite100_Employee" />
         <EntityTypeShape EntityType="BnoisdbModel.Remark" Width="1.5" PointX="13" PointY="85.875" />
         <AssociationConnector Association="BnoisdbModel.FK_Remark_Employee" />
-        <EntityTypeShape EntityType="BnoisdbModel.DashBoardTrace990" Width="1.5" PointX="29" PointY="81" />
-        <AssociationConnector Association="BnoisdbModel.FK_DashBoardTrace990_Employee" />
-        <AssociationConnector Association="BnoisdbModel.FK_DashBoardTrace990_Rank" />
         <EntityTypeShape EntityType="BnoisdbModel.DashBoardMinuteStandby975" Width="1.5" PointX="26" PointY="74.625" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuteStandby975_Employee" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuteStandby975_Rank" />
-        <EntityTypeShape EntityType="BnoisdbModel.DashBoardMinuite110" Width="1.5" PointX="33.25" PointY="84.375" />
+        <EntityTypeShape EntityType="BnoisdbModel.DashBoardMinuite110" Width="1.5" PointX="33.25" PointY="84.25" />
+        <EntityTypeShape EntityType="BnoisdbModel.DashBoardTrace990" Width="1.5" PointX="29" PointY="79.75" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100" />
         <AssociationConnector Association="BnoisdbModel.FK_DashBoardMinuite110_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardTrace990_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_DashBoardTrace990_Rank" />
+        <EntityTypeShape EntityType="BnoisdbModel.Achievement" Width="1.5" PointX="23.25" PointY="100.25" />
+        <EntityTypeShape EntityType="BnoisdbModel.EmployeeMscEducation" Width="1.5" PointX="20" PointY="63.625" />
+        <EntityTypeShape EntityType="BnoisdbModel.PunishmentAccident" Width="1.5" PointX="28.5" PointY="91.5" />
+        <AssociationConnector Association="BnoisdbModel.FK_Achievement_Commendation" />
+        <AssociationConnector Association="BnoisdbModel.FK_Achievement_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_Achievement_Employee1" />
+        <AssociationConnector Association="BnoisdbModel.FK_Achievement_Office" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Country" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_Employee" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType" />
+        <AssociationConnector Association="BnoisdbModel.FK_EmployeeMscEducation_Rank" />
+        <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_PunishmentCategory" />
+        <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_PunishmentNature" />
+        <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_PunishmentSubCategory" />
+        <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_Rank" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

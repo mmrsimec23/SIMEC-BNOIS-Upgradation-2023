@@ -22,17 +22,18 @@ namespace Infinity.Bnois.Data
         public Nullable<int> MscPermissionTypeId { get; set; }
         public Nullable<int> CountryId { get; set; }
         public string PassingYear { get; set; }
-        public string PermissionYear { get; set; }
         public string Results { get; set; }
         public string Remarks { get; set; }
-        public Nullable<bool> IsComplete { get; set; }
-        public Nullable<System.DateTime> FromDate { get; set; }
-        public Nullable<System.DateTime> ToDate { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<bool> IsComplete { get; set; }
+        public Nullable<System.DateTime> FromDate { get; set; }
+        public Nullable<System.DateTime> ToDate { get; set; }
+        public string PermissionYear { get; set; }
+        public Nullable<int> CompleteStatus { get; set; }
     
         public virtual Country Country { get; set; }
         public virtual Employee Employee { get; set; }

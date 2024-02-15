@@ -76,6 +76,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetMediumCoPendingList]"));
             return dataTable.ToJson().ToList();
         }
+        public List<object> GetSmallShipCoXoWaitingList()
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetSmallCoXoPendingList]"));
+            return dataTable.ToJson().ToList();
+        }
 
     }
 }

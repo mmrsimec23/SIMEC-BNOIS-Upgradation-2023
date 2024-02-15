@@ -17,7 +17,6 @@ namespace Infinity.Bnois.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Office()
         {
-            this.Achievement = new HashSet<Achievement>();
             this.EmployeeOpr = new HashSet<EmployeeOpr>();
             this.EmployeeOpr1 = new HashSet<EmployeeOpr>();
             this.EmployeeTransferFuturePlan = new HashSet<EmployeeTransferFuturePlan>();
@@ -27,6 +26,7 @@ namespace Infinity.Bnois.Data
             this.CoXoService = new HashSet<CoXoService>();
             this.ToeAuthorized = new HashSet<ToeAuthorized>();
             this.OfficeAppointment = new HashSet<OfficeAppointment>();
+            this.Achievement = new HashSet<Achievement>();
         }
     
         public int OfficeId { get; set; }
@@ -79,8 +79,6 @@ namespace Infinity.Bnois.Data
         public Nullable<bool> IsSubmarineCount { get; set; }
         public Nullable<bool> ActiveStatus { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Achievement> Achievement { get; set; }
         public virtual Country Country { get; set; }
         public virtual Country Country1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -104,5 +102,7 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<ToeAuthorized> ToeAuthorized { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OfficeAppointment> OfficeAppointment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Achievement> Achievement { get; set; }
     }
 }

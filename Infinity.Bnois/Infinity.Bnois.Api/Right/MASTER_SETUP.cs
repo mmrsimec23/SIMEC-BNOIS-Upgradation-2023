@@ -52,7 +52,6 @@ namespace Infinity.Bnois.Api.Right
         public const int COURSES = 1039;
         public const int TRAINING_INSTITUTES = 1040;
         public const int TRAINING_PLANS = 1041;
-        public const int TRAINING_RESULTS = 1041;
         public const int EXTRACURRICULAR_TYPES = 1042;
         public const int RELEGION_CAST = 1043;
         public const int PARENTS = 1044;
@@ -155,5 +154,7 @@ namespace Infinity.Bnois.Api.Right
         public const int ROASTER_LIST_EOSOLO = 1143;
         public const int EMPLOYEE_TRACE = 1144;
         public const int EMPLOYEE_MINUTE_STANDBY = 1145;
+        public const int EMPLOYEE_EOLOSODLOSEO_SERVICE = 1146;
+        public const int TRAINING_RESULTS = 1146;
     }
 }

@@ -44,10 +44,10 @@ namespace Infinity.Bnois.Data
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public bool IsActive { get; set; }
     
+        public virtual Employee Employee { get; set; }
         public virtual PunishmentCategory PunishmentCategory { get; set; }
         public virtual PunishmentNature PunishmentNature { get; set; }
         public virtual PunishmentSubCategory PunishmentSubCategory { get; set; }
         public virtual Rank Rank { get; set; }
-        public virtual Employee Employee { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace Infinity.Bnois.ApplicationService.Models
         public Nullable<int> Remarks4 { get; set; }
         public Nullable<int> Remarks5 { get; set; }
         public Nullable<int> Remarks6 { get; set; }
+        public Nullable<double> Remarks7 { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }

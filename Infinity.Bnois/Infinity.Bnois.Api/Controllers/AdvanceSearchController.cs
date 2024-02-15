@@ -257,10 +257,47 @@ namespace Infinity.Bnois.Api.Controllers
 			});
 		}
 
+        [HttpGet]
+        [Route("get-course-sub-categories-by-course")]
+        public async Task<IHttpActionResult> GetCourseSubCategoriesByCourse(int id)
+        {
+            CourseViewModel vm = new CourseViewModel();
+            vm.CourseSubCategories = await courseSubCategoryService.GetCourseSubCategorySelectModels(id);
+            return Ok(new ResponseMessage<CourseViewModel>
+            {
+                Result = vm
+            });
+        }
 
 
 
-		[HttpDelete]
+        [HttpGet]
+        [Route("get-course-by-sub-category")]
+        public async Task<IHttpActionResult> GetCourseBySubCategory(int id)
+        {
+
+            List<SelectModel> selectModels = await courseService.GetCourseBySubCategory(id);
+            return Ok(new ResponseMessage<List<SelectModel>>
+            {
+                Result = selectModels
+            });
+        }
+
+        [HttpGet]
+        [Route("get-course-by-category")]
+        public async Task<IHttpActionResult> GetCourseByCategory(int id)
+        {
+
+            List<SelectModel> selectModels = await courseService.GetCourseByCategory(id);
+            return Ok(new ResponseMessage<List<SelectModel>>
+            {
+                Result = selectModels
+            });
+        }
+
+
+
+        [HttpDelete]
 		[Route("delete-checked-column")]
 		public  IHttpActionResult DeleteCheckedColumn()
 		{

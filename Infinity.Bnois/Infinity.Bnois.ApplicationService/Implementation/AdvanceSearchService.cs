@@ -853,8 +853,6 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 	    }
        public Dictionary<string, dynamic> SearchOfficersResult(string userId)
         {
-            
-
             OfficerViewModel obj = searchRepository.GetSearchOfficers(userId);
            
             Dictionary<string, object> keyValues = new Dictionary<string, object>();
@@ -876,13 +874,6 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 		    return searchColumnRepository.ExecNoneQuery(query) > 0;
 
-
-
 		}
-
-
-
-
-
 	}
 }

@@ -25,8 +25,8 @@
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="CommAppType" Type="varchar" MaxLength="250" />
-          <Property Name="Reason" Type="varchar" MaxLength="250" />
-          <Property Name="Remarks" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="FileName" Type="varchar" MaxLength="250" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -663,13 +663,14 @@
           <Property Name="MinuiteCandidateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MinuiteId" Type="int" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
-          <Property Name="ProposedBillet" Type="nvarchar(max)" />
+          <Property Name="ProposedBillet" Type="nvarchar" MaxLength="1500" />
           <Property Name="Remarks1" Type="nvarchar(max)" />
           <Property Name="Remarks2" Type="nvarchar(max)" />
           <Property Name="Remarks3" Type="nvarchar(max)" />
           <Property Name="Remarks4" Type="int" />
           <Property Name="Remarks5" Type="int" />
           <Property Name="Remarks6" Type="int" />
+          <Property Name="Remarks7" Type="float" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
@@ -712,9 +713,13 @@
           <Property Name="RecomStatus" Type="int" />
           <Property Name="RecomStatus2" Type="int" />
           <Property Name="RecomStatus3" Type="int" />
+          <Property Name="RecomStatus4" Type="float" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="1500" />
           <Property Name="Remarks2" Type="nvarchar" MaxLength="1500" />
           <Property Name="Remarks3" Type="nvarchar" MaxLength="1500" />
+          <Property Name="Remarks4" Type="nvarchar" MaxLength="1500" />
+          <Property Name="Remarks5" Type="nvarchar" MaxLength="1500" />
+          <Property Name="Remarks6" Type="nvarchar" MaxLength="1500" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
@@ -1104,6 +1109,7 @@
           <Property Name="FromDate" Type="date" />
           <Property Name="ToDate" Type="date" />
           <Property Name="PermissionYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompleteStatus" Type="int" />
         </EntityType>
         <EntityType Name="EmployeeOpr">
           <Key>
@@ -2560,9 +2566,9 @@ warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a prim
           <Property Name="DurationMonths" Type="int" />
           <Property Name="DurationDays" Type="int" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="PunishmentType" Type="varchar" MaxLength="250" />
-          <Property Name="Reason" Type="nvarchar" MaxLength="528" />
-          <Property Name="Remarks" Type="nvarchar" MaxLength="1000" />
+          <Property Name="PunishmentType" Type="varchar" MaxLength="550" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="PunishmentValue" Type="float" Nullable="false" />
           <Property Name="SkipYear" Type="float" Nullable="false" />
           <Property Name="DeductPercentage" Type="float" Nullable="false" />
@@ -9462,7 +9468,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="ExamSubject" EntitySet="ExamSubjects" />
           </AssociationSet>
           <EntitySet Name="MedalAwards" EntityType="BnoisdbModel.MedalAward" />
-          <EntitySet Name="PunishmentAccidents" EntityType="BnoisdbModel.PunishmentAccident" />
           <AssociationSet Name="FK_MedalAward_Award" Association="BnoisdbModel.FK_MedalAward_Award">
             <End Role="Award" EntitySet="Awards" />
             <End Role="MedalAward" EntitySet="MedalAwards" />
@@ -9478,22 +9483,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <AssociationSet Name="FK_MedalAward_PublicationCategory" Association="BnoisdbModel.FK_MedalAward_PublicationCategory">
             <End Role="PublicationCategory" EntitySet="PublicationCategories" />
             <End Role="MedalAward" EntitySet="MedalAwards" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PunishmentAccident_PunishmentCategory" Association="BnoisdbModel.FK_PunishmentAccident_PunishmentCategory">
-            <End Role="PunishmentCategory" EntitySet="PunishmentCategories" />
-            <End Role="PunishmentAccident" EntitySet="PunishmentAccidents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PunishmentAccident_PunishmentNature" Association="BnoisdbModel.FK_PunishmentAccident_PunishmentNature">
-            <End Role="PunishmentNature" EntitySet="PunishmentNatures" />
-            <End Role="PunishmentAccident" EntitySet="PunishmentAccidents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PunishmentAccident_PunishmentSubCategory" Association="BnoisdbModel.FK_PunishmentAccident_PunishmentSubCategory">
-            <End Role="PunishmentSubCategory" EntitySet="PunishmentSubCategories" />
-            <End Role="PunishmentAccident" EntitySet="PunishmentAccidents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PunishmentAccident_Rank" Association="BnoisdbModel.FK_PunishmentAccident_Rank">
-            <End Role="Rank" EntitySet="Rank" />
-            <End Role="PunishmentAccident" EntitySet="PunishmentAccidents" />
           </AssociationSet>
           <EntitySet Name="ProposalDetails" EntityType="BnoisdbModel.ProposalDetail" />
           <EntitySet Name="CourseCategories" EntityType="BnoisdbModel.CourseCategory" />
@@ -9645,12 +9634,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="Transfer" EntitySet="Transfer" />
             <End Role="ExtraAppointment" EntitySet="ExtraAppointment" />
           </AssociationSet>
-          <EntitySet Name="Achievement" EntityType="BnoisdbModel.Achievement" />
           <EntitySet Name="EmployeeLpr" EntityType="BnoisdbModel.EmployeeLpr" />
-          <AssociationSet Name="FK_Achievement_Commendation" Association="BnoisdbModel.FK_Achievement_Commendation">
-            <End Role="Commendation" EntitySet="Commendations" />
-            <End Role="Achievement" EntitySet="Achievement" />
-          </AssociationSet>
           <AssociationSet Name="FK_EmployeeLpr_TerminationType" Association="BnoisdbModel.FK_EmployeeLpr_TerminationType">
             <End Role="TerminationType" EntitySet="TerminationTypes" />
             <End Role="EmployeeLpr" EntitySet="EmployeeLpr" />
@@ -9687,14 +9671,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           </AssociationSet>
           <EntitySet Name="Employee" EntityType="BnoisdbModel.Employee" />
           <EntitySet Name="ExecutionRemark" EntityType="BnoisdbModel.ExecutionRemark" />
-          <AssociationSet Name="FK_Achievement_Employee" Association="BnoisdbModel.FK_Achievement_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Achievement" EntitySet="Achievement" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Achievement_Employee1" Association="BnoisdbModel.FK_Achievement_Employee1">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Achievement" EntitySet="Achievement" />
-          </AssociationSet>
           <AssociationSet Name="FK_Address_Employee" Association="BnoisdbModel.FK_Address_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Address" EntitySet="Addresses" />
@@ -9855,10 +9831,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="Employee" EntitySet="Employee" />
             <End Role="PromotionNomination" EntitySet="PromotionNominations" />
           </AssociationSet>
-          <AssociationSet Name="FK_PunishmentAccident_Employee" Association="BnoisdbModel.FK_PunishmentAccident_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="PunishmentAccident" EntitySet="PunishmentAccidents" />
-          </AssociationSet>
           <AssociationSet Name="FK_RetiredEmployee_Employee" Association="BnoisdbModel.FK_RetiredEmployee_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="RetiredEmployee" EntitySet="RetiredEmployee" />
@@ -9992,10 +9964,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           </AssociationSet>
           <EntitySet Name="BnoisLog" EntityType="BnoisdbModel.BnoisLog" />
           <EntitySet Name="Office" EntityType="BnoisdbModel.Office" />
-          <AssociationSet Name="FK_Achievement_Office" Association="BnoisdbModel.FK_Achievement_Office">
-            <End Role="Office" EntitySet="Office" />
-            <End Role="Achievement" EntitySet="Achievement" />
-          </AssociationSet>
           <AssociationSet Name="FK_Office_Country" Association="BnoisdbModel.FK_Office_Country">
             <End Role="Country" EntitySet="Countries" />
             <End Role="Office" EntitySet="Office" />
@@ -10125,31 +10093,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="Institute" EntitySet="Institute" />
             <End Role="Education" EntitySet="Educations" />
           </AssociationSet>
-          <EntitySet Name="EmployeeMscEducation" EntityType="BnoisdbModel.EmployeeMscEducation" />
-          <AssociationSet Name="FK_EmployeeMscEducation_Country" Association="BnoisdbModel.FK_EmployeeMscEducation_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMscEducation_Employee" Association="BnoisdbModel.FK_EmployeeMscEducation_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMscEducation_MscEducationType" Association="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType">
-            <End Role="MscEducationType" EntitySet="MscEducationType" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMscEducation_MscInstitute" Association="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute">
-            <End Role="MscInstitute" EntitySet="MscInstitute" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMscEducation_MscPermissionType" Association="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType">
-            <End Role="MscPermissionType" EntitySet="MscPermissionType" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeMscEducation_Rank" Association="BnoisdbModel.FK_EmployeeMscEducation_Rank">
-            <End Role="Rank" EntitySet="Rank" />
-            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
-          </AssociationSet>
           <EntitySet Name="EmployeeServiceExamResult" EntityType="BnoisdbModel.EmployeeServiceExamResult" />
           <AssociationSet Name="FK_EmployeeServiceEamResult_Employee" Association="BnoisdbModel.FK_EmployeeServiceEamResult_Employee">
             <End Role="Employee" EntitySet="Employee" />
@@ -10268,15 +10211,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Remark" EntitySet="Remark" />
           </AssociationSet>
-          <EntitySet Name="DashBoardTrace990" EntityType="BnoisdbModel.DashBoardTrace990" />
-          <AssociationSet Name="FK_DashBoardTrace990_Employee" Association="BnoisdbModel.FK_DashBoardTrace990_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="DashBoardTrace990" EntitySet="DashBoardTrace990" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DashBoardTrace990_Rank" Association="BnoisdbModel.FK_DashBoardTrace990_Rank">
-            <End Role="Rank" EntitySet="Rank" />
-            <End Role="DashBoardTrace990" EntitySet="DashBoardTrace990" />
-          </AssociationSet>
           <EntitySet Name="DashBoardMinuteStandby975" EntityType="BnoisdbModel.DashBoardMinuteStandby975" />
           <AssociationSet Name="FK_DashBoardMinuteStandby975_Employee" Association="BnoisdbModel.FK_DashBoardMinuteStandby975_Employee">
             <End Role="Employee" EntitySet="Employee" />
@@ -10287,6 +10221,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="DashBoardMinuteStandby975" EntitySet="DashBoardMinuteStandby975" />
           </AssociationSet>
           <EntitySet Name="DashBoardMinuite110" EntityType="BnoisdbModel.DashBoardMinuite110" />
+          <EntitySet Name="DashBoardTrace990" EntityType="BnoisdbModel.DashBoardTrace990" />
           <AssociationSet Name="FK_DashBoardMinuite110_DashBoardMinuite100" Association="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100">
             <End Role="DashBoardMinuite100" EntitySet="DashBoardMinuite100" />
             <End Role="DashBoardMinuite110" EntitySet="DashBoardMinuite110" />
@@ -10294,6 +10229,77 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <AssociationSet Name="FK_DashBoardMinuite110_Employee" Association="BnoisdbModel.FK_DashBoardMinuite110_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="DashBoardMinuite110" EntitySet="DashBoardMinuite110" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardTrace990_Employee" Association="BnoisdbModel.FK_DashBoardTrace990_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="DashBoardTrace990" EntitySet="DashBoardTrace990" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DashBoardTrace990_Rank" Association="BnoisdbModel.FK_DashBoardTrace990_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="DashBoardTrace990" EntitySet="DashBoardTrace990" />
+          </AssociationSet>
+          <EntitySet Name="Achievement" EntityType="BnoisdbModel.Achievement" />
+          <EntitySet Name="EmployeeMscEducation" EntityType="BnoisdbModel.EmployeeMscEducation" />
+          <EntitySet Name="PunishmentAccident" EntityType="BnoisdbModel.PunishmentAccident" />
+          <AssociationSet Name="FK_Achievement_Commendation" Association="BnoisdbModel.FK_Achievement_Commendation">
+            <End Role="Commendation" EntitySet="Commendations" />
+            <End Role="Achievement" EntitySet="Achievement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Achievement_Employee" Association="BnoisdbModel.FK_Achievement_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Achievement" EntitySet="Achievement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Achievement_Employee1" Association="BnoisdbModel.FK_Achievement_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Achievement" EntitySet="Achievement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Achievement_Office" Association="BnoisdbModel.FK_Achievement_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="Achievement" EntitySet="Achievement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_Country" Association="BnoisdbModel.FK_EmployeeMscEducation_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_Employee" Association="BnoisdbModel.FK_EmployeeMscEducation_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunishmentAccident_Employee" Association="BnoisdbModel.FK_PunishmentAccident_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="PunishmentAccident" EntitySet="PunishmentAccident" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_MscEducationType" Association="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType">
+            <End Role="MscEducationType" EntitySet="MscEducationType" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_MscInstitute" Association="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute">
+            <End Role="MscInstitute" EntitySet="MscInstitute" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_MscPermissionType" Association="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType">
+            <End Role="MscPermissionType" EntitySet="MscPermissionType" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeMscEducation_Rank" Association="BnoisdbModel.FK_EmployeeMscEducation_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="EmployeeMscEducation" EntitySet="EmployeeMscEducation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunishmentAccident_PunishmentCategory" Association="BnoisdbModel.FK_PunishmentAccident_PunishmentCategory">
+            <End Role="PunishmentCategory" EntitySet="PunishmentCategories" />
+            <End Role="PunishmentAccident" EntitySet="PunishmentAccident" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunishmentAccident_PunishmentNature" Association="BnoisdbModel.FK_PunishmentAccident_PunishmentNature">
+            <End Role="PunishmentNature" EntitySet="PunishmentNatures" />
+            <End Role="PunishmentAccident" EntitySet="PunishmentAccident" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunishmentAccident_PunishmentSubCategory" Association="BnoisdbModel.FK_PunishmentAccident_PunishmentSubCategory">
+            <End Role="PunishmentSubCategory" EntitySet="PunishmentSubCategories" />
+            <End Role="PunishmentAccident" EntitySet="PunishmentAccident" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunishmentAccident_Rank" Association="BnoisdbModel.FK_PunishmentAccident_Rank">
+            <End Role="Rank" EntitySet="Rank" />
+            <End Role="PunishmentAccident" EntitySet="PunishmentAccident" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
@@ -10506,8 +10512,8 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="EmployeeFamilyPermission" Relationship="BnoisdbModel.FK_EmployeeFamilyPermission_Country" FromRole="Country" ToRole="EmployeeFamilyPermission" />
           <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_Office_Country" FromRole="Country" ToRole="Office" />
           <NavigationProperty Name="Office1" Relationship="BnoisdbModel.FK_Office_Country1" FromRole="Country" ToRole="Office" />
-          <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Country" FromRole="Country" ToRole="EmployeeMscEducation" />
           <NavigationProperty Name="DashBoardMinuite100" Relationship="BnoisdbModel.FK_DashBoardMinuite100_Country" FromRole="Country" ToRole="DashBoardMinuite100" />
+          <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Country" FromRole="Country" ToRole="EmployeeMscEducation" />
           </EntityType>
         <EntityType Name="District">
           <Key>
@@ -11218,7 +11224,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PunishmentSubCategories" Relationship="BnoisdbModel.FK_PunishmentSubCategory_PunishmentCategory" FromRole="PunishmentCategory" ToRole="PunishmentSubCategory" />
-          <NavigationProperty Name="PunishmentAccidents" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentCategory" FromRole="PunishmentCategory" ToRole="PunishmentAccident" />
+          <NavigationProperty Name="PunishmentAccident" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentCategory" FromRole="PunishmentCategory" ToRole="PunishmentAccident" />
         </EntityType>
         <EntityType Name="PunishmentNature">
           <Key>
@@ -11234,7 +11240,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PtDeductPunishment" Relationship="BnoisdbModel.FK_PtDeductPunishment_PunishmentNature" FromRole="PunishmentNature" ToRole="PtDeductPunishment" />
-          <NavigationProperty Name="PunishmentAccidents" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentNature" FromRole="PunishmentNature" ToRole="PunishmentAccident" />
+          <NavigationProperty Name="PunishmentAccident" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentNature" FromRole="PunishmentNature" ToRole="PunishmentAccident" />
         </EntityType>
         <EntityType Name="RankCategory">
           <Key>
@@ -12361,7 +12367,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="EmpRunMissings" Relationship="BnoisdbModel.FK_EmpRunMissing_Rank" FromRole="Rank" ToRole="EmpRunMissing" />
           <NavigationProperty Name="PreviousTransfers" Relationship="BnoisdbModel.FK_PreviousTransfer_Rank" FromRole="Rank" ToRole="PreviousTransfer" />
           <NavigationProperty Name="TrainingRanks" Relationship="BnoisdbModel.FK_TrainingRank_Rank" FromRole="Rank" ToRole="TrainingRank" />
-          <NavigationProperty Name="PunishmentAccidents" Relationship="BnoisdbModel.FK_PunishmentAccident_Rank" FromRole="Rank" ToRole="PunishmentAccident" />
           <NavigationProperty Name="PromotionBoards" Relationship="BnoisdbModel.FK_PromotionBoard_RankFrom" FromRole="Rank" ToRole="PromotionBoard" />
           <NavigationProperty Name="PromotionBoards1" Relationship="BnoisdbModel.FK_PromotionBoard_ToRank" FromRole="Rank" ToRole="PromotionBoard" />
           <NavigationProperty Name="Transfer" Relationship="BnoisdbModel.FK_Transfer_Rank" FromRole="Rank" ToRole="Transfer" />
@@ -12370,14 +12375,15 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="EmployeeFamilyPermission" Relationship="BnoisdbModel.FK_EmployeeFamilyPermission_Rank" FromRole="Rank" ToRole="EmployeeFamilyPermission" />
           <NavigationProperty Name="EmployeeCarLoan" Relationship="BnoisdbModel.FK_EmployeeCarLoan_Rank" FromRole="Rank" ToRole="EmployeeCarLoan" />
           <NavigationProperty Name="EmployeeSecurityClearance" Relationship="BnoisdbModel.FK_EmployeeSecurityClearance_Rank" FromRole="Rank" ToRole="EmployeeSecurityClearance" />
-          <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Rank" FromRole="Rank" ToRole="EmployeeMscEducation" />
           <NavigationProperty Name="ToeAuthorized" Relationship="BnoisdbModel.FK_ToeAuthorized_Rank" FromRole="Rank" ToRole="ToeAuthorized" />
           <NavigationProperty Name="DashBoardBranchByAdminAuthority600Entry" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority600Entry_Rank" FromRole="Rank" ToRole="DashBoardBranchByAdminAuthority600Entry" />
           <NavigationProperty Name="DashBoardBranchByAdminAuthority700" Relationship="BnoisdbModel.FK_DashBoardBranchByAdminAuthority700_Rank" FromRole="Rank" ToRole="DashBoardBranchByAdminAuthority700" />
           <NavigationProperty Name="DashBoardBranch975" Relationship="BnoisdbModel.FK_DashBoardBranch975_Rank" FromRole="Rank" ToRole="DashBoardBranch975" />
           <NavigationProperty Name="DashBoardBranch980" Relationship="BnoisdbModel.FK_DashBoardBranch980_Rank" FromRole="Rank" ToRole="DashBoardBranch980" />
-          <NavigationProperty Name="DashBoardTrace990" Relationship="BnoisdbModel.FK_DashBoardTrace990_Rank" FromRole="Rank" ToRole="DashBoardTrace990" />
           <NavigationProperty Name="DashBoardMinuteStandby975" Relationship="BnoisdbModel.FK_DashBoardMinuteStandby975_Rank" FromRole="Rank" ToRole="DashBoardMinuteStandby975" />
+          <NavigationProperty Name="DashBoardTrace990" Relationship="BnoisdbModel.FK_DashBoardTrace990_Rank" FromRole="Rank" ToRole="DashBoardTrace990" />
+          <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Rank" FromRole="Rank" ToRole="EmployeeMscEducation" />
+          <NavigationProperty Name="PunishmentAccident" Relationship="BnoisdbModel.FK_PunishmentAccident_Rank" FromRole="Rank" ToRole="PunishmentAccident" />
           </EntityType>
         <EntityType Name="SubBranch">
           <Key>
@@ -13002,7 +13008,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PunishmentCategory" Relationship="BnoisdbModel.FK_PunishmentSubCategory_PunishmentCategory" FromRole="PunishmentSubCategory" ToRole="PunishmentCategory" />
           <NavigationProperty Name="PtDeductPunishment" Relationship="BnoisdbModel.FK_PtDeductPunishment_PunishmentSubCategory" FromRole="PunishmentSubCategory" ToRole="PtDeductPunishment" />
-          <NavigationProperty Name="PunishmentAccidents" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentSubCategory" FromRole="PunishmentSubCategory" ToRole="PunishmentAccident" />
+          <NavigationProperty Name="PunishmentAccident" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentSubCategory" FromRole="PunishmentSubCategory" ToRole="PunishmentAccident" />
         </EntityType>
         <Association Name="FK_PunishmentSubCategory_PunishmentCategory">
           <End Type="BnoisdbModel.PunishmentCategory" Role="PunishmentCategory" Multiplicity="1" />
@@ -14453,45 +14459,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="AOffCd" Type="Int32" />
           <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_MedalAward_Employee" FromRole="MedalAward" ToRole="Employee" />
         </EntityType>
-        <EntityType Name="PunishmentAccident">
-          <Key>
-            <PropertyRef Name="PunishmentAccidentId" />
-          </Key>
-          <Property Name="PunishmentAccidentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="PunishmentCategoryId" Type="Int32" />
-          <Property Name="PunishmentSubCategoryId" Type="Int32" />
-          <Property Name="PunishmentNatureId" Type="Int32" />
-          <Property Name="IsBackLog" Type="Boolean" Nullable="false" />
-          <Property Name="RankId" Type="Int32" />
-          <Property Name="TransferId" Type="Int32" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="AccedentType" Type="Int32" />
-          <Property Name="DurationMonths" Type="Int32" />
-          <Property Name="DurationDays" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PunishmentType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Reason" Type="String" MaxLength="528" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="PunishmentValue" Type="Double" Nullable="false" />
-          <Property Name="SkipYear" Type="Double" Nullable="false" />
-          <Property Name="DeductPercentage" Type="Double" Nullable="false" />
-          <Property Name="DeductYear" Type="Int32" Nullable="false" />
-          <Property Name="PtAfterDeduct" Type="Double" Nullable="false" />
-          <Property Name="YearCount" Type="Int32" Nullable="false" />
-          <Property Name="IsProcessed" Type="Boolean" Nullable="false" />
-          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="PunishmentCategory" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentCategory" FromRole="PunishmentAccident" ToRole="PunishmentCategory" />
-          <NavigationProperty Name="PunishmentNature" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentNature" FromRole="PunishmentAccident" ToRole="PunishmentNature" />
-          <NavigationProperty Name="PunishmentSubCategory" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentSubCategory" FromRole="PunishmentAccident" ToRole="PunishmentSubCategory" />
-          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_PunishmentAccident_Rank" FromRole="PunishmentAccident" ToRole="Rank" />
-          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_PunishmentAccident_Employee" FromRole="PunishmentAccident" ToRole="Employee" />
-        </EntityType>
         <Association Name="FK_MedalAward_Award">
           <End Type="BnoisdbModel.Award" Role="Award" Multiplicity="0..1" />
           <End Type="BnoisdbModel.MedalAward" Role="MedalAward" Multiplicity="*" />
@@ -14537,54 +14504,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Principal>
             <Dependent Role="MedalAward">
               <PropertyRef Name="PublicationCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PunishmentAccident_PunishmentCategory">
-          <End Type="BnoisdbModel.PunishmentCategory" Role="PunishmentCategory" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.PunishmentAccident" Role="PunishmentAccident" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PunishmentCategory">
-              <PropertyRef Name="PunishmentCategoryId" />
-            </Principal>
-            <Dependent Role="PunishmentAccident">
-              <PropertyRef Name="PunishmentCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PunishmentAccident_PunishmentNature">
-          <End Type="BnoisdbModel.PunishmentNature" Role="PunishmentNature" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.PunishmentAccident" Role="PunishmentAccident" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PunishmentNature">
-              <PropertyRef Name="PunishmentNatureId" />
-            </Principal>
-            <Dependent Role="PunishmentAccident">
-              <PropertyRef Name="PunishmentNatureId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PunishmentAccident_PunishmentSubCategory">
-          <End Type="BnoisdbModel.PunishmentSubCategory" Role="PunishmentSubCategory" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.PunishmentAccident" Role="PunishmentAccident" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PunishmentSubCategory">
-              <PropertyRef Name="PunishmentSubCategoryId" />
-            </Principal>
-            <Dependent Role="PunishmentAccident">
-              <PropertyRef Name="PunishmentSubCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PunishmentAccident_Rank">
-          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.PunishmentAccident" Role="PunishmentAccident" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rank">
-              <PropertyRef Name="RankId" />
-            </Principal>
-            <Dependent Role="PunishmentAccident">
-              <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -15346,41 +15265,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Achievement">
-          <Key>
-            <PropertyRef Name="AchievementId" />
-          </Key>
-          <Property Name="AchievementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="IsBackLog" Type="Boolean" Nullable="false" />
-          <Property Name="RankId" Type="Int32" />
-          <Property Name="TransferId" Type="Int32" />
-          <Property Name="GivenEmployeeId" Type="Int32" />
-          <Property Name="GivenTransferId" Type="Int32" />
-          <Property Name="CommendationId" Type="Int32" />
-          <Property Name="PatternId" Type="Int32" />
-          <Property Name="OfficeId" Type="Int32" />
-          <Property Name="OfficerName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="OfficerDesignation" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="GivenByType" Type="Int32" Nullable="false" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CommAppType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Reason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="BOffCd" Type="Int32" />
-          <Property Name="AOffCd" Type="Int32" />
-          <NavigationProperty Name="Commendation" Relationship="BnoisdbModel.FK_Achievement_Commendation" FromRole="Achievement" ToRole="Commendation" />
-          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_Achievement_Employee" FromRole="Achievement" ToRole="Employee" />
-          <NavigationProperty Name="Employee1" Relationship="BnoisdbModel.FK_Achievement_Employee1" FromRole="Achievement" ToRole="Employee" />
-          <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_Achievement_Office" FromRole="Achievement" ToRole="Office" />
-          </EntityType>
         <EntityType Name="EmployeeLpr">
           <Key>
             <PropertyRef Name="EmpLprId" />
@@ -15404,18 +15288,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="TerminationType" Relationship="BnoisdbModel.FK_EmployeeLpr_TerminationType" FromRole="EmployeeLpr" ToRole="TerminationType" />
           <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_EmployeeLpr_Employee" FromRole="EmployeeLpr" ToRole="Employee" />
         </EntityType>
-        <Association Name="FK_Achievement_Commendation">
-          <End Type="BnoisdbModel.Commendation" Role="Commendation" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.Achievement" Role="Achievement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commendation">
-              <PropertyRef Name="CommendationId" />
-            </Principal>
-            <Dependent Role="Achievement">
-              <PropertyRef Name="CommendationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EmployeeLpr_TerminationType">
           <End Type="BnoisdbModel.TerminationType" Role="TerminationType" Multiplicity="1" />
           <End Type="BnoisdbModel.EmployeeLpr" Role="EmployeeLpr" Multiplicity="*" />
@@ -15615,8 +15487,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Achievement" Relationship="BnoisdbModel.FK_Achievement_Employee" FromRole="Employee" ToRole="Achievement" />
-          <NavigationProperty Name="Achievement1" Relationship="BnoisdbModel.FK_Achievement_Employee1" FromRole="Employee" ToRole="Achievement" />
           <NavigationProperty Name="Address" Relationship="BnoisdbModel.FK_Address_Employee" FromRole="Employee" ToRole="Address" />
           <NavigationProperty Name="Batch" Relationship="BnoisdbModel.FK_Employee_Batch" FromRole="Employee" ToRole="Batch" />
           <NavigationProperty Name="BoardMember" Relationship="BnoisdbModel.FK_BoardMember_Employee" FromRole="Employee" ToRole="BoardMember" />
@@ -15657,7 +15527,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="PreviousPunishment" Relationship="BnoisdbModel.FK_PreviousPunishment_Employee" FromRole="Employee" ToRole="PreviousPunishment" />
           <NavigationProperty Name="PreviousTransfer" Relationship="BnoisdbModel.FK_PreviousTransfer_Employee" FromRole="Employee" ToRole="PreviousTransfer" />
           <NavigationProperty Name="PromotionNomination" Relationship="BnoisdbModel.FK_PromotionNomination_Employee" FromRole="Employee" ToRole="PromotionNomination" />
-          <NavigationProperty Name="PunishmentAccident" Relationship="BnoisdbModel.FK_PunishmentAccident_Employee" FromRole="Employee" ToRole="PunishmentAccident" />
           <NavigationProperty Name="RetiredEmployee" Relationship="BnoisdbModel.FK_RetiredEmployee_Employee" FromRole="Employee" ToRole="RetiredEmployee" />
           <NavigationProperty Name="SeaService" Relationship="BnoisdbModel.FK_SeaService_Employee" FromRole="Employee" ToRole="SeaService" />
           <NavigationProperty Name="Sibling" Relationship="BnoisdbModel.FK_Sibling_Employee" FromRole="Employee" ToRole="Sibling" />
@@ -15675,16 +15544,19 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="CareerForecast" Relationship="BnoisdbModel.FK_CareerForecast_Employee" FromRole="Employee" ToRole="CareerForecast" />
           <NavigationProperty Name="EmployeeGeneral" Relationship="BnoisdbModel.FK_EmployeeGeneral_Employee" FromRole="Employee" ToRole="EmployeeGeneral" />
           <NavigationProperty Name="CoXoService" Relationship="BnoisdbModel.FK_CoXoService_Employee" FromRole="Employee" ToRole="CoXoService" />
-          <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="Employee" ToRole="EmployeeMscEducation" />
           <NavigationProperty Name="EmployeeServiceExamResult" Relationship="BnoisdbModel.FK_EmployeeServiceEamResult_Employee" FromRole="Employee" ToRole="EmployeeServiceExamResult" />
           <NavigationProperty Name="DashBoardBranch975" Relationship="BnoisdbModel.FK_DashBoardBranch975_Employee" FromRole="Employee" ToRole="DashBoardBranch975" />
           <NavigationProperty Name="DashBoardBranch980" Relationship="BnoisdbModel.FK_DashBoardBranch980_Employee" FromRole="Employee" ToRole="DashBoardBranch980" />
           <NavigationProperty Name="ProposalCandidate" Relationship="BnoisdbModel.FK_ProposalCadidate_Employee" FromRole="Employee" ToRole="ProposalCandidate" />
           <NavigationProperty Name="DashBoardMinuite100" Relationship="BnoisdbModel.FK_DashBoardMinuite100_Employee" FromRole="Employee" ToRole="DashBoardMinuite100" />
           <NavigationProperty Name="Remark" Relationship="BnoisdbModel.FK_Remark_Employee" FromRole="Employee" ToRole="Remark" />
-          <NavigationProperty Name="DashBoardTrace990" Relationship="BnoisdbModel.FK_DashBoardTrace990_Employee" FromRole="Employee" ToRole="DashBoardTrace990" />
           <NavigationProperty Name="DashBoardMinuteStandby975" Relationship="BnoisdbModel.FK_DashBoardMinuteStandby975_Employee" FromRole="Employee" ToRole="DashBoardMinuteStandby975" />
           <NavigationProperty Name="DashBoardMinuite110" Relationship="BnoisdbModel.FK_DashBoardMinuite110_Employee" FromRole="Employee" ToRole="DashBoardMinuite110" />
+          <NavigationProperty Name="DashBoardTrace990" Relationship="BnoisdbModel.FK_DashBoardTrace990_Employee" FromRole="Employee" ToRole="DashBoardTrace990" />
+          <NavigationProperty Name="Achievement" Relationship="BnoisdbModel.FK_Achievement_Employee" FromRole="Employee" ToRole="Achievement" />
+          <NavigationProperty Name="Achievement1" Relationship="BnoisdbModel.FK_Achievement_Employee1" FromRole="Employee" ToRole="Achievement" />
+          <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="Employee" ToRole="EmployeeMscEducation" />
+          <NavigationProperty Name="PunishmentAccident" Relationship="BnoisdbModel.FK_PunishmentAccident_Employee" FromRole="Employee" ToRole="PunishmentAccident" />
         </EntityType>
         <EntityType Name="ExecutionRemark">
           <Key>
@@ -15703,30 +15575,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_Employee_ExecutionRemark" FromRole="ExecutionRemark" ToRole="Employee" />
           <NavigationProperty Name="PromotionNomination" Relationship="BnoisdbModel.FK_PromotionNomination_ExecutionRemark" FromRole="ExecutionRemark" ToRole="PromotionNomination" />
         </EntityType>
-        <Association Name="FK_Achievement_Employee">
-          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="BnoisdbModel.Achievement" Role="Achievement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="Achievement">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Achievement_Employee1">
-          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.Achievement" Role="Achievement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="Achievement">
-              <PropertyRef Name="GivenEmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Address_Employee">
           <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
           <End Type="BnoisdbModel.Address" Role="Address" Multiplicity="*" />
@@ -16203,18 +16051,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
               <PropertyRef Name="EmployeeId" />
             </Principal>
             <Dependent Role="PromotionNomination">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PunishmentAccident_Employee">
-          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="BnoisdbModel.PunishmentAccident" Role="PunishmentAccident" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="PunishmentAccident">
               <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -16868,7 +16704,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="OrgCd" Type="Int32" />
           <Property Name="IsSubmarineCount" Type="Boolean" />
           <Property Name="ActiveStatus" Type="Boolean" />
-          <NavigationProperty Name="Achievement" Relationship="BnoisdbModel.FK_Achievement_Office" FromRole="Office" ToRole="Achievement" />
           <NavigationProperty Name="Country" Relationship="BnoisdbModel.FK_Office_Country" FromRole="Office" ToRole="Country" />
           <NavigationProperty Name="Country1" Relationship="BnoisdbModel.FK_Office_Country1" FromRole="Office" ToRole="Country" />
           <NavigationProperty Name="EmployeeOpr" Relationship="BnoisdbModel.FK_EmployeeOpr_Office" FromRole="Office" ToRole="EmployeeOpr" />
@@ -16883,19 +16718,8 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="CoXoService" Relationship="BnoisdbModel.FK_CoXoService_Office" FromRole="Office" ToRole="CoXoService" />
           <NavigationProperty Name="ToeAuthorized" Relationship="BnoisdbModel.FK_ToeAuthorized_Office" FromRole="Office" ToRole="ToeAuthorized" />
           <NavigationProperty Name="OfficeAppointment" Relationship="BnoisdbModel.FK_OfficeAppointment_Office" FromRole="Office" ToRole="OfficeAppointment" />
+          <NavigationProperty Name="Achievement" Relationship="BnoisdbModel.FK_Achievement_Office" FromRole="Office" ToRole="Achievement" />
         </EntityType>
-        <Association Name="FK_Achievement_Office">
-          <End Type="BnoisdbModel.Office" Role="Office" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.Achievement" Role="Achievement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Office">
-              <PropertyRef Name="OfficeId" />
-            </Principal>
-            <Dependent Role="Achievement">
-              <PropertyRef Name="OfficeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Office_Country">
           <End Type="BnoisdbModel.Country" Role="Country" Multiplicity="0..1" />
           <End Type="BnoisdbModel.Office" Role="Office" Multiplicity="*" />
@@ -17414,108 +17238,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Principal>
             <Dependent Role="Education">
               <PropertyRef Name="InstituteId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="EmployeeMscEducation">
-          <Key>
-            <PropertyRef Name="EmployeeMscEducationId" />
-          </Key>
-          <Property Name="EmployeeMscEducationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="RankId" Type="Int32" />
-          <Property Name="MscEducationTypeId" Type="Int32" />
-          <Property Name="MscInstituteId" Type="Int32" />
-          <Property Name="MscPermissionTypeId" Type="Int32" />
-          <Property Name="CountryId" Type="Int32" />
-          <Property Name="PassingYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PermissionYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Results" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="IsComplete" Type="Boolean" />
-          <Property Name="FromDate" Type="DateTime" Precision="0" />
-          <Property Name="ToDate" Type="DateTime" Precision="0" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Country" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Country" FromRole="EmployeeMscEducation" ToRole="Country" />
-          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="EmployeeMscEducation" ToRole="Employee" />
-          <NavigationProperty Name="MscEducationType" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType" FromRole="EmployeeMscEducation" ToRole="MscEducationType" />
-          <NavigationProperty Name="MscInstitute" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute" FromRole="EmployeeMscEducation" ToRole="MscInstitute" />
-          <NavigationProperty Name="MscPermissionType" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType" FromRole="EmployeeMscEducation" ToRole="MscPermissionType" />
-          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Rank" FromRole="EmployeeMscEducation" ToRole="Rank" />
-        </EntityType>
-        <Association Name="FK_EmployeeMscEducation_Country">
-          <End Type="BnoisdbModel.Country" Role="Country" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMscEducation_Employee">
-          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMscEducation_MscEducationType">
-          <End Type="BnoisdbModel.MscEducationType" Role="MscEducationType" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MscEducationType">
-              <PropertyRef Name="MscEducationTypeId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="MscEducationTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMscEducation_MscInstitute">
-          <End Type="BnoisdbModel.MscInstitute" Role="MscInstitute" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MscInstitute">
-              <PropertyRef Name="MscInstituteId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="MscInstituteId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMscEducation_MscPermissionType">
-          <End Type="BnoisdbModel.MscPermissionType" Role="MscPermissionType" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MscPermissionType">
-              <PropertyRef Name="MscPermissionTypeId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="MscPermissionTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeMscEducation_Rank">
-          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
-          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rank">
-              <PropertyRef Name="RankId" />
-            </Principal>
-            <Dependent Role="EmployeeMscEducation">
-              <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -18079,52 +17801,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="DashBoardTrace990">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="RankId" Type="Int32" Nullable="false" />
-          <Property Name="TraceMark" Type="Double" />
-          <Property Name="RecomStatus" Type="Int32" />
-          <Property Name="RecomStatus2" Type="Int32" />
-          <Property Name="RecomStatus3" Type="Int32" />
-          <Property Name="Remarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks2" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks3" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_DashBoardTrace990_Employee" FromRole="DashBoardTrace990" ToRole="Employee" />
-          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_DashBoardTrace990_Rank" FromRole="DashBoardTrace990" ToRole="Rank" />
-        </EntityType>
-        <Association Name="FK_DashBoardTrace990_Employee">
-          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="BnoisdbModel.DashBoardTrace990" Role="DashBoardTrace990" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
-            </Principal>
-            <Dependent Role="DashBoardTrace990">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DashBoardTrace990_Rank">
-          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="1" />
-          <End Type="BnoisdbModel.DashBoardTrace990" Role="DashBoardTrace990" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rank">
-              <PropertyRef Name="RankId" />
-            </Principal>
-            <Dependent Role="DashBoardTrace990">
-              <PropertyRef Name="RankId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="DashBoardMinuteStandby975">
           <Key>
             <PropertyRef Name="Id" />
@@ -18183,13 +17859,14 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="MinuiteCandidateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MinuiteId" Type="Int32" Nullable="false" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="ProposedBillet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProposedBillet" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
           <Property Name="Remarks1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Remarks2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Remarks3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Remarks4" Type="Int32" />
           <Property Name="Remarks5" Type="Int32" />
           <Property Name="Remarks6" Type="Int32" />
+          <Property Name="Remarks7" Type="Double" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -18197,6 +17874,32 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DashBoardMinuite100" Relationship="BnoisdbModel.FK_DashBoardMinuite110_DashBoardMinuite100" FromRole="DashBoardMinuite110" ToRole="DashBoardMinuite100" />
           <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_DashBoardMinuite110_Employee" FromRole="DashBoardMinuite110" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="DashBoardTrace990">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="RankId" Type="Int32" Nullable="false" />
+          <Property Name="TraceMark" Type="Double" />
+          <Property Name="RecomStatus" Type="Int32" />
+          <Property Name="RecomStatus2" Type="Int32" />
+          <Property Name="RecomStatus3" Type="Int32" />
+          <Property Name="RecomStatus4" Type="Double" />
+          <Property Name="Remarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks2" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks3" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks4" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks5" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks6" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_DashBoardTrace990_Employee" FromRole="DashBoardTrace990" ToRole="Employee" />
+          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_DashBoardTrace990_Rank" FromRole="DashBoardTrace990" ToRole="Rank" />
         </EntityType>
         <Association Name="FK_DashBoardMinuite110_DashBoardMinuite100">
           <End Type="BnoisdbModel.DashBoardMinuite100" Role="DashBoardMinuite100" Multiplicity="1" />
@@ -18219,6 +17922,315 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Principal>
             <Dependent Role="DashBoardMinuite110">
               <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardTrace990_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.DashBoardTrace990" Role="DashBoardTrace990" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="DashBoardTrace990">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DashBoardTrace990_Rank">
+          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="1" />
+          <End Type="BnoisdbModel.DashBoardTrace990" Role="DashBoardTrace990" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="DashBoardTrace990">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Achievement">
+          <Key>
+            <PropertyRef Name="AchievementId" />
+          </Key>
+          <Property Name="AchievementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="IsBackLog" Type="Boolean" Nullable="false" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="TransferId" Type="Int32" />
+          <Property Name="GivenEmployeeId" Type="Int32" />
+          <Property Name="GivenTransferId" Type="Int32" />
+          <Property Name="CommendationId" Type="Int32" />
+          <Property Name="PatternId" Type="Int32" />
+          <Property Name="OfficeId" Type="Int32" />
+          <Property Name="OfficerName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OfficerDesignation" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GivenByType" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CommAppType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="BOffCd" Type="Int32" />
+          <Property Name="AOffCd" Type="Int32" />
+          <NavigationProperty Name="Commendation" Relationship="BnoisdbModel.FK_Achievement_Commendation" FromRole="Achievement" ToRole="Commendation" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_Achievement_Employee" FromRole="Achievement" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="BnoisdbModel.FK_Achievement_Employee1" FromRole="Achievement" ToRole="Employee" />
+          <NavigationProperty Name="Office" Relationship="BnoisdbModel.FK_Achievement_Office" FromRole="Achievement" ToRole="Office" />
+        </EntityType>
+        <EntityType Name="EmployeeMscEducation">
+          <Key>
+            <PropertyRef Name="EmployeeMscEducationId" />
+          </Key>
+          <Property Name="EmployeeMscEducationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="MscEducationTypeId" Type="Int32" />
+          <Property Name="MscInstituteId" Type="Int32" />
+          <Property Name="MscPermissionTypeId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="PassingYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Results" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsComplete" Type="Boolean" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <Property Name="PermissionYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompleteStatus" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Country" FromRole="EmployeeMscEducation" ToRole="Country" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="EmployeeMscEducation" ToRole="Employee" />
+          <NavigationProperty Name="MscEducationType" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscEducationType" FromRole="EmployeeMscEducation" ToRole="MscEducationType" />
+          <NavigationProperty Name="MscInstitute" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscInstitute" FromRole="EmployeeMscEducation" ToRole="MscInstitute" />
+          <NavigationProperty Name="MscPermissionType" Relationship="BnoisdbModel.FK_EmployeeMscEducation_MscPermissionType" FromRole="EmployeeMscEducation" ToRole="MscPermissionType" />
+          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Rank" FromRole="EmployeeMscEducation" ToRole="Rank" />
+        </EntityType>
+        <EntityType Name="PunishmentAccident">
+          <Key>
+            <PropertyRef Name="PunishmentAccidentId" />
+          </Key>
+          <Property Name="PunishmentAccidentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="PunishmentCategoryId" Type="Int32" />
+          <Property Name="PunishmentSubCategoryId" Type="Int32" />
+          <Property Name="PunishmentNatureId" Type="Int32" />
+          <Property Name="IsBackLog" Type="Boolean" Nullable="false" />
+          <Property Name="RankId" Type="Int32" />
+          <Property Name="TransferId" Type="Int32" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="AccedentType" Type="Int32" />
+          <Property Name="DurationMonths" Type="Int32" />
+          <Property Name="DurationDays" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PunishmentType" Type="String" MaxLength="550" FixedLength="false" Unicode="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PunishmentValue" Type="Double" Nullable="false" />
+          <Property Name="SkipYear" Type="Double" Nullable="false" />
+          <Property Name="DeductPercentage" Type="Double" Nullable="false" />
+          <Property Name="DeductYear" Type="Int32" Nullable="false" />
+          <Property Name="PtAfterDeduct" Type="Double" Nullable="false" />
+          <Property Name="YearCount" Type="Int32" Nullable="false" />
+          <Property Name="IsProcessed" Type="Boolean" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_PunishmentAccident_Employee" FromRole="PunishmentAccident" ToRole="Employee" />
+          <NavigationProperty Name="PunishmentCategory" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentCategory" FromRole="PunishmentAccident" ToRole="PunishmentCategory" />
+          <NavigationProperty Name="PunishmentNature" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentNature" FromRole="PunishmentAccident" ToRole="PunishmentNature" />
+          <NavigationProperty Name="PunishmentSubCategory" Relationship="BnoisdbModel.FK_PunishmentAccident_PunishmentSubCategory" FromRole="PunishmentAccident" ToRole="PunishmentSubCategory" />
+          <NavigationProperty Name="Rank" Relationship="BnoisdbModel.FK_PunishmentAccident_Rank" FromRole="PunishmentAccident" ToRole="Rank" />
+        </EntityType>
+        <Association Name="FK_Achievement_Commendation">
+          <End Type="BnoisdbModel.Commendation" Role="Commendation" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.Achievement" Role="Achievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commendation">
+              <PropertyRef Name="CommendationId" />
+            </Principal>
+            <Dependent Role="Achievement">
+              <PropertyRef Name="CommendationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Achievement_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.Achievement" Role="Achievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Achievement">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Achievement_Employee1">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.Achievement" Role="Achievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Achievement">
+              <PropertyRef Name="GivenEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Achievement_Office">
+          <End Type="BnoisdbModel.Office" Role="Office" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.Achievement" Role="Achievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeId" />
+            </Principal>
+            <Dependent Role="Achievement">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_Country">
+          <End Type="BnoisdbModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunishmentAccident_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.PunishmentAccident" Role="PunishmentAccident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="PunishmentAccident">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_MscEducationType">
+          <End Type="BnoisdbModel.MscEducationType" Role="MscEducationType" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MscEducationType">
+              <PropertyRef Name="MscEducationTypeId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="MscEducationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_MscInstitute">
+          <End Type="BnoisdbModel.MscInstitute" Role="MscInstitute" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MscInstitute">
+              <PropertyRef Name="MscInstituteId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="MscInstituteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_MscPermissionType">
+          <End Type="BnoisdbModel.MscPermissionType" Role="MscPermissionType" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MscPermissionType">
+              <PropertyRef Name="MscPermissionTypeId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="MscPermissionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeMscEducation_Rank">
+          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.EmployeeMscEducation" Role="EmployeeMscEducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="EmployeeMscEducation">
+              <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunishmentAccident_PunishmentCategory">
+          <End Type="BnoisdbModel.PunishmentCategory" Role="PunishmentCategory" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.PunishmentAccident" Role="PunishmentAccident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PunishmentCategory">
+              <PropertyRef Name="PunishmentCategoryId" />
+            </Principal>
+            <Dependent Role="PunishmentAccident">
+              <PropertyRef Name="PunishmentCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunishmentAccident_PunishmentNature">
+          <End Type="BnoisdbModel.PunishmentNature" Role="PunishmentNature" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.PunishmentAccident" Role="PunishmentAccident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PunishmentNature">
+              <PropertyRef Name="PunishmentNatureId" />
+            </Principal>
+            <Dependent Role="PunishmentAccident">
+              <PropertyRef Name="PunishmentNatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunishmentAccident_PunishmentSubCategory">
+          <End Type="BnoisdbModel.PunishmentSubCategory" Role="PunishmentSubCategory" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.PunishmentAccident" Role="PunishmentAccident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PunishmentSubCategory">
+              <PropertyRef Name="PunishmentSubCategoryId" />
+            </Principal>
+            <Dependent Role="PunishmentAccident">
+              <PropertyRef Name="PunishmentSubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunishmentAccident_Rank">
+          <End Type="BnoisdbModel.Rank" Role="Rank" Multiplicity="0..1" />
+          <End Type="BnoisdbModel.PunishmentAccident" Role="PunishmentAccident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rank">
+              <PropertyRef Name="RankId" />
+            </Principal>
+            <Dependent Role="PunishmentAccident">
+              <PropertyRef Name="RankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -20692,41 +20704,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PunishmentAccidents">
-            <EntityTypeMapping TypeName="BnoisdbModel.PunishmentAccident">
-              <MappingFragment StoreEntitySet="PunishmentAccident">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="IsProcessed" ColumnName="IsProcessed" />
-                <ScalarProperty Name="YearCount" ColumnName="YearCount" />
-                <ScalarProperty Name="PtAfterDeduct" ColumnName="PtAfterDeduct" />
-                <ScalarProperty Name="DeductYear" ColumnName="DeductYear" />
-                <ScalarProperty Name="DeductPercentage" ColumnName="DeductPercentage" />
-                <ScalarProperty Name="SkipYear" ColumnName="SkipYear" />
-                <ScalarProperty Name="PunishmentValue" ColumnName="PunishmentValue" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Reason" ColumnName="Reason" />
-                <ScalarProperty Name="PunishmentType" ColumnName="PunishmentType" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="DurationDays" ColumnName="DurationDays" />
-                <ScalarProperty Name="DurationMonths" ColumnName="DurationMonths" />
-                <ScalarProperty Name="AccedentType" ColumnName="AccedentType" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
-                <ScalarProperty Name="RankId" ColumnName="RankId" />
-                <ScalarProperty Name="IsBackLog" ColumnName="IsBackLog" />
-                <ScalarProperty Name="PunishmentNatureId" ColumnName="PunishmentNatureId" />
-                <ScalarProperty Name="PunishmentSubCategoryId" ColumnName="PunishmentSubCategoryId" />
-                <ScalarProperty Name="PunishmentCategoryId" ColumnName="PunishmentCategoryId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="PunishmentAccidentId" ColumnName="PunishmentAccidentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProposalDetails">
             <EntityTypeMapping TypeName="BnoisdbModel.ProposalDetail">
               <MappingFragment StoreEntitySet="ProposalDetail">
@@ -21030,38 +21007,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="TransferId" ColumnName="TransferId" />
                 <ScalarProperty Name="ExtraAppointmentId" ColumnName="ExtraAppointmentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Achievement">
-            <EntityTypeMapping TypeName="BnoisdbModel.Achievement">
-              <MappingFragment StoreEntitySet="Achievement">
-                <ScalarProperty Name="AOffCd" ColumnName="AOffCd" />
-                <ScalarProperty Name="BOffCd" ColumnName="BOffCd" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Reason" ColumnName="Reason" />
-                <ScalarProperty Name="CommAppType" ColumnName="CommAppType" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="GivenByType" ColumnName="GivenByType" />
-                <ScalarProperty Name="OfficerDesignation" ColumnName="OfficerDesignation" />
-                <ScalarProperty Name="OfficerName" ColumnName="OfficerName" />
-                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
-                <ScalarProperty Name="PatternId" ColumnName="PatternId" />
-                <ScalarProperty Name="CommendationId" ColumnName="CommendationId" />
-                <ScalarProperty Name="GivenTransferId" ColumnName="GivenTransferId" />
-                <ScalarProperty Name="GivenEmployeeId" ColumnName="GivenEmployeeId" />
-                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
-                <ScalarProperty Name="RankId" ColumnName="RankId" />
-                <ScalarProperty Name="IsBackLog" ColumnName="IsBackLog" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="AchievementId" ColumnName="AchievementId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -21608,31 +21553,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EmployeeMscEducation">
-            <EntityTypeMapping TypeName="BnoisdbModel.EmployeeMscEducation">
-              <MappingFragment StoreEntitySet="EmployeeMscEducation">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Results" ColumnName="Results" />
-                <ScalarProperty Name="PermissionYear" ColumnName="PermissionYear" />
-                <ScalarProperty Name="PassingYear" ColumnName="PassingYear" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="MscPermissionTypeId" ColumnName="MscPermissionTypeId" />
-                <ScalarProperty Name="MscInstituteId" ColumnName="MscInstituteId" />
-                <ScalarProperty Name="MscEducationTypeId" ColumnName="MscEducationTypeId" />
-                <ScalarProperty Name="RankId" ColumnName="RankId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="EmployeeMscEducationId" ColumnName="EmployeeMscEducationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EmployeeServiceExamResult">
             <EntityTypeMapping TypeName="BnoisdbModel.EmployeeServiceExamResult">
               <MappingFragment StoreEntitySet="EmployeeServiceExamResult">
@@ -21851,27 +21771,6 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DashBoardTrace990">
-            <EntityTypeMapping TypeName="BnoisdbModel.DashBoardTrace990">
-              <MappingFragment StoreEntitySet="DashBoardTrace990">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Remarks3" ColumnName="Remarks3" />
-                <ScalarProperty Name="Remarks2" ColumnName="Remarks2" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="RecomStatus3" ColumnName="RecomStatus3" />
-                <ScalarProperty Name="RecomStatus2" ColumnName="RecomStatus2" />
-                <ScalarProperty Name="RecomStatus" ColumnName="RecomStatus" />
-                <ScalarProperty Name="TraceMark" ColumnName="TraceMark" />
-                <ScalarProperty Name="RankId" ColumnName="RankId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DashBoardMinuteStandby975">
             <EntityTypeMapping TypeName="BnoisdbModel.DashBoardMinuteStandby975">
               <MappingFragment StoreEntitySet="DashBoardMinuteStandby975">
@@ -21906,6 +21805,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remarks7" ColumnName="Remarks7" />
                 <ScalarProperty Name="Remarks6" ColumnName="Remarks6" />
                 <ScalarProperty Name="Remarks5" ColumnName="Remarks5" />
                 <ScalarProperty Name="Remarks4" ColumnName="Remarks4" />
@@ -21916,6 +21816,124 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="MinuiteId" ColumnName="MinuiteId" />
                 <ScalarProperty Name="MinuiteCandidateId" ColumnName="MinuiteCandidateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DashBoardTrace990">
+            <EntityTypeMapping TypeName="BnoisdbModel.DashBoardTrace990">
+              <MappingFragment StoreEntitySet="DashBoardTrace990">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks6" ColumnName="Remarks6" />
+                <ScalarProperty Name="Remarks5" ColumnName="Remarks5" />
+                <ScalarProperty Name="Remarks4" ColumnName="Remarks4" />
+                <ScalarProperty Name="Remarks3" ColumnName="Remarks3" />
+                <ScalarProperty Name="Remarks2" ColumnName="Remarks2" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="RecomStatus4" ColumnName="RecomStatus4" />
+                <ScalarProperty Name="RecomStatus3" ColumnName="RecomStatus3" />
+                <ScalarProperty Name="RecomStatus2" ColumnName="RecomStatus2" />
+                <ScalarProperty Name="RecomStatus" ColumnName="RecomStatus" />
+                <ScalarProperty Name="TraceMark" ColumnName="TraceMark" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Achievement">
+            <EntityTypeMapping TypeName="BnoisdbModel.Achievement">
+              <MappingFragment StoreEntitySet="Achievement">
+                <ScalarProperty Name="AOffCd" ColumnName="AOffCd" />
+                <ScalarProperty Name="BOffCd" ColumnName="BOffCd" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="CommAppType" ColumnName="CommAppType" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="GivenByType" ColumnName="GivenByType" />
+                <ScalarProperty Name="OfficerDesignation" ColumnName="OfficerDesignation" />
+                <ScalarProperty Name="OfficerName" ColumnName="OfficerName" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="PatternId" ColumnName="PatternId" />
+                <ScalarProperty Name="CommendationId" ColumnName="CommendationId" />
+                <ScalarProperty Name="GivenTransferId" ColumnName="GivenTransferId" />
+                <ScalarProperty Name="GivenEmployeeId" ColumnName="GivenEmployeeId" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="IsBackLog" ColumnName="IsBackLog" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="AchievementId" ColumnName="AchievementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeMscEducation">
+            <EntityTypeMapping TypeName="BnoisdbModel.EmployeeMscEducation">
+              <MappingFragment StoreEntitySet="EmployeeMscEducation">
+                <ScalarProperty Name="CompleteStatus" ColumnName="CompleteStatus" />
+                <ScalarProperty Name="PermissionYear" ColumnName="PermissionYear" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Results" ColumnName="Results" />
+                <ScalarProperty Name="PassingYear" ColumnName="PassingYear" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="MscPermissionTypeId" ColumnName="MscPermissionTypeId" />
+                <ScalarProperty Name="MscInstituteId" ColumnName="MscInstituteId" />
+                <ScalarProperty Name="MscEducationTypeId" ColumnName="MscEducationTypeId" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmployeeMscEducationId" ColumnName="EmployeeMscEducationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PunishmentAccident">
+            <EntityTypeMapping TypeName="BnoisdbModel.PunishmentAccident">
+              <MappingFragment StoreEntitySet="PunishmentAccident">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="IsProcessed" ColumnName="IsProcessed" />
+                <ScalarProperty Name="YearCount" ColumnName="YearCount" />
+                <ScalarProperty Name="PtAfterDeduct" ColumnName="PtAfterDeduct" />
+                <ScalarProperty Name="DeductYear" ColumnName="DeductYear" />
+                <ScalarProperty Name="DeductPercentage" ColumnName="DeductPercentage" />
+                <ScalarProperty Name="SkipYear" ColumnName="SkipYear" />
+                <ScalarProperty Name="PunishmentValue" ColumnName="PunishmentValue" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="PunishmentType" ColumnName="PunishmentType" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DurationDays" ColumnName="DurationDays" />
+                <ScalarProperty Name="DurationMonths" ColumnName="DurationMonths" />
+                <ScalarProperty Name="AccedentType" ColumnName="AccedentType" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="RankId" ColumnName="RankId" />
+                <ScalarProperty Name="IsBackLog" ColumnName="IsBackLog" />
+                <ScalarProperty Name="PunishmentNatureId" ColumnName="PunishmentNatureId" />
+                <ScalarProperty Name="PunishmentSubCategoryId" ColumnName="PunishmentSubCategoryId" />
+                <ScalarProperty Name="PunishmentCategoryId" ColumnName="PunishmentCategoryId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="PunishmentAccidentId" ColumnName="PunishmentAccidentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

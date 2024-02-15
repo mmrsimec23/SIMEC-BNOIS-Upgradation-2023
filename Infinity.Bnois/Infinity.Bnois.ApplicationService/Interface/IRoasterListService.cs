@@ -11,5 +11,6 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<Object> GetLargeShipCoWaitingList();
         List<Object> GetLargeShipXoWaitingList();
         List<Object> GetMediumShipCoWaitingList();
+        List<Object> GetSmallShipCoXoWaitingList();
     }
 }

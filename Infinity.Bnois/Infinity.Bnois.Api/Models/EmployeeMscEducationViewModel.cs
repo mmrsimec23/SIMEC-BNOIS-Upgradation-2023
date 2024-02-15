@@ -11,5 +11,6 @@ namespace Infinity.Bnois.Api.Models
         public List<SelectModel> MscInstituteList { get; set; }
         public List<SelectModel> MscPermissionTypeList { get; set; }
         public List<SelectModel> CountryList { get; set; }
+        public List<SelectModel> MscCompleteTypes { get; set; }
     }
 }

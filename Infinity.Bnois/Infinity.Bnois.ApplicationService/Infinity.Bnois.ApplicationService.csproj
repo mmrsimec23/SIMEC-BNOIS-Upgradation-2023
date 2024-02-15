@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="Implementation\AchievementService.cs" />
     <Compile Include="Implementation\AddressService.cs" />
+    <Compile Include="Implementation\EmployeeEoLoSoDloSeoService.cs" />
     <Compile Include="Implementation\EmployeeTraceService.cs" />
     <Compile Include="Implementation\EmployeeCoxoService.cs" />
     <Compile Include="Implementation\BasicSearchService.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Implementation\VisitSubCategoryService.cs" />
     <Compile Include="Implementation\OfficeShipmentService.cs" />
     <Compile Include="Implementation\ZoneService.cs" />
+    <Compile Include="Interface\IEmployeeEoLoSoDloSeoService.cs" />
     <Compile Include="Interface\IEmployeeTraceService.cs" />
     <Compile Include="Interface\IEmployeeMinuteStandbyService.cs" />
     <Compile Include="Interface\IEmployeeUnmDefermentService.cs" />

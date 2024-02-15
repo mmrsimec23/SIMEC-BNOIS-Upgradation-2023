@@ -174,7 +174,6 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<vwTransfer> vwTransfers { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<MedalAward> MedalAwards { get; set; }
-        public virtual DbSet<PunishmentAccident> PunishmentAccidents { get; set; }
         public virtual DbSet<ProposalDetail> ProposalDetails { get; set; }
         public virtual DbSet<CourseCategory> CourseCategories { get; set; }
         public virtual DbSet<QuickLink> QuickLinks { get; set; }
@@ -189,7 +188,6 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<EmployeeReport> EmployeeReport { get; set; }
         public virtual DbSet<TrainingResult> TrainingResult { get; set; }
         public virtual DbSet<ExtraAppointment> ExtraAppointment { get; set; }
-        public virtual DbSet<Achievement> Achievement { get; set; }
         public virtual DbSet<EmployeeLpr> EmployeeLpr { get; set; }
         public virtual DbSet<PreCommissionCourse> PreCommissionCourse { get; set; }
         public virtual DbSet<EmployeeOpr> EmployeeOpr { get; set; }
@@ -213,7 +211,6 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<EmployeeGeneral> EmployeeGeneral { get; set; }
         public virtual DbSet<CoXoService> CoXoService { get; set; }
         public virtual DbSet<Institute> Institute { get; set; }
-        public virtual DbSet<EmployeeMscEducation> EmployeeMscEducation { get; set; }
         public virtual DbSet<EmployeeServiceExamResult> EmployeeServiceExamResult { get; set; }
         public virtual DbSet<ToeAuthorized> ToeAuthorized { get; set; }
         public virtual DbSet<DashBoardBranchByAdminAuthority600Entry> DashBoardBranchByAdminAuthority600Entry { get; set; }
@@ -224,9 +221,12 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<ProposalCandidate> ProposalCandidate { get; set; }
         public virtual DbSet<DashBoardMinuite100> DashBoardMinuite100 { get; set; }
         public virtual DbSet<Remark> Remark { get; set; }
-        public virtual DbSet<DashBoardTrace990> DashBoardTrace990 { get; set; }
         public virtual DbSet<DashBoardMinuteStandby975> DashBoardMinuteStandby975 { get; set; }
         public virtual DbSet<DashBoardMinuite110> DashBoardMinuite110 { get; set; }
+        public virtual DbSet<DashBoardTrace990> DashBoardTrace990 { get; set; }
+        public virtual DbSet<Achievement> Achievement { get; set; }
+        public virtual DbSet<EmployeeMscEducation> EmployeeMscEducation { get; set; }
+        public virtual DbSet<PunishmentAccident> PunishmentAccident { get; set; }
     
         public virtual ObjectResult<GetLeaveInfo_Result> GetLeaveInfo(string employeeID, Nullable<int> idFrom, Nullable<int> idTo)
         {

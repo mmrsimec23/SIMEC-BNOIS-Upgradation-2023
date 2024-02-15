@@ -5,6 +5,7 @@ using System.Web.Http.Cors;
 using Infinity.Bnois.Api.Core;
 using Infinity.Bnois.Api.Models;
 using Infinity.Bnois.Api.Right;
+using Infinity.Bnois.ApplicationService.Implementation;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
 
@@ -18,11 +19,15 @@ namespace Infinity.Bnois.Api.Controllers
     {
         private readonly ICurrentStatusService currentStatusService;
         private readonly IEmployeeLeaveService employeeLeaveService;
+        private readonly IEmployeeService employeeService;
+        private readonly IEmployeeHajjDetaitService _employeeHajjDetaitService;
 
-        public CurrentStatusController(ICurrentStatusService currentStatusService, IEmployeeLeaveService employeeLeaveService)
+        public CurrentStatusController(ICurrentStatusService currentStatusService, IEmployeeHajjDetaitService employeeHajjDetaitService, IEmployeeService employeeService, IEmployeeLeaveService employeeLeaveService)
         {
             this.currentStatusService = currentStatusService;
             this.employeeLeaveService = employeeLeaveService;
+            this.employeeService = employeeService;
+            _employeeHajjDetaitService = employeeHajjDetaitService;
         }
 
         [HttpGet]
@@ -44,7 +49,29 @@ namespace Infinity.Bnois.Api.Controllers
                 Result = currentStatusService.GetCivilAcademicQualification(pNo)
             });
         }
-        
+        [HttpGet]
+        [Route("get-employee-hajj-details-by-pno")]
+        public IHttpActionResult GetEmployeeHajjDetailsByPno(string PNo)
+        {
+            return Ok(new ResponseMessage<List<EmployeeHajjDetailModel>>()
+            {
+                Result = _employeeHajjDetaitService.GetEmployeeHajjDetailsByPno(PNo)
+            });
+        }
+
+        [HttpGet]
+        [Route("get-employee-and-leaveInfo")]
+        public async Task<IHttpActionResult> GetEmployeeAndLeaveInfo(string pId)
+        {
+            EmployeeLeaveViewModel vm = new EmployeeLeaveViewModel();
+            vm.LeaveDetails = await employeeLeaveService.GetEmployeeLeaveDetailsByPNo(pId);
+            vm.Employee = await employeeService.GetEmployeeByPO(pId);
+
+
+
+            return Ok(new ResponseMessage<EmployeeLeaveViewModel>() { Result = vm });
+        }
+
         [HttpGet]
         [Route("get-security-clearance")]
         public IHttpActionResult GetSecurityClearance(string pNo)

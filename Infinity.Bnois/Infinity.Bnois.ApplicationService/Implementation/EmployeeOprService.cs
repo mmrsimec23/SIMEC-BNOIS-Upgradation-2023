@@ -303,7 +303,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             employeeOpr.Section2= model.Section2;
             employeeOpr.Section3 = model.Section3;
             employeeOpr.Section4 = model.Section4;
-            employeeOpr.Overweight = model.Overweight;
+            employeeOpr.Overweight = model.Overweight??0;
             employeeOpr.Underweight = model.Underweight;
             employeeOpr.ApptRecom = model.ApptRecom;
             employeeOpr.BOffCId = model.BOffCId;

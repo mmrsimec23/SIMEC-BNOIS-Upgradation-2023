@@ -38,7 +38,7 @@ namespace Infinity.Bnois.Api.Controllers
         {
             int total = 0;
             List<EmployeeTraceModel> models = _employeeTraceService.GetEmployeeTraceList(ps, pn, qs, out total);
-            RoleFeature permission = base.GetFeature(MASTER_SETUP.EMPLOYEE_CAR_LOAN);
+            RoleFeature permission = base.GetFeature(MASTER_SETUP.EMPLOYEE_TRACE);
             return Ok(new ResponseMessage<List<EmployeeTraceModel>>()
             {
                 Result = models,
