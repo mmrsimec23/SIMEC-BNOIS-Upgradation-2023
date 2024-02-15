@@ -132,7 +132,7 @@
         function punishmentAccidentType(type) {
             if (type == 2) {
                 vm.punishmentDisabled = true;
-                vm.punishmentAccident.accedentType = 1;
+                //vm.punishmentAccident.accedentType = 1;
                 vm.punishmentAccident.punishmentCategoryId = null;
                 vm.punishmentAccident.punishmentSubCategoryId = null;
                 vm.punishmentAccident.punishmentNatureId = null;
@@ -144,7 +144,7 @@
             else {
                 vm.punishmentDisabled = false;
                 vm.isAccidentDisabled = true;
-                vm.punishmentAccident.accedentType = null;
+                //vm.punishmentAccident.accedentType = null;
 
             }
 

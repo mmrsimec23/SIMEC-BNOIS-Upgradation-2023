@@ -11,6 +11,7 @@
             getDashboardInsideNavyOrganization: getDashboardInsideNavyOrganization,
             getDashboardBCGOrganization: getDashboardBCGOrganization,
             getDashboardLeave: getDashboardLeave,
+            getOfficerStreamSelectModels: getOfficerStreamSelectModels,
             getDashboardExBDLeave: getDashboardExBDLeave,
             getDashboardStream: getDashboardStream,
             getDashboardCategory: getDashboardCategory,
@@ -98,6 +99,11 @@
         }
 
 
+
+        function getOfficerStreamSelectModels() {
+            var url = dataConstants.DASHBOARD_URL + 'get-officer-stream-select-models';
+            return apiHttpService.GET(url);
+        }
         function getDashboardCategory(categoryId) {
             var url = dataConstants.DASHBOARD_URL + 'get-dashboard-category?categoryId=' + categoryId;
             return apiHttpService.GET(url);

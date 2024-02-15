@@ -40,6 +40,7 @@
             getNotifications: getNotifications,
             getRemark: getRemark,
             getPersuasion: getPersuasion,
+            getEmployeeLeaveAndEmployeeInfo: getEmployeeLeaveAndEmployeeInfo,
             getCourseFuturePlan: getCourseFuturePlan,
             getTransferFuturePlan: getTransferFuturePlan,
             getTemporaryTransferHistory: getTemporaryTransferHistory,
@@ -49,6 +50,7 @@
             getForeignProjects: getForeignProjects,
             getMissions: getMissions,
             getHODServices: getHODServices,
+            GetEmployeeHajjDetailsByPno: GetEmployeeHajjDetailsByPno,
             getDockyardServices: getDockyardServices,
             getNsdServices: getNsdServices,
             getBsdServices: getBsdServices,
@@ -82,7 +84,11 @@
             var url = dataConstants.CURRENT_STATUS_URL + 'get-msc-education-qualification?pNo=' + pNo;
             return apiHttpService.GET(url);
         }
+        function getEmployeeLeaveAndEmployeeInfo(pId) {
 
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-employee-and-leaveInfo?pId=' + pId;
+            return apiHttpService.GET(url);
+        }
         function getSecurityClearance(pNo) {
             var url = dataConstants.CURRENT_STATUS_URL + 'get-security-clearance?pNo=' + pNo;
             return apiHttpService.GET(url);
@@ -322,6 +328,10 @@
             return apiHttpService.GET(url);
         }
 
+        function GetEmployeeHajjDetailsByPno(PNo) {
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-employee-hajj-details-by-pno?PNo=' + PNo
+            return apiHttpService.GET(url);
+        }
         function getMissions(pNo) {
             var url = dataConstants.CURRENT_STATUS_URL + 'get-missions?pNo=' + pNo;
             return apiHttpService.GET(url);

@@ -3775,6 +3775,15 @@
                     title: 'Mission Schedule'
                 }
             },
+            {
+                state: 'mission-schedule-modify',
+                config: {
+                    url: '/mission-schedule-modify/:id',
+                    templateUrl: 'app/views/mission-schedule/missionScheduleAdd.html',
+                    controller: 'missionScheduleAddController as vm',
+                    title: 'Mission Schedule'
+                }
+            },
 
 
             //-------------Employee Minute Standby-------
@@ -6080,6 +6089,15 @@
                 }
             },
             {
+                state: "coxo-small-ships",
+                config: {
+                    url: "/coxo-small-ships",
+                    templateUrl: 'app/views/small-ship-coxo/smallShipCoXo.html',
+                    controller: 'smallShipCoXoController as vm',
+                    title: 'CO/XO Small Ships'
+                }
+            },
+            {
                 state: "eosolo-large-ships",
                 config: {
                     url: "/eosolo-large-ships",
@@ -6104,6 +6122,15 @@
                     templateUrl: 'app/views/large-ship-co-waiting-list/largeShipCoWaitingList.html',
                     controller: 'largeShipCoWaitingListController as vm',
                     title: 'CO Large Ship Waiting List'
+                }
+            },
+            {
+                state: "co-small-ship-waiting-list",
+                config: {
+                    url: "/co-small-ship-waiting-list",
+                    templateUrl: 'app/views/small-ship-coxo-waiting-list/smallShipCoXoWaitingList.html',
+                    controller: 'smallShipCoXoWaitingListController as vm',
+                    title: 'CO Small Ship Waiting List'
                 }
             },
             {

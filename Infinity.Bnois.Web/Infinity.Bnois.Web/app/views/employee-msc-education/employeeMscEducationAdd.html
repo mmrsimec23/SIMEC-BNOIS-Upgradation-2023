@@ -120,10 +120,14 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="isComplete" class="custom-label">Status</label>
-                                <label>
-                                    <input type="radio" id="isComplete" ng-model="vm.employeeMscEducation.isComplete" ng-value="true"> Done
-                                    <input type="radio" id="isComplete" ng-model="vm.employeeMscEducation.isComplete" ng-value="false"> Doing
-                                </label>
+                                <div class="radio-inline" ng-repeat=" status in vm.mscCompleteTypes">
+
+                                    <label>
+                                        <input type="radio" id="type" ng-model="vm.employeeMscEducation.completeStatus"
+                                               value="{{status.value}}" required> {{status.text}}
+                                    </label>
+
+                                </div>
                             </div>
                         </div>
                     </div>

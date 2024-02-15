@@ -5,9 +5,9 @@
     'use strict';
     var controllerId = 'employeeProposedEoSoLosController';
     angular.module('app').controller(controllerId, employeeProposedEoSoLosController);
-    employeeProposedEoSoLosController.$inject = ['$state', 'employeeProposedCoxoService', 'notificationService', '$location'];
+    employeeProposedEoSoLosController.$inject = ['$state', 'employeeProposedEolosodloseoService', 'notificationService', '$location'];
 
-    function employeeProposedEoSoLosController($state, employeeProposedCoxoService, notificationService, location) {
+    function employeeProposedEoSoLosController($state, employeeProposedEolosodloseoService, notificationService, location) {
 
         /* jshint validthis:true */
         var vm = this;
@@ -34,7 +34,7 @@
         }
         init();
         function init() {
-            employeeProposedCoxoService.getemployeeProposedCoxos(2,vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
+            employeeProposedEolosodloseoService.getemployeeProposedEolosodloseos(2,vm.pageSize, vm.pageNumber, vm.searchText).then(function (data) {
                 vm.employeeProposedEoSoLos = data.result;
                 vm.total = data.total; vm.permission = data.permission;
             },
@@ -52,7 +52,7 @@
         }
 
         function deleteEmployeeProposedEoSoLo(EmployeeProposedEoSoLo) {
-            employeeProposedCoxoService.deleteemployeeProposedCoxo(EmployeeProposedEoSoLo.coXoServiceId).then(function (data) {
+            employeeProposedEolosodloseoService.deleteemployeeProposedEolosodloseo(EmployeeProposedEoSoLo.coXoServiceId).then(function (data) {
                 $state.go($state.current, { pn: vm.pageNumber, ps: vm.pageSize, q: vm.searchText }, { reload: true, inherit: false });
             });
         }

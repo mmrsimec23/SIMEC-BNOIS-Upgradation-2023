@@ -17,6 +17,7 @@
         vm.mscInstituteList = [];
         vm.mscPermissionTypeList = [];
         vm.countryList = [];
+        vm.mscCompleteTypes = [];
         vm.ranks = [];
         vm.transfers = [];
         vm.saveButtonText = 'Save';
@@ -37,7 +38,7 @@
                
                 if (vm.employeeMscEducationId !== 0 && vm.employeeMscEducationId !== '') {
 
-                    
+                    //vm.employeeMscEducation.completeStatus = data.result.employeeMscEducation.completeStatus;
                     if (vm.employeeMscEducation.fromDate != null) {
                         vm.employeeMscEducation.fromDate = new Date(data.result.employeeMscEducation.fromDate);
                     }
@@ -49,6 +50,7 @@
                 vm.mscInstituteList = data.result.mscInstituteList;
                 vm.mscPermissionTypeList = data.result.mscPermissionTypeList;
                 vm.countryList = data.result.countryList;
+                vm.mscCompleteTypes = data.result.mscCompleteTypes;
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

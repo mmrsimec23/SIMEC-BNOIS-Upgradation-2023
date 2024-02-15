@@ -3,14 +3,16 @@
     'use strict';
     var controllerId = 'minuteCandidatesController';
     angular.module('app').controller(controllerId, minuteCandidatesController);
-    minuteCandidatesController.$inject = ['$state', '$stateParams','$window', 'minuteCandidateService', 'notificationService', '$location'];
+    minuteCandidatesController.$inject = ['$state', '$stateParams', '$window', 'minuiteService','minuteCandidateService', 'notificationService', '$location'];
 
-    function minuteCandidatesController($state, $stateParams, $window, minuteCandidateService, notificationService, location) {
+    function minuteCandidatesController($state, $stateParams, $window, minuiteService, minuteCandidateService, notificationService, location) {
 
         /* jshint validthis:true */
         var vm = this;
         vm.minuteId = 0;
+        vm.minuite = '';
         vm.minuteCandidates = [];
+        vm.updateMinuiteCandidate = updateMinuiteCandidate;
         vm.deleteMinuteCandidate = deleteMinuteCandidate;
         vm.saveButtonText = 'Save';
         vm.save = save;
@@ -34,6 +36,14 @@
         }
         init();
         function init() {
+
+            minuiteService.getMinuite(vm.minuteId).then(function (data) {
+                vm.minuiteName = data.result.minuite.minuiteName;  
+                console.log(vm.minuite);
+            },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
             minuteCandidateService.getMinuteCandidates(vm.minuteId).then(function (data) {
                 vm.minuteCandidates = data.result;
             },
@@ -58,6 +68,19 @@
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);
                 });
+        }
+
+        function updateMinuiteCandidate(minuteCandidate) {
+            vm.saveButtonText = 'Update';
+            $window.document.documentElement.scrollTop = 0;
+            $window.document.body.scrollTop = 0;
+            minuteCandidateService.getMinuteCandidate(minuteCandidate.minuiteCandidateId).then(function (data) {
+                vm.minuteCandidate = data.result;
+            },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+            
         }
         function close() {
             vm.minuteCandidate = null;

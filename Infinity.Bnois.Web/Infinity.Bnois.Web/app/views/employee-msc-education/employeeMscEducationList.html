@@ -38,7 +38,7 @@
                                 <td>{{employeeMscEducation.results}}</td>
                                 <td>{{employeeMscEducation.permissionYear}}</td>
                                 <td>{{employeeMscEducation.passingYear}}</td>
-                                <td>{{employeeMscEducation.isComplete? 'Done' : 'Doing'}}</td>
+                                <td>{{employeeMscEducation.completeStatus == 1 ? 'Doing' : employeeMscEducation.completeStatus ==2 ? 'Done' :  employeeMscEducation.completeStatus==3 ? 'Incomplete' : 'Others'}}</td>
                                 <td class="text-right">
                                     <a ng-show="vm.permission.update" class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.updateEmployeeMscEducation(employeeMscEducation)"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span></a>
                                     <a ng-show="vm.permission.delete" class="btn custom-btn btn-delete btn-danger btn-xs" style="cursor:pointer" ng-confirmation-click="vm.deleteEmployeeMscEducation(employeeMscEducation)"

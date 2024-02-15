@@ -62,7 +62,7 @@
                 });
 
 
-            employeeHajjDetailService.GetEmployeeHajjDetailsByPno(vm.pNo).then(function (data) {
+            currentStatusService.GetEmployeeHajjDetailsByPno(vm.pNo).then(function (data) {
                 vm.hajjDetails = data.result;
 
             },

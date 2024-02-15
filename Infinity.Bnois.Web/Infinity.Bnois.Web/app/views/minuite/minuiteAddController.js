@@ -18,6 +18,7 @@
         vm.save = save;
         vm.close = close;
         vm.minuiteForm = {};
+        vm.minuteFieldVisible = minuteFieldVisible;
 
         if ($stateParams.id !== undefined && $stateParams.id !== null) {
             vm.minuiteId = $stateParams.id;
@@ -30,7 +31,7 @@
              minuiteService.getMinuite(vm.minuiteId).then(function (data) {
                  vm.minuite = data.result.minuite;
                  vm.countries = data.result.countries;
-
+                 minuteFieldVisible(vm.minuite.minuiteCategory)
                  if (vm.minuite.startDate !=null) {
                      vm.minuite.startDate = new Date(vm.minuite.startDate);
                  }
@@ -46,6 +47,33 @@
                 });
         };
 
+        function minuteFieldVisible(minuiteCategory) {
+            console.log(minuiteCategory);
+            vm.unmCat = false;
+            vm.gcCat = false;
+            vm.lcCat = false;
+            vm.vsCat = false;
+            vm.scCat = false;
+            vm.fpCat = false;
+            if (minuiteCategory == 1) {
+                vm.unmCat = true;
+            }
+            else if (minuiteCategory == 2) {
+                vm.gcCat = true;
+            }
+            else if (minuiteCategory == 3) {
+                vm.lcCat = true;
+            }
+            else if (minuiteCategory == 4) {
+                vm.vsCat = true;
+            }
+            else if (minuiteCategory == 5) {
+                vm.scCat = true;
+            }
+            else if (minuiteCategory == 6) {
+                vm.fpCat = true;
+            }
+        }
         function save() {
             if (vm.minuiteId !== 0 && vm.minuiteId !== '') {
                 updateMinuite();

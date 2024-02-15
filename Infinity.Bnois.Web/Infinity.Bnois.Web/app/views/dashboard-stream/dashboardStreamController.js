@@ -21,7 +21,7 @@
         Init();
         function Init() {
 
-            officerStreamService.getOfficerStreamSelectModels().then(function(data) {
+            dashboardService.getOfficerStreamSelectModels().then(function(data) {
                 vm.streams = data.result;
                 getEmployeeListByOffice(vm.streamId);
 

@@ -1269,7 +1269,7 @@
         function doneCourseCategorySelect(item) {
 
             
-            courseService.getCourseSubCategories(item.value).then(function (data) {
+            advanceSearchService.getCourseSubCategories(item.value).then(function (data) {
 
                 data.result.courseSubCategories.forEach(function (office) {
                     vm.doneCourseSubCategories.push(office);
@@ -1278,7 +1278,7 @@
 
             });
 
-            courseService.getCourseByCategory(item.value).then(function (data) {
+            advanceSearchService.getCourseByCategory(item.value).then(function (data) {
 
                 data.result.forEach(function (office) {
                     vm.doneCoursesByCategory.push(office);
@@ -1292,13 +1292,13 @@
 
         function doneCourseCategoryDeSelect(item) {
 
-            courseService.getCourseSubCategories(item.value).then(function (data) {
+            advanceSearchService.getCourseSubCategories(item.value).then(function (data) {
 
                 data.result.courseSubCategories.forEach(function (office) {
                     vm.doneCourseSubCategories.pop(office);
                 });
 
-                courseService.getCourseByCategory(item.value).then(function (data) {
+                advanceSearchService.getCourseByCategory(item.value).then(function (data) {
 
                     data.result.forEach(function (office) {
                         vm.doneCoursesByCategory.pop(office);
@@ -1321,7 +1321,7 @@
         function notDoneCourseCategorySelect(item) {
 
            
-            courseService.getCourseSubCategories(item.value).then(function (data) {
+            advanceSearchService.getCourseSubCategories(item.value).then(function (data) {
 
                 data.result.courseSubCategories.forEach(function (office) {
                     vm.notDoneCourseSubCategories.push(office);
@@ -1330,7 +1330,7 @@
 
             });
 
-            courseService.getCourseByCategory(item.value).then(function (data) {
+            advanceSearchService.getCourseByCategory(item.value).then(function (data) {
 
                 data.result.forEach(function (office) {
                     vm.notDoneCoursesByCategory.push(office);
@@ -1342,7 +1342,7 @@
         }
         function notDoneCourseCategoryDeSelect(item) {
 
-            courseService.getCourseSubCategories(item.value).then(function (data) {
+            advanceSearchService.getCourseSubCategories(item.value).then(function (data) {
 
                 data.result.courseSubCategories.forEach(function (office) {
                     vm.notDoneCourseSubCategories.pop(office);
@@ -1365,7 +1365,7 @@
         function doingCourseCategorySelect(item) {
 
 
-            courseService.getCourseSubCategories(item.value).then(function (data) {
+            advanceSearchService.getCourseSubCategories(item.value).then(function (data) {
 
                 data.result.courseSubCategories.forEach(function (office) {
                     vm.doingCourseSubCategories.push(office);
@@ -1374,7 +1374,7 @@
 
             });
 
-            courseService.getCourseByCategory(item.value).then(function (data) {
+            advanceSearchService.getCourseByCategory(item.value).then(function (data) {
 
                 data.result.forEach(function (office) {
                     vm.doingCoursesByCategory.push(office);
@@ -1386,7 +1386,7 @@
         }
         function doingCourseCategoryDeSelect(item) {
 
-            courseService.getCourseSubCategories(item.value).then(function (data) {
+            advanceSearchService.getCourseSubCategories(item.value).then(function (data) {
 
                 data.result.courseSubCategories.forEach(function (office) {
                     vm.doingCourseSubCategories.pop(office);
@@ -1410,7 +1410,7 @@
         function doneCourseSubCategorySelect(item) {
 
 
-            courseService.getCourseBySubCategory(item.value).then(function (data) {
+            advanceSearchService.getCourseBySubCategory(item.value).then(function (data) {
 
                 data.result.forEach(function (office) {
                     vm.doneCourses.push(office);
@@ -1422,7 +1422,7 @@
         }
         function doneCourseSubCategoryDeSelect(item) {
 
-            courseService.getCourseBySubCategory(item.value).then(function (data) {
+            advanceSearchService.getCourseBySubCategory(item.value).then(function (data) {
 
                 data.result.forEach(function (office) {
                     vm.doneCourses.pop(office);
@@ -1451,7 +1451,7 @@
         function notDoneCourseSubCategorySelect(item) {
 
 
-            courseService.getCourseBySubCategory(item.value).then(function (data) {
+            advanceSearchService.getCourseBySubCategory(item.value).then(function (data) {
 
                 data.result.forEach(function (office) {
                     vm.notDoneCourses.push(office);
@@ -1463,7 +1463,7 @@
         }
         function notDoneCourseSubCategoryDeSelect(item) {
 
-            courseService.getCourseBySubCategory(item.value).then(function (data) {
+            advanceSearchService.getCourseBySubCategory(item.value).then(function (data) {
 
                 data.result.forEach(function (office) {
                     vm.notDoneCourses.pop(office);
@@ -1493,7 +1493,7 @@
 
         function doingCourseSubCategorySelect(item) {
 
-            courseService.getCourseBySubCategory(item.value).then(function (data) {
+            advanceSearchService.getCourseBySubCategory(item.value).then(function (data) {
 
                 data.result.forEach(function (office) {
                     vm.doingCourses.push(office);
@@ -1505,7 +1505,7 @@
         }
         function doingCourseSubCategoryDeSelect(item) {
 
-            courseService.getCourseBySubCategory(item.value).then(function (data) {
+            advanceSearchService.getCourseBySubCategory(item.value).then(function (data) {
 
                 data.result.forEach(function (office) {
                     vm.doingCourses.pop(office);

@@ -8,6 +8,9 @@
             saveCheckedValue: saveCheckedValue,
             deleteCheckedColumn: deleteCheckedColumn,
             searchOfficers: searchOfficers,
+            getCourseSubCategories: getCourseSubCategories,
+            getCourseByCategory: getCourseByCategory,
+            getCourseBySubCategory: getCourseBySubCategory,
             searchOfficersResult: searchOfficersResult
         };
 
@@ -24,7 +27,19 @@
             return apiHttpService.POST(url, data);
         }
 
+        function getCourseSubCategories(categoryId) {
+            var url = dataConstants.ADVANCE_SEARCH_URL + 'get-course-sub-categories-by-course?id=' + categoryId;
+            return apiHttpService.GET(url);
+        }
+        function getCourseByCategory(courseCatId) {
+            var url = dataConstants.ADVANCE_SEARCH_URL + 'get-course-by-category?id=' + courseCatId;
+            return apiHttpService.GET(url);
+        }
 
+        function getCourseBySubCategory(courseSubCatId) {
+            var url = dataConstants.ADVANCE_SEARCH_URL + 'get-course-by-sub-category?id=' + courseSubCatId;
+            return apiHttpService.GET(url);
+        }
         function searchOfficersResult() {
             var url = dataConstants.ADVANCE_SEARCH_URL + 'search-officers-result';
             return apiHttpService.GET(url);

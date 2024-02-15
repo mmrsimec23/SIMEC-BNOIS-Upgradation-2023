@@ -8,6 +8,7 @@
             getLargeShipCoWaitingList: getLargeShipCoWaitingList,
             getLargeShipXoWaitingList: getLargeShipXoWaitingList,
             getMediumShipCoWaitingList: getMediumShipCoWaitingList,
+            getSmallShipCoXoWaitingList: getSmallShipCoXoWaitingList,
             getLargeShipProposedWaitingCoXoList: getLargeShipProposedWaitingCoXoList
 
         };
@@ -33,6 +34,10 @@
         }
         function getMediumShipCoWaitingList() {
             var url = dataConstants.ROASTER_LIST_URL + 'get-medium-ship-co-waiting-list';
+            return apiHttpService.GET(url);
+        }
+        function getSmallShipCoXoWaitingList() {
+            var url = dataConstants.ROASTER_LIST_URL + 'get-small-ship-coxo-waiting-list';
             return apiHttpService.GET(url);
         }
     }

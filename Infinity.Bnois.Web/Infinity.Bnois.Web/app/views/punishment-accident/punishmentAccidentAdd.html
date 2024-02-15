@@ -119,15 +119,12 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="accedentType" class="custom-label">Accident Type</label>
-                            <div class="radio-inline" ng-repeat=" status in vm.accidentTypes">
-
-                                <label>
-                                    <input type="radio" id="givenByType" ng-model="vm.punishmentAccident.accedentType" ng-disabled="vm.isAccidentDisabled"
-                                           value="{{status.value}}"> {{status.text}}
-                                </label>
-
-                            </div>
+                            <label for="accedentType" class="custom-label">GCM/ST Type</label>
+                            <select name="accedentType" id="accedentType" class="form-control"
+                                    ng-model="vm.punishmentAccident.accedentType" ng-disabled="vm.punishmentDisabled"
+                                    ng-options="option.value as option.text for option in vm.accidentTypes">
+                                <option value="">--Select an Option--</option>
+                            </select>
                         </div>
 
                     </div>

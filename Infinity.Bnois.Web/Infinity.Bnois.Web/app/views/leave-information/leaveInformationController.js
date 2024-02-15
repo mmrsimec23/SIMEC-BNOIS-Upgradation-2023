@@ -7,9 +7,9 @@
     var controllerId = 'leaveInformationController';
 
     angular.module('app').controller(controllerId, leaveInformationController);
-    leaveInformationController.$inject = ['$stateParams','employeeService','currentStatusService','employeeLeaveService', 'notificationService', '$state'];
+    leaveInformationController.$inject = ['$stateParams','employeeService','currentStatusService', 'notificationService', '$state'];
 
-    function leaveInformationController($stateParams, employeeService,currentStatusService ,employeeLeaveService, notificationService, $state) {
+    function leaveInformationController($stateParams, employeeService,currentStatusService , notificationService, $state) {
         var vm = this;
         vm.pNo = 0;
         vm.leaveInfos = [];
@@ -33,7 +33,7 @@
                 });
 
 
-            employeeLeaveService.getEmployeeLeaveAndEmployeeInfo(vm.pNo).then(function (data) {
+            currentStatusService.getEmployeeLeaveAndEmployeeInfo(vm.pNo).then(function (data) {
                 vm.leaveInfos = data.result.leaveDetails;
 
                 },

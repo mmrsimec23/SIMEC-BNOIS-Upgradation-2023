@@ -96,6 +96,7 @@
     <Content Include="app\services\advanceSearchService.js" />
     <Content Include="app\services\careerForecastSettingService.js" />
     <Content Include="app\services\bnoisLogInfoService.js" />
+    <Content Include="app\services\employeeProposedEolosodloseoService.js" />
     <Content Include="app\services\employeeTraceService.js" />
     <Content Include="app\services\employeeMinuteStandbyService.js" />
     <Content Include="app\services\employeeUnmDefermentService.js" />
@@ -361,6 +362,10 @@
     <Content Include="app\views\employee-unm-deferment\employeeUnmDefermentAddController.js" />
     <Content Include="app\views\employee-unm-deferment\employeeUnmDefermentList.html" />
     <Content Include="app\views\employee-unm-deferment\employeeUnmDefermentListController.js" />
+    <Content Include="app\views\small-ship-coxo-waiting-list\smallShipCoXoWaitingList.html" />
+    <Content Include="app\views\small-ship-coxo-waiting-list\smallShipCoXoWaitingListController.js" />
+    <Content Include="app\views\small-ship-coxo\smallShipCoXo.html" />
+    <Content Include="app\views\small-ship-coxo\smallShipCoXoController.js" />
     <Content Include="app\views\medium-ship-eosolo-waiting-list\mediumShipEosoloWaitingList.html" />
     <Content Include="app\views\medium-ship-eosolo-waiting-list\mediumShipEosoloWaitingListController.js" />
     <Content Include="app\views\large-ship-seodlo-waiting-list\largeShipSeodloWaitingList.html" />
@@ -1358,7 +1363,6 @@
     <Content Include="Images\BNLogo.png" />
     <Content Include="Images\BNSLogo-favicon.png" />
     <Content Include="Images\BNSLogo.png" />
-    <Content Include="Images\down-arrow.png" />
     <Content Include="Images\FileIcon.png" />
     <Content Include="Images\imageIcon.png" />
     <Content Include="Images\InfinityLogo.png" />

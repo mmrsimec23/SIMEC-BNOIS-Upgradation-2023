@@ -5,9 +5,9 @@
     var controllerId = 'employeeProposedEoSoLoAddController';
 
     angular.module('app').controller(controllerId, employeeProposedEoSoLoAddController);
-    employeeProposedEoSoLoAddController.$inject = ['$stateParams', 'employeeProposedCoxoService', 'serviceExamService', 'notificationService', '$state'];
+    employeeProposedEoSoLoAddController.$inject = ['$stateParams', 'employeeProposedEolosodloseoService', 'serviceExamService', 'notificationService', '$state'];
 
-    function employeeProposedEoSoLoAddController($stateParams, employeeProposedCoxoService, serviceExamService, notificationService, $state) {
+    function employeeProposedEoSoLoAddController($stateParams, employeeProposedEolosodloseoService, serviceExamService, notificationService, $state) {
         var vm = this;
         vm.employeeProposedCoxoId = 0;
         vm.title = 'ADD MODE';
@@ -36,7 +36,7 @@
 
         Init();
         function Init() {
-            employeeProposedCoxoService.getemployeeProposedCoxo(vm.employeeProposedCoxoId, 2).then(function (data) {
+            employeeProposedEolosodloseoService.getemployeeProposedEolosodloseo(vm.employeeProposedCoxoId, 2).then(function (data) {
                 vm.employeeProposedEoSoLo = data.result.employeeCoxoService;
                 vm.coxoTypes = data.result.coxoTypes;
                 vm.coxoShipTypes = data.result.coxoShipTypes;
@@ -72,7 +72,7 @@
 
         function insertemployeeProposedCoxo() {
             vm.employeeProposedEoSoLo.type = 2;
-            employeeProposedCoxoService.saveemployeeProposedCoxo(vm.employeeProposedEoSoLo).then(function (data) {
+            employeeProposedEolosodloseoService.saveemployeeProposedEolosodloseo(vm.employeeProposedEoSoLo).then(function (data) {
                 close();
             },
                 function (errorMessage) {
@@ -80,7 +80,7 @@
                 });
         }
         function updateemployeeProposedCoxo() {
-            employeeProposedCoxoService.updateemployeeProposedCoxo(vm.employeeProposedCoxoId, vm.employeeProposedEoSoLo).then(function (data) {
+            employeeProposedEolosodloseoService.updateemployeeProposedEolosodloseo(vm.employeeProposedCoxoId, vm.employeeProposedEoSoLo).then(function (data) {
                 close();
             },
                 function (errorMessage) {
@@ -92,7 +92,7 @@
             $state.go('employee-proposed-eosolos');
         }
         function getOfficeByShiptype(type) {
-            employeeProposedCoxoService.GetEmployeeCoxoServiceOfficeList(type).then(function (data) {
+            employeeProposedEolosodloseoService.GetEmployeeEolosodloseoServiceOfficeList(type).then(function (data) {
                 vm.offices = data.result;
             });
         }
