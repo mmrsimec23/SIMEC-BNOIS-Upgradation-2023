@@ -191,5 +191,6 @@ namespace Infinity.Bnois.Api
         public const string ToeOfficerStateEntry = BnoisRoutePrefixBase + "toe-officer-state-entry";
         public const string EmployeeMinuteStandby = BnoisRoutePrefixBase + "employee-minute-standby";
         public const string EmployeeEoLoSoDloSeoService = BnoisRoutePrefixBase + "employee-eolosodloseo-service";
+        public const string EmployeeSmallCoxoService = BnoisRoutePrefixBase + "employee-small-coxo-service";
     }
 }

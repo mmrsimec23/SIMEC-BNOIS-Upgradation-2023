@@ -155,6 +155,7 @@ namespace Infinity.Bnois.Api.Right
         public const int EMPLOYEE_TRACE = 1144;
         public const int EMPLOYEE_MINUTE_STANDBY = 1145;
         public const int EMPLOYEE_EOLOSODLOSEO_SERVICE = 1146;
-        public const int TRAINING_RESULTS = 1146;
+        public const int TRAINING_RESULTS = 1147;
+        public const int EMPLOYEE_SMALL_COXO_SERVICE = 1148;
     }
 }

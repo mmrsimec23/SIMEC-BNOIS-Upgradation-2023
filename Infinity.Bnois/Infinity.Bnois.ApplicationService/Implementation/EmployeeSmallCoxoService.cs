@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace Infinity.Bnois.ApplicationService.Implementation
 {
-    public class EmployeeCoxoService : IEmployeeCoxoService
+    public class EmployeeSmallCoxoService : IEmployeeSmallCoxoService
     {
-        private readonly IBnoisRepository<CoXoService> EmployeeCoxoServiceRepository;
-        public EmployeeCoxoService(IBnoisRepository<CoXoService> EmployeeCoxoServiceRepository)
+        private readonly IBnoisRepository<CoXoService> EmployeeSmallCoxoServiceRepository;
+        public EmployeeSmallCoxoService(IBnoisRepository<CoXoService> EmployeeSmallCoxoServiceRepository)
         {
-            this.EmployeeCoxoServiceRepository = EmployeeCoxoServiceRepository;
+            this.EmployeeSmallCoxoServiceRepository = EmployeeSmallCoxoServiceRepository;
         }
 
-        public List<EmployeeCoxoServiceModel> GetEmployeeCoxoServices(int type, int ps, int pn, string qs, out int total)
+        public List<EmployeeCoxoServiceModel> GetEmployeeSmallCoxoServices(int type, int ps, int pn, string qs, out int total)
         {
-            IQueryable<CoXoService> EmployeeCoxoServices = EmployeeCoxoServiceRepository.FilterWithInclude(x => x.IsActive && x.Type == type
+            IQueryable<CoXoService> EmployeeCoxoServices = EmployeeSmallCoxoServiceRepository.FilterWithInclude(x => x.IsActive && x.Type == type
                  && (x.Employee.PNo == (qs) || x.Employee.FullNameEng.Contains(qs) || String.IsNullOrEmpty(qs)), "Employee", "Office");
             total = EmployeeCoxoServices.Count();
             EmployeeCoxoServices = EmployeeCoxoServices.OrderByDescending(x => x.CoXoServiceId).Skip((pn - 1) * ps).Take(ps);
@@ -29,13 +29,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             return models;
         }
 
-        public async Task<EmployeeCoxoServiceModel> GetEmployeeCoxoService(int id)
+        public async Task<EmployeeCoxoServiceModel> GetEmployeeSmallCoxoService(int id)
         {
             if (id <= 0)
             {
                 return new EmployeeCoxoServiceModel();
             }
-            CoXoService EmployeeCoxoService = await EmployeeCoxoServiceRepository.FindOneAsync(x => x.CoXoServiceId == id, new List<string> { "Employee", "Employee.Rank", "Employee.Batch" });
+            CoXoService EmployeeCoxoService = await EmployeeSmallCoxoServiceRepository.FindOneAsync(x => x.CoXoServiceId == id, new List<string> { "Employee", "Employee.Rank", "Employee.Batch" });
             if (EmployeeCoxoService == null)
             {
                 throw new InfinityNotFoundException("Employee PFT not found");
@@ -46,14 +46,14 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 
 
-        public async Task<EmployeeCoxoServiceModel> SaveEmployeeCoxoService(int id, EmployeeCoxoServiceModel model)
+        public async Task<EmployeeCoxoServiceModel> SaveEmployeeSmallCoxoService(int id, EmployeeCoxoServiceModel model)
         {
             model.Employee = null;
             if (model == null)
             {
                 throw new InfinityArgumentMissingException("Employee Coxo  data missing");
             }
-            bool isExistData = EmployeeCoxoServiceRepository.Exists(x => x.EmployeeId == model.EmployeeId && x.OfficeId == model.OfficeId && x.Type == model.Type && x.CoXoServiceId != id);
+            bool isExistData = EmployeeSmallCoxoServiceRepository.Exists(x => x.EmployeeId == model.EmployeeId && x.OfficeId == model.OfficeId && x.Type == model.Type && x.CoXoServiceId != id);
             if (isExistData)
             {
                 throw new InfinityInvalidDataException("Data already exists !");
@@ -62,7 +62,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             CoXoService EmployeeCoxoService = ObjectConverter<EmployeeCoxoServiceModel, CoXoService>.Convert(model);
             if (id > 0)
             {
-                EmployeeCoxoService = await EmployeeCoxoServiceRepository.FindOneAsync(x => x.CoXoServiceId == id);
+                EmployeeCoxoService = await EmployeeSmallCoxoServiceRepository.FindOneAsync(x => x.CoXoServiceId == id);
                 if (EmployeeCoxoService == null)
                 {
                     throw new InfinityNotFoundException("Employee Coxo not found !");
@@ -88,30 +88,30 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
 
 
-            await EmployeeCoxoServiceRepository.SaveAsync(EmployeeCoxoService);
+            await EmployeeSmallCoxoServiceRepository.SaveAsync(EmployeeCoxoService);
             model.CoXoServiceId = EmployeeCoxoService.CoXoServiceId;
             return model;
         }
 
 
-        public async Task<bool> DeleteEmployeeCoxoService(int id)
+        public async Task<bool> DeleteEmployeeSmallCoxoService(int id)
         {
             if (id < 0)
             {
                 throw new InfinityArgumentMissingException("Invalid Request");
             }
-            CoXoService EmployeeCoxoService = await EmployeeCoxoServiceRepository.FindOneAsync(x => x.CoXoServiceId == id);
+            CoXoService EmployeeCoxoService = await EmployeeSmallCoxoServiceRepository.FindOneAsync(x => x.CoXoServiceId == id);
             if (EmployeeCoxoService == null)
             {
                 throw new InfinityNotFoundException("Employee PFT not found");
             }
             else
             {
-                return await EmployeeCoxoServiceRepository.DeleteAsync(EmployeeCoxoService);
+                return await EmployeeSmallCoxoServiceRepository.DeleteAsync(EmployeeCoxoService);
             }
         }
 
-        public List<SelectModel> GetCoxoTypeSelectModels()
+        public List<SelectModel> GetSmallCoxoTypeSelectModels()
         {
             List<SelectModel> selectModels =
                 Enum.GetValues(typeof(CoXoType)).Cast<CoXoType>()
@@ -120,7 +120,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             return selectModels;
         }
 
-        public List<SelectModel> GetCoxoAppoinmentSelectModels(int type)
+        public List<SelectModel> GetSmallCoxoAppoinmentSelectModels(int type)
         {
             if (type == 1 || type == 3)
             {

@@ -56,9 +56,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         //    return keyValues;
         //}
 
-        public List<object> GetLargeShipProposedWaitingCoXoList(int officeId, int appointment)
+        public List<object> GetLargeShipProposedWaitingCoXoList(int shipType, int officeId, int appointment)
         {
-            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetCoXoProposedWaitingOfficerList] {0},{1}", officeId, appointment));
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetCoXoProposedWaitingOfficerList] {0},{1}, {2}", shipType, officeId, appointment));
             return dataTable.ToJson().ToList();
         }
         public List<object> GetLargeShipCoWaitingList()
@@ -76,7 +76,13 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetMediumCoPendingList]"));
             return dataTable.ToJson().ToList();
         }
-        public List<object> GetSmallShipCoXoWaitingList()
+        
+        public List<object> GetSmallShipCoXoWaitingList(int shipType, int coxoStatus, int viewStatus)
+        {
+            DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetSmallCoOpvFfWaitingList] {0},{1},{2} ", shipType, coxoStatus, viewStatus));
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetSmallShipCoXoPendingList()
         {
             DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetSmallCoXoPendingList]"));
             return dataTable.ToJson().ToList();

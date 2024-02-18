@@ -49,6 +49,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             coffrecoms.EmployeeId = model.EmployeeId;
             coffrecoms.RankId = model.Employee.RankId;
             coffrecoms.RecomStatus = model.RecomStatus;
+            coffrecoms.Remarks = model.Remarks;
             coffrecoms.Employee = null;
             await coFfRecomRepository.SaveAsync(coffrecoms);
             model.Id = coffrecoms.Id;

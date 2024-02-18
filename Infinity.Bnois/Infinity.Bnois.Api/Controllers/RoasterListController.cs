@@ -37,11 +37,11 @@ namespace Infinity.Bnois.Api.Controllers
 
         [HttpGet]
         [Route("get-proposed-waiting-coxo-list")]
-        public IHttpActionResult GetLargeShipProposedWaitingCoXoList(int officeId, int appointment)
+        public IHttpActionResult GetLargeShipProposedWaitingCoXoList(int shipType,int officeId, int appointment)
         {
             return Ok(new ResponseMessage<List<object>>()
             {
-                Result = roasterListService.GetLargeShipProposedWaitingCoXoList(officeId, appointment)
+                Result = roasterListService.GetLargeShipProposedWaitingCoXoList(shipType, officeId, appointment)
             });
         }
 
@@ -75,14 +75,33 @@ namespace Infinity.Bnois.Api.Controllers
 
 
         [HttpGet]
+        [Route("get-small-ship-coxo-pending-list")]
+        public IHttpActionResult GetSmallShipCoXoPendingList()
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = roasterListService.GetSmallShipCoXoPendingList()
+            });
+        }
+
+        [HttpGet]
         [Route("get-small-ship-coxo-waiting-list")]
         public IHttpActionResult GetSmallShipCoXoWaitingList()
         {
             return Ok(new ResponseMessage<List<object>>()
             {
-                Result = roasterListService.GetSmallShipCoXoWaitingList()
+                Result = roasterListService.GetSmallShipCoXoPendingList()
             });
         }
 
+        [HttpGet]
+        [Route("get-roaster-list-by-small-ship")]
+        public IHttpActionResult GetRoasterListBySmallShip(int shipType, int coxoStatus, int viewStatus)
+        {
+            return Ok(new ResponseMessage<List<object>>()
+            {
+                Result = roasterListService.GetSmallShipCoXoWaitingList(shipType, coxoStatus, viewStatus)
+            });
+        }
     }
 }
