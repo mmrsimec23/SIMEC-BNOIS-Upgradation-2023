@@ -1,0 +1,110 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">Proposed Officer<span class="pull-right text-success">{{vm.title}}</span></h2>
+                </div>
+                <form name="vm.employeeProposedCoxoForm">
+                    <employee-search ng-model="vm.employeeProposedCoxo.employee"></employee-search>
+
+                    <div class="col-sm-12">
+                        <hr />
+                    </div>
+                    <!--<div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="shipType" class="custom-label">Ship Type</label>
+                            <select name="shipType" class="form-control" ng-model="vm.employeeProposedCoxo.shipType" ng-options="option.value as option.text for option in vm.coxoShipTypes" ng-change="vm.getOfficeByShiptype(vm.employeeProposedCoxo.shipType)" required>
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.employeeProposedCoxoForm.shipType.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>-->
+                    <!--<div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="officeId" class="custom-label">Office</label>
+
+                                </div>
+                                <div class="col-sm-8">
+                                    <angucomplete-alt id="officeId"
+                                                      placeholder="Search Office"
+                                                      pause="400"
+                                                      maxlength="250"
+                                                      minlength="2"
+                                                      selected-object="vm.selected"
+                                                      local-data="vm.offices"
+                                                      local-search="vm.localSearch"
+                                                      title-field="text"
+                                                      match-class="highlight"
+                                                      field-required="false"
+                                                      input-name="officeId"
+                                                      override-suggestions="true"
+                                                      auto-match="true"
+                                                      text-no-results="Office Not Found"
+                                                      input-class="form-control form-control-small" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="type" class="custom-label">Proposed Ship</label>
+                            <select name="type" class="form-control" ng-model="vm.employeeProposedCoxo.officeId" ng-options="option.value as option.text for option in vm.offices" required>
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.employeeProposedCoxoForm.officeId.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="type" class="custom-label">Type</label>
+                            <select name="type" class="form-control" ng-model="vm.employeeProposedCoxo.type" ng-options="option.value as option.text for option in vm.coxoTypes" required>
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.employeeProposedCoxoForm.type.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>-->
+
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="appointment" class="custom-label">Appoinment</label>
+                            <select name="appointment" class="form-control" ng-model="vm.employeeProposedCoxo.appointment" ng-options="option.value as option.text for option in vm.coxoAppoinments" required>
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.employeeProposedCoxoForm.appointment.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="proposedDate" class="custom-label"> Proposed Date</label>
+                            <input kendo-date-picker id="proposedDate" class="form-control custom-form-control" k-ng-model="vm.employeeProposedCoxo.proposedDate" k-format="'dd-MM-yyyy'" name="proposedDate" required />
+                            <p ng-show="vm.employeeProposedCoxoForm.proposedDate.$error.required" class="help-block errormsg">Date is required.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="remarks" class="custom-label">Remarks</label>
+                            <textarea type="text" id="remarks" class="form-control custom-form-control" ng-model="vm.employeeProposedCoxo.remarks" name="remarks" maxlength="250"></textarea>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-12">
+                        <br />
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.employeeProposedCoxoForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

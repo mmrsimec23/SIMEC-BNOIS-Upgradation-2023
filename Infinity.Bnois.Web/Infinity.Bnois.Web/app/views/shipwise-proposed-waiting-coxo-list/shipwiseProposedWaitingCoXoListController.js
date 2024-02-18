@@ -12,6 +12,7 @@
     function shipwiseProposedWaitingCoXoListController($stateParams, roasterListService, notificationService, $state) {
         var vm = this;
         vm.officeId = 0;
+        vm.shipType = 0;
         vm.appointment = 1;
         vm.largeShipCoXos = [];
         vm.courseAttendeds = [];
@@ -19,6 +20,9 @@
         vm.shipName = '';
         vm.officeCurrentStatus = officeCurrentStatus;
 
+        if ($stateParams.shipType !== undefined && $stateParams.shipType !== null) {
+            vm.shipType = $stateParams.shipType;
+        }
         if ($stateParams.officeId !== undefined && $stateParams.officeId !== null) {
             vm.officeId = $stateParams.officeId;
         }
@@ -30,7 +34,7 @@
         function Init() {
 
 
-            roasterListService.getLargeShipProposedWaitingCoXoList(vm.officeId,vm.appointment).then(function (data) {
+            roasterListService.getLargeShipProposedWaitingCoXoList(vm.shipType,vm.officeId,vm.appointment).then(function (data) {
                 vm.largeShipCoXos = data.result;
                 vm.shipName = vm.largeShipCoXos[0].shortName;
             },

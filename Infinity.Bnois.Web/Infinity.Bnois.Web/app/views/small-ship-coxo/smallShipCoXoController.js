@@ -13,20 +13,33 @@
         var vm = this;
         vm.shipType = 1;
         vm.coxoStatus = 1;
+        vm.viewStatus = 1;
+        vm.title = "Officers List";
         vm.smallShipCoXos = [];
         vm.courseAttendeds = [];
         vm.printSection = printSection;
         vm.officeCurrentStatus = officeCurrentStatus;
 
+        if ($stateParams.viewStatus !== undefined && $stateParams.viewStatus !== null) {
+            vm.viewStatus = $stateParams.viewStatus;
+        }
         if ($stateParams.shipType !== undefined && $stateParams.shipType !== null) {
             vm.shipType = $stateParams.shipType;
         }
 
         Init();
         function Init() {
+            if (vm.viewStatus == 1) {
+                vm.title = "Smaller Ship CO List";
+            }
+            if (vm.viewStatus == 2) {
+                vm.title = "Smaller AUX/TUG CO List";
+            }
+            if (vm.viewStatus == 3) {
+                vm.title = "Smaller Craft BCG CO List";
+            }
 
-
-            roasterListService.getRoasterListByShipType(vm.shipType, vm.coxoStatus).then(function (data) {
+            roasterListService.getRoasterListBySmallShip(vm.shipType, vm.coxoStatus, vm.viewStatus).then(function (data) {
                 vm.smallShipCoXos = data.result;
             },
                 function (errorMessage) {

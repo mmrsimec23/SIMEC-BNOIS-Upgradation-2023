@@ -5374,6 +5374,16 @@
                     title: 'EOSOLO FF Recom'
                 }
             },
+            //-------------CO FF Recom-------
+            {
+                state: 'small-co-remark',
+                config: {
+                    url: '/small-co-remark',
+                    templateUrl: 'app/views/small-co-remark/smallCoRemark.html',
+                    controller: 'smallCoRemarkController as vm',
+                    title: 'small Co Remark'
+                }
+            },
 
 
             //-------------Advance Search-------
@@ -6051,6 +6061,36 @@
                 }
             },
 
+
+            //-------------Small proposed coxo-------
+            {
+                state: 'small-proposed-coxos',
+                config: {
+                    url: '/small-proposed-coxos?ps&pn&q',
+                    templateUrl: 'app/views/small-proposed-coxo/smallProposedCoxos.html',
+                    controller: 'smallProposedCoxosController as vm',
+                    title: 'Employee PFT'
+                }
+            },
+            {
+                state: 'small-proposed-coxo-create',
+                config: {
+                    url: '/small-proposed-coxo-create',
+                    templateUrl: 'app/views/small-proposed-coxo/smallProposedCoxoAdd.html',
+                    controller: 'smallProposedCoxoAddController as vm',
+                    title: 'Employee PFT'
+                }
+            },
+            {
+                state: "small-proposed-coxo-modify",
+                config: {
+                    url: "small-proposed-coxo-modify/:id",
+                    templateUrl: 'app/views/small-proposed-coxo/smallProposedCoxoAdd.html',
+                    controller: 'smallProposedCoxoAddController as vm',
+                    title: 'Employee PFT'
+                }
+            },
+
             //-------------Employee proposed eosolo-------
             {
                 state: 'employee-proposed-eosolos',
@@ -6091,7 +6131,7 @@
             {
                 state: "coxo-small-ships",
                 config: {
-                    url: "/coxo-small-ships",
+                    url: "/coxo-small-ships/:viewStatus",
                     templateUrl: 'app/views/small-ship-coxo/smallShipCoXo.html',
                     controller: 'smallShipCoXoController as vm',
                     title: 'CO/XO Small Ships'
@@ -6190,7 +6230,7 @@
             {
                 state: "coxo-waiting-list",
                 config: {
-                    url: "/coxo-waiting-list/:officeId/:appointment",
+                    url: "/coxo-waiting-list/:shipType/:officeId/:appointment",
                     templateUrl: 'app/views/shipwise-proposed-waiting-coxo-list/shipwiseProposedWaitingCoXoList.html',
                     controller: 'shipwiseProposedWaitingCoXoListController as vm',
                     title: 'Ship Wise CO/XO List'

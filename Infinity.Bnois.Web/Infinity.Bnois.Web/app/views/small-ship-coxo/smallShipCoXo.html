@@ -4,7 +4,7 @@
 			<button class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.printSection('print')"><span class="glyphicon glyphicon-print"></span> Print</button>
 
 			<div class="panel-body pdfReportFormCover" id="print">
-				<h3 class="reportHeader">PRESENT CO/XO LIST (SMALL SHIP)</h3>
+				<h3 class="reportHeader">{{vm.title}}</h3>
 				<hr />
 
 				<div ng-if="vm.smallShipCoXos.length>0" class="table-wrapper table-responsive reportCover">
@@ -36,9 +36,9 @@
 								<td class="reportTD">{{smallShipCoXo.batch}}</td>
 								<td class="reportTD">{{smallShipCoXo.since | date:"dd-MMM-yyyy"}}</td>
 								<td class="reportTD">{{smallShipCoXo.duration}}</td>
-								<td class="reportTD {{smallShipCoXo.comdTotalDurationCssSignal}}">{{smallShipCoXo.comdTotalDuration}}</td>
-								<td class="reportTD {{smallShipCoXo.seaTotalDurationCssSignal}}">{{smallShipCoXo.seaTotalDuration}}</td>
-								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{smallShipCoXo.officeId}}/{{smallShipCoXo.officeHead == true ? 1 : smallShipCoXo.headofDpt == true ? 2 : 0}}" style="text-decoration: none;"><strong>{{smallShipCoXo.proposed}}</strong></a></td>
+								<td class="reportTD">{{smallShipCoXo.comdTotalDuration}}</td>
+								<td class="reportTD">{{smallShipCoXo.seaTotalDuration}}</td>
+								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{smallShipCoXo.shipType}}/{{smallShipCoXo.officeId}}/{{smallShipCoXo.officeHead == true ? 1 : smallShipCoXo.headofDpt == true ? 2 : 0}}" style="text-decoration: none;"><strong>{{smallShipCoXo.proposed}}</strong></a></td>
 							</tr>
 						</tbody>
 					</table>

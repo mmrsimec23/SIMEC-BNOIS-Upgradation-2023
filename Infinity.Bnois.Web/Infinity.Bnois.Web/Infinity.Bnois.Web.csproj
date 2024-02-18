@@ -96,6 +96,7 @@
     <Content Include="app\services\advanceSearchService.js" />
     <Content Include="app\services\careerForecastSettingService.js" />
     <Content Include="app\services\bnoisLogInfoService.js" />
+    <Content Include="app\services\employeeProposedSmallCoxoService.js" />
     <Content Include="app\services\employeeProposedEolosodloseoService.js" />
     <Content Include="app\services\employeeTraceService.js" />
     <Content Include="app\services\employeeMinuteStandbyService.js" />
@@ -344,6 +345,12 @@
     <Content Include="app\views\bn-officer-states\bnOfficerStatesListController.js" />
     <Content Include="app\views\bn-officer-states\bnOfficerStates.html" />
     <Content Include="app\views\bn-officer-states\bnOfficerStatesController.js" />
+    <Content Include="app\views\small-proposed-coxo\smallProposedCoxoAdd.html" />
+    <Content Include="app\views\small-proposed-coxo\smallProposedCoxoAddController.js" />
+    <Content Include="app\views\small-proposed-coxo\smallProposedCoxos.html" />
+    <Content Include="app\views\small-proposed-coxo\smallProposedCoxosController.js" />
+    <Content Include="app\views\small-co-remark\smallCoRemark.html" />
+    <Content Include="app\views\small-co-remark\smallCoRemarkController.js" />
     <Content Include="app\views\employee-trace\employeeTraceAdd.html" />
     <Content Include="app\views\employee-trace\employeeTraceAddController.js" />
     <Content Include="app\views\employee-trace\employeeTraceList.html" />

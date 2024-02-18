@@ -285,7 +285,9 @@ select {
     width: 12px;
     height: 8px;
 }
-
+select {
+    -webkit-appearance: listbox !important;
+}  
 .panel-body form {
     /*overflow: hidden;*/
     background: #ffffff;

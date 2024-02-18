@@ -202,5 +202,6 @@
         EMPLOYEE_MINUTE_STANDBY_URL: baseAPIUrl + 'api/bnois/employee-minute-standby/',
         EMPLOYEE_CAR_LOAN_URL: baseAPIUrl + 'api/bnois/employee-car-loan/',
         BNOIS_EOLOSODLOSEO_SERVICE_URL: baseAPIUrl + 'api/bnois/employee-eolosodloseo-service/',
+        BNOIS_SMALL_COXO_SERVICE_URL: baseAPIUrl + 'api/bnois/employee-small-coxo-service/',
     });
 })();

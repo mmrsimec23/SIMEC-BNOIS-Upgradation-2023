@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>E:\publish\WEB</_PublishTargetUrl>
-    <History>True|2024-02-15T07:33:53.5019876Z;True|2024-02-14T11:08:33.4382743+06:00;False|2024-02-14T11:07:03.4695090+06:00;True|2024-02-12T16:17:25.0667790+06:00;True|2024-02-12T15:46:09.2900114+06:00;True|2024-02-11T15:21:48.0405582+06:00;True|2024-02-08T14:48:02.8570881+06:00;True|2024-02-07T10:37:15.7975392+06:00;True|2024-02-06T10:23:09.3931781+06:00;True|2024-01-11T17:28:41.6733127+06:00;True|2024-01-10T15:40:11.4776915+06:00;True|2024-01-02T16:19:54.9206712+06:00;True|2024-01-02T14:26:53.9857135+06:00;True|2023-12-13T11:22:15.0698741+06:00;True|2023-12-12T13:07:15.7593297+06:00;True|2023-12-12T12:30:24.7838189+06:00;True|2023-11-12T12:17:37.6258034+06:00;True|2023-11-12T11:54:20.7789494+06:00;True|2023-11-05T11:02:53.5650224+06:00;True|2023-11-05T09:57:02.4931018+06:00;True|2023-11-01T16:48:47.6542485+06:00;True|2023-11-01T16:31:02.0130893+06:00;True|2023-10-31T14:52:58.3373624+06:00;True|2023-10-30T16:07:44.5999966+06:00;True|2023-10-19T14:00:50.3593088+06:00;True|2023-10-18T14:37:52.7653276+06:00;True|2023-10-18T14:34:26.5112430+06:00;True|2023-10-17T16:42:08.1705185+06:00;True|2023-10-16T16:07:48.5351529+06:00;True|2023-10-12T14:38:38.0711407+06:00;True|2023-10-11T17:28:27.8555351+06:00;True|2023-10-11T13:27:55.7535143+06:00;True|2023-10-01T18:37:04.3638273+06:00;True|2023-10-01T15:11:45.4798459+06:00;</History>
+    <History>True|2024-02-18T09:50:45.7616429Z;True|2024-02-18T14:23:03.6444928+06:00;True|2024-02-15T13:33:53.5019876+06:00;True|2024-02-14T11:08:33.4382743+06:00;False|2024-02-14T11:07:03.4695090+06:00;True|2024-02-12T16:17:25.0667790+06:00;True|2024-02-12T15:46:09.2900114+06:00;True|2024-02-11T15:21:48.0405582+06:00;True|2024-02-08T14:48:02.8570881+06:00;True|2024-02-07T10:37:15.7975392+06:00;True|2024-02-06T10:23:09.3931781+06:00;True|2024-01-11T17:28:41.6733127+06:00;True|2024-01-10T15:40:11.4776915+06:00;True|2024-01-02T16:19:54.9206712+06:00;True|2024-01-02T14:26:53.9857135+06:00;True|2023-12-13T11:22:15.0698741+06:00;True|2023-12-12T13:07:15.7593297+06:00;True|2023-12-12T12:30:24.7838189+06:00;True|2023-11-12T12:17:37.6258034+06:00;True|2023-11-12T11:54:20.7789494+06:00;True|2023-11-05T11:02:53.5650224+06:00;True|2023-11-05T09:57:02.4931018+06:00;True|2023-11-01T16:48:47.6542485+06:00;True|2023-11-01T16:31:02.0130893+06:00;True|2023-10-31T14:52:58.3373624+06:00;True|2023-10-30T16:07:44.5999966+06:00;True|2023-10-19T14:00:50.3593088+06:00;True|2023-10-18T14:37:52.7653276+06:00;True|2023-10-18T14:34:26.5112430+06:00;True|2023-10-17T16:42:08.1705185+06:00;True|2023-10-16T16:07:48.5351529+06:00;True|2023-10-12T14:38:38.0711407+06:00;True|2023-10-11T17:28:27.8555351+06:00;True|2023-10-11T13:27:55.7535143+06:00;True|2023-10-01T18:37:04.3638273+06:00;True|2023-10-01T15:11:45.4798459+06:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -13,13 +13,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/20/2023 12:31:21</publishTime>
     </File>
     <File Include="app/common/codeValue.js">
-      <publishTime>02/15/2024 13:32:58</publishTime>
+      <publishTime>02/18/2024 17:27:40</publishTime>
     </File>
     <File Include="app/common/common.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/common/common.services.js">
-      <publishTime>02/15/2024 13:32:46</publishTime>
+      <publishTime>02/18/2024 17:27:29</publishTime>
     </File>
     <File Include="app/common/config.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -55,7 +55,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/20/2023 12:31:21</publishTime>
     </File>
     <File Include="app/layout/shell.html">
-      <publishTime>10/25/2023 11:29:51</publishTime>
+      <publishTime>02/18/2024 14:49:13</publishTime>
     </File>
     <File Include="app/layout/shellController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -67,7 +67,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/routes.js">
-      <publishTime>02/07/2024 15:18:08</publishTime>
+      <publishTime>02/18/2024 17:05:37</publishTime>
     </File>
     <File Include="app/services/accountHeadService.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -181,7 +181,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/13/2024 10:55:18</publishTime>
     </File>
     <File Include="app/services/dataConstants.js">
-      <publishTime>02/12/2024 12:49:03</publishTime>
+      <publishTime>02/18/2024 15:31:48</publishTime>
     </File>
     <File Include="app/services/departmentService.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -251,6 +251,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="app/services/employeeProposedEolosodloseoService.js">
       <publishTime>02/12/2024 12:50:20</publishTime>
+    </File>
+    <File Include="app/services/employeeProposedSmallCoxoService.js">
+      <publishTime>02/18/2024 15:34:19</publishTime>
     </File>
     <File Include="app/services/employeeRelationService.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -565,10 +568,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/services/roasterListEoSoLoService.js">
-      <publishTime>01/15/2024 15:14:54</publishTime>
+      <publishTime>02/18/2024 12:11:05</publishTime>
     </File>
     <File Include="app/services/roasterListService.js">
-      <publishTime>12/12/2023 11:43:12</publishTime>
+      <publishTime>02/18/2024 17:03:51</publishTime>
     </File>
     <File Include="app/services/roleService.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -937,7 +940,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/career-forecast/careerForecast.html">
-      <publishTime>02/15/2024 13:32:58</publishTime>
+      <publishTime>02/18/2024 17:27:40</publishTime>
     </File>
     <File Include="app/views/career-forecast/careerForecastController.js">
       <publishTime>12/20/2023 12:32:27</publishTime>
@@ -1099,7 +1102,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/current-status/currentStatus.html">
-      <publishTime>02/15/2024 13:32:58</publishTime>
+      <publishTime>02/18/2024 17:27:40</publishTime>
     </File>
     <File Include="app/views/current-status/currentStatusController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -1717,7 +1720,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/family-information/familyInformation.html">
-      <publishTime>02/15/2024 13:32:58</publishTime>
+      <publishTime>02/18/2024 17:27:40</publishTime>
     </File>
     <File Include="app/views/family-information/familyInformationController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -1894,7 +1897,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/20/2023 12:34:32</publishTime>
     </File>
     <File Include="app/views/large-ship-coxo/largeShipCoXo.html">
-      <publishTime>12/13/2023 18:02:55</publishTime>
+      <publishTime>02/18/2024 12:15:42</publishTime>
     </File>
     <File Include="app/views/large-ship-coxo/largeShipCoXoController.js">
       <publishTime>12/20/2023 12:34:32</publishTime>
@@ -1906,7 +1909,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/14/2024 16:02:56</publishTime>
     </File>
     <File Include="app/views/large-ship-eosolo/largeShipEoSoLo.html">
-      <publishTime>01/16/2024 12:33:07</publishTime>
+      <publishTime>02/18/2024 12:16:28</publishTime>
     </File>
     <File Include="app/views/large-ship-eosolo/largeShipEoSoLoController.js">
       <publishTime>01/16/2024 12:28:48</publishTime>
@@ -2044,7 +2047,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/20/2023 12:34:54</publishTime>
     </File>
     <File Include="app/views/medium-ship-coxo/mediumShipCoXo.html">
-      <publishTime>12/13/2023 12:40:05</publishTime>
+      <publishTime>02/18/2024 12:16:02</publishTime>
     </File>
     <File Include="app/views/medium-ship-coxo/mediumShipCoXoController.js">
       <publishTime>12/20/2023 12:35:04</publishTime>
@@ -2056,7 +2059,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/15/2024 13:22:22</publishTime>
     </File>
     <File Include="app/views/medium-ship-eosolo/mediumShipEoSoLo.html">
-      <publishTime>01/16/2024 12:58:40</publishTime>
+      <publishTime>02/18/2024 12:16:18</publishTime>
     </File>
     <File Include="app/views/medium-ship-eosolo/mediumShipEoSoLoController.js">
       <publishTime>01/10/2024 11:54:49</publishTime>
@@ -2269,7 +2272,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="app/views/office-structure/officeStructuresController.js">
-      <publishTime>02/15/2024 13:32:58</publishTime>
+      <publishTime>02/18/2024 17:27:40</publishTime>
     </File>
     <File Include="app/views/office-transfer/officeTransfers.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -2998,7 +3001,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/11/2024 12:26:39</publishTime>
     </File>
     <File Include="app/views/shipwise-proposed-waiting-coxo-list/shipwiseProposedWaitingCoXoListController.js">
-      <publishTime>12/20/2023 12:36:40</publishTime>
+      <publishTime>02/18/2024 12:09:47</publishTime>
     </File>
     <File Include="app/views/sibling/siblingAdd.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -3017,6 +3020,36 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="app/views/sibling/siblingsController.js">
       <publishTime>10/25/2023 11:29:51</publishTime>
+    </File>
+    <File Include="app/views/small-co-remark/smallCoRemark.html">
+      <publishTime>02/18/2024 17:19:34</publishTime>
+    </File>
+    <File Include="app/views/small-co-remark/smallCoRemarkController.js">
+      <publishTime>02/18/2024 10:34:58</publishTime>
+    </File>
+    <File Include="app/views/small-proposed-coxo/smallProposedCoxoAdd.html">
+      <publishTime>02/18/2024 17:20:23</publishTime>
+    </File>
+    <File Include="app/views/small-proposed-coxo/smallProposedCoxoAddController.js">
+      <publishTime>02/18/2024 15:36:11</publishTime>
+    </File>
+    <File Include="app/views/small-proposed-coxo/smallProposedCoxos.html">
+      <publishTime>02/18/2024 17:20:03</publishTime>
+    </File>
+    <File Include="app/views/small-proposed-coxo/smallProposedCoxosController.js">
+      <publishTime>02/18/2024 15:35:28</publishTime>
+    </File>
+    <File Include="app/views/small-ship-coxo-waiting-list/smallShipCoXoWaitingList.html">
+      <publishTime>02/18/2024 17:21:03</publishTime>
+    </File>
+    <File Include="app/views/small-ship-coxo-waiting-list/smallShipCoXoWaitingListController.js">
+      <publishTime>02/15/2024 16:56:36</publishTime>
+    </File>
+    <File Include="app/views/small-ship-coxo/smallShipCoXo.html">
+      <publishTime>02/18/2024 17:21:30</publishTime>
+    </File>
+    <File Include="app/views/small-ship-coxo/smallShipCoXoController.js">
+      <publishTime>02/18/2024 17:25:04</publishTime>
     </File>
     <File Include="app/views/social-attribute/socialAttribute.html">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -3454,10 +3487,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:51</publishTime>
     </File>
     <File Include="bin/Infinity.Tms.Web.dll">
-      <publishTime>02/15/2024 13:33:49</publishTime>
+      <publishTime>02/18/2024 15:50:42</publishTime>
     </File>
     <File Include="bin/Infinity.Tms.Web.pdb">
-      <publishTime>02/15/2024 13:33:49</publishTime>
+      <publishTime>02/18/2024 15:50:42</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>10/25/2023 11:29:51</publishTime>
@@ -3556,7 +3589,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:50</publishTime>
     </File>
     <File Include="Content/addmin/site.css">
-      <publishTime>10/25/2023 11:29:50</publishTime>
+      <publishTime>02/18/2024 17:03:51</publishTime>
     </File>
     <File Include="Content/addmin/style.css">
       <publishTime>10/25/2023 11:29:50</publishTime>
@@ -4117,7 +4150,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/25/2023 11:29:50</publishTime>
     </File>
     <File Include="index.html">
-      <publishTime>02/12/2024 12:54:26</publishTime>
+      <publishTime>02/18/2024 15:37:24</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>10/25/2023 11:29:51</publishTime>

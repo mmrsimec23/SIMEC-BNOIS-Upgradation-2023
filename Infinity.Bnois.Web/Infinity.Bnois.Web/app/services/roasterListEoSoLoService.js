@@ -19,8 +19,8 @@
             return apiHttpService.GET(url);
         }
 
-        function getLargeShipProposedWaitingCoXoList(officeId, appointment) {
-            var url = dataConstants.ROASTER_LIST_URL + 'get-proposed-waiting-coxo-list?officeId=' + officeId + '&appointment=' + appointment;
+        function getLargeShipProposedWaitingCoXoList(shipType,officeId, appointment) {
+            var url = dataConstants.ROASTER_LIST_URL + 'get-proposed-waiting-coxo-list?shipType=' + shipType +'&officeId=' + officeId + '&appointment=' + appointment;
             return apiHttpService.GET(url);
         }
         function getLargeShipEosoloWaitingList() {

@@ -38,7 +38,7 @@
 								<td class="reportTD">{{largeShipCoXo.duration}}</td>
 								<td class="reportTD {{largeShipCoXo.officeHead == true ? largeShipCoXo.coRotationDue == 'Completed' ? 'Completed' : '' : largeShipCoXo.headofDpt == true ? largeShipCoXo.xoRotationDue == 'Completed' ? 'Completed' : '' : '' }}">{{largeShipCoXo.officeHead == true ? largeShipCoXo.coRotationDue : largeShipCoXo.headofDpt == true ? largeShipCoXo.xoRotationDue : ''}}</td>
 								<td class="reportTD Completed">{{largeShipCoXo.recomStatus}}</td>
-								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{largeShipCoXo.officeId}}/{{largeShipCoXo.officeHead == true ? 1 : largeShipCoXo.headofDpt == true ? 2 : 0}}" style="text-decoration: none;"><strong>{{largeShipCoXo.proposed}}</strong></a></td>
+								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{largeShipCoXo.shipType}}/{{largeShipCoXo.officeId}}/{{largeShipCoXo.officeHead == true ? 1 : largeShipCoXo.headofDpt == true ? 2 : 0}}" style="text-decoration: none;"><strong>{{largeShipCoXo.proposed}}</strong></a></td>
 							</tr>
 						</tbody>
 					</table>
