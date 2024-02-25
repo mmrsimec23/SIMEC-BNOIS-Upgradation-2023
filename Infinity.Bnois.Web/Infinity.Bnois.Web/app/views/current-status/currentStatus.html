@@ -46,7 +46,7 @@
                         </tr>-->
                         <tr class="reportTR">
                             <td class="reportTD"><strong>Date of Commission</strong></td>
-                            <td class="reportTD">{{vm.currentStatus.dateOfCommission | date:"dd-MMM-yyyy"}} &nbsp; &nbsp;   ({{vm.currentStatus.duration}}) | <strong>Batch:</strong> <a target="_blank" href="http://192.168.1.200:8091/officer-list-by-batch/{{vm.currentStatus.batchId}}" style="text-decoration: none;"><strong>{{vm.currentStatus.batch}}</strong></a></td>
+                            <td class="reportTD">{{vm.currentStatus.dateOfCommission | date:"dd-MMM-yyyy"}} &nbsp; &nbsp;   ({{vm.currentStatus.duration}}) | <strong>Batch:</strong> <a target="_blank" href="http://localhost:24123/officer-list-by-batch/{{vm.currentStatus.batchId}}" style="text-decoration: none;"><strong>{{vm.currentStatus.batch}}</strong></a></td>
                         </tr>
                         <tr class="reportTR">
                             <td class="reportTD"><strong>Seniority Date</strong></td>
@@ -74,7 +74,7 @@
                         </tr>
                         <tr class="reportTR">
                             <td class="reportTD"><strong>Attached</strong></td>
-                            <td class="reportTD"><a target="_blank" href="http://192.168.1.200:8091/office-appointment-structures/{{vm.currentStatus.attachOfficeId}}" style="text-decoration: none;"><strong>{{vm.currentStatus.attached}}</strong></a></td>
+                            <td class="reportTD"><a target="_blank" href="http://localhost:24123/office-appointment-structures/{{vm.currentStatus.attachOfficeId}}" style="text-decoration: none;"><strong>{{vm.currentStatus.attached}}</strong></a></td>
                         </tr>
                         <tr class="reportTR">
                             <td class="reportTD"><strong>Appointment</strong></td>
