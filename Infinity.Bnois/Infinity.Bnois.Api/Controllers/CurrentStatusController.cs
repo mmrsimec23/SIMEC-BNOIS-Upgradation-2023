@@ -545,6 +545,18 @@ namespace Infinity.Bnois.Api.Controllers
                 Result = currentStatusService.GetSubmarineServices(pNo)
             });
         }
+        
+
+
+        [HttpGet]
+        [Route("get-swads-services")]
+        public IHttpActionResult getSwadsServices(string pNo)
+        {
+            return Ok(new ResponseMessage<object>()
+            {
+                Result = currentStatusService.getSwadsServices(pNo)
+            });
+        }
 
         
 

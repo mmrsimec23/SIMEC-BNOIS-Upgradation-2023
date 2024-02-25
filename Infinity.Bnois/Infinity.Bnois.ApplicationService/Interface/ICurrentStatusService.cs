@@ -72,6 +72,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<Object> GetBsdServices(string pNo);
         List<Object> GetBsoServices(string pNo);
         List<Object> GetSubmarineServices(string pNo);
+        List<Object> getSwadsServices(string pNo);
         List<Object> GetDeputationServices(string pNo);
         List<Object> GetShoreCommandServices(string pNo);
         List<Object> GetOutsideServices(string pNo);

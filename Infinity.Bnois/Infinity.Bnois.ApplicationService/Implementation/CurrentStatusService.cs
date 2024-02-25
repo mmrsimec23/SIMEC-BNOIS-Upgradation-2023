@@ -505,6 +505,12 @@ select isnull(@GrandTotalDuration,'') as GrandTotalDuration", pNo));
 
 	        return dataTable.ToJson().ToList();
 	    }
+	    public List<object> getSwadsServices(string pNo)
+	    {
+	        DataTable dataTable = employeeRepository.ExecWithSqlQuery(String.Format("exec [spGetSwadsServices] '{0}' ", pNo));
+
+	        return dataTable.ToJson().ToList();
+	    }
 		
 		
 

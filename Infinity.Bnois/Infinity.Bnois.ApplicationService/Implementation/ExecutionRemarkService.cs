@@ -14,9 +14,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
     public class ExecutionRemarkService : IExecutionRemarkService
     {
         private readonly IBnoisRepository<ExecutionRemark> executionRemarkRepository;
-        public ExecutionRemarkService(IBnoisRepository<ExecutionRemark> executionRemarkRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        public ExecutionRemarkService(IBnoisRepository<ExecutionRemark> executionRemarkRepository, IBnoisRepository<BnoisLog> bnoisLogRepository)
         {
             this.executionRemarkRepository = executionRemarkRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
         }
 
         public List<ExecutionRemarkModel> GetExecutionRemarks(int ps, int pn, string qs, out int total,int type)
@@ -67,6 +69,56 @@ namespace Infinity.Bnois.ApplicationService.Implementation
 
                 executionRemark.ModifiedDate = DateTime.Now;
                 executionRemark.ModifiedBy = userId;
+
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "ExecutionRemark";
+                bnLog.TableEntryForm = "Execution Remark";
+                bnLog.PreviousValue = "Id: " + model.ExecutionRemarkId;
+                bnLog.UpdatedValue = "Id: " + model.ExecutionRemarkId;
+                int bnoisUpdateCount = 0;
+
+                
+                if (executionRemark.Name != model.Name)
+                {
+                    bnLog.PreviousValue += ", Name: " + executionRemark.Name;
+                    bnLog.UpdatedValue += ", Name: " + model.Name;
+                    bnoisUpdateCount += 1;
+                }
+                if (executionRemark.Type != model.Type)
+                {
+                    bnLog.PreviousValue += ", Type: " + executionRemark.Type;
+                    bnLog.UpdatedValue += ", Type: " + model.Type;
+                    bnoisUpdateCount += 1;
+                }
+                if (executionRemark.ShortName != model.ShortName)
+                {
+                    bnLog.PreviousValue += ", Short Name: " + executionRemark.ShortName;
+                    bnLog.UpdatedValue += ", Short Name: " + model.ShortName;
+                    bnoisUpdateCount += 1;
+                }
+                if (executionRemark.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + executionRemark.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString(); ;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -95,6 +147,25 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "ExecutionRemark";
+                bnLog.TableEntryForm = "Execution Remark";
+                bnLog.PreviousValue = "Id: " + executionRemark.ExecutionRemarkId;
+
+                
+                bnLog.PreviousValue += ", Name: " + executionRemark.Name + ", Type: " + executionRemark.Type + ", Short Name: " + executionRemark.ShortName + ", Ext Lpr Date: " + ", Remarks: " + executionRemark.Remarks;
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await executionRemarkRepository.DeleteAsync(executionRemark);
             }
         }

@@ -132,7 +132,7 @@ namespace Infinity.Bnois.Api.Controllers
         {
             string extension = string.Empty;
             string mimeType = string.Empty;
-            string reportName = (hsasbType == 1 ? "BroadSheetSASBSubmarine" : hsasbType == 2 ? "BroadSheetHSASB" : "");
+            string reportName = (hsasbType == 1 ? "BroadSheetSASBSubmarine" : hsasbType == 2 ? "BroadSheetHSASB" : hsasbType == 3 ? "BroadSheetHASB" : "");
             PromotionBoardModel promotionBoard = await promotionBoardService.GetPromotionBoard(promotionBoardId);
             var parms = new List<ReportParameter> { new ReportParameter("PromotionBoardId", promotionBoardId.ToString()) };
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage
@@ -218,22 +218,22 @@ namespace Infinity.Bnois.Api.Controllers
             {
                 reportName = "BSPromLtCaptToCdre";
             }
-            else if (promotionBoard.FromRankId == 10)
+            if (promotionBoard.FromRankId == 10)
             {
                 reportName = "BSPCdrToCapt";
             }
-            else if(promotionBoard.FromRankId == 8)
+            if(promotionBoard.FromRankId == 8)
             {
                 reportName = "BSPromLtCdrToCdr";
             }
-            else if(promotionBoard.FromRankId == 6)
+            if(promotionBoard.FromRankId == 6)
             {
                 reportName = "BSPromLtToLtCdrNew";
             }
-            else
-            {
-                reportName = "BroadSheetPromotionLtAndCdreBelow";
-            }
+            //else
+            //{
+            //    reportName = "BroadSheetPromotionLtAndCdreBelow";
+            //}
          
             var parms = new List<ReportParameter> { new ReportParameter("PromotionBoardId", promotionBoardId.ToString()) };
             HttpResponseMessage httpResponseMessage = new HttpResponseMessage

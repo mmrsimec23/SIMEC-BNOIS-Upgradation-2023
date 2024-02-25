@@ -17,13 +17,17 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<PromotionNomination> promotionNominationRepository;
         private readonly IBnoisRepository<PromotionBoard> promotionBoardRepository;
         private readonly IBnoisRepository<Employee> employeeRepository;
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
 
-        public PromotionNominationService(IProcessRepository processRepository, IBnoisRepository<PromotionNomination> promotionNominationRepository, IBnoisRepository<PromotionBoard> promotionBoardRepository, IBnoisRepository<Employee> employeeRepository)
+        public PromotionNominationService(IProcessRepository processRepository, IBnoisRepository<PromotionNomination> promotionNominationRepository, IBnoisRepository<PromotionBoard> promotionBoardRepository, IBnoisRepository<Employee> employeeRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.promotionNominationRepository = promotionNominationRepository;
             this.promotionBoardRepository = promotionBoardRepository;
             this.employeeRepository = employeeRepository;
             this.processRepository = processRepository;
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
         }
 
 
@@ -97,6 +101,10 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 model.ToRankId = promotionBoard.ToRankId;
             }
 
+
+
+            
+
             string userId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
             PromotionNomination promotionNomination = ObjectConverter<PromotionNominationModel, PromotionNomination>.Convert(model);
             if (promotionNominationId > 0)
@@ -108,6 +116,127 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 }
                 promotionNomination.ModifiedDate = DateTime.Now;
                 promotionNomination.ModifiedBy = userId;
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PromotionNomination";
+                bnLog.TableEntryForm = "Promotion Nomination";
+                bnLog.PreviousValue = "Id: " + model.PromotionNominationId;
+                bnLog.UpdatedValue = "Id: " + model.PromotionNominationId;
+                int bnoisUpdateCount = 0;
+
+
+                if (promotionNomination.EmployeeId > 0)
+                {
+                    if (promotionNomination.EmployeeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", promotionNomination.EmployeeId);
+                        bnLog.PreviousValue += ", P No: " + ((dynamic)prev).PNo;
+                    }
+                    if (model.EmployeeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                        bnLog.UpdatedValue += ", P No: " + ((dynamic)newv).PNo;
+                    }
+                    //bnoisUpdateCount += 1;
+                }
+                if (promotionNomination.PromotionBoardId != model.PromotionBoardId)
+                {
+                    if (promotionNomination.PromotionBoardId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("PromotionBoard", "PromotionBoardId", promotionNomination.PromotionBoardId ?? 0);
+                        bnLog.PreviousValue += ", Promotion Board: " + ((dynamic)prev).BoardName;
+                    }
+                    if (model.EmployeeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("PromotionBoard", "PromotionBoardId", model.PromotionBoardId ?? 0);
+                        bnLog.UpdatedValue += ", Promotion Board: " + ((dynamic)newv).BoardName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+
+                if (promotionNomination.IsBackLog != model.IsBackLog)
+                {
+                    bnLog.PreviousValue += ", Back Log: " + promotionNomination.IsBackLog;
+                    bnLog.UpdatedValue += ", Back Log: " + model.IsBackLog;
+                    bnoisUpdateCount += 1;
+                }
+                if (promotionNomination.TransferId != model.TransferId)
+                {
+                    if (promotionNomination.TransferId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("Transfer", "TransferId", promotionNomination.TransferId ?? 0);
+                        bnLog.PreviousValue += ", Transfer: " + ((dynamic)prev).TransferFor + ((dynamic)prev).TransferMode;
+                    }
+                    if (model.TransferId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Transfer", "TransferId", model.TransferId ?? 0);
+                        bnLog.UpdatedValue += ", Transfer: " + ((dynamic)newv).TransferFor + ((dynamic)newv).TransferMode;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (promotionNomination.Type != model.Type)
+                {
+                    bnLog.PreviousValue += ", Type: " + promotionNomination.Type;
+                    bnLog.UpdatedValue += ", Type: " + model.Type;
+                    bnoisUpdateCount += 1;
+                }
+                if (promotionNomination.FromRankId != model.FromRankId)
+                {
+                    if (model.FromRankId > 0)
+                    {
+                        var rnk = employeeService.GetDynamicTableInfoById("Rank", "RankId", promotionNomination.FromRankId ?? 0);
+                        bnLog.PreviousValue += ", Rank: " + ((dynamic)rnk).ShortName;
+                    }
+                    if (model.FromRankId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.FromRankId ?? 0);
+                        bnLog.UpdatedValue += ", From Rank: " + ((dynamic)newv).ShortName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (promotionNomination.ToRankId != model.ToRankId)
+                {
+                    if (model.ToRankId > 0)
+                    {
+                        var rnk = employeeService.GetDynamicTableInfoById("Rank", "RankId", promotionNomination.ToRankId ?? 0);
+                        bnLog.PreviousValue += ", To Rank: " + ((dynamic)rnk).ShortName;
+                    }
+                    if (model.ToRankId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("Rank", "RankId", model.ToRankId ?? 0);
+                        bnLog.UpdatedValue += ", To Rank: " + ((dynamic)newv).ShortName;
+                    }
+                    bnoisUpdateCount += 1;
+                }                
+                if (promotionNomination.EffectiveDate != model.EffectiveDate)
+                {
+                    bnLog.PreviousValue += ", Effective Date: " + promotionNomination.EffectiveDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Effective Date: " + model.EffectiveDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }               
+                if (promotionNomination.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + promotionNomination.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+                
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
 
             }
             else
@@ -157,6 +286,39 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "PromotionNomination";
+                bnLog.TableEntryForm = "Promotion Nomination";
+                bnLog.PreviousValue = "Id: " + promotionNomination.PromotionNominationId;
+                if (promotionNomination.EmployeeId > 0)
+                {
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", promotionNomination.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)emp).PNo;
+                }
+                bnLog.PreviousValue += ", BackLog: " + promotionNomination.IsBackLog;
+                if (promotionNomination.FromRankId > 0)
+                {
+                    var rnk = employeeService.GetDynamicTableInfoById("Rank", "RankId", promotionNomination.FromRankId ?? 0);
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)rnk).ShortName;
+                }
+                if (promotionNomination.FromRankId > 0)
+                {
+                    var rnk = employeeService.GetDynamicTableInfoById("Rank", "RankId", promotionNomination.FromRankId ?? 0);
+                    bnLog.PreviousValue += ", Rank: " + ((dynamic)rnk).ShortName;
+                }
+
+                bnLog.PreviousValue += ", Remarks: " + promotionNomination.Remarks + ", Type: " + promotionNomination.Type;
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 return await promotionNominationRepository.DeleteAsync(promotionNomination);
             }
         }
