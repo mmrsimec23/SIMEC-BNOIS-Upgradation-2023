@@ -15,6 +15,7 @@
         vm.intelligenceServices = [];
         vm.instructionalServices = [];
         vm.submarineServices = [];
+        vm.swadsServices = [];
         vm.printSection = printSection;
 
 
@@ -52,6 +53,14 @@
 
             currentStatusService.getSubmarineServices(vm.pNo).then(function (data) {
                 vm.submarineServices = data.result;
+
+                },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+
+            currentStatusService.getSwadsServices(vm.pNo).then(function (data) {
+                vm.swadsServices = data.result;
 
                 },
                 function (errorMessage) {

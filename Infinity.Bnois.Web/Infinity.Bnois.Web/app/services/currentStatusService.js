@@ -57,6 +57,7 @@
             getBsoServices: getBsoServices,
             getShoreCommandServices: getShoreCommandServices,
             getSubmarineServices: getSubmarineServices,
+            getSwadsServices: getSwadsServices,
             getDeputationServices: getDeputationServices,
             getOutsideServices: getOutsideServices,
             GetFamilyPermissionRelationCount: GetFamilyPermissionRelationCount,
@@ -292,6 +293,11 @@
 
         function getSubmarineServices(pNo) {
             var url = dataConstants.CURRENT_STATUS_URL + 'get-submarine-services?pNo=' + pNo;
+            return apiHttpService.GET(url);
+        }
+
+        function getSwadsServices(pNo) {
+            var url = dataConstants.CURRENT_STATUS_URL + 'get-swads-services?pNo=' + pNo;
             return apiHttpService.GET(url);
         }
         

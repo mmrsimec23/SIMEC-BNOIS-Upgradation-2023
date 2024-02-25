@@ -24,7 +24,7 @@
         vm.type = 0;
         vm.promotionHide = false;
 
-        vm.ltCdrLevels = [{ text: 'Cdr & Above', value: 1 }, { text: 'Lt Cdr & Below', value: 2 }];
+        vm.ltCdrLevels = [{ text: 'Promotion Broadsheet', value: 1 }, { text: 'ACOSP Broadsheet', value: 2 }];
 
 
 
