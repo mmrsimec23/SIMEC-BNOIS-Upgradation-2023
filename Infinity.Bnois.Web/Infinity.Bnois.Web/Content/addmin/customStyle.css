@@ -85,7 +85,7 @@ hr {
     }
 
     .form-group .form-control {
-        background: transparent !important;
+        /*background: transparent !important;*/
         width: 60%;
         display: inline-block;
         font-size: 13px;
