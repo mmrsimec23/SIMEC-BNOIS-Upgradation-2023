@@ -278,6 +278,16 @@ namespace Infinity.Bnois
         Other= 4
     }
 
+	public enum NavyType
+    {
+        CMCIT=1,
+        BNA =2,
+        HM = 3,
+        BBU = 4,
+        BNS =5,
+        CMKUL =6
+    }
+
 	public enum DurationStatus
 	{
 		Month =1,
