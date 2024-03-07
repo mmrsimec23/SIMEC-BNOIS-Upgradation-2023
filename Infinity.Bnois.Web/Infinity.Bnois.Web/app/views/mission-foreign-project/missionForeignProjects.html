@@ -16,6 +16,7 @@
                                 <th>Mission</th>
                                 <th>Appointment</th>
                                 <th>Country</th>
+                                <th>UNM MSA</th>
                                 <th>From Date</th>
                                 <th>To Date </th>
                                 <th>Duration</th>
@@ -27,9 +28,11 @@
                                 <td class="reportTD">{{item.mission}}</td>
                                 <td class="reportTD">{{item.appointment}}</td>
                                 <td class="reportTD">{{item.country}}</td>
+                                <td class="reportTD" style="text-align: center;">{{item.unmMsa}}</td>
                                 <td class="reportTD" style="text-align: center; width: 100px;">{{item.fromDate | date:"dd-MMM-yyyy"}}</td>
                                 <td class="reportTD" style="text-align: center;width: 100px;" ng-if="item.toDate !='Total'">{{item.toDate | date:"dd-MMM-yyyy"}}</td>
                                 <td class="reportTD" style="text-align: center;width: 100px;" ng-if="item.toDate=='Total'"><strong>{{item.toDate | date:"dd-MMM-yyyy"}}</strong></td>
+
                                 <td class="reportTD" style="text-align: center;text-transform: lowercase;">{{item.duration}}</td>
                             </tr>
 

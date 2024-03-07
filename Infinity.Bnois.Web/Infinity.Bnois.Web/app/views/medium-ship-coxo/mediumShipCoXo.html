@@ -33,7 +33,7 @@
 							<tr ng-repeat="mediumShipCoXo in vm.mediumShipCoXos" class="reportTR">
 								<!--<td class="reportTD">{{mediumShipCoXo.shortName}}</td>-->
 							<td class="reportTD" style="{{ mediumShipCoXo.shipName !== vm.mediumShipCoXos[$index -1].shipName ? 'border-bottom:none !important;' : 'border-top:none !important;border-bottom:none !important;' }}"> {{ mediumShipCoXo.shipName !== vm.mediumShipCoXos[$index -1].shipName ? mediumShipCoXo.shipName : '' }} </td>
-								<td class="reportTD">{{mediumShipCoXo.appt}}</td>
+								<td class="reportTD" style="{{ mediumShipCoXo.appt === 'Vacant' ? 'font-weight:bold;color:red;' :''}}">{{mediumShipCoXo.appt}}</td>
 								<td class="reportTD">{{mediumShipCoXo.pNo}}</td>
 								<td class="reportTD"><a href="" ng-click="vm.officeCurrentStatus(mediumShipCoXo.pNo)"> <strong>{{mediumShipCoXo.fullNameEng}}</strong></a></td>
 								<td class="reportTD">{{mediumShipCoXo.batch}}</td>
@@ -44,7 +44,7 @@
 								<td class="reportTD {{mediumShipCoXo.seaTotalDurationCssSignal}}">{{mediumShipCoXo.seaTotalDuration}}</td>
 								<!--<td class="reportTD">{{mediumShipCoXo.officeHead == true ? mediumShipCoXo.coRotationDue : mediumShipCoXo.headofDpt == true ? mediumShipCoXo.xoRotationDue : ''}}</td>-->
 								<td class="reportTD">{{mediumShipCoXo.sasbStatus}}</td>
-								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{mediumShipCoXo.shipType}}/{{mediumShipCoXo.officeId}}/{{mediumShipCoXo.officeHead == true ? 1 : mediumShipCoXo.headofDpt == true ? 2 : 0}}" style="text-decoration: none;"><strong>{{mediumShipCoXo.proposed}}</strong></a></td>
+								<td class="reportTD" style="text-align: center;"><a target="_blank" href="/coxo-waiting-list/{{mediumShipCoXo.shipType}}/{{mediumShipCoXo.officeId}}/{{mediumShipCoXo.officeHead == true ? 1 : mediumShipCoXo.headofDpt == true ? 2 : 1}}" style="text-decoration: none;"><strong>{{mediumShipCoXo.proposed}}</strong></a></td>
 							</tr>
 						</tbody>
 					</table>
