@@ -1,0 +1,1399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="SummaryOfImportantCriteriaDS">
+      <DataSourceReference>BnoisDataSource</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>9d2dd072-0462-4a09-9dae-39beb3b3a957</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="CommonDSet">
+      <Query>
+        <DataSourceName>SummaryOfImportantCriteriaDS</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@EmployeeId">
+            <Value>=Parameters!EmployeeId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT        ISNULL 
+							 ((SELECT        dbo.fnGetSubmarineServiceDurationByEmployeeId(@EmployeeId) AS Expr4), 'Nil') AS TotalSbmrneSvc
+							 , 
+							 (SELECT        case when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'SEO%') is not null then 2 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'DLO%') is not null then 2 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'XO%') is not null then 5
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'NO%') is not null or dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'WCO%') is not null then 4 
+							 else '' end AS Expr5) AS SbmrneDmdYr, 
+							 (SELECT        case when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'SEO%') is not null then 3 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'DLO%') is not null then 4 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'XO%') is not null then 1
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'NO%') is not null or dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'WCO%') is not null then 2 
+							 else '' end AS Expr5) AS SbmrneTypeSvc, 
+							 (SELECT        case when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'SEO%') is not null then 'SEO' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'DLO%') is not null then 'DLO' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'XO%') is not null then 'XO'
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'NO%') is not null or dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'WCO%') is not null then 'NO/ WCO' 
+							 else '' end AS Expr5) AS SbmrneApptType, ISNULL
+							 ((SELECT        case when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'SEO%') is not null then dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'SEO%') 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'DLO%') is not null then dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'DLO%') 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'XO%') is not null then dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'XO%') 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'NO%') is not null or dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'WCO%') is not null then (select isnull(dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'NO%'),'')) +  (select isnull(dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'WCO%'),''))
+							 else null end AS Expr6), 'Nil') AS TotalSbmrneTypeDurSvc
+							  ,  
+							 (SELECT        case when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'SEO%') is not null then 'Desig EO Course (Qualified)' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'DLO%') is not null then 'Desig LO Course (Qualified)' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'XO%') is not null then '' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'NO%') is not null or dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'WCO%') is not null then 'Desig XO Course (Qualified)' 
+							 else '' end AS Expr5) AS DesigCourseTitle
+							 ,
+							 (SELECT        case when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'SEO%') is not null then 'Specialization Course (Qualified): MESC/ Equivalent Submarine Specialization from home/ abroad' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'DLO%') is not null then 'Specialization Course (Qualified): LEC/ Equivalent Submarine Specialization from home/ abroad' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'XO%') is not null then 'CQC (Submarine) Course Qualified' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'NO%') is not null or dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'WCO%') is not null then 'Specialization Course (Qualified): PWO (TAS)/ PWO (C)/ PWO (N)' 
+							 else '' end AS Expr5) AS CqcSplCourseTitle
+							 , 
+							 (SELECT        case when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'SEO%') is not null then 'SCEE Qualified (Preferable)' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'DLO%') is not null then 'SCEE Qualified (Preferable)' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'XO%') is not null then 'SC Qualified (Preferable' 
+							 when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'NO%') is not null or dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'WCO%') is not null then 'SCEE Qualified (Preferable)' 
+							 else '' end AS Expr5) AS SceeCourseTitle
+							 , ISNULL
+                             ((SELECT        TOP (1) s.SuitabilityName + ' (' + oas.Note + ')' AS RecomForXOFF
+                                 FROM            OprAptSuitability AS oas INNER JOIN
+                                                          EmployeeOpr AS eo ON oas.EmployeeOprId = eo.Id INNER JOIN
+                                                          Suitability AS s ON oas.SuitabilityId = s.Id INNER JOIN
+                                                          SpecialAptType AS sat ON oas.SpecialAptTypeId = sat.Id
+                                 WHERE        (eo.EmployeeId = @EmployeeId) AND (sat.SpAptType = 'XO FF')
+                                 ORDER BY oas.Id), 'Nil') AS RecomForXOFF
+
+
+
+--select * from employee where PNo='1924'</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="SbmrneApptType">
+          <DataField>SbmrneApptType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TotalSbmrneSvc">
+          <DataField>TotalSbmrneSvc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SbmrneDmdYr">
+          <DataField>SbmrneDmdYr</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DesigCourseTitle">
+          <DataField>DesigCourseTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TotalSbmrneTypeDurSvc">
+          <DataField>TotalSbmrneTypeDurSvc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CqcSplCourseTitle">
+          <DataField>CqcSplCourseTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SbmrneTypeSvc">
+          <DataField>SbmrneTypeSvc</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SceeCourseTitle">
+          <DataField>SceeCourseTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RecomForXOFF">
+          <DataField>RecomForXOFF</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="StaffCourseDSet">
+      <Query>
+        <DataSourceName>SummaryOfImportantCriteriaDS</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@EmployeeId">
+            <Value>=Parameters!EmployeeId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select 
+case
+when CT.CountryId=12 and TR.Positon=NULL then CAST(ROUND(TR.Percentage,2) AS varchar(20)) +'%'
+when CT.CountryId&lt;&gt;12  then CT.FullName
+else  CAST(ROUND(TR.Percentage,2) as varchar(20)) +'%'+ isnull(', '+CAST(TR.Positon as varchar(20)) +'/'+cast((select count(TrainingPlanId) from TrainingResult where TrainingPlanId=TR.TrainingPlanId) as varchar(20)),'') 
+end as Result
+from TrainingResult TR
+inner join CourseCategory  CC on TR.CourseCategoryId=CC.CourseCategoryId
+inner join TrainingPlan TP on TR.TrainingPlanId=TP.TrainingPlanId
+inner join Country CT on TP.CountryId=CT.CountryId
+where CC.CourseCategoryId=4 and TR.EmployeeId=@EmployeeId</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Result">
+          <DataField>Result</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="SubCourseDSet">
+      <Query>
+        <DataSourceName>SummaryOfImportantCriteriaDS</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@EmployeeId">
+            <Value>=Parameters!EmployeeId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>spGetSubmarineRelatedCourse</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Course">
+          <DataField>Course</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Batch">
+          <DataField>Batch</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Institute">
+          <DataField>Institute</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FromDate">
+          <DataField>FromDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ToDate">
+          <DataField>ToDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Duration">
+          <DataField>Duration</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="SplCourseQualDSet">
+      <Query>
+        <DataSourceName>SummaryOfImportantCriteriaDS</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@EmployeeId">
+            <Value>=Parameters!EmployeeId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select top 1
+(case when tr.CourseCategoryId is not null then 1 else 0 end) as IsDoneSpl
+from TrainingResult TR
+inner Join Employee E on TR.EmployeeId=E.EmployeeId
+inner Join TrainingPlan TP on TR.TrainingPlanId=TP.TrainingPlanId
+where E.EmployeeId=@EmployeeId and TR.CourseCategoryId in (3)</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="IsDoneSpl">
+          <DataField>IsDoneSpl</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="SceeQualDSet">
+      <Query>
+        <DataSourceName>SummaryOfImportantCriteriaDS</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@EmployeeId">
+            <Value>=Parameters!EmployeeId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select top 1
+(case when ESER.ServiceExamCategoryId is not null then 1 else 0 end) as IsDoneScee
+from EmployeeServiceExamResult ESER
+ where ESER.EmployeeId=@EmployeeId and ESER.ServiceExamCategoryId in (4)</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="IsDoneScee">
+          <DataField>IsDoneScee</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Last2OprForSubDSet">
+      <Query>
+        <DataSourceName>SummaryOfImportantCriteriaDS</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@EmployeeId">
+            <Value>=Parameters!EmployeeId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>  select top 2 FORMAT(CAST(EOPR.OprToDate as date),'MMM-yy') as OprDate, cast(EOPR.OprGrade as varchar(5)) + ' (' + o.SecurityName + ') '  as EmpOpr,
+ FORMAT(CAST(EOPR.OprToDate as date),'MMM/yy') + ' - ' + (case when rt.ShortName='Rec' then 'Yes' else 'No' end) as CoRecom
+from EmployeeOpr EOPR
+left join RecomandationType rt on rt.RecomandationTypeId=EOPR.RecomandationTypeId
+left join Office o on o.OfficeId=EOPR.OfficeId
+left join OfficeAppointment oa on oa.OffAppId=EOPR.AppoinmentId
+left join Employee e on e.EmployeeId=EOPR.EmployeeId
+left join Transfer t on t.TransferId=e.TransferId
+ where EOPR.EmployeeId=@EmployeeId and (t.AppointmentId=oa.OffAppId or EOPR.OprGrade is not null)
+ order by EOPR.OprToDate desc</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="OprDate">
+          <DataField>OprDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EmpOpr">
+          <DataField>EmpOpr</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CoRecom">
+          <DataField>CoRecom</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="OprAsApptDSet">
+      <Query>
+        <DataSourceName>SummaryOfImportantCriteriaDS</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@EmployeeId">
+            <Value>=Parameters!EmployeeId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select top 2 oa.ShortName as OprAppt, FORMAT(CAST(EOPR.OprToDate as date),'MMM-yy') as OprDate, cast(EOPR.OprGrade as varchar(5)) + ' (' + o.SecurityName + ') '  as EmpOpr,
+ FORMAT(CAST(EOPR.OprToDate as date),'MMM/yy') + ' - ' + (case when rt.ShortName='Rec' then 'Yes' else 'No' end) as CoRecom
+from EmployeeOpr EOPR
+left join RecomandationType rt on rt.RecomandationTypeId=EOPR.RecomandationTypeId
+left join Office o on o.OfficeId=EOPR.OfficeId
+left join OfficeAppointment oa on oa.OffAppId=EOPR.AppoinmentId
+left join Employee e on e.EmployeeId=EOPR.EmployeeId
+left join Transfer t on t.TransferId=e.TransferId
+ where EOPR.EmployeeId=@EmployeeId and (oa.ShortName like (case when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'XO%') is not null then ('XO%') 
+ when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'NO%') is not null then ('NO%') 
+ when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'SEO%') is not null then ('SEO%') 
+ when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'DLO%') is not null then ('DLO%') else '' end) 
+ or oa.ShortName like (case when dbo.fnGetSubmarineServiceDurationByEmployeeIdAndAppt(@EmployeeId,'WCO%') is not null then ('WCO%') else '' end))
+ order by EOPR.OprToDate desc</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="OprAppt">
+          <DataField>OprAppt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OprDate">
+          <DataField>OprDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EmpOpr">
+          <DataField>EmpOpr</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CoRecom">
+          <DataField>CoRecom</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="SeeeQualCourseDSet">
+      <Query>
+        <DataSourceName>SummaryOfImportantCriteriaDS</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@EmployeeId">
+            <Value>=Parameters!EmployeeId.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select top 1 
+(case when tr.CourseCategoryId is not null then 1 else 0 end) as IsDoneSc, (case when ee.ServiceExamCategoryId is not null then 1 else 0 end) as IsDoneScee
+from  Employee E
+left Join TrainingResult TR on TR.EmployeeId=E.EmployeeId and TR.CourseCategoryId in (4)
+left Join EmployeeServiceExamResult ee on ee.EmployeeId=E.EmployeeId and ee.ServiceExamCategoryId in (4)
+where E.EmployeeId=@EmployeeId   </CommandText>
+      </Query>
+      <Fields>
+        <Field Name="IsDoneSc">
+          <DataField>IsDoneSc</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="IsDoneScee">
+          <DataField>IsDoneScee</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>----------------------------------------------</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Submarine svc (min </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!SbmrneDmdYr.Value, "CommonDSet")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> yrs)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!TotalSbmrneSvc.Value, "CommonDSet")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.33278in</Top>
+            <Left>0.015in</Left>
+            <Height>0.325in</Height>
+            <Width>2.01in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!SbmrneApptType.Value, "CommonDSet")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> Svc (min 1 yr)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>Result</Label>
+                    <Value>=First(Fields!TotalSbmrneTypeDurSvc.Value, "CommonDSet")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.65778in</Top>
+            <Left>0.015in</Left>
+            <Height>0.30625in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Mandatory Courses/ Qualifications</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Left>0.015in</Left>
+            <Height>0.17306in</Height>
+            <Width>2.01in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!SceeCourseTitle.Value, "CommonDSet")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>IsDoneScee</Label>
+                    <Value>=iif(first(Fields!SbmrneTypeSvc.Value, "CommonDSet") = 1, 
+iif(First(Fields!IsDoneSc.Value, "SeeeQualCourseDSet") = 1,"Yes","No"),
+iif(First(Fields!IsDoneScee.Value, "SeeeQualCourseDSet") = 1,"Yes","No"))</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>2.28069in</Top>
+            <Left>0.0075in</Left>
+            <Height>0.31458in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix4">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>2.0175in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.14583in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=rownumber(nothing).ToString()+"."</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value xml:space="preserve"> </Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!Course.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <LineHeight>8pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Course</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>SubCourseDSet</DataSetName>
+            <Top>0.18695in</Top>
+            <Left>0.015in</Left>
+            <Height>0.14583in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Last 2 OPRs Gd  (min 6)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>2.62305in</Top>
+            <Left>0.0075in</Left>
+            <Height>0.17306in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>5</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(First(Fields!SbmrneTypeSvc.Value, "CommonDSet")=1,false,true)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Recom for CO from Submarine</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>3.31639in</Top>
+            <Left>0.0075in</Left>
+            <Height>0.17306in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix6">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>2.0175in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.14583in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CoRecom.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <LineHeight>8pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Course</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details3" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>Last2OprForSubDSet</DataSetName>
+            <Top>3.51723in</Top>
+            <Left>0.0075in</Left>
+            <Height>0.14583in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Dives as </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!SbmrneApptType.Value, "CommonDSet")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> (min 6)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>Result</Label>
+                    <Value />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.96403in</Top>
+            <Left>0.015in</Left>
+            <Height>0.30625in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Dives Submarine career (min 20)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>Result</Label>
+                    <Value />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.27028in</Top>
+            <Left>0.015in</Left>
+            <Height>0.30625in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>9</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(First(Fields!SbmrneTypeSvc.Value, "CommonDSet")=1,false,true)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CqcSplCourseTitle.Value, "CommonDSet")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>IsDoneSpl</Label>
+                    <Value>=iif(First(Fields!IsDoneSpl.Value, "SplCourseQualDSet") &gt; 0, "Yes", "No")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.96611in</Top>
+            <Left>0.0075in</Left>
+            <Height>0.31458in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>OPR Gd as </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!SbmrneApptType.Value, "CommonDSet")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> (6 or above)</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>2.96972in</Top>
+            <Left>0.0075in</Left>
+            <Height>0.17306in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix7">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>0.27083in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.3125in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.62917in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.8125in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.14583in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox13">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=rownumber(nothing).ToString()+"."</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox13</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="OprAppt">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!OprAppt.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>OprAppt</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!OprDate.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                                <LineHeight>8pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Course</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EmpOpr">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!EmpOpr.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EmpOpr</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details4" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>OprAsApptDSet</DataSetName>
+            <Top>3.17056in</Top>
+            <Left>0.0075in</Left>
+            <Height>0.14583in</Height>
+            <Width>2.025in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <FontSize>8pt</FontSize>
+            </Style>
+          </Tablix>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!DesigCourseTitle.Value, "CommonDSet")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>Result</Label>
+                    <Value />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.6182in</Top>
+            <Left>0.015in</Left>
+            <Height>0.30625in</Height>
+            <Width>2.0175in</Width>
+            <ZIndex>13</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(First(Fields!SbmrneTypeSvc.Value, "CommonDSet") = 1, true, false)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix8">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>0.27083in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.75417in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.14583in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox14">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=rownumber(nothing).ToString()+"."</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox13</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Course5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!OprDate.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                                <LineHeight>8pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Course</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EmpOpr2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!EmpOpr.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EmpOpr</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details5" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>Last2OprForSubDSet</DataSetName>
+            <Top>2.82389in</Top>
+            <Height>0.14583in</Height>
+            <Width>2.025in</Width>
+            <ZIndex>14</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(First(Fields!SbmrneTypeSvc.Value, "CommonDSet")=1,false,true)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <FontSize>8pt</FontSize>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>3.66306in</Height>
+        <Style />
+      </Body>
+      <Width>2.0325in</Width>
+      <Page>
+        <LeftMargin>0.1in</LeftMargin>
+        <RightMargin>0.1in</RightMargin>
+        <TopMargin>0.2in</TopMargin>
+        <BottomMargin>0.2in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="EmployeeId">
+      <DataType>String</DataType>
+      <Prompt>Employee Id</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>1</NumberOfColumns>
+      <NumberOfRows>1</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>EmployeeId</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>1b41df14-180a-48ba-b6a4-f439bf3b4cbb</rd:ReportID>
+</Report>
