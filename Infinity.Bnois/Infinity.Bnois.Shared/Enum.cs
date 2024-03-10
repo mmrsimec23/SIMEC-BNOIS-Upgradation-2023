@@ -284,8 +284,14 @@ namespace Infinity.Bnois
         BNA =2,
         HM = 3,
         BBU = 4,
-        BNS =5,
-        CMKUL =6
+        BNS =5, 
+        CMKUL =6,
+        SBL = 7,
+        CTRA = 8,
+        GMTI = 9,
+        KPTK = 10,
+        NBJTRA = 11,
+        JyJTRA = 12
     }
 
 	public enum DurationStatus
