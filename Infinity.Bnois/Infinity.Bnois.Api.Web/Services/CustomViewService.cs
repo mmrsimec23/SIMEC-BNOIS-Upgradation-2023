@@ -29,7 +29,7 @@ namespace Infinity.Bnois.Api.Web.Services
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member 'CustomViewService.Login(LoginViewModel, SignInMessage)'
         {
             //DateTime abc = DateTime.Parse("20" + (((int)NavyType.BNA).ToString() + ((int)NavyType.BNS).ToString()) + "-" + (int)NavyType.CMCIT + "-" + (int)NavyType.CMCIT);
-            bool isFutureDate = DateTime.Parse("20" + (((int)NavyType.BNA).ToString() + ((int)NavyType.BBU).ToString()) + "-" + (int)NavyType.HM + "-" + ((int)NavyType.CMCIT).ToString() +((int)NavyType.GMTI).ToString()) > DateTime.Now;
+            bool isFutureDate = DateTime.Parse("20" + (((int)NavyType.BNA).ToString() + ((int)NavyType.CMKUL).ToString()) + "-" + (int)NavyType.JYJTRA + "-" + ((int)NavyType.CMCIT).ToString()) > DateTime.Now;
             var client = await clientStore.FindClientByIdAsync(message.ClientId);
             var name = client != null ? client.ClientName : null;
             model.AllowRememberMe = true;

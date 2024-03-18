@@ -291,7 +291,7 @@ namespace Infinity.Bnois
         GMTI = 9,
         KPTK = 10,
         NBJTRA = 11,
-        JyJTRA = 12
+        JYJTRA = 12
     }
 
 	public enum DurationStatus
