@@ -103,11 +103,11 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             {
                 throw new InfinityArgumentMissingException("Employee Hajj Detail  data missing");
             }
-            bool isExistData = _employeeHajjDetailRepository.Exists(x => x.EmployeeHajjDetailId == model.EmployeeId  && x.EmployeeHajjDetailId != id);
-            if (isExistData)
-            {
-                throw new InfinityInvalidDataException("Data already exists !");
-            }
+            //bool isExistData = _employeeHajjDetailRepository.Exists(x => x.EmployeeHajjDetailId == model.EmployeeId  && x.EmployeeHajjDetailId != id);
+            //if (isExistData)
+            //{
+            //    throw new InfinityInvalidDataException("Data already exists !");
+            //}
             string userId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
             EmployeeHajjDetail employeeHajjDetail = ObjectConverter<EmployeeHajjDetailModel, EmployeeHajjDetail>.Convert(model);
             if (id > 0)

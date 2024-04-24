@@ -22,7 +22,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<EmployeeLeaveCountry> employeeLeaveCountryRepository;
         private readonly IBnoisRepository<EmployeeLeaveYear> employeeLeaveYearRepository;
         private readonly IBnoisRepository<LeavePolicy> leavePolicyRepository;
-        public EmployeeLeaveService(IBnoisRepository<Employee> employeeRepository,IEmployeeLeaveRepository employeeLeaveRepository, IBnoisRepository<EmployeeLeaveCountry> employeeLeaveCountryRepository, IBnoisRepository<EmployeeLeaveYear> employeeLeaveYearRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<LeavePolicy> leavePolicyRepository)
+        private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
+        private readonly IEmployeeService employeeService;
+        public EmployeeLeaveService(IBnoisRepository<Employee> employeeRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService, IEmployeeLeaveRepository employeeLeaveRepository, IBnoisRepository<EmployeeLeaveCountry> employeeLeaveCountryRepository, IBnoisRepository<EmployeeLeaveYear> employeeLeaveYearRepository, IBnoisRepository<EmployeeGeneral> employeeGeneralRepository, IBnoisRepository<LeavePolicy> leavePolicyRepository)
         {
             this.employeeLeaveRepository = employeeLeaveRepository;
             this.employeeLeaveCountryRepository = employeeLeaveCountryRepository;
@@ -30,7 +32,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             this.employeeGeneralRepository = employeeGeneralRepository;
             this.leavePolicyRepository = leavePolicyRepository;
             this.employeeRepository = employeeRepository;
-
+            this.bnoisLogRepository = bnoisLogRepository;
+            this.employeeService = employeeService;
 
         }
 
@@ -50,6 +53,38 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             }
             else
             {
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeeLeave";
+                bnLog.TableEntryForm = "Employee Leave";
+                bnLog.PreviousValue = "Id: " + employeeLeave.EmpLeaveId;
+                if (employeeLeave.EmployeeId > 0)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeLeave.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                }
+                if (employeeLeave.LeaveTypeId  > 0)
+                {
+                     var prev = employeeService.GetDynamicTableInfoById("LeaveType", "LeaveTypeId", employeeLeave.LeaveTypeId);
+                     bnLog.PreviousValue += ", Leave Type: " + ((dynamic)prev).TypeName;
+                }
+                bnLog.PreviousValue += ", Date From: " + employeeLeave.FromDate?.ToString("dd/MM/yyyy") + ", Date To: " + employeeLeave.ToDate?.ToString("dd/MM/yyyy") + ", Duration: " + employeeLeave.Duration + ", Remarks: " + employeeLeave.Remarks + ", Ex Bd Leave: " + employeeLeave.ExBdLeave + ", Accompany By: " + employeeLeave.AccompanyBy;
+                if (employeeLeave.Purpose > 0)
+                {
+                    var prev = employeeService.GetDynamicTableInfoById("LeavePurpose", "PurposeId", employeeLeave.Purpose ?? 0);
+                    bnLog.PreviousValue += ", Purpose: " + ((dynamic)prev).Name;
+                }
+
+                bnLog.UpdatedValue = "This Record has been Deleted!";
+
+                bnLog.LogStatus = 2; // 1 for update, 2 for delete
+                bnLog.UserId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                await bnoisLogRepository.SaveAsync(bnLog);
+
+                //data log section end
+
                 employeeLeaveYearRepository.RemoveRange(employeeLeaveYear);
                 employeeLeaveCountryRepository.RemoveRange(employeeLeaveCountry);
                 return await employeeLeaveRepository.DeleteAsync(employeeLeave);
@@ -258,6 +293,106 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 await employeeLeaveCountryRepository.DeleteAsync(x => x.EmpLeaveId == id);
                 // All Employee Leave Year Child Delete 
                 await employeeLeaveYearRepository.DeleteAsync(x => x.EmpLeaveId == id);
+
+                // data log section start
+                BnoisLog bnLog = new BnoisLog();
+                bnLog.TableName = "EmployeeLeave";
+                bnLog.TableEntryForm = "Employee Leave";
+                bnLog.PreviousValue = "Id: " + model.EmpLeaveId;
+                bnLog.UpdatedValue = "Id: " + model.EmpLeaveId;
+                int bnoisUpdateCount = 0;
+                if (employeeLeave.EmployeeId > 0 || model.EmployeeId > 0)
+                {
+                    var prevemp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", employeeLeave.EmployeeId);
+                    var emp = employeeService.GetDynamicTableInfoById("Employee", "EmployeeId", model.EmployeeId);
+                    bnLog.PreviousValue += ", PNo: " + ((dynamic)prevemp).PNo;
+                    bnLog.UpdatedValue += ", PNo: " + ((dynamic)emp).PNo;
+                }
+                if (employeeLeave.LeaveTypeId != model.LeaveTypeId)
+                {
+                    if (employeeLeave.LeaveTypeId > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("LeaveType", "LeaveTypeId", employeeLeave.LeaveTypeId);
+                        bnLog.PreviousValue += ", Leave Type: " + ((dynamic)prev).TypeName;
+                    }
+                    if (model.LeaveTypeId > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("LeaveType", "LeaveTypeId", model.LeaveTypeId);
+                        bnLog.UpdatedValue += ", Leave Type: " + ((dynamic)newv).TypeName;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLeave.FromDate != model.FromDate)
+                {
+                    bnLog.PreviousValue += ", Date From: " + employeeLeave.FromDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Date From: " + model.FromDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLeave.ToDate != model.ToDate)
+                {
+                    bnLog.PreviousValue += ", Date To: " + employeeLeave.ToDate?.ToString("dd/MM/yyyy");
+                    bnLog.UpdatedValue += ", Date To: " + model.ToDate?.ToString("dd/MM/yyyy");
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLeave.Duration != model.Duration)
+                {
+                    bnLog.PreviousValue += ", Duration: " + employeeLeave.Duration;
+                    bnLog.UpdatedValue += ", Duration: " + model.Duration;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLeave.Remarks != model.Remarks)
+                {
+                    bnLog.PreviousValue += ", Remarks: " + employeeLeave.Remarks;
+                    bnLog.UpdatedValue += ", Remarks: " + model.Remarks;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLeave.ExBdLeave != model.ExBdLeave)
+                {
+                    bnLog.PreviousValue += ", Ex Bd Leave: " + employeeLeave.ExBdLeave;
+                    bnLog.UpdatedValue += ", Ex Bd Leave: " + model.ExBdLeave;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLeave.AccompanyBy != model.AccompanyBy)
+                {
+                    bnLog.PreviousValue += ", Accompany By: " + employeeLeave.AccompanyBy;
+                    bnLog.UpdatedValue += ", Accompany By: " + model.AccompanyBy;
+                    bnoisUpdateCount += 1;
+                }
+                if (employeeLeave.Purpose != model.Purpose)
+                {
+                    if (employeeLeave.Purpose > 0)
+                    {
+                        var prev = employeeService.GetDynamicTableInfoById("LeavePurpose", "PurposeId", employeeLeave.Purpose??0);
+                        bnLog.PreviousValue += ", Purpose: " + ((dynamic)prev).Name;
+                    }
+                    if (model.Purpose > 0)
+                    {
+                        var newv = employeeService.GetDynamicTableInfoById("LeavePurpose", "PurposeId", model.Purpose??0);
+                        bnLog.UpdatedValue += ", Purpose: " + ((dynamic)newv).Name;
+                    }
+                    bnoisUpdateCount += 1;
+                }
+                //if (employeeLeave.Purpose != model.Purpose)
+                //{
+                //    bnLog.PreviousValue += ", Purpose: " + employeeLeave.Purpose;
+                //    bnLog.UpdatedValue += ", Purpose: " + model.Purpose;
+                //    bnoisUpdateCount += 1;
+                //}
+
+                bnLog.LogStatus = 1; // 1 for update, 2 for delete
+                bnLog.UserId = userId;
+                bnLog.LogCreatedDate = DateTime.Now;
+
+                if (bnoisUpdateCount > 0)
+                {
+                    await bnoisLogRepository.SaveAsync(bnLog);
+
+                }
+                else
+                {
+                    throw new InfinityNotFoundException("Please Update Any Field!");
+                }
+                //data log section end
             }
             else
             {
@@ -481,7 +616,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 leaveSummaryModel.CasualLeave = totaleaveBalance.Where(x => x.LeaveYear == DateTime.Now.Year && x.LeaveTypeId == CodeValue.CL_LeaveType).Select(x => x.Balance).FirstOrDefault();
                 leaveSummaryModel.SickLeave = totaleaveBalance.Where(x => x.LeaveYear == DateTime.Now.Year && x.LeaveTypeId == CodeValue.Sick_LeaveType).Select(x => x.Balance).FirstOrDefault();
                 leaveSummaryModel.MedicalLeave = totaleaveBalance.Where(x => x.LeaveYear == DateTime.Now.Year && x.LeaveTypeId == CodeValue.Medical_LeaveType).Select(x => x.Balance).FirstOrDefault();
-                leaveSummaryModel.TotalFurloughLeave = (yy * 30) > fltotal ? fltotal - flLeaveGet : (yy * 30) - flLeaveGet; 
+                //leaveSummaryModel.TotalFurloughLeave = (yy * 30) > fltotal ? fltotal - flLeaveGet : (yy * 30) - flLeaveGet; 
+                leaveSummaryModel.TotalFurloughLeave = (yy * 30) - flLeaveGet; 
                 leaveSummaryModel.TerminalLeave = totaleaveBalance.Where(x => x.LeaveTypeId == CodeValue.Terminal_LeaveType).Select(x => x.Balance).FirstOrDefault();
                 leaveSummaryModel.MaternyLeave = totaleaveBalance.Where(x => x.LeaveTypeId == CodeValue.Materny_LeaveType).Count() > maternyLeaveGet ? totaleaveBalance.Where(x => x.LeaveTypeId == CodeValue.Materny_LeaveType).Select(x => x.TotalLeave).FirstOrDefault() : 0;
                 leaveSummaryModel.SurveyLeave = totaleaveBalance.Where(x => x.LeaveTypeId == CodeValue.Survey_LeaveType).Select(x => x.Balance).FirstOrDefault();

@@ -24,6 +24,7 @@
         vm.updateAgeServicePolicy = updateAgeServicePolicy;
         vm.uploadImageToFolder = uploadImageToFolder;
         vm.executeDatabaseBackup = executeDatabaseBackup;
+        vm.executeDataScript = executeDataScript;
         init();
         function init() {
             dailyProcessService.getDailyProcesses().then(function (data) {
@@ -116,6 +117,14 @@
         function executeDatabaseBackup() {
             dailyProcessService.executeDataBaseBackup().then(function (data) {
                 notificationService.displaySuccess("Database Backup Successfully!");
+            },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
+        }
+        function executeDataScript() {
+            dailyProcessService.executeDataScript().then(function (data) {
+                notificationService.displaySuccess("Database Script Generated Successfully!");
             },
                 function (errorMessage) {
                     notificationService.displayError(errorMessage.message);

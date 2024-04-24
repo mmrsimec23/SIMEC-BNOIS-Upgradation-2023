@@ -70,6 +70,17 @@ namespace Infinity.Bnois.Api.Controllers
             });
         }
 
+        [HttpPost]
+        [ModelValidation]
+        [Route("execute-data-script")]
+        public async Task<IHttpActionResult> ExecuteDataScript()
+        {
+            return Ok(new ResponseMessage<bool>
+            {
+                Result = await promotionNominationService.ExecuteDataScript()
+            });
+        }
+
 
         [HttpPost]
         [ModelValidation]

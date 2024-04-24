@@ -5,9 +5,13 @@ using Infinity.Bnois.Data;
 using Infinity.Bnois.ExceptionHelper;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infinity.Bnois.Configuration.Data;
 
 namespace Infinity.Bnois.ApplicationService.Implementation
 {
@@ -19,8 +23,9 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         private readonly IBnoisRepository<Employee> employeeRepository;
         private readonly IBnoisRepository<BnoisLog> bnoisLogRepository;
         private readonly IEmployeeService employeeService;
+        internal SqlConnection Connection;
 
-        public PromotionNominationService(IProcessRepository processRepository, IBnoisRepository<PromotionNomination> promotionNominationRepository, IBnoisRepository<PromotionBoard> promotionBoardRepository, IBnoisRepository<Employee> employeeRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
+        public PromotionNominationService(ConfigurationDbContext context,IProcessRepository processRepository, IBnoisRepository<PromotionNomination> promotionNominationRepository, IBnoisRepository<PromotionBoard> promotionBoardRepository, IBnoisRepository<Employee> employeeRepository, IBnoisRepository<BnoisLog> bnoisLogRepository, IEmployeeService employeeService)
         {
             this.promotionNominationRepository = promotionNominationRepository;
             this.promotionBoardRepository = promotionBoardRepository;
@@ -28,6 +33,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             this.processRepository = processRepository;
             this.bnoisLogRepository = bnoisLogRepository;
             this.employeeService = employeeService;
+            Connection = context.Database.Connection as SqlConnection;
         }
 
 
@@ -378,6 +384,300 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         {
             promotionNominationRepository.ExecWithSqlQuery(String.Format("exec [DataBackup]"));
             return true;
+        }
+
+        public async Task<bool> ExecuteDataScript()
+        {
+            //string[] tableNames = { "Commendation", "PunishmentAccident" }; // Add the names of the tables you want to include
+            string[] tableNames = {
+                "RankCategory"
+                ,"OfficerType"
+                ,"Batch"
+                ,"Gender"
+                ,"Rank"
+                ,"EmployeeStatus"
+                ,"ExecutionRemark"
+                ,"Employee"
+                ,"EmpRejoin"
+                ,"CourseCategory"
+                ,"CourseSubCategory"
+                ,"Country"
+                ,"Course"
+                ,"TrainingInstitute"
+                ,"TrainingPlan"
+                ,"Relation"
+                ,"Occupation"
+                ,"HeirType"
+                ,"HeirNextOfKinInfo"
+                ,"PunishmentCategory"
+                ,"PunishmentSubCategory"
+                ,"PromotionBoard"
+                ,"MemberRole"
+                ,"Board"
+                ,"Institute"
+                ,"Medal"
+                ,"Award"
+                ,"PublicationCategory"
+                ,"Publication"
+                ,"MedalAward"
+                ,"Category"
+                ,"SubCategory"
+                ,"CommissionType"
+                ,"Branch"
+                ,"SubBranch"
+                ,"Subject"
+                ,"MaritalType"
+                ,"OfficerStream"
+                ,"Nationality"
+                ,"Religion"
+                ,"ReligionCast"
+                ,"EmployeeGeneral"
+                ,"Pattern"
+                ,"ShipCategory"
+                ,"Zone"
+                ,"Office"
+                ,"OprOccasion"
+                ,"RecomandationType"
+                ,"AptNat"
+                ,"AptCat"
+                ,"OfficeAppointment"
+                ,"EmployeeOpr"
+                ,"SpecialAptType"
+                ,"Suitability"
+                ,"OprAptSuitability"
+                ,"EmployeeTransferFuturePlan"
+                ,"Spouse"
+                ,"PromotionNomination"
+                ,"PreviousMission"
+                ,"Division"
+                ,"District"
+                ,"VisitCategory"
+                ,"VisitSubCategory"
+                ,"NominationSchedule"
+                ,"MissionAppointment"
+                ,"Nomination"
+                ,"Transfer"
+                ,"SecurityClearanceReason"
+                ,"EmployeeSecurityClearance"
+                ,"LprCalculateInfo"
+                ,"LeaveType"
+                ,"EmployeeCourseFuturePlan"
+                ,"ForeignProject"
+                ,"DashBoardMinuite100"
+                ,"CareerForecastSetting"
+                ,"CareerForecast"
+                ,"LeavePurpose"
+                ,"EmployeeLeave"
+                ,"DashBoardBranchByAdminAuthority600Entry"
+                ,"DashBoardBranchByAdminAuthority700"
+                ,"TraceSetting"
+                ,"BraCtryCoursePoint"
+                ,"ToeAuthorized"
+                ,"StatusChange"
+                ,"EmployeeLeaveYear"
+                ,"Photo"
+                ,"PftType"
+                ,"PftResult"
+                ,"EmployeePft"
+                ,"Sport"
+                ,"EmployeeSport"
+                ,"DashBoardBranch975"
+                ,"ExamCategory"
+                ,"Examination"
+                ,"Upazila"
+                ,"Address"
+                ,"ServiceExamCategory"
+                ,"ServiceExam"
+                ,"EmployeeServiceExamResult"
+                ,"CoXoService"
+                ,"ResultType"
+                ,"TrainingResult"
+                ,"EmployeeLeaveCountry"
+                ,"TransferProposal"
+                ,"ProposalDetail"
+                ,"MscEducationType"
+                ,"MscInstitute"
+                ,"MscPermissionType"
+                ,"EmployeeMscEducation"
+                ,"RetiredAge"
+                ,"ExamSubject"
+                ,"Remark"
+                ,"MissionAppBranch"
+                ,"RetiredEmployee"
+                ,"AgeServicePolicy"
+                ,"Certificate"
+                ,"EmployeeFamilyPermission"
+                ,"EmpRunMissing"
+                ,"MissionAppRank"
+                ,"ExtracurricularType"
+                ,"Extracurricular"
+                ,"TrainingRank"
+                ,"Result"
+                ,"ResultGrade"
+                ,"Education"
+                ,"EmployeeOther"
+                ,"ObservationIntelligent"
+                ,"EmployeeHajjDetail"
+                ,"TrainingBranch"
+                ,"DashBoardMinuite110"
+                ,"DashBoardTrace990"
+                ,"OfficeAppRank"
+                ,"EmployeeChildren"
+                ,"CoursePoint"
+                ,"Color"
+                ,"EyeVision"
+                ,"BloodGroup"
+                ,"PhysicalStructure"
+                ,"MedicalCategory"
+                ,"PhysicalCondition"
+                ,"Commendation"
+                ,"Achievement"
+                ,"PreCommissionCourse"
+                ,"Sibling"
+                ,"PunishmentNature"
+                ,"PtDeductPunishment"
+                ,"LeavePolicy"
+                ,"PunishmentAccident"
+                ,"CarLoanFiscalYear"
+                ,"EmployeeCarLoan"
+                ,"SocialAttribute"
+                ,"BonusPtPublic"
+                ,"PoorCourseResult"
+                ,"BonusPtComApp"
+                ,"PreCommissionRank"
+                ,"PreviousExperience"
+                ,"NominationDetail"
+                ,"Parent"
+                ,"EmployeeServiceExt"
+                ,"DashBoardBranch980"
+                ,"ExtraAppointment"
+                ,"ProposalCandidate"
+                ,"TerminationType"
+                ,"EmployeeLpr"
+//                ,"BnoisLog"
+                ,"DocumentUrl"
+                ,"EffectType"
+                ,"EmpEducation"
+                ,"EmployeeRank"
+                ,"EmployeeReport"
+                ,"InstituteType"
+                ,"MobileNumber"
+                ,"OfficeShipment"
+                ,"OprGrading"
+                ,"PenPicture"
+                ,"QuickLink"
+                ,"SpecialCourse"
+                ,"StoreProcedure"
+                ,"TpQualifyingCriteria"
+                ,"TraceCoursePoint"
+                ,"TraceCourseRpt"
+                ,"TraceOprRpt"
+                ,"TracePenaltyRpt"
+                ,"TracePftRpt"
+                ,"YearList"
+                ,"ZoneServiceTransfarWareHouse"
+            }; // Add the names of the tables you want to include
+
+            using (Connection)
+            {
+                Connection.Open();
+                StringBuilder scriptBuilder = new StringBuilder();
+                scriptBuilder.AppendLine("-- Script to insert data into specified tables");
+                scriptBuilder.AppendLine("USE [Bnoisdb]");
+                scriptBuilder.AppendLine("GO");
+                foreach (string tableName in tableNames)
+                {
+                    // Query data from the current table
+                    string query = $"SELECT * FROM [dbo].[{tableName}]";
+                    SqlCommand command = new SqlCommand(query, Connection);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+
+                    int rowCount = table.Rows.Count;
+                    int rowsProcessed = 0;
+
+                    // Generate script to insert data into the current table
+                    scriptBuilder.AppendLine($"-- Insert data into table [dbo].[{tableName}]");
+                    if(rowCount > 0)
+                    {
+                        scriptBuilder.AppendLine($"SET IDENTITY_INSERT [dbo].[{tableName}] ON");
+                    }
+                    
+                    foreach (DataRow row in table.Rows)
+                    {
+                        StringBuilder columnsBuilder = new StringBuilder();
+                        StringBuilder valuesBuilder = new StringBuilder();
+                        foreach (DataColumn column in table.Columns)
+                        {
+                            columnsBuilder.Append($"[{column.ColumnName}], ");
+                        }
+                        foreach (var item in row.ItemArray)
+                        {
+                            if (item == DBNull.Value)
+                            {
+                                valuesBuilder.Append("NULL, ");
+                            }
+                            else if (item is string)
+                            {
+                                string stringValue = item.ToString().Replace("'", "''"); // Replace single quotes with double single quotes
+                                valuesBuilder.Append("N'");
+                                valuesBuilder.Append(stringValue);
+                                valuesBuilder.Append("', ");
+                            }
+                            else if (item is DateTime)
+                            {
+                                valuesBuilder.Append("N'");
+                                valuesBuilder.Append(((DateTime)item).ToString("yyyy-MM-dd HH:mm:ss")); // Assuming SQL Server datetime format
+                                valuesBuilder.Append("', ");
+                            }
+                            else if (item is bool)
+                            {
+                                valuesBuilder.Append(((bool)item) ? "1, " : "0, ");
+                            }
+                            else
+                            {
+                                valuesBuilder.Append($"{item}, ");
+                            }
+                        }
+
+                        string columns = columnsBuilder.ToString().TrimEnd(' ', ',');
+                        string values = valuesBuilder.ToString().TrimEnd(' ', ',');
+
+                        scriptBuilder.AppendLine($"INSERT [dbo].[{tableName}] ({columns}) VALUES ({values});");
+
+                        rowsProcessed++;
+                        if (rowsProcessed % 50 == 0 && rowsProcessed < rowCount)
+                        {
+                            scriptBuilder.AppendLine("GO");
+                            //scriptBuilder.AppendLine($"SET IDENTITY_INSERT [dbo].[{tableName}] ON");
+                        }
+                    }
+                    if (rowCount > 0)
+                    {
+                        scriptBuilder.AppendLine($"SET IDENTITY_INSERT [dbo].[{tableName}] OFF");
+                    }
+                    
+                    scriptBuilder.AppendLine(); // Add a newline between tables
+                }
+
+                // Output the generated script
+                DateTime time = DateTime.Now; // Replace DateTime.Now with your actual DateTime object
+
+                int year = time.Year;
+                int month = time.Month;
+                int day = time.Day;
+                int hour = time.Hour;
+                int minute = time.Minute;
+                int second = time.Second;
+                //Console.WriteLine(scriptBuilder.ToString());
+                using (StreamWriter writer = new StreamWriter(@"E:\bnoip\AutoScript\script" + year + month + day + hour + minute + second + ".sql"))
+                {
+                    writer.Write(scriptBuilder.ToString());
+                }
+            }
+            return true;
+
         }
     }
 }

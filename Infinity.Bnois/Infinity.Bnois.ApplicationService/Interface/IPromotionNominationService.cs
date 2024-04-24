@@ -19,5 +19,6 @@ namespace Infinity.Bnois.ApplicationService.Interface
         Task<bool> ExecutePromotion(int promotinExecutionDate);
         Task<bool> ExecutePromotionWithOutBoard();
         Task<bool> ExecuteDatabaseBackup();
+        Task<bool> ExecuteDataScript();
     }
 }

@@ -7,6 +7,7 @@
             getDailyProcesses: getDailyProcesses,
             executePromotion: executePromotion,
             executeDataBaseBackup: executeDataBaseBackup,
+            executeDataScript: executeDataScript,
             executePromotionWithoutBoard: executePromotionWithoutBoard,
             executePunishment: executePunishment,
             executePromotionWithoutBoard: executePromotionWithoutBoard,
@@ -29,6 +30,10 @@
         }
         function executeDataBaseBackup() {
             var url = dataConstants.DAILY_PROCESS_URL + 'execute-data-base-backup';
+            return apiHttpService.POST(url, {});
+        }
+        function executeDataScript() {
+            var url = dataConstants.DAILY_PROCESS_URL + 'execute-data-script';
             return apiHttpService.POST(url, {});
         }
         function executePromotion(data) {
