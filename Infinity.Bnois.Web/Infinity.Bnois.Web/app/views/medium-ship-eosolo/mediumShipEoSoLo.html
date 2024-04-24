@@ -32,7 +32,7 @@
 								<!--<td class="reportTD">{{mediumShipEoSoLo.shortName}}</td>-->
 								<td class="reportTD" style="{{ mediumShipEoSoLo.shipName !== vm.mediumShipEoSoLos[$index -1].shipName ? 'border-bottom:none !important;' : 'border-top:none !important;border-bottom:none !important;' }}"> {{ mediumShipEoSoLo.shipName !== vm.mediumShipEoSoLos[$index -1].shipName ? mediumShipEoSoLo.shipName : '' }} </td>
 								<td class="reportTD">{{mediumShipEoSoLo.appt}}</td>
-								<td class="reportTD">{{mediumShipEoSoLo.pNo}}</td>
+								<td class="reportTD"  style="{{ mediumShipEoSoLo.pNo === 'Vacant' ? 'font-weight:bold;color:red;' :''}}">{{mediumShipEoSoLo.pNo}}</td>
 								<td class="reportTD"><a href="" ng-click="vm.officeCurrentStatus(mediumShipEoSoLo.pNo)"> <strong>{{mediumShipEoSoLo.fullNameEng}}</strong></a></td>
 								<td class="reportTD">{{mediumShipEoSoLo.batch}}</td>
 								<td class="reportTD">{{mediumShipEoSoLo.since | date:"dd-MMM-yyyy"}}</td>

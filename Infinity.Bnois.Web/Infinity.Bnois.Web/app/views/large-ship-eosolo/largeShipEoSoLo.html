@@ -34,7 +34,7 @@
 								<!--<td class="reportTD">{{largeShipEoSoLo.shortName}}</td>-->
 								<td class="reportTD" style="{{ largeShipEoSoLo.shipName !== vm.largeShipEoSoLos[$index -1].shipName ? 'border-bottom:none !important;' : 'border-top:none !important;border-bottom:none !important;' }}"> {{ largeShipEoSoLo.shipName !== vm.largeShipEoSoLos[$index -1].shipName ? largeShipEoSoLo.shipName : '' }} </td>
 								<td class="reportTD">{{largeShipEoSoLo.appt}}</td>
-								<td class="reportTD">{{largeShipEoSoLo.pNo}}</td>
+								<td class="reportTD" style="{{ largeShipEoSoLo.pNo === 'Vacant' ? 'font-weight:bold;color:red;' :''}}">{{largeShipEoSoLo.pNo}}</td>
 								<td class="reportTD"><a href="" ng-click="vm.officeCurrentStatus(largeShipEoSoLo.pNo)"> <strong>{{largeShipEoSoLo.fullNameEng}}</strong></a></td>
 								<td class="reportTD">{{largeShipEoSoLo.batch}}</td>
 								<td class="reportTD">{{largeShipEoSoLo.since | date:"dd-MMM-yyyy"}}</td>
