@@ -40,10 +40,14 @@
                             <td class="reportTD"><strong>Category</strong></td>
                             <td class="reportTD">{{vm.currentStatus.category}} | <strong>Sub Category:</strong> {{vm.currentStatus.subCategory}}</td>
                         </tr>
+                        <tr class="reportTR">
+                            <td class="reportTD"><strong>Stream</strong></td>
+                            <td class="reportTD"> <a target="_blank" href="http://localhost:24123/stream-officer/-1//{{vm.currentStatus.streamId}}" style="text-decoration: none;"><strong>{{vm.currentStatus.steamName}}</strong></a> </td>
+                        </tr>
                         <!--<tr class="reportTR">
-                            <td class="reportTD"><strong>Sub Category</strong></td>
-                            <td class="reportTD">{{vm.currentStatus.subCategory}}</td>
-                        </tr>-->
+        <td class="reportTD"><strong>Sub Category</strong></td>
+        <td class="reportTD">{{vm.currentStatus.subCategory}}</td>
+    </tr>-->
                         <tr class="reportTR">
                             <td class="reportTD"><strong>Date of Commission</strong></td>
                             <td class="reportTD">{{vm.currentStatus.dateOfCommission | date:"dd-MMM-yyyy"}} &nbsp; &nbsp;   ({{vm.currentStatus.duration}}) | <strong>Batch:</strong> <a target="_blank" href="http://localhost:24123/officer-list-by-batch/{{vm.currentStatus.batchId}}" style="text-decoration: none;"><strong>{{vm.currentStatus.batch}}</strong></a></td>

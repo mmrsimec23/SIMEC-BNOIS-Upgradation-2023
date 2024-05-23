@@ -671,7 +671,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
                 int minute = time.Minute;
                 int second = time.Second;
                 //Console.WriteLine(scriptBuilder.ToString());
-                using (StreamWriter writer = new StreamWriter(@"E:\bnoip\AutoScript\script" + year + month + day + hour + minute + second + ".sql"))
+                using (StreamWriter writer = new StreamWriter(@"E:\BNOIS Database Backup Daily\BNOIS-SCRIPT-BACKUP\script" + year + month + day + hour + minute + second + ".sql"))
                 {
                     writer.Write(scriptBuilder.ToString());
                 }
