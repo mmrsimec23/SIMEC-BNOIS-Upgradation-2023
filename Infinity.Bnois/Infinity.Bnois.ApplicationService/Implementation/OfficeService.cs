@@ -603,7 +603,8 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         public async Task<List<SelectModel>> GetOfficeByShipTypeSelectModel(int type)
         {
 
-            ICollection<Office> offices = await officeRepository.FilterAsync(x => x.IsActive && x.ShipType == type && x.ActiveStatus==true && x.CoastGuard == false);
+            //ICollection<Office> offices = await officeRepository.FilterAsync(x => x.IsActive && x.ShipType == type && x.ActiveStatus==true && x.CoastGuard == false);
+            ICollection<Office> offices = await officeRepository.FilterAsync(x => x.IsActive && x.ShipType == type && x.ActiveStatus==true);
             List<Office> query = offices.OrderBy(x => x.ShortName).ToList();
             List<SelectModel> selectModels = query.Select(x => new SelectModel
             {
