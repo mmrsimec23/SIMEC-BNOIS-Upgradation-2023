@@ -28,19 +28,33 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             return models;
         }
 
+        public async Task<CoFfRecomModel> getCOFFRecom(int id)
+        {
+            if (id <= 0)
+            {
+                return new CoFfRecomModel();
+            }
+            DashBoardBranch980 coffrecom = await coFfRecomRepository.FindOneAsync(x => x.Id == id, new List<string> { "Employee", "Employee.Rank", "Employee.Batch" });
+            if (coffrecom == null)
+            {
+                throw new InfinityNotFoundException("Minute Candidate not found");
+            }
+            CoFfRecomModel model = ObjectConverter<DashBoardBranch980, CoFfRecomModel>.Convert(coffrecom);
+            return model;
+        }
         public async Task<CoFfRecomModel> SaveCOFFRecom(int id, CoFfRecomModel model)
         {
             if (model == null)
             {
                 throw new InfinityArgumentMissingException("CO FF Recom data missing");
             }
-
-            bool isExistData = coFfRecomRepository.Exists(x => x.EmployeeId == model.EmployeeId && x.Id != id);
+            string userId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+            bool isExistData = coFfRecomRepository.Exists(x => x.EmployeeId == model.EmployeeId && x.Id != model.Id);
             if (isExistData)
             {
                 throw new InfinityInvalidDataException("Data already exists !");
             }
-            string userId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
+            
             DashBoardBranch980 coffrecoms = ObjectConverter<CoFfRecomModel, DashBoardBranch980>.Convert(model);
 
             coffrecoms.IsActive = true;
@@ -51,6 +65,19 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             coffrecoms.RecomStatus = model.RecomStatus;
             coffrecoms.Remarks = model.Remarks;
             coffrecoms.Employee = null;
+
+            if (model.Id > 0)
+            {
+                DashBoardBranch980 coffRecom = coFfRecomRepository.FindOne(x => x.Id == model.Id);
+                if (coffRecom == null)
+                {
+                    throw new InfinityNotFoundException("Employee Car Loan not found !");
+                }
+
+                coffrecoms.ModifiedDate = DateTime.Now;
+                coffrecoms.ModifiedBy = userId;
+            }
+
             await coFfRecomRepository.SaveAsync(coffrecoms);
             model.Id = coffrecoms.Id;
             return model;

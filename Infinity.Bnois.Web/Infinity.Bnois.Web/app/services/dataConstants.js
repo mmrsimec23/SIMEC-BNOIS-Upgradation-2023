@@ -203,5 +203,7 @@
         EMPLOYEE_CAR_LOAN_URL: baseAPIUrl + 'api/bnois/employee-car-loan/',
         BNOIS_EOLOSODLOSEO_SERVICE_URL: baseAPIUrl + 'api/bnois/employee-eolosodloseo-service/',
         BNOIS_SMALL_COXO_SERVICE_URL: baseAPIUrl + 'api/bnois/employee-small-coxo-service/',
+        MAJOR_COURSE_FORECAST_URL: baseAPIUrl + 'api/bnois/employee-major-course-forecast/',
+        SUITABILITY_TEST_URL: baseAPIUrl + 'api/bnois/employee-suitability-test/',
     });
 })();

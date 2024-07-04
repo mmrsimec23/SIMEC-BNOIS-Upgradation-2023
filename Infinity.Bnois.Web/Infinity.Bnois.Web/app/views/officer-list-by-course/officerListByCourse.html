@@ -1,0 +1,58 @@
+﻿
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h3 class="text-center">Officer List of Course: {{vm.officersListByCourse[0].course}} </h3>
+
+                    <!-- <button class="btn btn-danger pull-right" data-ng-click="vm.back()"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Back</button> -->
+                </div>
+                <div class="table-wrapper table-responsive reportCover">
+
+                    <table class="table table-bordered pdfReportTable" border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                                <th rowspan="2">SL</th>
+                                <th rowspan="2">Officer Name</th>
+                                <th rowspan="2">PNo</th>
+                                <th rowspan="2" style="vertical-align: middle">Institute</th>
+                                <th colspan="2" style="text-align: center">Duration</th>
+                                <th rowspan="2" style="vertical-align : middle;">Total Duration</th>
+                                <th rowspan="2" style="vertical-align: middle">Result</th>
+                                <th rowspan="2" style="vertical-align: middle">Position</th>
+
+                            </tr>
+                            <tr class="tableHeading">
+                                <th>Form Date</th>
+                                <th>To Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="reportBody">
+                            <tr class="reportTR" ng-repeat="item in vm.officersListByCourse">
+                                <td class="reportTD" style="text-align: center;width: 50px;"><strong> {{$index+1}}</strong> </td>
+                                <td class="reportTD hideElement"><a href="" ng-click="vm.officeCurrentStatus(item.pNo)"> <strong>{{item.fullNameEng}}</strong></a> </td>
+                                <td class="reportTD noScreen"><strong>{{item.officerName}}</strong></td>
+                                <td class="reportTD" style="text-align: center"> <strong>{{item.pNo}}</strong> </td>
+                                <td class="reportTD">{{item.institute}}</td>
+                                <td class="reportTD" style="text-align: center;width:95px;">{{item.fromDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center;width: 95px;">{{item.toDate | date:"dd-MMM-yyyy"}}</td>
+                                <td class="reportTD" style="text-align: center;text-transform: lowercase; width: 100px;">{{item.duration}}</td>
+                                <td class="reportTD" style="text-align: center">{{item.result}}</td>
+                                <td class="reportTD" style="text-align: center">{{item.position}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

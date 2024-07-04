@@ -227,6 +227,8 @@ namespace Infinity.Bnois.Data
         public virtual DbSet<Achievement> Achievement { get; set; }
         public virtual DbSet<EmployeeMscEducation> EmployeeMscEducation { get; set; }
         public virtual DbSet<PunishmentAccident> PunishmentAccident { get; set; }
+        public virtual DbSet<MajorCourseForecast> MajorCourseForecast { get; set; }
+        public virtual DbSet<SuitabilityTest> SuitabilityTest { get; set; }
     
         public virtual ObjectResult<GetLeaveInfo_Result> GetLeaveInfo(string employeeID, Nullable<int> idFrom, Nullable<int> idTo)
         {

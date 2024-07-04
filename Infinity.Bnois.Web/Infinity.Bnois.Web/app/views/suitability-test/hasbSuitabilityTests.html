@@ -1,0 +1,61 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">HASB Officer Suitability Test List</h2>
+                    <button class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.addsuitabilityTest()"><span class="glyphicon glyphicon-user"></span> Add</button>
+                    
+                </div>
+                <div class="table-wrapper table-responsive">
+                   
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th style="vertical-align: middle; width: 20px;"> Ser</th>
+                                <th style="vertical-align: middle; width: 50px; "> P No</th>
+                                <th style="vertical-align: middle; width: 300px; ">Rank & Name</th>
+                                <th style="vertical-align: middle; width: 200px;">Present Billet</th>
+                                <th style="vertical-align: middle; width: 60px;">Branch</th>
+                                <th style="vertical-align: middle; width: 60px;">Batch</th>
+                                <th style="vertical-align: middle; width: 100px;">Total Sea Svc</th>
+                                <th style="vertical-align: middle; width: 100px; ">Total SEO/DLO Svc</th>
+                                <th style="vertical-align: middle; width: 100px; ">Total HOD Svc</th>
+                                <th style="vertical-align: middle; width: 80px; ">B.Sc Result </th>
+                                <th style="vertical-align: middle; width: 80px; ">Staff Collage Percentage </th>
+                                <th style="vertical-align: middle; width: 80px; ">OPR Avarage</th>
+                                <th style="vertical-align: middle; width: 80px; ">HASB Eligibility</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="courseOfficer in vm.suitabilityTests">
+                                <td>{{$index+1}}</td>
+                                <td>{{courseOfficer.pNo}}</td>
+                                <td>{{courseOfficer.fullNameEng}}</td>
+                                <td>{{courseOfficer.billet}}</td>
+                                <td>{{courseOfficer.branchName}}</td>
+                                <td>{{courseOfficer.batchName}}</td>
+                                <td style="font-weight:bold;color:{{courseOfficer.seaTotalDurationYr < 3 ? 'red' : ''}}">{{courseOfficer.seaTotalDuration}}</td>
+                                <td style="font-weight:bold;color:{{courseOfficer.seoDloSvcYr < 1 ? 'red' : ''}}">{{courseOfficer.seoDloSvc}}</td>
+                                <td>{{courseOfficer.hodSvc}}</td>
+                                <td style="font-weight:bold;color:{{courseOfficer.bscResult < 3 ? 'red' : ''}}">{{courseOfficer.bscResult}}</td>
+                                <td style="font-weight:bold;color:{{courseOfficer.staffCourseResult < 60 ? 'red' : ''}}">{{courseOfficer.staffCourseResult}}</td>
+                                <td style="font-weight:bold;color:{{courseOfficer.oprAverage < 6 ? 'red' : ''}}">{{courseOfficer.oprAverage}}</td>
+                                <td style="font-weight:bold">
+                                    <span style="color: red">{{ courseOfficer.seaTotalDurationYr >= 3 && courseOfficer.seoDloSvcYr >= 1 && courseOfficer.bscResult >= 3 && courseOfficer.staffCourseResult >= 60 && courseOfficer.oprAverage >= 6 ?'':'No' }}</span>
+                                    <span style="color: green" ng-if="courseOfficer.seaTotalDurationYr >= 3 && courseOfficer.seoDloSvcYr >= 1 && courseOfficer.bscResult >= 3 && courseOfficer.staffCourseResult >= 60 && courseOfficer.oprAverage >= 6"> Yes</span>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagenation-wrapper" ng-if="vm.majorCourseForecasts.length > 0">
+                        <ul uib-pagination items-per-page="vm.pageSize" total-items="vm.total" ng-change="vm.pageChanged()" ng-model="vm.pageNumber" max-size="5" class="pagination" boundary-link-numbers="true"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

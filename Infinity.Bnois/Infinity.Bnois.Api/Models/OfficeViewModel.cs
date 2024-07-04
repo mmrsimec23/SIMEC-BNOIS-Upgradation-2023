@@ -22,6 +22,8 @@ namespace Infinity.Bnois.Api.Models
         public List<Object> AppointedOfficers  { get; set; }
         public List<Object> VacantAppointments  { get; set; }
         public List<Object> OfficersListByBatch  { get; set; }
+        public List<Object> OfficersListByCourse { get; set; }
+        public List<Object> OfficersListByAppt  { get; set; }
         public string OfficeName  { get; set; }
     }
 }

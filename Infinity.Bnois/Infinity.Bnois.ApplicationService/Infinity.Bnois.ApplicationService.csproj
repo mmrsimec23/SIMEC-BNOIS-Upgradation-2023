@@ -93,6 +93,8 @@
   <ItemGroup>
     <Compile Include="Implementation\AchievementService.cs" />
     <Compile Include="Implementation\AddressService.cs" />
+    <Compile Include="Implementation\SuitabilityTestService.cs" />
+    <Compile Include="Implementation\MajorCourseForecastService.cs" />
     <Compile Include="Implementation\EmployeeSmallCoxoService.cs" />
     <Compile Include="Implementation\EmployeeEoLoSoDloSeoService.cs" />
     <Compile Include="Implementation\EmployeeTraceService.cs" />
@@ -278,6 +280,8 @@
     <Compile Include="Implementation\VisitSubCategoryService.cs" />
     <Compile Include="Implementation\OfficeShipmentService.cs" />
     <Compile Include="Implementation\ZoneService.cs" />
+    <Compile Include="Interface\ISuitabilityTestService.cs" />
+    <Compile Include="Interface\IMajorCourseForecastService.cs" />
     <Compile Include="Interface\IEmployeeSmallCoxoService.cs" />
     <Compile Include="Interface\IEmployeeEoLoSoDloSeoService.cs" />
     <Compile Include="Interface\IEmployeeTraceService.cs" />
@@ -477,6 +481,8 @@
     <Compile Include="Models\CoFfRecomModel.cs" />
     <Compile Include="Models\DashBoardMinuteStandby975Model.cs" />
     <Compile Include="Models\DashBoardMinuite110Model.cs" />
+    <Compile Include="Models\SuitabilityTestModel.cs" />
+    <Compile Include="Models\MajorCourseForecastModel.cs" />
     <Compile Include="Models\EmployeeTraceModel.cs" />
     <Compile Include="Models\ToeAuthorizedModel.cs" />
     <Compile Include="Models\EmployeeCoxoServiceModel.cs" />

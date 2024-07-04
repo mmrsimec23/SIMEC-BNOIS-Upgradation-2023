@@ -41,6 +41,7 @@
         vm.servingAttachOfficeSelectAll = servingAttachOfficeSelectAll;
         vm.getServingOfficeSelectModelByShip = getServingOfficeSelectModelByShip;
         vm.getOfficeSelectModelByShip = getOfficeSelectModelByShip;
+        vm.getAllOfficeSelectModelByShip = getAllOfficeSelectModelByShip;
         vm.getNotServedOfficeSelectModelByShip = getNotServedOfficeSelectModelByShip;
         vm.getServedChildOfficeSelectModel = getServedChildOfficeSelectModel;
         vm.getNotServedChildOfficeSelectModel = getNotServedChildOfficeSelectModel;
@@ -1047,6 +1048,25 @@
 //            vm.advanceSearch.officesSelected = [];
           
             officeService.getOfficeSelectModelByShip(ship).then(function (data) {
+
+
+                vm.offices = data.result;
+
+            });
+            officeAppointmentService.getAppointmentByShipType(ship).then(function (data) {
+
+
+                vm.officeAppointmentsByShip = data.result;
+
+            });
+
+        }
+
+
+        function getAllOfficeSelectModelByShip(ship) {
+            //            vm.advanceSearch.officesSelected = [];
+
+            officeService.getAllOfficeSelectModelByShip(ship).then(function (data) {
 
 
                 vm.offices = data.result;

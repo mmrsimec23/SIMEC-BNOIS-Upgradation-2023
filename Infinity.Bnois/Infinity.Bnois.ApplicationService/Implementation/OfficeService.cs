@@ -477,7 +477,20 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         }
 
 
-     
+
+        public async Task<List<SelectModel>> GetAllOfficeSelectModelByShip(int ship)
+        {
+
+            ICollection<Office> offices = await officeRepository.FilterAsync(x => x.IsActive && x.ShipType == ship);
+            List<Office> query = offices.OrderBy(x => x.ShortName).ToList();
+
+            List<SelectModel> selectModels = query.Select(x => new SelectModel
+            {
+                Text = x.ShortName,
+                Value = x.OfficeId
+            }).ToList();
+            return selectModels;
+        }
 
 
 
@@ -516,7 +529,7 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             List<Office> query = offices.OrderBy(x => x.ShortName).ToList();
             List<SelectModel> selectModels = query.Select(x => new SelectModel
             {
-                Text = x.ShortName,
+                Text = x.ShortName + " ",
                 Value = x.OfficeId
             }).ToList();
             return selectModels;
@@ -928,6 +941,18 @@ namespace Infinity.Bnois.ApplicationService.Implementation
         public List<object> GetOfficerListByBatch(int batchId)
         {
             System.Data.DataTable dataTable = officeRepository.ExecWithSqlQuery(String.Format("exec [SpGetOfficerListByBatch] {0} ", batchId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetOfficerListByCourse(int coursePlanId)
+        {
+            System.Data.DataTable dataTable = officeRepository.ExecWithSqlQuery(String.Format("exec [spGetOfficerListByCourse] {0} ", coursePlanId));
+
+            return dataTable.ToJson().ToList();
+        }
+        public List<object> GetOfficerListByAppoinment(int appoinmentId)
+        {
+            System.Data.DataTable dataTable = officeRepository.ExecWithSqlQuery(String.Format("exec [spGetOfficerListByAppt] {0} ", appoinmentId));
 
             return dataTable.ToJson().ToList();
         }

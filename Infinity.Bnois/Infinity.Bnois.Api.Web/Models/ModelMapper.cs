@@ -1044,7 +1044,11 @@ namespace Infinity.Bnois.Api.Web.Models
          .ForMember(d => d.Commendation, opt => opt.MapFrom(s => s.Commendation));
 
 
-	            cfg.CreateMap<SeaServiceModel, SeaService>()
+                cfg.CreateMap<SuitabilityTestModel, SuitabilityTest>()
+                    .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee));
+
+
+                cfg.CreateMap<SeaServiceModel, SeaService>()
 		            .ForMember(d => d.Employee, opt => opt.MapFrom(s => s.Employee))
 		            .ForMember(d => d.Country, opt => opt.MapFrom(s => s.Country));
 

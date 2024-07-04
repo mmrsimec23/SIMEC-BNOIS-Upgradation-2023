@@ -224,7 +224,7 @@ namespace Infinity.Bnois
     {
         Commendation=1,
         Appreciation=2,
-        Notable_Achievement=3
+        Notable_Achievement_And_Command_Note=3
     }
 
     public enum GivenByType
@@ -367,6 +367,20 @@ namespace Infinity.Bnois
     {
         Proposed = 1,
         Waiting = 2,
+    }
+
+    public enum MajorCourseType
+    {
+        JSC = 1,
+        Specialization = 2,
+        Staff_College = 3,
+        AFWC = 4,
+        NDC = 5,
+    }
+    public enum SuitabilityTestType
+    {
+        HASB = 1,
+        SASB = 2,
     }
     public enum CoXoAppointment
     {

@@ -1,5 +1,6 @@
 ﻿using Infinity.Bnois.Api.Core;
 using Infinity.Bnois.Api.Right;
+using Infinity.Bnois.ApplicationService.Implementation;
 using Infinity.Bnois.ApplicationService.Interface;
 using Infinity.Bnois.ApplicationService.Models;
 using Infinity.Bnois.Configuration;
@@ -36,6 +37,18 @@ namespace Infinity.Bnois.Api.Controllers
             {
                 Result = models,
                 Permission = permission
+            });
+        }
+
+        [HttpGet]
+        [Route("get-co-ff-recom")]
+        public async Task<IHttpActionResult> getCOFFRecom(int id)
+        {
+            CoFfRecomModel model = await coFfRecomService.getCOFFRecom(id);
+
+            return Ok(new ResponseMessage<CoFfRecomModel>
+            {
+                Result = model
             });
         }
 

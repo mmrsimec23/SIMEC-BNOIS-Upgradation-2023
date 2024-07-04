@@ -1,0 +1,82 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">Course Forecast Officer<span class="pull-right text-success">{{vm.title}}</span></h2>
+                </div>
+                <form name="vm.majorCourseForecastForm">
+                    <employee-search ng-model="vm.majorCourseForecast.employee"></employee-search>
+
+                    <div class="col-sm-12">
+                        <hr />
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="type" class="custom-label">Course Type</label>
+                            <select name="type" class="form-control" ng-model="vm.majorCourseForecast.type" ng-options="option.value as option.text for option in vm.courseTypes"  required>
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.majorCourseForecastForm.type.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>
+
+                    <!--<div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="type" class="custom-label">Proposed Ship</label>
+                            <select name="type" class="form-control" ng-model="vm.majorCourseForecast.officeId" ng-options="option.value as option.text for option in vm.offices" required>
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.majorCourseForecastForm.officeId.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>-->
+                    <!--<div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="type" class="custom-label">Type</label>
+                            <select name="type" class="form-control" ng-model="vm.majorCourseForecast.type" ng-options="option.value as option.text for option in vm.coxoTypes" required>
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.majorCourseForecastForm.type.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>-->
+
+
+                    <!--<div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="appointment" class="custom-label">Appoinment</label>
+                            <select name="appointment" class="form-control" ng-model="vm.majorCourseForecast.appointment" ng-options="option.value as option.text for option in vm.coxoAppoinments" required>
+                                <option value="">--Select an Option--</option>
+                            </select>
+                            <p ng-show="vm.majorCourseForecastForm.appointment.$error.required" class="help-block errormsg">Please select an Option</p>
+                        </div>
+                    </div>-->
+
+
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="expiryDate" class="custom-label"> Proposed Date</label>
+                            <input kendo-date-picker id="expiryDate" class="form-control custom-form-control" k-ng-model="vm.majorCourseForecast.expiryDate" k-format="'dd-MM-yyyy'" name="expiryDate" required />
+                            <p ng-show="vm.majorCourseForecastForm.expiryDate.$error.required" class="help-block errormsg">Date is required.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="remarks" class="custom-label">Remarks</label>
+                            <textarea type="text" id="remarks" class="form-control custom-form-control" ng-model="vm.majorCourseForecast.remarks" name="remarks" maxlength="250"></textarea>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-12">
+                        <br />
+                        <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.majorCourseForecastForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                        <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

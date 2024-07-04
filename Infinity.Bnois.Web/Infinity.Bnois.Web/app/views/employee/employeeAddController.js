@@ -36,7 +36,7 @@
         function Init() {
             employeeService.getEmployee(vm.employeeId).then(function (data) {
                 vm.employee = data.result.employee; 
-
+                console.log(vm.employee)
                 if (vm.employee != null) {
                     countriesName(vm.employee.officerTypeId);
                 }

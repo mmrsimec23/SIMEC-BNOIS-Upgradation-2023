@@ -155,8 +155,19 @@ namespace Infinity.Bnois.Api.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("get-all-office-select-model-by-ship")]
+        public async Task<IHttpActionResult> GetAllOfficeSelectModelByShip(int ship)
+        {
+            List<SelectModel> selectModels = await officeService.GetAllOfficeSelectModelByShip(ship);
+            return Ok(new ResponseMessage<List<SelectModel>>()
+            {
+                Result = selectModels
+            });
+        }
 
-     
+
+
 
         [HttpGet]
         [Route("get-ministry-office-select-models")]
@@ -205,6 +216,30 @@ namespace Infinity.Bnois.Api.Controllers
         {
             OfficeViewModel vm = new OfficeViewModel();
             vm.OfficersListByBatch = officeService.GetOfficerListByBatch(batchId);
+            return Ok(new ResponseMessage<object>()
+            {
+                Result = vm
+            });
+        }
+
+        [HttpGet]
+        [Route("officers-result-by-course")]
+        public async Task<IHttpActionResult> OfficersResultByCourse(int coursePlanId)
+        {
+            OfficeViewModel vm = new OfficeViewModel();
+            vm.OfficersListByCourse = officeService.GetOfficerListByCourse(coursePlanId);
+            return Ok(new ResponseMessage<object>()
+            {
+                Result = vm
+            });
+        }
+
+        [HttpGet]
+        [Route("officers-result-by-appointment")]
+        public async Task<IHttpActionResult> OfficersResultByAppoinment(int appoinmentId)
+        {
+            OfficeViewModel vm = new OfficeViewModel();
+            vm.OfficersListByAppt = officeService.GetOfficerListByAppoinment(appoinmentId);
             return Ok(new ResponseMessage<object>()
             {
                 Result = vm

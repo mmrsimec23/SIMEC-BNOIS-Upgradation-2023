@@ -1,0 +1,53 @@
+﻿
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h3 class="text-center">Officer List of Appointment: {{vm.officersListByAppt[0].fullAppointment}} </h3>
+
+                </div>
+                <div class="table-wrapper table-responsive reportCover">
+
+                    <table class="table table-bordered pdfReportTable" border="1">
+                        <thead class="reportThead">
+                            <tr class="tableHeading reportTR">
+                                <th rowspan="2" style="vertical-align: middle; text-align: center;">SL</th>
+                                <th rowspan="2" style="vertical-align: middle; text-align: center;">Rank & Name</th>
+                                <th rowspan="2" style="vertical-align: middle; text-align: center;">PNo</th>
+                                <th rowspan="2" style="vertical-align: middle; text-align: center;">Appt. Rank</th>
+                                <th colspan="2" style="text-align: center">Duration</th>
+                                <th rowspan="2" style="vertical-align: middle; text-align: center;">Total Duration</th>
+
+                            </tr>
+                            <tr class="tableHeading reportTR">
+                                <th classs="reportTD">From Date</th>
+                                <th classs="reportTD">To Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="reportBody">
+                            <tr class="reportTR" ng-repeat="item in vm.officersListByAppt">
+                                <td class="reportTD" style="text-align: center;width: 50px;"><strong> {{$index+1}}</strong> </td>
+                                <td class="reportTD hideElement"><a href="" ng-click="vm.officeCurrentStatus(item.pNo)"> <strong>{{item.fullNameEng}}</strong></a> </td>
+                                <td class="reportTD noScreen"><strong>{{item.officerName}}</strong></td>
+                                <td class="reportTD" style="text-align: center"> <strong>{{item.pNo}}</strong> </td>
+                                <td class="reportTD"><strong>{{item.rank}} </strong> </td>
+                                <td class="reportTD" style="text-align: center;width: 100px;"><strong> {{item.fromDate | date:'dd/MM/yyyy'}}</strong>  </td>
+                                <td class="reportTD" style="text-align: center;width: 100px;"><strong> {{item.toDate | date:'dd/MM/yyyy'}}</strong>  </td>
+                                <td class="reportTD"><strong>{{item.duration}} </strong> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

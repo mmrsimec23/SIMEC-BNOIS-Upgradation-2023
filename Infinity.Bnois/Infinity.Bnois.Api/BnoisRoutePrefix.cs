@@ -186,6 +186,8 @@ namespace Infinity.Bnois.Api
         public const string CareerForecastSetting = BnoisRoutePrefixBase + "career-forecast-setting";
         public const string BnoisLogInfo = BnoisRoutePrefixBase + "bnois-log-info";
         public const string EmployeeCoXoService = BnoisRoutePrefixBase + "employee-coxo-service";
+        public const string EmployeeMajorCourseForecast = BnoisRoutePrefixBase + "employee-major-course-forecast";
+        public const string EmployeeSuitabilityTest = BnoisRoutePrefixBase + "employee-suitability-test";
         public const string ToeAuthorized = BnoisRoutePrefixBase + "toe-authorized";
         public const string OverviewOfficersDeploymentEntry = BnoisRoutePrefixBase + "overview-officers-deployment-entry";
         public const string ToeOfficerStateEntry = BnoisRoutePrefixBase + "toe-officer-state-entry";

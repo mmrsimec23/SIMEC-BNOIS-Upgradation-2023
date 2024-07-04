@@ -1,0 +1,56 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2 class="warning page-header-item">SASB Officer Suitability Test List</h2>
+                    <button class="btn custom-btn custom-btn-primary pull-right" type="button" data-ng-click="vm.addsuitabilityTest()"><span class="glyphicon glyphicon-user"></span> Add</button>
+                    
+                </div>
+                <div class="table-wrapper table-responsive">
+                   
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th style="vertical-align: middle; width: 20px;"> Ser</th>
+                                <th style="vertical-align: middle; width: 50px; "> P No</th>
+                                <th style="vertical-align: middle; width: 300px; ">Rank & Name</th>
+                                <th style="vertical-align: middle; width: 200px;">Present Billet</th>
+                                <th style="vertical-align: middle; width: 60px;">Branch</th>
+                                <th style="vertical-align: middle; width: 60px;">Batch</th>
+                                <th style="vertical-align: middle; width: 100px;">Medium Ship Comd Svc</th>
+                                <th style="vertical-align: middle; width: 100px; ">Total Comd Svc</th>
+                                <th style="vertical-align: middle; width: 100px; ">Total Sea Svc</th>
+                                <th style="vertical-align: middle; width: 80px; ">Staff Collage Percentage </th>
+                                <th style="vertical-align: middle; width: 80px; ">OPR Avarage</th>
+                                <th style="vertical-align: middle; width: 80px; ">SASB Eligibility</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="courseOfficer in vm.suitabilityTests">
+                                <td>{{$index+1}}</td>
+                                <td>{{courseOfficer.pNo}}</td>
+                                <td>{{courseOfficer.fullNameEng}}</td>
+                                <td>{{courseOfficer.billet}}</td>
+                                <td>{{courseOfficer.branchName}}</td>
+                                <td>{{courseOfficer.batchName}}</td>
+                                <td style="font-weight:bold;color:{{courseOfficer.medShipComdSvcYr < 1 ? 'red' : ''}}">{{courseOfficer.medShipComdSvc}}</td>
+                                <td style="font-weight:bold;color:{{courseOfficer.comdTotalDurationYr < 2 ? 'red' : ''}}">{{courseOfficer.comdTotalDuration}}</td>
+                                <td style="font-weight:bold;color:{{courseOfficer.seaTotalDurationYr < 7 ? 'red' : ''}}">{{courseOfficer.seaTotalDuration}}</td>
+                                <td style="font-weight:bold;color:{{courseOfficer.staffCourseResult < 60 ? 'red' : ''}}">{{courseOfficer.staffCourseResult}}</td>
+                                <td style="font-weight:bold;color:{{courseOfficer.oprAverage < 6 ? 'red' : ''}}">{{courseOfficer.oprAverage}}</td>
+                                <td style="font-weight:bold">
+                                    <span style="color: red">{{ courseOfficer.medShipComdSvcYr >= 1 && courseOfficer.comdTotalDurationYr >= 2 && courseOfficer.seaTotalDurationYr >= 7 && courseOfficer.staffCourseResult >= 60 && courseOfficer.oprAverage >= 6 ?'':'No' }}</span>
+                                    <span style="color: green" ng-if="courseOfficer.medShipComdSvcYr >= 1 && courseOfficer.comdTotalDurationYr >= 2 && courseOfficer.seaTotalDurationYr >= 7 && courseOfficer.staffCourseResult >= 60 && courseOfficer.oprAverage >= 6"> Yes</span>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

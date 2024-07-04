@@ -1360,7 +1360,7 @@
                             </div>
                             <div class="form-group col-md-6" style="margin-left:-13px">
                                 <label for="courseId">Ship Type</label> <br />
-                                <select name="shipType" id="shipType" class="form-control" ng-model="vm.advanceSearch.shipType" ng-options="option.value as option.text for option in vm.physicalStructures" ng-change="vm.getOfficeSelectModelByShip(vm.advanceSearch.shipType)">
+                                <select name="shipType" id="shipType" class="form-control" ng-model="vm.advanceSearch.shipType" ng-options="option.value as option.text for option in vm.physicalStructures" ng-change="vm.getAllOfficeSelectModelByShip(vm.advanceSearch.shipType)">
                                     <option value="">Select</option>
                                 </select>
                             </div>

@@ -84,7 +84,11 @@
 
         function selected(object) {
             vm.searchedOfficeId = object.originalObject.value;
-            
+            console.log(vm.searchedOfficeId)
+            if (vm.searchedOfficeId > 0) {
+                $state.goNewTab('office-search-result', { officeId: vm.searchedOfficeId });
+
+            }
         }
 
         function searchByOfficeId() {

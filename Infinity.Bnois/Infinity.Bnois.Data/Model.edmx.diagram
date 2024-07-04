@@ -520,6 +520,10 @@
         <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_PunishmentNature" />
         <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_PunishmentSubCategory" />
         <AssociationConnector Association="BnoisdbModel.FK_PunishmentAccident_Rank" />
+        <EntityTypeShape EntityType="BnoisdbModel.MajorCourseForecast" Width="1.5" PointX="13" PointY="59.25" />
+        <AssociationConnector Association="BnoisdbModel.FK_MajorCourseForecast_Employee" />
+        <EntityTypeShape EntityType="BnoisdbModel.SuitabilityTest" Width="1.5" PointX="13" PointY="35.375" />
+        <AssociationConnector Association="BnoisdbModel.FK_SuitabilityTest_Employee" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

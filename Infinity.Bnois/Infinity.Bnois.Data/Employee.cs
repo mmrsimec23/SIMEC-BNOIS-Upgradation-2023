@@ -80,6 +80,8 @@ namespace Infinity.Bnois.Data
             this.Achievement1 = new HashSet<Achievement>();
             this.EmployeeMscEducation = new HashSet<EmployeeMscEducation>();
             this.PunishmentAccident = new HashSet<PunishmentAccident>();
+            this.MajorCourseForecast = new HashSet<MajorCourseForecast>();
+            this.SuitabilityTest = new HashSet<SuitabilityTest>();
         }
     
         public int EmployeeId { get; set; }
@@ -247,5 +249,9 @@ namespace Infinity.Bnois.Data
         public virtual ICollection<EmployeeMscEducation> EmployeeMscEducation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PunishmentAccident> PunishmentAccident { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MajorCourseForecast> MajorCourseForecast { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SuitabilityTest> SuitabilityTest { get; set; }
     }
 }

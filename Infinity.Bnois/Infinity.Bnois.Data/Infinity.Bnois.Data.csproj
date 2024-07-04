@@ -238,6 +238,9 @@
     </Compile>
     <Compile Include="IEmployeeReportRepository.cs" />
     <Compile Include="ISearchRepository.cs" />
+    <Compile Include="MajorCourseForecast.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="MedalAward.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -639,6 +642,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Suitability.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SuitabilityTest.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="TerminationType.cs">

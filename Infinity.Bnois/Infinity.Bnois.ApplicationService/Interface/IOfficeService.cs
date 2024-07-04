@@ -16,6 +16,7 @@ namespace Infinity.Bnois.ApplicationService.Interface
         Task<bool> DeleteOffice(int id);
         Task<List<SelectModel>> GetAdminAuthoritySelectModel();
         Task<List<SelectModel>> GetOfficeSelectModelByShip(int ship);
+        Task<List<SelectModel>> GetAllOfficeSelectModelByShip(int ship);
     
         Task<List<SelectModel>> GetBornOfficeSelectModel();
         Task<List<SelectModel>> GetBornOfficeFullNameSelectModel();
@@ -36,6 +37,8 @@ namespace Infinity.Bnois.ApplicationService.Interface
         List<object> GetAppointedOfficer(int officeId);
         List<object> GetVacantAppointment(int officeId);
         List<object> GetOfficerListByBatch(int batchId);
+        List<object> GetOfficerListByCourse(int coursePlanId);
+        List<object> GetOfficerListByAppoinment(int appoinmentId);
         List<object> GetShipMovementHistory(int shipId);
 
     }

@@ -31,7 +31,10 @@
                         <tbody class="reportBody">
                             <tr ng-repeat="courseAttended in vm.courseAttendeds" class="reportTR" >
                                 <td class="reportTD" style="text-align: center; width: 20px;">{{$index+1}}</td>
-                                <td class="reportTD" >{{courseAttended.course}}</td>
+                                <td class="reportTD" >
+                                    <span ng-if="courseAttended.courseCategoryLink == 0">{{courseAttended.course}}</span>
+                                    <a ng-if="courseAttended.courseCategoryLink == 1" target="_blank" href="http://localhost:24123/officer-list-by-course/{{courseAttended.trainingPlanId}}" style="text-decoration: none;"><strong>{{courseAttended.course}}</strong></a>
+                                </td>
                                 <td class="reportTD" >{{courseAttended.institute}}</td>
                                 <td class="reportTD" style="text-align: center;width:95px;">{{courseAttended.fromDate | date:"dd-MMM-yyyy"}}</td>
                                 <td class="reportTD" style="text-align: center;width: 95px;">{{courseAttended.toDate | date:"dd-MMM-yyyy"}}</td>

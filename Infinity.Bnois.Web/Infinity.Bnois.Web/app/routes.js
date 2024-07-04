@@ -7,8 +7,6 @@
     /* @ngInject */
     function appRun(routerHelper) {
         routerHelper.configureStates(getStates());
-
-    
     }
 
 
@@ -3140,6 +3138,17 @@
                 }
             },
 
+            //-------------Officer List By Appointment-------
+            {
+                state: 'officer-list-by-appointment',
+                config: {
+                    url: '/officer-list-by-appointment/:appointmentId',
+                    templateUrl: 'app/views/officer-list-by-appointment/officerListByAppointment.html',
+                    controller: 'officerListByAppointmentController as vm',
+                    title: 'Officer List By Appointment'
+                }
+            },
+
             //---------------officer list by batch ------------
 
             {
@@ -3149,6 +3158,18 @@
                     templateUrl: 'app/views/officer-list-by-batch/officerListByBatch.html',
                     controller: 'officerListByBatchController as vm',
                     title: 'Office Appointment Structure'
+                }
+            },
+
+            //---------------officer list by course ------------
+
+            {
+                state: 'officer-list-by-course',
+                config: {
+                    url: '/officer-list-by-course/:coursePlanId',
+                    templateUrl: 'app/views/officer-list-by-course/officerListByCourse.html',
+                    controller: 'officerListByCourseController as vm',
+                    title: 'Officer List By Course'
                 }
             },
             
@@ -6058,6 +6079,82 @@
                     templateUrl: 'app/views/employee-proposed-coxo/employeeProposedCoxoAdd.html',
                     controller: 'employeeProposedCoxoAddController as vm',
                     title: 'Employee PFT'
+                }
+            },
+
+            //-------------Major Course Forecast-------
+            {
+                state: 'major-course-forecasts',
+                config: {
+                    url: '/major-course-forecasts?ps&pn&q',
+                    templateUrl: 'app/views/major-course-forecast/majorCourseForecasts.html',
+                    controller: 'majorCourseForecastsController as vm',
+                    title: 'Employee PFT'
+                }
+            },
+            {
+                state: 'major-course-forecast-create',
+                config: {
+                    url: '/major-course-forecast-create',
+                    templateUrl: 'app/views/major-course-forecast/majorCourseForecastAdd.html',
+                    controller: 'majorCourseForecastAddController as vm',
+                    title: 'Major Course Forecast'
+                }
+            },
+            {
+                state: "major-course-forecast-modify",
+                config: {
+                    url: "major-course-forecast-modify/:id",
+                    templateUrl: 'app/views/major-course-forecast/majorCourseForecastAdd.html',
+                    controller: 'majorCourseForecastAddController as vm',
+                    title: 'Major Course Forecast'
+                }
+            },
+
+            //-------------suitability Test-------
+            {
+                state: 'hasb-suitability-tests',
+                config: {
+                    url: '/hasb-suitability-tests?ps&pn&q',
+                    templateUrl: 'app/views/suitability-test/hasbSuitabilityTests.html',
+                    controller: 'hasbSuitabilityTestsController as vm',
+                    title: 'Employee Suitability Test'
+                }
+            },
+            {
+                state: 'sasb-suitability-tests',
+                config: {
+                    url: '/sasb-suitability-tests?ps&pn&q',
+                    templateUrl: 'app/views/suitability-test/sasbSuitabilityTests.html',
+                    controller: 'sasbSuitabilityTestsController as vm',
+                    title: 'Employee Suitability Test'
+                }
+            },
+            {
+                state: 'suitability-test-create',
+                config: {
+                    url: '/suitability-test-create',
+                    templateUrl: 'app/views/suitability-test/suitabilityTestAdd.html',
+                    controller: 'suitabilityTestAddController as vm',
+                    title: 'Employee Suitability Test'
+                }
+            },
+            {
+                state: 'suitability-test-officer-create',
+                config: {
+                    url: '/suitability-test-officer-create/:type',
+                    templateUrl: 'app/views/suitability-test/suitabilityTestAdd.html',
+                    controller: 'suitabilityTestAddController as vm',
+                    title: 'Employee Suitability Test'
+                }
+            },
+            {
+                state: "suitability-test-modify",
+                config: {
+                    url: "suitability-test-modify/:id",
+                    templateUrl: 'app/views/suitability-test/suitabilityTestAdd.html',
+                    controller: 'suitabilityTestAddController as vm',
+                    title: 'Employee Suitability Test'
                 }
             },
 

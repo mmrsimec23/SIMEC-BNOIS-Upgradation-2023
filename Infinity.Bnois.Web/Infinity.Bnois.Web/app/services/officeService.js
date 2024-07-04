@@ -16,6 +16,9 @@
             getChildOfficeSelectModels: getChildOfficeSelectModels,
             getOfficeAppointmentDetails: getOfficeAppointmentDetails,
             getOfficerListByBatch: getOfficerListByBatch,
+            getOfficerListByCourse: getOfficerListByCourse,
+            getOfficerListByAppointment: getOfficerListByAppointment,
+            getAllOfficeSelectModelByShip: getAllOfficeSelectModelByShip,
             getOfficeSelectModelByShip: getOfficeSelectModelByShip
 
 
@@ -56,6 +59,11 @@
             return apiHttpService.GET(url);
         }
 
+        function getAllOfficeSelectModelByShip(ship) {
+            var url = dataConstants.OFFICE_URL + 'get-all-office-select-model-by-ship?ship='+ship;
+            return apiHttpService.GET(url);
+        }
+
      
 
 
@@ -71,6 +79,15 @@
 
         function getOfficerListByBatch(batchId) {
             var url = dataConstants.OFFICE_URL + 'officers-result-by-batch?batchId=' + batchId;
+            return apiHttpService.GET(url);
+        }
+        function getOfficerListByCourse(coursePlanId) {
+            var url = dataConstants.OFFICE_URL + 'officers-result-by-course?coursePlanId=' + coursePlanId;
+            return apiHttpService.GET(url);
+        }
+
+        function getOfficerListByAppointment(appoinmentId) {
+            var url = dataConstants.OFFICE_URL + 'officers-result-by-appointment?appoinmentId=' + appoinmentId;
             return apiHttpService.GET(url);
         }
 

@@ -1325,7 +1325,7 @@
           <Property Name="SLCode" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb_Bn.dbo.EmployeeTraining' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmployeeTraining">
           <Key>
             <PropertyRef Name="EmployeTrainingId" />
@@ -1674,6 +1674,22 @@ warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a prim
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MajorCourseForecast">
+          <Key>
+            <PropertyRef Name="MajorCourseForecastId" />
+          </Key>
+          <Property Name="MajorCourseForecastId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
@@ -2566,7 +2582,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a prim
           <Property Name="DurationMonths" Type="int" />
           <Property Name="DurationDays" Type="int" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="PunishmentType" Type="varchar" MaxLength="550" />
+          <Property Name="PunishmentType" Type="varchar" MaxLength="250" />
           <Property Name="Reason" Type="nvarchar(max)" />
           <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="PunishmentValue" Type="float" Nullable="false" />
@@ -3170,6 +3186,22 @@ warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a prim
           <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="SuitabilityTest">
+          <Key>
+            <PropertyRef Name="SuitabilityTestId" />
+          </Key>
+          <Property Name="SuitabilityTestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="SuitabilityTestType" Type="int" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="TerminationType">
           <Key>
             <PropertyRef Name="TerminationTypeId" />
@@ -3448,7 +3480,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.EmployeeTraining' does not have a prim
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb.dbo.vwNomination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb_Bn.dbo.vwNomination' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwNomination">
           <Key>
             <PropertyRef Name="NominationId" />
@@ -3480,7 +3512,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwNomination' does not have a primary 
           <Property Name="UNMRemarks" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Bnoisdb_Bn.dbo.vwTransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwTransfer">
           <Key>
             <PropertyRef Name="TransferId" />
@@ -5545,6 +5577,18 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MajorCourseForecast_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="MajorCourseForecast" Type="Self.MajorCourseForecast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="MajorCourseForecast">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MedalAward_Award">
           <End Role="Award" Type="Self.Award" Multiplicity="0..1" />
           <End Role="MedalAward" Type="Self.MedalAward" Multiplicity="*" />
@@ -6973,6 +7017,18 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SuitabilityTest_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SuitabilityTest" Type="Self.SuitabilityTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="SuitabilityTest">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ToeAuthorized_Branch">
           <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
           <End Role="ToeAuthorized" Type="Self.ToeAuthorized" Multiplicity="*" />
@@ -7401,6 +7457,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <EntitySet Name="LeavePurpose" EntityType="Self.LeavePurpose" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeaveType" EntityType="Self.LeaveType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LprCalculateInfo" EntityType="Self.LprCalculateInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MajorCourseForecast" EntityType="Self.MajorCourseForecast" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaritalType" EntityType="Self.MaritalType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medal" EntityType="Self.Medal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MedalAward" EntityType="Self.MedalAward" Schema="dbo" store:Type="Tables" />
@@ -7490,6 +7547,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suitability" EntityType="Self.Suitability" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuitabilityTest" EntityType="Self.SuitabilityTest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TerminationType" EntityType="Self.TerminationType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ToeAuthorized" EntityType="Self.ToeAuthorized" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TraceSetting" EntityType="Self.TraceSetting" Schema="dbo" store:Type="Tables" />
@@ -8242,6 +8300,10 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             <End Role="Employee" EntitySet="Employee" />
             <End Role="LprCalculateInfo" EntitySet="LprCalculateInfo" />
           </AssociationSet>
+          <AssociationSet Name="FK_MajorCourseForecast_Employee" Association="Self.FK_MajorCourseForecast_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="MajorCourseForecast" EntitySet="MajorCourseForecast" />
+          </AssociationSet>
           <AssociationSet Name="FK_MedalAward_Award" Association="Self.FK_MedalAward_Award">
             <End Role="Award" EntitySet="Award" />
             <End Role="MedalAward" EntitySet="MedalAward" />
@@ -8717,6 +8779,10 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="SubCategory" EntitySet="SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitabilityTest_Employee" Association="Self.FK_SuitabilityTest_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SuitabilityTest" EntitySet="SuitabilityTest" />
           </AssociationSet>
           <AssociationSet Name="FK_ToeAuthorized_Branch" Association="Self.FK_ToeAuthorized_Branch">
             <End Role="Branch" EntitySet="Branch" />
@@ -10300,6 +10366,16 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <AssociationSet Name="FK_PunishmentAccident_Rank" Association="BnoisdbModel.FK_PunishmentAccident_Rank">
             <End Role="Rank" EntitySet="Rank" />
             <End Role="PunishmentAccident" EntitySet="PunishmentAccident" />
+          </AssociationSet>
+          <EntitySet Name="MajorCourseForecast" EntityType="BnoisdbModel.MajorCourseForecast" />
+          <AssociationSet Name="FK_MajorCourseForecast_Employee" Association="BnoisdbModel.FK_MajorCourseForecast_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="MajorCourseForecast" EntitySet="MajorCourseForecast" />
+          </AssociationSet>
+          <EntitySet Name="SuitabilityTest" EntityType="BnoisdbModel.SuitabilityTest" />
+          <AssociationSet Name="FK_SuitabilityTest_Employee" Association="BnoisdbModel.FK_SuitabilityTest_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SuitabilityTest" EntitySet="SuitabilityTest" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetLeaveInfo_Result">
@@ -15557,6 +15633,8 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <NavigationProperty Name="Achievement1" Relationship="BnoisdbModel.FK_Achievement_Employee1" FromRole="Employee" ToRole="Achievement" />
           <NavigationProperty Name="EmployeeMscEducation" Relationship="BnoisdbModel.FK_EmployeeMscEducation_Employee" FromRole="Employee" ToRole="EmployeeMscEducation" />
           <NavigationProperty Name="PunishmentAccident" Relationship="BnoisdbModel.FK_PunishmentAccident_Employee" FromRole="Employee" ToRole="PunishmentAccident" />
+          <NavigationProperty Name="MajorCourseForecast" Relationship="BnoisdbModel.FK_MajorCourseForecast_Employee" FromRole="Employee" ToRole="MajorCourseForecast" />
+          <NavigationProperty Name="SuitabilityTest" Relationship="BnoisdbModel.FK_SuitabilityTest_Employee" FromRole="Employee" ToRole="SuitabilityTest" />
         </EntityType>
         <EntityType Name="ExecutionRemark">
           <Key>
@@ -18032,7 +18110,7 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
           <Property Name="DurationMonths" Type="Int32" />
           <Property Name="DurationDays" Type="Int32" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PunishmentType" Type="String" MaxLength="550" FixedLength="false" Unicode="false" />
+          <Property Name="PunishmentType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PunishmentValue" Type="Double" Nullable="false" />
@@ -18231,6 +18309,64 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
             </Principal>
             <Dependent Role="PunishmentAccident">
               <PropertyRef Name="RankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MajorCourseForecast">
+          <Key>
+            <PropertyRef Name="MajorCourseForecastId" />
+          </Key>
+          <Property Name="MajorCourseForecastId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_MajorCourseForecast_Employee" FromRole="MajorCourseForecast" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_MajorCourseForecast_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.MajorCourseForecast" Role="MajorCourseForecast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="MajorCourseForecast">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SuitabilityTest">
+          <Key>
+            <PropertyRef Name="SuitabilityTestId" />
+          </Key>
+          <Property Name="SuitabilityTestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="SuitabilityTestType" Type="Int32" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="BnoisdbModel.FK_SuitabilityTest_Employee" FromRole="SuitabilityTest" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_SuitabilityTest_Employee">
+          <End Type="BnoisdbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="BnoisdbModel.SuitabilityTest" Role="SuitabilityTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="SuitabilityTest">
+              <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -21934,6 +22070,40 @@ warning 6002: The table/view 'Bnoisdb.dbo.vwTransfer' does not have a primary ke
                 <ScalarProperty Name="PunishmentCategoryId" ColumnName="PunishmentCategoryId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="PunishmentAccidentId" ColumnName="PunishmentAccidentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MajorCourseForecast">
+            <EntityTypeMapping TypeName="BnoisdbModel.MajorCourseForecast">
+              <MappingFragment StoreEntitySet="MajorCourseForecast">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="MajorCourseForecastId" ColumnName="MajorCourseForecastId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuitabilityTest">
+            <EntityTypeMapping TypeName="BnoisdbModel.SuitabilityTest">
+              <MappingFragment StoreEntitySet="SuitabilityTest">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="SuitabilityTestType" ColumnName="SuitabilityTestType" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="SuitabilityTestId" ColumnName="SuitabilityTestId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -73,6 +73,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\EmployeeSuitabilityTestController.cs" />
+    <Compile Include="Controllers\EmployeeMajorCourseForecastController.cs" />
     <Compile Include="Controllers\EmployeeSmallCoxoServiceController.cs" />
     <Compile Include="Controllers\EmployeeEoLoSoDloSeoServiceController.cs" />
     <Compile Include="Controllers\EmployeeTraceController.cs" />
@@ -258,6 +260,8 @@
     <Compile Include="Controllers\TerminationTypesController.cs" />
     <Compile Include="Controllers\UpazilasController.cs" />
     <Compile Include="Models\DashBoardBranchByAdminAuthority600EntryViewModel.cs" />
+    <Compile Include="Models\SuitabilityTestViewModel.cs" />
+    <Compile Include="Models\MajorCourseForecastViewModel.cs" />
     <Compile Include="Models\EmployeeCoxoServiceViewModel.cs" />
     <Compile Include="Models\BnoisLogInfoViewModel.cs" />
     <Compile Include="Models\CareerForecastSettingViewModel.cs" />

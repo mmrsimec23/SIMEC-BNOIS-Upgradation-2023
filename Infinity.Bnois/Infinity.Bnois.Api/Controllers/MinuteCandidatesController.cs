@@ -39,13 +39,7 @@ namespace Infinity.Bnois.Api.Controllers
         public async Task<IHttpActionResult> getMinuteCandidate(int id)
         {
             DashBoardMinuite110Model model = await minuteCandidateService.getMinuteCadidate(id);
-            //vm.EmployeeTrace = await _employeeTraceService.getEmployeeTrace(id);
-            //vm.TraceFiscalYears = await _TraceFiscalYearService.GetTraceFiscalYearsSelectModels();
-            //vm.Ranks = await _rankService.GetRanksSelectModel();
-            //return Ok(new ResponseMessage<EmployeeTraceModel>
-            //{
-            //    Result = vm
-            //});
+            
             return Ok(new ResponseMessage<DashBoardMinuite110Model>
             {
                 Result = model

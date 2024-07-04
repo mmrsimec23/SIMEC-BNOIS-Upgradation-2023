@@ -12,6 +12,7 @@
         vm.id = 0;
         vm.smallCoRemarks = [];
         vm.deleteSmallCoRemark = deleteSmallCoRemark;
+        vm.updateSmallCoRemark = updateSmallCoRemark;
         vm.saveButtonText = 'Save';
         vm.save = save;
         vm.back = back;
@@ -69,6 +70,21 @@
                 close();
             });
 
+
+        }
+
+
+
+        function updateSmallCoRemark(smallCoRemark) {
+            vm.saveButtonText = 'Update';
+            $window.document.documentElement.scrollTop = 0;
+            $window.document.body.scrollTop = 0;
+            coFfRecomService.getCoFfRecom(smallCoRemark.id).then(function (data) {
+                vm.smallCoRemark = data.result;
+            },
+                function (errorMessage) {
+                    notificationService.displayError(errorMessage.message);
+                });
 
         }
 
