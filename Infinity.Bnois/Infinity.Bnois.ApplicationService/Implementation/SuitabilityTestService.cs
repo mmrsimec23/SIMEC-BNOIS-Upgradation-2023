@@ -57,6 +57,15 @@ namespace Infinity.Bnois.ApplicationService.Implementation
             {
                 throw new InfinityArgumentMissingException("Course Forecast data missing");
             }
+            EmployeeGeneral employeeData = await employeeRepository.FindOneAsync(x => x.Employee.EmployeeId == model.EmployeeId);
+            if (model.SuitabilityTestType == 1 && (employeeData.BranchId != 2 || employeeData.BranchId != 7))
+            {
+                throw new InfinityNotFoundException("Employee Branch Does not Matched!!!");
+            }
+            if (model.SuitabilityTestType == 2 && employeeData.BranchId != 1)
+            {
+                throw new InfinityNotFoundException("Employee Branch Does not Matched!!!");
+            }
             string userId = ConfigurationResolver.Get().LoggedInUser.UserId.ToString();
             SuitabilityTest SuitabilityTest = ObjectConverter<SuitabilityTestModel, SuitabilityTest>.Convert(model);
             if (id > 0)

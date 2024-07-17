@@ -23,6 +23,29 @@
 </head>
 <body>
     <div ng-include="'app/layout/shell.html'"></div>
+
+    <script>
+        function appendCurrentDateTime() {
+            var now = new Date();
+            var datetimeString = now.getFullYear().toString() +
+                (now.getMonth() + 1).toString().padStart(2, '0') +
+                now.getDate().toString().padStart(2, '0') +
+                now.getHours().toString().padStart(2, '0') +
+                now.getMinutes().toString().padStart(2, '0') +
+                now.getSeconds().toString().padStart(2, '0');
+
+            var scripts = document.getElementsByTagName('script');
+            for (var j = 0; j < scripts.length; j++) {
+                var src = scripts[j].getAttribute('src');
+                if (src && !src.includes('?v=')) {
+                    scripts[j].setAttribute('src', src + '?v=' + datetimeString);
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', appendCurrentDateTime);
+    </script>
+
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/toastr.css" rel="stylesheet" />
@@ -735,7 +758,7 @@
     <script src="app/views/large-ship-eosolo/largeShipEoSoLoController.js"></script>
     <script src="app/views/medium-ship-eosolo/mediumShipEoSoLoController.js"></script>
 
-    
+
     <script src="app/services/employeeProposedEolosodloseoService.js"></script>
     <script src="app/views/employee-proposed-eosolo/employeeProposedEoSoLosController.js"></script>
     <script src="app/views/employee-proposed-eosolo/employeeProposedEoSoLoAddController.js"></script>

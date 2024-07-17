@@ -27,11 +27,24 @@
     app.config(configure);
 
     configure.$inject = ['$httpProvider', '$compileProvider','ChartJsProvider'];
-
+    app.factory('noCacheInterceptor', function () {
+        return {
+            request: function (config) {
+                if (config.method === 'GET') {
+                    config.headers['Cache-Control'] = 'no-cache';
+                    config.headers['Pragma'] = 'no-cache';
+                    config.headers['Expires'] = '0';
+                }
+                return config;
+            }
+        };
+    });
     function configure($httpProvider, $compileProvider, ChartJsProvider) {
         $httpProvider.defaults.useXDomain = true;
         $httpProvider.defaults.withCredentials = true;
         delete $httpProvider.defaults.headers.common["X-Requested-With"];
+        // Register the no-cache interceptor
+        $httpProvider.interceptors.push('noCacheInterceptor');
       //  ChartJsProvider.setOptions({ colors: ['#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
         $httpProvider.interceptors.push(function (appSettings, OidcManager) {
             return {

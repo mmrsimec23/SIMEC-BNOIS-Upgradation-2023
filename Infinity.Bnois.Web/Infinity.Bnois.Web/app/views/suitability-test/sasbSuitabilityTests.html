@@ -30,7 +30,7 @@
                             <tr ng-repeat="courseOfficer in vm.suitabilityTests">
                                 <td>{{$index+1}}</td>
                                 <td>{{courseOfficer.pNo}}</td>
-                                <td>{{courseOfficer.fullNameEng}}</td>
+                                <td><b><a href="" ng-click="vm.officerDetails(courseOfficer.pNo)">{{courseOfficer.fullNameEng}}</a></b></td>
                                 <td>{{courseOfficer.billet}}</td>
                                 <td>{{courseOfficer.branchName}}</td>
                                 <td>{{courseOfficer.batchName}}</td>

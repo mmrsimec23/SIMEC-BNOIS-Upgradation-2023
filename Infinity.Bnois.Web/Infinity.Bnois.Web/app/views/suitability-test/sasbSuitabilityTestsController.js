@@ -13,6 +13,9 @@
         var vm = this;
         vm.suitabilityTests = [];
         vm.courseTypes = [];
+
+        vm.officerDetails = officerDetails;
+
         vm.addsuitabilityTest = addsuitabilityTest;
         vm.updatesuitabilityTest = updatesuitabilityTest;
         vm.deletesuitabilityTest = deletesuitabilityTest;
@@ -58,6 +61,11 @@
         //}
         function getListByCourseType() {
             getDataList();
+        }
+
+        function officerDetails(pNo) {
+            $state.goNewTab('current-status-tab', { pno: pNo });
+
         }
         function addsuitabilityTest() {
             $state.go('suitability-test-officer-create', {type: 2});
